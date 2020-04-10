@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:easy_permission_validator/easy_permission_validator.dart';
 import 'package:highvibe/meeting_screen.dart';
+import 'package:highvibe/white_page_route.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 enum States {
@@ -34,7 +35,9 @@ class _EnsureMeetingPermissionState extends State<EnsureMeetingPermission> {
     if (camera && microphone) {
       setState(() => currentState = States.granted);
       Navigator.of(context).pushReplacement(
-        MaterialPageRoute(builder: (context) => MeetingScreen()),
+        WhitePageRoute(
+          enterPage: MeetingScreen(),
+        )
       );
     } else if (camera) {
       setState(() => currentState = States.microphoneDenied);
