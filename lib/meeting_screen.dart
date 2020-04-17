@@ -32,10 +32,10 @@ class _MeetingScreenState extends State<MeetingScreen> {
   }
 
   Future<void> initialize() async {
-    if (APP_ID.isEmpty) {
+    if (AGORA_APP_ID.isEmpty) {
       setState(() {
         _infoStrings.add(
-          'APP_ID missing, please provide your APP_ID in settings.dart',
+          'AGORA_APP_ID missing, please provide your AGORA_APP_ID in config.dart',
         );
         _infoStrings.add('Agora Engine is not starting');
       });
@@ -51,7 +51,7 @@ class _MeetingScreenState extends State<MeetingScreen> {
   }
 
   Future<void> _initAgoraRtcEngine() async {
-    await AgoraRtcEngine.create(APP_ID);
+    await AgoraRtcEngine.create(AGORA_APP_ID);
     await AgoraRtcEngine.enableVideo();
   }
 

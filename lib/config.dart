@@ -1,1 +1,2 @@
-var APP_ID = '';
+var AGORA_APP_ID = '7b859432cf524e7b931fc7798336d148';
+var STREAM_API_KEY = 's2dxdhpxd94g';
