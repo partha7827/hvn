@@ -1,5 +1,3 @@
-pubspec.lock
-
 # Miscellaneous
 *.class
 *.log
@@ -31,6 +29,8 @@ pubspec.lock
 .pub-cache/
 .pub/
 /build/
+pubspec.lock
+.slidy
 
 # Web related
 lib/generated_plugin_registrant.dart

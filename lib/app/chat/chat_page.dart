@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'home_controller.dart';
+import 'chat_controller.dart';
 
-class HomePage extends StatefulWidget {
+class ChatPage extends StatefulWidget {
   final String title;
-  const HomePage({Key key, this.title = "Home"}) : super(key: key);
+  const ChatPage({Key key, this.title = "Chat"}) : super(key: key);
 
   @override
-  _HomePageState createState() => _HomePageState();
+  _ChatPageState createState() => _ChatPageState();
 }
 
-class _HomePageState extends ModularState<HomePage, HomeController> {
+class _ChatPageState extends ModularState<ChatPage, ChatController> {
   //use 'controller' variable to access controller
 
   @override
@@ -20,7 +20,9 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
         title: Text(widget.title),
       ),
       body: Column(
-        children: <Widget>[],
+        children: <Widget>[
+          Text("Community Chat with getstream..."),
+        ],
       ),
     );
   }

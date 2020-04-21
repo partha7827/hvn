@@ -1,12 +1,20 @@
+import 'package:highvibe/app/firebase_repository.dart';
+import 'package:highvibe/app/blockchain_repository.dart';
+import 'package:highvibe/app/getstream_repository.dart';
+import 'package:highvibe/app/agora_repository.dart';
 import 'package:highvibe/app/app_controller.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter/material.dart';
 import 'package:highvibe/app/app_widget.dart';
-import 'package:highvibe/app/modules/home/home_module.dart';
+import 'package:highvibe/app/home/home_module.dart';
 
 class AppModule extends MainModule {
   @override
   List<Bind> get binds => [
+        Bind((i) => FirebaseRepository()),
+        Bind((i) => BlockchainRepository()),
+        Bind((i) => GetstreamRepository()),
+        Bind((i) => AgoraRepository()),
         Bind((i) => AppController()),
       ];
 

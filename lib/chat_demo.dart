@@ -54,7 +54,7 @@ void main() async {
   final client = Client(
     STREAM_API_KEY,
     logLevel: Level.INFO,
-    showFakeNotification: Platform.isAndroid ? showLocalNotification : null,
+    // showFakeNotification: Platform.isAndroid ? showLocalNotification : null,
   );
 
   await client.setUser(
