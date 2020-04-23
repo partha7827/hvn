@@ -1,6 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:dio/dio.dart';
+import 'package:highvibe/app/auth/user_store.dart';
 
 class AuthRepository extends Disposable {
   final _auth = FirebaseAuth.instance;

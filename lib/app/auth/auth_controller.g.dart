@@ -9,39 +9,51 @@ part of 'auth_controller.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$AuthController on _AuthControllerBase, Store {
-  final _$valueAtom = Atom(name: '_AuthControllerBase.value');
+  final _$authStateAtom = Atom(name: '_AuthControllerBase.authState');
 
   @override
-  int get value {
-    _$valueAtom.context.enforceReadPolicy(_$valueAtom);
-    _$valueAtom.reportObserved();
-    return super.value;
+  AuthState get authState {
+    _$authStateAtom.context.enforceReadPolicy(_$authStateAtom);
+    _$authStateAtom.reportObserved();
+    return super.authState;
   }
 
   @override
-  set value(int value) {
-    _$valueAtom.context.conditionallyRunInAction(() {
-      super.value = value;
-      _$valueAtom.reportChanged();
-    }, _$valueAtom, name: '${_$valueAtom.name}_set');
+  set authState(AuthState value) {
+    _$authStateAtom.context.conditionallyRunInAction(() {
+      super.authState = value;
+      _$authStateAtom.reportChanged();
+    }, _$authStateAtom, name: '${_$authStateAtom.name}_set');
   }
 
-  final _$_AuthControllerBaseActionController =
-      ActionController(name: '_AuthControllerBase');
+  final _$currentUserAtom = Atom(name: '_AuthControllerBase.currentUser');
 
   @override
-  void increment() {
-    final _$actionInfo = _$_AuthControllerBaseActionController.startAction();
-    try {
-      return super.increment();
-    } finally {
-      _$_AuthControllerBaseActionController.endAction(_$actionInfo);
-    }
+  User get currentUser {
+    _$currentUserAtom.context.enforceReadPolicy(_$currentUserAtom);
+    _$currentUserAtom.reportObserved();
+    return super.currentUser;
+  }
+
+  @override
+  set currentUser(User value) {
+    _$currentUserAtom.context.conditionallyRunInAction(() {
+      super.currentUser = value;
+      _$currentUserAtom.reportChanged();
+    }, _$currentUserAtom, name: '${_$currentUserAtom.name}_set');
+  }
+
+  final _$initAsyncAction = AsyncAction('init');
+
+  @override
+  Future<void> init() {
+    return _$initAsyncAction.run(() => super.init());
   }
 
   @override
   String toString() {
-    final string = 'value: ${value.toString()}';
+    final string =
+        'authState: ${authState.toString()},currentUser: ${currentUser.toString()}';
     return '{$string}';
   }
 }

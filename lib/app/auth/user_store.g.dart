@@ -3,13 +3,60 @@
 part of 'user_store.dart';
 
 // **************************************************************************
+// JsonSerializableGenerator
+// **************************************************************************
+
+User _$UserFromJson(Map<String, dynamic> json) {
+  return User(
+    id: json['id'] as String,
+    email: json['email'] as String,
+    isOnline: json['isOnline'] as bool,
+    lastTimeSeen: User._timeFromJson(json['lastTimeSeen']),
+    accountCreationTime: User._timeFromJson(json['accountCreationTime']),
+    chatId: json['chatId'] as String,
+    videoId: json['videoId'] as String,
+    name: json['name'] as String,
+    status: json['status'] as String,
+    photoUrl: json['photoUrl'] as String,
+    karmaPoints: json['karmaPoints'] as int,
+    experiencePoints: json['experiencePoints'] as int,
+    followers: (json['followers'] as List)?.map((e) => e as String)?.toList(),
+    following: (json['following'] as List)?.map((e) => e as String)?.toList(),
+    uploads: (json['uploads'] as List)?.map((e) => e as String)?.toList(),
+    featured: (json['featured'] as List)?.map((e) => e as String)?.toList(),
+    badges: (json['badges'] as List)?.map((e) => e as String)?.toList(),
+  )..value = json['value'] as int;
+}
+
+Map<String, dynamic> _$UserToJson(User instance) => <String, dynamic>{
+      'value': instance.value,
+      'name': instance.name,
+      'status': instance.status,
+      'photoUrl': instance.photoUrl,
+      'following': instance.following,
+      'followers': instance.followers,
+      'badges': instance.badges,
+      'uploads': instance.uploads,
+      'featured': instance.featured,
+      'karmaPoints': instance.karmaPoints,
+      'experiencePoints': instance.experiencePoints,
+      'id': instance.id,
+      'email': instance.email,
+      'chatId': instance.chatId,
+      'videoId': instance.videoId,
+      'isOnline': instance.isOnline,
+      'lastTimeSeen': User._timeToJson(instance.lastTimeSeen),
+      'accountCreationTime': User._timeToJson(instance.accountCreationTime),
+    };
+
+// **************************************************************************
 // StoreGenerator
 // **************************************************************************
 
 // ignore_for_file: non_constant_identifier_names, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
-mixin _$User on _UserStoreBase, Store {
-  final _$valueAtom = Atom(name: '_UserStoreBase.value');
+mixin _$User on _User, Store {
+  final _$valueAtom = Atom(name: '_User.value');
 
   @override
   int get value {
@@ -26,7 +73,7 @@ mixin _$User on _UserStoreBase, Store {
     }, _$valueAtom, name: '${_$valueAtom.name}_set');
   }
 
-  final _$nameAtom = Atom(name: '_UserStoreBase.name');
+  final _$nameAtom = Atom(name: '_User.name');
 
   @override
   String get name {
@@ -43,7 +90,7 @@ mixin _$User on _UserStoreBase, Store {
     }, _$nameAtom, name: '${_$nameAtom.name}_set');
   }
 
-  final _$statusAtom = Atom(name: '_UserStoreBase.status');
+  final _$statusAtom = Atom(name: '_User.status');
 
   @override
   String get status {
@@ -60,7 +107,7 @@ mixin _$User on _UserStoreBase, Store {
     }, _$statusAtom, name: '${_$statusAtom.name}_set');
   }
 
-  final _$photoUrlAtom = Atom(name: '_UserStoreBase.photoUrl');
+  final _$photoUrlAtom = Atom(name: '_User.photoUrl');
 
   @override
   String get photoUrl {
@@ -77,7 +124,7 @@ mixin _$User on _UserStoreBase, Store {
     }, _$photoUrlAtom, name: '${_$photoUrlAtom.name}_set');
   }
 
-  final _$followingAtom = Atom(name: '_UserStoreBase.following');
+  final _$followingAtom = Atom(name: '_User.following');
 
   @override
   ObservableList<String> get following {
@@ -94,41 +141,75 @@ mixin _$User on _UserStoreBase, Store {
     }, _$followingAtom, name: '${_$followingAtom.name}_set');
   }
 
-  final _$tribesAtom = Atom(name: '_UserStoreBase.tribes');
+  final _$followersAtom = Atom(name: '_User.followers');
 
   @override
-  ObservableList<String> get tribes {
-    _$tribesAtom.context.enforceReadPolicy(_$tribesAtom);
-    _$tribesAtom.reportObserved();
-    return super.tribes;
+  ObservableList<String> get followers {
+    _$followersAtom.context.enforceReadPolicy(_$followersAtom);
+    _$followersAtom.reportObserved();
+    return super.followers;
   }
 
   @override
-  set tribes(ObservableList<String> value) {
-    _$tribesAtom.context.conditionallyRunInAction(() {
-      super.tribes = value;
-      _$tribesAtom.reportChanged();
-    }, _$tribesAtom, name: '${_$tribesAtom.name}_set');
+  set followers(ObservableList<String> value) {
+    _$followersAtom.context.conditionallyRunInAction(() {
+      super.followers = value;
+      _$followersAtom.reportChanged();
+    }, _$followersAtom, name: '${_$followersAtom.name}_set');
   }
 
-  final _$meditationsAtom = Atom(name: '_UserStoreBase.meditations');
+  final _$badgesAtom = Atom(name: '_User.badges');
 
   @override
-  ObservableList<String> get meditations {
-    _$meditationsAtom.context.enforceReadPolicy(_$meditationsAtom);
-    _$meditationsAtom.reportObserved();
-    return super.meditations;
+  ObservableList<String> get badges {
+    _$badgesAtom.context.enforceReadPolicy(_$badgesAtom);
+    _$badgesAtom.reportObserved();
+    return super.badges;
   }
 
   @override
-  set meditations(ObservableList<String> value) {
-    _$meditationsAtom.context.conditionallyRunInAction(() {
-      super.meditations = value;
-      _$meditationsAtom.reportChanged();
-    }, _$meditationsAtom, name: '${_$meditationsAtom.name}_set');
+  set badges(ObservableList<String> value) {
+    _$badgesAtom.context.conditionallyRunInAction(() {
+      super.badges = value;
+      _$badgesAtom.reportChanged();
+    }, _$badgesAtom, name: '${_$badgesAtom.name}_set');
   }
 
-  final _$karmaPointsAtom = Atom(name: '_UserStoreBase.karmaPoints');
+  final _$uploadsAtom = Atom(name: '_User.uploads');
+
+  @override
+  ObservableList<String> get uploads {
+    _$uploadsAtom.context.enforceReadPolicy(_$uploadsAtom);
+    _$uploadsAtom.reportObserved();
+    return super.uploads;
+  }
+
+  @override
+  set uploads(ObservableList<String> value) {
+    _$uploadsAtom.context.conditionallyRunInAction(() {
+      super.uploads = value;
+      _$uploadsAtom.reportChanged();
+    }, _$uploadsAtom, name: '${_$uploadsAtom.name}_set');
+  }
+
+  final _$featuredAtom = Atom(name: '_User.featured');
+
+  @override
+  ObservableList<String> get featured {
+    _$featuredAtom.context.enforceReadPolicy(_$featuredAtom);
+    _$featuredAtom.reportObserved();
+    return super.featured;
+  }
+
+  @override
+  set featured(ObservableList<String> value) {
+    _$featuredAtom.context.conditionallyRunInAction(() {
+      super.featured = value;
+      _$featuredAtom.reportChanged();
+    }, _$featuredAtom, name: '${_$featuredAtom.name}_set');
+  }
+
+  final _$karmaPointsAtom = Atom(name: '_User.karmaPoints');
 
   @override
   int get karmaPoints {
@@ -145,7 +226,7 @@ mixin _$User on _UserStoreBase, Store {
     }, _$karmaPointsAtom, name: '${_$karmaPointsAtom.name}_set');
   }
 
-  final _$experiencePointsAtom = Atom(name: '_UserStoreBase.experiencePoints');
+  final _$experiencePointsAtom = Atom(name: '_User.experiencePoints');
 
   @override
   int get experiencePoints {
@@ -165,7 +246,7 @@ mixin _$User on _UserStoreBase, Store {
   @override
   String toString() {
     final string =
-        'value: ${value.toString()},name: ${name.toString()},status: ${status.toString()},photoUrl: ${photoUrl.toString()},following: ${following.toString()},tribes: ${tribes.toString()},meditations: ${meditations.toString()},karmaPoints: ${karmaPoints.toString()},experiencePoints: ${experiencePoints.toString()}';
+        'value: ${value.toString()},name: ${name.toString()},status: ${status.toString()},photoUrl: ${photoUrl.toString()},following: ${following.toString()},followers: ${followers.toString()},badges: ${badges.toString()},uploads: ${uploads.toString()},featured: ${featured.toString()},karmaPoints: ${karmaPoints.toString()},experiencePoints: ${experiencePoints.toString()}';
     return '{$string}';
   }
 }

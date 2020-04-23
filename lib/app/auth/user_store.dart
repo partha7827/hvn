@@ -5,8 +5,9 @@ import 'package:json_annotation/json_annotation.dart';
 part 'user_store.g.dart';
 
 @JsonSerializable()
-class User extends _UserStoreBase with _$User {
+class User extends _User with _$User {
   final String id, email;
+  final String chatId, videoId;
   final bool isOnline;
 
   @JsonKey(fromJson: _timeFromJson, toJson: _timeToJson)
@@ -21,19 +22,29 @@ class User extends _UserStoreBase with _$User {
     this.isOnline,
     this.lastTimeSeen,
     this.accountCreationTime,
+    this.chatId,
+    this.videoId,
     String name,
     String status,
     String photoUrl,
+    int karmaPoints,
+    int experiencePoints,
+    List<String> followers,
     List<String> following,
-    List<String> tribes,
-    List<String> meditations,
+    List<String> uploads,
+    List<String> featured,
+    List<String> badges,
   }) : super(
     name: name,
     status: status,
     photoUrl: photoUrl,
+    karmaPoints: karmaPoints,
+    experiencePoints: experiencePoints,
+    followers: ObservableList<String>.of(followers ?? []),
     following: ObservableList<String>.of(following ?? []),
-    tribes: ObservableList<String>.of(tribes ?? []),
-    meditations: ObservableList<String>.of(meditations ?? []),
+    uploads: ObservableList<String>.of(uploads ?? []),
+    featured: ObservableList<String>.of(featured ?? []),
+    badges: ObservableList<String>.of(badges ?? []),
   );
 
   factory User.createNew({
@@ -50,9 +61,15 @@ class User extends _UserStoreBase with _$User {
       isOnline: true,
       lastTimeSeen: DateTime.now().toUtc(),
       accountCreationTime: DateTime.now().toUtc(),
+      karmaPoints: 0,
+      experiencePoints: 0,
+      chatId: uid,
+      videoId: uid,
+      followers: List<String>(),
       following: List<String>(),
-      tribes: List<String>(),
-      meditations: List<String>(),
+      uploads: List<String>(),
+      featured: List<String>(),
+      badges: List<String>()
     );
   }
 
@@ -65,7 +82,7 @@ class User extends _UserStoreBase with _$User {
   static DateTime _timeToJson(DateTime time) => time;
 }
 
-abstract class _UserStoreBase with Store {
+abstract class _User with Store {
   @observable
   int value = 0;
 
@@ -82,10 +99,16 @@ abstract class _UserStoreBase with Store {
   ObservableList<String> following;
 
   @observable
-  ObservableList<String> tribes;
+  ObservableList<String> followers;
 
   @observable
-  ObservableList<String> meditations;
+  ObservableList<String> badges;
+
+  @observable
+  ObservableList<String> uploads;
+
+  @observable
+  ObservableList<String> featured;
 
   @observable
   int karmaPoints;
@@ -93,13 +116,15 @@ abstract class _UserStoreBase with Store {
   @observable
   int experiencePoints;
 
-  _UserStoreBase({
+  _User({
     this.name,
     this.status,
     this.photoUrl,
     this.following,
-    this.tribes,
-    this.meditations,
+    this.followers,
+    this.badges,
+    this.uploads,
+    this.featured,
     this.karmaPoints,
     this.experiencePoints
   });
