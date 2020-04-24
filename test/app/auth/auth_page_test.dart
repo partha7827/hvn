@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter_modular/flutter_modular_test.dart';
 
-import 'package:highvibe/app/auth/auth_page.dart';
+import 'package:highvibe/app/auth/auth_controller.dart';
 
 main() {
   testWidgets('AuthPage has title', (WidgetTester tester) async {

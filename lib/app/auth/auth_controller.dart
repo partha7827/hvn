@@ -1,3 +1,7 @@
+import 'package:flutter_modular/flutter_modular.dart';
+import 'package:highvibe/app/auth/auth_repository.dart';
+import 'package:highvibe/app/auth/user_repository.dart';
+import 'package:highvibe/app/auth/user_store.dart';
 import 'package:mobx/mobx.dart';
 
 part 'auth_controller.g.dart';
@@ -5,11 +9,58 @@ part 'auth_controller.g.dart';
 class AuthController = _AuthControllerBase with _$AuthController;
 
 abstract class _AuthControllerBase with Store {
+  final authRepo = Modular.get<AuthRepository>();
+  final userRepo = Modular.get<UserRepository>();
+
   @observable
-  int value = 0;
+  AuthState authState = AuthState.initial;
+
+  @observable
+  User currentUser;
 
   @action
-  void increment() {
-    value++;
+  Future<void> init() async {
+    try {
+      final uid = await authRepo.getUid();
+
+      await Future.delayed(Duration(seconds: 1));
+
+      if (uid == null) {
+        authState = AuthState.unauthenticated;
+      } else {
+        currentUser = await userRepo.fetchUserData(uid);
+
+        await setUserOnline(true);
+
+        authState = AuthState.authenticated;
+      }
+    } catch (e) {
+      authState = AuthState.unauthenticated;
+    }
   }
+
+  Future<void> login(String uid) async {
+    currentUser = await userRepo.fetchUserData(uid);
+
+    authState = AuthState.authenticated;
+
+    await setUserOnline(true);
+  }
+
+  Future<void> logout() async {
+    await setUserOnline(false);
+
+    await authRepo.logout();
+
+    authState = AuthState.unauthenticated;
+
+    currentUser = null;
+  }
+
+  Future<void> setUserOnline(bool active) =>
+      userRepo.setUserActive(currentUser.id, active);
+}
+
+enum AuthState {
+  initial, authenticated, unauthenticated
 }
