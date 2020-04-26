@@ -5,8 +5,9 @@ class GradientOutlineButton extends StatelessWidget {
   final _GradientPainter _painter;
   final VoidCallback _callback;
   final double _radius;
-  final Icon icon;
+  final Widget icon;
   final Widget label;
+  final double minHeight;
 
   GradientOutlineButton({
     double strokeWidth = 2,
@@ -14,7 +15,8 @@ class GradientOutlineButton extends StatelessWidget {
     LinearGradient gradient = primaryGradient,
     @required VoidCallback onPressed,
     this.icon,
-    @required this.label,
+    this.label,
+    this.minHeight = 48,
   })  : this._painter = _GradientPainter(
             strokeWidth: strokeWidth, radius: radius, gradient: gradient),
         this._callback = onPressed,
@@ -31,13 +33,16 @@ class GradientOutlineButton extends StatelessWidget {
           borderRadius: BorderRadius.circular(_radius),
           onTap: _callback,
           child: Container(
-            constraints: BoxConstraints(minWidth: 88, minHeight: 48),
+            constraints: BoxConstraints(minWidth: 48, minHeight: minHeight),
             child: Row(
               mainAxisSize: MainAxisSize.min,
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 Row(
-                  children: <Widget>[icon, label],
+                  children: <Widget>[
+                    if (icon != null) icon,
+                    if (label != null) label,
+                  ],
                 ),
               ],
             ),

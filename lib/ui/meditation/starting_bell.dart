@@ -59,7 +59,7 @@ class _StartingBellState extends State<StartingBell> {
                       width: 24.0,
                       height: 24.0,
                       child: OutlineButton(
-                        highlightedBorderColor: secondaryTextColor,
+                        highlightedBorderColor: accentColor,
                         splashColor: hintTextColor,
                         padding: const EdgeInsets.all(0.0),
                         borderSide: BorderSide(color: hintTextColor),
@@ -69,7 +69,7 @@ class _StartingBellState extends State<StartingBell> {
                         child: Icon(
                           Icons.remove,
                           size: 20.0,
-                          color: secondaryTextColor,
+                          color: accentColor,
                         ),
                         onPressed: () {},
                       ),
@@ -88,7 +88,7 @@ class _StartingBellState extends State<StartingBell> {
                       width: 24.0,
                       height: 24.0,
                       child: OutlineButton(
-                        highlightedBorderColor: secondaryTextColor,
+                        highlightedBorderColor: accentColor,
                         splashColor: hintTextColor,
                         padding: const EdgeInsets.all(0.0),
                         borderSide: BorderSide(color: hintTextColor),
@@ -98,7 +98,7 @@ class _StartingBellState extends State<StartingBell> {
                         child: Icon(
                           Icons.add,
                           size: 20.0,
-                          color: secondaryTextColor,
+                          color: accentColor,
                         ),
                         onPressed: () {},
                       ),
@@ -156,12 +156,12 @@ class _StartingBellState extends State<StartingBell> {
             child: GradientOutlineButton(
               icon: Icon(
                 Icons.close,
-                color: secondaryTextColor,
+                color: accentColor,
               ),
               label: Text(
                 Strings.cancel,
                 style: TextStyle(
-                  color: secondaryTextColor,
+                  color: accentColor,
                   fontSize: 16,
                 ),
               ),

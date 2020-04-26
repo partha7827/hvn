@@ -104,7 +104,7 @@ class _HomePageState extends State<HomePage> {
                 padding: const EdgeInsets.only(bottom: 4.0),
                 child: SvgPicture.asset(
                   asset,
-                  color: selected ? secondaryTextColor : Colors.white,
+                  color: selected ? accentColor : Colors.white,
                 ),
               ),
               Text(
@@ -112,7 +112,7 @@ class _HomePageState extends State<HomePage> {
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 12,
-                  color: selected ? secondaryTextColor : Colors.white,
+                  color: selected ? accentColor : Colors.white,
                 ),
               )
             ],
