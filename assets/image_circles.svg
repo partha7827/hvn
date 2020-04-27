@@ -1,9 +1,17 @@
-<svg width="157" height="120" viewBox="0 0 157 120" fill="none" xmlns="http://www.w3.org/2000/svg">
-<g opacity="0.3">
-<path opacity="0.2" d="M182.999 -1.78174H-3.31934V122.203H182.999V-1.78174Z" fill="white"/>
-<path opacity="0.2" fill-rule="evenodd" clip-rule="evenodd" d="M-3.31934 -1.78174H182.999V122.203H21.4238C10.3964 106.203 1.95183 88.2867 -3.31934 69.0577V-1.78174Z" fill="white"/>
-<path opacity="0.2" fill-rule="evenodd" clip-rule="evenodd" d="M57.4966 -1.78174H182.999V121.606C123.506 121.061 65.9644 90.2385 57.6922 22.4422C56.653 13.9247 56.6289 5.84251 57.4966 -1.78174Z" fill="white"/>
-<path opacity="0.2" fill-rule="evenodd" clip-rule="evenodd" d="M109.413 -1.78174H182.999V94.2912C165.042 95.2536 149.779 90.5288 137.613 82.5064C106.577 62.0434 98.6174 25.9012 109.413 -1.78174Z" fill="white"/>
-<path opacity="0.2" fill-rule="evenodd" clip-rule="evenodd" d="M137.633 -1.78174H183V55.6143C178.017 58.1063 172.395 59.511 166.445 59.511C145.971 59.511 129.13 45.3692 129.376 22.4422C129.481 12.6107 132.55 4.39667 137.633 -1.78174Z" fill="white"/>
-</g>
+<svg fill="none" height="120" viewBox="0 0 157 120" width="157" xmlns="http://www.w3.org/2000/svg">
+    <g opacity="0.3">
+        <path d="M182.999 -1.78174H-3.31934V122.203H182.999V-1.78174Z" fill="white" opacity="0.2" />
+        <path clip-rule="evenodd" d="M-3.31934 -1.78174H182.999V122.203H21.4238C10.3964 106.203 1.95183 88.2867 -3.31934 69.0577V-1.78174Z" fill="white"
+            fill-rule="evenodd"
+            opacity="0.2" />
+        <path clip-rule="evenodd" d="M57.4966 -1.78174H182.999V121.606C123.506 121.061 65.9644 90.2385 57.6922 22.4422C56.653 13.9247 56.6289 5.84251 57.4966 -1.78174Z" fill="white"
+            fill-rule="evenodd"
+            opacity="0.2" />
+        <path clip-rule="evenodd" d="M109.413 -1.78174H182.999V94.2912C165.042 95.2536 149.779 90.5288 137.613 82.5064C106.577 62.0434 98.6174 25.9012 109.413 -1.78174Z" fill="white"
+            fill-rule="evenodd"
+            opacity="0.2" />
+        <path clip-rule="evenodd" d="M137.633 -1.78174H183V55.6143C178.017 58.1063 172.395 59.511 166.445 59.511C145.971 59.511 129.13 45.3692 129.376 22.4422C129.481 12.6107 132.55 4.39667 137.633 -1.78174Z" fill="white"
+            fill-rule="evenodd"
+            opacity="0.2" />
+    </g>
 </svg>

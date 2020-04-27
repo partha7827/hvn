@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:highvibe/ui/creators_profile/creators_profile.dart';
+import 'package:highvibe/ui/custom_widgets/header_row.dart';
 import 'package:highvibe/values/themes.dart';
 
 class AuthorsWidget extends StatelessWidget {
@@ -10,23 +11,10 @@ class AuthorsWidget extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20),
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: <Widget>[
-              Text(
-                'Authors',
-                style: bold20PlayfairWhite,
-              ),
-              FlatButton(
-                child: Text(
-                  'See All',
-                  style: normal16Accent,
-                ),
-                onPressed: () {},
-              )
-            ],
+          padding: const EdgeInsets.only(left: 20.0),
+          child: HeaderRow(
+            title: 'Author',
+            showTrailing: true,
           ),
         ),
         Padding(
@@ -87,7 +75,7 @@ class AuthorsWidget extends StatelessWidget {
                   width: 100,
                   height: 40,
                   decoration: BoxDecoration(
-                    gradient: dartToTransparentGradient,
+                    gradient: darkToTransparentGradient,
                     borderRadius: BorderRadius.circular(10.0),
                   ),
                 ),

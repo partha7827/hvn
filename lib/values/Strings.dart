@@ -23,4 +23,5 @@ class Strings {
   static const pastStreams = 'Past Streams';
   static const membersJoined = 'Members joined';
   static const typeMessage = 'Type a message';
+  static const recommendedForYou = 'Recommended for you';
 }
