@@ -5,7 +5,7 @@ import 'package:highvibe/app/config/flavor_config.dart';
 
 void main() {
   FlavorConfig(
-      flavor: Flavor.DEV, values: FlavorValues(baseUrl: "dev api url"));
+      flavor: Flavor.PROD, values: FlavorValues(baseUrl: "prod api url"));
 
   runApp(ModularApp(module: AppModule()));
 }
