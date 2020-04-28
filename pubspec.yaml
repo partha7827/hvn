@@ -114,6 +114,8 @@ flutter:
      - assets/ic_chat.svg
      - assets/ic_donate.svg
      - assets/ic_play.svg
+     - assets/ic_hamburger.svg
+     - assets/ic_quote.svg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

@@ -33,17 +33,33 @@ LinearGradient secondaryGradient = LinearGradient(colors: [
   const Color(0xFF66CCCC),
 ]);
 
-const dartToTransparentGradient = const LinearGradient(
-    begin: Alignment.bottomCenter,
-    end: Alignment.topCenter,
-    colors: [
-      const Color(0x7006081A),
-      Colors.transparent,
-    ]);
+const darkToTransparentGradient = const LinearGradient(
+  begin: Alignment.bottomCenter,
+  end: Alignment.topCenter,
+  colors: [
+    const Color(0x7006081A),
+    Colors.transparent,
+  ],
+);
+
+const homeHeaderGradient = const LinearGradient(
+  begin: Alignment.topCenter,
+  end: Alignment.bottomCenter,
+  colors: [
+    Colors.transparent,
+    const Color(0xFF000222),
+  ],
+);
 
 // TextStyles
 TextStyle bold20PlayfairWhite = GoogleFonts.playfairDisplay(
   fontSize: 20,
+  fontWeight: FontWeight.bold,
+  color: Colors.white,
+);
+
+TextStyle bold18PlayfairWhite = GoogleFonts.playfairDisplay(
+  fontSize: 18,
   fontWeight: FontWeight.bold,
   color: Colors.white,
 );

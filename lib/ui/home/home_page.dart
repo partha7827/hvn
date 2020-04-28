@@ -26,49 +26,46 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     var provider = Provider.of<BottomNavigationProvider>(context);
     return Scaffold(
-      appBar: AppBar(
-        title: Text('HighVibe Network'),
-      ),
       body: _screens[provider.currentIndex],
-      bottomNavigationBar: Padding(
-        padding: const EdgeInsets.all(20.0),
-        child: Container(
-          decoration: BoxDecoration(
-            color: secondaryColor,
-            borderRadius: BorderRadius.circular(50.0),
-          ),
-          height: 60,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: <Widget>[
-              _bottomBarItem(
-                title: 'Home',
-                asset: 'assets/ic_home.svg',
-                onPressed: () => provider.currentIndex = 0,
-                selected: provider.currentIndex == 0,
-              ),
-              _bottomBarItem(
-                title: 'Discover',
-                asset: 'assets/ic_discover.svg',
-                onPressed: () => provider.currentIndex = 1,
-                selected: provider.currentIndex == 1,
-              ),
-              _bottomBarItem(
-                title: 'Live  ',
-                asset: 'assets/ic_live.svg',
-                onPressed: () => provider.currentIndex = 2,
-                selected: provider.currentIndex == 2,
-              ),
-              _bottomBarItem(
-                title: 'Profile',
-                asset: 'assets/ic_profile.svg',
-                onPressed: () => provider.currentIndex = 3,
-                selected: provider.currentIndex == 3,
-              ),
-            ],
-          ),
-        ),
-      ),
+//      bottomNavigationBar: Padding(
+//        padding: const EdgeInsets.all(20.0),
+//        child: Container(
+//          decoration: BoxDecoration(
+//            color: secondaryColor,
+//            borderRadius: BorderRadius.circular(50.0),
+//          ),
+//          height: 60,
+//          child: Row(
+//            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+//            children: <Widget>[
+//              _bottomBarItem(
+//                title: 'Home',
+//                asset: 'assets/ic_home.svg',
+//                onPressed: () => provider.currentIndex = 0,
+//                selected: provider.currentIndex == 0,
+//              ),
+//              _bottomBarItem(
+//                title: 'Discover',
+//                asset: 'assets/ic_discover.svg',
+//                onPressed: () => provider.currentIndex = 1,
+//                selected: provider.currentIndex == 1,
+//              ),
+//              _bottomBarItem(
+//                title: 'Live  ',
+//                asset: 'assets/ic_live.svg',
+//                onPressed: () => provider.currentIndex = 2,
+//                selected: provider.currentIndex == 2,
+//              ),
+//              _bottomBarItem(
+//                title: 'Profile',
+//                asset: 'assets/ic_profile.svg',
+//                onPressed: () => provider.currentIndex = 3,
+//                selected: provider.currentIndex == 3,
+//              ),
+//            ],
+//          ),
+//        ),
+//      ),
 //      floatingActionButton: FloatingActionButton(
 //        child: Icon(Icons.add),
 //        onPressed: () {
