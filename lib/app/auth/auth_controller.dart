@@ -23,16 +23,18 @@ abstract class _AuthControllerBase with Store {
     try {
       final uid = await authRepo.getUid();
 
-      await Future.delayed(Duration(seconds: 1));
-
       if (uid == null) {
         authState = AuthState.unauthenticated;
       } else {
         currentUser = await userRepo.fetchUserData(uid);
 
-        await setUserOnline(true);
+        if (currentUser == null) {
+          authState = AuthState.unauthenticated;
+        } else {
+          await setUserOnline(true);
 
-        authState = AuthState.authenticated;
+          authState = AuthState.authenticated;
+        }
       }
     } catch (e) {
       authState = AuthState.unauthenticated;
@@ -61,6 +63,4 @@ abstract class _AuthControllerBase with Store {
       userRepo.setUserActive(currentUser.id, active);
 }
 
-enum AuthState {
-  initial, authenticated, unauthenticated
-}
+enum AuthState { initial, authenticated, unauthenticated }

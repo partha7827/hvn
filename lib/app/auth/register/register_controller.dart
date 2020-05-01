@@ -43,7 +43,7 @@ abstract class _RegisterControllerBase with Store {
         name: usernameController.text
       );
 
-      Modular.to.pop();
+      await userRepo.createNewUser(user);
 
       await Modular.get<AuthController>().login(user.id);
     } catch (e) {
