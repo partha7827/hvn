@@ -34,31 +34,32 @@ class User extends _User with _$User {
     List<String> uploads,
     List<String> featured,
     List<String> badges,
+    List<String> scheduled,
+    bool isLive,
   }) : super(
-    name: name,
-    status: status,
-    photoUrl: photoUrl,
-    karmaPoints: karmaPoints,
-    experiencePoints: experiencePoints,
-    followers: ObservableList<String>.of(followers ?? []),
-    following: ObservableList<String>.of(following ?? []),
-    uploads: ObservableList<String>.of(uploads ?? []),
-    featured: ObservableList<String>.of(featured ?? []),
-    badges: ObservableList<String>.of(badges ?? []),
-  );
+          name: name,
+          status: status,
+          photoUrl: photoUrl,
+          karmaPoints: karmaPoints,
+          experiencePoints: experiencePoints,
+          followers: ObservableList<String>.of(followers ?? []),
+          following: ObservableList<String>.of(following ?? []),
+          uploads: ObservableList<String>.of(uploads ?? []),
+          featured: ObservableList<String>.of(featured ?? []),
+          badges: ObservableList<String>.of(badges ?? []),
+          scheduled: ObservableList<String>.of(scheduled ?? []),
+          isLive: isLive,
+        );
 
-  factory User.createNew({
-    String uid,
-    String email,
-    String name,
-    String photoUrl
-  }) {
+  factory User.createNew(
+      {String uid, String email, String name, String photoUrl}) {
     return User(
       id: uid,
       name: name ?? 'Anonymous',
       email: email,
       photoUrl: photoUrl,
       isOnline: true,
+      isLive: false,
       lastTimeSeen: DateTime.now().toUtc(),
       accountCreationTime: DateTime.now().toUtc(),
       karmaPoints: 0,
@@ -69,7 +70,8 @@ class User extends _User with _$User {
       following: List<String>(),
       uploads: List<String>(),
       featured: List<String>(),
-      badges: List<String>()
+      badges: List<String>(),
+      scheduled: List<String>(),
     );
   }
 
@@ -85,6 +87,9 @@ class User extends _User with _$User {
 abstract class _User with Store {
   @observable
   int value = 0;
+
+  @observable
+  bool isLive;
 
   @observable
   String name;
@@ -111,6 +116,9 @@ abstract class _User with Store {
   ObservableList<String> featured;
 
   @observable
+  ObservableList<String> scheduled;
+
+  @observable
   int karmaPoints;
 
   @observable
@@ -126,6 +134,8 @@ abstract class _User with Store {
     this.uploads,
     this.featured,
     this.karmaPoints,
-    this.experiencePoints
+    this.experiencePoints,
+    this.isLive,
+    this.scheduled,
   });
 }

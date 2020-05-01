@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:highvibe/app/auth/auth_controller.dart';
 import 'home_controller.dart';
 
 class HomePage extends StatefulWidget {
@@ -11,8 +12,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends ModularState<HomePage, HomeController> {
-  //use 'controller' variable to access controller
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,12 +20,13 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
       ),
       body: Column(
         children: <Widget>[
-          Text("Quote of the day"),
-          Text("My Wallet / Create"),
-          Text("My Tribe / Create"),
-          Text("Following Tribes"),
-          Text("Recommendations"),
-          Text("Journal Stories (later)"),
+          Text(
+            controller.currentUser,
+          ),
+          OutlineButton(
+            onPressed: controller.logout,
+            child: Text("Logout"),
+          ),
         ],
       ),
     );

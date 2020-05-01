@@ -1,5 +1,6 @@
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:highvibe/app/auth/auth_module.dart';
 import 'package:highvibe/app/auth/login/widgets/login_button.dart';
@@ -72,17 +73,12 @@ class _LoginPageState extends ModularState<LoginPage, LoginController> {
                 ),
               ),
               SizedBox(height: 20),
-              // Observer(
-              //   builder: (_) => LoginButton(
-              //     'Login',
-              //     isLoading: controller.inProgress,
-              //     onTap: controller.loginUser,
-              //   ),
-              // ),
-              LoginButton(
-                'Login',
-                isLoading: controller.inProgress,
-                onTap: controller.loginUser,
+              Observer(
+                builder: (_) => LoginButton(
+                  'Login',
+                  isLoading: controller.inProgress,
+                  onTap: controller.loginUser,
+                ),
               ),
               SizedBox(height: 10),
               FlatButton(

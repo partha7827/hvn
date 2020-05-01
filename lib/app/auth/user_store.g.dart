@@ -25,11 +25,14 @@ User _$UserFromJson(Map<String, dynamic> json) {
     uploads: (json['uploads'] as List)?.map((e) => e as String)?.toList(),
     featured: (json['featured'] as List)?.map((e) => e as String)?.toList(),
     badges: (json['badges'] as List)?.map((e) => e as String)?.toList(),
+    scheduled: (json['scheduled'] as List)?.map((e) => e as String)?.toList(),
+    isLive: json['isLive'] as bool,
   )..value = json['value'] as int;
 }
 
 Map<String, dynamic> _$UserToJson(User instance) => <String, dynamic>{
       'value': instance.value,
+      'isLive': instance.isLive,
       'name': instance.name,
       'status': instance.status,
       'photoUrl': instance.photoUrl,
@@ -38,6 +41,7 @@ Map<String, dynamic> _$UserToJson(User instance) => <String, dynamic>{
       'badges': instance.badges,
       'uploads': instance.uploads,
       'featured': instance.featured,
+      'scheduled': instance.scheduled,
       'karmaPoints': instance.karmaPoints,
       'experiencePoints': instance.experiencePoints,
       'id': instance.id,
@@ -71,6 +75,23 @@ mixin _$User on _User, Store {
       super.value = value;
       _$valueAtom.reportChanged();
     }, _$valueAtom, name: '${_$valueAtom.name}_set');
+  }
+
+  final _$isLiveAtom = Atom(name: '_User.isLive');
+
+  @override
+  bool get isLive {
+    _$isLiveAtom.context.enforceReadPolicy(_$isLiveAtom);
+    _$isLiveAtom.reportObserved();
+    return super.isLive;
+  }
+
+  @override
+  set isLive(bool value) {
+    _$isLiveAtom.context.conditionallyRunInAction(() {
+      super.isLive = value;
+      _$isLiveAtom.reportChanged();
+    }, _$isLiveAtom, name: '${_$isLiveAtom.name}_set');
   }
 
   final _$nameAtom = Atom(name: '_User.name');
@@ -209,6 +230,23 @@ mixin _$User on _User, Store {
     }, _$featuredAtom, name: '${_$featuredAtom.name}_set');
   }
 
+  final _$scheduledAtom = Atom(name: '_User.scheduled');
+
+  @override
+  ObservableList<String> get scheduled {
+    _$scheduledAtom.context.enforceReadPolicy(_$scheduledAtom);
+    _$scheduledAtom.reportObserved();
+    return super.scheduled;
+  }
+
+  @override
+  set scheduled(ObservableList<String> value) {
+    _$scheduledAtom.context.conditionallyRunInAction(() {
+      super.scheduled = value;
+      _$scheduledAtom.reportChanged();
+    }, _$scheduledAtom, name: '${_$scheduledAtom.name}_set');
+  }
+
   final _$karmaPointsAtom = Atom(name: '_User.karmaPoints');
 
   @override
@@ -246,7 +284,7 @@ mixin _$User on _User, Store {
   @override
   String toString() {
     final string =
-        'value: ${value.toString()},name: ${name.toString()},status: ${status.toString()},photoUrl: ${photoUrl.toString()},following: ${following.toString()},followers: ${followers.toString()},badges: ${badges.toString()},uploads: ${uploads.toString()},featured: ${featured.toString()},karmaPoints: ${karmaPoints.toString()},experiencePoints: ${experiencePoints.toString()}';
+        'value: ${value.toString()},isLive: ${isLive.toString()},name: ${name.toString()},status: ${status.toString()},photoUrl: ${photoUrl.toString()},following: ${following.toString()},followers: ${followers.toString()},badges: ${badges.toString()},uploads: ${uploads.toString()},featured: ${featured.toString()},scheduled: ${scheduled.toString()},karmaPoints: ${karmaPoints.toString()},experiencePoints: ${experiencePoints.toString()}';
     return '{$string}';
   }
 }
