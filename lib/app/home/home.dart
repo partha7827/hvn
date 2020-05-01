@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:highvibe/ui/custom_widgets/event_card.dart';
-import 'package:highvibe/ui/custom_widgets/header_row.dart';
-import 'package:highvibe/ui/custom_widgets/stream_card.dart';
-import 'package:highvibe/ui/home/authors_widget.dart';
-import 'package:highvibe/ui/home/tools_widget.dart';
+import 'package:highvibe/app/home/authors_widget.dart';
+import 'package:highvibe/app/home/tools_widget.dart';
 import 'package:highvibe/values/Strings.dart';
 import 'package:highvibe/values/themes.dart';
+import 'package:highvibe/widgets/event_card.dart';
+import 'package:highvibe/widgets/header_row.dart';
+import 'package:highvibe/widgets/stream_card.dart';
 
 import 'header_widget.dart';
 

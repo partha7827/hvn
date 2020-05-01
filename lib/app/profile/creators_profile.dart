@@ -1,13 +1,13 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:highvibe/ui/creators_profile/creator_audio.dart';
-import 'package:highvibe/ui/creators_profile/creator_broadcast.dart';
-import 'package:highvibe/ui/creators_profile/creator_chat.dart';
-import 'package:highvibe/ui/custom_widgets/gradient_outline_button.dart';
-import 'package:highvibe/ui/custom_widgets/underline_gradient_indicator.dart';
+import 'package:highvibe/app/profile/widgets/creator_audio.dart';
+import 'package:highvibe/app/profile/widgets/creator_broadcast.dart';
+import 'package:highvibe/app/profile/widgets/creator_chat.dart';
 import 'package:highvibe/values/Strings.dart';
 import 'package:highvibe/values/themes.dart';
+import 'package:highvibe/widgets/gradient_outline_button.dart';
+import 'package:highvibe/widgets/underline_gradient_indicator.dart';
 
 var imageUrl =
     'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2134&q=80';
@@ -147,12 +147,12 @@ class _CreatorsProfileState extends State<CreatorsProfile>
                           Column(
                             children: <Widget>[
                               Text(
-                                '12+ hrs',
+                                '1.4k',
                                 style: bold20White,
                               ),
-                              Text('Total Streamed', style: normal16Hint)
+                              Text('Following', style: normal16Hint)
                             ],
-                          )
+                          ),
                         ],
                       )
                     ],

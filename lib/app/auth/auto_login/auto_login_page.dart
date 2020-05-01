@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:highvibe/app/auth/auth_controller.dart';
 import 'package:highvibe/app/auth/auto_login/auto_login_controller.dart';
-import 'package:mobx/mobx.dart';
+import 'package:highvibe/widgets/splash_widget.dart';
 
 class AutoLoginPage extends StatefulWidget {
   final String title;
@@ -22,9 +21,7 @@ class _AutoLoginPageState extends ModularState<AutoLoginPage, AutoLoginControlle
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: CircularProgressIndicator(),
-      ),
+      body: SplashWidget(),
     );
   }
 }

@@ -1,10 +1,12 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:highvibe/ui/creators_profile/creator_audio.dart';
 import 'package:highvibe/values/Strings.dart';
 import 'package:highvibe/values/themes.dart';
 
 import 'audio_tile.dart';
+
+var dummyImgUrl =
+    'https://takelessons.com/blog/wp-content/uploads/2020/03/flute-for-beginners.jpg';
 
 class PlaylistsCard extends StatelessWidget {
   final String title;

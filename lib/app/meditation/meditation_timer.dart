@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:highvibe/ui/custom_widgets/custom_fab.dart';
-import 'package:highvibe/ui/custom_widgets/outline_tab_indicator.dart';
-import 'package:highvibe/ui/meditation/past_meditation.dart';
-import 'package:highvibe/ui/meditation/your_presets.dart';
+import 'package:highvibe/app/meditation/past_meditation.dart';
+import 'package:highvibe/app/meditation/your_presets.dart';
 import 'package:highvibe/values/themes.dart';
+import 'package:highvibe/widgets/custom_fab.dart';
+import 'package:highvibe/widgets/outline_tab_indicator.dart';
 
 class MeditationTimer extends StatefulWidget {
   @override

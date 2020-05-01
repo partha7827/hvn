@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:highvibe/ui/custom_widgets/audio_tile.dart';
-import 'package:highvibe/ui/custom_widgets/header_row.dart';
-import 'package:highvibe/ui/custom_widgets/playlists_card.dart';
+import 'package:highvibe/widgets/audio_tile.dart';
+import 'package:highvibe/widgets/header_row.dart';
+import 'package:highvibe/widgets/playlists_card.dart';
 import 'package:highvibe/values/Strings.dart';
 
 var dummyImgUrl =

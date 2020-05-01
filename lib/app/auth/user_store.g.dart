@@ -18,6 +18,7 @@ User _$UserFromJson(Map<String, dynamic> json) {
     name: json['name'] as String,
     status: json['status'] as String,
     photoUrl: json['photoUrl'] as String,
+    info: json['info'] as String,
     karmaPoints: json['karmaPoints'] as int,
     experiencePoints: json['experiencePoints'] as int,
     followers: (json['followers'] as List)?.map((e) => e as String)?.toList(),
@@ -35,6 +36,7 @@ Map<String, dynamic> _$UserToJson(User instance) => <String, dynamic>{
       'isLive': instance.isLive,
       'name': instance.name,
       'status': instance.status,
+      'info': instance.info,
       'photoUrl': instance.photoUrl,
       'following': instance.following,
       'followers': instance.followers,
@@ -126,6 +128,23 @@ mixin _$User on _User, Store {
       super.status = value;
       _$statusAtom.reportChanged();
     }, _$statusAtom, name: '${_$statusAtom.name}_set');
+  }
+
+  final _$infoAtom = Atom(name: '_User.info');
+
+  @override
+  String get info {
+    _$infoAtom.context.enforceReadPolicy(_$infoAtom);
+    _$infoAtom.reportObserved();
+    return super.info;
+  }
+
+  @override
+  set info(String value) {
+    _$infoAtom.context.conditionallyRunInAction(() {
+      super.info = value;
+      _$infoAtom.reportChanged();
+    }, _$infoAtom, name: '${_$infoAtom.name}_set');
   }
 
   final _$photoUrlAtom = Atom(name: '_User.photoUrl');
@@ -284,7 +303,7 @@ mixin _$User on _User, Store {
   @override
   String toString() {
     final string =
-        'value: ${value.toString()},isLive: ${isLive.toString()},name: ${name.toString()},status: ${status.toString()},photoUrl: ${photoUrl.toString()},following: ${following.toString()},followers: ${followers.toString()},badges: ${badges.toString()},uploads: ${uploads.toString()},featured: ${featured.toString()},scheduled: ${scheduled.toString()},karmaPoints: ${karmaPoints.toString()},experiencePoints: ${experiencePoints.toString()}';
+        'value: ${value.toString()},isLive: ${isLive.toString()},name: ${name.toString()},status: ${status.toString()},info: ${info.toString()},photoUrl: ${photoUrl.toString()},following: ${following.toString()},followers: ${followers.toString()},badges: ${badges.toString()},uploads: ${uploads.toString()},featured: ${featured.toString()},scheduled: ${scheduled.toString()},karmaPoints: ${karmaPoints.toString()},experiencePoints: ${experiencePoints.toString()}';
     return '{$string}';
   }
 }

@@ -27,6 +27,7 @@ class User extends _User with _$User {
     String name,
     String status,
     String photoUrl,
+    String info,
     int karmaPoints,
     int experiencePoints,
     List<String> followers,
@@ -40,6 +41,7 @@ class User extends _User with _$User {
           name: name,
           status: status,
           photoUrl: photoUrl,
+          info: info,
           karmaPoints: karmaPoints,
           experiencePoints: experiencePoints,
           followers: ObservableList<String>.of(followers ?? []),
@@ -58,6 +60,7 @@ class User extends _User with _$User {
       name: name ?? 'Anonymous',
       email: email,
       photoUrl: photoUrl,
+      info: '',
       isOnline: true,
       isLive: false,
       lastTimeSeen: DateTime.now().toUtc(),
@@ -98,6 +101,9 @@ abstract class _User with Store {
   String status;
 
   @observable
+  String info;
+
+  @observable
   String photoUrl;
 
   @observable
@@ -128,6 +134,7 @@ abstract class _User with Store {
     this.name,
     this.status,
     this.photoUrl,
+    this.info,
     this.following,
     this.followers,
     this.badges,

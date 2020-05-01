@@ -6,7 +6,7 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart'
     hide Message;
 import 'package:stream_chat_flutter/stream_chat_flutter.dart';
 
-import 'config.dart';
+import 'values/config.dart';
 
 void showLocalNotification(Message message, ChannelModel channel) async {
   FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =

@@ -3,7 +3,7 @@ import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:highvibe/app/auth/login/login_controller.dart';
-import 'package:highvibe/common/custom_text_form.dart';
+import 'package:highvibe/widgets/custom_text_form.dart';
 
 void showResetPasswordDialog(
     BuildContext context, TextEditingController emailController) async {

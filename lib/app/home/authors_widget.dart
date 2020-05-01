@@ -1,8 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:highvibe/ui/creators_profile/creators_profile.dart';
-import 'package:highvibe/ui/custom_widgets/header_row.dart';
+import 'package:highvibe/app/profile/creators_profile.dart';
 import 'package:highvibe/values/themes.dart';
+import 'package:highvibe/widgets/header_row.dart';
 
 class AuthorsWidget extends StatelessWidget {
   @override

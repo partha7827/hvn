@@ -1,10 +1,10 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:highvibe/ui/custom_widgets/header_row.dart';
-import 'package:highvibe/ui/custom_widgets/page_indicator.dart';
 import 'package:highvibe/values/Strings.dart';
 import 'package:highvibe/values/themes.dart';
+import 'package:highvibe/widgets/header_row.dart';
+import 'package:highvibe/widgets/page_indicator.dart';
 
 class HeaderWidget extends StatelessWidget {
   @override

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:highvibe/app/auth/login/widgets/login_button.dart';
-import 'package:highvibe/common/custom_text_form.dart';
+import 'package:highvibe/widgets/custom_text_form.dart';
 import 'register_controller.dart';
 
 class RegisterPage extends StatefulWidget {

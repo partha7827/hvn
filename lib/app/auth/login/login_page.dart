@@ -5,7 +5,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:highvibe/app/auth/auth_module.dart';
 import 'package:highvibe/app/auth/login/widgets/login_button.dart';
 import 'package:highvibe/app/auth/login/widgets/reset_password_widget.dart';
-import 'package:highvibe/common/custom_text_form.dart';
+import 'package:highvibe/widgets/custom_text_form.dart';
 import 'login_controller.dart';
 
 class LoginPage extends StatefulWidget {
