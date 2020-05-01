@@ -28,6 +28,8 @@ dependencies:
   stream_chat_flutter: ^0.2.0-alpha+2
   flutter_apns: ^1.1.0
   flutter_local_notifications: ^1.4.1
+  flutter_svg: ^0.17.4
+  provider: ^4.0.5
   dio: ^3.0.9
 
   #Firebase
@@ -91,11 +93,30 @@ flutter:
   # included with your application, so that you can use the icons in
   # the material Icons class.
   uses-material-design: true
-
-  # To add assets to your application, add an assets section, like this:
-  # assets:
-  #   - images/a_dot_burr.jpeg
-  #   - images/a_dot_ham.jpeg
+  assets:
+     - assets/ic_xp.png
+     - assets/ic_edit_outline.png
+     - assets/ic_home.svg
+     - assets/ic_discover.svg
+     - assets/ic_live.svg
+     - assets/ic_profile.svg
+     - assets/ic_feather.png
+     - assets/ic_time.png
+     - assets/image_wave.svg
+     - assets/image_gratitude.svg
+     - assets/image_circles.svg
+     - assets/image_mood.png
+     - assets/ic_wallet.svg
+     - assets/ic_notification.svg
+     - assets/ic_broadcasting.svg
+     - assets/ic_audio.svg
+     - assets/ic_audio.png
+     - assets/ic_audio_colored.png
+     - assets/ic_chat.svg
+     - assets/ic_donate.svg
+     - assets/ic_play.svg
+     - assets/ic_hamburger.svg
+     - assets/ic_quote.svg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
