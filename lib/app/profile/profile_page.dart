@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:highvibe/app/profile/widgets/creator_audio.dart';
-import 'package:highvibe/app/profile/widgets/creator_broadcast.dart';
-import 'package:highvibe/app/profile/widgets/creator_chat.dart';
+import 'package:highvibe/app/chat/chat_page.dart';
+import 'package:highvibe/app/profile/audio/audio_page.dart';
+import 'package:highvibe/app/profile/broadcast/broadcast_page.dart';
+import 'package:highvibe/widgets/bottom_navigation.dart';
 import 'package:highvibe/widgets/gradient_outline_button.dart';
 import 'package:highvibe/widgets/underline_gradient_indicator.dart';
 import 'profile_controller.dart';
@@ -88,7 +89,7 @@ class _ProfilePageState extends ModularState<ProfilePage, ProfileController>
                                 child: Center(
                                   child: ClipOval(
                                     child: CachedNetworkImage(
-                                      imageUrl: user.photoUrl,
+                                      imageUrl: user.photoUrl ?? imageUrl,
                                       width: 100,
                                       height: 100,
                                       fit: BoxFit.cover,
@@ -105,13 +106,13 @@ class _ProfilePageState extends ModularState<ProfilePage, ProfileController>
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: <Widget>[
                                 Text(
-                                  user.name,
+                                  user.name ?? 'username',
                                   style: bold20White,
                                 ),
                                 Padding(
                                   padding: const EdgeInsets.only(top: 4.0),
                                   child: Text(
-                                    user.status,
+                                    user.status ?? 'status',
                                     style: normal16Hint,
                                   ),
                                 ),
@@ -152,7 +153,7 @@ class _ProfilePageState extends ModularState<ProfilePage, ProfileController>
                       Padding(
                         padding: const EdgeInsets.symmetric(vertical: 20),
                         child: Text(
-                          user.info,
+                          user.info ?? 'info',
                           maxLines: 2,
                           overflow: TextOverflow.ellipsis,
                           style: normal16Hint,
@@ -164,7 +165,7 @@ class _ProfilePageState extends ModularState<ProfilePage, ProfileController>
                           Column(
                             children: <Widget>[
                               Text(
-                                user.followers.length,
+                                "${user.followers.length ?? 0}",
                                 style: bold20White,
                               ),
                               Text('Followers', style: normal16Hint)
@@ -173,7 +174,7 @@ class _ProfilePageState extends ModularState<ProfilePage, ProfileController>
                           Column(
                             children: <Widget>[
                               Text(
-                                user.following.length,
+                                "${user.following.length ?? 0}",
                                 style: bold20White,
                               ),
                               Text('Following', style: normal16Hint)
@@ -215,9 +216,9 @@ class _ProfilePageState extends ModularState<ProfilePage, ProfileController>
         body: TabBarView(
           controller: _tabController,
           children: <Widget>[
-            CreatorAudio(),
-            CreatorChat(),
-            CreatorBroadcast(),
+            AudioPage(),
+            ChatPage(),
+            BroadcastPage(),
           ],
         ),
       ),

@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
+import 'audio_controller.dart';
+
 import 'package:highvibe/widgets/audio_tile.dart';
 import 'package:highvibe/widgets/header_row.dart';
 import 'package:highvibe/widgets/playlists_card.dart';
@@ -7,7 +10,17 @@ import 'package:highvibe/values/Strings.dart';
 var dummyImgUrl =
     'https://takelessons.com/blog/wp-content/uploads/2020/03/flute-for-beginners.jpg';
 
-class CreatorAudio extends StatelessWidget {
+class AudioPage extends StatefulWidget {
+  final String title;
+  const AudioPage({Key key, this.title = "Audio"}) : super(key: key);
+
+  @override
+  _AudioPageState createState() => _AudioPageState();
+}
+
+class _AudioPageState extends ModularState<AudioPage, AudioController> {
+  //use 'controller' variable to access controller
+
   @override
   Widget build(BuildContext context) {
     return ListView(

@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:highvibe/app/auth/user_store.dart';
 
-class UserRepository extends Disposable {
+class UserService extends Disposable {
   final _firestore = Firestore.instance;
 
   CollectionReference get _userCollection => _firestore.collection("users");

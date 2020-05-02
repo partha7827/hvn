@@ -1,6 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:highvibe/app/profile/creators_profile.dart';
 import 'package:highvibe/values/themes.dart';
 import 'package:highvibe/widgets/header_row.dart';
 
@@ -27,12 +26,12 @@ class AuthorsWidget extends StatelessWidget {
               scrollDirection: Axis.horizontal,
               itemBuilder: (context, index) {
                 return _authorCard(onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (_) => CreatorsProfile(),
-                    ),
-                  );
+                  // Navigator.push(
+                  //   context,
+                  //   MaterialPageRoute(
+                  //     builder: (_) => CreatorsProfile(),
+                  //   ),
+                  // );
                 });
               },
             ),

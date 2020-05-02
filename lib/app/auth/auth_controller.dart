@@ -1,6 +1,6 @@
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:highvibe/app/auth/auth_repository.dart';
-import 'package:highvibe/app/auth/user_repository.dart';
+import 'package:highvibe/services/auth_service.dart';
+import 'package:highvibe/services/user_service.dart';
 import 'package:highvibe/app/auth/user_store.dart';
 import 'package:mobx/mobx.dart';
 
@@ -9,8 +9,8 @@ part 'auth_controller.g.dart';
 class AuthController = _AuthControllerBase with _$AuthController;
 
 abstract class _AuthControllerBase with Store {
-  final authRepo = Modular.get<AuthRepository>();
-  final userRepo = Modular.get<UserRepository>();
+  final authRepo = Modular.get<AuthService>();
+  final userRepo = Modular.get<UserService>();
 
   @observable
   AuthState authState = AuthState.initial;

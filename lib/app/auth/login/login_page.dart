@@ -10,7 +10,7 @@ import 'login_controller.dart';
 
 class LoginPage extends StatefulWidget {
   final String title;
-  const LoginPage({Key key, this.title = "Login"}) : super(key: key);
+  const LoginPage({ this.title = "Login"});
 
   @override
   _LoginPageState createState() => _LoginPageState();
@@ -20,7 +20,15 @@ class _LoginPageState extends ModularState<LoginPage, LoginController> {
   //use 'controller' variable to access controller
 
   @override
+  void initState() {
+    print("init login page state");
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
+    print("build login");
+
     final size = MediaQuery.of(context).size;
     return Scaffold(
       key: controller.scaffoldKey,

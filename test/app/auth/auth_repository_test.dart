@@ -2,12 +2,12 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:dio/dio.dart';
 
-import 'package:highvibe/app/auth/auth_repository.dart';
+// import 'package:highvibe/services/auth_service.dart';
 
 class MockClient extends Mock implements Dio {}
 
 void main() {
-  AuthRepository repository;
+  // AuthService repository;
   // MockClient client;
 
   setUp(() {

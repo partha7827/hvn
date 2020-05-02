@@ -1,11 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
+import 'broadcast_controller.dart';
 import 'package:highvibe/widgets/event_card.dart';
 import 'package:highvibe/widgets/header_row.dart';
 import 'package:highvibe/widgets/stream_card.dart';
 import 'package:highvibe/values/Strings.dart';
 import 'package:highvibe/values/themes.dart';
 
-class CreatorBroadcast extends StatelessWidget {
+class BroadcastPage extends StatefulWidget {
+  final String title;
+  const BroadcastPage({Key key, this.title = "Broadcast"}) : super(key: key);
+
+  @override
+  _BroadcastPageState createState() => _BroadcastPageState();
+}
+
+class _BroadcastPageState
+    extends ModularState<BroadcastPage, BroadcastController> {
+
   @override
   Widget build(BuildContext context) {
     return ListView(
@@ -101,4 +113,5 @@ class CreatorBroadcast extends StatelessWidget {
       ],
     );
   }
+
 }
