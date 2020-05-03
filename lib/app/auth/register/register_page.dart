@@ -24,8 +24,6 @@ class _RegisterPageState
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    final size = MediaQuery.of(context).size;
     return Scaffold(
       key: controller.scaffoldKey,
       appBar: AppBar(
@@ -84,7 +82,7 @@ class _RegisterPageState
                         builder: (_) => Theme(
                           data: ThemeData(unselectedWidgetColor: Colors.white),
                           child: Checkbox(
-                            activeColor: theme.accentColor,
+                            activeColor: Theme.of(context).accentColor,
                             checkColor: Colors.yellow,
                             value: controller.hasAcceptedTerms,
                             onChanged: (value) {
@@ -103,7 +101,7 @@ class _RegisterPageState
                 ),
                 Observer(
                   builder: (_) => GradientRaisedButton(
-                    label: "SIGN UP",
+                    label: Strings.signUp,
                     isLoading: controller.inProgress,
                     onPressed: controller.registerUser,
                   ),
@@ -165,13 +163,13 @@ class _RegisterPageState
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
                       Text(
-                        Strings.dontHaveAccount,
+                        Strings.alreadyHaveAccount,
                         style: normal16White,
                       ),
                       FlatButton(
                         onPressed: () => Navigator.pop(context),
                         child: Text(
-                          Strings.signUp,
+                          Strings.signIn,
                           style: normal16Accent,
                         ),
                       ),
