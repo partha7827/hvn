@@ -5,11 +5,13 @@ class GradientRaisedButton extends StatelessWidget {
   final Function onPressed;
   final String label;
   final IconData icon;
+  final bool isLoading;
 
   const GradientRaisedButton({
     this.onPressed,
     this.label,
     this.icon,
+    this.isLoading = false,
   });
 
   @override
@@ -28,17 +30,26 @@ class GradientRaisedButton extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              Padding(
-                padding: const EdgeInsets.only(right: 8.0),
-                child: Icon(icon),
-              ),
-              Text(
-                label,
-                style: TextStyle(
-                  fontSize: 16,
-                  color: Colors.white,
+              if (icon != null)
+                Padding(
+                  padding: const EdgeInsets.only(right: 8.0),
+                  child: Icon(icon),
                 ),
-              )
+              isLoading
+                  ? SizedBox(
+                      width: 24,
+                      height: 24,
+                      child: CircularProgressIndicator(
+                        valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+                      ),
+                    )
+                  : Text(
+                      label,
+                      style: TextStyle(
+                        fontSize: 16,
+                        color: Colors.white,
+                      ),
+                    ),
             ],
           ),
         ),

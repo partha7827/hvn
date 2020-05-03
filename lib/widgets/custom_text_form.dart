@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:highvibe/values/themes.dart';
 
 class CustomTextForm extends StatelessWidget {
   final String hint;
@@ -11,27 +12,27 @@ class CustomTextForm extends StatelessWidget {
   final double borderRadius;
   final int maxLength;
 
-  const CustomTextForm(
-      {Key key,
-      this.hint,
-      this.controller,
-      this.isObscure = false,
-      this.icon,
-      this.validator,
-      this.onSave,
-      this.keyboardType,
-      this.borderRadius,
-      this.maxLength})
-      : super(key: key);
+  const CustomTextForm({
+    Key key,
+    this.hint,
+    this.controller,
+    this.isObscure = false,
+    this.icon,
+    this.validator,
+    this.onSave,
+    this.keyboardType,
+    this.borderRadius,
+    this.maxLength,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+    return Theme(
+      data: ThemeData(
+        primaryColor: Colors.white,
+      ),
       child: TextFormField(
-        style: theme.textTheme.subtitle,
+        style: normal16White,
         controller: controller,
         obscureText: isObscure,
         validator: validator,
@@ -40,14 +41,21 @@ class CustomTextForm extends StatelessWidget {
         onSaved: onSave,
         decoration: InputDecoration(
           filled: true,
-          errorStyle: theme.textTheme.caption.copyWith(color: Colors.red),
+          counterStyle: normal12White,
           border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(borderRadius ?? 50),
-              borderSide: BorderSide()),
-          prefixIcon: icon == null ?null: Icon(icon),
-          contentPadding:
-              const EdgeInsets.symmetric(horizontal: 20, vertical: 18),
-          labelText: hint,
+            borderRadius: BorderRadius.circular(borderRadius ?? 10),
+            borderSide: BorderSide(color: Colors.white),
+          ),
+          enabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(borderRadius ?? 10),
+            borderSide: BorderSide(color: Colors.white),
+          ),
+          prefixIcon: Icon(
+            icon,
+            color: Colors.white,
+          ),
+          hintStyle: normal16Hint,
+          hintText: hint,
         ),
       ),
     );

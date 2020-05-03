@@ -58,6 +58,12 @@ TextStyle bold20PlayfairWhite = GoogleFonts.playfairDisplay(
   color: Colors.white,
 );
 
+TextStyle bold24PlayfairWhite = GoogleFonts.playfairDisplay(
+  fontSize: 24,
+  fontWeight: FontWeight.bold,
+  color: Colors.white,
+);
+
 TextStyle bold18PlayfairWhite = GoogleFonts.playfairDisplay(
   fontSize: 18,
   fontWeight: FontWeight.bold,
@@ -100,6 +106,10 @@ TextStyle normal12Accent = TextStyle(
 TextStyle normal14White = TextStyle(
   fontSize: 14,
   color: Colors.white,
+);
+TextStyle normal14Accent = TextStyle(
+  fontSize: 14,
+  color: accentColor,
 );
 
 TextStyle normal16White = TextStyle(
