@@ -32,6 +32,9 @@ dependencies:
   provider: ^4.0.5
   dio: ^3.0.9
 
+  virtual_keyboard: ^0.1.4
+  camera: ^0.5.7+4
+
   #Firebase
   firebase_auth: ^0.15.4
   cloud_firestore: ^0.13.0+1

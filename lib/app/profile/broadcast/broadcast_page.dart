@@ -27,8 +27,6 @@ class _BroadcastPageState
 
   @override
   Widget build(BuildContext context) {
-    return ListView(
-      padding: const EdgeInsets.only(left: 20, top: 10, bottom: 80, right: 20),
     return AgoraRenderWidget(0, local: true, preview: true);
    
     // return ListView(

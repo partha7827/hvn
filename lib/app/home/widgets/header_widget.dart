@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:highvibe/values/Strings.dart';
 import 'package:highvibe/values/themes.dart';
@@ -47,7 +48,9 @@ class HeaderWidget extends StatelessWidget {
                 actions: <Widget>[
                   IconButton(
                     icon: SvgPicture.asset('assets/ic_wallet.svg'),
-                    onPressed: () {},
+                    onPressed: () {
+                      Modular.to.pushNamed("/wallet");
+                    },
                   ),
                   IconButton(
                     icon: SvgPicture.asset('assets/ic_notification.svg'),
