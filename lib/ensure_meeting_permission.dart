@@ -1,18 +1,17 @@
-import 'package:flutter/material.dart';
 import 'package:easy_permission_validator/easy_permission_validator.dart';
+import 'package:flutter/material.dart';
 import 'package:highvibe/meeting_screen.dart';
 import 'package:highvibe/white_page_route.dart';
 import 'package:permission_handler/permission_handler.dart';
 
-enum States {
-  initial, granted, denied, microphoneDenied, cameraDenied
-}
+enum States { initial, granted, denied, microphoneDenied, cameraDenied }
 
 class EnsureMeetingPermission extends StatefulWidget {
   EnsureMeetingPermission();
 
   @override
-  _EnsureMeetingPermissionState createState() => _EnsureMeetingPermissionState();
+  _EnsureMeetingPermissionState createState() =>
+      _EnsureMeetingPermissionState();
 }
 
 class _EnsureMeetingPermissionState extends State<EnsureMeetingPermission> {
@@ -37,7 +36,7 @@ class _EnsureMeetingPermissionState extends State<EnsureMeetingPermission> {
       Navigator.of(context).pushReplacement(
         WhitePageRoute(
           enterPage: MeetingScreen(),
-        )
+        ),
       );
     } else if (camera) {
       setState(() => currentState = States.microphoneDenied);
@@ -69,11 +68,9 @@ class _EnsureMeetingPermissionState extends State<EnsureMeetingPermission> {
         child = Text('Microphone Denied', style: TextStyle(fontSize: 22));
         break;
     }
-    
+
     return Scaffold(
-      body: Center(
-        child: child
-      ),
+      body: Center(child: child),
     );
   }
 }

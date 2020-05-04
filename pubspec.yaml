@@ -117,6 +117,9 @@ flutter:
      - assets/ic_play.svg
      - assets/ic_hamburger.svg
      - assets/ic_quote.svg
+     - assets/image_hvn.png
+     - assets/ic_facebook.svg
+     - assets/ic_google.svg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

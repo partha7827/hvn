@@ -24,4 +24,16 @@ class Strings {
   static const membersJoined = 'Members joined';
   static const typeMessage = 'Type a message';
   static const recommendedForYou = 'Recommended for you';
+  static const email = 'Email';
+  static const password = 'Password';
+  static const forgotPassword = 'Forgot Password?';
+  static const login = 'Login';
+  static const dontHaveAccount = "Don't have an account?";
+  static const alreadyHaveAccount = "Already have an account?";
+  static const signUp = "Sign Up";
+  static const signIn = "Sign In";
+  static const facebook = "Facebook";
+  static const google = "Google";
+  static const letsGetSignedUp = "Let’s get you signed up";
+  static const name = "Name";
 }
