@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:highvibe/app/chat/chat_page.dart';
 import 'package:highvibe/app/profile/audio/audio_page.dart';
 import 'package:highvibe/app/profile/broadcast/broadcast_page.dart';
+import 'package:highvibe/app/profile/chat/chat_page.dart';
 import 'package:highvibe/widgets/bottom_navigation.dart';
 import 'package:highvibe/widgets/gradient_outline_button.dart';
 import 'package:highvibe/widgets/underline_gradient_indicator.dart';
@@ -38,20 +38,20 @@ class _ProfilePageState extends ModularState<ProfilePage, ProfileController>
               floating: false,
               pinned: true,
               backgroundColor: secondaryColor,
-              // title: Text(
-              //   'jayden624',
-              //   style: bold18White,
-              // ),
-              // actions: <Widget>[
-              //   IconButton(
-              //     icon: SvgPicture.asset('assets/ic_wallet.svg'),
-              //     onPressed: () {},
-              //   ),
-              //   IconButton(
-              //     icon: SvgPicture.asset('assets/ic_notification.svg'),
-              //     onPressed: () {},
-              //   ),
-              // ],
+              title: Text(
+                user?.account ?? 'account',
+                style: bold18White,
+              ),
+              actions: <Widget>[
+                IconButton(
+                  icon: SvgPicture.asset('assets/ic_wallet.svg'),
+                  onPressed: () {},
+                ),
+                IconButton(
+                  icon: SvgPicture.asset('assets/ic_notification.svg'),
+                  onPressed: () {},
+                ),
+              ],
               flexibleSpace: FlexibleSpaceBar(
                 collapseMode: CollapseMode.parallax,
                 stretchModes: [
@@ -214,6 +214,7 @@ class _ProfilePageState extends ModularState<ProfilePage, ProfileController>
           ];
         },
         body: TabBarView(
+          
           controller: _tabController,
           children: <Widget>[
             AudioPage(),
@@ -222,6 +223,7 @@ class _ProfilePageState extends ModularState<ProfilePage, ProfileController>
           ],
         ),
       ),
+      bottomNavigationBar: BottomNavigation(),
     );
   }
 

@@ -1,3 +1,4 @@
+import 'package:agora_rtc_engine/agora_rtc_engine.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'broadcast_controller.dart';
@@ -19,15 +20,25 @@ class _BroadcastPageState
     extends ModularState<BroadcastPage, BroadcastController> {
 
   @override
+  void initState() {
+    controller.init();
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return ListView(
       padding: const EdgeInsets.only(left: 20, top: 10, bottom: 80, right: 20),
-      children: <Widget>[
-        _liveNowWidget(),
-        _upcomingEventsWidget(),
-        _pastStreamWidget(context),
-      ],
-    );
+    return AgoraRenderWidget(0, local: true, preview: true);
+   
+    // return ListView(
+    //   padding: const EdgeInsets.only(left: 20, top: 10, bottom: 80, right: 20),
+    //   children: <Widget>[
+    //     _liveNowWidget(),
+    //     _upcomingEventsWidget(),
+    //     _pastStreamWidget(context),
+    //   ],
+    // );
   }
 
   Widget _liveNowWidget() {

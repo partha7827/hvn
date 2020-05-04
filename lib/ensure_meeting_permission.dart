@@ -17,6 +17,8 @@ class EnsureMeetingPermission extends StatefulWidget {
 class _EnsureMeetingPermissionState extends State<EnsureMeetingPermission> {
   States currentState = States.initial;
 
+  GlobalKey meetingKey = GlobalKey();
+
   @override
   void initState() {
     super.initState();
@@ -33,10 +35,11 @@ class _EnsureMeetingPermissionState extends State<EnsureMeetingPermission> {
     var microphone = await permissionValidator.microphone();
     if (camera && microphone) {
       setState(() => currentState = States.granted);
+
       Navigator.of(context).pushReplacement(
         WhitePageRoute(
-          enterPage: MeetingScreen(),
-        ),
+          enterPage: MeetingScreen(key: meetingKey),
+        )
       );
     } else if (camera) {
       setState(() => currentState = States.microphoneDenied);

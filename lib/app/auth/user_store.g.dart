@@ -10,15 +10,17 @@ User _$UserFromJson(Map<String, dynamic> json) {
   return User(
     id: json['id'] as String,
     email: json['email'] as String,
-    isOnline: json['isOnline'] as bool,
     lastTimeSeen: User._timeFromJson(json['lastTimeSeen']),
     accountCreationTime: User._timeFromJson(json['accountCreationTime']),
     chatId: json['chatId'] as String,
     videoId: json['videoId'] as String,
+    address: json['address'] as String,
+    account: json['account'] as String,
     name: json['name'] as String,
     status: json['status'] as String,
     photoUrl: json['photoUrl'] as String,
     info: json['info'] as String,
+    playlist: json['playlist'] as String,
     karmaPoints: json['karmaPoints'] as int,
     experiencePoints: json['experiencePoints'] as int,
     followers: (json['followers'] as List)?.map((e) => e as String)?.toList(),
@@ -28,15 +30,18 @@ User _$UserFromJson(Map<String, dynamic> json) {
     badges: (json['badges'] as List)?.map((e) => e as String)?.toList(),
     scheduled: (json['scheduled'] as List)?.map((e) => e as String)?.toList(),
     isLive: json['isLive'] as bool,
+    isOnline: json['isOnline'] as bool,
   )..value = json['value'] as int;
 }
 
 Map<String, dynamic> _$UserToJson(User instance) => <String, dynamic>{
       'value': instance.value,
       'isLive': instance.isLive,
+      'isOnline': instance.isOnline,
       'name': instance.name,
       'status': instance.status,
       'info': instance.info,
+      'playlist': instance.playlist,
       'photoUrl': instance.photoUrl,
       'following': instance.following,
       'followers': instance.followers,
@@ -48,9 +53,10 @@ Map<String, dynamic> _$UserToJson(User instance) => <String, dynamic>{
       'experiencePoints': instance.experiencePoints,
       'id': instance.id,
       'email': instance.email,
+      'address': instance.address,
+      'account': instance.account,
       'chatId': instance.chatId,
       'videoId': instance.videoId,
-      'isOnline': instance.isOnline,
       'lastTimeSeen': User._timeToJson(instance.lastTimeSeen),
       'accountCreationTime': User._timeToJson(instance.accountCreationTime),
     };
@@ -94,6 +100,23 @@ mixin _$User on _User, Store {
       super.isLive = value;
       _$isLiveAtom.reportChanged();
     }, _$isLiveAtom, name: '${_$isLiveAtom.name}_set');
+  }
+
+  final _$isOnlineAtom = Atom(name: '_User.isOnline');
+
+  @override
+  bool get isOnline {
+    _$isOnlineAtom.context.enforceReadPolicy(_$isOnlineAtom);
+    _$isOnlineAtom.reportObserved();
+    return super.isOnline;
+  }
+
+  @override
+  set isOnline(bool value) {
+    _$isOnlineAtom.context.conditionallyRunInAction(() {
+      super.isOnline = value;
+      _$isOnlineAtom.reportChanged();
+    }, _$isOnlineAtom, name: '${_$isOnlineAtom.name}_set');
   }
 
   final _$nameAtom = Atom(name: '_User.name');
@@ -145,6 +168,23 @@ mixin _$User on _User, Store {
       super.info = value;
       _$infoAtom.reportChanged();
     }, _$infoAtom, name: '${_$infoAtom.name}_set');
+  }
+
+  final _$playlistAtom = Atom(name: '_User.playlist');
+
+  @override
+  String get playlist {
+    _$playlistAtom.context.enforceReadPolicy(_$playlistAtom);
+    _$playlistAtom.reportObserved();
+    return super.playlist;
+  }
+
+  @override
+  set playlist(String value) {
+    _$playlistAtom.context.conditionallyRunInAction(() {
+      super.playlist = value;
+      _$playlistAtom.reportChanged();
+    }, _$playlistAtom, name: '${_$playlistAtom.name}_set');
   }
 
   final _$photoUrlAtom = Atom(name: '_User.photoUrl');
@@ -303,7 +343,7 @@ mixin _$User on _User, Store {
   @override
   String toString() {
     final string =
-        'value: ${value.toString()},isLive: ${isLive.toString()},name: ${name.toString()},status: ${status.toString()},info: ${info.toString()},photoUrl: ${photoUrl.toString()},following: ${following.toString()},followers: ${followers.toString()},badges: ${badges.toString()},uploads: ${uploads.toString()},featured: ${featured.toString()},scheduled: ${scheduled.toString()},karmaPoints: ${karmaPoints.toString()},experiencePoints: ${experiencePoints.toString()}';
+        'value: ${value.toString()},isLive: ${isLive.toString()},isOnline: ${isOnline.toString()},name: ${name.toString()},status: ${status.toString()},info: ${info.toString()},playlist: ${playlist.toString()},photoUrl: ${photoUrl.toString()},following: ${following.toString()},followers: ${followers.toString()},badges: ${badges.toString()},uploads: ${uploads.toString()},featured: ${featured.toString()},scheduled: ${scheduled.toString()},karmaPoints: ${karmaPoints.toString()},experiencePoints: ${experiencePoints.toString()}';
     return '{$string}';
   }
 }

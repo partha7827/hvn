@@ -10,7 +10,7 @@ class BroadcastModule extends ChildModule {
 
   @override
   List<Router> get routers => [
-        Router(Modular.initialRoute, child: (_, args) => BroadcastPage()),
+        // Router(Modular.initialRoute, child: (_, args) => BroadcastPage()),
       ];
 
   static Inject get to => Inject<BroadcastModule>.of();

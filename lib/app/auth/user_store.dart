@@ -6,9 +6,8 @@ part 'user_store.g.dart';
 
 @JsonSerializable()
 class User extends _User with _$User {
-  final String id, email;
+  final String id, email, address, account;
   final String chatId, videoId;
-  final bool isOnline;
 
   @JsonKey(fromJson: _timeFromJson, toJson: _timeToJson)
   final DateTime lastTimeSeen;
@@ -19,15 +18,17 @@ class User extends _User with _$User {
   User({
     this.id,
     this.email,
-    this.isOnline,
     this.lastTimeSeen,
     this.accountCreationTime,
     this.chatId,
     this.videoId,
+    this.address,
+    this.account,
     String name,
     String status,
     String photoUrl,
     String info,
+    String playlist,
     int karmaPoints,
     int experiencePoints,
     List<String> followers,
@@ -37,6 +38,7 @@ class User extends _User with _$User {
     List<String> badges,
     List<String> scheduled,
     bool isLive,
+    bool isOnline,
   }) : super(
           name: name,
           status: status,
@@ -51,6 +53,8 @@ class User extends _User with _$User {
           badges: ObservableList<String>.of(badges ?? []),
           scheduled: ObservableList<String>.of(scheduled ?? []),
           isLive: isLive,
+          isOnline: isOnline,
+          playlist: playlist,
         );
 
   factory User.createNew(
@@ -61,6 +65,7 @@ class User extends _User with _$User {
       email: email,
       photoUrl: photoUrl,
       info: '',
+      playlist: '',
       isOnline: true,
       isLive: false,
       lastTimeSeen: DateTime.now().toUtc(),
@@ -69,6 +74,8 @@ class User extends _User with _$User {
       experiencePoints: 0,
       chatId: uid,
       videoId: uid,
+      address: uid,
+      account: uid,
       followers: List<String>(),
       following: List<String>(),
       uploads: List<String>(),
@@ -95,6 +102,9 @@ abstract class _User with Store {
   bool isLive;
 
   @observable
+  bool isOnline;
+
+  @observable
   String name;
 
   @observable
@@ -102,6 +112,9 @@ abstract class _User with Store {
 
   @observable
   String info;
+
+  @observable
+  String playlist;
 
   @observable
   String photoUrl;
@@ -143,6 +156,8 @@ abstract class _User with Store {
     this.karmaPoints,
     this.experiencePoints,
     this.isLive,
+    this.isOnline,
     this.scheduled,
+    this.playlist,
   });
 }
