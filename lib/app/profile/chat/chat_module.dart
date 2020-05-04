@@ -10,7 +10,7 @@ class ChatModule extends ChildModule {
 
   @override
   List<Router> get routers => [
-        Router(Modular.initialRoute, child: (_, args) => ChatPage()),
+        // Router("/profile/chat", child: (_, args) => ChatPage()),
       ];
 
   static Inject get to => Inject<ChatModule>.of();

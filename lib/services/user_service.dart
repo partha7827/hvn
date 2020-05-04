@@ -7,7 +7,8 @@ class UserService extends Disposable {
 
   CollectionReference get _userCollection => _firestore.collection("users");
 
-  DocumentReference _userDocument(String userId) => _userCollection.document(userId);
+  DocumentReference _userDocument(String userId) =>
+      _userCollection.document(userId);
 
   Future<User> fetchUserData(String userId) async {
     final doc = await _userDocument(userId).get();
@@ -45,6 +46,15 @@ class UserService extends Disposable {
     });
     await _userDocument(otherId).updateData({
       "followers": FieldValue.arrayUnion([currentUserId])
+    });
+  }
+
+  Future<void> unfollowUser(String currentUserId, String otherId) async {
+    await _userDocument(currentUserId).updateData({
+      'following': FieldValue.arrayRemove([otherId]),
+    });
+    await _userDocument(otherId).updateData({
+      "followers": FieldValue.arrayRemove([currentUserId]),
     });
   }
 

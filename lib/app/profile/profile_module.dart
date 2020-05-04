@@ -1,7 +1,9 @@
 import 'package:highvibe/app/auth/auth_controller.dart';
 import 'package:highvibe/app/profile/audio/audio_controller.dart';
 import 'package:highvibe/app/profile/broadcast/broadcast_controller.dart';
+import 'package:highvibe/app/profile/broadcast/broadcast_page.dart';
 import 'package:highvibe/app/profile/chat/chat_controller.dart';
+import 'package:highvibe/app/profile/chat/chat_page.dart';
 import 'package:highvibe/app/profile/profile_controller.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:highvibe/app/profile/profile_page.dart';
@@ -25,6 +27,8 @@ class ProfileModule extends ChildModule {
           child: (_, args) => ProfilePage(),
           transition: TransitionType.noTransition,
         ),
+        Router("/chat", child: (_, args) => ChatPage()),
+        Router("/broadcast", child: (_, args) => BroadcastPage()),
       ];
 
   static Inject get to => Inject<ProfileModule>.of();

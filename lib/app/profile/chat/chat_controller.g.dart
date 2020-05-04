@@ -9,39 +9,51 @@ part of 'chat_controller.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$ChatController on _ChatControllerBase, Store {
-  final _$valueAtom = Atom(name: '_ChatControllerBase.value');
+  final _$clientAtom = Atom(name: '_ChatControllerBase.client');
 
   @override
-  int get value {
-    _$valueAtom.context.enforceReadPolicy(_$valueAtom);
-    _$valueAtom.reportObserved();
-    return super.value;
+  Client get client {
+    _$clientAtom.context.enforceReadPolicy(_$clientAtom);
+    _$clientAtom.reportObserved();
+    return super.client;
   }
 
   @override
-  set value(int value) {
-    _$valueAtom.context.conditionallyRunInAction(() {
-      super.value = value;
-      _$valueAtom.reportChanged();
-    }, _$valueAtom, name: '${_$valueAtom.name}_set');
+  set client(Client value) {
+    _$clientAtom.context.conditionallyRunInAction(() {
+      super.client = value;
+      _$clientAtom.reportChanged();
+    }, _$clientAtom, name: '${_$clientAtom.name}_set');
   }
 
-  final _$_ChatControllerBaseActionController =
-      ActionController(name: '_ChatControllerBase');
+  final _$channelAtom = Atom(name: '_ChatControllerBase.channel');
 
   @override
-  void increment() {
-    final _$actionInfo = _$_ChatControllerBaseActionController.startAction();
-    try {
-      return super.increment();
-    } finally {
-      _$_ChatControllerBaseActionController.endAction(_$actionInfo);
-    }
+  Channel get channel {
+    _$channelAtom.context.enforceReadPolicy(_$channelAtom);
+    _$channelAtom.reportObserved();
+    return super.channel;
+  }
+
+  @override
+  set channel(Channel value) {
+    _$channelAtom.context.conditionallyRunInAction(() {
+      super.channel = value;
+      _$channelAtom.reportChanged();
+    }, _$channelAtom, name: '${_$channelAtom.name}_set');
+  }
+
+  final _$initAsyncAction = AsyncAction('init');
+
+  @override
+  Future<void> init() {
+    return _$initAsyncAction.run(() => super.init());
   }
 
   @override
   String toString() {
-    final string = 'value: ${value.toString()}';
+    final string =
+        'client: ${client.toString()},channel: ${channel.toString()}';
     return '{$string}';
   }
 }
