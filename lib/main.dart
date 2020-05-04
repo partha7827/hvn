@@ -1,18 +1,26 @@
 import 'package:flutter/material.dart';
-import 'package:high_vibe_mobile/ui/pages/auth/face/face_page.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_modular/flutter_modular.dart';
+import 'package:highvibe/app/app/app_module.dart';
+import 'package:highvibe/values/themes.dart';
 
-void main() => runApp(MyApp());
+void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setSystemUIOverlayStyle(
+    SystemUiOverlayStyle(
+      systemNavigationBarColor: primaryColor,
+      statusBarColor: Colors.transparent,
+    ),
+  );
 
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
+  SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+    DeviceOrientation.portraitDown,
+  ]).then(
+    (value) => runApp(
+      ModularApp(
+        module: AppModule(),
       ),
-      home: FacePage()
-    );
-  }
+    ),
+  );
 }
-
