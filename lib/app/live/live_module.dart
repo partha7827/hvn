@@ -10,8 +10,11 @@ class LiveModule extends ChildModule {
 
   @override
   List<Router> get routers => [
-        Router(Modular.initialRoute, child: (_, args) => LivePage()),
+        Router("/live/:userId", child: (_, args) => LivePage(userId: args.params['userId'])),
       ];
 
   static Inject get to => Inject<LiveModule>.of();
+
+  static Future toLive(String userId) =>
+      Modular.to.pushNamed("/live/$userId");
 }

@@ -1,6 +1,7 @@
-import 'package:agora_rtc_engine/agora_rtc_engine.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:highvibe/app/auth/user_store.dart';
+import 'package:highvibe/app/live/live_module.dart';
 import 'broadcast_controller.dart';
 import 'package:highvibe/widgets/event_card.dart';
 import 'package:highvibe/widgets/header_row.dart';
@@ -10,7 +11,8 @@ import 'package:highvibe/values/themes.dart';
 
 class BroadcastPage extends StatefulWidget {
   final String title;
-  const BroadcastPage({Key key, this.title = "Broadcast"}) : super(key: key);
+  final User user;
+  const BroadcastPage({Key key, this.user, this.title = "Broadcast"}) : super(key: key);
 
   @override
   _BroadcastPageState createState() => _BroadcastPageState();
@@ -21,22 +23,20 @@ class _BroadcastPageState
 
   @override
   void initState() {
-    controller.init();
+    controller.init(widget.user);
     super.initState();
   }
 
   @override
-  Widget build(BuildContext context) {
-    return AgoraRenderWidget(0, local: true, preview: true);
-   
-    // return ListView(
-    //   padding: const EdgeInsets.only(left: 20, top: 10, bottom: 80, right: 20),
-    //   children: <Widget>[
-    //     _liveNowWidget(),
-    //     _upcomingEventsWidget(),
-    //     _pastStreamWidget(context),
-    //   ],
-    // );
+  Widget build(BuildContext context) {   
+    return ListView(
+      padding: const EdgeInsets.only(left: 20, top: 10, bottom: 80, right: 20),
+      children: <Widget>[
+        _liveNowWidget(),
+        _upcomingEventsWidget(),
+        _pastStreamWidget(context),
+      ],
+    );
   }
 
   Widget _liveNowWidget() {
@@ -60,6 +60,12 @@ class _BroadcastPageState
             messages: '2.0k',
           ),
         ),
+        OutlineButton(
+          child: Text("JOIN NOW"),
+          onPressed: () {
+            LiveModule.toLive(widget.user.id);
+          },
+        )
       ],
     );
   }

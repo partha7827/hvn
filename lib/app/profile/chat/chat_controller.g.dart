@@ -12,14 +12,14 @@ mixin _$ChatController on _ChatControllerBase, Store {
   final _$clientAtom = Atom(name: '_ChatControllerBase.client');
 
   @override
-  Client get client {
+  Chat.Client get client {
     _$clientAtom.context.enforceReadPolicy(_$clientAtom);
     _$clientAtom.reportObserved();
     return super.client;
   }
 
   @override
-  set client(Client value) {
+  set client(Chat.Client value) {
     _$clientAtom.context.conditionallyRunInAction(() {
       super.client = value;
       _$clientAtom.reportChanged();
@@ -29,31 +29,48 @@ mixin _$ChatController on _ChatControllerBase, Store {
   final _$channelAtom = Atom(name: '_ChatControllerBase.channel');
 
   @override
-  Channel get channel {
+  Chat.Channel get channel {
     _$channelAtom.context.enforceReadPolicy(_$channelAtom);
     _$channelAtom.reportObserved();
     return super.channel;
   }
 
   @override
-  set channel(Channel value) {
+  set channel(Chat.Channel value) {
     _$channelAtom.context.conditionallyRunInAction(() {
       super.channel = value;
       _$channelAtom.reportChanged();
     }, _$channelAtom, name: '${_$channelAtom.name}_set');
   }
 
+  final _$currentCreatorAtom = Atom(name: '_ChatControllerBase.currentCreator');
+
+  @override
+  User get currentCreator {
+    _$currentCreatorAtom.context.enforceReadPolicy(_$currentCreatorAtom);
+    _$currentCreatorAtom.reportObserved();
+    return super.currentCreator;
+  }
+
+  @override
+  set currentCreator(User value) {
+    _$currentCreatorAtom.context.conditionallyRunInAction(() {
+      super.currentCreator = value;
+      _$currentCreatorAtom.reportChanged();
+    }, _$currentCreatorAtom, name: '${_$currentCreatorAtom.name}_set');
+  }
+
   final _$initAsyncAction = AsyncAction('init');
 
   @override
-  Future<void> init() {
-    return _$initAsyncAction.run(() => super.init());
+  Future<void> init(User user) {
+    return _$initAsyncAction.run(() => super.init(user));
   }
 
   @override
   String toString() {
     final string =
-        'client: ${client.toString()},channel: ${channel.toString()}';
+        'client: ${client.toString()},channel: ${channel.toString()},currentCreator: ${currentCreator.toString()}';
     return '{$string}';
   }
 }

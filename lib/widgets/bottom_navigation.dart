@@ -31,7 +31,7 @@ class BottomNavigation extends StatelessWidget {
               title: 'Profile',
               asset: 'assets/ic_profile.svg',
               onPressed: () => ProfileModule.toProfile(),
-              selected: Modular.actualRoute == ProfileModule.PROFILE,
+              selected: Modular.actualRoute == ProfileModule.profileRoute,
             ),
           ],
         ),

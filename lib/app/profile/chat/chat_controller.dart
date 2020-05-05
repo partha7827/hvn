@@ -1,35 +1,43 @@
+import 'package:flutter_modular/flutter_modular.dart';
+import 'package:highvibe/app/auth/auth_controller.dart';
 import 'package:highvibe/values/config.dart';
 import 'package:mobx/mobx.dart';
-import 'package:stream_chat_flutter/stream_chat_flutter.dart';
+import 'package:stream_chat_flutter/stream_chat_flutter.dart' as Chat;
+import 'package:highvibe/app/auth/user_store.dart';
 
 part 'chat_controller.g.dart';
 
 class ChatController = _ChatControllerBase with _$ChatController;
 
 abstract class _ChatControllerBase with Store {
-  @observable
-  Client client;
+  final authController = Modular.get<AuthController>();
 
   @observable
-  Channel channel;
+  Chat.Client client;
+
+  @observable
+  Chat.Channel channel;
+
+  @observable
+  User currentCreator;
+
+  User get currentUser => authController.currentUser;
   
   @action
-  Future<void> init() async {
-    final c = Client(
+  Future<void> init(User user) async {
+    currentCreator = user;
+    
+    client = Chat.Client(
       STREAM_API_KEY,
     );
 
-    var creatorId = 'user2';
-    var userId = 'user1';
+    var creatorId = currentCreator.chatId;
+    var userId = currentUser.id;
     var userToken = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoidXNlcjEifQ.NGZPyPMx7KSVisJmh4tJhOIv7ZjCaMQpOh4gTINvCaU';
 
-    await c.setUser(User(id: userId), userToken);
-
-    client = c;
+    await client.setUser(Chat.User(id: userId), userToken);
 
     channel = client.channel('messaging', id: creatorId);
-
-    print("channel created");
 
     channel.watch();
   }

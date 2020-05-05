@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:mobx/mobx.dart';
-import 'package:stream_chat_flutter/stream_chat_flutter.dart';
+import 'package:highvibe/app/auth/user_store.dart';
+import 'package:stream_chat_flutter/stream_chat_flutter.dart' as Chat;
 import 'chat_controller.dart';
 import 'package:highvibe/values/Strings.dart';
 import 'package:highvibe/values/themes.dart';
@@ -10,7 +10,8 @@ import 'package:highvibe/widgets/custom_fab.dart';
 
 class ChatPage extends StatefulWidget {
   final String title;
-  const ChatPage({Key key, this.title = "Chat"}) : super(key: key);
+  final User user;
+  const ChatPage({Key key, this.user, this.title = "Chat"}) : super(key: key);
 
   @override
   _ChatPageState createState() => _ChatPageState();
@@ -22,23 +23,18 @@ class _ChatPageState extends ModularState<ChatPage, ChatController> with Automat
   
   @override
   void initState() {
-    controller.init();
+    controller.init(widget.user);
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    // return StreamChat(
-    //     client: controller.client,
-    //     child: ChannelListPage(),
-    //   )
-
     return Container(
       child: Observer(
         builder: (_) => controller.client != null
-            ? StreamChat(
+            ? Chat.StreamChat(
                 client: controller.client,
-                child: StreamChannel(
+                child: Chat.StreamChannel(
 
                   channel: controller.channel,
                   child: ChannelPage(),
@@ -47,11 +43,6 @@ class _ChatPageState extends ModularState<ChatPage, ChatController> with Automat
             : Center(child: CircularProgressIndicator()),
       ),
     );
-    // return SafeArea(
-    //   child: Scaffold(
-    //     bottomNavigationBar: MessageComposer(),
-    //   ),
-    // );
   }
 }
 
@@ -59,15 +50,15 @@ class ChannelListPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: ChannelsBloc(
-        child: ChannelListView(
+      body: Chat.ChannelsBloc(
+        child: Chat.ChannelListView(
           filter: {
             'members': {
-              '\$in': [StreamChat.of(context).user.id],
+              '\$in': [Chat.StreamChat.of(context).user.id],
             }
           },
-          sort: [SortOption('last_message_at')],
-          pagination: PaginationParams(
+          sort: [Chat.SortOption('last_message_at')],
+          pagination: Chat.PaginationParams(
             limit: 20,
           ),
           channelWidget: ChannelPage(),
@@ -91,7 +82,7 @@ class ChannelPage extends StatelessWidget {
           Expanded(
             child: Stack(
               children: <Widget>[
-                MessageListView(
+                Chat.MessageListView(
                   showVideoFullScreen: false,
                   threadBuilder: (_, parentMessage) {
                     return ThreadPage(
@@ -105,7 +96,7 @@ class ChannelPage extends StatelessWidget {
                       horizontal: 8.0,
                       vertical: 4,
                     ),
-                    child: TypingIndicator(
+                    child: Chat.TypingIndicator(
                       alignment: Alignment.bottomRight,
                     ),
                   ),
@@ -113,7 +104,7 @@ class ChannelPage extends StatelessWidget {
               ],
             ),
           ),
-          MessageInput(),
+          Chat.MessageInput(),
           // MessageComposer()
         ],
       ),
@@ -122,7 +113,7 @@ class ChannelPage extends StatelessWidget {
 }
 
 class ThreadPage extends StatelessWidget {
-  final Message parent;
+  final Chat.Message parent;
 
   ThreadPage({
     Key key,
@@ -132,18 +123,18 @@ class ThreadPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: ThreadHeader(
+      appBar: Chat.ThreadHeader(
         parent: parent,
       ),
       body: Column(
         children: <Widget>[
           Expanded(
-            child: MessageListView(
+            child: Chat.MessageListView(
               parentMessage: parent,
             ),
           ),
           if (parent.type != 'deleted')
-            MessageInput(
+            Chat.MessageInput(
               parentMessage: parent,
             ),
         ],

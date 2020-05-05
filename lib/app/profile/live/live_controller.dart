@@ -5,11 +5,11 @@ import 'package:highvibe/app/auth/user_store.dart';
 import 'package:highvibe/values/config.dart';
 import 'package:mobx/mobx.dart';
 
-part 'broadcast_controller.g.dart';
+part 'live_controller.g.dart';
 
-class BroadcastController = _BroadcastControllerBase with _$BroadcastController;
+class LiveController = _LiveControllerBase with _$LiveController;
 
-abstract class _BroadcastControllerBase with Store {
+abstract class _LiveControllerBase with Store {
   final authController = Modular.get<AuthController>();
 
   get currentUser => authController.currentUser;

@@ -1,34 +1,34 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:highvibe/app/auth/user_store.dart';
 import 'package:highvibe/app/profile/audio/audio_page.dart';
 import 'package:highvibe/app/profile/broadcast/broadcast_page.dart';
 import 'package:highvibe/app/profile/chat/chat_page.dart';
+import 'package:highvibe/values/Strings.dart';
+import 'package:highvibe/values/themes.dart';
 import 'package:highvibe/widgets/bottom_navigation.dart';
 import 'package:highvibe/widgets/gradient_outline_button.dart';
 import 'package:highvibe/widgets/underline_gradient_indicator.dart';
-import 'profile_controller.dart';
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:highvibe/values/Strings.dart';
-import 'package:highvibe/values/themes.dart';
+import 'current_user_controller.dart';
 
-var imageUrl =
-    'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2134&q=80';
-
-class ProfilePage extends StatefulWidget {
+class CurrentUserPage extends StatefulWidget {
   final String title;
-  const ProfilePage({Key key, this.title = "Profile"}) : super(key: key);
+  const CurrentUserPage({Key key, this.title = "OtherUser"}) : super(key: key);
 
   @override
-  _ProfilePageState createState() => _ProfilePageState();
+  _CurrentUserPageState createState() => _CurrentUserPageState();
 }
 
-class _ProfilePageState extends ModularState<ProfilePage, ProfileController>
+class _CurrentUserPageState
+    extends ModularState<CurrentUserPage, CurrentUserController>
     with SingleTickerProviderStateMixin {
+
+  User get user => controller.currentUser;
+
   @override
   Widget build(BuildContext context) {
-    final user = controller.currentUser;
-
     return Scaffold(
       body: NestedScrollView(
         headerSliverBuilder: (context, innerBoxIsScrolled) {
@@ -89,7 +89,7 @@ class _ProfilePageState extends ModularState<ProfilePage, ProfileController>
                                 child: Center(
                                   child: ClipOval(
                                     child: CachedNetworkImage(
-                                      imageUrl: user.photoUrl ?? imageUrl,
+                                      imageUrl: user.photoUrl ?? "",
                                       width: 100,
                                       height: 100,
                                       fit: BoxFit.cover,
@@ -214,12 +214,11 @@ class _ProfilePageState extends ModularState<ProfilePage, ProfileController>
           ];
         },
         body: TabBarView(
-          
           controller: _tabController,
           children: <Widget>[
-            AudioPage(),
-            ChatPage(),
-            BroadcastPage(),
+            AudioPage(user: user),
+            ChatPage(user: user),
+            BroadcastPage(user: user),
           ],
         ),
       ),
