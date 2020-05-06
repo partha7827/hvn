@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:highvibe/app/auth/user_store.dart';
 import 'audio_controller.dart';
 
 import 'package:highvibe/widgets/audio_tile.dart';
@@ -12,7 +13,13 @@ var dummyImgUrl =
 
 class AudioPage extends StatefulWidget {
   final String title;
-  const AudioPage({Key key, this.title = "Audio"}) : super(key: key);
+  final User user;
+
+  const AudioPage({
+    Key key,
+    this.title = "Audio",
+    this.user,
+  }) : super(key: key);
 
   @override
   _AudioPageState createState() => _AudioPageState();
