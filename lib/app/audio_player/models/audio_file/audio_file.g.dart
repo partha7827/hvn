@@ -18,8 +18,8 @@ class _$AudioFileSerializer implements StructuredSerializer<AudioFile> {
   Iterable<Object> serialize(Serializers serializers, AudioFile object,
       {FullType specifiedType = FullType.unspecified}) {
     final result = <Object>[
-      'artist',
-      serializers.serialize(object.artist,
+      'author',
+      serializers.serialize(object.author,
           specifiedType: const FullType(String)),
       'artworkUrlPath',
       serializers.serialize(object.artworkUrlPath,
@@ -34,6 +34,9 @@ class _$AudioFileSerializer implements StructuredSerializer<AudioFile> {
       serializers.serialize(object.id, specifiedType: const FullType(String)),
       'title',
       serializers.serialize(object.title,
+          specifiedType: const FullType(String)),
+      'subTitle',
+      serializers.serialize(object.subTitle,
           specifiedType: const FullType(String)),
     ];
 
@@ -51,8 +54,8 @@ class _$AudioFileSerializer implements StructuredSerializer<AudioFile> {
       iterator.moveNext();
       final dynamic value = iterator.current;
       switch (key) {
-        case 'artist':
-          result.artist = serializers.deserialize(value,
+        case 'author':
+          result.author = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String;
           break;
         case 'artworkUrlPath':
@@ -75,6 +78,10 @@ class _$AudioFileSerializer implements StructuredSerializer<AudioFile> {
           result.title = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String;
           break;
+        case 'subTitle':
+          result.subTitle = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String;
+          break;
       }
     }
 
@@ -84,7 +91,7 @@ class _$AudioFileSerializer implements StructuredSerializer<AudioFile> {
 
 class _$AudioFile extends AudioFile {
   @override
-  final String artist;
+  final String author;
   @override
   final String artworkUrlPath;
   @override
@@ -95,20 +102,23 @@ class _$AudioFile extends AudioFile {
   final String id;
   @override
   final String title;
+  @override
+  final String subTitle;
 
   factory _$AudioFile([void Function(AudioFileBuilder) updates]) =>
       (new AudioFileBuilder()..update(updates)).build();
 
   _$AudioFile._(
-      {this.artist,
+      {this.author,
       this.artworkUrlPath,
       this.audioFileUrlPath,
       this.duration,
       this.id,
-      this.title})
+      this.title,
+      this.subTitle})
       : super._() {
-    if (artist == null) {
-      throw new BuiltValueNullFieldError('AudioFile', 'artist');
+    if (author == null) {
+      throw new BuiltValueNullFieldError('AudioFile', 'author');
     }
     if (artworkUrlPath == null) {
       throw new BuiltValueNullFieldError('AudioFile', 'artworkUrlPath');
@@ -125,6 +135,9 @@ class _$AudioFile extends AudioFile {
     if (title == null) {
       throw new BuiltValueNullFieldError('AudioFile', 'title');
     }
+    if (subTitle == null) {
+      throw new BuiltValueNullFieldError('AudioFile', 'subTitle');
+    }
   }
 
   @override
@@ -138,12 +151,13 @@ class _$AudioFile extends AudioFile {
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
     return other is AudioFile &&
-        artist == other.artist &&
+        author == other.author &&
         artworkUrlPath == other.artworkUrlPath &&
         audioFileUrlPath == other.audioFileUrlPath &&
         duration == other.duration &&
         id == other.id &&
-        title == other.title;
+        title == other.title &&
+        subTitle == other.subTitle;
   }
 
   @override
@@ -151,22 +165,25 @@ class _$AudioFile extends AudioFile {
     return $jf($jc(
         $jc(
             $jc(
-                $jc($jc($jc(0, artist.hashCode), artworkUrlPath.hashCode),
-                    audioFileUrlPath.hashCode),
-                duration.hashCode),
-            id.hashCode),
-        title.hashCode));
+                $jc(
+                    $jc($jc($jc(0, author.hashCode), artworkUrlPath.hashCode),
+                        audioFileUrlPath.hashCode),
+                    duration.hashCode),
+                id.hashCode),
+            title.hashCode),
+        subTitle.hashCode));
   }
 
   @override
   String toString() {
     return (newBuiltValueToStringHelper('AudioFile')
-          ..add('artist', artist)
+          ..add('author', author)
           ..add('artworkUrlPath', artworkUrlPath)
           ..add('audioFileUrlPath', audioFileUrlPath)
           ..add('duration', duration)
           ..add('id', id)
-          ..add('title', title))
+          ..add('title', title)
+          ..add('subTitle', subTitle))
         .toString();
   }
 }
@@ -174,9 +191,9 @@ class _$AudioFile extends AudioFile {
 class AudioFileBuilder implements Builder<AudioFile, AudioFileBuilder> {
   _$AudioFile _$v;
 
-  String _artist;
-  String get artist => _$this._artist;
-  set artist(String artist) => _$this._artist = artist;
+  String _author;
+  String get author => _$this._author;
+  set author(String author) => _$this._author = author;
 
   String _artworkUrlPath;
   String get artworkUrlPath => _$this._artworkUrlPath;
@@ -200,16 +217,21 @@ class AudioFileBuilder implements Builder<AudioFile, AudioFileBuilder> {
   String get title => _$this._title;
   set title(String title) => _$this._title = title;
 
+  String _subTitle;
+  String get subTitle => _$this._subTitle;
+  set subTitle(String subTitle) => _$this._subTitle = subTitle;
+
   AudioFileBuilder();
 
   AudioFileBuilder get _$this {
     if (_$v != null) {
-      _artist = _$v.artist;
+      _author = _$v.author;
       _artworkUrlPath = _$v.artworkUrlPath;
       _audioFileUrlPath = _$v.audioFileUrlPath;
       _duration = _$v.duration;
       _id = _$v.id;
       _title = _$v.title;
+      _subTitle = _$v.subTitle;
       _$v = null;
     }
     return this;
@@ -232,12 +254,13 @@ class AudioFileBuilder implements Builder<AudioFile, AudioFileBuilder> {
   _$AudioFile build() {
     final _$result = _$v ??
         new _$AudioFile._(
-            artist: artist,
+            author: author,
             artworkUrlPath: artworkUrlPath,
             audioFileUrlPath: audioFileUrlPath,
             duration: duration,
             id: id,
-            title: title);
+            title: title,
+            subTitle: subTitle);
     replace(_$result);
     return _$result;
   }

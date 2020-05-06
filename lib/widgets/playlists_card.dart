@@ -1,11 +1,12 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:highvibe/app/audio_player/models/audio_file/mock_audio_files.dart';
 import 'package:highvibe/values/Strings.dart';
 import 'package:highvibe/values/themes.dart';
 
 import 'audio_tile.dart';
 
-var dummyImgUrl =
+const _dummyImgUrl =
     'https://takelessons.com/blog/wp-content/uploads/2020/03/flute-for-beginners.jpg';
 
 class PlaylistsCard extends StatelessWidget {
@@ -32,7 +33,7 @@ class PlaylistsCard extends StatelessWidget {
               topRight: Radius.circular(10),
             ),
             child: CachedNetworkImage(
-              imageUrl: dummyImgUrl,
+              imageUrl: _dummyImgUrl,
               height: 140,
               width: double.maxFinite,
               fit: BoxFit.cover,
@@ -53,25 +54,22 @@ class PlaylistsCard extends StatelessWidget {
               color: Colors.white,
             ),
             children: <Widget>[
-              AudioTile(
-                title: 'Relaxing Flute',
-                subTitle: 'Lorem ipsum dolar sit a mat',
-                imageUrl: dummyImgUrl,
-              ),
-              AudioTile(
-                title: 'Deep sleep',
-                subTitle: 'Lorem ipsum dolar sit a mat',
-                imageUrl: dummyImgUrl,
-              ),
-              AudioTile(
-                title: 'Feel your soul',
-                subTitle: 'Lorem ipsum dolar sit a mat',
-                imageUrl: dummyImgUrl,
-              ),
+              ...mockAudioItemsList
+                  .map(
+                    (item) => AudioTile(
+                      audioFile: item,
+                      onItemTapped: (item) => _showAudioPlayer(),
+                    ),
+                  )
+                  .toList(),
             ],
           )
         ],
       ),
     );
+  }
+
+  void _showAudioPlayer() {
+    print('showAudioPlayer');
   }
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:highvibe/app/audio_player/models/audio_file/mock_audio_files.dart';
 import 'package:highvibe/app/auth/user_store.dart';
 import 'audio_controller.dart';
 
@@ -7,9 +8,6 @@ import 'package:highvibe/widgets/audio_tile.dart';
 import 'package:highvibe/widgets/header_row.dart';
 import 'package:highvibe/widgets/playlists_card.dart';
 import 'package:highvibe/values/Strings.dart';
-
-var dummyImgUrl =
-    'https://takelessons.com/blog/wp-content/uploads/2020/03/flute-for-beginners.jpg';
 
 class AudioPage extends StatefulWidget {
   final String title;
@@ -36,21 +34,14 @@ class _AudioPageState extends ModularState<AudioPage, AudioController> {
         HeaderRow(
           title: Strings.uploads,
         ),
-        AudioTile(
-          title: 'Relaxing Flute',
-          subTitle: 'Lorem ipsum dolar sit a mat',
-          imageUrl: dummyImgUrl,
-        ),
-        AudioTile(
-          title: 'Deep sleep',
-          subTitle: 'Lorem ipsum dolar sit a mat',
-          imageUrl: dummyImgUrl,
-        ),
-        AudioTile(
-          title: 'Feel your soul',
-          subTitle: 'Lorem ipsum dolar sit a mat',
-          imageUrl: dummyImgUrl,
-        ),
+        ...mockAudioItemsList
+            .map(
+              (item) => AudioTile(
+                audioFile: item,
+                onItemTapped: (item) => _showAudioPlayer(),
+              ),
+            )
+            .toList(),
         HeaderRow(
           title: Strings.playlists,
           showTrailing: true,
@@ -62,5 +53,9 @@ class _AudioPageState extends ModularState<AudioPage, AudioController> {
         ),
       ],
     );
+  }
+
+  void _showAudioPlayer() {
+    print('showAudioPlayer');
   }
 }

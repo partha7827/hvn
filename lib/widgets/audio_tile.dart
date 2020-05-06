@@ -1,17 +1,16 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:highvibe/app/audio_player/models/models.dart';
 import 'package:highvibe/values/themes.dart';
 
 class AudioTile extends StatelessWidget {
-  final String title;
-  final String subTitle;
-  final String imageUrl;
+  final AudioFile audioFile;
+  final ValueChanged<AudioFile> onItemTapped;
 
   const AudioTile({
-    @required this.title,
-    @required this.subTitle,
-    @required this.imageUrl,
+    @required this.audioFile,
+    @required this.onItemTapped,
   });
 
   @override
@@ -23,7 +22,7 @@ class AudioTile extends StatelessWidget {
           ClipRRect(
             borderRadius: BorderRadius.circular(10),
             child: CachedNetworkImage(
-              imageUrl: imageUrl,
+              imageUrl: audioFile.artworkUrlPath,
               width: 48,
               height: 48,
               fit: BoxFit.cover,
@@ -36,11 +35,11 @@ class AudioTile extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   Text(
-                    title,
+                    audioFile.title,
                     style: normal16White,
                   ),
                   Text(
-                    subTitle,
+                    audioFile.subTitle,
                     style: normal14Hint,
                   ),
                 ],
@@ -49,7 +48,7 @@ class AudioTile extends StatelessWidget {
           ),
           IconButton(
             icon: SvgPicture.asset('assets/ic_play.svg'),
-            onPressed: () {},
+            onPressed: () => onItemTapped(audioFile),
           )
         ],
       ),

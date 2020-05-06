@@ -16,12 +16,13 @@ abstract class AudioFile implements Built<AudioFile, AudioFileBuilder> {
 
   AudioFile._();
 
-  String get artist;
+  String get author;
   String get artworkUrlPath;
   String get audioFileUrlPath;
   int get duration;
   String get id;
   String get title;
+  String get subTitle;
 
   String toJson() {
     return json.encode(serializers.serializeWith(AudioFile.serializer, this));
