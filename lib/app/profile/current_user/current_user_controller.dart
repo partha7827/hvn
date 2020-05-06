@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:highvibe/app/audio_player/models/models.dart';
-import 'package:highvibe/services/user_service.dart';
+import 'package:highvibe/services/store_service.dart';
 import 'package:highvibe/store/current_user_store.dart';
 import 'package:highvibe/utils.dart';
 import 'package:image_picker/image_picker.dart';
@@ -13,7 +13,7 @@ class CurrentUserController = _CurrentUserControllerBase
     with _$CurrentUserController;
 
 abstract class _CurrentUserControllerBase with Store {
-  final userService = Modular.get<UserService>();
+  final store = Modular.get<StoreService>();
 
   final nameController = TextEditingController();
   final statusController = TextEditingController();
@@ -30,7 +30,7 @@ abstract class _CurrentUserControllerBase with Store {
     currentUser.rebuild((b) => b
       ..name = name
       ..status = status);
-    await userService.updateUserInfo(currentUser);
+    await store.updateUserInfo(currentUser);
   }
 
   @action
@@ -41,7 +41,7 @@ abstract class _CurrentUserControllerBase with Store {
         String url = await uploadFile(img, "avatar");
         currentUser.rebuild((b) => b..photoUrl = url);
 
-        await userService.updateUserInfo(currentUser);
+        await store.updateUserInfo(currentUser);
       } catch (e) {}
     }
   }

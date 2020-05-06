@@ -1,7 +1,7 @@
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:highvibe/app/audio_player/models/models.dart';
 import 'package:highvibe/services/auth_service.dart';
-import 'package:highvibe/services/user_service.dart';
+import 'package:highvibe/services/store_service.dart';
 import 'package:mobx/mobx.dart';
 
 part 'current_user_store.g.dart';
@@ -50,9 +50,9 @@ abstract class _CurrentUserStoreBase with Store {
   // @observable
   // int experiencePoints;
 
-  final authRepo = Modular.get<AuthService>();
+  final auth = Modular.get<AuthService>();
 
-  final userRepo = Modular.get<UserService>();
+  final store = Modular.get<StoreService>();
 
   @observable
   AuthState authState = AuthState.initial;
@@ -63,12 +63,12 @@ abstract class _CurrentUserStoreBase with Store {
   @action
   Future<void> init() async {
     try {
-      final uid = await authRepo.getUid();
+      final uid = await auth.getUid();
 
       if (uid == null) {
         authState = AuthState.unauthenticated;
       } else {
-        currentUser = await userRepo.fetchUserData(uid);
+        currentUser = await store.fetchUserData(uid);
 
         if (currentUser == null) {
           authState = AuthState.unauthenticated;
@@ -84,7 +84,7 @@ abstract class _CurrentUserStoreBase with Store {
   }
 
   Future<void> login(String uid) async {
-    currentUser = await userRepo.fetchUserData(uid);
+    currentUser = await store.fetchUserData(uid);
 
     authState = AuthState.authenticated;
 
@@ -94,7 +94,7 @@ abstract class _CurrentUserStoreBase with Store {
   Future<void> logout() async {
     await setUserOnline(false);
 
-    await authRepo.logout();
+    await auth.logout();
 
     authState = AuthState.unauthenticated;
 
@@ -102,5 +102,5 @@ abstract class _CurrentUserStoreBase with Store {
   }
 
   Future<void> setUserOnline(bool active) =>
-      userRepo.setUserActive(currentUser.id, active);
+      store.setUserActive(currentUser.id, active);
 }

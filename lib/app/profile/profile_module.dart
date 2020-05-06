@@ -9,7 +9,7 @@ import 'package:highvibe/app/profile/chat/chat_page.dart';
 import 'package:highvibe/app/profile/current_user/current_user_page.dart';
 import 'package:highvibe/app/profile/other_user/other_user_page.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:highvibe/services/user_service.dart';
+import 'package:highvibe/services/store_service.dart';
 import 'package:highvibe/store/current_user_store.dart';
 
 class ProfileModule extends ChildModule {
@@ -21,7 +21,7 @@ class ProfileModule extends ChildModule {
         Bind((i) => ChatController()),
         Bind((i) => CurrentUserController()),
         Bind((i) => LiveController()),
-        Bind((i) => UserService()),
+        Bind((i) => StoreService()),
       ];
 
   @override

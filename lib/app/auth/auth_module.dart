@@ -6,7 +6,7 @@ import 'package:highvibe/app/auth/register/register_controller.dart';
 import 'package:highvibe/app/auth/register/register_page.dart';
 import 'package:highvibe/app/auth/user_store.dart';
 import 'package:highvibe/services/auth_service.dart';
-import 'package:highvibe/services/user_service.dart';
+import 'package:highvibe/services/store_service.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:highvibe/store/current_user_store.dart';
 
@@ -16,7 +16,7 @@ class AuthModule extends ChildModule {
         Bind((i) => AutoLoginController()),
         Bind((i) => User()),
         Bind((i) => AuthService()),
-        Bind((i) => UserService()),
+        Bind((i) => StoreService()),
         Bind((i) => CurrentUserStore()),
         Bind((i) => LoginController()),
         Bind((i) => RegisterController()),
