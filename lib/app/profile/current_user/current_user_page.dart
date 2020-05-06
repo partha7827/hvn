@@ -30,6 +30,8 @@ class _CurrentUserPageState
 
   @override
   Widget build(BuildContext context) {
+    print('CurrentUserPage:\n $user');
+
     return Scaffold(
       body: ResponsiveSafeArea(
         builder: (context, size) {
@@ -92,7 +94,7 @@ class _CurrentUserPageState
                                     child: Center(
                                       child: ClipOval(
                                         child: CachedNetworkImage(
-                                          imageUrl: user.photoUrl ?? "",
+                                          imageUrl: user.photoUrl ?? '',
                                           width: 100,
                                           height: 100,
                                           fit: BoxFit.cover,

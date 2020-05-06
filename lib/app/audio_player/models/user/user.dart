@@ -10,55 +10,65 @@ import 'package:highvibe/app/audio_player/models/serializer/serializer.dart';
 part 'user.g.dart';
 
 abstract class User implements Built<User, UserBuilder> {
-  String get id;
-  String get email;
-  String get address;
+  static Serializer<User> get serializer => _$userSerializer;
+
+  factory User([void Function(UserBuilder) updates]) = _$User;
+
+  User._();
+
   String get account;
-  String get chatId;
-  String get videoId;
-  DateTime get lastTimeSeen;
+
   DateTime get accountCreationTime;
 
-  @nullable
-  String get name;
+  String get address;
 
-  @nullable
-  String get status;
+  BuiltList<String> get badges;
 
-  @nullable
-  String get photoUrl;
+  String get chatId;
 
-  @nullable
-  String get info;
-
-  @nullable
-  String get playlist;
-
-  @nullable
-  int get karmaPoints;
+  String get email;
 
   @nullable
   int get experiencePoints;
+
+  BuiltList<String> get featured;
 
   BuiltList<String> get followers;
 
   BuiltList<String> get following;
 
-  BuiltList<String> get uploads;
+  String get id;
 
-  BuiltList<String> get featured;
-
-  BuiltList<String> get badges;
-
-  BuiltList<String> get scheduled;
+  @nullable
+  String get info;
 
   bool get isLive;
 
   bool get isOnline;
 
-  User._();
+  @nullable
+  int get karmaPoints;
 
-  factory User([void Function(UserBuilder) updates]) = _$User;
+  @nullable
+  DateTime get lastTimeSeen;
+
+  @nullable
+  String get name;
+
+  @nullable
+  String get photoUrl;
+
+  @nullable
+  String get playlist;
+
+  BuiltList<String> get scheduled;
+
+  @nullable
+  String get status;
+
+  BuiltList<String> get uploads;
+
+  String get videoId;
 
   String toJson() {
     return json.encode(serializers.serializeWith(User.serializer, this));
@@ -68,6 +78,4 @@ abstract class User implements Built<User, UserBuilder> {
     return serializers.deserializeWith(
         User.serializer, json.decode(jsonString));
   }
-
-  static Serializer<User> get serializer => _$userSerializer;
 }

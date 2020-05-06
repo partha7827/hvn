@@ -74,7 +74,6 @@ abstract class _CurrentUserStoreBase with Store {
           authState = AuthState.unauthenticated;
         } else {
           await setUserOnline(true);
-
           authState = AuthState.authenticated;
         }
       }
@@ -87,20 +86,17 @@ abstract class _CurrentUserStoreBase with Store {
     currentUser = await store.fetchUserData(uid);
 
     authState = AuthState.authenticated;
-
     await setUserOnline(true);
   }
 
   Future<void> logout() async {
     await setUserOnline(false);
-
     await auth.logout();
-
     authState = AuthState.unauthenticated;
-
     currentUser = null;
   }
 
-  Future<void> setUserOnline(bool active) =>
-      store.setUserActive(currentUser.id, active);
+  Future<void> setUserOnline(bool active) {
+    return store.setUserActive(currentUser.id, active);
+  }
 }

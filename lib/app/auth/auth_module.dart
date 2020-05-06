@@ -1,10 +1,10 @@
+import 'package:highvibe/app/audio_player/models/models.dart';
 import 'package:highvibe/app/auth/auto_login/auto_login_controller.dart';
 import 'package:highvibe/app/auth/auto_login/auto_login_page.dart';
 import 'package:highvibe/app/auth/login/login_controller.dart';
 import 'package:highvibe/app/auth/login/login_page.dart';
 import 'package:highvibe/app/auth/register/register_controller.dart';
 import 'package:highvibe/app/auth/register/register_page.dart';
-import 'package:highvibe/app/auth/user_store.dart';
 import 'package:highvibe/services/auth_service.dart';
 import 'package:highvibe/services/store_service.dart';
 import 'package:flutter_modular/flutter_modular.dart';

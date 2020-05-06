@@ -14,6 +14,7 @@ class StoreService extends Disposable {
 
   Future<User> fetchUserData(String userId) async {
     final doc = await _userDocument(userId).get();
+    print('fetchUserData:\n ${doc.data}');
     final jsonString = jsonEncode(doc.data);
     return doc.exists ? User.fromJson(jsonString) : null;
   }

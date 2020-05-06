@@ -32,17 +32,21 @@ abstract class _LoginControllerBase with Store {
     try {
       if (!formKey.currentState.validate()) return null;
 
-      final uid =
-          await auth.login(emailController.text, passwordController.text);
+      final uid = await auth.login(
+        emailController.text,
+        passwordController.text,
+      );
 
       if (uid == null) {
         showSnackBarMsg(
-            scaffoldKey.currentState, 'User not found, Please check password');
+          scaffoldKey.currentState,
+          'User not found, Please check password',
+        );
       } else {
         await Modular.get<CurrentUserStore>().login(uid);
       }
-    } catch (e) {
-      showSnackBarMsg(scaffoldKey.currentState, e.toString());
+    } catch (error) {
+      showSnackBarMsg(scaffoldKey.currentState, error.toString());
     }
 
     inProgress = false;
