@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:highvibe/app/auth/auth_controller.dart';
-import 'package:highvibe/app/auth/user_store.dart';
+import 'package:highvibe/app/audio_player/models/models.dart';
 import 'package:highvibe/services/user_service.dart';
+import 'package:highvibe/store/current_user_store.dart';
 import 'package:highvibe/utils.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:mobx/mobx.dart';
@@ -18,7 +18,7 @@ abstract class _CurrentUserControllerBase with Store {
   final nameController = TextEditingController();
   final statusController = TextEditingController();
 
-  User get currentUser => Modular.get<AuthController>().currentUser;
+  User get currentUser => Modular.get<CurrentUserStore>().currentUser;
 
   @action
   Future<void> updateUserInfo() async {
@@ -27,9 +27,9 @@ abstract class _CurrentUserControllerBase with Store {
     if (name == currentUser.name && status == currentUser.status) {
       return;
     }
-    currentUser
+    currentUser.rebuild((b) => b
       ..name = name
-      ..status = status;
+      ..status = status);
     await userService.updateUserInfo(currentUser);
   }
 
@@ -39,10 +39,10 @@ abstract class _CurrentUserControllerBase with Store {
     if (img != null) {
       try {
         String url = await uploadFile(img, "avatar");
-        currentUser.photoUrl = url;
+        currentUser.rebuild((b) => b..photoUrl = url);
+
         await userService.updateUserInfo(currentUser);
-      } catch (e) {
-      }
+      } catch (e) {}
     }
   }
 }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:highvibe/app/auth/user_store.dart';
+import 'package:highvibe/app/audio_player/models/models.dart';
+// import 'package:highvibe/app/auth/user_store.dart';
 import 'package:highvibe/app/live/live_module.dart';
 import 'broadcast_controller.dart';
 import 'package:highvibe/widgets/event_card.dart';
@@ -12,7 +13,8 @@ import 'package:highvibe/values/themes.dart';
 class BroadcastPage extends StatefulWidget {
   final String title;
   final User user;
-  const BroadcastPage({Key key, this.user, this.title = "Broadcast"}) : super(key: key);
+  const BroadcastPage({Key key, this.user, this.title = "Broadcast"})
+      : super(key: key);
 
   @override
   _BroadcastPageState createState() => _BroadcastPageState();
@@ -20,7 +22,6 @@ class BroadcastPage extends StatefulWidget {
 
 class _BroadcastPageState
     extends ModularState<BroadcastPage, BroadcastController> {
-
   @override
   void initState() {
     controller.init(widget.user);
@@ -28,7 +29,7 @@ class _BroadcastPageState
   }
 
   @override
-  Widget build(BuildContext context) {   
+  Widget build(BuildContext context) {
     return ListView(
       padding: const EdgeInsets.only(left: 20, top: 10, bottom: 80, right: 20),
       children: <Widget>[
@@ -128,5 +129,4 @@ class _BroadcastPageState
       ],
     );
   }
-
 }

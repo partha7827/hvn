@@ -1,16 +1,16 @@
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:highvibe/app/auth/auth_controller.dart';
+import 'package:highvibe/app/audio_player/models/user/user.dart';
+import 'package:highvibe/store/current_user_store.dart';
 import 'package:highvibe/values/config.dart';
 import 'package:mobx/mobx.dart';
 import 'package:stream_chat_flutter/stream_chat_flutter.dart' as Chat;
-import 'package:highvibe/app/auth/user_store.dart';
 
 part 'chat_controller.g.dart';
 
 class ChatController = _ChatControllerBase with _$ChatController;
 
 abstract class _ChatControllerBase with Store {
-  final authController = Modular.get<AuthController>();
+  final authController = Modular.get<CurrentUserStore>();
 
   @observable
   Chat.Client client;
@@ -22,18 +22,19 @@ abstract class _ChatControllerBase with Store {
   User currentCreator;
 
   User get currentUser => authController.currentUser;
-  
+
   @action
   Future<void> init(User user) async {
     currentCreator = user;
-    
+
     client = Chat.Client(
       STREAM_API_KEY,
     );
 
     var creatorId = currentCreator.chatId;
     var userId = currentUser.id;
-    var userToken = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoidXNlcjEifQ.NGZPyPMx7KSVisJmh4tJhOIv7ZjCaMQpOh4gTINvCaU';
+    var userToken =
+        'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoidXNlcjEifQ.NGZPyPMx7KSVisJmh4tJhOIv7ZjCaMQpOh4gTINvCaU';
 
     await client.setUser(Chat.User(id: userId), userToken);
 

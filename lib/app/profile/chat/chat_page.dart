@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:highvibe/app/auth/user_store.dart';
+import 'package:highvibe/app/audio_player/models/models.dart';
+// import 'package:highvibe/app/auth/user_store.dart';
 import 'package:stream_chat_flutter/stream_chat_flutter.dart' as Chat;
 import 'chat_controller.dart';
 import 'package:highvibe/values/Strings.dart';
@@ -17,10 +18,11 @@ class ChatPage extends StatefulWidget {
   _ChatPageState createState() => _ChatPageState();
 }
 
-class _ChatPageState extends ModularState<ChatPage, ChatController> with AutomaticKeepAliveClientMixin {
+class _ChatPageState extends ModularState<ChatPage, ChatController>
+    with AutomaticKeepAliveClientMixin {
   @override
   bool get wantKeepAlive => true;
-  
+
   @override
   void initState() {
     controller.init(widget.user);
@@ -35,7 +37,6 @@ class _ChatPageState extends ModularState<ChatPage, ChatController> with Automat
             ? Chat.StreamChat(
                 client: controller.client,
                 child: Chat.StreamChannel(
-
                   channel: controller.channel,
                   child: ChannelPage(),
                 ),

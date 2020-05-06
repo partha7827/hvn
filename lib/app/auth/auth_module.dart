@@ -1,5 +1,4 @@
 import 'package:highvibe/app/auth/auto_login/auto_login_controller.dart';
-import 'package:highvibe/app/auth/auth_controller.dart';
 import 'package:highvibe/app/auth/auto_login/auto_login_page.dart';
 import 'package:highvibe/app/auth/login/login_controller.dart';
 import 'package:highvibe/app/auth/login/login_page.dart';
@@ -9,6 +8,7 @@ import 'package:highvibe/app/auth/user_store.dart';
 import 'package:highvibe/services/auth_service.dart';
 import 'package:highvibe/services/user_service.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:highvibe/store/current_user_store.dart';
 
 class AuthModule extends ChildModule {
   @override
@@ -17,7 +17,7 @@ class AuthModule extends ChildModule {
         Bind((i) => User()),
         Bind((i) => AuthService()),
         Bind((i) => UserService()),
-        Bind((i) => AuthController()),
+        Bind((i) => CurrentUserStore()),
         Bind((i) => LoginController()),
         Bind((i) => RegisterController()),
       ];

@@ -1,7 +1,6 @@
 import 'package:highvibe/app/live/live_page.dart';
 import 'package:highvibe/app/profile/current_user/current_user_controller.dart';
 import 'package:highvibe/app/profile/live/live_controller.dart';
-import 'package:highvibe/app/auth/auth_controller.dart';
 import 'package:highvibe/app/profile/audio/audio_controller.dart';
 import 'package:highvibe/app/profile/broadcast/broadcast_controller.dart';
 import 'package:highvibe/app/profile/broadcast/broadcast_page.dart';
@@ -11,12 +10,13 @@ import 'package:highvibe/app/profile/current_user/current_user_page.dart';
 import 'package:highvibe/app/profile/other_user/other_user_page.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:highvibe/services/user_service.dart';
+import 'package:highvibe/store/current_user_store.dart';
 
 class ProfileModule extends ChildModule {
   @override
   List<Bind> get binds => [
         Bind((i) => AudioController()),
-        Bind((i) => AuthController()),
+        Bind((i) => CurrentUserStore()),
         Bind((i) => BroadcastController()),
         Bind((i) => ChatController()),
         Bind((i) => CurrentUserController()),

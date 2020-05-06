@@ -3,12 +3,13 @@ library serializer;
 import 'package:built_collection/built_collection.dart';
 import 'package:built_value/serializer.dart';
 import 'package:built_value/standard_json_plugin.dart';
-import 'package:highvibe/app/audio_player/models/audio_file/audio_file.dart';
+import 'package:highvibe/app/audio_player/models/models.dart';
 
 part 'serializer.g.dart';
 
 @SerializersFor([
   AudioFile,
+  User,
 ])
 final Serializers serializers =
     (_$serializers.toBuilder()..addPlugin(StandardJsonPlugin())).build();

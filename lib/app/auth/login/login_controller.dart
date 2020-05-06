@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:highvibe/app/auth/auth_controller.dart';
 import 'package:highvibe/services/auth_service.dart';
 import 'package:highvibe/services/user_service.dart';
+import 'package:highvibe/store/current_user_store.dart';
 import 'package:highvibe/utils.dart';
 import 'package:mobx/mobx.dart';
 
@@ -42,7 +42,7 @@ abstract class _LoginControllerBase with Store {
         showSnackBarMsg(
             scaffoldKey.currentState, 'User not found, Please check password');
       } else {
-        await Modular.get<AuthController>().login(uid);
+        await Modular.get<CurrentUserStore>().login(uid);
       }
     } catch (e) {
       showSnackBarMsg(scaffoldKey.currentState, e.toString());

@@ -1,15 +1,57 @@
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:highvibe/app/audio_player/models/models.dart';
 import 'package:highvibe/services/auth_service.dart';
 import 'package:highvibe/services/user_service.dart';
-import 'package:highvibe/app/auth/user_store.dart';
 import 'package:mobx/mobx.dart';
 
-part 'auth_controller.g.dart';
+part 'current_user_store.g.dart';
 
-class AuthController = _AuthControllerBase with _$AuthController;
+enum AuthState { initial, authenticated, unauthenticated }
 
-abstract class _AuthControllerBase with Store {
+class CurrentUserStore = _CurrentUserStoreBase with _$CurrentUserStore;
+
+abstract class _CurrentUserStoreBase with Store {
+  // @observable
+  // bool isLive;
+
+  // @observable
+  // bool isOnline;
+
+  // @observable
+  // String name;
+
+  // @observable
+  // String status;
+
+  // @observable
+  // String info;
+
+  // @observable
+  // String playlist;
+
+  // @observable
+  // String photoUrl;
+
+  // @observable
+  // ObservableList<String> badges;
+
+  // @observable
+  // ObservableList<String> uploads;
+
+  // @observable
+  // ObservableList<String> featured;
+
+  // @observable
+  // ObservableList<String> scheduled;
+
+  // @observable
+  // int karmaPoints;
+
+  // @observable
+  // int experiencePoints;
+
   final authRepo = Modular.get<AuthService>();
+
   final userRepo = Modular.get<UserService>();
 
   @observable
@@ -62,5 +104,3 @@ abstract class _AuthControllerBase with Store {
   Future<void> setUserOnline(bool active) =>
       userRepo.setUserActive(currentUser.id, active);
 }
-
-enum AuthState { initial, authenticated, unauthenticated }
