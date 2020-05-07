@@ -10,7 +10,7 @@ void showSnackBarMsg(ScaffoldState scaffoldState, String message) {
         message,
         style: Theme.of(scaffoldState.context)
             .textTheme
-            .subtitle
+            .subtitle2
             .copyWith(color: Colors.white),
         textAlign: TextAlign.center,
       ),

@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:highvibe/app/wallet/resources/app_colors.dart';
-import 'package:highvibe/app/wallet/pages/auth/passcode/passcode_page.dart';
 import 'package:highvibe/app/wallet/pages/widgets/buttons/outline_button.dart' as o;
 
 class ReceivePage extends StatefulWidget {
@@ -31,7 +29,6 @@ class ReceivePageState extends State<ReceivePage> {
   }
 
   Widget buildQr() {
-    final width = MediaQuery.of(context).size.width;
     return Container(
       margin: EdgeInsets.all(50),
       child: Image.network('https://qrcode.tec-it.com/API/QRCode?data=18923353cX3452399S&backcolor=%23000222&color=%23ffffff&size=large',

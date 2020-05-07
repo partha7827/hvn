@@ -1,13 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:highvibe/app/wallet/resources/app_colors.dart';
-import 'package:highvibe/app/wallet/pages/auth/face/face_page.dart';
 import 'package:highvibe/app/wallet/pages/scan/scan_page.dart';
 import 'package:highvibe/app/wallet/pages/send/send_page.dart';
-import 'package:highvibe/app/wallet/pages/widgets/buttons/main_button.dart';
-import 'package:highvibe/app/wallet/pages/widgets/containers/transaction_container.dart';
 import 'package:highvibe/app/wallet/pages/widgets/containers/user_container.dart';
-import 'package:virtual_keyboard/virtual_keyboard.dart';
 
 class UsersPage extends StatefulWidget {
 

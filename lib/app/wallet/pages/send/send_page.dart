@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:highvibe/app/wallet/resources/app_colors.dart';
 import 'package:highvibe/app/wallet/pages/auth/face/face_page.dart';
-import 'package:highvibe/app/wallet/pages/wallet/wallet_page.dart';
 import 'package:highvibe/app/wallet/pages/widgets/buttons/main_button.dart';
 import 'package:highvibe/app/wallet/pages/widgets/buttons/outline_button.dart' as o;
 import 'package:highvibe/app/wallet/pages/widgets/containers/user_container.dart';
@@ -74,7 +72,6 @@ class SendPageState extends State<SendPage> {
   }
 
   Widget buildConfirm() {
-    final width = MediaQuery.of(context).size.width;
     return Material(
       type: MaterialType.transparency,
       child: Center(

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:highvibe/app/app/app_widget.dart';
+import 'package:highvibe/app/audio_player/audio_player_module.dart';
 import 'package:highvibe/app/auth/auth_controller.dart';
 import 'package:highvibe/app/auth/auth_module.dart';
 import 'package:highvibe/app/home/home_module.dart';
@@ -19,6 +20,7 @@ class AppModule extends MainModule {
         Router("", module: HomeModule()),
         Router("", module: ProfileModule()),
         Router("", module: WalletModule()),
+        Router("", module: AudioPlayerModule()),
       ];
 
   @override

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:highvibe/app/wallet/resources/app_colors.dart';
 import 'package:highvibe/app/wallet/pages/auth/face/face_page.dart';
 import 'package:highvibe/app/wallet/pages/wallet/wallet_page.dart';

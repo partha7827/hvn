@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:highvibe/app/wallet/resources/app_colors.dart';
-import 'package:timeago/timeago.dart' as timeago;
 
 class UserContainer extends StatelessWidget {
   final EdgeInsets margin;

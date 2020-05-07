@@ -29,6 +29,7 @@ class _ChatPageState extends ModularState<ChatPage, ChatController> with Automat
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     return Container(
       child: Observer(
         builder: (_) => controller.client != null

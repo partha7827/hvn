@@ -32,7 +32,6 @@ class _LoginPageState extends ModularState<LoginPage, LoginController> {
   @override
   Widget build(BuildContext context) {
     debugPrint("build login");
-    final size = MediaQuery.of(context).size;
     return Scaffold(
       key: controller.scaffoldKey,
       body: Form(

@@ -5,6 +5,7 @@ import 'package:timeago/timeago.dart' as timeago;
 class TransactionContainer extends StatelessWidget {
   final EdgeInsets margin;
   final Function onPressed;
+  final incomeTransaction = true;
 
   TransactionContainer({this.margin, this.onPressed});
 
@@ -66,7 +67,7 @@ class TransactionContainer extends StatelessWidget {
                 ),
                 Padding(
                   padding: EdgeInsets.only(left: 10),
-                  child: true ? Icon(Icons.arrow_downward,
+                  child: incomeTransaction ? Icon(Icons.arrow_downward,
                     color: AppColors.green.withOpacity(0.8),
                     size: 12
                   )  :
