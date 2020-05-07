@@ -26,6 +26,13 @@ mixin _$LoginController on _LoginControllerBase, Store {
     }, _$inProgressAtom, name: '${_$inProgressAtom.name}_set');
   }
 
+  final _$initAsyncAction = AsyncAction('init');
+
+  @override
+  Future<void> init() {
+    return _$initAsyncAction.run(() => super.init());
+  }
+
   final _$loginUserAsyncAction = AsyncAction('loginUser');
 
   @override

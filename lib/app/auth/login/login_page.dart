@@ -21,11 +21,9 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends ModularState<LoginPage, LoginController> {
-  //use 'controller' variable to access controller
-
   @override
   void initState() {
-    print("init login page state");
+    controller.init();
     super.initState();
   }
 

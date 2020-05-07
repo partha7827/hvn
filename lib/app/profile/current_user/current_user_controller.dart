@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:highvibe/app/auth/auth_controller.dart';
-import 'package:highvibe/app/auth/user_store.dart';
-import 'package:highvibe/services/user_service.dart';
+import 'package:highvibe/app/audio_player/models/models.dart';
+import 'package:highvibe/services/store_service.dart';
+import 'package:highvibe/store/current_user_store.dart';
 import 'package:highvibe/utils.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:mobx/mobx.dart';
@@ -13,12 +13,20 @@ class CurrentUserController = _CurrentUserControllerBase
     with _$CurrentUserController;
 
 abstract class _CurrentUserControllerBase with Store {
-  final userService = Modular.get<UserService>();
+  final store = Modular.get<StoreService>();
+  final currentUserStore = Modular.get<CurrentUserStore>();
 
   final nameController = TextEditingController();
   final statusController = TextEditingController();
 
-  User get currentUser => Modular.get<AuthController>().currentUser;
+  User get currentUser => currentUserStore.currentUser;
+
+  @action
+  Future<void> init() async {
+    when((_) => currentUserStore.authState == AuthState.unauthenticated, () {
+      Modular.to.pushReplacementNamed("/login");
+    });
+  }
 
   @action
   Future<void> updateUserInfo() async {
@@ -27,10 +35,10 @@ abstract class _CurrentUserControllerBase with Store {
     if (name == currentUser.name && status == currentUser.status) {
       return;
     }
-    currentUser
+    currentUser.rebuild((b) => b
       ..name = name
-      ..status = status;
-    await userService.updateUserInfo(currentUser);
+      ..status = status);
+    await store.updateUserInfo(currentUser);
   }
 
   @action
@@ -39,10 +47,15 @@ abstract class _CurrentUserControllerBase with Store {
     if (img != null) {
       try {
         String url = await uploadFile(img, "avatar");
-        currentUser.photoUrl = url;
-        await userService.updateUserInfo(currentUser);
-      } catch (e) {
-      }
+        currentUser.rebuild((b) => b..photoUrl = url);
+
+        await store.updateUserInfo(currentUser);
+      } catch (e) {}
     }
+  }
+
+  @action
+  Future<void> logout() async {
+    await currentUserStore.logout();
   }
 }

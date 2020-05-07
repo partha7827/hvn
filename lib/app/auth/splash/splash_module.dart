@@ -1,11 +1,11 @@
-import 'package:highvibe/app/auth/auth_controller.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:highvibe/app/auth/splash/splash_page.dart';
+import 'package:highvibe/store/current_user_store.dart';
 
 class SplashModule extends ChildModule {
   @override
   List<Bind> get binds => [
-        Bind((i) => AuthController()),
+        Bind((i) => CurrentUserStore()),
       ];
 
   @override

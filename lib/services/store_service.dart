@@ -1,8 +1,10 @@
+import 'dart:convert';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:highvibe/app/auth/user_store.dart';
+import 'package:highvibe/app/audio_player/models/models.dart' show User;
 
-class UserService extends Disposable {
+class StoreService extends Disposable {
   final _firestore = Firestore.instance;
 
   CollectionReference get _userCollection => _firestore.collection("users");
@@ -12,32 +14,36 @@ class UserService extends Disposable {
 
   Future<User> fetchUserData(String userId) async {
     final doc = await _userDocument(userId).get();
-
-    return doc.exists ? User.fromJson(doc.data) : null;
+    final jsonString = jsonEncode(doc.data);
+    return doc.exists ? User.fromJson(jsonString) : null;
   }
 
   Future<void> createNewUser(User user) async {
     final userDoc = _userDocument(user.id);
     if ((await userDoc.get()).data == null) {
-      await userDoc.setData(user.toJson());
+      final json = jsonDecode(user.toJson());
+      await userDoc.setData(json);
     }
   }
 
   Stream<User> getUserStream(String userId) {
     final response = _userDocument(userId).snapshots();
-
-    return response.map((s) => User.fromJson(s.data));
+    return response.map((s) {
+      final jsonStrng = jsonEncode(s.data);
+      return User.fromJson(jsonStrng);
+    });
   }
 
   Future<void> setUserActive(String userId, bool isActive) {
     return _userDocument(userId).updateData({
       "isOnline": isActive,
-      "lastTimeSeen": DateTime.now().toUtc(),
+      // "lastTimeSeen": DateTime.now().toUtc(),
     });
   }
 
   Future<void> updateUserInfo(User user) {
-    return _userDocument(user.id).updateData(user.toJson());
+    final json = jsonDecode(user.toJson());
+    return _userDocument(user.id).updateData(json);
   }
 
   Future<void> followUser(String currentUserId, String otherId) async {

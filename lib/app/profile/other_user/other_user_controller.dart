@@ -1,7 +1,8 @@
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:highvibe/app/auth/auth_controller.dart';
-import 'package:highvibe/app/auth/user_store.dart';
-import 'package:highvibe/services/user_service.dart';
+import 'package:highvibe/app/audio_player/models/models.dart';
+
+import 'package:highvibe/services/store_service.dart';
+import 'package:highvibe/store/current_user_store.dart';
 import 'package:mobx/mobx.dart';
 
 part 'other_user_controller.g.dart';
@@ -9,7 +10,7 @@ part 'other_user_controller.g.dart';
 class OtherUserController = _OtherUserControllerBase with _$OtherUserController;
 
 abstract class _OtherUserControllerBase with Store {
-  final userService = Modular.get<UserService>();
+  final store = Modular.get<StoreService>();
 
   @observable
   String otherUserId;
@@ -20,10 +21,10 @@ abstract class _OtherUserControllerBase with Store {
   @action
   Future<void> init(String userId) async {
     otherUserId = userId;
-    otherUser = await userService.fetchUserData(userId);
+    otherUser = await store.fetchUserData(userId);
   }
 
-  User get currentUser => Modular.get<AuthController>().currentUser;
+  User get currentUser => Modular.get<CurrentUserStore>().currentUser;
 
   @computed
   bool get isFollowing => currentUser.following.contains(otherUserId);
@@ -31,13 +32,13 @@ abstract class _OtherUserControllerBase with Store {
   @action
   Future<void> followUser(userId) async {
     if (isFollowing) {
-      currentUser.following.remove(userId);
-      otherUser.followers.remove(currentUser.id);
-      await userService.unfollowUser(currentUser.id, userId);
+      currentUser.following.toList().remove(userId);
+      otherUser.followers.toList().remove(currentUser.id);
+      await store.unfollowUser(currentUser.id, userId);
     } else {
-      currentUser.following.add(userId);
-      otherUser.followers.add(currentUser.id);
-      await userService.followUser(currentUser.id, userId);
+      currentUser.following.toList().add(userId);
+      otherUser.followers.toList().add(currentUser.id);
+      await store.followUser(currentUser.id, userId);
     }
   }
 }

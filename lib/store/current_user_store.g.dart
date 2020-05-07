@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'auth_controller.dart';
+part of 'current_user_store.dart';
 
 // **************************************************************************
 // StoreGenerator
@@ -8,8 +8,8 @@ part of 'auth_controller.dart';
 
 // ignore_for_file: non_constant_identifier_names, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
-mixin _$AuthController on _AuthControllerBase, Store {
-  final _$authStateAtom = Atom(name: '_AuthControllerBase.authState');
+mixin _$CurrentUserStore on _CurrentUserStoreBase, Store {
+  final _$authStateAtom = Atom(name: '_CurrentUserStoreBase.authState');
 
   @override
   AuthState get authState {
@@ -26,7 +26,7 @@ mixin _$AuthController on _AuthControllerBase, Store {
     }, _$authStateAtom, name: '${_$authStateAtom.name}_set');
   }
 
-  final _$currentUserAtom = Atom(name: '_AuthControllerBase.currentUser');
+  final _$currentUserAtom = Atom(name: '_CurrentUserStoreBase.currentUser');
 
   @override
   User get currentUser {

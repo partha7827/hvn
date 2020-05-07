@@ -23,6 +23,12 @@ class _RegisterPageState
   //use 'controller' variable to access controller
 
   @override
+  void initState() {
+    controller.init();
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       key: controller.scaffoldKey,

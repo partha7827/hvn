@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:highvibe/app/audio_player/models/audio_file/mock_audio_files.dart';
 import 'package:highvibe/app/audio_player/models/models.dart';
-import 'package:highvibe/app/auth/user_store.dart';
 import 'package:highvibe/values/Strings.dart';
 import 'package:highvibe/widgets/audio_tile.dart';
 import 'package:highvibe/widgets/header_row.dart';

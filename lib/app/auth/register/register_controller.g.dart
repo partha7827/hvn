@@ -44,6 +44,13 @@ mixin _$RegisterController on _RegisterControllerBase, Store {
     }, _$hasAcceptedTermsAtom, name: '${_$hasAcceptedTermsAtom.name}_set');
   }
 
+  final _$initAsyncAction = AsyncAction('init');
+
+  @override
+  Future<void> init() {
+    return _$initAsyncAction.run(() => super.init());
+  }
+
   final _$registerUserAsyncAction = AsyncAction('registerUser');
 
   @override

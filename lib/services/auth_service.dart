@@ -1,10 +1,11 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:highvibe/app/auth/user_store.dart';
+import 'package:highvibe/app/audio_player/models/models.dart';
+// import 'package:highvibe/app/auth/user_store.dart';
 
 class AuthService extends Disposable {
   final _auth = FirebaseAuth.instance;
-  
+
   Future<String> getUid() async {
     final user = await _auth.currentUser();
 
@@ -16,7 +17,8 @@ class AuthService extends Disposable {
   }
 
   Future<String> login(String email, String password) async {
-    final response = await _auth.signInWithEmailAndPassword(email: email, password: password);
+    final response = await _auth.signInWithEmailAndPassword(
+        email: email, password: password);
 
     return response?.user?.uid;
   }
@@ -27,14 +29,38 @@ class AuthService extends Disposable {
     return response?.user?.uid;
   }
 
-  Future<User> emailRegister({ String email, String password, String name }) async {
-    final response = await _auth.createUserWithEmailAndPassword(email: email, password: password);
+  Future<User> emailRegister({
+    String email,
+    String password,
+    String name,
+  }) async {
+    final response = await _auth.createUserWithEmailAndPassword(
+      email: email,
+      password: password,
+    );
 
     final user = response.user;
 
     await user.sendEmailVerification();
 
-    return User.createNew(uid: user.uid, email: email, name: name);
+    return User(
+      (b) => b
+        ..account = user.uid
+        ..accountCreationTime = DateTime.now().toUtc()
+        ..address = ''
+        ..chatId = user.uid
+        ..email = email
+        ..experiencePoints = 0
+        ..id = user.uid
+        ..info = ''
+        ..isLive = false
+        ..isOnline = true
+        ..karmaPoints = 0
+        ..name = name
+        ..photoUrl = ''
+        ..status = ''
+        ..videoId = '',
+    );
   }
 
   Future<void> sendPasswordResetEmail(String email) async {
