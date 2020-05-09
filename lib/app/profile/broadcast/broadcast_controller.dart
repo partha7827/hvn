@@ -1,6 +1,6 @@
 import 'package:agora_rtc_engine/agora_rtc_engine.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:highvibe/app/audio_player/models/models.dart';
+import 'package:highvibe/models/models.dart' show User;
 import 'package:highvibe/store/current_user_store.dart';
 import 'package:highvibe/values/config.dart';
 import 'package:mobx/mobx.dart';

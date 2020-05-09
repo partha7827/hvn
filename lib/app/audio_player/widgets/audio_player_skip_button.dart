@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:highvibe/app/audio_player/audio_player_service.dart';
 
 class AudioPlayerSkipButton<S> extends StatelessWidget {
   final Color activeColor;
   final Color disabledColor;
   final AudioPlayerSkipButtonType buttonType;
-  final Stream<S> stream;
   final VoidCallback onPressed;
 
   AudioPlayerSkipButton({
     @required this.buttonType,
     @required this.onPressed,
-    this.stream,
     this.activeColor = Colors.black,
     this.disabledColor = Colors.grey,
     Key key,
@@ -18,19 +17,14 @@ class AudioPlayerSkipButton<S> extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder(
-      stream: stream,
-      builder: (context, snapshot) {
-        return Container(
-          child: IconButton(
-            iconSize: 70,
-            icon: _configureIcon(),
-            color: activeColor,
-            disabledColor: disabledColor,
-            onPressed: (snapshot.hasData) ? onPressed : null,
-          ),
-        );
-      },
+    return Container(
+      child: IconButton(
+        iconSize: 70,
+        icon: _configureIcon(),
+        color: activeColor,
+        disabledColor: disabledColor,
+        onPressed: onPressed,
+      ),
     );
   }
 
@@ -42,5 +36,3 @@ class AudioPlayerSkipButton<S> extends StatelessWidget {
     }
   }
 }
-
-enum AudioPlayerSkipButtonType { fastForward, rewind }

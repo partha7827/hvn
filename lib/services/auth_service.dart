@@ -1,7 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:highvibe/app/audio_player/models/models.dart';
-// import 'package:highvibe/app/auth/user_store.dart';
+import 'package:highvibe/models/models.dart' show User;
 
 class AuthService extends Disposable {
   final _auth = FirebaseAuth.instance;

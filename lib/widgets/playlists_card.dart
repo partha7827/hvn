@@ -1,6 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:highvibe/app/audio_player/models/audio_file/mock_audio_files.dart';
+import 'package:highvibe/models/audio_file/mock_audio_files.dart';
 import 'package:highvibe/values/Strings.dart';
 import 'package:highvibe/values/themes.dart';
 

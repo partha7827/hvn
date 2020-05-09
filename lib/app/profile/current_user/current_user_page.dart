@@ -2,17 +2,17 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:highvibe/app/audio_player/models/user/user.dart';
-// import 'package:highvibe/app/auth/user_store.dart';
 import 'package:highvibe/app/profile/audio/audio_page.dart';
 import 'package:highvibe/app/profile/broadcast/broadcast_page.dart';
 import 'package:highvibe/app/profile/chat/chat_page.dart';
+import 'package:highvibe/models/models.dart' show User;
 import 'package:highvibe/values/Strings.dart';
 import 'package:highvibe/values/themes.dart';
 import 'package:highvibe/widgets/bottom_navigation.dart';
 import 'package:highvibe/widgets/gradient_outline_button.dart';
 import 'package:highvibe/widgets/responsive_safe_area.dart';
 import 'package:highvibe/widgets/underline_gradient_indicator.dart';
+
 import 'current_user_controller.dart';
 
 class CurrentUserPage extends StatefulWidget {
@@ -29,7 +29,7 @@ class _CurrentUserPageState
   User get user => controller.currentUser;
 
   @override
-  void initState() { 
+  void initState() {
     super.initState();
     controller.init();
     _tabController = TabController(initialIndex: 0, length: 3, vsync: this);

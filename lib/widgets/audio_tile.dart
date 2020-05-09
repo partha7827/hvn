@@ -1,7 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:highvibe/app/audio_player/models/models.dart';
+import 'package:highvibe/models/models.dart' show AudioFile;
 import 'package:highvibe/values/themes.dart';
 
 class AudioTile extends StatelessWidget {

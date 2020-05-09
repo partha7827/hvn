@@ -67,6 +67,7 @@ class _MeditationTimerState extends State<MeditationTimer>
   }
 }
 
+// ignore: unused_element
 class _Painter extends CustomPainter {
   final Gradient gradient;
   final Radius radius;

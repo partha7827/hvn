@@ -4,7 +4,7 @@ import 'package:built_collection/built_collection.dart';
 import 'package:built_value/iso_8601_date_time_serializer.dart';
 import 'package:built_value/serializer.dart';
 import 'package:built_value/standard_json_plugin.dart';
-import 'package:highvibe/app/audio_player/models/models.dart';
+import 'package:highvibe/models/models.dart';
 
 part 'serializer.g.dart';
 

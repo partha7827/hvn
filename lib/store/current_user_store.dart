@@ -1,5 +1,5 @@
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:highvibe/app/audio_player/models/models.dart';
+import 'package:highvibe/models/models.dart' show User;
 import 'package:highvibe/services/auth_service.dart';
 import 'package:highvibe/services/store_service.dart';
 import 'package:mobx/mobx.dart';
@@ -11,45 +11,6 @@ enum AuthState { initial, authenticated, unauthenticated }
 class CurrentUserStore = _CurrentUserStoreBase with _$CurrentUserStore;
 
 abstract class _CurrentUserStoreBase with Store {
-  // @observable
-  // bool isLive;
-
-  // @observable
-  // bool isOnline;
-
-  // @observable
-  // String name;
-
-  // @observable
-  // String status;
-
-  // @observable
-  // String info;
-
-  // @observable
-  // String playlist;
-
-  // @observable
-  // String photoUrl;
-
-  // @observable
-  // ObservableList<String> badges;
-
-  // @observable
-  // ObservableList<String> uploads;
-
-  // @observable
-  // ObservableList<String> featured;
-
-  // @observable
-  // ObservableList<String> scheduled;
-
-  // @observable
-  // int karmaPoints;
-
-  // @observable
-  // int experiencePoints;
-
   final auth = Modular.get<AuthService>();
 
   final store = Modular.get<StoreService>();

@@ -1,23 +1,23 @@
 import 'package:flutter/material.dart';
-import 'package:highvibe/app/audio_player/models/models.dart' show AudioFile;
+
+typedef double UpdateTrackPosition();
 
 class AudioPlayerSlider extends StatelessWidget {
-  final AudioFile audioFile;
+  final double trackPosition;
+  final ValueChanged<double> onChanged;
 
   const AudioPlayerSlider({
-    @required this.audioFile,
+    @required this.trackPosition,
+    @required this.onChanged,
     Key key,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Slider(
-      value: 0,
-      min: 0,
-      max: audioFile.duration.toDouble(),
+      value: trackPosition,
       activeColor: Colors.black,
-      onChanged: (value) => print('Seek To!'),
-      onChangeEnd: (value) => print('Resume!'),
+      onChanged: (value) => onChanged(value),
     );
   }
 }

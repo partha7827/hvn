@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:highvibe/app/audio_player/models/models.dart';
+import 'package:highvibe/models/models.dart' show User;
 import 'package:highvibe/services/store_service.dart';
 import 'package:highvibe/store/current_user_store.dart';
 import 'package:highvibe/utils.dart';

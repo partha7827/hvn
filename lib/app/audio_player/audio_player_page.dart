@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:highvibe/app/app/utils/free_functions.dart';
-import 'package:highvibe/app/audio_player/models/models.dart' show AudioFile;
+import 'package:highvibe/app/audio_player/audio_player_service.dart';
 import 'package:highvibe/app/audio_player/widgets/widgets.dart';
+import 'package:highvibe/models/models.dart' show AudioFile;
 import 'package:highvibe/widgets/responsive_safe_area.dart';
+
 import 'audio_player_controller.dart';
 
 class AudioPlayerPage extends StatefulWidget {
@@ -22,6 +24,11 @@ class AudioPlayerPage extends StatefulWidget {
 
 class _AudioPlayerPageState
     extends ModularState<AudioPlayerPage, AudioPlayerController> {
+  final _audioPlayerService = Modular.get<AudioPlayerService>();
+  String _positionText;
+  Duration _trackPosition;
+  bool _isPlaying = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -46,6 +53,7 @@ class _AudioPlayerPageState
                       icon: const Icon(Icons.close),
                       tooltip: 'Close',
                       onPressed: () {
+                        _audioPlayerService.stop();
                         Navigator.pop(context);
                       },
                     ),
@@ -60,7 +68,9 @@ class _AudioPlayerPageState
                               children: <Widget>[
                                 Text(
                                   '${widget.audioFile.title}',
-                                  style: const TextStyle(fontSize: 28),
+                                  style: const TextStyle(
+                                    fontSize: 28,
+                                  ),
                                   maxLines: 1,
                                 ),
                                 const SizedBox(height: 8),
@@ -78,7 +88,11 @@ class _AudioPlayerPageState
                   const SizedBox(height: 16),
                   _configureArtwork(context),
                   const SizedBox(height: 40),
-                  AudioPlayerSlider(audioFile: widget.audioFile),
+                  AudioPlayerSlider(
+                    trackPosition: _updateSliderPosition(),
+                    onChanged: (value) =>
+                        _audioPlayerService.seekToPosition(value),
+                  ),
                   Container(
                     padding: const EdgeInsets.fromLTRB(16, 0, 16, 0),
                     child: Row(
@@ -86,8 +100,8 @@ class _AudioPlayerPageState
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: <Widget>[
                         Text(
-                          '1m 32 sec',
-                          style: const TextStyle(color: Colors.grey),
+                          '${_positionText ?? ''}',
+                          style: const TextStyle(color: Colors.black87),
                         ),
                         Text(
                           mediaTimeFormarter(
@@ -95,7 +109,7 @@ class _AudioPlayerPageState
                               milliseconds: widget.audioFile.duration,
                             ),
                           ),
-                          style: const TextStyle(color: Colors.grey),
+                          style: const TextStyle(color: Colors.black87),
                         ),
                       ],
                     ),
@@ -107,14 +121,23 @@ class _AudioPlayerPageState
                     children: <Widget>[
                       AudioPlayerSkipButton(
                         buttonType: AudioPlayerSkipButtonType.rewind,
-                        onPressed: () => print('rewind'),
+                        onPressed: () => _audioPlayerService.skip15seconds(
+                          buttonType: AudioPlayerSkipButtonType.rewind,
+                          trackPosition: _trackPosition,
+                        ),
                       ),
                       AudioPlayerPlayButton(
-                        onPressed: () => print('toggle'),
+                        icon: _configurePlayButtonIcon(_isPlaying),
+                        onPressed: () => _audioPlayerService.toggle(
+                          playPosition: _trackPosition,
+                        ),
                       ),
                       AudioPlayerSkipButton(
                         buttonType: AudioPlayerSkipButtonType.fastForward,
-                        onPressed: () =>print('fast forward'),
+                        onPressed: () => _audioPlayerService.skip15seconds(
+                          buttonType: AudioPlayerSkipButtonType.fastForward,
+                          trackPosition: _trackPosition,
+                        ),
                       ),
                     ],
                   ),
@@ -125,6 +148,23 @@ class _AudioPlayerPageState
         },
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    _audioPlayerService.dispose();
+    super.dispose();
+  }
+
+  @override
+  void initState() {
+    _configure();
+    super.initState();
+  }
+
+  void _configure() {
+    _updateTrackPosition();
+    _updatePlayerState();
   }
 
   Widget _configureArtwork(BuildContext context) {
@@ -140,5 +180,45 @@ class _AudioPlayerPageState
         fit: BoxFit.cover,
       );
     }
+  }
+
+  Icon _configurePlayButtonIcon(bool isPlaying) {
+    if (isPlaying) {
+      return const Icon(Icons.pause);
+    } else {
+      return const Icon(Icons.play_circle_filled);
+    }
+  }
+
+  void _updatePlayerState() {
+    _audioPlayerService.playerStateSubscription.onData((state) {
+      setState(() {
+        _isPlaying = _audioPlayerService.isPlaying;
+        _configurePlayButtonIcon(_isPlaying);
+      });
+    });
+  }
+
+  double _updateSliderPosition() {
+    return (_trackPosition != null &&
+            widget.audioFile.duration != null &&
+            _trackPosition.inMilliseconds > 0 &&
+            _trackPosition.inMilliseconds < widget.audioFile.duration)
+        ? _trackPosition.inMilliseconds / widget.audioFile.duration
+        : 0;
+  }
+
+  void _updateTrackPosition() {
+    _audioPlayerService.positionSubscription.onData((position) {
+      setState(() {
+        _trackPosition = position;
+        if (_trackPosition >=
+            Duration(milliseconds: widget.audioFile.duration)) {
+          _trackPosition = Duration(milliseconds: 0);
+        }
+        _positionText = _trackPosition?.toString()?.split('.')?.first ?? '';
+        _updateSliderPosition();
+      });
+    });
   }
 }
