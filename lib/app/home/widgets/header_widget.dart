@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:highvibe/app/audio_player/widgets/audio_player.dart';
 import 'package:highvibe/values/Strings.dart';
 import 'package:highvibe/values/themes.dart';
 import 'package:highvibe/widgets/header_row.dart';
@@ -19,6 +20,8 @@ class HeaderWidget extends StatelessWidget {
             'https://images.unsplash.com/photo-1470104240373-bc1812eddc9f',
           ),
           fit: BoxFit.cover,
+          colorFilter: ColorFilter.mode(
+              Colors.black.withOpacity(0.2), BlendMode.dstATop),
         ),
       ),
       height: MediaQuery.of(context).size.height,
@@ -54,7 +57,10 @@ class HeaderWidget extends StatelessWidget {
                   ),
                   IconButton(
                     icon: SvgPicture.asset('assets/ic_notification.svg'),
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (_) => AudioPlayer()));
+                    },
                   ),
                 ],
               ),

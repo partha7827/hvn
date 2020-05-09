@@ -42,6 +42,15 @@ const darkToTransparentGradient = const LinearGradient(
   ],
 );
 
+const darkToTransparentGradientTop = const LinearGradient(
+  begin: Alignment.topCenter,
+  end: Alignment.bottomCenter,
+  colors: [
+    const Color(0xFF000222),
+    Colors.transparent,
+  ],
+);
+
 const homeHeaderGradient = const LinearGradient(
   begin: Alignment.topCenter,
   end: Alignment.bottomCenter,

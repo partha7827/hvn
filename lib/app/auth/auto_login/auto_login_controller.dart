@@ -12,7 +12,7 @@ abstract class _AutoLoginControllerBase with Store {
   @action
   Future<void> init() async {
     when((_) => currentUserStore.authState == AuthState.unauthenticated, () {
-      Modular.to.pushReplacementNamed("/login");
+      Modular.to.pushReplacementNamed("/home");
     });
 
     when((_) => currentUserStore.authState == AuthState.authenticated, () {
