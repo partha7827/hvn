@@ -35,9 +35,13 @@ abstract class _CurrentUserControllerBase with Store {
     if (name == currentUser.name && status == currentUser.status) {
       return;
     }
-    currentUser.rebuild((b) => b
-      ..name = name
-      ..status = status);
+//    currentUser.rebuild((b) => b
+//      ..name = name
+//      ..status = status);
+
+    currentUser.name = name;
+    currentUser.status = status;
+    await currentUser.save();
     await store.updateUserInfo(currentUser);
   }
 
@@ -47,7 +51,8 @@ abstract class _CurrentUserControllerBase with Store {
     if (img != null) {
       try {
         String url = await uploadFile(img, "avatar");
-        currentUser.rebuild((b) => b..photoUrl = url);
+        currentUser.photoUrl = url;
+        await currentUser.save();
 
         await store.updateUserInfo(currentUser);
       } catch (e) {}

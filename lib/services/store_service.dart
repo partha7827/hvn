@@ -13,16 +13,18 @@ class StoreService extends Disposable {
       _userCollection.document(userId);
 
   Future<User> fetchUserData(String userId) async {
-    final doc = await _userDocument(userId).get();
-    final jsonString = jsonEncode(doc.data);
-    return doc.exists ? User.fromJson(jsonString) : null;
+//    final doc = await _userDocument(userId).get();
+//    final jsonString = jsonEncode(doc.data);
+//    return doc.exists ? User.fromJson(jsonString) : null;
+
+    return await User.getById(userId);
   }
 
   Future<void> createNewUser(User user) async {
     final userDoc = _userDocument(user.id);
     if ((await userDoc.get()).data == null) {
-      final json = jsonDecode(user.toJson());
-      await userDoc.setData(json);
+//      final json = jsonDecode(user.toJson());
+//      await userDoc.setData(json);
     }
   }
 
@@ -30,7 +32,7 @@ class StoreService extends Disposable {
     final response = _userDocument(userId).snapshots();
     return response.map((s) {
       final jsonStrng = jsonEncode(s.data);
-      return User.fromJson(jsonStrng);
+//      return User.fromJson(jsonStrng);
     });
   }
 
@@ -42,8 +44,8 @@ class StoreService extends Disposable {
   }
 
   Future<void> updateUserInfo(User user) {
-    final json = jsonDecode(user.toJson());
-    return _userDocument(user.id).updateData(json);
+//    final json = jsonDecode(user.toJson());
+//    return _userDocument(user.id).updateData(json);
   }
 
   Future<void> followUser(String currentUserId, String otherId) async {

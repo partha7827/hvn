@@ -42,24 +42,7 @@ class AuthService extends Disposable {
 
     await user.sendEmailVerification();
 
-    return User(
-      (b) => b
-        ..account = user.uid
-        ..accountCreationTime = DateTime.now().toUtc()
-        ..address = ''
-        ..chatId = user.uid
-        ..email = email
-        ..experiencePoints = 0
-        ..id = user.uid
-        ..info = ''
-        ..isLive = false
-        ..isOnline = true
-        ..karmaPoints = 0
-        ..name = name
-        ..photoUrl = ''
-        ..status = ''
-        ..videoId = '',
-    );
+    return User(user);
   }
 
   Future<void> sendPasswordResetEmail(String email) async {

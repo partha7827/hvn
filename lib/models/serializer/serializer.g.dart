@@ -8,7 +8,6 @@ part of serializer;
 
 Serializers _$serializers = (new Serializers().toBuilder()
       ..add(AudioFile.serializer)
-      ..add(User.serializer)
       ..addBuilderFactory(
           const FullType(BuiltList, const [const FullType(String)]),
           () => new ListBuilder<String>())
