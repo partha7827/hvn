@@ -1,29 +1,27 @@
 import 'package:flutter/material.dart';
 
 class AudioPlayerPlayButton extends StatelessWidget {
-  final Color activeColor;
-  final Color disabledColor;
-  final Icon icon;
+  final Color color;
   final VoidCallback onPressed;
+  final Animation progress;
 
   AudioPlayerPlayButton({
-    @required this.icon,
     @required this.onPressed,
-    this.activeColor = Colors.black,
-    this.disabledColor = Colors.grey,
+    @required this.progress,
+    this.color = Colors.black,
     Key key,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: IconButton(
-        iconSize: 70,
-        icon: icon,
-        color: activeColor,
-        disabledColor: disabledColor,
-        onPressed: onPressed,
+    return FloatingActionButton(
+      backgroundColor: Colors.white,
+      child: AnimatedIcon(
+        icon: AnimatedIcons.play_pause,
+        color: color,
+        progress: progress,
       ),
+      onPressed: onPressed,
     );
   }
 }
