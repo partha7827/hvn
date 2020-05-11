@@ -10,7 +10,7 @@ class ExploreModule extends ChildModule {
 
   @override
   List<Router> get routers => [
-        Router(Modular.initialRoute, child: (_, args) => ExplorePage()),
+        Router("/explore", child: (_, args) => ExplorePage()),
       ];
 
   static Inject get to => Inject<ExploreModule>.of();
