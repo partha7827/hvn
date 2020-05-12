@@ -17,6 +17,7 @@ class StoreService extends Disposable {
   DocumentReference _audioDocument(String audioId) =>
       _audioCollection.document(audioId);
 
+  // ignore: unused_element
   DocumentReference _tagDocument(String tagId) =>
       _tagsCollection.document(tagId);
 
@@ -34,7 +35,9 @@ class StoreService extends Disposable {
 
   Future<AudioFile> fetchAudioFile(String id) async {
     final audioDocument = await _audioDocument(id).get();
-    return audioDocument.exists ? AudioFile.fromJson(audioDocument.data) : null;
+    return audioDocument.exists
+        ? AudioFile.fromJson(jsonEncode(audioDocument.data))
+        : null;
   }
 
   Future<List<AudioFile>> fetchAudioFileByTag(String tag) async {

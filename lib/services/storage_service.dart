@@ -4,6 +4,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
 class StorageService extends Disposable {
+  // ignore: unused_field
   final _storage = FirebaseStorage.instance;
 
   Future<String> _uploadFile(File file, String childName,

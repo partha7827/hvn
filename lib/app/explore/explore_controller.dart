@@ -8,7 +8,7 @@ abstract class _ExploreControllerBase with Store {
   @observable
   bool filesReady = false;
 
-  List<AudioFile> audios;
+  // List<AudioFile> audios;
 
   Future<void> findAudiosByTag(String id) async {}
 }

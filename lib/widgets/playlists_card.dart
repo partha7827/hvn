@@ -1,10 +1,9 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:highvibe/models/audio_file/mock_audio_files.dart';
 import 'package:highvibe/values/Strings.dart';
 import 'package:highvibe/values/themes.dart';
 
-import 'audio_tile.dart';
+// import 'audio_tile.dart';
 
 const _dummyImgUrl =
     'https://takelessons.com/blog/wp-content/uploads/2020/03/flute-for-beginners.jpg';
@@ -54,14 +53,14 @@ class PlaylistsCard extends StatelessWidget {
               color: Colors.white,
             ),
             children: <Widget>[
-              ...mockAudioItemsList
-                  .map(
-                    (item) => AudioTile(
-                      audioFile: item,
-                      onItemTapped: (item) => _showAudioPlayer(),
-                    ),
-                  )
-                  .toList(),
+              // ...mockAudioItemsList
+              //     .map(
+              //       (item) => AudioTile(
+              //         audioFile: item,
+              //         onItemTapped: (item) => _showAudioPlayer(),
+              //       ),
+              //     )
+              //     .toList(),
             ],
           )
         ],
@@ -69,6 +68,7 @@ class PlaylistsCard extends StatelessWidget {
     );
   }
 
+  // ignore: unused_element
   void _showAudioPlayer() {
     print('showAudioPlayer');
   }
