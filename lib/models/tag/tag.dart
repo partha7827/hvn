@@ -37,7 +37,7 @@ abstract class Tag implements Built<Tag, TagBuilder> {
   }
 
   static BuiltList<Tag> parseListOfTags(String responseBody) {
-    final parsed = json.decode(responseBody).cast<Map<String, dynamic>>();
+    final parsed = json.decode(responseBody).cast<Map<String, Object>>();
     return deserializeListOf<Tag>(parsed);
   }
 }

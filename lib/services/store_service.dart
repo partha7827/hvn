@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:built_collection/built_collection.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:highvibe/models/models.dart' show User, AudioFile;
@@ -40,16 +41,12 @@ class StoreService extends Disposable {
         : null;
   }
 
-  Future<List<AudioFile>> fetchAudioFileByTag(String tag) async {
+  Future<BuiltList<AudioFile>> fetchAudioFilesByTag(String tag) async {
     final snapshot = await (_audioCollection
         .where('tags', arrayContains: tag)
         .getDocuments());
-
-    final audioDocuments = snapshot.documents;
-
-    //return AudioFile.parseListOfAudioFiles(jsonEncode(audioDocuments));
-    return audioDocuments
-        .map((doc) => AudioFile.fromJson(jsonEncode(doc.data)));
+    final audioDocuments = snapshot.documents.map((doc) => doc.data);
+    return AudioFile.parseListOfAudioFiles(jsonEncode(audioDocuments));
   }
 
   Future<User> fetchUserData(String userId) async {

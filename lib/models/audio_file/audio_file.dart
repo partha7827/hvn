@@ -42,7 +42,7 @@ abstract class AudioFile implements Built<AudioFile, AudioFileBuilder> {
   }
 
   static BuiltList<AudioFile> parseListOfAudioFiles(String responseBody) {
-    final parsed = json.decode(responseBody).cast<Map<String, dynamic>>();
+    final parsed = json.decode(responseBody).cast<Map<String, Object>>();
     return deserializeListOf<AudioFile>(parsed);
   }
 }
