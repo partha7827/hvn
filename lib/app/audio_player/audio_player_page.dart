@@ -143,7 +143,9 @@ class _AudioPlayerPageState
                           children: <Widget>[
                             Text(
                               '${_positionText ?? ''}',
-                              style: const TextStyle(color: Colors.black87, ),
+                              style: const TextStyle(
+                                color: Colors.black87,
+                              ),
                             ),
                             Text(
                               mediaTimeFormarter(
@@ -226,21 +228,6 @@ class _AudioPlayerPageState
   void _configure() {
     _updateTrackPosition();
     _updatePlayerState();
-  }
-
-  Widget _configureArtwork(BuildContext context) {
-    if (aspectRatio(context) < 0.5) {
-      return Image.network(
-        widget.audioFile.artworkUrlPath,
-        fit: BoxFit.cover,
-      );
-    } else {
-      return Image.network(
-        widget.audioFile.artworkUrlPath,
-        height: screenHeight(context) - 450,
-        fit: BoxFit.cover,
-      );
-    }
   }
 
   Icon _configurePlayButtonIcon(bool isPlaying) {
