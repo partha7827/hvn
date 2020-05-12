@@ -17,13 +17,9 @@ abstract class Tag implements Built<Tag, TagBuilder> {
   Tag._();
 
   DateTime get creationAt;
-
   String get id;
-
   bool get isRecommended;
-
   bool get isVisible;
-
   String get name;
 
   String toJson() {

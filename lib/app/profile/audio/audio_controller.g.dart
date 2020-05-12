@@ -9,39 +9,51 @@ part of 'audio_controller.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$AudioController on _AudioControllerBase, Store {
-  final _$valueAtom = Atom(name: '_AudioControllerBase.value');
+  final _$readyFilesAtom = Atom(name: '_AudioControllerBase.readyFiles');
 
   @override
-  int get value {
-    _$valueAtom.context.enforceReadPolicy(_$valueAtom);
-    _$valueAtom.reportObserved();
-    return super.value;
+  bool get readyFiles {
+    _$readyFilesAtom.context.enforceReadPolicy(_$readyFilesAtom);
+    _$readyFilesAtom.reportObserved();
+    return super.readyFiles;
   }
 
   @override
-  set value(int value) {
-    _$valueAtom.context.conditionallyRunInAction(() {
-      super.value = value;
-      _$valueAtom.reportChanged();
-    }, _$valueAtom, name: '${_$valueAtom.name}_set');
+  set readyFiles(bool value) {
+    _$readyFilesAtom.context.conditionallyRunInAction(() {
+      super.readyFiles = value;
+      _$readyFilesAtom.reportChanged();
+    }, _$readyFilesAtom, name: '${_$readyFilesAtom.name}_set');
   }
 
-  final _$_AudioControllerBaseActionController =
-      ActionController(name: '_AudioControllerBase');
+  final _$audioFilesAtom = Atom(name: '_AudioControllerBase.audioFiles');
 
   @override
-  void increment() {
-    final _$actionInfo = _$_AudioControllerBaseActionController.startAction();
-    try {
-      return super.increment();
-    } finally {
-      _$_AudioControllerBaseActionController.endAction(_$actionInfo);
-    }
+  List<AudioFile> get audioFiles {
+    _$audioFilesAtom.context.enforceReadPolicy(_$audioFilesAtom);
+    _$audioFilesAtom.reportObserved();
+    return super.audioFiles;
+  }
+
+  @override
+  set audioFiles(List<AudioFile> value) {
+    _$audioFilesAtom.context.conditionallyRunInAction(() {
+      super.audioFiles = value;
+      _$audioFilesAtom.reportChanged();
+    }, _$audioFilesAtom, name: '${_$audioFilesAtom.name}_set');
+  }
+
+  final _$initAsyncAction = AsyncAction('init');
+
+  @override
+  Future<void> init() {
+    return _$initAsyncAction.run(() => super.init());
   }
 
   @override
   String toString() {
-    final string = 'value: ${value.toString()}';
+    final string =
+        'readyFiles: ${readyFiles.toString()},audioFiles: ${audioFiles.toString()}';
     return '{$string}';
   }
 }

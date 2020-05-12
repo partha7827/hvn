@@ -30,6 +30,13 @@ mixin _$CurrentUserController on _CurrentUserControllerBase, Store {
     return _$changeProfilePicAsyncAction.run(() => super.changeProfilePic());
   }
 
+  final _$uploadAudioAsyncAction = AsyncAction('uploadAudio');
+
+  @override
+  Future<void> uploadAudio() {
+    return _$uploadAudioAsyncAction.run(() => super.uploadAudio());
+  }
+
   final _$logoutAsyncAction = AsyncAction('logout');
 
   @override

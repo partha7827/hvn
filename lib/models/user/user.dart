@@ -22,6 +22,8 @@ abstract class User implements Built<User, UserBuilder> {
 
   String get address;
 
+  BuiltList<String> get audioFileIds;
+
   BuiltList<String> get badges;
 
   String get chatId;

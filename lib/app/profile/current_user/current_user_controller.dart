@@ -55,6 +55,21 @@ abstract class _CurrentUserControllerBase with Store {
   }
 
   @action
+  Future<void> uploadAudio() async {
+    final audio = await FilePicker.getFile(type: FileType.audio);
+
+    final audioUrl = await storage.uploadUserAudio(audio, currentUser.id);
+
+    await store.addUserAudio(
+      currentUser.id,
+      AudioModel.fromUser(
+        currentUser,
+        fileUrl: audioUrl,
+      ),
+    );
+  }
+
+  @action
   Future<void> logout() async {
     await currentUserStore.logout();
   }

@@ -18,25 +18,27 @@ class _$AudioFileSerializer implements StructuredSerializer<AudioFile> {
   Iterable<Object> serialize(Serializers serializers, AudioFile object,
       {FullType specifiedType = FullType.unspecified}) {
     final result = <Object>[
-      'author',
-      serializers.serialize(object.author,
-          specifiedType: const FullType(String)),
       'artworkUrlPath',
       serializers.serialize(object.artworkUrlPath,
           specifiedType: const FullType(String)),
       'audioFileUrlPath',
       serializers.serialize(object.audioFileUrlPath,
           specifiedType: const FullType(String)),
+      'author',
+      serializers.serialize(object.author, specifiedType: const FullType(User)),
       'duration',
       serializers.serialize(object.duration,
           specifiedType: const FullType(int)),
       'id',
       serializers.serialize(object.id, specifiedType: const FullType(String)),
-      'title',
-      serializers.serialize(object.title,
-          specifiedType: const FullType(String)),
       'subTitle',
       serializers.serialize(object.subTitle,
+          specifiedType: const FullType(String)),
+      'tags',
+      serializers.serialize(object.tags,
+          specifiedType: const FullType(BuiltSet, const [const FullType(Tag)])),
+      'title',
+      serializers.serialize(object.title,
           specifiedType: const FullType(String)),
     ];
 
@@ -54,10 +56,6 @@ class _$AudioFileSerializer implements StructuredSerializer<AudioFile> {
       iterator.moveNext();
       final dynamic value = iterator.current;
       switch (key) {
-        case 'author':
-          result.author = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String;
-          break;
         case 'artworkUrlPath':
           result.artworkUrlPath = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String;
@@ -65,6 +63,10 @@ class _$AudioFileSerializer implements StructuredSerializer<AudioFile> {
         case 'audioFileUrlPath':
           result.audioFileUrlPath = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String;
+          break;
+        case 'author':
+          result.author.replace(serializers.deserialize(value,
+              specifiedType: const FullType(User)) as User);
           break;
         case 'duration':
           result.duration = serializers.deserialize(value,
@@ -74,12 +76,18 @@ class _$AudioFileSerializer implements StructuredSerializer<AudioFile> {
           result.id = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String;
           break;
-        case 'title':
-          result.title = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String;
-          break;
         case 'subTitle':
           result.subTitle = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String;
+          break;
+        case 'tags':
+          result.tags.replace(serializers.deserialize(value,
+                  specifiedType:
+                      const FullType(BuiltSet, const [const FullType(Tag)]))
+              as BuiltSet<Object>);
+          break;
+        case 'title':
+          result.title = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String;
           break;
       }
@@ -91,40 +99,43 @@ class _$AudioFileSerializer implements StructuredSerializer<AudioFile> {
 
 class _$AudioFile extends AudioFile {
   @override
-  final String author;
-  @override
   final String artworkUrlPath;
   @override
   final String audioFileUrlPath;
+  @override
+  final User author;
   @override
   final int duration;
   @override
   final String id;
   @override
-  final String title;
-  @override
   final String subTitle;
+  @override
+  final BuiltSet<Tag> tags;
+  @override
+  final String title;
 
   factory _$AudioFile([void Function(AudioFileBuilder) updates]) =>
       (new AudioFileBuilder()..update(updates)).build();
 
   _$AudioFile._(
-      {this.author,
-      this.artworkUrlPath,
+      {this.artworkUrlPath,
       this.audioFileUrlPath,
+      this.author,
       this.duration,
       this.id,
-      this.title,
-      this.subTitle})
+      this.subTitle,
+      this.tags,
+      this.title})
       : super._() {
-    if (author == null) {
-      throw new BuiltValueNullFieldError('AudioFile', 'author');
-    }
     if (artworkUrlPath == null) {
       throw new BuiltValueNullFieldError('AudioFile', 'artworkUrlPath');
     }
     if (audioFileUrlPath == null) {
       throw new BuiltValueNullFieldError('AudioFile', 'audioFileUrlPath');
+    }
+    if (author == null) {
+      throw new BuiltValueNullFieldError('AudioFile', 'author');
     }
     if (duration == null) {
       throw new BuiltValueNullFieldError('AudioFile', 'duration');
@@ -132,11 +143,14 @@ class _$AudioFile extends AudioFile {
     if (id == null) {
       throw new BuiltValueNullFieldError('AudioFile', 'id');
     }
-    if (title == null) {
-      throw new BuiltValueNullFieldError('AudioFile', 'title');
-    }
     if (subTitle == null) {
       throw new BuiltValueNullFieldError('AudioFile', 'subTitle');
+    }
+    if (tags == null) {
+      throw new BuiltValueNullFieldError('AudioFile', 'tags');
+    }
+    if (title == null) {
+      throw new BuiltValueNullFieldError('AudioFile', 'title');
     }
   }
 
@@ -151,13 +165,14 @@ class _$AudioFile extends AudioFile {
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
     return other is AudioFile &&
-        author == other.author &&
         artworkUrlPath == other.artworkUrlPath &&
         audioFileUrlPath == other.audioFileUrlPath &&
+        author == other.author &&
         duration == other.duration &&
         id == other.id &&
-        title == other.title &&
-        subTitle == other.subTitle;
+        subTitle == other.subTitle &&
+        tags == other.tags &&
+        title == other.title;
   }
 
   @override
@@ -166,34 +181,35 @@ class _$AudioFile extends AudioFile {
         $jc(
             $jc(
                 $jc(
-                    $jc($jc($jc(0, author.hashCode), artworkUrlPath.hashCode),
-                        audioFileUrlPath.hashCode),
-                    duration.hashCode),
-                id.hashCode),
-            title.hashCode),
-        subTitle.hashCode));
+                    $jc(
+                        $jc(
+                            $jc($jc(0, artworkUrlPath.hashCode),
+                                audioFileUrlPath.hashCode),
+                            author.hashCode),
+                        duration.hashCode),
+                    id.hashCode),
+                subTitle.hashCode),
+            tags.hashCode),
+        title.hashCode));
   }
 
   @override
   String toString() {
     return (newBuiltValueToStringHelper('AudioFile')
-          ..add('author', author)
           ..add('artworkUrlPath', artworkUrlPath)
           ..add('audioFileUrlPath', audioFileUrlPath)
+          ..add('author', author)
           ..add('duration', duration)
           ..add('id', id)
-          ..add('title', title)
-          ..add('subTitle', subTitle))
+          ..add('subTitle', subTitle)
+          ..add('tags', tags)
+          ..add('title', title))
         .toString();
   }
 }
 
 class AudioFileBuilder implements Builder<AudioFile, AudioFileBuilder> {
   _$AudioFile _$v;
-
-  String _author;
-  String get author => _$this._author;
-  set author(String author) => _$this._author = author;
 
   String _artworkUrlPath;
   String get artworkUrlPath => _$this._artworkUrlPath;
@@ -205,6 +221,10 @@ class AudioFileBuilder implements Builder<AudioFile, AudioFileBuilder> {
   set audioFileUrlPath(String audioFileUrlPath) =>
       _$this._audioFileUrlPath = audioFileUrlPath;
 
+  UserBuilder _author;
+  UserBuilder get author => _$this._author ??= new UserBuilder();
+  set author(UserBuilder author) => _$this._author = author;
+
   int _duration;
   int get duration => _$this._duration;
   set duration(int duration) => _$this._duration = duration;
@@ -213,25 +233,30 @@ class AudioFileBuilder implements Builder<AudioFile, AudioFileBuilder> {
   String get id => _$this._id;
   set id(String id) => _$this._id = id;
 
-  String _title;
-  String get title => _$this._title;
-  set title(String title) => _$this._title = title;
-
   String _subTitle;
   String get subTitle => _$this._subTitle;
   set subTitle(String subTitle) => _$this._subTitle = subTitle;
+
+  SetBuilder<Tag> _tags;
+  SetBuilder<Tag> get tags => _$this._tags ??= new SetBuilder<Tag>();
+  set tags(SetBuilder<Tag> tags) => _$this._tags = tags;
+
+  String _title;
+  String get title => _$this._title;
+  set title(String title) => _$this._title = title;
 
   AudioFileBuilder();
 
   AudioFileBuilder get _$this {
     if (_$v != null) {
-      _author = _$v.author;
       _artworkUrlPath = _$v.artworkUrlPath;
       _audioFileUrlPath = _$v.audioFileUrlPath;
+      _author = _$v.author?.toBuilder();
       _duration = _$v.duration;
       _id = _$v.id;
-      _title = _$v.title;
       _subTitle = _$v.subTitle;
+      _tags = _$v.tags?.toBuilder();
+      _title = _$v.title;
       _$v = null;
     }
     return this;
@@ -252,15 +277,32 @@ class AudioFileBuilder implements Builder<AudioFile, AudioFileBuilder> {
 
   @override
   _$AudioFile build() {
-    final _$result = _$v ??
-        new _$AudioFile._(
-            author: author,
-            artworkUrlPath: artworkUrlPath,
-            audioFileUrlPath: audioFileUrlPath,
-            duration: duration,
-            id: id,
-            title: title,
-            subTitle: subTitle);
+    _$AudioFile _$result;
+    try {
+      _$result = _$v ??
+          new _$AudioFile._(
+              artworkUrlPath: artworkUrlPath,
+              audioFileUrlPath: audioFileUrlPath,
+              author: author.build(),
+              duration: duration,
+              id: id,
+              subTitle: subTitle,
+              tags: tags.build(),
+              title: title);
+    } catch (_) {
+      String _$failedField;
+      try {
+        _$failedField = 'author';
+        author.build();
+
+        _$failedField = 'tags';
+        tags.build();
+      } catch (e) {
+        throw new BuiltValueNestedFieldError(
+            'AudioFile', _$failedField, e.toString());
+      }
+      rethrow;
+    }
     replace(_$result);
     return _$result;
   }

@@ -10,6 +10,7 @@ part 'serializer.g.dart';
 
 @SerializersFor([
   AudioFile,
+  Tag,
   User,
 ])
 final Serializers serializers = (_$serializers.toBuilder()

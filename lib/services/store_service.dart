@@ -2,15 +2,52 @@ import 'dart:convert';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:highvibe/models/models.dart' show User;
+import 'package:highvibe/models/models.dart' show User, AudioFile;
 
 class StoreService extends Disposable {
   final _firestore = Firestore.instance;
 
   CollectionReference get _userCollection => _firestore.collection("users");
+  CollectionReference get _audioCollection => _firestore.collection("audios");
+  CollectionReference get _tagsCollection => _firestore.collection("tags");
 
   DocumentReference _userDocument(String userId) =>
       _userCollection.document(userId);
+
+  DocumentReference _audioDocument(String audioId) =>
+      _audioCollection.document(audioId);
+
+  DocumentReference _tagDocument(String tagId) =>
+      _tagsCollection.document(tagId);
+
+  Future<void> addAudioFile(String currentUserId, AudioFile audio) async {
+    final audioDocument = await _audioDocument(audio.id);
+
+    final json = jsonDecode(audio.toJson());
+
+    await audioDocument.setData(json);
+
+    await _userDocument(currentUserId).updateData({
+      'audioFiles': FieldValue.arrayUnion([audio.id]),
+    });
+  }
+
+  Future<AudioFile> fetchAudioFile(String id) async {
+    final audioDocument = await _audioDocument(id).get();
+    return audioDocument.exists ? AudioFile.fromJson(audioDocument.data) : null;
+  }
+
+  Future<List<AudioFile>> fetchAudioFileByTag(String tag) async {
+    final snapshot = await (_audioCollection
+        .where('tags', arrayContains: tag)
+        .getDocuments());
+
+    final audioDocuments = snapshot.documents;
+
+    //return AudioFile.parseListOfAudioFiles(jsonEncode(audioDocuments));
+    return audioDocuments
+        .map((doc) => AudioFile.fromJson(jsonEncode(doc.data)));
+  }
 
   Future<User> fetchUserData(String userId) async {
     final doc = await _userDocument(userId).get();

@@ -24,6 +24,14 @@ class AudioPage extends StatefulWidget {
 }
 
 class _AudioPageState extends ModularState<AudioPage, AudioController> {
+  User get user => controller.user;
+
+  @override
+  void initState() {
+    super.initState();
+    controller.init();
+  }
+
   @override
   Widget build(BuildContext context) {
     return ListView(
@@ -32,14 +40,16 @@ class _AudioPageState extends ModularState<AudioPage, AudioController> {
         HeaderRow(
           title: Strings.uploads,
         ),
-        ...mockAudioItemsList
-            .map(
-              (item) => AudioTile(
-                audioFile: item,
-                onItemTapped: (item) => _showAudioPlayer(context, item),
-              ),
-            )
-            .toList(),
+        controller.readyFiles
+            ? (controller.audioFiles
+                .map(
+                  (item) => AudioTile(
+                    audioFile: item,
+                    onItemTapped: (item) => _showAudioPlayer(context, item),
+                  ),
+                )
+                .toList())
+            : CircularProgressIndicator(),
         HeaderRow(
           title: Strings.playlists,
           showTrailing: true,

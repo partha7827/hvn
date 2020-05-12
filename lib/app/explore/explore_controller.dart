@@ -6,10 +6,9 @@ class ExploreController = _ExploreControllerBase with _$ExploreController;
 
 abstract class _ExploreControllerBase with Store {
   @observable
-  int value = 0;
+  bool filesReady = false;
 
-  @action
-  void increment() {
-    value++;
-  }
+  List<AudioFile> audios;
+
+  Future<void> findAudiosByTag(String id) async {}
 }

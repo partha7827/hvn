@@ -27,6 +27,10 @@ class _$UserSerializer implements StructuredSerializer<User> {
       'address',
       serializers.serialize(object.address,
           specifiedType: const FullType(String)),
+      'audioFileIds',
+      serializers.serialize(object.audioFileIds,
+          specifiedType:
+              const FullType(BuiltList, const [const FullType(String)])),
       'badges',
       serializers.serialize(object.badges,
           specifiedType:
@@ -115,6 +119,12 @@ class _$UserSerializer implements StructuredSerializer<User> {
         case 'address':
           result.address = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String;
+          break;
+        case 'audioFileIds':
+          result.audioFileIds.replace(serializers.deserialize(value,
+                  specifiedType:
+                      const FullType(BuiltList, const [const FullType(String)]))
+              as BuiltList<Object>);
           break;
         case 'badges':
           result.badges.replace(serializers.deserialize(value,
@@ -219,6 +229,8 @@ class _$User extends User {
   @override
   final String address;
   @override
+  final BuiltList<String> audioFileIds;
+  @override
   final BuiltList<String> badges;
   @override
   final String chatId;
@@ -264,6 +276,7 @@ class _$User extends User {
       {this.account,
       this.accountCreationTime,
       this.address,
+      this.audioFileIds,
       this.badges,
       this.chatId,
       this.email,
@@ -292,6 +305,9 @@ class _$User extends User {
     }
     if (address == null) {
       throw new BuiltValueNullFieldError('User', 'address');
+    }
+    if (audioFileIds == null) {
+      throw new BuiltValueNullFieldError('User', 'audioFileIds');
     }
     if (badges == null) {
       throw new BuiltValueNullFieldError('User', 'badges');
@@ -363,6 +379,7 @@ class _$User extends User {
         account == other.account &&
         accountCreationTime == other.accountCreationTime &&
         address == other.address &&
+        audioFileIds == other.audioFileIds &&
         badges == other.badges &&
         chatId == other.chatId &&
         email == other.email &&
@@ -404,7 +421,7 @@ class _$User extends User {
                                                                 $jc(
                                                                     $jc(
                                                                         $jc(
-                                                                            $jc($jc($jc($jc(0, account.hashCode), accountCreationTime.hashCode), address.hashCode),
+                                                                            $jc($jc($jc($jc($jc(0, account.hashCode), accountCreationTime.hashCode), address.hashCode), audioFileIds.hashCode),
                                                                                 badges.hashCode),
                                                                             chatId.hashCode),
                                                                         email.hashCode),
@@ -432,6 +449,7 @@ class _$User extends User {
           ..add('account', account)
           ..add('accountCreationTime', accountCreationTime)
           ..add('address', address)
+          ..add('audioFileIds', audioFileIds)
           ..add('badges', badges)
           ..add('chatId', chatId)
           ..add('email', email)
@@ -470,6 +488,12 @@ class UserBuilder implements Builder<User, UserBuilder> {
   String _address;
   String get address => _$this._address;
   set address(String address) => _$this._address = address;
+
+  ListBuilder<String> _audioFileIds;
+  ListBuilder<String> get audioFileIds =>
+      _$this._audioFileIds ??= new ListBuilder<String>();
+  set audioFileIds(ListBuilder<String> audioFileIds) =>
+      _$this._audioFileIds = audioFileIds;
 
   ListBuilder<String> _badges;
   ListBuilder<String> get badges =>
@@ -561,6 +585,7 @@ class UserBuilder implements Builder<User, UserBuilder> {
       _account = _$v.account;
       _accountCreationTime = _$v.accountCreationTime;
       _address = _$v.address;
+      _audioFileIds = _$v.audioFileIds?.toBuilder();
       _badges = _$v.badges?.toBuilder();
       _chatId = _$v.chatId;
       _email = _$v.email;
@@ -607,6 +632,7 @@ class UserBuilder implements Builder<User, UserBuilder> {
               account: account,
               accountCreationTime: accountCreationTime,
               address: address,
+              audioFileIds: audioFileIds.build(),
               badges: badges.build(),
               chatId: chatId,
               email: email,
@@ -629,6 +655,8 @@ class UserBuilder implements Builder<User, UserBuilder> {
     } catch (_) {
       String _$failedField;
       try {
+        _$failedField = 'audioFileIds';
+        audioFileIds.build();
         _$failedField = 'badges';
         badges.build();
 

@@ -5,6 +5,7 @@ import 'dart:convert';
 import 'package:built_collection/built_collection.dart';
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
+import 'package:highvibe/models/models.dart';
 import 'package:highvibe/models/serializer/serializer.dart';
 
 part 'audio_file.g.dart';
@@ -16,13 +17,14 @@ abstract class AudioFile implements Built<AudioFile, AudioFileBuilder> {
 
   AudioFile._();
 
-  String get author;
   String get artworkUrlPath;
   String get audioFileUrlPath;
+  User get author;
   int get duration;
   String get id;
-  String get title;
   String get subTitle;
+  BuiltSet<Tag> get tags;
+  String get title;
 
   String toJson() {
     return json.encode(serializers.serializeWith(AudioFile.serializer, this));

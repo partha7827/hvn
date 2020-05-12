@@ -9,39 +9,26 @@ part of 'explore_controller.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$ExploreController on _ExploreControllerBase, Store {
-  final _$valueAtom = Atom(name: '_ExploreControllerBase.value');
+  final _$filesReadyAtom = Atom(name: '_ExploreControllerBase.filesReady');
 
   @override
-  int get value {
-    _$valueAtom.context.enforceReadPolicy(_$valueAtom);
-    _$valueAtom.reportObserved();
-    return super.value;
+  bool get filesReady {
+    _$filesReadyAtom.context.enforceReadPolicy(_$filesReadyAtom);
+    _$filesReadyAtom.reportObserved();
+    return super.filesReady;
   }
 
   @override
-  set value(int value) {
-    _$valueAtom.context.conditionallyRunInAction(() {
-      super.value = value;
-      _$valueAtom.reportChanged();
-    }, _$valueAtom, name: '${_$valueAtom.name}_set');
-  }
-
-  final _$_ExploreControllerBaseActionController =
-      ActionController(name: '_ExploreControllerBase');
-
-  @override
-  void increment() {
-    final _$actionInfo = _$_ExploreControllerBaseActionController.startAction();
-    try {
-      return super.increment();
-    } finally {
-      _$_ExploreControllerBaseActionController.endAction(_$actionInfo);
-    }
+  set filesReady(bool value) {
+    _$filesReadyAtom.context.conditionallyRunInAction(() {
+      super.filesReady = value;
+      _$filesReadyAtom.reportChanged();
+    }, _$filesReadyAtom, name: '${_$filesReadyAtom.name}_set');
   }
 
   @override
   String toString() {
-    final string = 'value: ${value.toString()}';
+    final string = 'filesReady: ${filesReady.toString()}';
     return '{$string}';
   }
 }
