@@ -1,12 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:mock_cloud_firestore/mock_cloud_firestore.dart';
 
 class StoreService extends Disposable {
   dynamic firestore;
   
   StoreService(this.firestore) {
-
     _userCollection = firestore.collection("users");
     _messageCollection = firestore.collection("messages");
     _tagCollection = firestore.collection("tags");
