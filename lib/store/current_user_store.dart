@@ -1,5 +1,6 @@
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:highvibe/models/models.dart' show User;
+import 'package:highvibe/models/serializer/serializer.dart';
 import 'package:highvibe/services/auth_service.dart';
 import 'package:highvibe/services/store_service.dart';
 import 'package:mobx/mobx.dart';
@@ -29,7 +30,8 @@ abstract class _CurrentUserStoreBase with Store {
       if (uid == null) {
         authState = AuthState.unauthenticated;
       } else {
-        currentUser = await store.fetchUserData(uid);
+        currentUser =
+            User.fromSnapshot(await store.userCollection.document(uid).get());
 
         if (currentUser == null) {
           authState = AuthState.unauthenticated;
@@ -45,7 +47,7 @@ abstract class _CurrentUserStoreBase with Store {
   }
 
   Future<void> login(String uid) async {
-    currentUser = await store.fetchUserData(uid);
+    currentUser = User.fromSnapshot(await store.userCollection.document(uid).get());
 
     authState = AuthState.authenticated;
 
@@ -63,5 +65,8 @@ abstract class _CurrentUserStoreBase with Store {
   }
 
   Future<void> setUserOnline(bool active) =>
-      store.setUserActive(currentUser.id, active);
+      store.userCollection.document(currentUser.id).updateData({
+        "isOnline": active,
+        "lastTimeSeen": serializers.serialize(DateTime.now())
+      });
 }

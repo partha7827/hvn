@@ -3,7 +3,9 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:highvibe/models/models.dart' show User;
 
 class AuthService extends Disposable {
-  final _auth = FirebaseAuth.instance;
+  final FirebaseAuth _auth;
+
+  AuthService(this._auth);
 
   Future<String> getUid() async {
     final user = await _auth.currentUser();

@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:highvibe/models/models.dart' show User;
+import 'package:highvibe/models/serializer/serializer.dart';
 import 'package:highvibe/services/store_service.dart';
 import 'package:highvibe/store/current_user_store.dart';
 import 'package:highvibe/utils.dart';
@@ -38,7 +39,9 @@ abstract class _CurrentUserControllerBase with Store {
     currentUser.rebuild((b) => b
       ..name = name
       ..status = status);
-    await store.updateUserInfo(currentUser);
+    await store.userCollection
+        .document(currentUser.id)
+        .updateData(serializers.deserialize(currentUser));
   }
 
   @action
@@ -49,7 +52,9 @@ abstract class _CurrentUserControllerBase with Store {
         String url = await uploadFile(img, "avatar");
         currentUser.rebuild((b) => b..photoUrl = url);
 
-        await store.updateUserInfo(currentUser);
+        await store.userCollection
+            .document(currentUser.id)
+            .updateData(serializers.deserialize(currentUser));
       } catch (e) {}
     }
   }

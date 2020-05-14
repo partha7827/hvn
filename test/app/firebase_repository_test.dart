@@ -2,12 +2,10 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:dio/dio.dart';
 
-import 'package:highvibe/app/firebase_repository.dart';
-
 class MockClient extends Mock implements Dio {}
 
 void main() {
-  FirebaseRepository repository;
+  // FirebaseRepository repository;
   // MockClient client;
 
   setUp(() {

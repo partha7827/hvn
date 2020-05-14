@@ -1,11 +1,11 @@
-import 'package:flutter_modular/flutter_modular_test.dart';
+//import 'package:flutter_modular/flutter_modular_test.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-import 'package:highvibe/app/chat/chat_controller.dart';
-import 'package:highvibe/app/chat/chat_module.dart';
+// import 'package:highvibe/app/profile/chat/chat_controller.dart';
+// import 'package:highvibe/app/profile/chat/chat_module.dart';
 
 void main() {
-  initModule(ChatModule());
+  // initModule(ChatModule());
   // ChatController chat;
   //
   setUp(() {

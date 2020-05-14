@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:highvibe/models/serializer/serializer.dart';
 import 'package:highvibe/services/auth_service.dart';
 import 'package:highvibe/services/store_service.dart';
 import 'package:highvibe/store/current_user_store.dart';
@@ -51,7 +52,9 @@ abstract class _RegisterControllerBase with Store {
         name: usernameController.text,
       );
 
-      await store.createNewUser(user);
+      await store.userCollection
+          .document(user.id)
+          .setData(serializers.serialize(user));
 
       await Modular.get<CurrentUserStore>().login(user.id);
     } catch (e) {

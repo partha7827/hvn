@@ -5,6 +5,7 @@ import 'dart:convert';
 import 'package:built_collection/built_collection.dart';
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:highvibe/models/serializer/serializer.dart';
 
 part 'user.g.dart';
@@ -68,5 +69,13 @@ abstract class User implements Built<User, UserBuilder> {
   static User fromJson(String jsonString) {
     return serializers.deserializeWith(
         User.serializer, json.decode(jsonString));
+  }
+
+  static User fromSnapshot(DocumentSnapshot snapshot) {
+    if (snapshot.exists) {
+      return serializers.deserializeWith(User.serializer, snapshot.data);
+    } else {
+      return null;
+    }
   }
 }

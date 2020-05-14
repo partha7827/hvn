@@ -2,12 +2,10 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:dio/dio.dart';
 
-import 'package:highvibe/app/getstream_repository.dart';
-
 class MockClient extends Mock implements Dio {}
 
 void main() {
-  GetstreamRepository repository;
+  // GetstreamRepository repository;
   // MockClient client;
 
   setUp(() {
