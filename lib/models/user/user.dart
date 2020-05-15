@@ -69,4 +69,16 @@ abstract class User implements Built<User, UserBuilder> {
     return serializers.deserializeWith(
         User.serializer, json.decode(jsonString));
   }
+
+  static void _initializeBuilder(UserBuilder b) => b
+    ..accountCreationTime = DateTime.now().toUtc()
+    ..address = ''
+    ..experiencePoints = 0
+    ..info = ''
+    ..isLive = false
+    ..isOnline = true
+    ..karmaPoints = 0
+    ..photoUrl = ''
+    ..status = ''
+    ..videoId = '';
 }

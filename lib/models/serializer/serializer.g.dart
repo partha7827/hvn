@@ -8,7 +8,15 @@ part of serializer;
 
 Serializers _$serializers = (new Serializers().toBuilder()
       ..add(AudioFile.serializer)
+      ..add(FileDetails.serializer)
+      ..add(Snippet.serializer)
+      ..add(Tag.serializer)
+      ..add(Thumbnail.serializer)
       ..add(User.serializer)
+      ..add(Video.serializer)
+      ..addBuilderFactory(
+          const FullType(BuiltList, const [const FullType(String)]),
+          () => new ListBuilder<String>())
       ..addBuilderFactory(
           const FullType(BuiltList, const [const FullType(String)]),
           () => new ListBuilder<String>())

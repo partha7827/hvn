@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:highvibe/app/audio_player/widgets/audio_player.dart';
+import 'package:highvibe/app/home/widgets/video_demo_widget.dart';
 import 'package:highvibe/values/Strings.dart';
 import 'package:highvibe/values/themes.dart';
 import 'package:highvibe/widgets/header_row.dart';
@@ -65,6 +66,7 @@ class HeaderWidget extends StatelessWidget {
                 ],
               ),
               _quote_widget(),
+              VideoDemo(),
               _recommended_widget(pageController),
             ],
           ),

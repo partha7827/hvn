@@ -554,7 +554,9 @@ class UserBuilder implements Builder<User, UserBuilder> {
   String get videoId => _$this._videoId;
   set videoId(String videoId) => _$this._videoId = videoId;
 
-  UserBuilder();
+  UserBuilder() {
+    User._initializeBuilder(this);
+  }
 
   UserBuilder get _$this {
     if (_$v != null) {
