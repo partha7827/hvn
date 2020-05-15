@@ -3,12 +3,14 @@ import 'dart:convert';
 import 'package:built_collection/built_collection.dart';
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
+import 'package:highvibe/models/serializer/serializer.dart';
 
 part 'tag.g.dart';
 
 abstract class Tag implements Built<Tag, TagBuilder> {
   String get id;
-  String   
+  String get name;
+  bool get isRecommended;
 
   Tag._();
   factory Tag([void Function(TagBuilder) updates]) = _$Tag;

@@ -35,7 +35,7 @@ abstract class AudioFile implements Built<AudioFile, AudioFileBuilder> {
   String get subTitle;
   
   
-  BuiltList<String> tagIds;
+  BuiltList<String> get tagIds;
 
   String toJson() {
     return json.encode(serializers.serializeWith(AudioFile.serializer, this));
