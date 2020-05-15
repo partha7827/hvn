@@ -78,4 +78,22 @@ abstract class User implements Built<User, UserBuilder> {
       return null;
     }
   }
+
+  static void _initializeBuilder(UserBuilder b) => b
+    ..accountCreationTime = DateTime.now().toUtc()
+    ..address = ''
+    ..experiencePoints = 0
+    ..info = ''
+    ..isLive = false
+    ..isOnline = true
+    ..karmaPoints = 0
+    ..photoUrl = ''
+    ..status = ''
+    ..videoId = ''
+    ..chatId = ''
+    ..name = ''
+    ..account = ''
+    ..email = ''
+    ..name = ''
+    ;
 }
