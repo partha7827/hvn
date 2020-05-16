@@ -84,7 +84,7 @@ class ChannelPage extends StatelessWidget {
             child: Stack(
               children: <Widget>[
                 Chat.MessageListView(
-                  showVideoFullScreen: false,
+                  // showVideoFullScreen: false,
                   threadBuilder: (_, parentMessage) {
                     return ThreadPage(
                       parent: parentMessage,
