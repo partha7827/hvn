@@ -14,7 +14,12 @@ part 'serializer.g.dart';
   Tag,
   Message,
   AudioFile,
+  FileDetails,
+  Snippet,
+  Tag,
+  Thumbnail,
   User,
+  Video,
 ])
 final Serializers serializers = (_$serializers.toBuilder()
       ..addPlugin(StandardJsonPlugin())

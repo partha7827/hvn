@@ -6,6 +6,7 @@ import 'package:highvibe/app/home/widgets/livenow_widget.dart';
 import 'package:highvibe/app/home/widgets/tools_widget.dart';
 import 'package:highvibe/app/home/widgets/upcoming_events_widget.dart';
 import 'package:highvibe/widgets/bottom_navigation.dart';
+
 import 'home_controller.dart';
 
 class HomePage extends StatefulWidget {

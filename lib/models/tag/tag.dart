@@ -1,3 +1,5 @@
+library tag;
+
 import 'dart:convert';
 
 import 'package:built_collection/built_collection.dart';
@@ -8,12 +10,16 @@ import 'package:highvibe/models/serializer/serializer.dart';
 part 'tag.g.dart';
 
 abstract class Tag implements Built<Tag, TagBuilder> {
-  String get id;
-  String get name;
-  bool get isRecommended;
+  static Serializer<Tag> get serializer => _$tagSerializer;
+  factory Tag([void Function(TagBuilder) updates]) = _$Tag;
 
   Tag._();
-  factory Tag([void Function(TagBuilder) updates]) = _$Tag;
+
+  DateTime get createdAt;
+  String get id;
+  bool get isRecommended;
+  bool get isVisible;
+  String get name;
 
   String toJson() {
     return json.encode(serializers.serializeWith(Tag.serializer, this));
@@ -23,5 +29,14 @@ abstract class Tag implements Built<Tag, TagBuilder> {
     return serializers.deserializeWith(Tag.serializer, json.decode(jsonString));
   }
 
-  static Serializer<Tag> get serializer => _$tagSerializer;
+  static String listOfTagsToJson(List<Tag> tags) {
+    final data = <String>[];
+    tags.forEach((item) => data.add(item.toJson()));
+    return '$data';
+  }
+
+  static BuiltList<Tag> parseListOfTags(String responseBody) {
+    final parsed = json.decode(responseBody).cast<Map<String, Object>>();
+    return deserializeListOf<Tag>(parsed);
+  }
 }

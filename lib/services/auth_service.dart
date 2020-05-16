@@ -7,28 +7,14 @@ class AuthService extends Disposable {
 
   AuthService(this._auth);
 
-  Future<String> getUid() async {
-    final user = await _auth.currentUser();
-
-    return user?.uid;
-  }
-
-  Future<void> logout() async {
-    await _auth.signOut();
-  }
-
-  Future<String> login(String email, String password) async {
-    final response = await _auth.signInWithEmailAndPassword(
-        email: email, password: password);
-
-    return response?.user?.uid;
-  }
-
   Future<String> anonymousLogin() async {
     final response = await _auth.signInAnonymously();
-
     return response?.user?.uid;
   }
+
+  //dispose will be called automatically
+  @override
+  void dispose() {}
 
   Future<User> emailRegister({
     String email,
@@ -47,28 +33,31 @@ class AuthService extends Disposable {
     return User(
       (b) => b
         ..account = user.uid
-        ..accountCreationTime = DateTime.now().toUtc()
-        ..address = ''
         ..chatId = user.uid
         ..email = email
-        ..experiencePoints = 0
         ..id = user.uid
-        ..info = ''
-        ..isLive = false
-        ..isOnline = true
-        ..karmaPoints = 0
-        ..name = name
-        ..photoUrl = ''
-        ..status = ''
-        ..videoId = '',
+        ..name = name,
     );
+  }
+
+  Future<String> getUid() async {
+    final user = await _auth.currentUser();
+    return user?.uid;
+  }
+
+  Future<String> login(String email, String password) async {
+    final response = await _auth.signInWithEmailAndPassword(
+      email: email,
+      password: password,
+    );
+    return response?.user?.uid;
+  }
+
+  Future<void> logout() async {
+    await _auth.signOut();
   }
 
   Future<void> sendPasswordResetEmail(String email) async {
     await _auth.sendPasswordResetEmail(email: email);
   }
-
-  //dispose will be called automatically
-  @override
-  void dispose() {}
 }

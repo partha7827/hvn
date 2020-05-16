@@ -23,10 +23,11 @@ abstract class _BroadcastControllerBase with Store {
 
     var creatorId = currentCreator.videoId;
     var channelId = "$creatorId-channel";
+    //ignore: unused_local_variable
     var userId = currentUser.id;
 
     await AgoraRtcEngine.create(AGORA_APP_ID);
     await AgoraRtcEngine.enableVideo();
-    await AgoraRtcEngine.joinChannel(null, channelId, null, userId);
+    await AgoraRtcEngine.joinChannel('null', channelId, 'null', 1);
   }
 }

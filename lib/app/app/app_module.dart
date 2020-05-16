@@ -7,6 +7,7 @@ import 'package:highvibe/app/audio_player/audio_player_module.dart';
 import 'package:highvibe/app/auth/auth_module.dart';
 import 'package:highvibe/app/home/home_module.dart';
 import 'package:highvibe/app/profile/profile_module.dart';
+import 'package:highvibe/app/video_player/video_player_module.dart';
 
 import 'package:highvibe/app/wallet/wallet_module.dart';
 import 'package:highvibe/mocks/firebase_auth_mocks_base.dart';
@@ -48,6 +49,7 @@ class AppModule extends MainModule {
         Router("", module: ProfileModule()),
         Router("", module: WalletModule()),
         Router("", module: AudioPlayerModule()),
+        Router("", module: VideoPlayerModule()),
       ];
 
   @override
