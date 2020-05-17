@@ -6,7 +6,6 @@ import 'package:highvibe/modules/app/app_store.dart';
 import 'package:highvibe/modules/auth/exceptions.dart';
 import 'package:highvibe/services/auth_service.dart';
 import 'package:highvibe/services/store_service.dart';
-import 'package:highvibe/utils/utils.dart';
 import 'package:highvibe/values/Strings.dart';
 import 'package:mobx/mobx.dart';
 

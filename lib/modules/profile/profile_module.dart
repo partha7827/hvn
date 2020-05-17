@@ -9,7 +9,6 @@ import 'package:highvibe/modules/profile/chat/chat_page.dart';
 import 'package:highvibe/modules/profile/current_user/current_user_page.dart';
 import 'package:highvibe/modules/profile/other_user/other_user_page.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:highvibe/services/store_service.dart';
 
 class ProfileModule extends ChildModule {
   @override
