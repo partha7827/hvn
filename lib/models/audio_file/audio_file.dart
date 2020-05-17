@@ -15,14 +15,23 @@ abstract class AudioFile implements Built<AudioFile, AudioFileBuilder> {
   factory AudioFile([void Function(AudioFileBuilder) updates]) = _$AudioFile;
 
   AudioFile._();
+  
+  String get id;
 
   String get author;
+  
+  @nullable
   String get artworkUrlPath;
+  
   String get audioFileUrlPath;
+
   int get duration;
-  String get id;
+  
   String get title;
+  
   String get subTitle;
+  
+  BuiltList<String> get tagIds;
 
   String toJson() {
     return json.encode(serializers.serializeWith(AudioFile.serializer, this));
@@ -43,4 +52,6 @@ abstract class AudioFile implements Built<AudioFile, AudioFileBuilder> {
     final parsed = json.decode(responseBody).cast<Map<String, dynamic>>();
     return deserializeListOf<AudioFile>(parsed);
   }
+
+  static void _initializeBuilder(AudioFileBuilder b) => b..duration = 0 ..title = "" ..subTitle = "";
 }

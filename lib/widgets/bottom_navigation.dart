@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:highvibe/app/home/home_module.dart';
-import 'package:highvibe/app/profile/profile_module.dart';
+import 'package:highvibe/modules/home/home_module.dart';
+import 'package:highvibe/modules/profile/profile_module.dart';
 import 'package:highvibe/values/themes.dart';
 
 class BottomNavigation extends StatelessWidget {
@@ -25,13 +24,13 @@ class BottomNavigation extends StatelessWidget {
               title: 'Home',
               asset: 'assets/ic_home.svg',
               onPressed: () => HomeModule.toHome(),
-              selected: Modular.actualRoute == HomeModule.HOME,
+              //selected: Modular.actualRoute == HomeModule.HOME,
             ),
             _bottomBarItem(
               title: 'Profile',
               asset: 'assets/ic_profile.svg',
               onPressed: () => ProfileModule.toProfile(),
-              selected: Modular.actualRoute == ProfileModule.profileRoute,
+              //selected: Modular.actualRoute == ProfileModule.profileRoute,
             ),
           ],
         ),
