@@ -5,7 +5,6 @@ import 'package:highvibe/models/serializer/serializer.dart';
 import 'package:highvibe/modules/app/app_store.dart';
 import 'package:highvibe/services/auth_service.dart';
 import 'package:highvibe/services/store_service.dart';
-import 'package:highvibe/utils/utils.dart';
 import 'package:mobx/mobx.dart';
 
 part 'register_controller.g.dart';
@@ -32,27 +31,19 @@ abstract class _RegisterControllerBase with Store {
 
   @action
   Future<void> registerUser() async {
-    if (!formKey.currentState.validate() || !hasAcceptedTerms) {
-      return;
-    }
-
     inProgress = true;
 
-    try {
-      final user = await auth.emailRegister(
-        email: emailController.text,
-        password: passwordController.text,
-        name: usernameController.text,
-      );
+    final user = await auth.emailRegister(
+      email: emailController.text,
+      password: passwordController.text,
+      name: usernameController.text,
+    );
 
-      await firestore.userCollection
-          .document(user.id)
-          .setData(serializers.serialize(user));
+    await firestore.userCollection
+        .document(user.id)
+        .setData(serializers.serialize(user));
 
-      appStore.setCurrentUser(user);
-    } catch (e) {
-      showSnackBarMsg(scaffoldKey.currentState, e.toString());
-    }
+    appStore.setCurrentUser(user);
 
     inProgress = false;
   }

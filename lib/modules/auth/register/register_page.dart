@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:highvibe/utils/utils.dart';
 import 'package:highvibe/values/Strings.dart';
 import 'package:highvibe/values/themes.dart';
 import 'package:highvibe/widgets/custom_text_form.dart';
@@ -20,7 +21,6 @@ class RegisterPage extends StatefulWidget {
 
 class _RegisterPageState
     extends ModularState<RegisterPage, RegisterController> {
-      
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -102,7 +102,18 @@ class _RegisterPageState
                   builder: (_) => GradientRaisedButton(
                     label: Strings.signUp,
                     isLoading: controller.inProgress,
-                    onPressed: controller.registerUser,
+                    onPressed: () async {
+                      if (!controller.formKey.currentState.validate() ||
+                          !controller.hasAcceptedTerms) {
+                        return;
+                      }
+                      try {
+                        await controller.registerUser();
+                      } catch (e) {
+                        showSnackBarMsg(
+                            controller.scaffoldKey.currentState, e.toString());
+                      }
+                    },
                   ),
                 ),
                 Padding(
