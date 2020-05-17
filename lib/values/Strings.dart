@@ -36,4 +36,6 @@ class Strings {
   static const google = "Google";
   static const letsGetSignedUp = "Let’s get you signed up";
   static const name = "Name";
+  static const userNotFound = "User with given email and password does not exist";
+  static const resetPassword = "Email Sent, Please check it to change password";
 }

@@ -11,13 +11,12 @@ import 'package:highvibe/models/tag/tag.dart';
 part 'serializer.g.dart';
 
 @SerializersFor([
-  Tag,
-  Message,
   AudioFile,
   FileDetails,
   Snippet,
   Tag,
   Thumbnail,
+  Message,
   User,
   Video,
 ])

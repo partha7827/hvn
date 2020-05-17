@@ -72,11 +72,7 @@ abstract class User implements Built<User, UserBuilder> {
   }
 
   static User fromSnapshot(DocumentSnapshot snapshot) {
-    if (snapshot.exists) {
-      return serializers.deserializeWith(User.serializer, snapshot.data);
-    } else {
-      return null;
-    }
+    return serializers.deserializeWith(User.serializer, snapshot.data);
   }
 
   static void _initializeBuilder(UserBuilder b) => b
