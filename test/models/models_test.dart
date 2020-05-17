@@ -33,8 +33,7 @@ main() async {
     ..authorName = userInstance.name
     ..authorPhotoUrl = userInstance.photoUrl
     ..channelId = "1"
-    ..content = "message"
-    ..createdAt = DateTime.now().toUtc());
+    ..content = "message");
 
   final tagInstance = Tag((b) => b
     ..id = "1"

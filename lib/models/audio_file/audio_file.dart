@@ -25,16 +25,12 @@ abstract class AudioFile implements Built<AudioFile, AudioFileBuilder> {
   
   String get audioFileUrlPath;
 
-  @nullable
   int get duration;
   
-  @nullable
   String get title;
   
-  @nullable
   String get subTitle;
   
-  @nullable
   BuiltList<String> get tagIds;
 
   String toJson() {
@@ -56,4 +52,6 @@ abstract class AudioFile implements Built<AudioFile, AudioFileBuilder> {
     final parsed = json.decode(responseBody).cast<Map<String, dynamic>>();
     return deserializeListOf<AudioFile>(parsed);
   }
+
+  static void _initializeBuilder(AudioFileBuilder b) => b..duration = 0 ..title = "" ..subTitle = "";
 }

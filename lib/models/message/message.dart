@@ -35,4 +35,6 @@ abstract class Message implements Built<Message, MessageBuilder> {
   }
 
   static Serializer<Message> get serializer => _$messageSerializer;
+
+  static void _initializeBuilder(MessageBuilder b) => b..content = "" ..createdAt = DateTime.now().toUtc();
 }
