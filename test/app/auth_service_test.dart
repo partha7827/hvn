@@ -11,7 +11,5 @@ main() async {
     String uid = await service.login("email", "password");
 
     expect(uid, equals("aabbcc"));
-
-    print(uid);
   });
 }

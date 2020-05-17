@@ -11,7 +11,8 @@ part of 'video_player_strore.dart';
 mixin _$VideoPlayerStore on _VideoPlayerStoreBase, Store {
   @override
   String toString() {
-    final string = '';
-    return '{$string}';
+    return '''
+
+    ''';
   }
 }

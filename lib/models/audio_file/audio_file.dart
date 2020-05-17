@@ -31,10 +31,10 @@ abstract class AudioFile implements Built<AudioFile, AudioFileBuilder> {
   @nullable
   String get title;
   
-  
+  @nullable
   String get subTitle;
   
-  
+  @nullable
   BuiltList<String> get tagIds;
 
   String toJson() {

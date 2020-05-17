@@ -9,11 +9,19 @@ part 'message.g.dart';
 
 abstract class Message implements Built<Message, MessageBuilder> {
   String get id;
+  
   String get channelId;
+  
   String get authorId;
+  
+  @nullable
   String get authorName;
+  
+  @nullable
   String get authorPhotoUrl;
+  
   String get content;
+  
   DateTime get createdAt;
 
   Message._();

@@ -19,7 +19,6 @@ class ProfileModule extends ChildModule {
         Bind((i) => ChatController()),
         Bind((i) => CurrentUserController()),
         Bind((i) => LiveController()),
-        Bind((i) => StoreService()),
       ];
 
   @override
