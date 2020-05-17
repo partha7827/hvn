@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:highvibe/models/models.dart' show User;
 import 'package:highvibe/models/serializer/serializer.dart';
@@ -20,6 +21,8 @@ abstract class _CurrentUserControllerBase with Store {
   final nameController = TextEditingController();
   final statusController = TextEditingController();
 
+  final scaffoldKey = GlobalKey<ScaffoldState>();
+
   User get currentUser => currentUserStore.currentUser;
 
   @action
@@ -39,9 +42,13 @@ abstract class _CurrentUserControllerBase with Store {
     currentUser.rebuild((b) => b
       ..name = name
       ..status = status);
-    await store.userCollection
-        .document(currentUser.id)
-        .updateData(serializers.deserialize(currentUser));
+    try {
+      await store.userCollection
+          .document(currentUser.id)
+          .updateData(serializers.deserialize(currentUser));
+    } catch (e) {
+      showSnackBarMsg(scaffoldKey.currentState, e.toString());
+    }
   }
 
   @action
@@ -55,7 +62,9 @@ abstract class _CurrentUserControllerBase with Store {
         await store.userCollection
             .document(currentUser.id)
             .updateData(serializers.deserialize(currentUser));
-      } catch (e) {}
+      } catch (e) {
+        showSnackBarMsg(scaffoldKey.currentState, e.toString());
+      }
     }
   }
 
