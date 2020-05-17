@@ -2,14 +2,10 @@ import 'package:highvibe/services/store_service.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mock_cloud_firestore/mock_cloud_firestore.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:highvibe/models/serializer/serializer.dart';
+import 'package:highvibe/mocks/mock_database.dart';
 
 main() async {
-  final database = """
-      { "users": { "first": { "name": "username" } } }
-    """;
-
-  final firestore = MockCloudFirestore(database);
+  final firestore = MockCloudFirestore(mockDatabase);
 
   final service = StoreService(firestore);
 
@@ -18,8 +14,8 @@ main() async {
   });
 
   test("get user document", () async {
-    var document = await service.userCollection.document("first").get();
+    var document = await service.userCollection.document("default").get();
 
-    expect(document.data, equals({'name': 'username'}));
+    expect(document.data["name"], equals('Default User'));
   });
 }

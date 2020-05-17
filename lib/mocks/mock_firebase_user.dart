@@ -5,10 +5,10 @@ import 'mock_id_token_result.dart';
 
 class MockFirebaseUser extends Mock implements FirebaseUser {
   @override
-  String get displayName => 'Bob';
+  String get displayName => 'Default User';
 
   @override
-  String get uid => 'aabbcc';
+  String get uid => 'default';
 
   @override
   Future<IdTokenResult> getIdToken({bool refresh = false}) async {
