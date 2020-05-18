@@ -18,4 +18,14 @@ main() async {
 
     expect(document.data["name"], equals('Default User'));
   });
+
+  test("get channel document", () async {
+    var document = await service.channelCollection.document("default").get();
+
+    expect(document.data["id"], equals("default"));
+  });
+
+  test("get message document", () async {
+    
+  });
 }

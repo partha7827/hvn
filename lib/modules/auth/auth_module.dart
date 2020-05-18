@@ -14,7 +14,7 @@ class AuthModule extends ChildModule {
   @override
   List<Bind> get binds => [
         Bind((i) => AppStore()),
-        // Bind((i) => FirebaseAuth.instance),
+        // Bind((i) => FirebaseAuth.instance),  
         // Bind((i) => Firestore.instance),
         Bind((i) => StoreService(getMockFirestore())),
         Bind((i) => AuthService(getMockAuth())),

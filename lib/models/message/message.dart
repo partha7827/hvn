@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:highvibe/models/serializer/serializer.dart';
 
 part 'message.g.dart';
@@ -11,13 +12,13 @@ abstract class Message implements Built<Message, MessageBuilder> {
   
   String get channelId;
   
-  String get authorId;
+  String get senderId;
   
   @nullable
-  String get authorName;
+  String get senderName;
   
   @nullable
-  String get authorPhotoUrl;
+  String get senderPhotoUrl;
   
   String get content;
   
@@ -32,6 +33,10 @@ abstract class Message implements Built<Message, MessageBuilder> {
 
   static Message fromJson(String jsonString) {
     return serializers.deserializeWith(Message.serializer, json.decode(jsonString));
+  }
+
+  static Message fromSnapshot(DocumentSnapshot snapshot) {
+    return serializers.deserializeWith(Message.serializer, snapshot);
   }
 
   static Serializer<Message> get serializer => _$messageSerializer;

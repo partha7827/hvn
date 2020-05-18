@@ -1,6 +1,7 @@
 import 'package:highvibe/models/models.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:highvibe/models/serializer/serializer.dart';
+import 'package:built_collection/built_collection.dart';
 
 main() async {
   final userInstance = User((b) => b
@@ -29,9 +30,9 @@ main() async {
 
   final messageInstance = Message((b) => b
     ..id = "1"
-    ..authorId = userInstance.id
-    ..authorName = userInstance.name
-    ..authorPhotoUrl = userInstance.photoUrl
+    ..senderId = userInstance.id
+    ..senderName = userInstance.name
+    ..senderPhotoUrl = userInstance.photoUrl
     ..channelId = "1"
     ..content = "message");
 
@@ -42,6 +43,8 @@ main() async {
     ..isRecommended = true
     ..isVisible = true
   );
+
+  final channelInstance = Channel((b) => b..id = "1" ..messages = ListBuilder([messageInstance]));
 
   test("user model", () async {
     final serialized = serializers.serializeWith(User.serializer, userInstance);
@@ -79,5 +82,13 @@ main() async {
         serializers.deserializeWith(Tag.serializer, serialized);
 
     expect(deserialized, tagInstance);
+  });
+
+  test("channel model", () async {
+    final serialized = serializers.serializeWith(Channel.serializer, channelInstance);
+
+    final deserialized = serializers.deserializeWith(Channel.serializer, serialized);
+
+    expect(deserialized, channelInstance);
   });
 }
