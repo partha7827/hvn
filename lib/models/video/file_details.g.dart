@@ -18,25 +18,36 @@ class _$FileDetailsSerializer implements StructuredSerializer<FileDetails> {
   Iterable<Object> serialize(Serializers serializers, FileDetails object,
       {FullType specifiedType = FullType.unspecified}) {
     final result = <Object>[
-      'bitrateBps',
-      serializers.serialize(object.bitrateBps,
-          specifiedType: const FullType(int)),
       'creationTime',
       serializers.serialize(object.creationTime,
           specifiedType: const FullType(DateTime)),
-      'durationMs',
-      serializers.serialize(object.durationMs,
-          specifiedType: const FullType(int)),
-      'fileName',
-      serializers.serialize(object.fileName,
-          specifiedType: const FullType(String)),
-      'fileSize',
-      serializers.serialize(object.fileSize,
-          specifiedType: const FullType(int)),
       'url',
       serializers.serialize(object.url, specifiedType: const FullType(String)),
     ];
-
+    if (object.bitrateBps != null) {
+      result
+        ..add('bitrateBps')
+        ..add(serializers.serialize(object.bitrateBps,
+            specifiedType: const FullType(int)));
+    }
+    if (object.durationMs != null) {
+      result
+        ..add('durationMs')
+        ..add(serializers.serialize(object.durationMs,
+            specifiedType: const FullType(int)));
+    }
+    if (object.fileName != null) {
+      result
+        ..add('fileName')
+        ..add(serializers.serialize(object.fileName,
+            specifiedType: const FullType(String)));
+    }
+    if (object.fileSize != null) {
+      result
+        ..add('fileSize')
+        ..add(serializers.serialize(object.fileSize,
+            specifiedType: const FullType(int)));
+    }
     return result;
   }
 
@@ -107,20 +118,8 @@ class _$FileDetails extends FileDetails {
       this.fileSize,
       this.url})
       : super._() {
-    if (bitrateBps == null) {
-      throw new BuiltValueNullFieldError('FileDetails', 'bitrateBps');
-    }
     if (creationTime == null) {
       throw new BuiltValueNullFieldError('FileDetails', 'creationTime');
-    }
-    if (durationMs == null) {
-      throw new BuiltValueNullFieldError('FileDetails', 'durationMs');
-    }
-    if (fileName == null) {
-      throw new BuiltValueNullFieldError('FileDetails', 'fileName');
-    }
-    if (fileSize == null) {
-      throw new BuiltValueNullFieldError('FileDetails', 'fileSize');
     }
     if (url == null) {
       throw new BuiltValueNullFieldError('FileDetails', 'url');
@@ -199,7 +198,9 @@ class FileDetailsBuilder implements Builder<FileDetails, FileDetailsBuilder> {
   String get url => _$this._url;
   set url(String url) => _$this._url = url;
 
-  FileDetailsBuilder();
+  FileDetailsBuilder() {
+    FileDetails._initializeBuilder(this);
+  }
 
   FileDetailsBuilder get _$this {
     if (_$v != null) {

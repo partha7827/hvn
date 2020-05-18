@@ -1,11 +1,16 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:highvibe/mocks/firebase_auth_mocks_base.dart';
 import 'package:highvibe/models/models.dart' show User;
 
 class AuthService extends Disposable {
   final FirebaseAuth _auth;
 
   AuthService(this._auth);
+
+  factory AuthService.withReal() => AuthService(FirebaseAuth.instance);
+
+  factory AuthService.withMock() => AuthService(MockFirebaseAuth(signedIn: true));
 
   Future<String> anonymousLogin() async {
     final response = await _auth.signInAnonymously();

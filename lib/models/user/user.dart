@@ -52,15 +52,24 @@ abstract class User implements Built<User, UserBuilder> {
   String get photoUrl;
 
   @nullable
+  String get bio;
+
+  @nullable
   String get playlist;
 
   BuiltList<String> get scheduled;
+
+  @nullable
+  BuiltList<String> get videos;
 
   String get status;
 
   BuiltList<String> get uploads;
 
   String get videoId;
+
+  @nullable
+  bool get isRecommended;
 
   String toJson() {
     return json.encode(serializers.serializeWith(User.serializer, this));
@@ -73,6 +82,10 @@ abstract class User implements Built<User, UserBuilder> {
 
   static User fromSnapshot(DocumentSnapshot snapshot) {
     return serializers.deserializeWith(User.serializer, snapshot.data);
+  }
+
+  static BuiltList<User> parseListOfUsers(QuerySnapshot snapshot) {
+    return deserializeListOf<User>(snapshot.documents.map((s) => s.data));
   }
 
   static void _initializeBuilder(UserBuilder b) => b
@@ -91,5 +104,6 @@ abstract class User implements Built<User, UserBuilder> {
     ..account = ''
     ..email = ''
     ..name = ''
+    ..isRecommended = false
     ;
 }

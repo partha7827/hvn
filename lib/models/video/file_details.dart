@@ -16,11 +16,20 @@ abstract class FileDetails implements Built<FileDetails, FileDetailsBuilder> {
 
   FileDetails._();
 
+  @nullable
   int get bitrateBps;
+
   DateTime get creationTime;
+
+  @nullable
   int get durationMs;
+
+  @nullable
   String get fileName;
+
+  @nullable
   int get fileSize;
+
   String get url;
 
   String toJson() {
@@ -31,4 +40,7 @@ abstract class FileDetails implements Built<FileDetails, FileDetailsBuilder> {
     return serializers.deserializeWith(
         FileDetails.serializer, json.decode(jsonString));
   }
+
+  static void _initializeBuilder(FileDetailsBuilder b) =>
+      b..creationTime = DateTime.now().toUtc();
 }

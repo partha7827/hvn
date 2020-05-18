@@ -18,9 +18,14 @@ abstract class Snippet implements Built<Snippet, SnippetBuilder> {
   Snippet._();
 
   String get description;
+  
   DateTime get publishedAt;
+  
   BuiltList<String> get tags;
+  
   String get title;
+  
+  @nullable
   Thumbnail get videoThumbnail;
 
   String toJson() {
@@ -33,7 +38,9 @@ abstract class Snippet implements Built<Snippet, SnippetBuilder> {
   }
 
   static void _initializeBuilder(SnippetBuilder b) => b
-    ..description = 'Description'
+    ..description = 'No Description'
     ..publishedAt = DateTime.now().toUtc()
-    ..title = 'The Grand Plan to Rise and Shine';
+    ..title = 'No Title'
+    ..tags = BuiltList<String>.from(["test"]).toBuilder()
+  ;
 }

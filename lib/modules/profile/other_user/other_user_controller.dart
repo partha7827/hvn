@@ -21,8 +21,8 @@ abstract class _OtherUserControllerBase with Store {
   @action
   Future<void> init(String userId) async {
     otherUserId = userId;
-    otherUser =
-        User.fromSnapshot(await store.userCollection.document(userId).get());
+    final snapshot = await store.userCollection.document(otherUserId).get();
+    otherUser = User.fromSnapshot(snapshot);
   }
 
   User get currentUser => Modular.get<AppStore>().currentUser;
@@ -37,22 +37,22 @@ abstract class _OtherUserControllerBase with Store {
       // otherUser.followers.toList().remove(currentUser.id);
 
       await store.userCollection.document(currentUser.id).updateData({
-        "following": FieldValue.arrayRemove([ userId ])
+        "following": FieldValue.arrayRemove([userId])
       });
 
       await store.userCollection.document(userId).updateData({
-        "followers": FieldValue.arrayRemove([ currentUser.id ])
+        "followers": FieldValue.arrayRemove([currentUser.id])
       });
     } else {
       // currentUser.following.toList().add(userId);
       // otherUser.followers.toList().add(currentUser.id);
 
       await store.userCollection.document(currentUser.id).updateData({
-        "following": FieldValue.arrayUnion([ userId ])
+        "following": FieldValue.arrayUnion([userId])
       });
 
       await store.userCollection.document(userId).updateData({
-        "followers": FieldValue.arrayUnion([ currentUser.id ])
+        "followers": FieldValue.arrayUnion([currentUser.id])
       });
     }
   }

@@ -3,6 +3,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mock_cloud_firestore/mock_cloud_firestore.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:highvibe/mocks/mock_database.dart';
+import 'package:highvibe/models/models.dart';
 
 main() async {
   final firestore = MockCloudFirestore(mockDatabase);
@@ -17,5 +18,13 @@ main() async {
     var document = await service.userCollection.document("default").get();
 
     expect(document.data["name"], equals('Default User'));
+  });
+
+  test("get video document", () async {
+    var document = await service.videoCollection.document("1").get();
+
+    var video = Video.fromSnapshot(document);
+
+    expect(video.snippet.videoThumbnail.height, equals(1080));
   });
 }

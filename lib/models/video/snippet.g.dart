@@ -31,11 +31,13 @@ class _$SnippetSerializer implements StructuredSerializer<Snippet> {
       'title',
       serializers.serialize(object.title,
           specifiedType: const FullType(String)),
-      'videoThumbnail',
-      serializers.serialize(object.videoThumbnail,
-          specifiedType: const FullType(Thumbnail)),
     ];
-
+    if (object.videoThumbnail != null) {
+      result
+        ..add('videoThumbnail')
+        ..add(serializers.serialize(object.videoThumbnail,
+            specifiedType: const FullType(Thumbnail)));
+    }
     return result;
   }
 
@@ -112,9 +114,6 @@ class _$Snippet extends Snippet {
     }
     if (title == null) {
       throw new BuiltValueNullFieldError('Snippet', 'title');
-    }
-    if (videoThumbnail == null) {
-      throw new BuiltValueNullFieldError('Snippet', 'videoThumbnail');
     }
   }
 
@@ -222,7 +221,7 @@ class SnippetBuilder implements Builder<Snippet, SnippetBuilder> {
               publishedAt: publishedAt,
               tags: tags.build(),
               title: title,
-              videoThumbnail: videoThumbnail.build());
+              videoThumbnail: _videoThumbnail?.build());
     } catch (_) {
       String _$failedField;
       try {
@@ -230,7 +229,7 @@ class SnippetBuilder implements Builder<Snippet, SnippetBuilder> {
         tags.build();
 
         _$failedField = 'videoThumbnail';
-        videoThumbnail.build();
+        _videoThumbnail?.build();
       } catch (e) {
         throw new BuiltValueNestedFieldError(
             'Snippet', _$failedField, e.toString());

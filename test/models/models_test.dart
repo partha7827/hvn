@@ -3,44 +3,63 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:highvibe/models/serializer/serializer.dart';
 
 main() async {
-  final userInstance = User((b) => b
-    ..id = "default"
-    ..accountCreationTime = DateTime.now().toUtc()
-    ..address = ''
-    ..experiencePoints = 0
-    ..info = ''
-    ..isLive = false
-    ..isOnline = true
-    ..karmaPoints = 0
-    ..photoUrl = ''
-    ..status = ''
-    ..videoId = ''
-    ..chatId = ''
-    ..name = ''
-    ..account = ''
-    ..email = ''
-    ..name = '');
+  final userInstance = User(
+    (b) => b
+      ..id = "default"
+      ..accountCreationTime = DateTime.now().toUtc()
+      ..address = ''
+      ..experiencePoints = 0
+      ..info = ''
+      ..isLive = false
+      ..isOnline = true
+      ..karmaPoints = 0
+      ..photoUrl = ''
+      ..status = ''
+      ..videoId = ''
+      ..chatId = ''
+      ..name = ''
+      ..account = ''
+      ..email = ''
+      ..name = '',
+  );
 
-  final audioFileInstance = AudioFile((b) => b
-    ..id = "1"
-    ..author = userInstance.id
-    ..audioFileUrlPath = "empty"
-    );
+  final audioFileInstance = AudioFile(
+    (b) => b
+      ..id = "1"
+      ..author = userInstance.id
+      ..audioFileUrlPath = "empty",
+  );
 
-  final messageInstance = Message((b) => b
-    ..id = "1"
-    ..authorId = userInstance.id
-    ..authorName = userInstance.name
-    ..authorPhotoUrl = userInstance.photoUrl
-    ..channelId = "1"
-    ..content = "message");
+  final messageInstance = Message(
+    (b) => b
+      ..id = "1"
+      ..authorId = userInstance.id
+      ..authorName = userInstance.name
+      ..authorPhotoUrl = userInstance.photoUrl
+      ..channelId = "1"
+      ..content = "message",
+  );
 
-  final tagInstance = Tag((b) => b
-    ..id = "1"
-    ..name = "meditation"
-    ..createdAt = DateTime.now().toUtc()
-    ..isRecommended = true
-    ..isVisible = true
+  final tagInstance = Tag(
+    (b) => b
+      ..id = "1"
+      ..name = "meditation"
+      ..createdAt = DateTime.now().toUtc()
+      ..isRecommended = true
+      ..isVisible = true,
+  );
+
+  final videoInstance = Video(
+    (b) => b
+      ..id = "1"
+      ..snippet = Snippet(
+        (b) => b..description = "test",
+      ).toBuilder()
+      ..fileDetails = FileDetails(
+        (b) => b
+          ..fileName = "test"
+          ..url = "",
+      ).toBuilder(),
   );
 
   test("user model", () async {
@@ -79,5 +98,14 @@ main() async {
         serializers.deserializeWith(Tag.serializer, serialized);
 
     expect(deserialized, tagInstance);
+  });
+
+  test("video model", () async {
+    final serialized =
+        serializers.serializeWith(Video.serializer, videoInstance);
+
+    final deserialized = deserialize<Video>(serialized);
+
+    expect(deserialized, videoInstance);
   });
 }
