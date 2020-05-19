@@ -10,18 +10,15 @@ part 'file_details.g.dart';
 
 abstract class FileDetails implements Built<FileDetails, FileDetailsBuilder> {
   static Serializer<FileDetails> get serializer => _$fileDetailsSerializer;
-
-  factory FileDetails([void Function(FileDetailsBuilder) updates]) =
-      _$FileDetails;
-
+  factory FileDetails([void Function(FileDetailsBuilder) updates]) = _$FileDetails;
   FileDetails._();
 
-  int get bitrateBps;
-  DateTime get creationTime;
-  int get durationMs;
-  String get fileName;
-  int get fileSize;
   String get url;
+  String get fileName;
+  int get bitrateBps;
+  int get durationMs;
+  int get fileSize;
+  DateTime get creationTime;
 
   String toJson() {
     return json.encode(serializers.serializeWith(FileDetails.serializer, this));
@@ -31,4 +28,12 @@ abstract class FileDetails implements Built<FileDetails, FileDetailsBuilder> {
     return serializers.deserializeWith(
         FileDetails.serializer, json.decode(jsonString));
   }
+
+  static void _initializeBuilder(FileDetailsBuilder b) => b
+    ..url = ""
+    ..fileName = ""
+    ..bitrateBps = 0
+    ..durationMs = 0
+    ..fileSize = 0
+    ..creationTime = DateTime.now().toUtc();
 }

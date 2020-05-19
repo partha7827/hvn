@@ -1,11 +1,17 @@
+import 'package:highvibe/modules/app/app_store.dart';
 import 'package:highvibe/modules/home/home_controller.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:highvibe/modules/home/home_page.dart';
+import 'package:highvibe/services/auth_service.dart';
+import 'package:highvibe/services/store_service.dart';
 
 class HomeModule extends ChildModule {
   @override
   List<Bind> get binds => [
-        Bind((i) => HomeController()),
+        Bind<AppStore>((i) => AppStore()),
+        Bind<HomeController>((i) => HomeController()),
+        Bind<AuthService>((i) => AuthService.withReal()),
+        Bind<StoreService>((i) => StoreService.withReal()),
       ];
 
   @override
@@ -21,5 +27,6 @@ class HomeModule extends ChildModule {
 
   static const HOME = "/home";
 
-  static Future toHome() => Modular.to.pushNamedAndRemoveUntil(HOME, (_) => false);
+  static Future toHome() =>
+      Modular.to.pushNamedAndRemoveUntil(HOME, (_) => false);
 }

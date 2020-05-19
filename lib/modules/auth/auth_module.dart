@@ -8,16 +8,13 @@ import 'package:highvibe/modules/auth/register/register_page.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:highvibe/services/auth_service.dart';
 import 'package:highvibe/services/store_service.dart';
-import 'package:highvibe/utils/utils.dart';
 
 class AuthModule extends ChildModule {
   @override
   List<Bind> get binds => [
         Bind((i) => AppStore()),
-        // Bind((i) => FirebaseAuth.instance),
-        // Bind((i) => Firestore.instance),
-        Bind((i) => StoreService(getMockFirestore())),
-        Bind((i) => AuthService(getMockAuth())),
+        Bind((i) => StoreService.withReal()),
+        Bind((i) => AuthService.withReal()),
         Bind((i) => AutoLoginController()),
         Bind((i) => LoginController()),
         Bind((i) => RegisterController()),

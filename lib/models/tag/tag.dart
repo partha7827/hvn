@@ -5,7 +5,9 @@ import 'dart:convert';
 import 'package:built_collection/built_collection.dart';
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:highvibe/models/serializer/serializer.dart';
+import 'package:uuid/uuid.dart';
 
 part 'tag.g.dart';
 
@@ -15,11 +17,11 @@ abstract class Tag implements Built<Tag, TagBuilder> {
 
   Tag._();
 
-  DateTime get createdAt;
   String get id;
+  String get name;
   bool get isRecommended;
   bool get isVisible;
-  String get name;
+  DateTime get createdAt;
 
   String toJson() {
     return json.encode(serializers.serializeWith(Tag.serializer, this));
@@ -35,8 +37,18 @@ abstract class Tag implements Built<Tag, TagBuilder> {
     return '$data';
   }
 
-  static BuiltList<Tag> parseListOfTags(String responseBody) {
-    final parsed = json.decode(responseBody).cast<Map<String, Object>>();
-    return deserializeListOf<Tag>(parsed);
+  static Tag fromSnapshot(DocumentSnapshot snapshot) {
+    return serializers.deserializeWith(Tag.serializer, snapshot.data);
   }
+
+  static BuiltList<Tag> parseListOfTags(QuerySnapshot snapshot) {
+    return deserializeListOf<Tag>(snapshot.documents.map((s) => s.data));
+  }
+
+  static void _initializeBuilder(TagBuilder b) => b
+    ..id = Uuid().v4()
+    ..name = ""
+    ..isRecommended = false
+    ..isVisible = false
+    ..createdAt = DateTime.now().toUtc();
 }
