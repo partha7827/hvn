@@ -38,4 +38,6 @@ class Strings {
   static const name = "Name";
   static const userNotFound = "User with given email and password does not exist";
   static const resetPassword = "Email Sent, Please check it to change password";
+  static const defaultQuote = "It's time to start living the life you've imagined";
+  static const authorsTitle = "Explore Authors";
 }

@@ -4,55 +4,58 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:highvibe/models/user/user.dart';
 import 'package:highvibe/modules/home/home_controller.dart';
 import 'package:highvibe/modules/profile/profile_module.dart';
+import 'package:highvibe/values/Strings.dart';
 import 'package:highvibe/values/themes.dart';
 import 'package:highvibe/widgets/header_row.dart';
 
 class AuthorsWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: <Widget>[
-        Padding(
-          padding: const EdgeInsets.only(left: 20.0),
-          child: HeaderRow(
-            title: 'Explore Authors',
-            showTrailing: true,
-          ),
-        ),
-        Padding(
-          padding: const EdgeInsets.only(bottom: 20),
-          child: Container(
-            height: 140,
-            child: FutureBuilder(
-                future: Modular.get<HomeController>().getAuthors(),
-                builder: (_, snapshot) {
-                  if (snapshot.hasData) {
-                    return ListView.builder(
-                      padding: const EdgeInsets.symmetric(horizontal: 20),
-                      itemCount: snapshot.data.length,
-                      scrollDirection: Axis.horizontal,
-                      itemBuilder: (context, index) {
-                        return _authorCard(
-                            user: snapshot.data[index],
-                            onPressed: () {
-                              ProfileModule.toOtherProfile(snapshot.data[index].id);
-                              // Navigator.push(
-                              //   context,
-                              //   MaterialPageRoute(
-                              //     builder: (_) => CreatorsProfile(),
-                              //   ),
-                              // );
-                            });
-                      },
-                    );
-                  } else {
-                    return CircularProgressIndicator();
-                  }
-                }),
-          ),
-        ),
-      ],
+    return FutureBuilder(
+      future: Modular.get<HomeController>().getAuthors(),
+      builder: (_, snapshot) {
+        if (snapshot.hasData) {
+          return Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Padding(
+                padding: const EdgeInsets.only(left: 20.0),
+                child: HeaderRow(
+                  title: Strings.authorsTitle,
+                  showTrailing: true,
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(bottom: 20),
+                child: Container(
+                  height: 140,
+                  child: ListView.builder(
+                    padding: const EdgeInsets.symmetric(horizontal: 20),
+                    itemCount: snapshot.data.length,
+                    scrollDirection: Axis.horizontal,
+                    itemBuilder: (context, index) {
+                      return _authorCard(
+                          user: snapshot.data[index],
+                          onPressed: () {
+                            ProfileModule.toOtherProfile(
+                                snapshot.data[index].id);
+                            // Navigator.push(
+                            //   context,
+                            //   MaterialPageRoute(
+                            //     builder: (_) => CreatorsProfile(),
+                            //   ),
+                            // );
+                          });
+                    },
+                  ),
+                ),
+              ),
+            ],
+          );
+        } else {
+          return Container();
+        }
+      },
     );
   }
 

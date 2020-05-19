@@ -84,7 +84,7 @@ class HeaderWidget extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.all(20.0),
           child: Text(
-            "It's time to start living the life you've imagined",
+            Strings.defaultQuote,
             style: bold18PlayfairWhite,
             textAlign: TextAlign.center,
           ),
@@ -138,7 +138,7 @@ class HeaderWidget extends StatelessWidget {
               ),
             );
           } else {
-            return Container();
+            return Container(child: Text("No videos"));
           }
         });
   }
