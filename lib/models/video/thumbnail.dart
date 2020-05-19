@@ -10,17 +10,11 @@ part 'thumbnail.g.dart';
 
 abstract class Thumbnail implements Built<Thumbnail, ThumbnailBuilder> {
   static Serializer<Thumbnail> get serializer => _$thumbnailSerializer;
-
   factory Thumbnail([void Function(ThumbnailBuilder) updates]) = _$Thumbnail;
-
   Thumbnail._();
 
   String get url;
-
-  @nullable
   int get width;
-
-  @nullable
   int get height;
 
   String toJson() {
@@ -32,5 +26,8 @@ abstract class Thumbnail implements Built<Thumbnail, ThumbnailBuilder> {
         Thumbnail.serializer, json.decode(jsonString));
   }
 
-  static void _initializeBuilder(ThumbnailBuilder b) => b..url = "" ..width = 0 ..height = 0;
+  static void _initializeBuilder(ThumbnailBuilder b) => b
+    ..url = ""
+    ..width = 0
+    ..height = 0;
 }

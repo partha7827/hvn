@@ -18,11 +18,11 @@ class _$VideoSerializer implements StructuredSerializer<Video> {
   Iterable<Object> serialize(Serializers serializers, Video object,
       {FullType specifiedType = FullType.unspecified}) {
     final result = <Object>[
+      'id',
+      serializers.serialize(object.id, specifiedType: const FullType(String)),
       'fileDetails',
       serializers.serialize(object.fileDetails,
           specifiedType: const FullType(FileDetails)),
-      'id',
-      serializers.serialize(object.id, specifiedType: const FullType(String)),
       'snippet',
       serializers.serialize(object.snippet,
           specifiedType: const FullType(Snippet)),
@@ -42,13 +42,13 @@ class _$VideoSerializer implements StructuredSerializer<Video> {
       iterator.moveNext();
       final dynamic value = iterator.current;
       switch (key) {
-        case 'fileDetails':
-          result.fileDetails.replace(serializers.deserialize(value,
-              specifiedType: const FullType(FileDetails)) as FileDetails);
-          break;
         case 'id':
           result.id = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String;
+          break;
+        case 'fileDetails':
+          result.fileDetails.replace(serializers.deserialize(value,
+              specifiedType: const FullType(FileDetails)) as FileDetails);
           break;
         case 'snippet':
           result.snippet.replace(serializers.deserialize(value,
@@ -63,21 +63,21 @@ class _$VideoSerializer implements StructuredSerializer<Video> {
 
 class _$Video extends Video {
   @override
-  final FileDetails fileDetails;
-  @override
   final String id;
+  @override
+  final FileDetails fileDetails;
   @override
   final Snippet snippet;
 
   factory _$Video([void Function(VideoBuilder) updates]) =>
       (new VideoBuilder()..update(updates)).build();
 
-  _$Video._({this.fileDetails, this.id, this.snippet}) : super._() {
-    if (fileDetails == null) {
-      throw new BuiltValueNullFieldError('Video', 'fileDetails');
-    }
+  _$Video._({this.id, this.fileDetails, this.snippet}) : super._() {
     if (id == null) {
       throw new BuiltValueNullFieldError('Video', 'id');
+    }
+    if (fileDetails == null) {
+      throw new BuiltValueNullFieldError('Video', 'fileDetails');
     }
     if (snippet == null) {
       throw new BuiltValueNullFieldError('Video', 'snippet');
@@ -95,22 +95,22 @@ class _$Video extends Video {
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
     return other is Video &&
-        fileDetails == other.fileDetails &&
         id == other.id &&
+        fileDetails == other.fileDetails &&
         snippet == other.snippet;
   }
 
   @override
   int get hashCode {
     return $jf(
-        $jc($jc($jc(0, fileDetails.hashCode), id.hashCode), snippet.hashCode));
+        $jc($jc($jc(0, id.hashCode), fileDetails.hashCode), snippet.hashCode));
   }
 
   @override
   String toString() {
     return (newBuiltValueToStringHelper('Video')
-          ..add('fileDetails', fileDetails)
           ..add('id', id)
+          ..add('fileDetails', fileDetails)
           ..add('snippet', snippet))
         .toString();
   }
@@ -119,15 +119,15 @@ class _$Video extends Video {
 class VideoBuilder implements Builder<Video, VideoBuilder> {
   _$Video _$v;
 
+  String _id;
+  String get id => _$this._id;
+  set id(String id) => _$this._id = id;
+
   FileDetailsBuilder _fileDetails;
   FileDetailsBuilder get fileDetails =>
       _$this._fileDetails ??= new FileDetailsBuilder();
   set fileDetails(FileDetailsBuilder fileDetails) =>
       _$this._fileDetails = fileDetails;
-
-  String _id;
-  String get id => _$this._id;
-  set id(String id) => _$this._id = id;
 
   SnippetBuilder _snippet;
   SnippetBuilder get snippet => _$this._snippet ??= new SnippetBuilder();
@@ -139,8 +139,8 @@ class VideoBuilder implements Builder<Video, VideoBuilder> {
 
   VideoBuilder get _$this {
     if (_$v != null) {
-      _fileDetails = _$v.fileDetails?.toBuilder();
       _id = _$v.id;
+      _fileDetails = _$v.fileDetails?.toBuilder();
       _snippet = _$v.snippet?.toBuilder();
       _$v = null;
     }
@@ -166,15 +166,14 @@ class VideoBuilder implements Builder<Video, VideoBuilder> {
     try {
       _$result = _$v ??
           new _$Video._(
-              fileDetails: fileDetails.build(),
               id: id,
+              fileDetails: fileDetails.build(),
               snippet: snippet.build());
     } catch (_) {
       String _$failedField;
       try {
         _$failedField = 'fileDetails';
         fileDetails.build();
-
         _$failedField = 'snippet';
         snippet.build();
       } catch (e) {

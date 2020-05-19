@@ -21,7 +21,7 @@ abstract class _LiveControllerBase with Store {
   Future<void> init(User user) async {
     currentCreator = user;
 
-    var creatorId = currentCreator.videoId;
+    var creatorId = currentCreator.liveId;
     var channelId = "$creatorId-channel";
     var userId = currentUser.id;
 

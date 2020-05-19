@@ -12,20 +12,13 @@ part 'snippet.g.dart';
 
 abstract class Snippet implements Built<Snippet, SnippetBuilder> {
   static Serializer<Snippet> get serializer => _$snippetSerializer;
-
   factory Snippet([void Function(SnippetBuilder) updates]) = _$Snippet;
-
   Snippet._();
 
-  String get description;
-  
-  DateTime get publishedAt;
-  
-  BuiltList<String> get tags;
-  
   String get title;
-  
-  @nullable
+  String get description;
+  DateTime get publishedAt;
+  BuiltList<String> get tags;
   Thumbnail get videoThumbnail;
 
   String toJson() {
@@ -38,9 +31,9 @@ abstract class Snippet implements Built<Snippet, SnippetBuilder> {
   }
 
   static void _initializeBuilder(SnippetBuilder b) => b
+    ..title = 'No Title'
     ..description = 'No Description'
     ..publishedAt = DateTime.now().toUtc()
-    ..title = 'No Title'
-    ..tags = BuiltList<String>.from(["test"]).toBuilder()
-  ;
+    ..tags = BuiltList<String>([]).toBuilder()
+    ..videoThumbnail = Thumbnail().toBuilder();
 }

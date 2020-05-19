@@ -5,31 +5,31 @@ const _artworkUrl =
 const _audioFileUrl = 'https://luan.xyz/files/audio/ambient_c_motion.mp3';
 
 final mockAudioItemsList = [
-  AudioFile(
+  Audio(
     (b) => b
       ..author = 'Author'
       ..artworkUrlPath = _artworkUrl
-      ..audioFileUrlPath = _audioFileUrl
+      ..audioUrlPath = _audioFileUrl
       ..duration = 210000
       ..id = 'id-1'
       ..title = 'Relaxing Flute'
       ..subTitle = 'Lorem ipsum dolar sit a mat',
   ),
-  AudioFile(
+  Audio(
     (b) => b
       ..author = 'Author'
       ..artworkUrlPath = _artworkUrl
-      ..audioFileUrlPath = _audioFileUrl
+      ..audioUrlPath = _audioFileUrl
       ..duration = 210000
       ..id = 'id-1'
       ..title = 'Deep sleep'
       ..subTitle = 'Lorem ipsum dolar sit a mat',
   ),
-  AudioFile(
+  Audio(
     (b) => b
       ..author = 'Author'
       ..artworkUrlPath = _artworkUrl
-      ..audioFileUrlPath = _audioFileUrl
+      ..audioUrlPath = _audioFileUrl
       ..duration = 210000
       ..id = 'id-1'
       ..title = 'Feel your soul'

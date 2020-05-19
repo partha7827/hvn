@@ -7,9 +7,6 @@ import 'package:highvibe/modules/home/home_controller.dart';
 import 'package:highvibe/mocks/mock_database.dart';
 import 'package:highvibe/models/models.dart';
 import 'package:highvibe/values/Strings.dart';
-import 'package:highvibe/modules/home/widgets/authors_widget.dart';
-// import 'package:highvibe/services/auth_service.dart';
-// import 'package:highvibe/services/store_service.dart';
 
 class MockHomeController extends HomeController {
   @override

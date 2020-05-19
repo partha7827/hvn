@@ -18,36 +18,25 @@ class _$FileDetailsSerializer implements StructuredSerializer<FileDetails> {
   Iterable<Object> serialize(Serializers serializers, FileDetails object,
       {FullType specifiedType = FullType.unspecified}) {
     final result = <Object>[
+      'url',
+      serializers.serialize(object.url, specifiedType: const FullType(String)),
+      'fileName',
+      serializers.serialize(object.fileName,
+          specifiedType: const FullType(String)),
+      'bitrateBps',
+      serializers.serialize(object.bitrateBps,
+          specifiedType: const FullType(int)),
+      'durationMs',
+      serializers.serialize(object.durationMs,
+          specifiedType: const FullType(int)),
+      'fileSize',
+      serializers.serialize(object.fileSize,
+          specifiedType: const FullType(int)),
       'creationTime',
       serializers.serialize(object.creationTime,
           specifiedType: const FullType(DateTime)),
-      'url',
-      serializers.serialize(object.url, specifiedType: const FullType(String)),
     ];
-    if (object.bitrateBps != null) {
-      result
-        ..add('bitrateBps')
-        ..add(serializers.serialize(object.bitrateBps,
-            specifiedType: const FullType(int)));
-    }
-    if (object.durationMs != null) {
-      result
-        ..add('durationMs')
-        ..add(serializers.serialize(object.durationMs,
-            specifiedType: const FullType(int)));
-    }
-    if (object.fileName != null) {
-      result
-        ..add('fileName')
-        ..add(serializers.serialize(object.fileName,
-            specifiedType: const FullType(String)));
-    }
-    if (object.fileSize != null) {
-      result
-        ..add('fileSize')
-        ..add(serializers.serialize(object.fileSize,
-            specifiedType: const FullType(int)));
-    }
+
     return result;
   }
 
@@ -62,29 +51,29 @@ class _$FileDetailsSerializer implements StructuredSerializer<FileDetails> {
       iterator.moveNext();
       final dynamic value = iterator.current;
       switch (key) {
-        case 'bitrateBps':
-          result.bitrateBps = serializers.deserialize(value,
-              specifiedType: const FullType(int)) as int;
-          break;
-        case 'creationTime':
-          result.creationTime = serializers.deserialize(value,
-              specifiedType: const FullType(DateTime)) as DateTime;
-          break;
-        case 'durationMs':
-          result.durationMs = serializers.deserialize(value,
-              specifiedType: const FullType(int)) as int;
+        case 'url':
+          result.url = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String;
           break;
         case 'fileName':
           result.fileName = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String;
           break;
+        case 'bitrateBps':
+          result.bitrateBps = serializers.deserialize(value,
+              specifiedType: const FullType(int)) as int;
+          break;
+        case 'durationMs':
+          result.durationMs = serializers.deserialize(value,
+              specifiedType: const FullType(int)) as int;
+          break;
         case 'fileSize':
           result.fileSize = serializers.deserialize(value,
               specifiedType: const FullType(int)) as int;
           break;
-        case 'url':
-          result.url = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String;
+        case 'creationTime':
+          result.creationTime = serializers.deserialize(value,
+              specifiedType: const FullType(DateTime)) as DateTime;
           break;
       }
     }
@@ -95,34 +84,46 @@ class _$FileDetailsSerializer implements StructuredSerializer<FileDetails> {
 
 class _$FileDetails extends FileDetails {
   @override
-  final int bitrateBps;
-  @override
-  final DateTime creationTime;
-  @override
-  final int durationMs;
+  final String url;
   @override
   final String fileName;
   @override
+  final int bitrateBps;
+  @override
+  final int durationMs;
+  @override
   final int fileSize;
   @override
-  final String url;
+  final DateTime creationTime;
 
   factory _$FileDetails([void Function(FileDetailsBuilder) updates]) =>
       (new FileDetailsBuilder()..update(updates)).build();
 
   _$FileDetails._(
-      {this.bitrateBps,
-      this.creationTime,
-      this.durationMs,
+      {this.url,
       this.fileName,
+      this.bitrateBps,
+      this.durationMs,
       this.fileSize,
-      this.url})
+      this.creationTime})
       : super._() {
-    if (creationTime == null) {
-      throw new BuiltValueNullFieldError('FileDetails', 'creationTime');
-    }
     if (url == null) {
       throw new BuiltValueNullFieldError('FileDetails', 'url');
+    }
+    if (fileName == null) {
+      throw new BuiltValueNullFieldError('FileDetails', 'fileName');
+    }
+    if (bitrateBps == null) {
+      throw new BuiltValueNullFieldError('FileDetails', 'bitrateBps');
+    }
+    if (durationMs == null) {
+      throw new BuiltValueNullFieldError('FileDetails', 'durationMs');
+    }
+    if (fileSize == null) {
+      throw new BuiltValueNullFieldError('FileDetails', 'fileSize');
+    }
+    if (creationTime == null) {
+      throw new BuiltValueNullFieldError('FileDetails', 'creationTime');
     }
   }
 
@@ -137,12 +138,12 @@ class _$FileDetails extends FileDetails {
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
     return other is FileDetails &&
-        bitrateBps == other.bitrateBps &&
-        creationTime == other.creationTime &&
-        durationMs == other.durationMs &&
+        url == other.url &&
         fileName == other.fileName &&
+        bitrateBps == other.bitrateBps &&
+        durationMs == other.durationMs &&
         fileSize == other.fileSize &&
-        url == other.url;
+        creationTime == other.creationTime;
   }
 
   @override
@@ -150,22 +151,22 @@ class _$FileDetails extends FileDetails {
     return $jf($jc(
         $jc(
             $jc(
-                $jc($jc($jc(0, bitrateBps.hashCode), creationTime.hashCode),
-                    durationMs.hashCode),
-                fileName.hashCode),
+                $jc($jc($jc(0, url.hashCode), fileName.hashCode),
+                    bitrateBps.hashCode),
+                durationMs.hashCode),
             fileSize.hashCode),
-        url.hashCode));
+        creationTime.hashCode));
   }
 
   @override
   String toString() {
     return (newBuiltValueToStringHelper('FileDetails')
-          ..add('bitrateBps', bitrateBps)
-          ..add('creationTime', creationTime)
-          ..add('durationMs', durationMs)
+          ..add('url', url)
           ..add('fileName', fileName)
+          ..add('bitrateBps', bitrateBps)
+          ..add('durationMs', durationMs)
           ..add('fileSize', fileSize)
-          ..add('url', url))
+          ..add('creationTime', creationTime))
         .toString();
   }
 }
@@ -173,30 +174,30 @@ class _$FileDetails extends FileDetails {
 class FileDetailsBuilder implements Builder<FileDetails, FileDetailsBuilder> {
   _$FileDetails _$v;
 
-  int _bitrateBps;
-  int get bitrateBps => _$this._bitrateBps;
-  set bitrateBps(int bitrateBps) => _$this._bitrateBps = bitrateBps;
-
-  DateTime _creationTime;
-  DateTime get creationTime => _$this._creationTime;
-  set creationTime(DateTime creationTime) =>
-      _$this._creationTime = creationTime;
-
-  int _durationMs;
-  int get durationMs => _$this._durationMs;
-  set durationMs(int durationMs) => _$this._durationMs = durationMs;
+  String _url;
+  String get url => _$this._url;
+  set url(String url) => _$this._url = url;
 
   String _fileName;
   String get fileName => _$this._fileName;
   set fileName(String fileName) => _$this._fileName = fileName;
 
+  int _bitrateBps;
+  int get bitrateBps => _$this._bitrateBps;
+  set bitrateBps(int bitrateBps) => _$this._bitrateBps = bitrateBps;
+
+  int _durationMs;
+  int get durationMs => _$this._durationMs;
+  set durationMs(int durationMs) => _$this._durationMs = durationMs;
+
   int _fileSize;
   int get fileSize => _$this._fileSize;
   set fileSize(int fileSize) => _$this._fileSize = fileSize;
 
-  String _url;
-  String get url => _$this._url;
-  set url(String url) => _$this._url = url;
+  DateTime _creationTime;
+  DateTime get creationTime => _$this._creationTime;
+  set creationTime(DateTime creationTime) =>
+      _$this._creationTime = creationTime;
 
   FileDetailsBuilder() {
     FileDetails._initializeBuilder(this);
@@ -204,12 +205,12 @@ class FileDetailsBuilder implements Builder<FileDetails, FileDetailsBuilder> {
 
   FileDetailsBuilder get _$this {
     if (_$v != null) {
-      _bitrateBps = _$v.bitrateBps;
-      _creationTime = _$v.creationTime;
-      _durationMs = _$v.durationMs;
-      _fileName = _$v.fileName;
-      _fileSize = _$v.fileSize;
       _url = _$v.url;
+      _fileName = _$v.fileName;
+      _bitrateBps = _$v.bitrateBps;
+      _durationMs = _$v.durationMs;
+      _fileSize = _$v.fileSize;
+      _creationTime = _$v.creationTime;
       _$v = null;
     }
     return this;
@@ -232,12 +233,12 @@ class FileDetailsBuilder implements Builder<FileDetails, FileDetailsBuilder> {
   _$FileDetails build() {
     final _$result = _$v ??
         new _$FileDetails._(
-            bitrateBps: bitrateBps,
-            creationTime: creationTime,
-            durationMs: durationMs,
+            url: url,
             fileName: fileName,
+            bitrateBps: bitrateBps,
+            durationMs: durationMs,
             fileSize: fileSize,
-            url: url);
+            creationTime: creationTime);
     replace(_$result);
     return _$result;
   }

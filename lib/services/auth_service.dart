@@ -10,7 +10,8 @@ class AuthService extends Disposable {
 
   factory AuthService.withReal() => AuthService(FirebaseAuth.instance);
 
-  factory AuthService.withMock() => AuthService(MockFirebaseAuth(signedIn: true));
+  factory AuthService.withMock() =>
+      AuthService(MockFirebaseAuth(signedIn: true));
 
   Future<String> anonymousLogin() async {
     final response = await _auth.signInAnonymously();
@@ -37,10 +38,10 @@ class AuthService extends Disposable {
 
     return User(
       (b) => b
-        ..account = user.uid
-        ..chatId = user.uid
-        ..email = email
         ..id = user.uid
+        ..chatId = user.uid
+        ..liveId = user.uid
+        ..email = email
         ..name = name,
     );
   }

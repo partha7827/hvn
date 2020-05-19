@@ -20,19 +20,12 @@ class _$ThumbnailSerializer implements StructuredSerializer<Thumbnail> {
     final result = <Object>[
       'url',
       serializers.serialize(object.url, specifiedType: const FullType(String)),
+      'width',
+      serializers.serialize(object.width, specifiedType: const FullType(int)),
+      'height',
+      serializers.serialize(object.height, specifiedType: const FullType(int)),
     ];
-    if (object.width != null) {
-      result
-        ..add('width')
-        ..add(serializers.serialize(object.width,
-            specifiedType: const FullType(int)));
-    }
-    if (object.height != null) {
-      result
-        ..add('height')
-        ..add(serializers.serialize(object.height,
-            specifiedType: const FullType(int)));
-    }
+
     return result;
   }
 
@@ -80,6 +73,12 @@ class _$Thumbnail extends Thumbnail {
   _$Thumbnail._({this.url, this.width, this.height}) : super._() {
     if (url == null) {
       throw new BuiltValueNullFieldError('Thumbnail', 'url');
+    }
+    if (width == null) {
+      throw new BuiltValueNullFieldError('Thumbnail', 'width');
+    }
+    if (height == null) {
+      throw new BuiltValueNullFieldError('Thumbnail', 'height');
     }
   }
 

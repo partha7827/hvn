@@ -14,13 +14,11 @@ part 'video.g.dart';
 
 abstract class Video implements Built<Video, VideoBuilder> {
   static Serializer<Video> get serializer => _$videoSerializer;
-
   factory Video([void Function(VideoBuilder) updates]) = _$Video;
-
   Video._();
 
-  FileDetails get fileDetails;
   String get id;
+  FileDetails get fileDetails;
   Snippet get snippet;
 
   static Video fromSnapshot(DocumentSnapshot snapshot) {
@@ -40,5 +38,8 @@ abstract class Video implements Built<Video, VideoBuilder> {
     return deserializeListOf<Video>(snapshot.documents.map((s) => s.data));
   }
 
-  static void _initializeBuilder(VideoBuilder b) => b..id = Uuid().v4();
+  static void _initializeBuilder(VideoBuilder b) => b
+    ..id = Uuid().v4()
+    ..fileDetails = FileDetails().toBuilder()
+    ..snippet = Snippet().toBuilder();
 }

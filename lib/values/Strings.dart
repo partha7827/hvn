@@ -40,4 +40,5 @@ class Strings {
   static const resetPassword = "Email Sent, Please check it to change password";
   static const defaultQuote = "It's time to start living the life you've imagined";
   static const authorsTitle = "Explore Authors";
+  static const audioTitlePlaceholder = "No Title";
 }

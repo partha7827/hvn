@@ -53,7 +53,7 @@ class _OtherUserPageState
                       pinned: true,
                       backgroundColor: secondaryColor,
                       title: Text(
-                        user?.account ?? 'account',
+                        user?.account,
                         style: bold18White,
                       ),
                       leading: IconButton(
@@ -169,7 +169,7 @@ class _OtherUserPageState
                                 padding:
                                     const EdgeInsets.symmetric(vertical: 20),
                                 child: Text(
-                                  user.info ?? 'info',
+                                  user.bio,
                                   maxLines: 2,
                                   overflow: TextOverflow.ellipsis,
                                   style: normal16Hint,

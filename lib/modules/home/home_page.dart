@@ -30,7 +30,6 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
           // ToolsWidget(),
         ],
       ),
-      // bottomNavigationBar: BottomNavigation(),
     );
   }
 }
