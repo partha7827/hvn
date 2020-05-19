@@ -40,7 +40,7 @@ abstract class _HomeControllerBase with Store {
     print("get authors");
 
     final querySnapshot = await firestore.userCollection
-        .where("isRecommended", isEqualTo: "true")
+        .where("isRecommended", isEqualTo: true)
         .getDocuments();
 
     return User.parseListOfUsers(querySnapshot).toList();

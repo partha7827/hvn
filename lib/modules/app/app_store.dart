@@ -42,9 +42,12 @@ abstract class _AppStoreBase with Store {
     }
   }
 
-  Future<void> _setUserOnline(bool active) =>
+  Future<void> _setUserOnline(bool active) {
+    if (currentUser != null) {
       firestore.userCollection.document(currentUser.id).updateData({
         "isOnline": active,
         // "lastTimeSeen": serializers.serialize(DateTime.now().toUtc())
       });
+    }
+  }
 }

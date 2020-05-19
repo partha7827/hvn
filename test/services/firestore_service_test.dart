@@ -27,4 +27,20 @@ main() async {
 
     expect(video.snippet.videoThumbnail.height, equals(1080));
   });
+
+  test("parse list of users", () async {
+    var snapshot = await service.userCollection.getDocuments();
+
+    var users = User.parseListOfUsers(snapshot).toList();
+
+    expect(users[0], equals(mockUser));
+  });
+
+  test("parse list of videos", () async {
+    var snapshot = await service.videoCollection.getDocuments();
+
+    var videos = Video.parseListOfVideos(snapshot).toList();
+
+    expect(videos[0], equals(mockVideo));
+  });
 }
