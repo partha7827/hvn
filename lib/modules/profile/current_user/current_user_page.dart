@@ -50,7 +50,7 @@ class _CurrentUserPageState
                   pinned: true,
                   backgroundColor: secondaryColor,
                   title: Text(
-                    user?.account,
+                    user.account,
                     style: bold18White,
                   ),
                   actions: <Widget>[

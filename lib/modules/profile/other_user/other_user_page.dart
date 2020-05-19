@@ -53,7 +53,7 @@ class _OtherUserPageState
                       pinned: true,
                       backgroundColor: secondaryColor,
                       title: Text(
-                        user?.account,
+                        user.account,
                         style: bold18White,
                       ),
                       leading: IconButton(
