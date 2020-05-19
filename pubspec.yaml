@@ -76,7 +76,7 @@ dependencies:
   video_player: ">=0.10.10 <2.0.0"
   mock_cloud_firestore: ^0.0.20
   firebase_auth_mocks:
-    git: git@github.com:atn832/firebase_auth_mocks.git
+    git: git://github.com/atn832/firebase_auth_mocks.git
 
 dev_dependencies:
   flutter_driver:
