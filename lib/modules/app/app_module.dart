@@ -10,11 +10,15 @@ import 'package:highvibe/modules/profile/profile_module.dart';
 import 'package:highvibe/modules/video_player/video_player_module.dart';
 
 import 'package:highvibe/modules/wallet/wallet_module.dart';
+import 'package:highvibe/services/auth_service.dart';
+import 'package:highvibe/services/store_service.dart';
 
 class AppModule extends MainModule {
   @override
   List<Bind> get binds => [
         Bind((i) => AppStore()),
+        Bind((i) => AuthService.withReal()),
+        Bind((i) => StoreService.withReal()),
       ];
 
   @override

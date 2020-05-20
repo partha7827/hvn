@@ -7,6 +7,7 @@ import 'package:highvibe/modules/profile/broadcast/broadcast_page.dart';
 import 'package:highvibe/modules/profile/chat/chat_controller.dart';
 import 'package:highvibe/modules/profile/chat/chat_page.dart';
 import 'package:highvibe/modules/profile/current_user/current_user_page.dart';
+import 'package:highvibe/modules/profile/other_user/other_user_controller.dart';
 import 'package:highvibe/modules/profile/other_user/other_user_page.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
@@ -17,6 +18,7 @@ class ProfileModule extends ChildModule {
         Bind((i) => BroadcastController()),
         Bind((i) => ChatController()),
         Bind((i) => CurrentUserController()),
+        Bind((i) => OtherUserController()),
         Bind((i) => LiveController()),
       ];
 
@@ -46,7 +48,7 @@ class ProfileModule extends ChildModule {
 
   static Future toOtherProfile(String userId) =>
       Modular.to.pushNamedAndRemoveUntil(
-        "$profileRoute/:$userId",
+        "$profileRoute/$userId",
         (route) => (route.settings.name ?? '').startsWith(profileRoute),
       );
 }

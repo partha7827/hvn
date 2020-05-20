@@ -21,7 +21,7 @@ abstract class _BroadcastControllerBase with Store {
   Future<void> init(User user) async {
     currentCreator = user;
 
-    var creatorId = currentCreator.videoId;
+    var creatorId = currentCreator.liveId;
     var channelId = "$creatorId-channel";
     //ignore: unused_local_variable
     var userId = currentUser.id;

@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:highvibe/modules/home/widgets/authors_widget.dart';
 import 'package:highvibe/modules/home/widgets/header_widget.dart';
-import 'package:highvibe/modules/home/widgets/livenow_widget.dart';
-import 'package:highvibe/modules/home/widgets/tools_widget.dart';
-import 'package:highvibe/modules/home/widgets/upcoming_events_widget.dart';
-import 'package:highvibe/widgets/bottom_navigation.dart';
+// import 'package:highvibe/modules/home/widgets/livenow_widget.dart';
+// import 'package:highvibe/modules/home/widgets/tools_widget.dart';
+// import 'package:highvibe/modules/home/widgets/upcoming_events_widget.dart';
+// import 'package:highvibe/widgets/bottom_navigation.dart';
 
 import 'home_controller.dart';
 
@@ -24,13 +24,12 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
       body: ListView(
         children: [
           HeaderWidget(),
-          LiveNowWidget(),
+          // LiveNowWidget(),
           AuthorsWidget(),
-          UpcomingEventsWidget(),
-          ToolsWidget(),
+          // UpcomingEventsWidget(),
+          // ToolsWidget(),
         ],
       ),
-      bottomNavigationBar: BottomNavigation(),
     );
   }
 }

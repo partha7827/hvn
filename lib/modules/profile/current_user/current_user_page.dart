@@ -50,7 +50,7 @@ class _CurrentUserPageState
                   pinned: true,
                   backgroundColor: secondaryColor,
                   title: Text(
-                    user?.account ?? 'account',
+                    user.account,
                     style: bold18White,
                   ),
                   actions: <Widget>[
@@ -168,7 +168,7 @@ class _CurrentUserPageState
                           Padding(
                             padding: const EdgeInsets.symmetric(vertical: 20),
                             child: Text(
-                              user.info ?? 'info',
+                              user.bio,
                               maxLines: 2,
                               overflow: TextOverflow.ellipsis,
                               style: normal16Hint,

@@ -1,9 +1,4 @@
 import 'package:flutter/widgets.dart';
-import 'package:highvibe/mocks/firebase_auth_mocks_base.dart';
-import 'package:mock_cloud_firestore/mock_cloud_firestore.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:highvibe/mocks/mock_database.dart';
 import 'dart:io';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
@@ -15,14 +10,6 @@ double aspectRatio(BuildContext context) =>
 
 String mediaTimeFormarter(Duration d) =>
     d.toString().split('.').first.padLeft(8, '0');
-
-dynamic getMockFirestore() => MockCloudFirestore(mockDatabase);
-
-dynamic getMockAuth() => MockFirebaseAuth(signedIn: true);
-
-dynamic getFirestoreInstance() => Firestore.instance;
-
-dynamic getAuthInstance() => FirebaseAuth.instance;
 
 Future<String> uploadFile(File file, String childName,
     {String fileName = ''}) async {

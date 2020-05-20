@@ -7,60 +7,39 @@ import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:highvibe/models/serializer/serializer.dart';
+import 'package:uuid/uuid.dart';
 
 part 'user.g.dart';
 
 abstract class User implements Built<User, UserBuilder> {
   static Serializer<User> get serializer => _$userSerializer;
-
   factory User([void Function(UserBuilder) updates]) = _$User;
 
   User._();
 
-  String get account;
-
-  DateTime get accountCreationTime;
-
-  String get address;
-
-  BuiltList<String> get badges;
-
-  String get chatId;
-
-  String get email;
-
-  int get experiencePoints;
-
-  BuiltList<String> get featured;
-
-  BuiltList<String> get followers;
-
-  BuiltList<String> get following;
-
   String get id;
-
-  String get info;
-
-  bool get isLive;
-
-  bool get isOnline;
-
-  int get karmaPoints;
-
-  String get name;
-
-  String get photoUrl;
-
-  @nullable
-  String get playlist;
-
-  BuiltList<String> get scheduled;
-
+  String get account;
+  String get address;
+  String get chatId;
+  String get liveId;
   String get status;
-
-  BuiltList<String> get uploads;
-
-  String get videoId;
+  String get email;
+  String get name;
+  String get photoUrl;
+  String get bio;
+  int get experiencePoints;
+  int get karmaPoints;
+  bool get isLive;
+  bool get isOnline;
+  bool get isRecommended;
+  DateTime get accountCreationTime;
+  BuiltList<String> get badges;
+  BuiltList<String> get featured;
+  BuiltList<String> get followers;
+  BuiltList<String> get following;
+  BuiltList<String> get scheduled;
+  BuiltList<String> get videos;
+  BuiltList<String> get audios;
 
   String toJson() {
     return json.encode(serializers.serializeWith(User.serializer, this));
@@ -75,21 +54,32 @@ abstract class User implements Built<User, UserBuilder> {
     return serializers.deserializeWith(User.serializer, snapshot.data);
   }
 
+  static BuiltList<User> parseListOfUsers(QuerySnapshot snapshot) {
+    return deserializeListOf<User>(snapshot.documents.map((s) => s.data));
+  }
+
   static void _initializeBuilder(UserBuilder b) => b
-    ..accountCreationTime = DateTime.now().toUtc()
-    ..address = ''
+    ..id = Uuid().v4()
+    ..account = b.id
+    ..address = b.id
+    ..chatId = b.id
+    ..liveId = b.id
+    ..status = ""
+    ..email = ""
+    ..name = ""
+    ..photoUrl = ""
+    ..bio = ""
     ..experiencePoints = 0
-    ..info = ''
-    ..isLive = false
-    ..isOnline = true
     ..karmaPoints = 0
-    ..photoUrl = ''
-    ..status = ''
-    ..videoId = ''
-    ..chatId = ''
-    ..name = ''
-    ..account = ''
-    ..email = ''
-    ..name = ''
-    ;
+    ..isLive = false
+    ..isOnline = false
+    ..isRecommended = false
+    ..accountCreationTime = DateTime.now().toUtc()
+    ..badges = BuiltList<String>([]).toBuilder()
+    ..featured = BuiltList<String>([]).toBuilder()
+    ..followers = BuiltList<String>([]).toBuilder()
+    ..following = BuiltList<String>([]).toBuilder()
+    ..scheduled = BuiltList<String>([]).toBuilder()
+    ..videos = BuiltList<String>([]).toBuilder()
+    ..audios = BuiltList<String>([]).toBuilder();
 }
