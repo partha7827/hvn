@@ -2,9 +2,18 @@ import 'package:flutter/material.dart';
 
 class TransparentRoute extends PageRoute {
   final WidgetBuilder builder;
+  final Widget Function(
+    BuildContext,
+    Animation<double>,
+    Animation<double>,
+    Widget,
+  ) animationBuilder;
+  final int duration;
 
   TransparentRoute({
     @required this.builder,
+    this.animationBuilder,
+    this.duration = 350,
     RouteSettings settings,
   })  : assert(builder != null),
         super(settings: settings, fullscreenDialog: false);
@@ -22,7 +31,7 @@ class TransparentRoute extends PageRoute {
   bool get opaque => false;
 
   @override
-  Duration get transitionDuration => Duration(milliseconds: 350);
+  Duration get transitionDuration => Duration(milliseconds: duration);
 
   @override
   Widget buildPage(
@@ -31,6 +40,19 @@ class TransparentRoute extends PageRoute {
     Animation<double> secondaryAnimation,
   ) {
     final childWidget = builder(context);
+    if (animationBuilder == null) {
+      return _defaultAnimation(childWidget);
+    } else {
+      return animationBuilder(
+        context,
+        animation,
+        secondaryAnimation,
+        childWidget,
+      );
+    }
+  }
+
+  FadeTransition _defaultAnimation(Widget childWidget) {
     return FadeTransition(
       opacity: animation,
       child: ScaleTransition(scale: animation, child: childWidget),
