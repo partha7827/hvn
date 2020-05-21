@@ -158,10 +158,10 @@ PODS:
     - abseil/base/base_internal
     - abseil/base/config
     - abseil/meta/type_traits
-  - agora_rtc_engine (1.0.5):
-    - AgoraRtcEngine_iOS (= 2.9.1)
+  - agora_rtc_engine (1.0.12):
+    - AgoraRtcEngine_iOS_Crypto (= 2.9.1)
     - Flutter
-  - AgoraRtcEngine_iOS (2.9.1)
+  - AgoraRtcEngine_iOS_Crypto (2.9.1)
   - audioplayers (0.0.1):
     - Flutter
   - BoringSSL-GRPC (0.0.3):
@@ -452,7 +452,7 @@ DEPENDENCIES:
 SPEC REPOS:
   trunk:
     - abseil
-    - AgoraRtcEngine_iOS
+    - AgoraRtcEngine_iOS_Crypto
     - BoringSSL-GRPC
     - DKImagePickerController
     - DKPhotoGallery
@@ -553,8 +553,8 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   abseil: 18063d773f5366ff8736a050fe035a28f635fd27
-  agora_rtc_engine: e45c7d4fd42f3f679195a56c5c9cdc61f6818ea1
-  AgoraRtcEngine_iOS: b2eedd8f9ab47b71163f3285e836bd23feb43fff
+  agora_rtc_engine: 1fe3b8d1949467e5884c4b57fd02c45c887533a5
+  AgoraRtcEngine_iOS_Crypto: c2bca616406c6dda9ae254d59637a18ba0fae8f0
   audioplayers: 84f968cea3f2deab00ec4f8ff53358b3c0b3992c
   BoringSSL-GRPC: db8764df3204ccea016e1c8dd15d9a9ad63ff318
   camera: 38cc83ae9a5667bb5a71c7d9edaf60a91920fd4e
@@ -564,7 +564,7 @@ SPEC CHECKSUMS:
   DKPhotoGallery: 0290d32343574f06eaa4c26f8f2f8a1035e916be
   file_picker: 3e6c3790de664ccf9b882732d9db5eaf6b8d4eb1
   Firebase: 32f9520684e87c7af3f0704f7f88042626d6b536
-  firebase_auth: 4ee3a54d3f09434c508c284a62f895a741a30637
+  firebase_auth: f8287325aae894aff045dff38bf0667cbeb49563
   firebase_auth_web: 0955c07bcc06e84af76b9d4e32e6f31518f2d7de
   firebase_core: 0d8be0e0d14c4902953aeb5ac5d7316d1fe4b978
   firebase_core_web: d501d8b946b60c8af265428ce483b0fff5ad52d1

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:highvibe/models/models.dart' show Video;
 import 'package:highvibe/modules/video_player/video_player_strore.dart';
 import 'package:highvibe/modules/video_player/widgets/widgets.dart'
     show PlayPauseOverlay;
-import 'package:highvibe/models/models.dart' show Video;
 import 'package:highvibe/widgets/responsive_safe_area.dart';
 import 'package:video_player/video_player.dart';
 
@@ -14,7 +14,7 @@ class VideoPlayerPage extends StatefulWidget {
 
   const VideoPlayerPage({
     @required this.video,
-    this.title = "Video Player",
+    this.title = 'Video Player',
     Key key,
   }) : super(key: key);
 
@@ -25,33 +25,18 @@ class VideoPlayerPage extends StatefulWidget {
 class _VideoPlayerPageState
     extends ModularState<VideoPlayerPage, VideoPlayerStore> {
   VideoPlayerController _controller;
-  bool isFullscreenMode = false;
+  Color _screenBackgroundColor = Colors.transparent;
+  bool isFullScreenMode = false;
+  bool isMinimised = false;
 
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: ResponsiveSafeArea(
-        builder: (context, size) {
-          return Align(
-            alignment: Alignment.center,
-            child: Container(
-              padding: EdgeInsets.all(4),
-              child: AspectRatio(
-                aspectRatio: _controller.value.aspectRatio,
-                child: Stack(
-                  alignment: Alignment.bottomCenter,
-                  children: <Widget>[
-                    VideoPlayer(_controller),
-                    PlayPauseOverlay(controller: _controller),
-                    _closeButton(),
-                    _fullScreenButton(),
-                    VideoProgressIndicator(_controller, allowScrubbing: true),
-                  ],
-                ),
-              ),
-            ),
-          );
-        },
-      ),
+    return ResponsiveSafeArea(
+      builder: (context, size) {
+        return Scaffold(
+          backgroundColor: _screenBackgroundColor,
+          body: _normalModeView(context),
+        );
+      },
     );
   }
 
@@ -78,17 +63,17 @@ class _VideoPlayerPageState
     ]);
   }
 
-  void _close() {
+  void _close(BuildContext context) {
     _controller.pause();
     Navigator.pop(context);
   }
 
-  Widget _closeButton() {
+  Widget _closeButton(BuildContext context) {
     return Positioned(
       top: 0,
-      right: -16,
+      right: -24,
       child: FlatButton(
-        onPressed: () => _close(),
+        onPressed: () => _close(context),
         child: Icon(
           Icons.close,
           color: Colors.white,
@@ -107,7 +92,7 @@ class _VideoPlayerPageState
   Widget _fullScreenButton() {
     return Positioned(
       bottom: 8,
-      right: -16,
+      right: -24,
       child: FlatButton(
         onPressed: () => _toggleFullscreenMode(),
         child: Icon(
@@ -119,6 +104,59 @@ class _VideoPlayerPageState
     );
   }
 
+  Widget _minimizeScreenButton() {
+    return Positioned(
+      top: 0,
+      left: -24,
+      child: FlatButton(
+        onPressed: () => _minimizeVideoPlayer(),
+        child: Icon(
+          Icons.keyboard_arrow_down,
+          color: Colors.white,
+          size: 32,
+        ),
+      ),
+    );
+  }
+
+  void _minimizeVideoPlayer() {
+    print('_minimizeVideoPlayer');
+  }
+
+  Widget _normalModeView(BuildContext context) {
+    return Container(
+      color: Colors.transparent,
+      child: Align(
+        alignment: Alignment.center,
+        child: Container(
+          padding: EdgeInsets.all(4),
+          child: AspectRatio(
+            aspectRatio: _controller.value.aspectRatio,
+            child: Stack(
+              alignment: Alignment.bottomCenter,
+              children: <Widget>[
+                VideoPlayer(_controller),
+                PlayPauseOverlay(controller: _controller),
+                _closeButton(context),
+                _fullScreenButton(),
+                if (!isFullScreenMode) _minimizeScreenButton(),
+                VideoProgressIndicator(_controller, allowScrubbing: true),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _minimisedModeView() {
+    return Container(
+      width: 100,
+      height: 100,
+      color: Colors.red,
+    );
+  }
+
   void _portretScreenOrientaionModes() {
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.portraitUp,
@@ -127,11 +165,11 @@ class _VideoPlayerPageState
   }
 
   void _toggleFullscreenMode() {
-    if (isFullscreenMode) {
-      isFullscreenMode = false;
+    if (isFullScreenMode) {
+      isFullScreenMode = false;
       _portretScreenOrientaionModes();
     } else {
-      isFullscreenMode = true;
+      isFullScreenMode = true;
       setState(() {
         SystemChrome.setPreferredOrientations([
           DeviceOrientation.landscapeRight,
