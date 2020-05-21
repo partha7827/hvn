@@ -2,9 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:highvibe/models/models.dart';
 import 'package:highvibe/modules/home/home_controller.dart';
-import 'package:highvibe/modules/video_player/video_player_page.dart';
 import 'package:highvibe/modules/video_player/widgets/video_preview_item.dart';
 import 'package:highvibe/values/Strings.dart';
 import 'package:highvibe/values/assets.dart';
@@ -79,18 +77,6 @@ class HeaderWidget extends StatelessWidget {
     );
   }
 
-  void pushVideoScreen(BuildContext context, Video video) {
-    Navigator.push(
-      context,
-      PageRouteBuilder(
-        opaque: false,
-        pageBuilder: (context, _, __) {
-          return VideoPlayerPage(video: video);
-        },
-      ),
-    );
-  }
-
   Widget _buildVideos() {
     return FutureBuilder(
       future: Modular.get<HomeController>().getVideos(),
@@ -116,7 +102,10 @@ class HeaderWidget extends StatelessWidget {
                     itemBuilder: (context, index) {
                       return VideoPreviewItem(
                         video: snapshot.data[index],
-                        onTap: (item) => pushVideoScreen(context, item),
+                        onTap: (item) => Modular.to.pushNamed(
+                          '/videoplayer',
+                          arguments: item,
+                        ),
                       );
                     },
                   ),

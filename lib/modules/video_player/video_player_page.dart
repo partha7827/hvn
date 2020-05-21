@@ -33,8 +33,30 @@ class _VideoPlayerPageState
     return ResponsiveSafeArea(
       builder: (context, size) {
         return Scaffold(
-          backgroundColor: _screenBackgroundColor,
-          body: _normalModeView(context),
+          backgroundColor: Colors.transparent,
+          body: Container(
+            child: Align(
+              alignment: Alignment.center,
+              child: Container(
+                color: Colors.transparent,
+                padding: EdgeInsets.all(4),
+                child: AspectRatio(
+                  aspectRatio: _controller.value.aspectRatio,
+                  child: Stack(
+                    alignment: Alignment.bottomCenter,
+                    children: <Widget>[
+                      VideoPlayer(_controller),
+                      PlayPauseOverlay(controller: _controller),
+                      _closeButton(context),
+                      _fullScreenButton(),
+                      if (!isFullScreenMode) _minimizeScreenButton(),
+                      VideoProgressIndicator(_controller, allowScrubbing: true),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          ),
         );
       },
     );
@@ -121,40 +143,6 @@ class _VideoPlayerPageState
 
   void _minimizeVideoPlayer() {
     print('_minimizeVideoPlayer');
-  }
-
-  Widget _normalModeView(BuildContext context) {
-    return Container(
-      color: Colors.transparent,
-      child: Align(
-        alignment: Alignment.center,
-        child: Container(
-          padding: EdgeInsets.all(4),
-          child: AspectRatio(
-            aspectRatio: _controller.value.aspectRatio,
-            child: Stack(
-              alignment: Alignment.bottomCenter,
-              children: <Widget>[
-                VideoPlayer(_controller),
-                PlayPauseOverlay(controller: _controller),
-                _closeButton(context),
-                _fullScreenButton(),
-                if (!isFullScreenMode) _minimizeScreenButton(),
-                VideoProgressIndicator(_controller, allowScrubbing: true),
-              ],
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-
-  Widget _minimisedModeView() {
-    return Container(
-      width: 100,
-      height: 100,
-      color: Colors.red,
-    );
   }
 
   void _portretScreenOrientaionModes() {

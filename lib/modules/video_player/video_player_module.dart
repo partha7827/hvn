@@ -12,10 +12,14 @@ class VideoPlayerModule extends ChildModule {
   @override
   List<Router> get routers => [
         Router(
-          "/videoplayer",
-          child: (_, args) => VideoPlayerPage(video: args.data),
+          '/videoplayer',
           transition: TransitionType.custom,
           customTransition: _videoPlayerTransition,
+          // routeGenerator: (builder, settings) => VideoPageRoute(
+          //   builder: builder,
+          //   settings: settings,
+          // ),
+          child: (_, args) => VideoPlayerPage(video: args.data),
         ),
       ];
 
@@ -27,10 +31,7 @@ CustomTransition get _videoPlayerTransition => CustomTransition(
       transitionBuilder: (context, animation, secondaryAnimation, child) {
         return FadeTransition(
           opacity: animation,
-          child: ScaleTransition(
-            scale: animation,
-            child: child,
-          ),
+          child: ScaleTransition(scale: animation, child: child),
         );
       },
     );
