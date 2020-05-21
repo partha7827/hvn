@@ -25,7 +25,7 @@ class VideoPlayerPage extends StatefulWidget {
 class _VideoPlayerPageState
     extends ModularState<VideoPlayerPage, VideoPlayerStore> {
   VideoPlayerController _controller;
-  Color _screenBackgroundColor = Colors.transparent;
+  Color _screenBackgroundColor = Colors.black;
   bool isFullScreenMode = false;
   bool isMinimised = false;
 
@@ -48,6 +48,22 @@ class _VideoPlayerPageState
                     _fullScreenButton(),
                     if (!isFullScreenMode) _minimizeScreenButton(),
                     VideoProgressIndicator(_controller, allowScrubbing: true),
+                    Row(
+                      children: <Widget>[
+                        Container(height: 80, width: 100, color: Colors.red),
+                        SizedBox(width: 8),
+                        Text(
+                          widget.video.snippet.title,
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyle(
+                            color: Colors.yellow,
+                            fontSize: 16,
+                          ),
+                        ),
+                        _minimisedPlayStopButton(),
+                      ],
+                    ),
                   ],
                 ),
               ),
@@ -56,6 +72,26 @@ class _VideoPlayerPageState
         },
       ),
     );
+  }
+
+  void _toggleVideoPlaybackForMinimisedMode() {
+    _controller.value.isPlaying ? _controller.pause() : _controller.play();
+  }
+
+  Widget _minimisedPlayStopButton() {
+    return Positioned(
+      child: FlatButton(
+          onPressed: () => _toggleVideoPlaybackForMinimisedMode(),
+          child: _minimisedPlaybackIcon()),
+    );
+  }
+
+  Icon _minimisedPlaybackIcon() {
+    if (_controller.value.isPlaying) {
+      return Icon(Icons.pause, color: Colors.yellow, size: 48);
+    } else {
+      return Icon(Icons.play_arrow, color: Colors.yellow, size: 48);
+    }
   }
 
   @override
@@ -138,7 +174,13 @@ class _VideoPlayerPageState
   }
 
   void _minimizeVideoPlayer() {
-    print('_minimizeVideoPlayer');
+    if (!isMinimised) {
+      isMinimised = true;
+      setState(() => _screenBackgroundColor = Colors.transparent);
+    } else {
+      isMinimised = false;
+      setState(() => _screenBackgroundColor = Colors.black);
+    }
   }
 
   void _portretScreenOrientaionModes() {

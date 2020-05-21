@@ -41,7 +41,10 @@ class TransparentRoute extends PageRoute {
   ) {
     final childWidget = builder(context);
     if (animationBuilder == null) {
-      return _defaultAnimation(childWidget);
+      return FadeTransition(
+        opacity: animation,
+        child: ScaleTransition(scale: animation, child: childWidget),
+      );
     } else {
       return animationBuilder(
         context,
@@ -50,12 +53,5 @@ class TransparentRoute extends PageRoute {
         childWidget,
       );
     }
-  }
-
-  FadeTransition _defaultAnimation(Widget childWidget) {
-    return FadeTransition(
-      opacity: animation,
-      child: ScaleTransition(scale: animation, child: childWidget),
-    );
   }
 }
