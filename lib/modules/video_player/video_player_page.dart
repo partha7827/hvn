@@ -30,35 +30,31 @@ class _VideoPlayerPageState
   bool isMinimised = false;
 
   Widget build(BuildContext context) {
-    return ResponsiveSafeArea(
-      builder: (context, size) {
-        return Scaffold(
-          backgroundColor: Colors.transparent,
-          body: Container(
+    return Scaffold(
+      backgroundColor: _screenBackgroundColor,
+      body: ResponsiveSafeArea(
+        builder: (context, size) {
+          return Container(
             child: Align(
               alignment: Alignment.center,
-              child: Container(
-                color: Colors.transparent,
-                padding: EdgeInsets.all(4),
-                child: AspectRatio(
-                  aspectRatio: _controller.value.aspectRatio,
-                  child: Stack(
-                    alignment: Alignment.bottomCenter,
-                    children: <Widget>[
-                      VideoPlayer(_controller),
-                      PlayPauseOverlay(controller: _controller),
-                      _closeButton(context),
-                      _fullScreenButton(),
-                      if (!isFullScreenMode) _minimizeScreenButton(),
-                      VideoProgressIndicator(_controller, allowScrubbing: true),
-                    ],
-                  ),
+              child: AspectRatio(
+                aspectRatio: _controller.value.aspectRatio,
+                child: Stack(
+                  alignment: Alignment.bottomCenter,
+                  children: <Widget>[
+                    VideoPlayer(_controller),
+                    PlayPauseOverlay(controller: _controller),
+                    _closeButton(context),
+                    _fullScreenButton(),
+                    if (!isFullScreenMode) _minimizeScreenButton(),
+                    VideoProgressIndicator(_controller, allowScrubbing: true),
+                  ],
                 ),
               ),
             ),
-          ),
-        );
-      },
+          );
+        },
+      ),
     );
   }
 

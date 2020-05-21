@@ -30,10 +30,10 @@ class TransparentRoute extends PageRoute {
     Animation<double> animation,
     Animation<double> secondaryAnimation,
   ) {
-    final result = builder(context);
+    final childWidget = builder(context);
     return FadeTransition(
       opacity: animation,
-      child: ScaleTransition(scale: animation, child: result),
+      child: ScaleTransition(scale: animation, child: childWidget),
     );
   }
 }
