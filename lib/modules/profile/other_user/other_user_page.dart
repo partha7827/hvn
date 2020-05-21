@@ -3,15 +3,20 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:highvibe/models/models.dart' show User;
-import 'package:highvibe/modules/home/home_module.dart';
-import 'package:highvibe/modules/profile/audio/audio_page.dart';
-import 'package:highvibe/modules/profile/broadcast/broadcast_page.dart';
-import 'package:highvibe/modules/profile/chat/chat_page.dart';
+import 'package:highvibe/modules/audio/audio_module.dart';
+import 'package:highvibe/modules/chat/chat_module.dart';
+import 'package:highvibe/modules/live/live_module.dart';
+import 'package:highvibe/modules/profile/profile_module.dart';
+import 'package:highvibe/modules/profile/widgets/profile_avatar.dart';
+import 'package:highvibe/modules/profile/widgets/profile_tab_buttons.dart';
+import 'package:highvibe/modules/profile/widgets/profile_tab_pages.dart';
 import 'package:highvibe/values/Strings.dart';
 import 'package:highvibe/values/themes.dart';
 import 'package:highvibe/widgets/gradient_outline_button.dart';
+import 'package:highvibe/widgets/repeat_widget.dart';
+import 'package:highvibe/widgets/splash_widget.dart';
 import 'package:highvibe/widgets/underline_gradient_indicator.dart';
+import 'package:mobx/mobx.dart';
 import 'other_user_controller.dart';
 
 class OtherUserPage extends StatefulWidget {
@@ -27,248 +32,152 @@ class OtherUserPage extends StatefulWidget {
 class _OtherUserPageState
     extends ModularState<OtherUserPage, OtherUserController>
     with SingleTickerProviderStateMixin {
-  User get user => controller.otherUser;
-
-  @override
-  void initState() {
-    super.initState();
-    controller.init(widget.userId);
-    _tabController = TabController(initialIndex: 0, length: 3, vsync: this);
-  }
-
   TabController _tabController;
 
   @override
-  Widget build(BuildContext context) {
-    return Observer(builder: (_) {
-      return user == null
-          ? Center(child: CircularProgressIndicator())
-          : Scaffold(
-              body: NestedScrollView(
-                headerSliverBuilder: (context, innerBoxIsScrolled) {
-                  return <Widget>[
-                    SliverAppBar(
-                      expandedHeight: 300,
-                      floating: false,
-                      pinned: true,
-                      backgroundColor: secondaryColor,
-                      title: Text(
-                        user.account,
-                        style: bold18White,
-                      ),
-                      leading: IconButton(
-                        icon: Icon(Icons.arrow_back_ios),
-                        onPressed: () {
-                          HomeModule.toHome();
-                        },
-                      ),
-                      flexibleSpace: FlexibleSpaceBar(
-                        collapseMode: CollapseMode.parallax,
-                        stretchModes: [
-                          StretchMode.fadeTitle,
-                        ],
-                        background: Padding(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 16.0,
-                          ),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: <Widget>[
-                              AppBar(
-                                backgroundColor: Colors.transparent,
-                                leading: Container(),
-                              ),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: <Widget>[
-                                  Container(
-                                    width: 110,
-                                    height: 110,
-                                    decoration: BoxDecoration(
-                                      gradient: primaryGradient,
-                                      borderRadius: BorderRadius.circular(100),
-                                    ),
-                                    child: Center(
-                                      child: Container(
-                                        width: 105,
-                                        height: 105,
-                                        decoration: BoxDecoration(
-                                          color: secondaryColor,
-                                          borderRadius:
-                                              BorderRadius.circular(100),
-                                        ),
-                                        child: Center(
-                                          child: ClipOval(
-                                            child: CachedNetworkImage(
-                                              imageUrl: user.photoUrl ?? "",
-                                              width: 100,
-                                              height: 100,
-                                              fit: BoxFit.cover,
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.only(left: 16.0),
-                                    child: Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: <Widget>[
-                                        Text(
-                                          user.name ?? 'username',
-                                          style: bold20White,
-                                        ),
-                                        Padding(
-                                          padding:
-                                              const EdgeInsets.only(top: 4.0),
-                                          child: Text(
-                                            user.status ?? 'status',
-                                            style: normal16Hint,
-                                          ),
-                                        ),
-                                        Padding(
-                                          padding:
-                                              const EdgeInsets.only(top: 8.0),
-                                          child: Row(
-                                            children: <Widget>[
-                                              GradientOutlineButton(
-                                                icon: SvgPicture.asset(
-                                                    'assets/ic_donate.svg'),
-                                                onPressed: () {},
-                                              ),
-                                              Padding(
-                                                padding: const EdgeInsets.only(
-                                                    left: 16.0),
-                                                child: Container(
-                                                  width: MediaQuery.of(context)
-                                                          .size
-                                                          .width *
-                                                      0.3,
-                                                  child: GradientOutlineButton(
-                                                    label: Text(
-                                                      Strings.follow,
-                                                      style: normal16Accent,
-                                                    ),
-                                                    onPressed: () {},
-                                                  ),
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  )
-                                ],
-                              ),
-                              Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(vertical: 20),
-                                child: Text(
-                                  user.bio,
-                                  maxLines: 2,
-                                  overflow: TextOverflow.ellipsis,
-                                  style: normal16Hint,
-                                ),
-                              ),
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
-                                children: <Widget>[
-                                  Column(
-                                    children: <Widget>[
-                                      Text(
-                                        "${user.followers.length ?? 0}",
-                                        style: bold20White,
-                                      ),
-                                      Text('Followers', style: normal16Hint)
-                                    ],
-                                  ),
-                                  Column(
-                                    children: <Widget>[
-                                      Text(
-                                        "${user.following.length ?? 0}",
-                                        style: bold20White,
-                                      ),
-                                      Text('Following', style: normal16Hint)
-                                    ],
-                                  ),
-                                ],
-                              )
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
-                    SliverPersistentHeader(
-                      pinned: true,
-                      delegate: _SliverAppBarDelegate(
-                        color: primaryLightColor,
-                        tabBar: TabBar(
-                          controller: _tabController,
-                          labelColor: Colors.white,
-                          unselectedLabelColor: Colors.grey,
-                          indicator: UnderlineGradientIndicator(
-                            gradient: primaryGradientHorizontal,
-                            insets:
-                                const EdgeInsets.symmetric(horizontal: 16.0),
-                          ),
-                          tabs: [
-                            Tab(
-                              icon: Image.asset(_tabController.index == 0
-                                  ? 'assets/ic_audio_colored.png'
-                                  : 'assets/ic_audio.png'),
-                            ),
-                            Tab(icon: SvgPicture.asset('assets/ic_chat.svg')),
-                            Tab(
-                                icon: SvgPicture.asset(
-                                    'assets/ic_broadcasting.svg')),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ];
-                },
-                body: TabBarView(
-                  controller: _tabController,
-                  children: <Widget>[
-                    AudioPage(user: user),
-                    ChatPage(user: user),
-                    BroadcastPage(user: user),
-                  ],
-                ),
-              ),
-            );
-    });
+  void initState() {
+    controller.loadOtherUser();
+    _tabController = TabController(initialIndex: 0, length: 3, vsync: this);
+    super.initState();
   }
-}
-
-class _SliverAppBarDelegate extends SliverPersistentHeaderDelegate {
-  _SliverAppBarDelegate({this.tabBar, this.color});
-
-  final TabBar tabBar;
-  final Color color;
 
   @override
-  double get minExtent => tabBar.preferredSize.height;
-  @override
-  double get maxExtent => tabBar.preferredSize.height;
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Observer(
+        builder: (_) {
+          switch (controller.otherUserFuture?.status) {
+            case FutureStatus.fulfilled:
+              return buildProfilePage();
 
-  @override
-  Widget build(
-      BuildContext context, double shrinkOffset, bool overlapsContent) {
-    return Container(
-      child: tabBar,
-      color: color,
+            case FutureStatus.rejected:
+              return RepeatWidget(controller.loadOtherUser);
+
+            default:
+              return SplashWidget();
+          }
+        },
+      ),
     );
   }
 
-  @override
-  bool shouldRebuild(_SliverAppBarDelegate oldDelegate) {
-    return false;
+  Widget buildProfilePage() {
+    return NestedScrollView(
+      headerSliverBuilder: (context, innerBoxIsScrolled) {
+        return <Widget>[
+          SliverAppBar(
+            expandedHeight: 300,
+            floating: false,
+            pinned: true,
+            backgroundColor: secondaryColor,
+            leading: BackButton(
+              onPressed: ProfileModule.toHome,
+            ),
+            flexibleSpace: FlexibleSpaceBar(
+              collapseMode: CollapseMode.parallax,
+              stretchModes: [
+                StretchMode.fadeTitle,
+              ],
+              background: Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 16.0,
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    AppBar(
+                      backgroundColor: Colors.transparent,
+                      leading: Container(),
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: <Widget>[
+                        ProfileAvatar(controller.otherUser.photoUrl),
+                        Padding(
+                          padding: const EdgeInsets.only(left: 16.0),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: <Widget>[
+                              Text(
+                                controller.otherUser.name,
+                                style: bold20White,
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.only(top: 4.0),
+                                child: Text(
+                                  controller.otherUser.status,
+                                  style: normal16Hint,
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.only(top: 8.0),
+                                child: Container(
+                                  width:
+                                      MediaQuery.of(context).size.width * 0.3,
+                                  child: GradientOutlineButton(
+                                    label: Observer(
+                                      builder: (_) => Text(
+                                        controller.isFollowing
+                                            ? Strings.unfollow
+                                            : Strings.follow,
+                                        style: normal16Accent,
+                                      ),
+                                    ),
+                                    onPressed: controller.followUser,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        )
+                      ],
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 20),
+                      child: Text(
+                        controller.otherUser.bio,
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
+                        style: normal16Hint,
+                      ),
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: <Widget>[
+                        Column(
+                          children: <Widget>[
+                            Observer(
+                              builder: (_) => Text(
+                                controller.followers.length.toString(),
+                                style: bold20White,
+                              ),
+                            ),
+                            Text('Followers', style: normal16Hint)
+                          ],
+                        ),
+                        Column(
+                          children: <Widget>[
+                            Observer(
+                              builder: (_) => Text(
+                                controller.following.length.toString(),
+                                style: bold20White,
+                              ),
+                            ),
+                            Text('Following', style: normal16Hint)
+                          ],
+                        ),
+                      ],
+                    )
+                  ],
+                ),
+              ),
+            ),
+          ),
+          ProfileTabButtons(controller: _tabController),
+        ];
+      },
+      body: ProfileTabPages(controller: _tabController),
+    );
   }
 }

@@ -54,7 +54,7 @@ dependencies:
   styled_widget: ^0.0.6
   # State Managment
   flutter_mobx: ^1.1.0
-  flutter_modular: ^1.1.2
+  flutter_modular: ^1.2.3
   freezed_annotation: ^0.7.1
   # hive_flutter: ^0.3.0+1
   # hive: ^1.4.1+1

@@ -10,8 +10,8 @@ class HomeModule extends ChildModule {
   List<Bind> get binds => [
         Bind<AppStore>((i) => AppStore()),
         Bind<HomeController>((i) => HomeController()),
-        Bind<AuthService>((i) => AuthService.withReal()),
-        Bind<StoreService>((i) => StoreService.withReal()),
+        Bind<AuthService>((i) => AuthService.withFirebase()),
+        Bind<StoreService>((i) => StoreService.withFirebase()),
       ];
 
   @override

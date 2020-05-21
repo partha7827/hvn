@@ -10,6 +10,9 @@ part 'chat_controller.g.dart';
 class ChatController = _ChatControllerBase with _$ChatController;
 
 abstract class _ChatControllerBase with Store {
+  final String channelId;
+  _ChatControllerBase(this.channelId);
+
   final authController = Modular.get<AppStore>();
 
   @observable

@@ -5,11 +5,7 @@ part 'audio_controller.g.dart';
 class AudioController = _AudioControllerBase with _$AudioController;
 
 abstract class _AudioControllerBase with Store {
-  @observable
-  int value = 0;
+  final String userId;
+  _AudioControllerBase(this.userId);
 
-  @action
-  void increment() {
-    value++;
-  }
 }

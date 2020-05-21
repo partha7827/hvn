@@ -13,8 +13,8 @@ class AuthModule extends ChildModule {
   @override
   List<Bind> get binds => [
         Bind((i) => AppStore()),
-        Bind((i) => StoreService.withReal()),
-        Bind((i) => AuthService.withReal()),
+        Bind((i) => StoreService.withFirebase()),
+        Bind((i) => AuthService.withFirebase()),
         Bind((i) => AutoLoginController()),
         Bind((i) => LoginController()),
         Bind((i) => RegisterController()),

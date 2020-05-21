@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:highvibe/models/models.dart' show User;
+import 'package:highvibe/widgets/splash_widget.dart';
 import 'package:stream_chat_flutter/stream_chat_flutter.dart' as Chat;
 import 'chat_controller.dart';
 import 'package:highvibe/values/Strings.dart';
@@ -9,9 +9,7 @@ import 'package:highvibe/values/themes.dart';
 import 'package:highvibe/widgets/custom_fab.dart';
 
 class ChatPage extends StatefulWidget {
-  final String title;
-  final User user;
-  const ChatPage({Key key, this.user, this.title = "Chat"}) : super(key: key);
+  const ChatPage({Key key}) : super(key: key);
 
   @override
   _ChatPageState createState() => _ChatPageState();
@@ -21,12 +19,6 @@ class _ChatPageState extends ModularState<ChatPage, ChatController>
     with AutomaticKeepAliveClientMixin {
   @override
   bool get wantKeepAlive => true;
-
-  @override
-  void initState() {
-    controller.init(widget.user);
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +33,7 @@ class _ChatPageState extends ModularState<ChatPage, ChatController>
                   child: ChannelPage(),
                 ),
               )
-            : Center(child: CircularProgressIndicator()),
+            : SplashWidget(),
       ),
     );
   }
