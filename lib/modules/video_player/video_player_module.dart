@@ -8,18 +8,18 @@ class VideoPlayerModule extends ChildModule {
 
   @override
   List<Bind> get binds => [
-        Bind((i) => VideoPlayerStore()),
+        //Bind((i) => VideoPlayerStore()),
       ];
 
   @override
   List<Router> get routers => [
-        Router(
-          '/videoplayer',
-          pageRouteGenerator: (builder, settings) => TransparentRoute(
-            builder: builder,
-            settings: settings,
-          ),
-          child: (_, args) => VideoPlayerPage(video: args.data),
-        ),
+        // Router(
+        //   '/videoplayer',
+        //   pageRouteGenerator: (builder, settings) => TransparentRoute(
+        //     builder: builder,
+        //     settings: settings,
+        //   ),
+        //   child: (_, args) => VideoPlayerPage(video: args.data),
+        // ),
       ];
 }

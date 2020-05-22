@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:highvibe/modules/app/app_store.dart';
@@ -28,7 +27,7 @@ class AppModule extends MainModule {
         Router("", module: ProfileModule()),
         Router("", module: WalletModule()),
         Router("", module: AudioPlayerModule()),
-        Router("", module: VideoPlayerModule()),
+        //Router("", module: VideoPlayerModule()),
       ];
 
   @override

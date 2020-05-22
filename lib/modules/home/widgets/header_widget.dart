@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:highvibe/modules/home/home_controller.dart';
+import 'package:highvibe/modules/video_player/video_player_page.dart';
 import 'package:highvibe/modules/video_player/widgets/video_preview_item.dart';
 import 'package:highvibe/values/Strings.dart';
 import 'package:highvibe/values/assets.dart';
@@ -100,13 +101,7 @@ class HeaderWidget extends StatelessWidget {
                     scrollDirection: Axis.horizontal,
                     itemCount: snapshot.data.length,
                     itemBuilder: (context, index) {
-                      return VideoPreviewItem(
-                        video: snapshot.data[index],
-                        onTap: (item) => Modular.to.pushNamed(
-                          '/videoplayer',
-                          arguments: item,
-                        ),
-                      );
+                      return VideoPlayerPage(video: snapshot.data[index]);
                     },
                   ),
                 ),
