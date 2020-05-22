@@ -31,49 +31,45 @@ class _VideoPlayerPageState
   bool _isMinimised = false;
 
   Widget build(BuildContext context) {
-    return AbsorbPointer(
-      absorbing: false,
-      child: Scaffold(
-        backgroundColor: _screenBackgroundColor,
-        body: ResponsiveSafeArea(
-          builder: (context, size) {
-            print(size);
-            return AnimatedPadding(
-              padding: _videoPlayePadding(size),
-              curve: Curves.ease,
-              duration: const Duration(milliseconds: 350),
-              child: Align(
-                alignment: Alignment.center,
-                child: AspectRatio(
-                  aspectRatio: _controller.value.aspectRatio,
-                  child: Stack(
-                    alignment: Alignment.bottomCenter,
-                    children: <Widget>[
-                      GestureDetector(
-                        child: VideoPlayer(_controller),
-                        onTap: () {
-                          if (_isMinimised) {
-                            _minimizeVideoPlayer();
-                          }
-                        },
+    return Container(
+      color: _screenBackgroundColor,
+      child: ResponsiveSafeArea(
+        builder: (context, size) {
+          return AnimatedPadding(
+            padding: _videoPlayePadding(size),
+            curve: Curves.ease,
+            duration: const Duration(milliseconds: 350),
+            child: Align(
+              alignment: Alignment.center,
+              child: AspectRatio(
+                aspectRatio: _controller.value.aspectRatio,
+                child: Stack(
+                  alignment: Alignment.bottomCenter,
+                  children: <Widget>[
+                    GestureDetector(
+                      child: VideoPlayer(_controller),
+                      onTap: () {
+                        if (_isMinimised) {
+                          _minimizeVideoPlayer();
+                        }
+                      },
+                    ),
+                    if (!_isMinimised)
+                      PlayPauseOverlay(controller: _controller),
+                    if (!_isMinimised) _closeButton(context),
+                    if (!_isMinimised) _fullScreenButton(),
+                    if (!_isFullScreenMode) _minimizeScreenButton(),
+                    if (!_isMinimised)
+                      VideoProgressIndicator(
+                        _controller,
+                        allowScrubbing: true,
                       ),
-                      if (!_isMinimised)
-                        PlayPauseOverlay(controller: _controller),
-                      if (!_isMinimised) _closeButton(context),
-                      if (!_isMinimised) _fullScreenButton(),
-                      if (!_isFullScreenMode) _minimizeScreenButton(),
-                      if (!_isMinimised)
-                        VideoProgressIndicator(
-                          _controller,
-                          allowScrubbing: true,
-                        ),
-                    ],
-                  ),
+                  ],
                 ),
               ),
-            );
-          },
-        ),
+            ),
+          );
+        },
       ),
     );
   }
