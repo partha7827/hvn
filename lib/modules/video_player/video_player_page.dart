@@ -197,7 +197,7 @@ class _VideoPlayerPageState extends State<VideoPlayerPage> {
         ),
       );
     } else {
-      return SizedBox(width: 0);
+      return const SizedBox.shrink();
     }
   }
 
@@ -239,13 +239,5 @@ class _VideoPlayerPageState extends State<VideoPlayerPage> {
 
   void _toggleVideoPlaybackForMinimisedMode() {
     _controller.value.isPlaying ? _controller.pause() : _controller.play();
-  }
-
-  EdgeInsetsGeometry _videoPlayePadding(Size size) {
-    if (_isMinimised) {
-      return EdgeInsets.fromLTRB(0, (size.height - 120), (size.width - 120), 0);
-    } else {
-      return EdgeInsets.all(0);
-    }
   }
 }

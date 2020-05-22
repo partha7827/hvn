@@ -4,7 +4,6 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:highvibe/modules/home/home_controller.dart';
 import 'package:highvibe/modules/video_player/video_player_page.dart';
-import 'package:highvibe/modules/video_player/widgets/video_preview_item.dart';
 import 'package:highvibe/values/Strings.dart';
 import 'package:highvibe/values/assets.dart';
 import 'package:highvibe/values/themes.dart';
