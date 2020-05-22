@@ -3,16 +3,18 @@ import 'package:flutter/services.dart';
 import 'package:flutter_portal/flutter_portal.dart';
 import 'package:highvibe/models/models.dart' show Video;
 import 'package:highvibe/modules/video_player/widgets/widgets.dart'
-    show PlayPauseOverlay, VideoPreviewItem;
+    show PlayPauseOverlay;
 import 'package:highvibe/widgets/responsive_safe_area.dart';
 import 'package:video_player/video_player.dart';
 
 class VideoPlayerPage extends StatefulWidget {
   final String title;
   final Video video;
+  final Widget rootWidget;
 
   const VideoPlayerPage({
     @required this.video,
+    @required this.rootWidget,
     this.title = 'Video Player',
     Key key,
   }) : super(key: key);
@@ -72,12 +74,10 @@ class _VideoPlayerPageState extends State<VideoPlayerPage> {
         ),
       ),
       child: GestureDetector(
-        child: VideoPreviewItem(
-          video: widget.video,
-          onTap: (item) {
-            setState(() => showVideoPlayer = true);
-          },
-        ),
+        child: widget.rootWidget,
+        key: UniqueKey(),
+        behavior: HitTestBehavior.opaque,
+        onTap: () => setState(() => showVideoPlayer = true),
       ),
     );
   }
