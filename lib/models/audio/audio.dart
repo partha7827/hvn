@@ -21,7 +21,7 @@ abstract class Audio implements Built<Audio, AudioBuilder> {
 
   String get id;
   String get userId;
-  Stirng get userName;
+  String get userName;
   String get title;
   String get subTitle;
   String get author;

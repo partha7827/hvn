@@ -1,11 +1,6 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:highvibe/modules/audio/audio_module.dart';
-import 'package:highvibe/modules/chat/chat_module.dart';
-import 'package:highvibe/modules/live/live_module.dart';
 import 'package:highvibe/modules/profile/profile_module.dart';
 import 'package:highvibe/modules/profile/widgets/profile_avatar.dart';
 import 'package:highvibe/modules/profile/widgets/profile_tab_buttons.dart';
@@ -15,7 +10,6 @@ import 'package:highvibe/values/themes.dart';
 import 'package:highvibe/widgets/gradient_outline_button.dart';
 import 'package:highvibe/widgets/repeat_widget.dart';
 import 'package:highvibe/widgets/splash_widget.dart';
-import 'package:highvibe/widgets/underline_gradient_indicator.dart';
 import 'package:mobx/mobx.dart';
 import 'other_user_controller.dart';
 
