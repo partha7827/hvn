@@ -37,9 +37,9 @@ class _VideoPlayerPageState
         backgroundColor: _screenBackgroundColor,
         body: ResponsiveSafeArea(
           builder: (context, size) {
-            final padding = 640.0; // Calculate!
+            print(size);
             return AnimatedPadding(
-              padding: EdgeInsets.only(top: _isMinimised ? padding : 0),
+              padding: _videoPlayePadding(size),
               curve: Curves.ease,
               duration: const Duration(milliseconds: 350),
               child: Align(
@@ -63,8 +63,10 @@ class _VideoPlayerPageState
                       if (!_isMinimised) _fullScreenButton(),
                       if (!_isFullScreenMode) _minimizeScreenButton(),
                       if (!_isMinimised)
-                        VideoProgressIndicator(_controller,
-                            allowScrubbing: true),
+                        VideoProgressIndicator(
+                          _controller,
+                          allowScrubbing: true,
+                        ),
                     ],
                   ),
                 ),
@@ -232,5 +234,18 @@ class _VideoPlayerPageState
 
   void _toggleVideoPlaybackForMinimisedMode() {
     _controller.value.isPlaying ? _controller.pause() : _controller.play();
+  }
+
+  EdgeInsetsGeometry _videoPlayePadding(Size size) {
+    if (_isMinimised) {
+      return EdgeInsets.fromLTRB(
+        0,
+        (size.height - 120),
+        (size.width - 120),
+        0,
+      );
+    } else {
+      return EdgeInsets.all(0);
+    }
   }
 }
