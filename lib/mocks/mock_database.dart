@@ -41,17 +41,20 @@ final mockVideo = Video(
     ..snippet = _mockSnippet.toBuilder(),
 );
 
-var mockUser = User(
-  (b) => b
-    ..id = "default"
-    ..name = "Default User"
-    ..isRecommended = true,
-);
+var mockUser = User((b) => b
+  ..id = "default"
+  ..name = "Default User"
+  ..isRecommended = true);
+
+var mockAnotherUser = User((b) => b
+  ..id = "another"
+  ..name = "Another User");
 
 final mockDatabase = """
       {
         "users": {
           "${mockUser.id}": ${mockUser.toJson()},
+          "${mockAnotherUser.id}": ${mockAnotherUser.toJson()},
           "__where__": {
             "isRecommended == true": {
               "${mockUser.id}": ${mockUser.toJson()}

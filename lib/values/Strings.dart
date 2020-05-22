@@ -11,6 +11,7 @@ class Strings {
   static const done = 'Done';
   static const tools = 'Tools';
   static const follow = 'Follow';
+  static const unfollow = 'Unfollow';
   static const uploads = 'Uploads';
   static const seeAll = 'See All';
   static const playlists = 'Playlists';

@@ -11,47 +11,60 @@ class OtherUserController = _OtherUserControllerBase with _$OtherUserController;
 
 abstract class _OtherUserControllerBase with Store {
   final store = Modular.get<StoreService>();
+  User get currentUser => Modular.get<AppStore>().currentUser;
+  String get currentUserId => currentUser.id;
 
-  @observable
-  String otherUserId;
-
-  @observable
-  User otherUser;
+  final String otherUserId;
+  _OtherUserControllerBase(this.otherUserId);
 
   @action
-  Future<void> init(String userId) async {
-    otherUserId = userId;
-    final snapshot = await store.userCollection.document(otherUserId).get();
-    otherUser = User.fromSnapshot(snapshot);
+  Future<void> loadOtherUser() async {
+    final userFuture = store.userCollection
+        .document(otherUserId)
+        .get()
+        .then((s) => User.fromSnapshot(s));
+
+    otherUserFuture = ObservableFuture(userFuture);
+    otherUser = await userFuture;
+
+    followers = ObservableList.of(otherUser.followers);
+    following = ObservableList.of(otherUser.following);
   }
 
-  User get currentUser => Modular.get<AppStore>().currentUser;
+  User otherUser;
+
+  @observable
+  ObservableFuture<User> otherUserFuture;
+
+  @observable
+  ObservableList<String> followers = ObservableList.of([]);
+
+  @observable
+  ObservableList<String> following = ObservableList.of([]);
 
   @computed
-  bool get isFollowing => currentUser.following.contains(otherUserId);
+  bool get isFollowing => followers.contains(currentUserId);
 
   @action
-  Future<void> followUser(userId) async {
+  Future<void> followUser() async {
     if (isFollowing) {
-      // currentUser.following.toList().remove(userId);
-      // otherUser.followers.toList().remove(currentUser.id);
+      followers.remove(currentUserId);
 
       await store.userCollection.document(currentUser.id).updateData({
-        "following": FieldValue.arrayRemove([userId])
+        "following": FieldValue.arrayRemove([otherUserId])
       });
 
-      await store.userCollection.document(userId).updateData({
+      await store.userCollection.document(otherUserId).updateData({
         "followers": FieldValue.arrayRemove([currentUser.id])
       });
     } else {
-      // currentUser.following.toList().add(userId);
-      // otherUser.followers.toList().add(currentUser.id);
+      followers.add(currentUserId);
 
       await store.userCollection.document(currentUser.id).updateData({
-        "following": FieldValue.arrayUnion([userId])
+        "following": FieldValue.arrayUnion([otherUserId])
       });
 
-      await store.userCollection.document(userId).updateData({
+      await store.userCollection.document(otherUserId).updateData({
         "followers": FieldValue.arrayUnion([currentUser.id])
       });
     }

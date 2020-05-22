@@ -8,7 +8,7 @@ class AuthService extends Disposable {
 
   AuthService(this._auth);
 
-  factory AuthService.withReal() => AuthService(FirebaseAuth.instance);
+  factory AuthService.withFirebase() => AuthService(FirebaseAuth.instance);
 
   factory AuthService.withMock() =>
       AuthService(MockFirebaseAuth(signedIn: true));

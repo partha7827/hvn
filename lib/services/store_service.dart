@@ -11,7 +11,7 @@ class StoreService extends Disposable {
     _videoCollection = firestore.collection("videos");
   }
 
-  factory StoreService.withReal() => StoreService(Firestore.instance);
+  factory StoreService.withFirebase() => StoreService(Firestore.instance);
 
   factory StoreService.withMock() => StoreService(MockCloudFirestore(mockDatabase));
 

@@ -64,7 +64,7 @@ abstract class User implements Built<User, UserBuilder> {
     ..address = b.id
     ..chatId = b.id
     ..liveId = b.id
-    ..status = ""
+    ..status = "Author"
     ..email = ""
     ..name = ""
     ..photoUrl = ""

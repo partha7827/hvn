@@ -2,7 +2,7 @@ import 'package:highvibe/models/models.dart';
 
 const _artworkUrl =
     'https://takelessons.com/blog/wp-content/uploads/2020/03/flute-for-beginners.jpg';
-const _audioFileUrl = 'https://luan.xyz/files/audio/ambient_c_motion.mp3';
+const _audioFileUrl = 'https://storage.googleapis.com/download/storage/v1/b/highvibe-8601d.appspot.com/o/sample.mp3?alt=media';
 
 final mockAudioItemsList = [
   Audio(
