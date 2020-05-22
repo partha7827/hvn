@@ -41,12 +41,12 @@ final mockVideo = Video(
     ..snippet = _mockSnippet.toBuilder(),
 );
 
-var mockUser = User((b) => b
-  ..id = "default"
-  ..name = "Default User"
-  ..isRecommended = true  
+var mockUser = User(
+  (b) => b
+    ..id = "default"
+    ..name = "Default User"
+    ..isRecommended = true,
 );
-
 
 final mockDatabase = """
       {
