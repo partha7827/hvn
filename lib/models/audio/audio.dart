@@ -20,6 +20,8 @@ abstract class Audio implements Built<Audio, AudioBuilder> {
   Audio._();
 
   String get id;
+  String get userId;
+  Stirng get userName;
   String get title;
   String get subTitle;
   String get author;
@@ -53,6 +55,8 @@ abstract class Audio implements Built<Audio, AudioBuilder> {
 
   static void _initializeBuilder(AudioBuilder b) => b
     ..id = Uuid().v4()
+    ..userId = Uuid().v4()
+    ..userName = ""
     ..title = Strings.audioTitlePlaceholder
     ..subTitle = ""
     ..author = ""
