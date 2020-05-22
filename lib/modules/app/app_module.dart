@@ -16,8 +16,8 @@ class AppModule extends MainModule {
   @override
   List<Bind> get binds => [
         Bind((i) => AppStore()),
-        Bind((i) => AuthService.withReal()),
-        Bind((i) => StoreService.withReal()),
+        Bind((i) => AuthService.withFirebase()),
+        Bind((i) => StoreService.withFirebase()),
       ];
 
   @override

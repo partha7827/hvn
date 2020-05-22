@@ -11,6 +11,7 @@ class CustomTextForm extends StatelessWidget {
   final TextInputType keyboardType;
   final double borderRadius;
   final int maxLength;
+  final bool autoFocus;
 
   const CustomTextForm({
     Key key,
@@ -23,6 +24,7 @@ class CustomTextForm extends StatelessWidget {
     this.keyboardType,
     this.borderRadius,
     this.maxLength,
+    this.autoFocus = false,
   }) : super(key: key);
 
   @override
@@ -39,6 +41,7 @@ class CustomTextForm extends StatelessWidget {
         keyboardType: keyboardType,
         maxLength: maxLength,
         onSaved: onSave,
+        autofocus: autoFocus,
         decoration: InputDecoration(
           filled: true,
           counterStyle: normal12White,

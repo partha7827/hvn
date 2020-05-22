@@ -3,9 +3,8 @@ import 'package:flutter_modular/flutter_modular_test.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:highvibe/mocks/mock_database.dart';
 import 'package:highvibe/modules/app/app_store.dart';
-import 'package:highvibe/modules/home/home_module.dart';
-
 import 'package:highvibe/modules/home/home_controller.dart';
+import 'package:highvibe/modules/home/home_module.dart';
 import 'package:highvibe/services/auth_service.dart';
 import 'package:highvibe/services/store_service.dart';
 
@@ -37,11 +36,11 @@ void main() {
     expect(appStore.authState, equals(AuthState.unauthenticated));
   });
 
-  test("getAuthors", () async {
-    final authors = await home.getAuthors();
-
-    expect(authors[0], equals(mockUser));
-  });
+//  test("getAuthors", () async {
+//    final authors = await home.getAuthors();
+//
+//    expect(authors[0], equals(mockUser));
+//  });
 
   test("getVideos", () async {
     final videos = await home.getVideos();

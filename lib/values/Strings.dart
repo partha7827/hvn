@@ -11,6 +11,7 @@ class Strings {
   static const done = 'Done';
   static const tools = 'Tools';
   static const follow = 'Follow';
+  static const unfollow = 'Unfollow';
   static const uploads = 'Uploads';
   static const seeAll = 'See All';
   static const playlists = 'Playlists';
@@ -36,9 +37,18 @@ class Strings {
   static const google = "Google";
   static const letsGetSignedUp = "Let’s get you signed up";
   static const name = "Name";
-  static const userNotFound = "User with given email and password does not exist";
+  static const userNotFound =
+      "User with given email and password does not exist";
   static const resetPassword = "Email Sent, Please check it to change password";
-  static const defaultQuote = "It's time to start living the life you've imagined";
+  static const defaultQuote =
+      "It's time to start living the life you've imagined";
   static const authorsTitle = "Explore Authors";
   static const audioTitlePlaceholder = "No Title";
+  static const submit = "Submit";
+  static const thankYou = "Thank You";
+  static const backToLogin = "Back to Login";
+
+  ///Messages
+  static emailToChangePassword(String email) =>
+      "An e-mail to change your password has been send to $email";
 }
