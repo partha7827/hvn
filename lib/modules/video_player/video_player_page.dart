@@ -23,54 +23,55 @@ class VideoPlayerPage extends StatefulWidget {
 }
 
 class _VideoPlayerPageState
-    extends ModularState<VideoPlayerPage, VideoPlayerStore> {
+    extends ModularState<VideoPlayerPage, VideoPlayerStore>
+    with TickerProviderStateMixin {
   VideoPlayerController _controller;
   Color _screenBackgroundColor = Colors.black;
   bool _isFullScreenMode = false;
   bool _isMinimised = false;
 
   Widget build(BuildContext context) {
-    print('_isMinimised $_isMinimised');
-    return Scaffold(
-      backgroundColor: _screenBackgroundColor,
-      body: ResponsiveSafeArea(
-        builder: (context, size) {
-          return AnimatedPositioned(
-            duration: Duration(milliseconds: 500),
-            bottom: _isMinimised ? 300 : 20,
-            // alignment: Alignment.center,
-            child: AspectRatio(
-              aspectRatio: _controller.value.aspectRatio,
-              child: Stack(
-                alignment: Alignment.bottomCenter,
-                children: <Widget>[
-                  VideoPlayer(_controller),
-                  PlayPauseOverlay(controller: _controller),
-                  _closeButton(context),
-                  _fullScreenButton(),
-                  if (!_isFullScreenMode) _minimizeScreenButton(),
-                  VideoProgressIndicator(_controller, allowScrubbing: true),
-                  Row(
+    return AbsorbPointer(
+      absorbing: false,
+      child: Scaffold(
+        backgroundColor: _screenBackgroundColor,
+        body: ResponsiveSafeArea(
+          builder: (context, size) {
+            final padding = 640.0; // Calculate!
+            return AnimatedPadding(
+              padding: EdgeInsets.only(top: _isMinimised ? padding : 0),
+              curve: Curves.ease,
+              duration: const Duration(milliseconds: 350),
+              child: Align(
+                alignment: Alignment.center,
+                child: AspectRatio(
+                  aspectRatio: _controller.value.aspectRatio,
+                  child: Stack(
+                    alignment: Alignment.bottomCenter,
                     children: <Widget>[
-                      Container(height: 80, width: 100, color: Colors.red),
-                      SizedBox(width: 8),
-                      Text(
-                        widget.video.snippet.title,
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                        style: TextStyle(
-                          color: Colors.yellow,
-                          fontSize: 16,
-                        ),
+                      GestureDetector(
+                        child: VideoPlayer(_controller),
+                        onTap: () {
+                          if (_isMinimised) {
+                            _minimizeVideoPlayer();
+                          }
+                        },
                       ),
-                      _minimisedPlayStopButton(),
+                      if (!_isMinimised)
+                        PlayPauseOverlay(controller: _controller),
+                      if (!_isMinimised) _closeButton(context),
+                      if (!_isMinimised) _fullScreenButton(),
+                      if (!_isFullScreenMode) _minimizeScreenButton(),
+                      if (!_isMinimised)
+                        VideoProgressIndicator(_controller,
+                            allowScrubbing: true),
                     ],
                   ),
-                ],
+                ),
               ),
-            ),
-          );
-        },
+            );
+          },
+        ),
       ),
     );
   }
@@ -91,8 +92,8 @@ class _VideoPlayerPageState
 
   void _allScreenOrientaionModes() {
     SystemChrome.setPreferredOrientations([
-      DeviceOrientation.landscapeRight,
-      DeviceOrientation.landscapeLeft,
+      // DeviceOrientation.landscapeRight,
+      // DeviceOrientation.landscapeLeft,
       DeviceOrientation.portraitUp,
       DeviceOrientation.portraitDown,
     ]);
@@ -155,19 +156,42 @@ class _VideoPlayerPageState
     );
   }
 
-  Widget _minimizeScreenButton() {
-    return Positioned(
-      top: 0,
-      left: -24,
-      child: FlatButton(
-        onPressed: () => _minimizeVideoPlayer(),
-        child: Icon(
-          Icons.keyboard_arrow_down,
-          color: Colors.white,
-          size: 32,
+  Widget _minimisedVideoPlayer() {
+    return Row(
+      children: <Widget>[
+        Container(height: 80, width: 100, color: Colors.red),
+        SizedBox(width: 8),
+        Text(
+          widget.video.snippet.title,
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
+          style: TextStyle(
+            color: Colors.yellow,
+            fontSize: 16,
+          ),
         ),
-      ),
+        _minimisedPlayStopButton(),
+      ],
     );
+  }
+
+  Widget _minimizeScreenButton() {
+    if (!_isMinimised) {
+      return Positioned(
+        top: 0,
+        left: -24,
+        child: FlatButton(
+          onPressed: () => _minimizeVideoPlayer(),
+          child: Icon(
+            Icons.keyboard_arrow_down,
+            color: Colors.white,
+            size: 32,
+          ),
+        ),
+      );
+    } else {
+      return SizedBox(width: 0);
+    }
   }
 
   void _minimizeVideoPlayer() {
