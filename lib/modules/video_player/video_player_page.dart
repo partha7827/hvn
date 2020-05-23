@@ -195,7 +195,7 @@ class _VideoPlayerPageState extends State<VideoPlayerPage> {
                       _controller,
                       allowScrubbing: true,
                     ),
-                  if (_isMinimised)
+                  if (_isMinimised) ...[
                     Positioned(
                       left: 130,
                       top: 8,
@@ -216,7 +216,6 @@ class _VideoPlayerPageState extends State<VideoPlayerPage> {
                         ),
                       ),
                     ),
-                  if (_isMinimised)
                     Positioned(
                       left: 130,
                       top: 50,
@@ -238,7 +237,6 @@ class _VideoPlayerPageState extends State<VideoPlayerPage> {
                         ),
                       ),
                     ),
-                  if (_isMinimised)
                     Positioned(
                       right: 50,
                       child: FlatButton(
@@ -246,7 +244,6 @@ class _VideoPlayerPageState extends State<VideoPlayerPage> {
                         child: _minimisedPlaybackIcon(),
                       ),
                     ),
-                  if (_isMinimised)
                     GestureDetector(
                       child: Container(
                         width: size.width / 1.7,
@@ -254,6 +251,7 @@ class _VideoPlayerPageState extends State<VideoPlayerPage> {
                       ),
                       onTap: () => _toggleVideoPlayerMode(),
                     ),
+                  ],
                 ],
               ),
             ),
