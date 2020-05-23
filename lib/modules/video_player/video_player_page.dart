@@ -9,6 +9,8 @@ import 'package:highvibe/values/themes.dart';
 import 'package:highvibe/widgets/responsive_safe_area.dart';
 import 'package:video_player/video_player.dart';
 
+enum VideoPlayerMode { fullScreenMode, minimised, none }
+
 class VideoPlayerPage extends StatefulWidget {
   final Video video;
 
@@ -23,8 +25,8 @@ class VideoPlayerPage extends StatefulWidget {
 
 class _VideoPlayerPageState extends State<VideoPlayerPage> {
   VideoPlayerController _controller;
-  bool _isFullScreenMode = false;
-  bool _isMinimised = false;
+  VideoPlayerMode _videoPlayerMode = VideoPlayerMode.none;
+  bool get _isMinimised => _videoPlayerMode == VideoPlayerMode.minimised;
 
   Widget build(BuildContext context) {
     if (_isMinimised) {
@@ -38,6 +40,9 @@ class _VideoPlayerPageState extends State<VideoPlayerPage> {
   void dispose() {
     _portretScreenOrientaionModes();
     _controller.dispose();
+    if (videoOverlayEntry != null) {
+      videoOverlayEntry.remove();
+    }
     super.dispose();
   }
 
@@ -118,12 +123,14 @@ class _VideoPlayerPageState extends State<VideoPlayerPage> {
   }
 
   void _toggleFullscreenMode() {
-    if (_isFullScreenMode) {
-      _isFullScreenMode = false;
-      _portretScreenOrientaionModes();
-    } else {
-      _isFullScreenMode = true;
+    if (_videoPlayerMode == VideoPlayerMode.fullScreenMode) {
       setState(() {
+        _videoPlayerMode = VideoPlayerMode.none;
+        _portretScreenOrientaionModes();
+      });
+    } else if (_videoPlayerMode == VideoPlayerMode.none) {
+      setState(() {
+        _videoPlayerMode = VideoPlayerMode.fullScreenMode;
         SystemChrome.setPreferredOrientations([
           DeviceOrientation.landscapeRight,
           DeviceOrientation.landscapeLeft,
@@ -137,10 +144,10 @@ class _VideoPlayerPageState extends State<VideoPlayerPage> {
   }
 
   void _toggleVideoPlayerMode() {
-    if (!_isMinimised) {
-      setState(() => _isMinimised = true);
+    if (_videoPlayerMode != VideoPlayerMode.minimised) {
+      setState(() => _videoPlayerMode = VideoPlayerMode.minimised);
     } else {
-      setState(() => _isMinimised = false);
+      setState(() => _videoPlayerMode = VideoPlayerMode.none);
     }
   }
 
@@ -190,8 +197,6 @@ class _VideoPlayerPageState extends State<VideoPlayerPage> {
                     ),
                   if (_isMinimised)
                     GestureDetector(
-                      key: UniqueKey(),
-                      behavior: HitTestBehavior.opaque,
                       child: Container(
                         width: size.width / 1.7,
                         color: Colors.transparent,
