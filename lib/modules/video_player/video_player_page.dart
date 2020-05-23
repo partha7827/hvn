@@ -8,14 +8,12 @@ import 'package:highvibe/widgets/responsive_safe_area.dart';
 import 'package:video_player/video_player.dart';
 
 class VideoPlayerPage extends StatefulWidget {
-  final String title;
   final Video video;
   final Widget rootWidget;
 
   const VideoPlayerPage({
     @required this.video,
     @required this.rootWidget,
-    this.title = 'Video Player',
     Key key,
   }) : super(key: key);
 
@@ -28,12 +26,13 @@ class _VideoPlayerPageState extends State<VideoPlayerPage> {
   Color _screenBackgroundColor = Colors.black;
   bool _isFullScreenMode = false;
   bool _isMinimised = false;
-  bool showVideoPlayer = false;
+  bool _showVideoPlayer = false;
 
   Widget build(BuildContext context) {
     return PortalEntry(
-      visible: showVideoPlayer,
+      visible: _showVideoPlayer,
       portal: Container(
+        color: Colors.black,
         child: ResponsiveSafeArea(
           builder: (context, size) {
             return Container(
@@ -77,7 +76,7 @@ class _VideoPlayerPageState extends State<VideoPlayerPage> {
         child: widget.rootWidget,
         key: UniqueKey(),
         behavior: HitTestBehavior.opaque,
-        onTap: () => setState(() => showVideoPlayer = true),
+        onTap: () => setState(() => _showVideoPlayer = true),
       ),
     );
   }
@@ -107,7 +106,7 @@ class _VideoPlayerPageState extends State<VideoPlayerPage> {
 
   void _close(BuildContext context) {
     _controller.pause();
-    setState(() => showVideoPlayer = false);
+    setState(() => _showVideoPlayer = false);
   }
 
   Widget _closeButton(BuildContext context) {

@@ -12,13 +12,15 @@ part 'snippet.g.dart';
 
 abstract class Snippet implements Built<Snippet, SnippetBuilder> {
   static Serializer<Snippet> get serializer => _$snippetSerializer;
+
   factory Snippet([void Function(SnippetBuilder) updates]) = _$Snippet;
+
   Snippet._();
 
-  String get title;
   String get description;
   DateTime get publishedAt;
   BuiltList<String> get tags;
+  String get title;
   Thumbnail get videoThumbnail;
 
   String toJson() {
