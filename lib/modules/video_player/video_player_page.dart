@@ -196,18 +196,6 @@ class _VideoPlayerPageState extends State<VideoPlayerPage> {
                       allowScrubbing: true,
                     ),
                   if (_isMinimised)
-                    GestureDetector(
-                      child: Container(
-                        width: size.width / 1.7,
-                        color: Colors.transparent,
-                      ),
-                      onTap: () {
-                        if (_isMinimised) {
-                          _toggleVideoPlayerMode();
-                        }
-                      },
-                    ),
-                  if (_isMinimised)
                     Positioned(
                       left: 130,
                       top: 8,
@@ -257,6 +245,14 @@ class _VideoPlayerPageState extends State<VideoPlayerPage> {
                         onPressed: () => _toggleVideoPlaybackForMinimisedMode(),
                         child: _minimisedPlaybackIcon(),
                       ),
+                    ),
+                  if (_isMinimised)
+                    GestureDetector(
+                      child: Container(
+                        width: size.width / 1.7,
+                        color: Colors.transparent,
+                      ),
+                      onTap: () => _toggleVideoPlayerMode(),
                     ),
                 ],
               ),
