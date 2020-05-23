@@ -2,8 +2,8 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:highvibe/modules/app/media_overlays.dart';
 import 'package:highvibe/modules/home/home_controller.dart';
-import 'package:highvibe/modules/video_player/video_player_page.dart';
 import 'package:highvibe/modules/video_player/widgets/widgets.dart';
 import 'package:highvibe/values/Strings.dart';
 import 'package:highvibe/values/assets.dart';
@@ -103,8 +103,10 @@ class HeaderWidget extends StatelessWidget {
                     itemBuilder: (context, index) {
                       return VideoPreviewItem(
                         video: snapshot.data[index],
-                        onTap: (item) =>
-                            showVideoPlayerAsOverlay(context, item),
+                        onTap: (item) => presentVideoPlayerAsOverlay(
+                          context,
+                          item,
+                        ),
                       );
                     },
                   ),
