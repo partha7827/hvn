@@ -5,7 +5,6 @@ import 'package:highvibe/modules/video_player/video_player_page.dart';
 
 OverlayEntry videoOverlayEntry;
 OverlayState videOverlayState;
-bool isVideoShownAsOverlay;
 
 void presentVideoPlayerAsOverlay(BuildContext context, Video video) {
   videOverlayState = Overlay.of(context);
