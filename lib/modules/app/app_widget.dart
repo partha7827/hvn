@@ -30,16 +30,14 @@ class _AppWidgetState extends State<AppWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Portal(
-      child: MaterialApp(
-        debugShowCheckedModeBanner: false,
-        color: Colors.black,
-        navigatorKey: Modular.navigatorKey,
-        initialRoute: '/',
-        onGenerateRoute: Modular.generateRoute,
-        theme: appTheme,
-        //builder: (_, child) => Portal(child: child),
-      ),
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      color: Colors.black,
+      navigatorKey: Modular.navigatorKey,
+      initialRoute: '/',
+      onGenerateRoute: Modular.generateRoute,
+      theme: appTheme,
+      //builder: (_, child) => Portal(child: child),
     );
   }
 }

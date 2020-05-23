@@ -1,19 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_portal/flutter_portal.dart';
 import 'package:highvibe/models/models.dart' show Video;
 import 'package:highvibe/modules/video_player/widgets/widgets.dart'
     show PlayPauseOverlay;
 import 'package:highvibe/widgets/responsive_safe_area.dart';
 import 'package:video_player/video_player.dart';
 
+// Global properties
+OverlayState videOverlayState;
+OverlayEntry videoOverlayEntry;
+
+showVideoPlayerAsOverlay(BuildContext context, Video video) {
+  videOverlayState = Overlay.of(context);
+  videoOverlayEntry = OverlayEntry(builder: (context) {
+    return VideoPlayerPage(video: video);
+  });
+
+  videOverlayState.insert(videoOverlayEntry);
+}
+
 class VideoPlayerPage extends StatefulWidget {
   final Video video;
-  final Widget rootWidget;
 
   const VideoPlayerPage({
     @required this.video,
-    @required this.rootWidget,
     Key key,
   }) : super(key: key);
 
@@ -26,57 +36,46 @@ class _VideoPlayerPageState extends State<VideoPlayerPage> {
   Color _screenBackgroundColor = Colors.black;
   bool _isFullScreenMode = false;
   bool _isMinimised = false;
-  bool _showVideoPlayer = false;
 
   Widget build(BuildContext context) {
-    return PortalEntry(
-      visible: _showVideoPlayer,
-      portal: Container(
-        color: Colors.black,
-        child: ResponsiveSafeArea(
-          builder: (context, size) {
-            return Container(
-              color: _screenBackgroundColor,
-              width: _isMinimised ? 200 : double.infinity,
-              height: _isMinimised ? 200 : double.infinity,
-              child: Align(
-                alignment: Alignment.center,
-                child: AspectRatio(
-                  aspectRatio: _controller.value.aspectRatio,
-                  child: Stack(
-                    alignment: Alignment.bottomCenter,
-                    children: <Widget>[
-                      GestureDetector(
-                        child: VideoPlayer(_controller),
-                        onTap: () {
-                          if (_isMinimised) {
-                            _minimizeVideoPlayer();
-                          }
-                        },
+    return Container(
+      color: _screenBackgroundColor,
+      child: ResponsiveSafeArea(
+        builder: (context, size) {
+          return Container(
+            width: _isMinimised ? 200 : double.infinity,
+            height: _isMinimised ? 200 : double.infinity,
+            child: Align(
+              alignment: Alignment.center,
+              child: AspectRatio(
+                aspectRatio: _controller.value.aspectRatio,
+                child: Stack(
+                  alignment: Alignment.bottomCenter,
+                  children: <Widget>[
+                    GestureDetector(
+                      child: VideoPlayer(_controller),
+                      onTap: () {
+                        if (_isMinimised) {
+                          _minimizeVideoPlayer();
+                        }
+                      },
+                    ),
+                    if (!_isMinimised)
+                      PlayPauseOverlay(controller: _controller),
+                    if (!_isMinimised) _closeButton(context),
+                    if (!_isMinimised) _fullScreenButton(),
+                    if (!_isFullScreenMode) _minimizeScreenButton(),
+                    if (!_isMinimised)
+                      VideoProgressIndicator(
+                        _controller,
+                        allowScrubbing: true,
                       ),
-                      if (!_isMinimised)
-                        PlayPauseOverlay(controller: _controller),
-                      if (!_isMinimised) _closeButton(context),
-                      if (!_isMinimised) _fullScreenButton(),
-                      if (!_isFullScreenMode) _minimizeScreenButton(),
-                      if (!_isMinimised)
-                        VideoProgressIndicator(
-                          _controller,
-                          allowScrubbing: true,
-                        ),
-                    ],
-                  ),
+                  ],
                 ),
               ),
-            );
-          },
-        ),
-      ),
-      child: GestureDetector(
-        child: widget.rootWidget,
-        key: UniqueKey(),
-        behavior: HitTestBehavior.opaque,
-        onTap: () => setState(() => _showVideoPlayer = true),
+            ),
+          );
+        },
       ),
     );
   }
@@ -106,7 +105,7 @@ class _VideoPlayerPageState extends State<VideoPlayerPage> {
 
   void _close(BuildContext context) {
     _controller.pause();
-    setState(() => _showVideoPlayer = false);
+    videoOverlayEntry.remove();
   }
 
   Widget _closeButton(BuildContext context) {

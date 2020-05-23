@@ -101,12 +101,10 @@ class HeaderWidget extends StatelessWidget {
                     scrollDirection: Axis.horizontal,
                     itemCount: snapshot.data.length,
                     itemBuilder: (context, index) {
-                      final rootWidget = VideoPreviewItem(
+                      return VideoPreviewItem(
                         video: snapshot.data[index],
-                      );
-                      return VideoPlayerPage(
-                        video: snapshot.data[index],
-                        rootWidget: rootWidget,
+                        onTap: (item) =>
+                            showVideoPlayerAsOverlay(context, item),
                       );
                     },
                   ),
