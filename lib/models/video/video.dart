@@ -14,16 +14,14 @@ part 'video.g.dart';
 
 abstract class Video implements Built<Video, VideoBuilder> {
   static Serializer<Video> get serializer => _$videoSerializer;
+
   factory Video([void Function(VideoBuilder) updates]) = _$Video;
+
   Video._();
 
-  String get id;
   FileDetails get fileDetails;
+  String get id;
   Snippet get snippet;
-
-  static Video fromSnapshot(DocumentSnapshot snapshot) {
-    return serializers.deserializeWith(Video.serializer, snapshot.data);
-  }
 
   String toJson() {
     return json.encode(serializers.serializeWith(Video.serializer, this));
@@ -32,6 +30,10 @@ abstract class Video implements Built<Video, VideoBuilder> {
   static Video fromJson(String jsonString) {
     return serializers.deserializeWith(
         Video.serializer, json.decode(jsonString));
+  }
+
+  static Video fromSnapshot(DocumentSnapshot snapshot) {
+    return serializers.deserializeWith(Video.serializer, snapshot.data);
   }
 
   static BuiltList<Video> parseListOfVideos(QuerySnapshot snapshot) {

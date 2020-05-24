@@ -15,6 +15,18 @@ class _AppWidgetState extends State<AppWidget> {
   final appStore = Modular.get<AppStore>();
 
   @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      color: Colors.black,
+      navigatorKey: Modular.navigatorKey,
+      initialRoute: '/',
+      onGenerateRoute: Modular.generateRoute,
+      theme: appTheme,
+    );
+  }
+
+  @override
   void initState() {
     super.initState();
 
@@ -25,17 +37,5 @@ class _AppWidgetState extends State<AppWidget> {
         Modular.to.pushNamedAndRemoveUntil("/home", (_) => false);
       }
     });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      color: Colors.black,
-      navigatorKey: Modular.navigatorKey,
-      initialRoute: '/',
-      onGenerateRoute: Modular.generateRoute,
-      theme: appTheme,
-    );
   }
 }
