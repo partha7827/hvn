@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:highvibe/models/user/user.dart';
+import 'package:highvibe/modules/discover/discover_module.dart';
 import 'package:highvibe/modules/home/home_controller.dart';
 import 'package:highvibe/modules/profile/profile_module.dart';
 import 'package:highvibe/values/Strings.dart';
@@ -23,6 +24,8 @@ class AuthorsWidget extends StatelessWidget {
                 child: HeaderRow(
                   title: Strings.authorsTitle,
                   showTrailing: true,
+                  onPressedTrailing: () =>
+                      DiscoverModule.toDiscover(pageIndex: 0),
                 ),
               ),
               Padding(

@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:highvibe/modules/discover/discover_module.dart';
 import 'package:highvibe/modules/app/media_overlays.dart';
 import 'package:highvibe/modules/home/home_controller.dart';
 import 'package:highvibe/modules/video_player/widgets/widgets.dart';
@@ -144,6 +145,53 @@ class HeaderWidget extends StatelessWidget {
         ),
       ],
     );
+  }
+  
+  Widget buildVideos() {
+    return FutureBuilder(
+        future: Modular.get<HomeController>().getVideos(),
+        builder: (_, snapshot) {
+          if (snapshot.hasData) {
+            return Padding(
+              padding: const EdgeInsets.only(bottom: 16),
+              child: Column(
+                children: <Widget>[
+                  Padding(
+                    padding: const EdgeInsets.only(left: 16),
+                    child: HeaderRow(
+                      title: Strings.recommendedForYou,
+                      showTrailing: true,
+                      onPressedTrailing: () =>
+                          DiscoverModule.toDiscover(pageIndex: 3),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 240,
+                    child: PageView.builder(
+                      controller: pageController,
+                      // padding: const EdgeInsets.only(bottom: 16),
+                      scrollDirection: Axis.horizontal,
+                      itemCount: snapshot.data.length,
+                      itemBuilder: (_, index) {
+                        return VideoPreviewItem(
+                          video: snapshot.data[index],
+                          onTap: (item) => Modular.to
+                              .pushNamed("/videoplayer", arguments: item),
+                        );
+                      },
+                    ),
+                  ),
+                  PageIndicator(
+                    controller: pageController,
+                    count: snapshot.data.length,
+                  ),
+                ],
+              ),
+            );
+          } else {
+            return Container(child: Text("No videos"));
+          }
+        });
   }
 
   // _recommended_widget(PageController pageController) {

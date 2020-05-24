@@ -47,6 +47,10 @@ class Strings {
   static const submit = "Submit";
   static const thankYou = "Thank You";
   static const backToLogin = "Back to Login";
+  static const discover = "Discover";
+  static const creator = 'Creator';
+  static const audio = 'Audio';
+  static const video = 'Video';
 
   ///Messages
   static emailToChangePassword(String email) =>
