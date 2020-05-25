@@ -1,11 +1,16 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:highvibe/models/user/user.dart';
 import 'package:highvibe/modules/discover/audio/audio_card.dart';
 import 'package:highvibe/values/Strings.dart';
 import 'package:highvibe/values/themes.dart';
 import 'package:highvibe/widgets/gradient_raised_button.dart';
 
 class CreatorCard extends StatelessWidget {
+  final User user;
+  
+  CreatorCard(this.user);
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -17,7 +22,7 @@ class CreatorCard extends StatelessWidget {
             child: CachedNetworkImage(
               width: 48,
               height: 48,
-              imageUrl: dummyAvatarUrl,
+              imageUrl: user.photoUrl.isNotEmpty ? user.photoUrl : dummyAvatarUrl,
               fit: BoxFit.cover,
             ),
           ),
@@ -28,11 +33,11 @@ class CreatorCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Angela Stevens',
+                    user.name,
                     style: normal16White,
                   ),
                   Text(
-                    '1.4 k Followers',
+                    '0 Followers',
                     style: normal14Hint,
                   )
                 ],

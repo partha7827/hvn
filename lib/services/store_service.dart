@@ -9,6 +9,7 @@ class StoreService extends Disposable {
     _messageCollection = firestore.collection("messages");
     _tagCollection = firestore.collection("tags");
     _videoCollection = firestore.collection("videos");
+    _audioCollection = firestore.collection("audio");
   }
 
   factory StoreService.withFirebase() => StoreService(Firestore.instance);
@@ -19,11 +20,13 @@ class StoreService extends Disposable {
   CollectionReference _messageCollection;
   CollectionReference _tagCollection;
   CollectionReference _videoCollection;
+  CollectionReference _audioCollection;
 
   CollectionReference get userCollection => _userCollection;
   CollectionReference get messageCollection => _messageCollection;
   CollectionReference get tagCollection => _tagCollection;
   CollectionReference get videoCollection => _videoCollection;
+  CollectionReference get audioCollection => _audioCollection;
 
   //dispose will be called automatically
   @override

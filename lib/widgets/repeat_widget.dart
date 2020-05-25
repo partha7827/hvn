@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:highvibe/values/themes.dart';
 
 class RepeatWidget extends StatelessWidget {
   final Function onPressed;
@@ -11,7 +12,7 @@ class RepeatWidget extends StatelessWidget {
       child: OutlineButton(
         borderSide: BorderSide(width: 5, color: Colors.white),
         onPressed: onPressed,
-        child: Text("Try again"),
+        child: Text("Try again", style: normal14White),
       ),
     );
   }

@@ -37,8 +37,6 @@ abstract class _HomeControllerBase with Store {
 
   @action
   Future<List<User>> getAuthors() async {
-    print("get authors");
-
     final querySnapshot = await firestore.userCollection
         .where("isRecommended", isEqualTo: true)
         .getDocuments();
