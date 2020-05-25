@@ -5,7 +5,7 @@ class CreatorListPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
-      itemCount: 5,
+      itemCount: 15,
       padding: const EdgeInsets.only(bottom: 40),
       itemBuilder: (context, index) {
         return CreatorCard();
