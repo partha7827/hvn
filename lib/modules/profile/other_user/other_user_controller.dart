@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart' show FieldValue;
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:highvibe/models/audio/audio.dart';
 import 'package:highvibe/models/models.dart' show User;
 import 'package:highvibe/modules/app/app_store.dart';
 import 'package:highvibe/services/store_service.dart';

@@ -171,7 +171,7 @@ class _OtherUserPageState
           ProfileTabButtons(controller: _tabController),
         ];
       },
-      body: ProfileTabPages(controller: _tabController),
+      body: ProfileTabPages(userId: widget.userId, controller: _tabController),
     );
   }
 }
