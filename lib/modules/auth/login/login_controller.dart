@@ -11,6 +11,8 @@ import 'package:highvibe/services/store_service.dart';
 import 'package:highvibe/values/Strings.dart';
 import 'package:mobx/mobx.dart';
 
+import '../../../utils/utils.dart';
+
 part 'login_controller.g.dart';
 
 final GoogleSignIn _googleSignIn = GoogleSignIn();
@@ -40,46 +42,57 @@ abstract class _LoginControllerBase with Store {
   Future<void> loginUser() async {
     inProgress = true;
 
-    final uid = await auth.login(emailController.text, passwordController.text);
+    try {
+      final uid =
+          await auth.login(emailController.text, passwordController.text);
 
-    if (uid == null) throw LoginException(Strings.userNotFound);
+      if (uid == null) throw LoginException(Strings.userNotFound);
 
-    final user = await firestore.userCollection.document(uid).get();
+      final user = await firestore.userCollection.document(uid).get();
 
-    if (!user.exists) throw LoginException(Strings.userNotFound);
+      if (!user.exists) throw LoginException(Strings.userNotFound);
 
-    appStore.setCurrentUser(User.fromSnapshot(user));
-
-    inProgress = false;
+      appStore.setCurrentUser(User.fromSnapshot(user));
+    } catch (e) {
+      print('Error while logging in $e');
+      showSnackBarMsg(scaffoldKey.currentState, e.toString());
+    } finally {
+      inProgress = false;
+    }
   }
 
   @action
   Future<void> googleSignIn() async {
     inProgressGoogleSignIn = true;
 
-    final googleSignInAccount = await _getGoogleUser();
-    final googleSignInAuthentication = await googleSignInAccount.authentication;
+    try {
+      final googleSignInAccount = await _getGoogleUser();
+      final googleSignInAuthentication =
+          await googleSignInAccount.authentication;
 
-    final AuthCredential credential = GoogleAuthProvider.getCredential(
-      accessToken: googleSignInAuthentication.accessToken,
-      idToken: googleSignInAuthentication.idToken,
-    );
+      final AuthCredential credential = GoogleAuthProvider.getCredential(
+        accessToken: googleSignInAuthentication.accessToken,
+        idToken: googleSignInAuthentication.idToken,
+      );
 
-    final AuthResult authResult =
-        await _firebaseAuth.signInWithCredential(credential);
-    FirebaseUser firebaseUser = authResult.user;
+      final AuthResult authResult =
+          await _firebaseAuth.signInWithCredential(credential);
+      FirebaseUser firebaseUser = authResult.user;
 
-    if (firebaseUser.uid != null) {
-      debugPrint('googlogin userName: ${firebaseUser.uid}');
-      final user =
-          await firestore.userCollection.document(firebaseUser.uid).get();
-      if (!user.exists) throw LoginException(Strings.userNotFound);
-      appStore.setCurrentUser(User.fromSnapshot(user));
-    } else {
-      throw LoginException(Strings.userNotFound);
+      if (firebaseUser.uid != null) {
+        debugPrint('googlogin userName: ${firebaseUser.uid}');
+        final user =
+            await firestore.userCollection.document(firebaseUser.uid).get();
+        if (!user.exists) throw LoginException(Strings.userNotFound);
+        appStore.setCurrentUser(User.fromSnapshot(user));
+      } else {
+        throw LoginException(Strings.userNotFound);
+      }
+    } catch (e) {
+      showSnackBarMsg(scaffoldKey.currentState, e.toString());
+    } finally {
+      inProgressGoogleSignIn = false;
     }
-
-    inProgressGoogleSignIn = false;
   }
 
   @action

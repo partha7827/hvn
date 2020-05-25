@@ -4,7 +4,6 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:highvibe/modules/auth/auth_module.dart';
-import 'package:highvibe/utils/utils.dart';
 import 'package:highvibe/values/Strings.dart';
 import 'package:highvibe/values/themes.dart';
 import 'package:highvibe/widgets/custom_text_form.dart';
@@ -85,12 +84,7 @@ class _LoginPageState extends ModularState<LoginPage, LoginController> {
                       onPressed: () async {
                         if (!controller.formKey.currentState.validate())
                           return null;
-                        try {
                           await controller.loginUser();
-                        } catch (e) {
-                          showSnackBarMsg(controller.scaffoldKey.currentState,
-                              e.toString());
-                        }
                       },
                     ),
                   ),
