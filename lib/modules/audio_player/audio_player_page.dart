@@ -32,8 +32,8 @@ class _AudioPlayerPageState extends State<AudioPlayerPage>
   bool _isPlaying = false;
   AudioPlayerMode _audioPlayerMode = AudioPlayerMode.none;
 
-  bool get _isMinimised => _audioPlayerMode == AudioPlayerMode.minimised;
   get _audioFile => widget.audioFile;
+  bool get _isMinimised => _audioPlayerMode == AudioPlayerMode.minimised;
 
   @override
   Widget build(BuildContext context) {
@@ -41,8 +41,10 @@ class _AudioPlayerPageState extends State<AudioPlayerPage>
       child: Stack(
         children: [
           Opacity(
-            opacity: 0.5,
+            opacity: _isMinimised ? 1 : 0.5,
             child: Container(
+              width: _isMinimised ? 100 : null,
+              height: _isMinimised ? 100 : null,
               decoration: BoxDecoration(
                 image: DecorationImage(
                   fit: BoxFit.cover,
@@ -79,14 +81,8 @@ class _AudioPlayerPageState extends State<AudioPlayerPage>
               ),
             ),
           ),
-          AppBar(
-            backgroundColor: Colors.transparent,
-            elevation: 0,
-            leading: IconButton(
-              icon: Icon(Icons.keyboard_arrow_down),
-              onPressed: () => _close(context),
-            ),
-          ),
+          _minimizeScreenButton(),
+          _closeScreenButton(),
           Positioned(
             bottom: 0,
             left: 0,
@@ -115,14 +111,14 @@ class _AudioPlayerPageState extends State<AudioPlayerPage>
                           Text(
                             '${_positionText ?? ''}',
                             style: const TextStyle(
-                              color: Colors.black87,
+                              color: Colors.white,
                             ),
                           ),
                           Text(
                             mediaTimeFormarter(
                               Duration(milliseconds: _audioFile.duration),
                             ),
-                            style: const TextStyle(color: Colors.black87),
+                            style: const TextStyle(color: Colors.white),
                           ),
                         ],
                       ),
@@ -132,32 +128,33 @@ class _AudioPlayerPageState extends State<AudioPlayerPage>
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
-                          _rewindButton(),
+                          if (!_isMinimised) _rewindButton(),
                           AudioPlayerPlayButton(
                             progress: playButtonAnimation,
                             onPressed: () => _togglePlayStop(),
                           ),
-                          _fastForwardButton(),
+                          if (!_isMinimised) _fastForwardButton(),
                         ],
                       ),
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        IconButton(
-                          icon: SvgPicture.asset('assets/ic_favorite.svg'),
-                          onPressed: () {},
-                        ),
-                        IconButton(
-                          icon: SvgPicture.asset('assets/ic_playlist.svg'),
-                          onPressed: () {},
-                        ),
-                        IconButton(
-                          icon: SvgPicture.asset('assets/ic_share.svg'),
-                          onPressed: () {},
-                        ),
-                      ],
-                    ),
+                    if (!_isMinimised)
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          IconButton(
+                            icon: SvgPicture.asset('assets/ic_favorite.svg'),
+                            onPressed: () {},
+                          ),
+                          IconButton(
+                            icon: SvgPicture.asset('assets/ic_playlist.svg'),
+                            onPressed: () {},
+                          ),
+                          IconButton(
+                            icon: SvgPicture.asset('assets/ic_share.svg'),
+                            onPressed: () {},
+                          ),
+                        ],
+                      ),
                   ],
                 ),
               ),
@@ -166,10 +163,6 @@ class _AudioPlayerPageState extends State<AudioPlayerPage>
         ],
       ),
     );
-  }
-
-  void _configureAudioPlayerService() {
-    _audioPlayerService = AudioPlayerService(audioFile: widget.audioFile);
   }
 
   @override
@@ -189,15 +182,34 @@ class _AudioPlayerPageState extends State<AudioPlayerPage>
     super.initState();
   }
 
-  void _close(BuildContext context) {
+  void _close() {
     _audioPlayerService.stop();
     MediaOverlays.disposeAudioOverlayEntry();
+  }
+
+  Widget _closeScreenButton() {
+    return Positioned(
+      top: 20,
+      right: -16,
+      child: FlatButton(
+        onPressed: () => _close(),
+        child: Icon(
+          Icons.close,
+          color: Colors.white,
+          size: 32,
+        ),
+      ),
+    );
   }
 
   void _configure() {
     _configureAudioPlayerService();
     _updateTrackPosition();
     _updatePlayerState();
+  }
+
+  void _configureAudioPlayerService() {
+    _audioPlayerService = AudioPlayerService(audioFile: widget.audioFile);
   }
 
   Icon _configurePlayButtonIcon(bool isPlaying) {
@@ -218,6 +230,25 @@ class _AudioPlayerPageState extends State<AudioPlayerPage>
     );
   }
 
+  Widget _minimizeScreenButton() {
+    if (!_isMinimised) {
+      return Positioned(
+        top: 20,
+        left: -16,
+        child: FlatButton(
+          onPressed: () => _toggleAudioPlayerMode(),
+          child: Icon(
+            Icons.keyboard_arrow_down,
+            color: Colors.white,
+            size: 32,
+          ),
+        ),
+      );
+    } else {
+      return const SizedBox.shrink();
+    }
+  }
+
   AudioPlayerSkipButton _rewindButton() {
     return AudioPlayerSkipButton(
       buttonType: AudioPlayerSkipButtonType.rewind,
@@ -226,6 +257,14 @@ class _AudioPlayerPageState extends State<AudioPlayerPage>
         trackPosition: _trackPosition,
       ),
     );
+  }
+
+  void _toggleAudioPlayerMode() {
+    if (_audioPlayerMode != AudioPlayerMode.minimised) {
+      setState(() => _audioPlayerMode = AudioPlayerMode.minimised);
+    } else {
+      setState(() => _audioPlayerMode = AudioPlayerMode.none);
+    }
   }
 
   void _togglePlayStop() {
