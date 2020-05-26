@@ -4,10 +4,12 @@ import 'package:highvibe/values/themes.dart';
 class CustomFloatingActionButton extends StatelessWidget {
   final Widget child;
   final Function onPressed;
+  final double size;
 
   const CustomFloatingActionButton({
     this.child,
     this.onPressed,
+    this.size = 56.0,
   });
 
   @override
@@ -15,8 +17,8 @@ class CustomFloatingActionButton extends StatelessWidget {
     return GestureDetector(
       onTap: onPressed,
       child: Container(
-        width: 56.0,
-        height: 56.0,
+        width: size,
+        height: size,
         decoration: BoxDecoration(
           gradient: primaryGradient,
           borderRadius: BorderRadius.circular(50.0),

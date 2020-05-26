@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/widgets.dart';
 import 'dart:io';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -57,4 +58,14 @@ void showSnackBarMsg(ScaffoldState scaffoldState, String message) {
       ),
     ),
   );
+}
+
+DateTime getDateTime(dynamic dateTime) {
+  return (dateTime is Timestamp)
+      ? dateTime.toDate()
+      : dateTime is int
+          ? DateTime.fromMillisecondsSinceEpoch(dateTime)
+          : dateTime is Map
+              ? DateTime.fromMicrosecondsSinceEpoch(dateTime['_seconds'])
+              : (dateTime as DateTime);
 }

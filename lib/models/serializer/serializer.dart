@@ -5,6 +5,8 @@ import 'package:built_value/iso_8601_date_time_serializer.dart';
 import 'package:built_value/serializer.dart';
 import 'package:built_value/standard_json_plugin.dart';
 import 'package:highvibe/models/models.dart';
+import 'package:highvibe/models/tag/tag.dart';
+import 'package:highvibe/models/channel/channel.dart';
 
 part 'serializer.g.dart';
 
@@ -17,6 +19,7 @@ part 'serializer.g.dart';
   Message,
   User,
   Video,
+  Channel,
 ])
 final Serializers serializers = (_$serializers.toBuilder()
       ..addPlugin(StandardJsonPlugin())

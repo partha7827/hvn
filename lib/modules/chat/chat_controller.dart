@@ -1,9 +1,11 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:highvibe/models/models.dart' show User;
+import 'package:highvibe/models/message/message.dart';
+import 'package:highvibe/models/serializer/serializer.dart';
+import 'package:highvibe/models/user/user.dart';
 import 'package:highvibe/modules/app/app_store.dart';
-import 'package:highvibe/values/config.dart';
+import 'package:highvibe/services/store_service.dart';
 import 'package:mobx/mobx.dart';
-import 'package:stream_chat_flutter/stream_chat_flutter.dart' as Chat;
 
 part 'chat_controller.g.dart';
 
@@ -13,36 +15,43 @@ abstract class _ChatControllerBase with Store {
   final String channelId;
   _ChatControllerBase(this.channelId);
 
-  final authController = Modular.get<AppStore>();
+  final appStore = Modular.get<AppStore>();
 
-  @observable
-  Chat.Client client;
+  final firestore = Modular.get<StoreService>();
 
-  @observable
-  Chat.Channel channel;
+  User get currentUser => appStore.currentUser;
 
-  @observable
-  User currentCreator;
+  Future<void> sendMessage(String content) async {
+    final message = Message((b) => b
+      ..content = content
+      ..chatId = channelId
+      ..authorId = currentUser.id
+      ..authorPhotoUrl = currentUser.photoUrl
+      ..authorName = currentUser.name);
 
-  User get currentUser => authController.currentUser;
+    final serializedMessage =
+        serializers.serializeWith(Message.serializer, message);
 
-  @action
-  Future<void> init(User user) async {
-    currentCreator = user;
+    firestore.messageCollection.add(serializedMessage);
 
-    client = Chat.Client(
-      STREAM_API_KEY,
-    );
+    firestore.channelCollection
+        .document(channelId)
+        .collection("messages")
+        .add(serializedMessage);
+  }
 
-    var creatorId = currentCreator.chatId;
-    var userId = currentUser.id;
-    var userToken =
-        'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoidXNlcjEifQ.NGZPyPMx7KSVisJmh4tJhOIv7ZjCaMQpOh4gTINvCaU';
+  Stream<QuerySnapshot> getChannelMessages() {
+    return firestore.channelCollection
+        .document(channelId)
+        .collection("messages")
+        .orderBy("createdAt", descending: false)
+        .snapshots();
+  }
 
-    await client.setUser(Chat.User(id: userId), userToken);
-
-    channel = client.channel('messaging', id: creatorId);
-
-    channel.watch();
+  Stream<QuerySnapshot> findMessagesByChannel() {
+    return firestore.messageCollection
+        .where("channelId", isEqualTo: channelId)
+        .orderBy("createdAt", descending: false)
+        .snapshots();
   }
 }
