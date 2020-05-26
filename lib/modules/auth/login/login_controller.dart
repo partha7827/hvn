@@ -11,8 +11,6 @@ import 'package:highvibe/services/store_service.dart';
 import 'package:highvibe/values/Strings.dart';
 import 'package:mobx/mobx.dart';
 
-import '../../../utils/utils.dart';
-
 part 'login_controller.g.dart';
 
 final GoogleSignIn _googleSignIn = GoogleSignIn();
@@ -54,8 +52,7 @@ abstract class _LoginControllerBase with Store {
 
       appStore.setCurrentUser(User.fromSnapshot(user));
     } catch (e) {
-      print('Error while logging in $e');
-      showSnackBarMsg(scaffoldKey.currentState, e.toString());
+      throw e;
     } finally {
       inProgress = false;
     }
@@ -89,7 +86,7 @@ abstract class _LoginControllerBase with Store {
         throw LoginException(Strings.userNotFound);
       }
     } catch (e) {
-      showSnackBarMsg(scaffoldKey.currentState, e.toString());
+      throw e;
     } finally {
       inProgressGoogleSignIn = false;
     }
