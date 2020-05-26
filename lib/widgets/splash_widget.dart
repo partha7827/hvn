@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 class SplashWidget extends StatelessWidget {
   const SplashWidget({Key key}) : super(key: key);
@@ -7,7 +8,7 @@ class SplashWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       child: Center(
-        child: CircularProgressIndicator(),
+        child: const SpinKitFoldingCube(color: Colors.white),
       ),
     );
   }
