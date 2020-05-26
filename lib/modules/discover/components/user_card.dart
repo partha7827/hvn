@@ -1,8 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:highvibe/models/user/user.dart';
-import 'package:highvibe/modules/discover/audio/audio_card.dart';
 import 'package:highvibe/values/Strings.dart';
+import 'package:highvibe/values/assets.dart';
 import 'package:highvibe/values/themes.dart';
 import 'package:highvibe/widgets/gradient_raised_button.dart';
 
@@ -31,7 +31,7 @@ class UserCard extends StatelessWidget {
               width: 48,
               height: 48,
               imageUrl:
-                  user.photoUrl.isNotEmpty ? user.photoUrl : dummyAvatarUrl,
+                  user.photoUrl.isNotEmpty ? user.photoUrl : Assets.dummyAvatarUrl,
               fit: BoxFit.cover,
             ),
           ),

@@ -8,9 +8,6 @@ import 'package:highvibe/modules/profile/widgets/profile_tab_pages.dart';
 import 'package:highvibe/values/Strings.dart';
 import 'package:highvibe/values/themes.dart';
 import 'package:highvibe/widgets/gradient_outline_button.dart';
-import 'package:highvibe/widgets/repeat_widget.dart';
-import 'package:highvibe/widgets/splash_widget.dart';
-import 'package:mobx/mobx.dart';
 import 'other_user_controller.dart';
 
 class OtherUserPage extends StatefulWidget {
@@ -28,7 +25,6 @@ class _OtherUserPageState
 
   @override
   void initState() {
-    controller.loadOtherUser();
     _tabController = TabController(initialIndex: 0, length: 3, vsync: this);
     super.initState();
   }
@@ -36,20 +32,7 @@ class _OtherUserPageState
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Observer(
-        builder: (_) {
-          switch (controller.otherUserFuture?.status) {
-            case FutureStatus.fulfilled:
-              return buildProfilePage();
-
-            case FutureStatus.rejected:
-              return RepeatWidget(controller.loadOtherUser);
-
-            default:
-              return SplashWidget();
-          }
-        },
-      ),
+      body: buildProfilePage(),
     );
   }
 
@@ -84,7 +67,10 @@ class _OtherUserPageState
                     Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: <Widget>[
-                        ProfileAvatar(controller.otherUser.photoUrl),
+                        Hero(
+                          tag: "author#${controller.otherUser.id}",
+                          child: ProfileAvatar(controller.otherUser.photoUrl),
+                        ),
                         Padding(
                           padding: const EdgeInsets.only(left: 16.0),
                           child: Column(
@@ -182,7 +168,7 @@ class _OtherUserPageState
         ];
       },
       body: ProfileTabPages(
-          userId: controller.otherUserId, controller: _tabController),
+          userId: controller.otherUser.id, controller: _tabController),
     );
   }
 }

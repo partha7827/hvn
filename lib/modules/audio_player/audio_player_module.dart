@@ -15,7 +15,6 @@ class AudioPlayerModule extends ChildModule {
         Router(
           "/audioplayer",
           child: (_, args) => AudioPlayerPage(audioFile: args.data),
-          transition: TransitionType.scale,
         ),
       ];
 

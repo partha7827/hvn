@@ -40,8 +40,7 @@ class AuthorsWidget extends StatelessWidget {
                       return _authorCard(
                           user: snapshot.data[index],
                           onPressed: () {
-                            ProfileModule.toOtherProfile(
-                                snapshot.data[index].id);
+                            ProfileModule.toOtherProfile(snapshot.data[index]);
                             // Navigator.push(
                             //   context,
                             //   MaterialPageRoute(
@@ -78,13 +77,16 @@ class AuthorsWidget extends StatelessWidget {
           onTap: onPressed,
           child: Stack(
             children: <Widget>[
-              ClipRRect(
-                borderRadius: BorderRadius.circular(10.0),
-                child: CachedNetworkImage(
-                  imageUrl: user.photoUrl,
-                  fit: BoxFit.cover,
-                  height: 140,
-                  width: 100,
+              Hero(
+                tag: "author#${user.id}",
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(10.0),
+                  child: CachedNetworkImage(
+                    imageUrl: user.photoUrl,
+                    fit: BoxFit.cover,
+                    height: 140,
+                    width: 100,
+                  ),
                 ),
               ),
               Positioned(
