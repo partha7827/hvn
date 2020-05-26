@@ -29,7 +29,7 @@ abstract class _DiscoverUsersController with Store {
       query = store.userCollection.limit(100);
     }
 
-    print(query);
+    if (query == null) return;
 
     usersFuture = ObservableFuture(
       query.getDocuments().then((s) => User.parseListOfUsers(s)),
