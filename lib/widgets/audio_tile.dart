@@ -19,13 +19,16 @@ class AudioTile extends StatelessWidget {
       padding: const EdgeInsets.only(left: 10, top: 10, bottom: 10),
       child: Row(
         children: <Widget>[
-          ClipRRect(
-            borderRadius: BorderRadius.circular(10),
-            child: CachedNetworkImage(
-              imageUrl: audioFile.artworkUrlPath,
-              width: 48,
-              height: 48,
-              fit: BoxFit.cover,
+          Hero(
+            tag: "audio#${audioFile.id}",
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(10),
+              child: CachedNetworkImage(
+                imageUrl: audioFile.artworkUrlPath,
+                width: 48,
+                height: 48,
+                fit: BoxFit.cover,
+              ),
             ),
           ),
           Expanded(

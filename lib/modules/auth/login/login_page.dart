@@ -129,7 +129,15 @@ class _LoginPageState extends ModularState<LoginPage, LoginController> {
                           child: GradientOutlineButton(
                             isLoading: controller.inProgressGoogleSignIn,
                             icon: SvgPicture.asset('assets/ic_google.svg'),
-                            onPressed: () => controller.googleSignIn(),
+                            onPressed: () async {
+                              try {
+                                await controller.googleSignIn();
+                              } catch (e) {
+                                showSnackBarMsg(
+                                    controller.scaffoldKey.currentState,
+                                    e.toString());
+                              }
+                            },
                           ),
                         ),
                       ),

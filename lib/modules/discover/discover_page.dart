@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:highvibe/modules/discover/audio/audio_list_page.dart';
-import 'package:highvibe/modules/discover/creator/creator_list_page.dart';
 import 'package:highvibe/modules/discover/discover_controller.dart';
 import 'package:highvibe/modules/discover/live_now/live_list_page.dart';
+import 'package:highvibe/modules/discover/users/discover_users.dart';
 import 'package:highvibe/modules/discover/video/video_list_page.dart';
 import 'package:highvibe/values/Strings.dart';
 import 'package:highvibe/values/themes.dart';
@@ -75,7 +75,7 @@ class _DiscoverPageState extends ModularState<DiscoverPage, DiscoverController>
       body: TabBarView(
         controller: _tabController,
         children: [
-          CreatorListPage(),
+          DiscoverUsers(),
           LiveListPage(),
           AudioListPage(),
           VideoListPage(),

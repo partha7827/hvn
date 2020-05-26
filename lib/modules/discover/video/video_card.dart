@@ -1,7 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:highvibe/modules/discover/audio/audio_card.dart';
+import 'package:highvibe/values/assets.dart';
 import 'package:highvibe/values/themes.dart';
 import 'package:highvibe/widgets/gradient_outline_button.dart';
 import 'package:highvibe/widgets/stream_card.dart';
@@ -136,7 +136,7 @@ class VideoCard extends StatelessWidget {
       child: ClipRRect(
         borderRadius: BorderRadius.circular(50),
         child: CachedNetworkImage(
-          imageUrl: dummyAvatarUrl,
+          imageUrl: Assets.dummyAvatarUrl,
           fit: BoxFit.cover,
         ),
       ),

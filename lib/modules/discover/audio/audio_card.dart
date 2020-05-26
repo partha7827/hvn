@@ -2,11 +2,9 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:highvibe/values/Strings.dart';
+import 'package:highvibe/values/assets.dart';
 import 'package:highvibe/values/themes.dart';
 import 'package:highvibe/widgets/stream_card.dart';
-
-var dummyAvatarUrl =
-    'https://images.unsplash.com/photo-1542103749-8ef59b94f47e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80';
 
 class AudioCard extends StatelessWidget {
   @override
@@ -100,7 +98,7 @@ class AudioCard extends StatelessWidget {
           ClipRRect(
             borderRadius: BorderRadius.circular(50),
             child: CachedNetworkImage(
-              imageUrl: dummyAvatarUrl,
+              imageUrl: Assets.dummyAvatarUrl,
               width: 32,
               height: 32,
               fit: BoxFit.cover,
