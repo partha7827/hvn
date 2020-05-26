@@ -106,8 +106,8 @@ class HeaderWidget extends StatelessWidget {
                         video: snapshot.data[index],
                         onTap: (item) =>
                             MediaOverlays.presentVideoPlayerAsOverlay(
-                          context,
-                          item,
+                          context: context,
+                          video: item,
                         ),
                       );
                     },

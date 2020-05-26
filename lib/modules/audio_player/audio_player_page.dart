@@ -2,9 +2,9 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:highvibe/models/models.dart' show Audio;
 import 'package:highvibe/modules/audio_player/audio_player_service.dart';
 import 'package:highvibe/modules/audio_player/widgets/widgets.dart';
-import 'package:highvibe/models/models.dart' show Audio;
 import 'package:highvibe/utils/utils.dart';
 import 'package:highvibe/values/themes.dart';
 import 'package:highvibe/widgets/responsive_safe_area.dart';
@@ -29,28 +29,13 @@ class _AudioPlayerPageState
     extends ModularState<AudioPlayerPage, AudioPlayerController>
     with SingleTickerProviderStateMixin {
   final _audioPlayerService = Modular.get<AudioPlayerService>();
+
+  AnimationController playButtonAnimation;
   String _positionText;
   Duration _trackPosition;
   bool _isPlaying = false;
 
-  AnimationController playButtonAnimation;
-
   get audioFile => widget.audioFile;
-
-  @override
-  void initState() {
-    playButtonAnimation =
-        AnimationController(vsync: this, duration: Duration(milliseconds: 300));
-    _configure();
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    _audioPlayerService.dispose();
-    playButtonAnimation.dispose();
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -71,9 +56,8 @@ class _AudioPlayerPageState
             ),
             Container(
               width: double.maxFinite,
-              constraints: BoxConstraints(
-                minHeight: MediaQuery.of(context).size.height * 0.4,
-              ),
+              constraints:
+                  BoxConstraints(minHeight: screenHeight(context) * 0.4),
               decoration: BoxDecoration(
                 gradient: darkToTransparentGradientTop,
               ),
@@ -106,10 +90,7 @@ class _AudioPlayerPageState
               elevation: 0,
               leading: IconButton(
                 icon: Icon(Icons.keyboard_arrow_down),
-                onPressed: () {
-                  _audioPlayerService.stop();
-                  Navigator.pop(context);
-                },
+                onPressed: () => _close(context),
               ),
             ),
             Positioned(
@@ -118,12 +99,9 @@ class _AudioPlayerPageState
               right: 0,
               child: Container(
                 width: double.maxFinite,
-                constraints: BoxConstraints(
-                  minHeight: MediaQuery.of(context).size.height * 0.4,
-                ),
-                decoration: BoxDecoration(
-                  gradient: darkToTransparentGradient,
-                ),
+                constraints:
+                    BoxConstraints(minHeight: screenHeight(context) * 0.4),
+                decoration: BoxDecoration(gradient: darkToTransparentGradient),
                 child: Padding(
                   padding:
                       const EdgeInsets.only(left: 40, right: 40, bottom: 20),
@@ -149,9 +127,7 @@ class _AudioPlayerPageState
                             ),
                             Text(
                               mediaTimeFormarter(
-                                Duration(
-                                  milliseconds: widget.audioFile.duration,
-                                ),
+                                Duration(milliseconds: audioFile.duration),
                               ),
                               style: const TextStyle(color: Colors.black87),
                             ),
@@ -159,41 +135,16 @@ class _AudioPlayerPageState
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 20.0),
+                        padding: const EdgeInsets.symmetric(vertical: 20),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
-                            AudioPlayerSkipButton(
-                              buttonType: AudioPlayerSkipButtonType.rewind,
-                              onPressed: () =>
-                                  _audioPlayerService.skip15seconds(
-                                buttonType: AudioPlayerSkipButtonType.rewind,
-                                trackPosition: _trackPosition,
-                              ),
-                            ),
+                            _rewindButton(),
                             AudioPlayerPlayButton(
                               progress: playButtonAnimation,
-                              onPressed: () {
-                                setState(() {
-                                  _isPlaying = !_isPlaying;
-                                  _isPlaying
-                                      ? playButtonAnimation.forward()
-                                      : playButtonAnimation.reverse();
-                                });
-                                _audioPlayerService.toggle(
-                                  playPosition: _trackPosition,
-                                );
-                              },
+                              onPressed: () => _togglePlayStop(),
                             ),
-                            AudioPlayerSkipButton(
-                              buttonType: AudioPlayerSkipButtonType.fastForward,
-                              onPressed: () =>
-                                  _audioPlayerService.skip15seconds(
-                                buttonType:
-                                    AudioPlayerSkipButtonType.fastForward,
-                                trackPosition: _trackPosition,
-                              ),
-                            ),
+                            _fastForwardButton(),
                           ],
                         ),
                       ),
@@ -225,6 +176,28 @@ class _AudioPlayerPageState
     );
   }
 
+  @override
+  void dispose() {
+    _audioPlayerService.dispose();
+    playButtonAnimation.dispose();
+    super.dispose();
+  }
+
+  @override
+  void initState() {
+    playButtonAnimation = AnimationController(
+      vsync: this,
+      duration: Duration(milliseconds: 300),
+    );
+    _configure();
+    super.initState();
+  }
+
+  void _close(BuildContext context) {
+    _audioPlayerService.stop();
+    Navigator.pop(context);
+  }
+
   void _configure() {
     _updateTrackPosition();
     _updatePlayerState();
@@ -238,6 +211,38 @@ class _AudioPlayerPageState
     }
   }
 
+  AudioPlayerSkipButton _fastForwardButton() {
+    return AudioPlayerSkipButton(
+      buttonType: AudioPlayerSkipButtonType.fastForward,
+      onPressed: () => _audioPlayerService.skip15seconds(
+        buttonType: AudioPlayerSkipButtonType.fastForward,
+        trackPosition: _trackPosition,
+      ),
+    );
+  }
+
+  AudioPlayerSkipButton _rewindButton() {
+    return AudioPlayerSkipButton(
+      buttonType: AudioPlayerSkipButtonType.rewind,
+      onPressed: () => _audioPlayerService.skip15seconds(
+        buttonType: AudioPlayerSkipButtonType.rewind,
+        trackPosition: _trackPosition,
+      ),
+    );
+  }
+
+  void _togglePlayStop() {
+    setState(() {
+      _isPlaying = !_isPlaying;
+      _isPlaying
+          ? playButtonAnimation.forward()
+          : playButtonAnimation.reverse();
+    });
+    _audioPlayerService.toggle(
+      playPosition: _trackPosition,
+    );
+  }
+
   void _updatePlayerState() {
     _audioPlayerService.playerStateSubscription.onData((state) {
       setState(() {
@@ -249,10 +254,10 @@ class _AudioPlayerPageState
 
   double _updateSliderPosition() {
     return (_trackPosition != null &&
-            widget.audioFile.duration != null &&
+            audioFile.duration != null &&
             _trackPosition.inMilliseconds > 0 &&
-            _trackPosition.inMilliseconds < widget.audioFile.duration)
-        ? _trackPosition.inMilliseconds / widget.audioFile.duration
+            _trackPosition.inMilliseconds < audioFile.duration)
+        ? _trackPosition.inMilliseconds / audioFile.duration
         : 0;
   }
 
@@ -260,8 +265,7 @@ class _AudioPlayerPageState
     _audioPlayerService.positionSubscription.onData((position) {
       setState(() {
         _trackPosition = position;
-        if (_trackPosition >=
-            Duration(milliseconds: widget.audioFile.duration)) {
+        if (_trackPosition >= Duration(milliseconds: audioFile.duration)) {
           _trackPosition = Duration(milliseconds: 0);
         }
         _positionText = _trackPosition?.toString()?.split('.')?.first ?? '';

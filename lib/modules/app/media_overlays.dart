@@ -13,8 +13,10 @@ class MediaOverlays {
 
   MediaOverlays._();
 
-  static void presentAudioPlayerAsOverlay(
-      BuildContext context, Audio audioFile) {
+  static void presentAudioPlayerAsOverlay({
+    @required BuildContext context,
+    @required Audio audioFile,
+  }) {
     audioOverlayState = Overlay.of(context);
     audioOverlayEntry = OverlayEntry(
       builder: (context) {
@@ -25,7 +27,10 @@ class MediaOverlays {
     audioOverlayState.insert(audioOverlayEntry);
   }
 
-  static void presentVideoPlayerAsOverlay(BuildContext context, Video video) {
+  static void presentVideoPlayerAsOverlay({
+    @required BuildContext context,
+    @required Video video,
+  }) {
     videOverlayState = Overlay.of(context);
     videoOverlayEntry = OverlayEntry(
       builder: (context) {
