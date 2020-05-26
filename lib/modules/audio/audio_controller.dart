@@ -1,3 +1,6 @@
+import 'package:flutter_modular/flutter_modular.dart';
+import 'package:highvibe/models/audio/audio.dart';
+import 'package:highvibe/services/store_service.dart';
 import 'package:mobx/mobx.dart';
 
 part 'audio_controller.g.dart';
@@ -5,7 +8,18 @@ part 'audio_controller.g.dart';
 class AudioController = _AudioControllerBase with _$AudioController;
 
 abstract class _AudioControllerBase with Store {
-  final String userId;
-  _AudioControllerBase(this.userId);
+  final store = Modular.get<StoreService>();
 
+  final String userId;
+
+  ObservableFuture<List<Audio>> audios;
+
+  _AudioControllerBase(this.userId) {
+    audios = ObservableFuture(
+      store.audioCollection
+          .where("userId", isEqualTo: userId)
+          .getDocuments()
+          .then((s) => Audio.parseListOfAudios(s).toList()),
+    );
+  }
 }
