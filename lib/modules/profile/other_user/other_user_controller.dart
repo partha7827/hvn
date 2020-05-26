@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart' show FieldValue;
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:highvibe/models/models.dart' show User;
 import 'package:highvibe/modules/app/app_store.dart';
@@ -49,24 +48,10 @@ abstract class _OtherUserControllerBase with Store {
   Future<void> followUser() async {
     if (isFollowing) {
       followers.remove(currentUserId);
-
-      await store.userCollection.document(currentUser.id).updateData({
-        "following": FieldValue.arrayRemove([otherUserId])
-      });
-
-      await store.userCollection.document(otherUserId).updateData({
-        "followers": FieldValue.arrayRemove([currentUser.id])
-      });
+      store.unfollow(currentUser.id, otherUserId);
     } else {
       followers.add(currentUserId);
-
-      await store.userCollection.document(currentUser.id).updateData({
-        "following": FieldValue.arrayUnion([otherUserId])
-      });
-
-      await store.userCollection.document(otherUserId).updateData({
-        "followers": FieldValue.arrayUnion([currentUser.id])
-      });
+      store.follow(currentUser.id, otherUserId);
     }
   }
 }

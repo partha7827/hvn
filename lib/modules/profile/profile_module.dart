@@ -1,3 +1,4 @@
+import 'package:highvibe/modules/discover/users/discover_users.dart';
 import 'package:highvibe/modules/profile/current_user/current_user_module.dart';
 import 'package:highvibe/modules/profile/other_user/other_user_module.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -14,13 +15,17 @@ class ProfileModule extends ChildModule {
           transition: TransitionType.noTransition,
         ),
         Router(
-          "$profileRoute/:userId",
+          "$profileRoute/user/:userId",
           child: (_, args) => OtherUserModule(args.params['userId']),
         ),
-        // Router("/chat", child: (_, args) => ChatPage()),
-        // Router("/broadcast", child: (_, args) => BroadcastPage()),
-        // Router("/live/:userId",
-        //     child: (_, args) => LivePage(userId: args.params['userId'])),
+        Router(
+          "$profileRoute/followers",
+          child: (_, args) => DiscoverFollowers(args.data),
+        ),
+        Router(
+          "$profileRoute/following",
+          child: (_, args) => DiscoverFollowing(args.data),
+        ),
       ];
 
   static String profileRoute = "/profile";
@@ -29,10 +34,16 @@ class ProfileModule extends ChildModule {
 
   static Future toProfile() => Modular.to.pushNamed(profileRoute);
 
-  static Future toOtherProfile(String userId) => Modular.to.pushNamed(
-        "$profileRoute/$userId",
-        // (route) => (route.settings.name ?? '').startsWith(profileRoute),
+  static Future toOtherProfile(String userId) => Modular.to.pushNamedAndRemoveUntil(
+        "$profileRoute/user/$userId",
+        (route) => !(route.settings.name ?? '').startsWith(profileRoute),
       );
+
+  static Future toFollowers(List<String> followers) => Modular.to
+      .pushNamed("$profileRoute/followers", arguments: followers);
+
+  static Future toFollowing(List<String> following) => Modular.to
+      .pushNamed("$profileRoute/following", arguments: following);
 
   static void toHome() => Modular.to.pop();
 }
