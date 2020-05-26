@@ -84,7 +84,10 @@ class _OtherUserPageState
                     Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: <Widget>[
-                        ProfileAvatar(controller.otherUser.photoUrl),
+                        Hero(
+                          tag: "author#${controller.otherUser.id}",
+                          child: ProfileAvatar(controller.otherUser.photoUrl),
+                        ),
                         Padding(
                           padding: const EdgeInsets.only(left: 16.0),
                           child: Column(

@@ -60,11 +60,15 @@ class _AudioPlayerPageState
           children: [
             Opacity(
               opacity: 0.5,
-              child: Container(
-                decoration: BoxDecoration(
-                  image: DecorationImage(
-                    fit: BoxFit.cover,
-                    image: CachedNetworkImageProvider(audioFile.artworkUrlPath),
+              child: Hero(
+                tag: "audio#${audioFile.id}",
+                child: Container(
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                      fit: BoxFit.cover,
+                      image:
+                          CachedNetworkImageProvider(audioFile.artworkUrlPath),
+                    ),
                   ),
                 ),
               ),
