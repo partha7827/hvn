@@ -1,33 +1,17 @@
 import 'package:highvibe/models/models.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:highvibe/models/serializer/serializer.dart';
-import 'package:built_collection/built_collection.dart';
+import 'package:highvibe/values/assets.dart';
+import 'package:highvibe/values/Strings.dart';
 
 main() async {
-  final userInstance = User((b) => b
-    ..id = "default"
-    ..accountCreationTime = DateTime.now().toUtc()
-    ..address = ''
-    ..experiencePoints = 0
-    ..info = ''
-    ..isLive = false
-    ..isOnline = true
-    ..karmaPoints = 0
-    ..photoUrl = ''
-    ..status = ''
-    ..videoId = ''
-    ..chatId = ''
-    ..name = ''
-    ..account = ''
-    ..email = ''
-    ..name = '');
+  test("user model", () async {
+    final user = User((b) => b..id = "default");
 
-  final audioFileInstance = AudioFile((b) => b
-    ..id = "1"
-    ..author = userInstance.id
-    ..audioFileUrlPath = "empty"
-    );
+    expect(user.id, equals("default"));
+    expect(user.chatId, equals(user.liveId));
 
+    final serialized = serializers.serializeWith(User.serializer, user);
   final messageInstance = Message((b) => b
     ..id = "1"
     ..senderId = userInstance.id
@@ -36,52 +20,56 @@ main() async {
     ..channelId = "1"
     ..content = "message");
 
-  final tagInstance = Tag((b) => b
-    ..id = "1"
-    ..name = "meditation"
-    ..createdAt = DateTime.now().toUtc()
-    ..isRecommended = true
-    ..isVisible = true
-  );
-
-  final channelInstance = Channel((b) => b..id = "1" ..messages = ListBuilder([messageInstance]));
-
-  test("user model", () async {
-    final serialized = serializers.serializeWith(User.serializer, userInstance);
-
     final deserialized =
         serializers.deserializeWith(User.serializer, serialized);
 
-    expect(deserialized, userInstance);
+    expect(deserialized, user);
   });
 
-  test("audio file model", () async {
-    final serialized =
-        serializers.serializeWith(AudioFile.serializer, audioFileInstance);
+  test("audio model", () async {
+    final audio = Audio();
+
+    expect(audio.artworkUrlPath, Assets.audioArtworkPlaceholder);
+    expect(audio.title, Strings.audioTitlePlaceholder);
+
+    final serialized = serializers.serializeWith(Audio.serializer, audio);
 
     final deserialized =
-        serializers.deserializeWith(AudioFile.serializer, serialized);
+        serializers.deserializeWith(Audio.serializer, serialized);
 
-    expect(deserialized, audioFileInstance);
+    expect(deserialized, audio);
   });
 
   test("message model", () async {
-    final serialized =
-        serializers.serializeWith(Message.serializer, messageInstance);
+    final message = Message();
+
+    final serialized = serializers.serializeWith(Message.serializer, message);
 
     final deserialized =
         serializers.deserializeWith(Message.serializer, serialized);
 
-    expect(deserialized, messageInstance);
+    expect(deserialized, message);
   });
 
   test("tag model", () async {
-    final serialized = serializers.serializeWith(Tag.serializer, tagInstance);
+    final tag = Tag();
+
+    final serialized = serializers.serializeWith(Tag.serializer, tag);
 
     final deserialized =
         serializers.deserializeWith(Tag.serializer, serialized);
 
-    expect(deserialized, tagInstance);
+    expect(deserialized, tag);
+  });
+
+  test("video model", () async {
+    final video = Video();
+
+    final serialized = serializers.serializeWith(Video.serializer, video);
+
+    final deserialized = deserialize<Video>(serialized);
+
+    expect(deserialized, video);
   });
 
   test("channel model", () async {

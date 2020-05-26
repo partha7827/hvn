@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:highvibe/models/models.dart' show Video;
+import 'package:highvibe/utils/utils.dart' show screenWidth;
 import 'package:highvibe/values/themes.dart';
 
 class VideoPreviewItem extends StatelessWidget {
@@ -15,7 +16,7 @@ class VideoPreviewItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final width = MediaQuery.of(context).size.width - 40;
+    final width = screenWidth(context) - 40;
     return GestureDetector(
       key: UniqueKey(),
       behavior: HitTestBehavior.opaque,

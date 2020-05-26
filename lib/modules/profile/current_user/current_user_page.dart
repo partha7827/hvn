@@ -2,9 +2,6 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:highvibe/modules/profile/audio/audio_page.dart';
-import 'package:highvibe/modules/profile/broadcast/broadcast_page.dart';
-import 'package:highvibe/modules/profile/chat/chat_page.dart';
 import 'package:highvibe/models/models.dart' show User;
 import 'package:highvibe/values/Strings.dart';
 import 'package:highvibe/values/themes.dart';
@@ -50,7 +47,7 @@ class _CurrentUserPageState
                   pinned: true,
                   backgroundColor: secondaryColor,
                   title: Text(
-                    user?.account ?? 'account',
+                    user.account,
                     style: bold18White,
                   ),
                   actions: <Widget>[
@@ -168,7 +165,7 @@ class _CurrentUserPageState
                           Padding(
                             padding: const EdgeInsets.symmetric(vertical: 20),
                             child: Text(
-                              user.info ?? 'info',
+                              user.bio,
                               maxLines: 2,
                               overflow: TextOverflow.ellipsis,
                               style: normal16Hint,
@@ -233,9 +230,6 @@ class _CurrentUserPageState
             body: TabBarView(
               controller: _tabController,
               children: <Widget>[
-                AudioPage(user: user),
-                ChatPage(user: user),
-                BroadcastPage(user: user),
               ],
             ),
           );

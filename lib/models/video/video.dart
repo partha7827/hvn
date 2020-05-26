@@ -5,6 +5,7 @@ import 'dart:convert';
 import 'package:built_collection/built_collection.dart';
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:highvibe/models/models.dart';
 import 'package:highvibe/models/serializer/serializer.dart';
 import 'package:uuid/uuid.dart';
@@ -31,10 +32,16 @@ abstract class Video implements Built<Video, VideoBuilder> {
         Video.serializer, json.decode(jsonString));
   }
 
-  static BuiltList<Video> parseListOfVideos(String responseBody) {
-    final parsed = json.decode(responseBody).cast<Map<String, Object>>();
-    return deserializeListOf<Video>(parsed);
+  static Video fromSnapshot(DocumentSnapshot snapshot) {
+    return serializers.deserializeWith(Video.serializer, snapshot.data);
   }
 
-  static void _initializeBuilder(VideoBuilder b) => b..id = Uuid().v4();
+  static BuiltList<Video> parseListOfVideos(QuerySnapshot snapshot) {
+    return deserializeListOf<Video>(snapshot.documents.map((s) => s.data));
+  }
+
+  static void _initializeBuilder(VideoBuilder b) => b
+    ..id = Uuid().v4()
+    ..fileDetails = FileDetails().toBuilder()
+    ..snippet = Snippet().toBuilder();
 }

@@ -1,27 +1,31 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter_modular/flutter_modular.dart';
+import 'package:highvibe/mocks/mock_database.dart';
+import 'package:highvibe/services/user_queries.dart';
+import 'package:mock_cloud_firestore/mock_cloud_firestore.dart';
 
-class StoreService extends Disposable {
-  dynamic firestore;
-  
-  StoreService(this.firestore) {
-    _userCollection = firestore.collection("users");
+abstract class IStoreService {
+  CollectionReference userCollection;
+  CollectionReference messageCollection;
+  CollectionReference tagCollection;
+  CollectionReference videoCollection;
+  CollectionReference audioCollection;
+}
+
+class StoreService extends IStoreService with UserQueries {
+  StoreService(firestore) {
+    userCollection = firestore.collection("users");
+    messageCollection = firestore.collection("messages");
+    tagCollection = firestore.collection("tags");
+    videoCollection = firestore.collection("videos");
+    audioCollection = firestore.collection("audio");
     _messageCollection = firestore.collection("messages");
-    _tagCollection = firestore.collection("tags");
-    _channelCollection = firestore.collection("channels");
   }
 
-  CollectionReference _userCollection;
+  factory StoreService.withFirebase() => StoreService(Firestore.instance);
   CollectionReference _messageCollection;
-  CollectionReference _tagCollection;
-  CollectionReference _channelCollection;
 
-  CollectionReference get userCollection => _userCollection;
+  factory StoreService.withMock() => StoreService(MockCloudFirestore(mockDatabase));
   CollectionReference get messageCollection => _messageCollection;
-  CollectionReference get tagCollection => _tagCollection;
-  CollectionReference get channelCollection => _channelCollection;
 
-  //dispose will be called automatically
-  @override
   void dispose() {}
 }

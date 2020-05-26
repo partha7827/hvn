@@ -2,11 +2,11 @@ import 'dart:async';
 
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/foundation.dart' show required;
-import 'package:highvibe/models/models.dart' show AudioFile;
+import 'package:highvibe/models/models.dart' show Audio;
 
 class AudioPlayerService {
   final AudioPlayer audioPlayer;
-  final AudioFile audioFile;
+  final Audio audioFile;
 
   StreamSubscription positionSubscription;
   StreamSubscription playerStateSubscription;
@@ -38,7 +38,7 @@ class AudioPlayerService {
 
   Future<int> _play({@required Duration playPosition}) async {
     final result = await audioPlayer.play(
-      audioFile.audioFileUrlPath,
+      audioFile.audioUrlPath,
       position: playPosition,
     );
 
