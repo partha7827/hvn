@@ -29,7 +29,7 @@ void main() {
   test("load users", () async {
     await controller.loadUsers();
 
-    if (controller.users.toList() != null)
+    if (controller.users.isNotEmpty)
       expect(controller.users.toList(), equals([mockUser, mockAnotherUser]));
   });
 
