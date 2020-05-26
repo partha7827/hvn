@@ -8,7 +8,10 @@ class SplashWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       child: Center(
-        child: const SpinKitFoldingCube(color: Colors.white),
+        child: const SpinKitFoldingCube(
+          color: Colors.white,
+          duration: Duration(milliseconds: 800),
+        ),
       ),
     );
   }
