@@ -6,17 +6,17 @@ import 'package:highvibe/values/themes.dart';
 
 class AudioTile extends StatelessWidget {
   final Audio audioFile;
-  final ValueChanged<Audio> onItemTapped;
+  final ValueChanged<Audio> onTap;
 
   const AudioTile({
     @required this.audioFile,
-    @required this.onItemTapped,
+    @required this.onTap,
   });
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(left: 10.0, top: 10, bottom: 10.0),
+      padding: const EdgeInsets.only(left: 10, top: 10, bottom: 10),
       child: Row(
         children: <Widget>[
           ClipRRect(
@@ -34,21 +34,15 @@ class AudioTile extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  Text(
-                    audioFile.title,
-                    style: normal16White,
-                  ),
-                  Text(
-                    audioFile.subTitle,
-                    style: normal14Hint,
-                  ),
+                  Text(audioFile.title, style: normal16White),
+                  Text(audioFile.subTitle, style: normal14Hint),
                 ],
               ),
             ),
           ),
           IconButton(
             icon: SvgPicture.asset('assets/ic_play.svg'),
-            onPressed: () => onItemTapped(audioFile),
+            onPressed: () => onTap(audioFile),
           )
         ],
       ),

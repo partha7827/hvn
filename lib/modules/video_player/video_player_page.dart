@@ -40,9 +40,7 @@ class _VideoPlayerPageState extends State<VideoPlayerPage> {
   void dispose() {
     _portretScreenOrientaionModes();
     _controller.dispose();
-    if (MediaOverlays.videoOverlayEntry != null) {
-      MediaOverlays.videoOverlayEntry.remove();
-    }
+    MediaOverlays.disposeVideoOverlayEntry();
     super.dispose();
   }
 
@@ -64,7 +62,7 @@ class _VideoPlayerPageState extends State<VideoPlayerPage> {
 
   void _close(BuildContext context) {
     _controller.pause();
-    MediaOverlays.videoOverlayEntry.remove();
+    MediaOverlays.disposeVideoOverlayEntry();
   }
 
   void _configureVideoController() {
