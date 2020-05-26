@@ -39,140 +39,143 @@ class _AudioPlayerPageState
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: ResponsiveSafeArea(
-        builder: (context, state) => Stack(
-          children: [
-            Opacity(
-              opacity: 0.5,
-              child: Container(
-                decoration: BoxDecoration(
-                  image: DecorationImage(
-                    fit: BoxFit.cover,
-                    image: CachedNetworkImageProvider(audioFile.artworkUrlPath),
+    return ResponsiveSafeArea(
+      builder: (context, state) {
+        return Material(
+          child: Stack(
+            children: [
+              Opacity(
+                opacity: 0.5,
+                child: Container(
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                      fit: BoxFit.cover,
+                      image:
+                          CachedNetworkImageProvider(audioFile.artworkUrlPath),
+                    ),
                   ),
                 ),
               ),
-            ),
-            Container(
-              width: double.maxFinite,
-              constraints:
-                  BoxConstraints(minHeight: screenHeight(context) * 0.4),
-              decoration: BoxDecoration(
-                gradient: darkToTransparentGradientTop,
-              ),
-              child: Padding(
-                padding: const EdgeInsets.only(left: 16, right: 16, top: 32),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Text(
-                      audioFile.title,
-                      style: bold24PlayfairWhite,
-                      textAlign: TextAlign.center,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 16.0),
-                      child: Text(
-                        audioFile.subTitle,
-                        style: normal16White,
-                        textAlign: TextAlign.center,
-                      ),
-                    )
-                  ],
-                ),
-              ),
-            ),
-            AppBar(
-              backgroundColor: Colors.transparent,
-              elevation: 0,
-              leading: IconButton(
-                icon: Icon(Icons.keyboard_arrow_down),
-                onPressed: () => _close(context),
-              ),
-            ),
-            Positioned(
-              bottom: 0,
-              left: 0,
-              right: 0,
-              child: Container(
+              Container(
                 width: double.maxFinite,
                 constraints:
                     BoxConstraints(minHeight: screenHeight(context) * 0.4),
-                decoration: BoxDecoration(gradient: darkToTransparentGradient),
+                decoration:
+                    BoxDecoration(gradient: darkToTransparentGradientTop),
                 child: Padding(
-                  padding:
-                      const EdgeInsets.only(left: 40, right: 40, bottom: 20),
+                  padding: const EdgeInsets.only(left: 16, right: 16, top: 32),
                   child: Column(
-                    mainAxisAlignment: MainAxisAlignment.end,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    mainAxisSize: MainAxisSize.min,
                     children: [
-                      AudioPlayerSlider(
-                        trackPosition: _updateSliderPosition(),
-                        onChanged: (value) =>
-                            _audioPlayerService.seekToPosition(value),
-                      ),
-                      Container(
-                        padding: const EdgeInsets.fromLTRB(16, 0, 16, 0),
-                        child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: <Widget>[
-                            Text(
-                              '${_positionText ?? ''}',
-                              style: const TextStyle(
-                                color: Colors.black87,
-                              ),
-                            ),
-                            Text(
-                              mediaTimeFormarter(
-                                Duration(milliseconds: audioFile.duration),
-                              ),
-                              style: const TextStyle(color: Colors.black87),
-                            ),
-                          ],
-                        ),
+                      Text(
+                        audioFile.title,
+                        style: bold24PlayfairWhite,
+                        textAlign: TextAlign.center,
                       ),
                       Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 20),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            _rewindButton(),
-                            AudioPlayerPlayButton(
-                              progress: playButtonAnimation,
-                              onPressed: () => _togglePlayStop(),
-                            ),
-                            _fastForwardButton(),
-                          ],
+                        padding: const EdgeInsets.only(top: 16.0),
+                        child: Text(
+                          audioFile.subTitle,
+                          style: normal16White,
+                          textAlign: TextAlign.center,
                         ),
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          IconButton(
-                            icon: SvgPicture.asset('assets/ic_favorite.svg'),
-                            onPressed: () {},
-                          ),
-                          IconButton(
-                            icon: SvgPicture.asset('assets/ic_playlist.svg'),
-                            onPressed: () {},
-                          ),
-                          IconButton(
-                            icon: SvgPicture.asset('assets/ic_share.svg'),
-                            onPressed: () {},
-                          ),
-                        ],
-                      ),
+                      )
                     ],
                   ),
                 ),
               ),
-            )
-          ],
-        ),
-      ),
+              AppBar(
+                backgroundColor: Colors.transparent,
+                elevation: 0,
+                leading: IconButton(
+                  icon: Icon(Icons.keyboard_arrow_down),
+                  onPressed: () => _close(context),
+                ),
+              ),
+              Positioned(
+                bottom: 0,
+                left: 0,
+                right: 0,
+                child: Container(
+                  width: double.maxFinite,
+                  constraints:
+                      BoxConstraints(minHeight: screenHeight(context) * 0.4),
+                  decoration:
+                      BoxDecoration(gradient: darkToTransparentGradient),
+                  child: Padding(
+                    padding:
+                        const EdgeInsets.only(left: 40, right: 40, bottom: 20),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        AudioPlayerSlider(
+                          trackPosition: _updateSliderPosition(),
+                          onChanged: (value) =>
+                              _audioPlayerService.seekToPosition(value),
+                        ),
+                        Container(
+                          padding: const EdgeInsets.fromLTRB(16, 0, 16, 0),
+                          child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: <Widget>[
+                              Text(
+                                '${_positionText ?? ''}',
+                                style: const TextStyle(
+                                  color: Colors.black87,
+                                ),
+                              ),
+                              Text(
+                                mediaTimeFormarter(
+                                  Duration(milliseconds: audioFile.duration),
+                                ),
+                                style: const TextStyle(color: Colors.black87),
+                              ),
+                            ],
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 20),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              _rewindButton(),
+                              AudioPlayerPlayButton(
+                                progress: playButtonAnimation,
+                                onPressed: () => _togglePlayStop(),
+                              ),
+                              _fastForwardButton(),
+                            ],
+                          ),
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            IconButton(
+                              icon: SvgPicture.asset('assets/ic_favorite.svg'),
+                              onPressed: () {},
+                            ),
+                            IconButton(
+                              icon: SvgPicture.asset('assets/ic_playlist.svg'),
+                              onPressed: () {},
+                            ),
+                            IconButton(
+                              icon: SvgPicture.asset('assets/ic_share.svg'),
+                              onPressed: () {},
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              )
+            ],
+          ),
+        );
+      },
     );
   }
 
@@ -238,9 +241,7 @@ class _AudioPlayerPageState
           ? playButtonAnimation.forward()
           : playButtonAnimation.reverse();
     });
-    _audioPlayerService.toggle(
-      playPosition: _trackPosition,
-    );
+    _audioPlayerService.toggle(playPosition: _trackPosition);
   }
 
   void _updatePlayerState() {
