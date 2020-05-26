@@ -4,7 +4,6 @@ import 'package:highvibe/models/user/user.dart';
 import 'package:highvibe/modules/discover/audio/audio_card.dart';
 import 'package:highvibe/values/Strings.dart';
 import 'package:highvibe/values/themes.dart';
-import 'package:highvibe/widgets/gradient_outline_button.dart';
 import 'package:highvibe/widgets/gradient_raised_button.dart';
 
 class UserCard extends StatelessWidget {

@@ -3,8 +3,6 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:highvibe/modules/discover/components/user_card.dart';
 import 'package:highvibe/modules/profile/profile_module.dart';
-import 'package:highvibe/values/Strings.dart';
-import 'package:highvibe/values/themes.dart';
 import 'package:highvibe/widgets/repeat_widget.dart';
 import 'package:highvibe/widgets/splash_widget.dart';
 import 'package:mobx/mobx.dart';
