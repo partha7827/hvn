@@ -53,13 +53,13 @@ var mockAnotherUser = User((b) => b
 final mockMessages = BuiltList.from([
   Message((b) => b
     ..id = "1"
-    ..channelId = "default"
-    ..senderId = "default"
+    ..chatId = "default"
+    ..authorId = "default"
     ..content = "first message"),
   Message((b) => b
     ..id = "2"
-    ..channelId = "default"
-    ..senderId = "default"
+    ..chatId = "default"
+    ..authorId = "default"
     ..content = "second message"),
 ]);
 

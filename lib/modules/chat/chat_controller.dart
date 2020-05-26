@@ -24,10 +24,10 @@ abstract class _ChatControllerBase with Store {
   Future<void> sendMessage(String content) async {
     final message = Message((b) => b
       ..content = content
-      ..channelId = channelId
-      ..senderId = currentUser.id
-      ..senderPhotoUrl = currentUser.photoUrl
-      ..senderName = currentUser.name);
+      ..chatId = channelId
+      ..authorId = currentUser.id
+      ..authorPhotoUrl = currentUser.photoUrl
+      ..authorName = currentUser.name);
 
     final serializedMessage =
         serializers.serializeWith(Message.serializer, message);
