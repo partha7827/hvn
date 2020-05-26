@@ -29,6 +29,8 @@ abstract class _DiscoverUsersController with Store {
       query = store.userCollection.limit(100);
     }
 
+    print(query);
+
     usersFuture = ObservableFuture(
       query.getDocuments().then((s) => User.parseListOfUsers(s)),
     );
@@ -46,8 +48,6 @@ abstract class _DiscoverUsersController with Store {
   @action
   void followUser(String userId) {
     bool alreadyFollowing = isFollowing[userId] == true;
-
-    print("alreadyFollowing: $alreadyFollowing");
 
     if (alreadyFollowing) {
       numberOfFollowers[userId] =
