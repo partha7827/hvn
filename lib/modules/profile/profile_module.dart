@@ -16,7 +16,7 @@ class ProfileModule extends ChildModule {
         ),
         Router(
           "$profileRoute/user/:userId",
-          child: (_, args) => OtherUserModule(args.params['userId']),
+          child: (_, args) => OtherUserModule(args.data),
         ),
         Router(
           "$profileRoute/followers",
@@ -34,9 +34,10 @@ class ProfileModule extends ChildModule {
 
   static Future toProfile() => Modular.to.pushNamed(profileRoute);
 
-  static Future toOtherProfile(String userId) => Modular.to.pushNamedAndRemoveUntil(
-        "$profileRoute/user/$userId",
+  static Future toOtherProfile(user) => Modular.to.pushNamedAndRemoveUntil(
+        "$profileRoute/user/${user.id}",
         (route) => !(route.settings.name ?? '').startsWith(profileRoute),
+        arguments: user
       );
 
   static Future toFollowers(List<String> followers) => Modular.to

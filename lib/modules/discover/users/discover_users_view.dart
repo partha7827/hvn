@@ -33,7 +33,7 @@ class _DiscoverUsersViewState
               return Observer(
                 builder: (_) => UserCard(
                   user: user,
-                  onChoose: () => ProfileModule.toOtherProfile(user.id),
+                  onChoose: () => ProfileModule.toOtherProfile(user),
                   onFollow: () => controller.followUser(user.id),
                   isFollowing: controller.isFollowing[user.id] == true,
                 ),

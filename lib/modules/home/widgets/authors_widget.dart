@@ -40,8 +40,7 @@ class AuthorsWidget extends StatelessWidget {
                       return _authorCard(
                           user: snapshot.data[index],
                           onPressed: () {
-                            ProfileModule.toOtherProfile(
-                                snapshot.data[index].id);
+                            ProfileModule.toOtherProfile(snapshot.data[index]);
                             // Navigator.push(
                             //   context,
                             //   MaterialPageRoute(
