@@ -25,9 +25,9 @@ class AudioPlayerService {
   }
 
   void dispose() {
-    audioPlayer.dispose();
     positionSubscription?.cancel();
     playerStateSubscription?.cancel();
+    audioPlayer.dispose();
   }
 
   Future<int> _pause() async {
