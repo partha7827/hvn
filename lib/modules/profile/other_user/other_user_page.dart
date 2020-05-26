@@ -15,9 +15,7 @@ import 'other_user_controller.dart';
 
 class OtherUserPage extends StatefulWidget {
   final String title;
-  final String userId;
-  const OtherUserPage({Key key, this.userId, this.title = "OtherUser"})
-      : super(key: key);
+  const OtherUserPage({Key key, this.title = "OtherUser"}) : super(key: key);
 
   @override
   _OtherUserPageState createState() => _OtherUserPageState();
@@ -139,28 +137,40 @@ class _OtherUserPageState
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: <Widget>[
-                        Column(
-                          children: <Widget>[
-                            Observer(
-                              builder: (_) => Text(
-                                controller.followers.length.toString(),
-                                style: bold20White,
-                              ),
+                        Observer(builder: (_) {
+                          return InkWell(
+                            onTap: () {
+                              if (controller.followers.length > 0)
+                                ProfileModule.toFollowers(controller.followers);
+                            },
+                            child: Column(
+                              children: <Widget>[
+                                Text(
+                                  controller.followers.length.toString(),
+                                  style: bold20White,
+                                ),
+                                Text('Followers', style: normal16Hint)
+                              ],
                             ),
-                            Text('Followers', style: normal16Hint)
-                          ],
-                        ),
-                        Column(
-                          children: <Widget>[
-                            Observer(
-                              builder: (_) => Text(
-                                controller.following.length.toString(),
-                                style: bold20White,
-                              ),
+                          );
+                        }),
+                        Observer(builder: (_) {
+                          return InkWell(
+                            onTap: () {
+                              if (controller.following.length > 0)
+                                ProfileModule.toFollowing(controller.following);
+                            },
+                            child: Column(
+                              children: <Widget>[
+                                Text(
+                                  controller.following.length.toString(),
+                                  style: bold20White,
+                                ),
+                                Text('Following', style: normal16Hint)
+                              ],
                             ),
-                            Text('Following', style: normal16Hint)
-                          ],
-                        ),
+                          );
+                        })
                       ],
                     )
                   ],
@@ -171,7 +181,8 @@ class _OtherUserPageState
           ProfileTabButtons(controller: _tabController),
         ];
       },
-      body: ProfileTabPages(userId: widget.userId, controller: _tabController),
+      body: ProfileTabPages(
+          userId: controller.otherUserId, controller: _tabController),
     );
   }
 }
