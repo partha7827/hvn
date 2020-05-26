@@ -139,6 +139,12 @@ TextStyle normal12Hint = TextStyle(
   fontSize: 12,
   color: hintTextColor,
 );
+
+TextStyle normal10Hint = TextStyle(
+  fontSize: 10,
+  color: hintTextColor,
+);
+
 TextStyle normal16Hint = TextStyle(
   fontSize: 16,
   color: hintTextColor,
@@ -151,7 +157,6 @@ final appTheme = ThemeData(
   appBarTheme: AppBarTheme(
     elevation: 0,
     color: const Color(0xFF000222),
-    textTheme: TextTheme(),
   ),
   iconTheme: IconThemeData(
     color: Colors.white,

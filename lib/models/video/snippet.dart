@@ -33,7 +33,9 @@ abstract class Snippet implements Built<Snippet, SnippetBuilder> {
   }
 
   static void _initializeBuilder(SnippetBuilder b) => b
-    ..description = 'Description'
+    ..title = 'No Title'
+    ..description = 'No Description'
     ..publishedAt = DateTime.now().toUtc()
-    ..title = 'The Grand Plan to Rise and Shine';
+    ..tags = BuiltList<String>([]).toBuilder()
+    ..videoThumbnail = Thumbnail().toBuilder();
 }

@@ -4,11 +4,11 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:highvibe/modules/auth/auth_module.dart';
-import 'package:highvibe/modules/auth/login/widgets/reset_password_widget.dart';
 import 'package:highvibe/utils/utils.dart';
 import 'package:highvibe/values/Strings.dart';
 import 'package:highvibe/values/themes.dart';
 import 'package:highvibe/widgets/custom_text_form.dart';
+import 'package:highvibe/widgets/gradient_outline_button.dart';
 import 'package:highvibe/widgets/gradient_raised_button.dart';
 
 import 'login_controller.dart';
@@ -67,8 +67,9 @@ class _LoginPageState extends ModularState<LoginPage, LoginController> {
                 Align(
                   alignment: Alignment.topRight,
                   child: FlatButton(
-                    onPressed: () => showResetPasswordDialog(
-                        context, controller.emailController),
+                    onPressed: () => AuthModule.toForgotPassword(
+                      controller.emailController.text,
+                    ),
                     child: Text(
                       Strings.forgotPassword,
                       style: normal14White,
@@ -82,11 +83,13 @@ class _LoginPageState extends ModularState<LoginPage, LoginController> {
                       label: Strings.login,
                       isLoading: controller.inProgress,
                       onPressed: () async {
-                        if (!controller.formKey.currentState.validate()) return null;
+                        if (!controller.formKey.currentState.validate())
+                          return null;
                         try {
                           await controller.loginUser();
                         } catch (e) {
-                          showSnackBarMsg(controller.scaffoldKey.currentState, e.toString());
+                          showSnackBarMsg(controller.scaffoldKey.currentState,
+                              e.toString());
                         }
                       },
                     ),
@@ -102,37 +105,39 @@ class _LoginPageState extends ModularState<LoginPage, LoginController> {
                 Row(
                   children: <Widget>[
                     Expanded(
-                      child: Container(
-                        height: 48,
-                        padding: const EdgeInsets.only(right: 8),
-                        child: RaisedButton.icon(
+                      child: Padding(
+                        padding: const EdgeInsets.only(right: 8.0),
+                        child: GradientOutlineButton(
+                          icon: SvgPicture.asset('assets/ic_apple.svg'),
                           onPressed: () {},
-                          icon: SvgPicture.asset('assets/ic_facebook.svg'),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          color: const Color(0xFF2B5C93),
-                          label: Text(
-                            Strings.facebook,
-                            style: normal16White,
-                          ),
                         ),
                       ),
                     ),
                     Expanded(
-                      child: Container(
-                        height: 48,
-                        padding: const EdgeInsets.only(left: 8),
-                        child: RaisedButton.icon(
+                      child: Padding(
+                        padding: const EdgeInsets.only(right: 8.0, left: 8.0),
+                        child: GradientOutlineButton(
+                          icon: SvgPicture.asset('assets/ic_facebook.svg'),
                           onPressed: () {},
-                          icon: SvgPicture.asset('assets/ic_google.svg'),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          color: const Color(0xFFCF4332),
-                          label: Text(
-                            Strings.google,
-                            style: normal16White,
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      child: Observer(
+                        builder: (_) => Padding(
+                          padding: const EdgeInsets.only(left: 8.0),
+                          child: GradientOutlineButton(
+                            isLoading: controller.inProgressGoogleSignIn,
+                            icon: SvgPicture.asset('assets/ic_google.svg'),
+                            onPressed: () async {
+                              try {
+                                await controller.googleSignIn();
+                              } catch (e) {
+                                showSnackBarMsg(
+                                    controller.scaffoldKey.currentState,
+                                    e.toString());
+                              }
+                            },
                           ),
                         ),
                       ),

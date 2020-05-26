@@ -31,4 +31,12 @@ abstract class FileDetails implements Built<FileDetails, FileDetailsBuilder> {
     return serializers.deserializeWith(
         FileDetails.serializer, json.decode(jsonString));
   }
+
+  static void _initializeBuilder(FileDetailsBuilder b) => b
+    ..bitrateBps = 0
+    ..creationTime = DateTime.now().toUtc()
+    ..durationMs = 0
+    ..fileName = ''
+    ..fileSize = 0
+    ..url = '';
 }

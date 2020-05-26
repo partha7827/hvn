@@ -6,18 +6,20 @@ class GradientRaisedButton extends StatelessWidget {
   final String label;
   final IconData icon;
   final bool isLoading;
+  final double minHeight;
 
   const GradientRaisedButton({
     this.onPressed,
     this.label,
     this.icon,
     this.isLoading = false,
+    this.minHeight = 48,
   });
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      constraints: BoxConstraints(minWidth: 88, minHeight: 48),
+      constraints: BoxConstraints(minWidth: 88, minHeight: minHeight),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10.0),
         gradient: primaryGradient,

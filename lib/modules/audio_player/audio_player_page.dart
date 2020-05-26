@@ -4,7 +4,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:highvibe/modules/audio_player/audio_player_service.dart';
 import 'package:highvibe/modules/audio_player/widgets/widgets.dart';
-import 'package:highvibe/models/models.dart' show AudioFile;
+import 'package:highvibe/models/models.dart' show Audio;
 import 'package:highvibe/utils/utils.dart';
 import 'package:highvibe/values/themes.dart';
 import 'package:highvibe/widgets/responsive_safe_area.dart';
@@ -13,7 +13,7 @@ import 'audio_player_controller.dart';
 
 class AudioPlayerPage extends StatefulWidget {
   final String title;
-  final AudioFile audioFile;
+  final Audio audioFile;
 
   const AudioPlayerPage({
     @required this.audioFile,
@@ -60,11 +60,15 @@ class _AudioPlayerPageState
           children: [
             Opacity(
               opacity: 0.5,
-              child: Container(
-                decoration: BoxDecoration(
-                  image: DecorationImage(
-                    fit: BoxFit.cover,
-                    image: CachedNetworkImageProvider(audioFile.artworkUrlPath),
+              child: Hero(
+                tag: "audio#${audioFile.id}",
+                child: Container(
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                      fit: BoxFit.cover,
+                      image:
+                          CachedNetworkImageProvider(audioFile.artworkUrlPath),
+                    ),
                   ),
                 ),
               ),

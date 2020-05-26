@@ -16,7 +16,7 @@ class SingleMessageTile extends StatelessWidget {
       leading: ClipRRect(
         borderRadius: BorderRadius.circular(50.0),
         child: CachedNetworkImage(
-          imageUrl: message.senderPhotoUrl,
+          imageUrl: message.authorPhotoUrl,
           width: 48,
           height: 48,
           fit: BoxFit.cover,
@@ -30,7 +30,7 @@ class SingleMessageTile extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Text(
-                message.senderName,
+                message.authorName,
                 style: bold16White,
               ),
               Padding(

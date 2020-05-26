@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart' show FieldValue;
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:highvibe/models/models.dart' show User;
 import 'package:highvibe/modules/app/app_store.dart';
@@ -11,49 +10,35 @@ class OtherUserController = _OtherUserControllerBase with _$OtherUserController;
 
 abstract class _OtherUserControllerBase with Store {
   final store = Modular.get<StoreService>();
+  User get currentUser => Modular.get<AppStore>().currentUser;
+  String get currentUserId => currentUser.id;
 
-  @observable
-  String otherUserId;
-
-  @observable
-  User otherUser;
-
-  @action
-  Future<void> init(String userId) async {
-    otherUserId = userId;
-    otherUser =
-        User.fromSnapshot(await store.userCollection.document(userId).get());
+  final User otherUser;
+  _OtherUserControllerBase(this.otherUser) {
+    followers = ObservableList.of(otherUser.followers);
+    following = ObservableList.of(otherUser.following);
   }
 
-  User get currentUser => Modular.get<AppStore>().currentUser;
+  @observable
+  ObservableFuture<User> otherUserFuture;
+
+  @observable
+  ObservableList<String> followers = ObservableList.of([]);
+
+  @observable
+  ObservableList<String> following = ObservableList.of([]);
 
   @computed
-  bool get isFollowing => currentUser.following.contains(otherUserId);
+  bool get isFollowing => followers.contains(currentUserId);
 
   @action
-  Future<void> followUser(userId) async {
+  Future<void> followUser() async {
     if (isFollowing) {
-      // currentUser.following.toList().remove(userId);
-      // otherUser.followers.toList().remove(currentUser.id);
-
-      await store.userCollection.document(currentUser.id).updateData({
-        "following": FieldValue.arrayRemove([ userId ])
-      });
-
-      await store.userCollection.document(userId).updateData({
-        "followers": FieldValue.arrayRemove([ currentUser.id ])
-      });
+      followers.remove(currentUserId);
+      store.unfollow(currentUser.id, otherUser.id);
     } else {
-      // currentUser.following.toList().add(userId);
-      // otherUser.followers.toList().add(currentUser.id);
-
-      await store.userCollection.document(currentUser.id).updateData({
-        "following": FieldValue.arrayUnion([ userId ])
-      });
-
-      await store.userCollection.document(userId).updateData({
-        "followers": FieldValue.arrayUnion([ currentUser.id ])
-      });
+      followers.add(currentUserId);
+      store.follow(currentUser.id, otherUser.id);
     }
   }
 }
