@@ -9,6 +9,7 @@ const primaryTextColor = Colors.white;
 const accentColor = const Color(0xFF66CCCC);
 const hintTextColor = const Color(0xFF8E8F99);
 const redColor = const Color(0xFFFF0000);
+const mediaPlayerBackgroundColor = Color(0xFF525366);
 
 const LinearGradient primaryGradient = const LinearGradient(
   begin: Alignment.topCenter,

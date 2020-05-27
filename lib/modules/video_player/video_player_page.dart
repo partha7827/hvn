@@ -158,7 +158,7 @@ class _VideoPlayerPageState extends State<VideoPlayerPage> {
             margin: _isMinimised
                 ? const EdgeInsets.only(left: 8, right: 8)
                 : EdgeInsets.only(left: 0, right: 0),
-            color: secondaryColor,
+            color: mediaPlayerBackgroundColor,
             height: _isMinimised ? 80 : null,
             width: _isMinimised ? size.width : null,
             child: AspectRatio(

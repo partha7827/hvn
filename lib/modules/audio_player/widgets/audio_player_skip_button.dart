@@ -19,14 +19,12 @@ class AudioPlayerSkipButton<S> extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: Material(
-        child: IconButton(
-          iconSize: 70,
-          icon: _configureIcon(),
-          color: activeColor,
-          disabledColor: disabledColor,
-          onPressed: onPressed,
-        ),
+      child: IconButton(
+        iconSize: 70,
+        icon: _configureIcon(),
+        color: activeColor,
+        disabledColor: disabledColor,
+        onPressed: onPressed,
       ),
     );
   }

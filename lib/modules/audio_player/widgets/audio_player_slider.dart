@@ -14,12 +14,10 @@ class AudioPlayerSlider extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Material(
-      child: Slider(
-        value: trackPosition,
-        activeColor: Colors.black,
-        onChanged: (value) => onChanged(value),
-      ),
+    return Slider(
+      value: trackPosition,
+      activeColor: Colors.black,
+      onChanged: (value) => onChanged(value),
     );
   }
 }
