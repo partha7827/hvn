@@ -37,130 +37,165 @@ class _AudioPlayerPageState extends State<AudioPlayerPage>
 
   @override
   Widget build(BuildContext context) {
-    return Material(
-      child: Stack(
-        children: [
-          Opacity(
-            opacity: _isMinimised ? 1 : 0.5,
-            child: Container(
-              width: _isMinimised ? 100 : null,
-              height: _isMinimised ? 100 : null,
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  fit: BoxFit.cover,
-                  image: CachedNetworkImageProvider(_audioFile.artworkUrlPath),
+    return Align(
+      alignment: _isMinimised ? Alignment.bottomCenter : Alignment.center,
+      child: Container(
+        color: _isMinimised ? Colors.red : Colors.blue,
+        height: _isMinimised ? 80 : null,
+        margin: _isMinimised
+            ? const EdgeInsets.only(left: 8, right: 8)
+            : EdgeInsets.only(left: 0, right: 0),
+        child: Stack(
+          children: [
+            Opacity(
+              opacity: _isMinimised ? 1 : 0.5,
+              child: Container(
+                width: _isMinimised ? 80 : null,
+                height: _isMinimised ? 80 : null,
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                    fit: BoxFit.cover,
+                    image:
+                        CachedNetworkImageProvider(_audioFile.artworkUrlPath),
+                  ),
                 ),
               ),
             ),
-          ),
-          Container(
-            width: double.maxFinite,
-            constraints: BoxConstraints(minHeight: screenHeight(context) * 0.4),
-            decoration: BoxDecoration(gradient: darkToTransparentGradientTop),
-            child: Padding(
-              padding: const EdgeInsets.only(left: 16, right: 16, top: 32),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Text(
-                    _audioFile.title,
-                    style: bold24PlayfairWhite,
-                    textAlign: TextAlign.center,
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 16.0),
-                    child: Text(
-                      _audioFile.subTitle,
-                      style: normal16White,
-                      textAlign: TextAlign.center,
-                    ),
-                  )
-                ],
-              ),
-            ),
-          ),
-          _minimizeScreenButton(),
-          _closeScreenButton(),
-          Positioned(
-            bottom: 0,
-            left: 0,
-            right: 0,
-            child: Container(
+            Container(
+              color: _isMinimised ? Colors.transparent : null,
               width: double.maxFinite,
               constraints:
                   BoxConstraints(minHeight: screenHeight(context) * 0.4),
-              decoration: BoxDecoration(gradient: darkToTransparentGradient),
-              child: Padding(
-                padding: const EdgeInsets.only(left: 40, right: 40, bottom: 20),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    AudioPlayerSlider(
-                      trackPosition: _updateSliderPosition(),
-                      onChanged: (value) =>
-                          _audioPlayerService.seekToPosition(value),
+              decoration: _isMinimised
+                  ? null
+                  : BoxDecoration(
+                      gradient: darkToTransparentGradientTop,
                     ),
-                    Container(
-                      padding: const EdgeInsets.fromLTRB(16, 0, 16, 0),
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: <Widget>[
-                          Text(
-                            '${_positionText ?? ''}',
-                            style: const TextStyle(
-                              color: Colors.white,
-                            ),
-                          ),
-                          Text(
-                            mediaTimeFormarter(
-                              Duration(milliseconds: _audioFile.duration),
-                            ),
-                            style: const TextStyle(color: Colors.white),
-                          ),
-                        ],
+              child: Padding(
+                padding: const EdgeInsets.only(left: 16, right: 16, top: 32),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Material(
+                      child: Text(
+                        _audioFile.title,
+                        style: bold24PlayfairWhite,
+                        textAlign: TextAlign.center,
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 20),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          if (!_isMinimised) _rewindButton(),
-                          AudioPlayerPlayButton(
-                            progress: playButtonAnimation,
-                            onPressed: () => _togglePlayStop(),
-                          ),
-                          if (!_isMinimised) _fastForwardButton(),
-                        ],
+                      padding: const EdgeInsets.only(top: 16),
+                      child: Material(
+                        child: Text(
+                          _audioFile.subTitle,
+                          style: normal16White,
+                          textAlign: TextAlign.center,
+                        ),
                       ),
-                    ),
-                    if (!_isMinimised)
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          IconButton(
-                            icon: SvgPicture.asset('assets/ic_favorite.svg'),
-                            onPressed: () {},
-                          ),
-                          IconButton(
-                            icon: SvgPicture.asset('assets/ic_playlist.svg'),
-                            onPressed: () {},
-                          ),
-                          IconButton(
-                            icon: SvgPicture.asset('assets/ic_share.svg'),
-                            onPressed: () {},
-                          ),
-                        ],
-                      ),
+                    )
                   ],
                 ),
               ),
             ),
-          )
-        ],
+            _minimizeScreenButton(),
+            if (!_isMinimised) _closeScreenButton(),
+            Positioned(
+              bottom: 0,
+              left: 0,
+              right: 0,
+              child: Container(
+                width: double.maxFinite,
+                constraints: BoxConstraints(
+                  minHeight: screenHeight(context) * 0.4,
+                ),
+                decoration: BoxDecoration(gradient: darkToTransparentGradient),
+                child: Padding(
+                  padding:
+                      const EdgeInsets.only(left: 40, right: 40, bottom: 20),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      if (!_isMinimised)
+                        AudioPlayerSlider(
+                          trackPosition: _updateSliderPosition(),
+                          onChanged: (value) =>
+                              _audioPlayerService.seekToPosition(value),
+                        ),
+                      if (!_isMinimised)
+                        Container(
+                          padding: const EdgeInsets.fromLTRB(16, 0, 16, 0),
+                          child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: <Widget>[
+                              Material(
+                                child: Text(
+                                  '${_positionText ?? ''}',
+                                  style: const TextStyle(
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ),
+                              Material(
+                                child: Text(
+                                  mediaTimeFormarter(
+                                    Duration(milliseconds: _audioFile.duration),
+                                  ),
+                                  style: const TextStyle(color: Colors.white),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 20),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            if (!_isMinimised) _rewindButton(),
+                            AudioPlayerPlayButton(
+                              progress: playButtonAnimation,
+                              onPressed: () => _togglePlayStop(),
+                            ),
+                            if (!_isMinimised) _fastForwardButton(),
+                          ],
+                        ),
+                      ),
+                      if (!_isMinimised)
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Material(
+                              child: IconButton(
+                                icon:
+                                    SvgPicture.asset('assets/ic_favorite.svg'),
+                                onPressed: () {},
+                              ),
+                            ),
+                            Material(
+                              child: IconButton(
+                                icon:
+                                    SvgPicture.asset('assets/ic_playlist.svg'),
+                                onPressed: () {},
+                              ),
+                            ),
+                            Material(
+                              child: IconButton(
+                                icon: SvgPicture.asset('assets/ic_share.svg'),
+                                onPressed: () {},
+                              ),
+                            ),
+                          ],
+                        ),
+                    ],
+                  ),
+                ),
+              ),
+            )
+          ],
+        ),
       ),
     );
   }
