@@ -266,7 +266,7 @@ class _AudioPlayerPageState extends State<AudioPlayerPage>
                 bottom: 4,
                 child: ConstrainedBox(
                   constraints: BoxConstraints(
-                    maxWidth: 40,
+                    maxWidth: 80,
                     maxHeight: 40,
                   ),
                   child: Text(
@@ -326,14 +326,6 @@ class _AudioPlayerPageState extends State<AudioPlayerPage>
     _audioPlayerService = AudioPlayerService(audioFile: widget.audioFile);
   }
 
-  Icon _configurePlayButtonIcon(bool isPlaying) {
-    if (isPlaying) {
-      return const Icon(Icons.pause);
-    } else {
-      return const Icon(Icons.play_circle_filled);
-    }
-  }
-
   AudioPlayerSkipButton _fastForwardButton() {
     return AudioPlayerSkipButton(
       buttonType: AudioPlayerSkipButtonType.fastForward,
@@ -383,7 +375,6 @@ class _AudioPlayerPageState extends State<AudioPlayerPage>
 
   void _togglePlayStop() {
     setState(() {
-      _isPlaying = !_isPlaying;
       _isPlaying
           ? playButtonAnimation.forward()
           : playButtonAnimation.reverse();
@@ -395,7 +386,9 @@ class _AudioPlayerPageState extends State<AudioPlayerPage>
     _audioPlayerService.playerStateSubscription.onData((state) {
       setState(() {
         _isPlaying = _audioPlayerService.isPlaying;
-        _configurePlayButtonIcon(_isPlaying);
+        _isPlaying
+            ? playButtonAnimation.forward()
+            : playButtonAnimation.reverse();
       });
     });
   }
