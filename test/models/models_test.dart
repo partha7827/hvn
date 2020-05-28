@@ -12,13 +12,6 @@ main() async {
     expect(user.chatId, equals(user.liveId));
 
     final serialized = serializers.serializeWith(User.serializer, user);
-  final messageInstance = Message((b) => b
-    ..id = "1"
-    ..senderId = userInstance.id
-    ..senderName = userInstance.name
-    ..senderPhotoUrl = userInstance.photoUrl
-    ..channelId = "1"
-    ..content = "message");
 
     final deserialized =
         serializers.deserializeWith(User.serializer, serialized);
@@ -72,10 +65,32 @@ main() async {
     expect(deserialized, video);
   });
 
-  test("channel model", () async {
-    final serialized = serializers.serializeWith(Channel.serializer, channelInstance);
+  test("message model", () async {
+    final messageInstance = Message((b) => b
+      ..id = "1"
+      ..authorId = "1"
+      ..authorName = "1"
+      ..authorPhotoUrl = "1"
+      ..chatId = "1"
+      ..content = "message");
 
-    final deserialized = serializers.deserializeWith(Channel.serializer, serialized);
+    final serialized =
+        serializers.serializeWith(Message.serializer, messageInstance);
+
+    final deserialized =
+        serializers.deserializeWith(Message.serializer, serialized);
+
+    expect(deserialized, messageInstance);
+  });
+
+  test("channel model", () async {
+    final channelInstance = Channel((b) => b..id = "default");
+
+    final serialized =
+        serializers.serializeWith(Channel.serializer, channelInstance);
+
+    final deserialized =
+        serializers.deserializeWith(Channel.serializer, serialized);
 
     expect(deserialized, channelInstance);
   });

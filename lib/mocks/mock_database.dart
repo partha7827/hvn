@@ -50,7 +50,7 @@ var mockAnotherUser = User((b) => b
   ..id = "another"
   ..name = "Another User");
 
-final mockMessages = BuiltList.from([
+final mockMessages = BuiltList<Message>.from([
   Message((b) => b
     ..id = "1"
     ..chatId = "default"
@@ -78,8 +78,8 @@ final mockDatabase = """
             }
           }
         },
-        "videos": { "${mockVideo.id}": ${mockVideo.toJson()} }
-      }
+        "videos": { "${mockVideo.id}": ${mockVideo.toJson()} },
         "channels": {"${mockUser.id}": ${mockChannel.toJson()} },
-        "messages": {"${mockMessages[0].id}": ${mockMessages[0].toJson()}, "${mockMessages[1].id}": ${mockMessages[1].toJson()}},
+        "messages": {"${mockMessages[0].id}": ${mockMessages[0].toJson()}, "${mockMessages[1].id}": ${mockMessages[1].toJson()}}
+      }
     """;

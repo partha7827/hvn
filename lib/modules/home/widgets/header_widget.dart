@@ -104,9 +104,10 @@ class HeaderWidget extends StatelessWidget {
                     itemBuilder: (context, index) {
                       return VideoPreviewItem(
                         video: snapshot.data[index],
-                        onTap: (item) => presentVideoPlayerAsOverlay(
-                          context,
-                          item,
+                        onTap: (item) =>
+                            MediaOverlays.presentVideoPlayerAsOverlay(
+                          context: context,
+                          video: item,
                         ),
                       );
                     },
@@ -146,7 +147,7 @@ class HeaderWidget extends StatelessWidget {
       ],
     );
   }
-  
+
   Widget buildVideos() {
     return FutureBuilder(
         future: Modular.get<HomeController>().getVideos(),

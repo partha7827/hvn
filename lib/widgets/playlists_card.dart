@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:highvibe/models/audio/mock_audio_files.dart';
+import 'package:highvibe/modules/app/media_overlays.dart';
 import 'package:highvibe/values/Strings.dart';
 import 'package:highvibe/values/themes.dart';
 
@@ -49,27 +50,20 @@ class PlaylistsCard extends StatelessWidget {
               '$playlistLength ${Strings.meditations}',
               style: normal14Hint,
             ),
-            trailing: Icon(
-              Icons.playlist_play,
-              color: Colors.white,
-            ),
+            trailing: Icon(Icons.playlist_play, color: Colors.white),
             children: <Widget>[
-              ...mockAudioItemsList
-                  .map(
-                    (item) => AudioTile(
-                      audioFile: item,
-                      onItemTapped: (item) => _showAudioPlayer(),
-                    ),
-                  )
-                  .toList(),
+              for (final audioItem in mockAudioItemsList)
+                AudioTile(
+                  audioFile: audioItem,
+                  onTap: (item) => MediaOverlays.presentAudioPlayerAsOverlay(
+                    context: context,
+                    audioFile: item,
+                  ),
+                ),
             ],
           )
         ],
       ),
     );
-  }
-
-  void _showAudioPlayer() {
-    print('showAudioPlayer');
   }
 }
