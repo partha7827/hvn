@@ -156,7 +156,7 @@ class _VideoPlayerPageState extends State<VideoPlayerPage> {
           alignment: _isMinimised ? Alignment.bottomCenter : Alignment.center,
           child: Container(
             margin: _isMinimised
-                ? const EdgeInsets.only(left: 8, right: 8)
+                ? const EdgeInsets.only(left: 8, right: 8, bottom: 8)
                 : EdgeInsets.only(left: 0, right: 0),
             color: mediaPlayerBackgroundColor,
             height: _isMinimised ? 80 : null,
