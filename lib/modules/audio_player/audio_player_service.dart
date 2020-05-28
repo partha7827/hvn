@@ -24,7 +24,8 @@ class AudioPlayerService {
     _configure();
   }
 
-  void dispose() {
+  void dispose() async {
+    await audioPlayer.stop();
     positionSubscription?.cancel();
     playerStateSubscription?.cancel();
     audioPlayer.dispose();
@@ -62,8 +63,6 @@ class AudioPlayerService {
   }
 
   Future<void> stop() async {
-    // Exception has occurred.
-    // StateError (Bad state: Cannot add new events after calling close)
     final result = await audioPlayer.stop();
     if (result == 1) {
       _playerState = PlayerState.stopped;

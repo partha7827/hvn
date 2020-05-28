@@ -107,7 +107,7 @@ class _AudioPlayerPageState extends State<AudioPlayerPage>
 
   Widget _closeScreenButton() {
     return Positioned(
-      top: 20,
+      top: 32,
       right: -16,
       child: FlatButton(
         onPressed: () => _close(),
@@ -278,7 +278,7 @@ class _AudioPlayerPageState extends State<AudioPlayerPage>
         ),
       ),
       Positioned(
-        left: 130,
+        left: 90,
         top: 50,
         child: ConstrainedBox(
           constraints: BoxConstraints(
@@ -344,7 +344,7 @@ class _AudioPlayerPageState extends State<AudioPlayerPage>
   Widget _minimizeScreenButton() {
     if (!_isMinimised) {
       return Positioned(
-        top: 20,
+        top: 40,
         left: -16,
         child: FlatButton(
           onPressed: () => _toggleAudioPlayerMode(),
