@@ -22,6 +22,7 @@ abstract class Video implements Built<Video, VideoBuilder> {
   FileDetails get fileDetails;
   String get id;
   Snippet get snippet;
+  bool get isRecommended;
 
   String toJson() {
     return json.encode(serializers.serializeWith(Video.serializer, this));
@@ -43,5 +44,7 @@ abstract class Video implements Built<Video, VideoBuilder> {
   static void _initializeBuilder(VideoBuilder b) => b
     ..id = Uuid().v4()
     ..fileDetails = FileDetails().toBuilder()
-    ..snippet = Snippet().toBuilder();
+    ..snippet = Snippet().toBuilder()
+    ..isRecommended = false  
+  ;
 }

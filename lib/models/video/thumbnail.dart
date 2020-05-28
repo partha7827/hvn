@@ -5,6 +5,7 @@ import 'dart:convert';
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
 import 'package:highvibe/models/serializer/serializer.dart';
+import 'package:highvibe/values/assets.dart';
 
 part 'thumbnail.g.dart';
 
@@ -28,7 +29,7 @@ abstract class Thumbnail implements Built<Thumbnail, ThumbnailBuilder> {
   }
 
   static void _initializeBuilder(ThumbnailBuilder b) => b
-    ..url = ""
+    ..url = Assets.videoThumbnailPlaceholder
     ..width = 0
     ..height = 0;
 }

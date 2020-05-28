@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:highvibe/modules/profile/audio/audio_module.dart';
 import 'package:highvibe/modules/profile/profile_module.dart';
 import 'package:highvibe/modules/profile/widgets/profile_avatar.dart';
 import 'package:highvibe/modules/profile/widgets/profile_tab_buttons.dart';
@@ -26,7 +27,7 @@ class _OtherUserPageState
 
   @override
   void initState() {
-    _tabController = TabController(initialIndex: 0, length: 3, vsync: this);
+    _tabController = TabController(initialIndex: 0, length: 1, vsync: this);
     super.initState();
   }
 
@@ -183,8 +184,7 @@ class _OtherUserPageState
           ProfileTabButtons(controller: _tabController),
         ];
       },
-      body: ProfileTabPages(
-          userId: controller.otherUser.id, controller: _tabController),
+      body: AudioModule(controller.otherUser.id),
     );
   }
 }

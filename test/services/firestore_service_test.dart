@@ -1,4 +1,4 @@
-import 'package:highvibe/services/store_service.dart';
+import 'package:highvibe/services/firestore_service.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mock_cloud_firestore/mock_cloud_firestore.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -6,22 +6,20 @@ import 'package:highvibe/mocks/mock_database.dart';
 import 'package:highvibe/models/models.dart';
 
 main() async {
-  final firestore = MockCloudFirestore(mockDatabase);
-
-  final service = StoreService(firestore);
+  final firestore = FirestoreService.withMock();
 
   test("initialize store service", () async {
-    expect(service.userCollection, isInstanceOf<CollectionReference>());
+    expect(firestore.userCollection, isInstanceOf<CollectionReference>());
   });
 
   test("get user document", () async {
-    var document = await service.userCollection.document("default").get();
+    var document = await firestore.userCollection.document("default").get();
 
     expect(document.data["name"], equals('Default User'));
   });
 
   test("get video document", () async {
-    var document = await service.videoCollection.document("1").get();
+    var document = await firestore.videoCollection.document("1").get();
 
     var video = Video.fromSnapshot(document);
 
@@ -29,7 +27,7 @@ main() async {
   });
 
   test("parse list of users", () async {
-    var snapshot = await service.userCollection.getDocuments();
+    var snapshot = await firestore.userCollection.getDocuments();
 
     var users = User.parseListOfUsers(snapshot).toList();
 
@@ -37,7 +35,7 @@ main() async {
   });
 
   test("parse list of videos", () async {
-    var snapshot = await service.videoCollection.getDocuments();
+    var snapshot = await firestore.videoCollection.getDocuments();
 
     var videos = Video.parseListOfVideos(snapshot).toList();
 
@@ -45,7 +43,7 @@ main() async {
   });
 
   test("get channel document", () async {
-    var document = await service.channelCollection.document("default").get();
+    var document = await firestore.channelCollection.document("default").get();
 
     expect(document.data["id"], equals("default"));
   });

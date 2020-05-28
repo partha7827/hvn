@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:highvibe/services/store_service.dart';
+import 'package:highvibe/services/firestore_service.dart';
 
-mixin UserQueries on IStoreService {
+mixin UserQueries on IFirestoreService {
   void follow(String follower, String following) {
     userCollection.document(follower).updateData({
       "following": FieldValue.arrayUnion([following])

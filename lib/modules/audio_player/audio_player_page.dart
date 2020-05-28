@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:highvibe/modules/audio_player/audio_player_service.dart';
@@ -204,18 +205,19 @@ class _AudioPlayerPageState
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          IconButton(
-                            icon: SvgPicture.asset('assets/ic_favorite.svg'),
-                            onPressed: () {},
-                          ),
-                          IconButton(
-                            icon: SvgPicture.asset('assets/ic_playlist.svg'),
-                            onPressed: () {},
-                          ),
-                          IconButton(
-                            icon: SvgPicture.asset('assets/ic_share.svg'),
-                            onPressed: () {},
-                          ),
+                          Observer(
+                            builder: (_) {
+                              return IconButton(
+                                icon: Icon(
+                                  Icons.repeat,
+                                  color: controller.isLoopMode
+                                      ? Colors.blue
+                                      : Colors.white,
+                                ),
+                                onPressed: controller.switchLoopMode,
+                              );
+                            },
+                          )
                         ],
                       ),
                     ],

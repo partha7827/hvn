@@ -27,6 +27,9 @@ class Strings {
   static const membersJoined = 'Members joined';
   static const typeMessage = 'Type a message';
   static const recommendedForYou = 'Recommended for you';
+  static const recommendedAudios = 'Recommended for you';
+  static const recommendedVideos = 'Video';
+  static const recommendedAuthors = 'Authors';
   static const email = 'Email';
   static const password = 'Password';
   static const forgotPassword = 'Forgot Password?';
@@ -44,15 +47,15 @@ class Strings {
   static const resetPassword = "Email Sent, Please check it to change password";
   static const defaultQuote =
       "It's time to start living the life you've imagined";
-  static const authorsTitle = "Explore Authors";
+  static const authorsTitle = "Explore Creators";
   static const audioTitlePlaceholder = "No Title";
   static const submit = "Submit";
   static const thankYou = "Thank You";
   static const backToLogin = "Back to Login";
   static const discover = "Discover";
-  static const creator = 'Creator';
-  static const audio = 'Audio';
-  static const video = 'Video';
+  static const discoverAuthors = 'Authors';
+  static const discoverAudios = 'Audio';
+  static const discoverVideos = 'Video';
 
   ///Messages
   static emailToChangePassword(String email) =>

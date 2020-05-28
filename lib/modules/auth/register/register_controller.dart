@@ -2,9 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:highvibe/models/serializer/serializer.dart';
-import 'package:highvibe/modules/app/app_store.dart';
+import 'package:highvibe/modules/app/app_controller.dart';
 import 'package:highvibe/services/auth_service.dart';
-import 'package:highvibe/services/store_service.dart';
+import 'package:highvibe/services/firestore_service.dart';
 import 'package:mobx/mobx.dart';
 
 part 'register_controller.g.dart';
@@ -13,8 +13,8 @@ class RegisterController = _RegisterControllerBase with _$RegisterController;
 
 abstract class _RegisterControllerBase with Store {
   final auth = Modular.get<AuthService>();
-  final firestore = Modular.get<StoreService>();
-  final appStore = Modular.get<AppStore>();
+  final firestore = Modular.get<FirestoreService>();
+  final appStore = Modular.get<AppController>();
 
   final usernameController = TextEditingController();
   final emailController = TextEditingController();
