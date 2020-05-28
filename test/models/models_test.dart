@@ -75,10 +75,10 @@ main() async {
       ..content = "message");
 
     final serialized =
-        serializers.serializeWith(Channel.serializer, messageInstance);
+        serializers.serializeWith(Message.serializer, messageInstance);
 
     final deserialized =
-        serializers.deserializeWith(Channel.serializer, serialized);
+        serializers.deserializeWith(Message.serializer, serialized);
 
     expect(deserialized, messageInstance);
   });
