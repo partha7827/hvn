@@ -8,7 +8,7 @@
 PRODUCT_NAME = highvibe
 
 // The application's bundle identifier
-PRODUCT_BUNDLE_IDENTIFIER = com.example.highvibe
+PRODUCT_BUNDLE_IDENTIFIER = network.highvibe.hvn
 
 // The copyright displayed in application information
 PRODUCT_COPYRIGHT = Copyright © 2020 com.example. All rights reserved.

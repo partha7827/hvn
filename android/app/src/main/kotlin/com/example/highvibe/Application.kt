@@ -1,4 +1,4 @@
-package com.example.highvibe
+package network.highvibe.hvn
 
 import com.dexterous.flutterlocalnotifications.FlutterLocalNotificationsPlugin
 import io.flutter.app.FlutterApplication
