@@ -1,11 +1,3 @@
-# App Secrets
-
-./GoogleService-Info.plist
-**/ios/Runner/GoogleService-Info.plist
-
-./google-services.json
-**/android/app/src/google-services.json
-
 # Miscellaneous
 *.class
 *.log
@@ -23,8 +15,12 @@
 *.iws
 .idea/
 
+# The .vscode folder contains launch configuration and tasks you configure in
+# VS Code which you may wish to be included in version control, so this line
+# is commented out by default.
+#.vscode/
+
 # Flutter/Dart/Pub related
-*.g.dart
 **/doc/api/
 .dart_tool/
 .flutter-plugins
@@ -33,8 +29,6 @@
 .pub-cache/
 .pub/
 /build/
-pubspec.lock
-.slidy
 
 # Web related
 lib/generated_plugin_registrant.dart
