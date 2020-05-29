@@ -55,6 +55,7 @@ abstract class _CurrentUserControllerBase with Store {
 
   @action
   Future<void> changeProfilePic() async {
+    // ignore: deprecated_member_use
     final img = await ImagePicker.pickImage(source: ImageSource.gallery);
     if (img != null) {
       try {

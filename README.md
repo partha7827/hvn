@@ -36,6 +36,11 @@ flutter pub run build_runner build --delete-conflicting-outputs && \
 flutter run
 ```
 
+### Update App Icon
+```
+flutter pub run flutter_launcher_icons:main
+```
+
 ### Codecov (_WIP_)
 
 You can use [Codecov](https://codecov.io) automatically as long as the repository's owner is a paid Codecov member (assuming this is a private repo).
