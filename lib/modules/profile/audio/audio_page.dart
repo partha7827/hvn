@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:highvibe/models/models.dart';
+import 'package:highvibe/modules/app/media_overlays.dart';
 import 'package:highvibe/values/Strings.dart';
 import 'package:highvibe/widgets/audio_tile.dart';
 import 'package:highvibe/widgets/header_row.dart';
@@ -48,15 +49,14 @@ class _AudioPageState extends ModularState<AudioPage, AudioController> {
             .map(
               (item) => AudioTile(
                 audioFile: item,
-                onTap: (_) => _showAudioPlayer(context, item),
+                onTap: (_) => MediaOverlays.presentAudioPlayerAsOverlay(
+                  context: context,
+                  audioFile: item,
+                ),
               ),
             )
             .toList(),
       ],
     );
-  }
-
-  void _showAudioPlayer(BuildContext context, Audio audioFile) {
-    Modular.to.pushNamed("/audioplayer", arguments: audioFile);
   }
 }

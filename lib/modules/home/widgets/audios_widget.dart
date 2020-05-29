@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:highvibe/models/audio/audio.dart';
-import 'package:highvibe/modules/audio_player/audio_player_module.dart';
+import 'package:highvibe/modules/app/media_overlays.dart';
 import 'package:highvibe/modules/audio_player/widgets/audio_preview_item.dart';
 import 'package:highvibe/modules/discover/discover_module.dart';
 import 'package:highvibe/modules/home/home_controller.dart';
@@ -61,7 +61,10 @@ class _AudiosWidgetState extends ModularState<AudiosWidget, HomeController> {
               itemCount: audios.length,
               itemBuilder: (_, index) => AudioPreviewItem(
                 audio: audios[index],
-                onTap: (item) => AudioPlayerModule.toPlayer(audios[index]),
+                onTap: (item) => MediaOverlays.presentAudioPlayerAsOverlay(
+                  context: context,
+                  audioFile: item,
+                ),
               ),
             ),
           ),

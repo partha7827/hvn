@@ -1,4 +1,5 @@
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:highvibe/models/audio/audio.dart';
 import 'package:highvibe/modules/audio_player/audio_player_service.dart';
 import 'package:mobx/mobx.dart';
 
@@ -8,6 +9,9 @@ class AudioPlayerController = _AudioPlayerControllerBase
     with _$AudioPlayerController;
 
 abstract class _AudioPlayerControllerBase with Store {
+  Audio audioFile;
+  _AudioPlayerControllerBase(this.audioFile);
+
   final player = Modular.get<AudioPlayerService>();
 
   @observable

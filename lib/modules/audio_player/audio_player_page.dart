@@ -2,7 +2,6 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:highvibe/models/models.dart' show Audio;
 import 'package:highvibe/modules/app/media_overlays.dart';
 import 'package:highvibe/modules/audio_player/audio_player_controller.dart';
 import 'package:highvibe/modules/audio_player/audio_player_service.dart';
@@ -14,13 +13,6 @@ import 'package:highvibe/widgets/responsive_safe_area.dart';
 enum AudioPlayerMode { fullScreen, minimised, none }
 
 class AudioPlayerPage extends StatefulWidget {
-  final Audio audioFile;
-
-  const AudioPlayerPage({
-    @required this.audioFile,
-    Key key,
-  }) : super(key: key);
-
   @override
   _AudioPlayerPageState createState() => _AudioPlayerPageState();
 }
@@ -88,7 +80,7 @@ class _AudioPlayerPageState extends ModularState<AudioPlayerPage, AudioPlayerCon
                   image: DecorationImage(
                     fit: BoxFit.cover,
                     image: CachedNetworkImageProvider(
-                      widget.audioFile.artworkUrlPath,
+                      controller.audioFile.artworkUrlPath,
                     ),
                   ),
                 ),
@@ -129,7 +121,7 @@ class _AudioPlayerPageState extends ModularState<AudioPlayerPage, AudioPlayerCon
   }
 
   void _configureAudioPlayerService() {
-    _audioPlayerService = AudioPlayerService(audioFile: widget.audioFile);
+    _audioPlayerService = AudioPlayerService(audioFile: controller.audioFile);
   }
 
   AudioPlayerSkipButton _fastForwardButton() {
@@ -158,14 +150,14 @@ class _AudioPlayerPageState extends ModularState<AudioPlayerPage, AudioPlayerCon
             mainAxisSize: MainAxisSize.min,
             children: [
               Text(
-                widget.audioFile.title,
+                controller.audioFile.title,
                 style: bold24PlayfairWhite,
                 textAlign: TextAlign.center,
               ),
               Padding(
                 padding: const EdgeInsets.only(top: 16),
                 child: Text(
-                  widget.audioFile.subTitle,
+                  controller.audioFile.subTitle,
                   style: normal16White,
                   textAlign: TextAlign.center,
                 ),
@@ -209,7 +201,7 @@ class _AudioPlayerPageState extends ModularState<AudioPlayerPage, AudioPlayerCon
                       Text(
                         mediaTimeFormarter(
                           Duration(
-                            milliseconds: widget.audioFile.duration,
+                            milliseconds: controller.audioFile.duration,
                           ),
                         ),
                         style: const TextStyle(color: Colors.white),
@@ -268,7 +260,7 @@ class _AudioPlayerPageState extends ModularState<AudioPlayerPage, AudioPlayerCon
             maxHeight: 40,
           ),
           child: Text(
-            widget.audioFile.title,
+            controller.audioFile.title,
             maxLines: 2,
             overflow: TextOverflow.clip,
             style: TextStyle(
@@ -289,7 +281,7 @@ class _AudioPlayerPageState extends ModularState<AudioPlayerPage, AudioPlayerCon
             maxHeight: 40,
           ),
           child: Text(
-            widget.audioFile.subTitle,
+            controller.audioFile.subTitle,
             maxLines: 2,
             overflow: TextOverflow.clip,
             style: TextStyle(
@@ -403,10 +395,10 @@ class _AudioPlayerPageState extends ModularState<AudioPlayerPage, AudioPlayerCon
 
   double _updateSliderPosition() {
     return (_trackPosition != null &&
-            widget.audioFile.duration != null &&
+            controller.audioFile.duration != null &&
             _trackPosition.inMilliseconds > 0 &&
-            _trackPosition.inMilliseconds < widget.audioFile.duration)
-        ? _trackPosition.inMilliseconds / widget.audioFile.duration
+            _trackPosition.inMilliseconds < controller.audioFile.duration)
+        ? _trackPosition.inMilliseconds / controller.audioFile.duration
         : 0;
   }
 
@@ -415,7 +407,7 @@ class _AudioPlayerPageState extends ModularState<AudioPlayerPage, AudioPlayerCon
       setState(() {
         _trackPosition = position;
         if (_trackPosition >=
-            Duration(milliseconds: widget.audioFile.duration)) {
+            Duration(milliseconds: controller.audioFile.duration)) {
           _trackPosition = Duration(milliseconds: 0);
         }
         _positionText = _trackPosition?.toString()?.split('.')?.first ?? '';
