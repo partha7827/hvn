@@ -8,6 +8,7 @@ import 'package:highvibe/modules/profile/widgets/profile_tab_buttons.dart';
 import 'package:highvibe/values/Strings.dart';
 import 'package:highvibe/values/themes.dart';
 import 'package:highvibe/widgets/gradient_outline_button.dart';
+import 'package:highvibe/widgets/image_viewer.dart';
 import 'other_user_controller.dart';
 
 class OtherUserPage extends StatefulWidget {
@@ -78,10 +79,19 @@ class _OtherUserPageState
                           Row(
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: <Widget>[
-                              Hero(
-                                tag: "author#${controller.otherUser.id}",
-                                child: ProfileAvatar(
-                                    controller.otherUser.photoUrl),
+                              GestureDetector(
+                                onTap: () => ProfileModule.toAvatarPicture(
+                                  ImageViewerArguments(
+                                    heroTag:
+                                        "author#${controller.otherUser.id}",
+                                    imageUrl: controller.otherUser.photoUrl,
+                                  ),
+                                ),
+                                child: Hero(
+                                  tag: "author#${controller.otherUser.id}",
+                                  child: ProfileAvatar(
+                                      controller.otherUser.photoUrl),
+                                ),
                               ),
                               Padding(
                                 padding: const EdgeInsets.only(left: 16.0),

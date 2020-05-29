@@ -2,6 +2,7 @@ import 'package:highvibe/modules/profile/current_user/current_user_module.dart';
 import 'package:highvibe/modules/profile/other_user/other_user_module.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:highvibe/modules/profile/users_list/users_list_module.dart';
+import 'package:highvibe/widgets/image_viewer.dart';
 
 class ProfileModule extends ChildModule {
   @override
@@ -29,11 +30,18 @@ class ProfileModule extends ChildModule {
           child: (_, args) => UsersListModule(userIds: args.data, title: "Following"),
           transition: TransitionType.fadeIn,
         ),
+        Router(
+          "$profileRoute/avatar",
+          child: (_, args) => ImageViewer(arguments: args.data),
+          transition: TransitionType.fadeIn,
+        ),
       ];
 
   static String profileRoute = "/profile";
 
   static Inject get to => Inject<ProfileModule>.of();
+
+  static Future toAvatarPicture(ImageViewerArguments arguments) => Modular.to.pushNamed("$profileRoute/avatar", arguments: arguments);
 
   static Future toProfile() => Modular.to.pushNamed(profileRoute);
 
