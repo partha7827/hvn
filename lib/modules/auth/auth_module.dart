@@ -1,13 +1,13 @@
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:highvibe/modules/app/app_store.dart';
-import 'package:highvibe/modules/auth/auto_login/auto_login_controller.dart';
-import 'package:highvibe/modules/auth/auto_login/auto_login_page.dart';
-import 'package:highvibe/modules/auth/login/login_controller.dart';
-import 'package:highvibe/modules/auth/login/login_page.dart';
-import 'package:highvibe/modules/auth/register/register_controller.dart';
-import 'package:highvibe/modules/auth/register/register_page.dart';
-import 'package:highvibe/services/auth_service.dart';
-import 'package:highvibe/services/store_service.dart';
+import 'package:hvn/modules/app/app_store.dart';
+import 'package:hvn/modules/auth/auto_login/auto_login_controller.dart';
+import 'package:hvn/modules/auth/auto_login/auto_login_page.dart';
+import 'package:hvn/modules/auth/login/login_controller.dart';
+import 'package:hvn/modules/auth/login/login_page.dart';
+import 'package:hvn/modules/auth/register/register_controller.dart';
+import 'package:hvn/modules/auth/register/register_page.dart';
+import 'package:hvn/services/auth_service.dart';
+import 'package:hvn/services/store_service.dart';
 
 import 'login/forgot_password_page.dart';
 import 'login/thank_you_page.dart';

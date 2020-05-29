@@ -1,6 +1,6 @@
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:highvibe/models/audio/audio.dart';
-import 'package:highvibe/services/store_service.dart';
+import 'package:hvn/models/audio/audio.dart';
+import 'package:hvn/services/store_service.dart';
 import 'package:mobx/mobx.dart';
 
 part 'audio_controller.g.dart';

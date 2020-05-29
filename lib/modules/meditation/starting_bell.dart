@@ -1,10 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:highvibe/values/Strings.dart';
-import 'package:highvibe/values/themes.dart';
-import 'package:highvibe/widgets/gradient_chip.dart';
-import 'package:highvibe/widgets/gradient_outline_button.dart';
-import 'package:highvibe/widgets/gradient_raised_button.dart';
+import 'package:hvn/values/Strings.dart';
+import 'package:hvn/values/themes.dart';
+import 'package:hvn/widgets/gradient_chip.dart';
+import 'package:hvn/widgets/gradient_outline_button.dart';
+import 'package:hvn/widgets/gradient_raised_button.dart';
 
 class StartingBell extends StatefulWidget {
   @override

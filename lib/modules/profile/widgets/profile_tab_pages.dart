@@ -1,9 +1,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:highvibe/modules/audio/audio_module.dart';
-import 'package:highvibe/modules/chat/chat_module.dart';
-import 'package:highvibe/modules/live/live_module.dart';
+import 'package:hvn/modules/audio/audio_module.dart';
+import 'package:hvn/modules/chat/chat_module.dart';
+import 'package:hvn/modules/live/live_module.dart';
 
 class ProfileTabPages extends StatelessWidget {
   final TabController controller;

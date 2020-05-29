@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:highvibe/modules/wallet/resources/app_colors.dart';
-import 'package:highvibe/modules/wallet/pages/auth/face/face_page.dart';
-import 'package:highvibe/modules/wallet/pages/widgets/buttons/main_button.dart';
-import 'package:highvibe/modules/wallet/pages/widgets/buttons/outline_button.dart' as o;
-import 'package:highvibe/modules/wallet/pages/widgets/containers/user_container.dart';
+import 'package:hvn/modules/wallet/resources/app_colors.dart';
+import 'package:hvn/modules/wallet/pages/auth/face/face_page.dart';
+import 'package:hvn/modules/wallet/pages/widgets/buttons/main_button.dart';
+import 'package:hvn/modules/wallet/pages/widgets/buttons/outline_button.dart' as o;
+import 'package:hvn/modules/wallet/pages/widgets/containers/user_container.dart';
 import 'package:virtual_keyboard/virtual_keyboard.dart';
 
 

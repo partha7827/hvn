@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:highvibe/mocks/mock_database.dart';
-import 'package:highvibe/services/user_queries.dart';
+import 'package:hvn/mocks/mock_database.dart';
+import 'package:hvn/services/user_queries.dart';
 import 'package:mock_cloud_firestore/mock_cloud_firestore.dart';
 
 abstract class IStoreService {

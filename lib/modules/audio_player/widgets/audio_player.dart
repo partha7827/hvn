@@ -1,7 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:highvibe/values/themes.dart';
+import 'package:hvn/values/themes.dart';
 
 class AudioPlayer extends StatefulWidget {
   @override

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:highvibe/modules/wallet/resources/app_colors.dart';
-import 'package:highvibe/modules/wallet/pages/auth/passcode/passcode_page.dart';
+import 'package:hvn/modules/wallet/resources/app_colors.dart';
+import 'package:hvn/modules/wallet/pages/auth/passcode/passcode_page.dart';
 
 
 class FacePage extends StatefulWidget {

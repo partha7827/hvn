@@ -1,10 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:highvibe/models/message/message.dart';
-import 'package:highvibe/models/serializer/serializer.dart';
-import 'package:highvibe/models/user/user.dart';
-import 'package:highvibe/modules/app/app_store.dart';
-import 'package:highvibe/services/store_service.dart';
+import 'package:hvn/models/message/message.dart';
+import 'package:hvn/models/serializer/serializer.dart';
+import 'package:hvn/models/user/user.dart';
+import 'package:hvn/modules/app/app_store.dart';
+import 'package:hvn/services/store_service.dart';
 import 'package:mobx/mobx.dart';
 
 part 'chat_controller.g.dart';

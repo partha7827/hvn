@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:highvibe/models/models.dart' show User;
+import 'package:hvn/models/models.dart' show User;
 import 'package:stream_chat_flutter/stream_chat_flutter.dart' as Chat;
 import 'chat_controller.dart';
-import 'package:highvibe/values/Strings.dart';
-import 'package:highvibe/values/themes.dart';
-import 'package:highvibe/widgets/custom_fab.dart';
+import 'package:hvn/values/Strings.dart';
+import 'package:hvn/values/themes.dart';
+import 'package:hvn/widgets/custom_fab.dart';
 
 class ChatPage extends StatefulWidget {
   final String title;

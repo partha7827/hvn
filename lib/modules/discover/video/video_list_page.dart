@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:highvibe/modules/discover/video/video_card.dart';
+import 'package:hvn/modules/discover/video/video_card.dart';
 
 class VideoListPage extends StatelessWidget {
   @override

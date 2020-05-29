@@ -6,9 +6,9 @@ import 'package:built_collection/built_collection.dart';
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:highvibe/models/serializer/serializer.dart';
-import 'package:highvibe/values/Strings.dart';
-import 'package:highvibe/values/assets.dart';
+import 'package:hvn/models/serializer/serializer.dart';
+import 'package:hvn/values/Strings.dart';
+import 'package:hvn/values/assets.dart';
 import 'package:uuid/uuid.dart';
 
 part 'audio.g.dart';

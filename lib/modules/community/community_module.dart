@@ -1,6 +1,6 @@
-import 'package:highvibe/modules/community/community_controller.dart';
+import 'package:hvn/modules/community/community_controller.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:highvibe/modules/community/community_page.dart';
+import 'package:hvn/modules/community/community_page.dart';
 
 class CommunityModule extends ChildModule {
   @override

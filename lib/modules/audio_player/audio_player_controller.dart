@@ -1,5 +1,5 @@
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:highvibe/modules/audio_player/audio_player_service.dart';
+import 'package:hvn/modules/audio_player/audio_player_service.dart';
 import 'package:mobx/mobx.dart';
 
 part 'audio_player_controller.g.dart';

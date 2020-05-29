@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:highvibe/modules/wallet/pages/auth/face/face_page.dart';
+import 'package:hvn/modules/wallet/pages/auth/face/face_page.dart';
 import 'wallet_controller.dart';
 
 class WalletPage extends StatefulWidget {

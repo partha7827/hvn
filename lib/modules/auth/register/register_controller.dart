@@ -1,10 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:highvibe/models/serializer/serializer.dart';
-import 'package:highvibe/modules/app/app_store.dart';
-import 'package:highvibe/services/auth_service.dart';
-import 'package:highvibe/services/store_service.dart';
+import 'package:hvn/models/serializer/serializer.dart';
+import 'package:hvn/modules/app/app_store.dart';
+import 'package:hvn/services/auth_service.dart';
+import 'package:hvn/services/store_service.dart';
 import 'package:mobx/mobx.dart';
 
 part 'register_controller.g.dart';

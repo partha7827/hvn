@@ -1,7 +1,7 @@
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:highvibe/modules/discover/discover_controller.dart';
-import 'package:highvibe/modules/discover/discover_page.dart';
-import 'package:highvibe/services/store_service.dart';
+import 'package:hvn/modules/discover/discover_controller.dart';
+import 'package:hvn/modules/discover/discover_page.dart';
+import 'package:hvn/services/store_service.dart';
 
 class DiscoverModule extends ChildModule {
   static const DISCOVER = '/discover';

@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/foundation.dart' show required;
-import 'package:highvibe/models/models.dart' show Audio;
+import 'package:hvn/models/models.dart' show Audio;
 
 class AudioPlayerService {
   final AudioPlayer audioPlayer;

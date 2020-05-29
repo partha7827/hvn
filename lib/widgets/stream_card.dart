@@ -1,7 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:highvibe/values/Strings.dart';
-import 'package:highvibe/values/themes.dart';
+import 'package:hvn/values/Strings.dart';
+import 'package:hvn/values/themes.dart';
 
 var dummyImgUrl =
     'https://takelessons.com/blog/wp-content/uploads/2020/03/flute-for-beginners.jpg';

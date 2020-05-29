@@ -2,15 +2,15 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:highvibe/modules/discover/discover_module.dart';
-import 'package:highvibe/modules/app/media_overlays.dart';
-import 'package:highvibe/modules/home/home_controller.dart';
-import 'package:highvibe/modules/video_player/widgets/widgets.dart';
-import 'package:highvibe/values/Strings.dart';
-import 'package:highvibe/values/assets.dart';
-import 'package:highvibe/values/themes.dart';
-import 'package:highvibe/widgets/header_row.dart';
-import 'package:highvibe/widgets/page_indicator.dart';
+import 'package:hvn/modules/discover/discover_module.dart';
+import 'package:hvn/modules/app/media_overlays.dart';
+import 'package:hvn/modules/home/home_controller.dart';
+import 'package:hvn/modules/video_player/widgets/widgets.dart';
+import 'package:hvn/values/Strings.dart';
+import 'package:hvn/values/assets.dart';
+import 'package:hvn/values/themes.dart';
+import 'package:hvn/widgets/header_row.dart';
+import 'package:hvn/widgets/page_indicator.dart';
 
 class HeaderWidget extends StatelessWidget {
   final pageController = PageController();

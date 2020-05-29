@@ -1,6 +1,6 @@
-import 'package:highvibe/modules/discover/users/discover_users.dart';
-import 'package:highvibe/modules/profile/current_user/current_user_module.dart';
-import 'package:highvibe/modules/profile/other_user/other_user_module.dart';
+import 'package:hvn/modules/discover/users/discover_users.dart';
+import 'package:hvn/modules/profile/current_user/current_user_module.dart';
+import 'package:hvn/modules/profile/other_user/other_user_module.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
 class ProfileModule extends ChildModule {

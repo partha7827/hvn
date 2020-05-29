@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:highvibe/values/themes.dart';
+import 'package:hvn/values/themes.dart';
 
 class CustomFloatingActionButton extends StatelessWidget {
   final Widget child;

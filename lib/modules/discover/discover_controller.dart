@@ -1,6 +1,6 @@
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:highvibe/models/user/user.dart';
-import 'package:highvibe/services/store_service.dart';
+import 'package:hvn/models/user/user.dart';
+import 'package:hvn/services/store_service.dart';
 import 'package:mobx/mobx.dart';
 
 part 'discover_controller.g.dart';

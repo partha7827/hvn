@@ -1,6 +1,6 @@
-import 'package:highvibe/services/auth_service.dart';
+import 'package:hvn/services/auth_service.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:highvibe/mocks/firebase_auth_mocks_base.dart';
+import 'package:hvn/mocks/firebase_auth_mocks_base.dart';
 
 main() async {
   test("login with email and password", () async {

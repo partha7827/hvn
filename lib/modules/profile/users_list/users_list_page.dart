@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:highvibe/models/user/user.dart';
-import 'package:highvibe/modules/profile/profile_module.dart';
-import 'package:highvibe/modules/profile/users_list/user_card.dart';
-import 'package:highvibe/modules/profile/users_list/users_list_controller.dart';
-import 'package:highvibe/widgets/repeat_widget.dart';
-import 'package:highvibe/widgets/splash_widget.dart';
+import 'package:hvn/models/user/user.dart';
+import 'package:hvn/modules/profile/profile_module.dart';
+import 'package:hvn/modules/profile/users_list/user_card.dart';
+import 'package:hvn/modules/profile/users_list/users_list_controller.dart';
+import 'package:hvn/widgets/repeat_widget.dart';
+import 'package:hvn/widgets/splash_widget.dart';
 import 'package:mobx/mobx.dart';
 
 class UsersListPage extends StatefulWidget {

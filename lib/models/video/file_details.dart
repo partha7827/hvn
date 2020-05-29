@@ -4,7 +4,7 @@ import 'dart:convert';
 
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
-import 'package:highvibe/models/serializer/serializer.dart';
+import 'package:hvn/models/serializer/serializer.dart';
 
 part 'file_details.g.dart';
 

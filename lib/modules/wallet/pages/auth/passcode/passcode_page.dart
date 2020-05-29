@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:highvibe/modules/wallet/resources/app_colors.dart';
-import 'package:highvibe/modules/wallet/pages/auth/face/face_page.dart';
-import 'package:highvibe/modules/wallet/pages/wallet/wallet_page.dart';
+import 'package:hvn/modules/wallet/resources/app_colors.dart';
+import 'package:hvn/modules/wallet/pages/auth/face/face_page.dart';
+import 'package:hvn/modules/wallet/pages/wallet/wallet_page.dart';
 import 'package:virtual_keyboard/virtual_keyboard.dart';
 
 

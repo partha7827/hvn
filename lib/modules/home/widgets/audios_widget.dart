@@ -2,14 +2,14 @@ import 'package:built_collection/built_collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:highvibe/models/audio/audio.dart';
-import 'package:highvibe/modules/audio_player/audio_player_module.dart';
-import 'package:highvibe/modules/audio_player/widgets/audio_preview_item.dart';
-import 'package:highvibe/modules/discover/discover_module.dart';
-import 'package:highvibe/modules/home/home_controller.dart';
-import 'package:highvibe/values/Strings.dart';
-import 'package:highvibe/widgets/header_row.dart';
-import 'package:highvibe/widgets/page_indicator.dart';
+import 'package:hvn/models/audio/audio.dart';
+import 'package:hvn/modules/audio_player/audio_player_module.dart';
+import 'package:hvn/modules/audio_player/widgets/audio_preview_item.dart';
+import 'package:hvn/modules/discover/discover_module.dart';
+import 'package:hvn/modules/home/home_controller.dart';
+import 'package:hvn/values/Strings.dart';
+import 'package:hvn/widgets/header_row.dart';
+import 'package:hvn/widgets/page_indicator.dart';
 import 'package:mobx/mobx.dart';
 
 class AudiosWidget extends StatefulWidget {

@@ -1,7 +1,7 @@
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:highvibe/models/models.dart' show User;
-import 'package:highvibe/services/auth_service.dart';
-import 'package:highvibe/services/firestore_service.dart';
+import 'package:hvn/models/models.dart' show User;
+import 'package:hvn/services/auth_service.dart';
+import 'package:hvn/services/firestore_service.dart';
 import 'package:mobx/mobx.dart';
 
 part 'app_controller.g.dart';

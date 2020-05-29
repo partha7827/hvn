@@ -1,8 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:highvibe/models/audio/audio.dart';
-import 'package:highvibe/utils/utils.dart' show screenWidth;
-import 'package:highvibe/values/themes.dart';
+import 'package:hvn/models/audio/audio.dart';
+import 'package:hvn/utils/utils.dart' show screenWidth;
+import 'package:hvn/values/themes.dart';
 
 class AudioPreviewItem extends StatelessWidget {
   final Audio audio;

@@ -1,5 +1,5 @@
 import 'package:built_collection/built_collection.dart';
-import 'package:highvibe/models/models.dart';
+import 'package:hvn/models/models.dart';
 
 final _mockFileDetails = FileDetails(
   (b) => b

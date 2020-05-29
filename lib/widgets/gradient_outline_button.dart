@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:highvibe/values/themes.dart';
+import 'package:hvn/values/themes.dart';
 
 class GradientOutlineButton extends StatelessWidget {
   final _GradientPainter _painter;

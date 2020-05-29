@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:highvibe/models/video/video.dart';
-import 'package:highvibe/modules/discover/videos/discover_videos_controller.dart';
-import 'package:highvibe/modules/discover/videos/video_card.dart';
-import 'package:highvibe/modules/video_player/video_player_module.dart';
-import 'package:highvibe/widgets/repeat_widget.dart';
-import 'package:highvibe/widgets/splash_widget.dart';
+import 'package:hvn/models/video/video.dart';
+import 'package:hvn/modules/discover/videos/discover_videos_controller.dart';
+import 'package:hvn/modules/discover/videos/video_card.dart';
+import 'package:hvn/modules/video_player/video_player_module.dart';
+import 'package:hvn/widgets/repeat_widget.dart';
+import 'package:hvn/widgets/splash_widget.dart';
 import 'package:mobx/mobx.dart';
 
 class DiscoverVideosView extends StatefulWidget {

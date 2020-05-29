@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:highvibe/modules/profile/users_list/users_list_controller.dart';
-import 'package:highvibe/modules/profile/users_list/users_list_page.dart';
+import 'package:hvn/modules/profile/users_list/users_list_controller.dart';
+import 'package:hvn/modules/profile/users_list/users_list_page.dart';
 
 class UsersListModule extends WidgetModule {
   final List<String> userIds;

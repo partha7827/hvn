@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:highvibe/modules/app/app_store.dart';
-import 'package:highvibe/values/themes.dart';
+import 'package:hvn/modules/app/app_store.dart';
+import 'package:hvn/values/themes.dart';
 import 'package:mobx/mobx.dart';
 
 class AppWidget extends StatefulWidget {

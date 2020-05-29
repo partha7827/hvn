@@ -1,8 +1,8 @@
-import 'package:highvibe/models/audio/audio.dart';
-import 'package:highvibe/modules/audio_player/audio_player_controller.dart';
+import 'package:hvn/models/audio/audio.dart';
+import 'package:hvn/modules/audio_player/audio_player_controller.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:highvibe/modules/audio_player/audio_player_page.dart';
-import 'package:highvibe/modules/audio_player/audio_player_service.dart';
+import 'package:hvn/modules/audio_player/audio_player_page.dart';
+import 'package:hvn/modules/audio_player/audio_player_service.dart';
 
 class AudioPlayerModule extends ChildModule {
   @override

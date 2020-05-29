@@ -1,7 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:highvibe/models/message/message.dart';
-import 'package:highvibe/values/themes.dart';
+import 'package:hvn/models/message/message.dart';
+import 'package:hvn/values/themes.dart';
 import 'package:intl/intl.dart';
 
 class SingleMessageTile extends StatelessWidget {

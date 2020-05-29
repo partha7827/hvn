@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:highvibe/values/Strings.dart';
-import 'package:highvibe/widgets/event_card.dart';
-import 'package:highvibe/widgets/header_row.dart';
+import 'package:hvn/values/Strings.dart';
+import 'package:hvn/widgets/event_card.dart';
+import 'package:hvn/widgets/header_row.dart';
 
 class UpcomingEventsWidget extends StatelessWidget {
   const UpcomingEventsWidget({Key key}) : super(key: key);

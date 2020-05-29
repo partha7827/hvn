@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:highvibe/modules/profile/profile_module.dart';
-import 'package:highvibe/modules/profile/widgets/profile_avatar.dart';
-import 'package:highvibe/modules/profile/widgets/profile_tab_buttons.dart';
-import 'package:highvibe/modules/profile/widgets/profile_tab_pages.dart';
-import 'package:highvibe/values/Strings.dart';
-import 'package:highvibe/values/themes.dart';
-import 'package:highvibe/widgets/gradient_outline_button.dart';
+import 'package:hvn/modules/profile/profile_module.dart';
+import 'package:hvn/modules/profile/widgets/profile_avatar.dart';
+import 'package:hvn/modules/profile/widgets/profile_tab_buttons.dart';
+import 'package:hvn/modules/profile/widgets/profile_tab_pages.dart';
+import 'package:hvn/values/Strings.dart';
+import 'package:hvn/values/themes.dart';
+import 'package:hvn/widgets/gradient_outline_button.dart';
 import 'other_user_controller.dart';
 
 class OtherUserPage extends StatefulWidget {

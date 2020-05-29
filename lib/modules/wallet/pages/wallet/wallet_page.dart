@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:highvibe/modules/wallet/resources/app_colors.dart';
-import 'package:highvibe/modules/wallet/pages/receive/receive_page.dart';
-import 'package:highvibe/modules/wallet/pages/transactions/transactions_page.dart';
-import 'package:highvibe/modules/wallet/pages/users/users_page.dart';
-import 'package:highvibe/modules/wallet/pages/widgets/buttons/main_button.dart';
-import 'package:highvibe/modules/wallet/pages/widgets/containers/transaction_container.dart';
+import 'package:hvn/modules/wallet/resources/app_colors.dart';
+import 'package:hvn/modules/wallet/pages/receive/receive_page.dart';
+import 'package:hvn/modules/wallet/pages/transactions/transactions_page.dart';
+import 'package:hvn/modules/wallet/pages/users/users_page.dart';
+import 'package:hvn/modules/wallet/pages/widgets/buttons/main_button.dart';
+import 'package:hvn/modules/wallet/pages/widgets/containers/transaction_container.dart';
 
 
 class WalletPage extends StatefulWidget {

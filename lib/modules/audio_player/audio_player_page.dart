@@ -1,13 +1,13 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:highvibe/models/models.dart' show Audio;
-import 'package:highvibe/modules/app/media_overlays.dart';
-import 'package:highvibe/modules/audio_player/audio_player_service.dart';
-import 'package:highvibe/modules/audio_player/widgets/widgets.dart';
-import 'package:highvibe/utils/utils.dart';
-import 'package:highvibe/values/themes.dart';
-import 'package:highvibe/widgets/responsive_safe_area.dart';
+import 'package:hvn/models/models.dart' show Audio;
+import 'package:hvn/modules/app/media_overlays.dart';
+import 'package:hvn/modules/audio_player/audio_player_service.dart';
+import 'package:hvn/modules/audio_player/widgets/widgets.dart';
+import 'package:hvn/utils/utils.dart';
+import 'package:hvn/values/themes.dart';
+import 'package:hvn/widgets/responsive_safe_area.dart';
 
 enum AudioPlayerMode { fullScreen, minimised, none }
 

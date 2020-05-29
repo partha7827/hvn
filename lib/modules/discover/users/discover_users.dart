@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:highvibe/modules/app/app_store.dart';
-import 'package:highvibe/modules/discover/users/discover_users_view.dart';
-import 'package:highvibe/services/auth_service.dart';
-import 'package:highvibe/services/store_service.dart';
-import 'package:highvibe/values/themes.dart';
+import 'package:hvn/modules/app/app_store.dart';
+import 'package:hvn/modules/discover/users/discover_users_view.dart';
+import 'package:hvn/services/auth_service.dart';
+import 'package:hvn/services/store_service.dart';
+import 'package:hvn/values/themes.dart';
 import './discover_users_controller.dart';
 
 final commonBinds = [

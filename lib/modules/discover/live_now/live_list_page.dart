@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:highvibe/widgets/stream_card.dart';
+import 'package:hvn/widgets/stream_card.dart';
 
 class LiveListPage extends StatelessWidget {
   @override

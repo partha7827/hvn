@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:highvibe/modules/discover/audio/audio_card.dart';
+import 'package:hvn/modules/discover/audio/audio_card.dart';
 
 class AudioListPage extends StatelessWidget {
   @override

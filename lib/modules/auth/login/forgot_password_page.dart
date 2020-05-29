@@ -1,10 +1,10 @@
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:highvibe/values/Strings.dart';
-import 'package:highvibe/values/themes.dart';
-import 'package:highvibe/widgets/custom_text_form.dart';
-import 'package:highvibe/widgets/gradient_raised_button.dart';
+import 'package:hvn/values/Strings.dart';
+import 'package:hvn/values/themes.dart';
+import 'package:hvn/widgets/custom_text_form.dart';
+import 'package:hvn/widgets/gradient_raised_button.dart';
 
 import '../auth_module.dart';
 import 'login_controller.dart';

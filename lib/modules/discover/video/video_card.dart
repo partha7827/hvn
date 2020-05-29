@@ -1,10 +1,10 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:highvibe/values/assets.dart';
-import 'package:highvibe/values/themes.dart';
-import 'package:highvibe/widgets/gradient_outline_button.dart';
-import 'package:highvibe/widgets/stream_card.dart';
+import 'package:hvn/values/assets.dart';
+import 'package:hvn/values/themes.dart';
+import 'package:hvn/widgets/gradient_outline_button.dart';
+import 'package:hvn/widgets/stream_card.dart';
 
 class VideoCard extends StatelessWidget {
   @override

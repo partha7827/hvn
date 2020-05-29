@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:highvibe/modules/app/app_module.dart';
-import 'package:highvibe/values/themes.dart';
+import 'package:hvn/modules/app/app_module.dart';
+import 'package:hvn/values/themes.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();

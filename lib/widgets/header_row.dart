@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:highvibe/values/Strings.dart';
-import 'package:highvibe/values/themes.dart';
+import 'package:hvn/values/Strings.dart';
+import 'package:hvn/values/themes.dart';
 
 class HeaderRow extends StatelessWidget {
   final String title;

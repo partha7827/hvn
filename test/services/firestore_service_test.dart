@@ -1,9 +1,9 @@
-import 'package:highvibe/services/store_service.dart';
+import 'package:hvn/services/store_service.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mock_cloud_firestore/mock_cloud_firestore.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:highvibe/mocks/mock_database.dart';
-import 'package:highvibe/models/models.dart';
+import 'package:hvn/mocks/mock_database.dart';
+import 'package:hvn/models/models.dart';
 
 main() async {
   final firestore = MockCloudFirestore(mockDatabase);

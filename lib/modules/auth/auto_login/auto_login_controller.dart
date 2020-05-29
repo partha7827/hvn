@@ -1,10 +1,10 @@
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:highvibe/models/models.dart';
-import 'package:highvibe/modules/app/app_store.dart';
-import 'package:highvibe/modules/auth/exceptions.dart';
-import 'package:highvibe/services/auth_service.dart';
-import 'package:highvibe/services/store_service.dart';
-import 'package:highvibe/values/Strings.dart';
+import 'package:hvn/models/models.dart';
+import 'package:hvn/modules/app/app_store.dart';
+import 'package:hvn/modules/auth/exceptions.dart';
+import 'package:hvn/services/auth_service.dart';
+import 'package:hvn/services/store_service.dart';
+import 'package:hvn/values/Strings.dart';
 import 'package:mobx/mobx.dart';
 
 part 'auto_login_controller.g.dart';

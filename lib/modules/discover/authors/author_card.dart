@@ -1,9 +1,9 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:highvibe/models/user/user.dart';
-import 'package:highvibe/values/Strings.dart';
-import 'package:highvibe/values/themes.dart';
-import 'package:highvibe/widgets/gradient_raised_button.dart';
+import 'package:hvn/models/user/user.dart';
+import 'package:hvn/values/Strings.dart';
+import 'package:hvn/values/themes.dart';
+import 'package:hvn/widgets/gradient_raised_button.dart';
 
 class AuthorCard extends StatelessWidget {
   final User user;

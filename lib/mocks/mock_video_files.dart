@@ -1,8 +1,8 @@
 import 'package:built_collection/built_collection.dart';
-import 'package:highvibe/models/video/file_details.dart';
-import 'package:highvibe/models/video/snippet.dart';
-import 'package:highvibe/models/video/thumbnail.dart';
-import 'package:highvibe/models/video/video.dart';
+import 'package:hvn/models/video/file_details.dart';
+import 'package:hvn/models/video/snippet.dart';
+import 'package:hvn/models/video/thumbnail.dart';
+import 'package:hvn/models/video/video.dart';
 
 final _mockFileDetails = FileDetails(
   (b) => b

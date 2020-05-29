@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:highvibe/modules/wallet/resources/app_colors.dart';
-import 'package:highvibe/modules/wallet/pages/widgets/buttons/outline_button.dart' as o;
+import 'package:hvn/modules/wallet/resources/app_colors.dart';
+import 'package:hvn/modules/wallet/pages/widgets/buttons/outline_button.dart' as o;
 
 class ReceivePage extends StatefulWidget {
 

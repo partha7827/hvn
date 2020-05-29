@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:highvibe/modules/app/app_store.dart';
-import 'package:highvibe/modules/app/app_widget.dart';
-import 'package:highvibe/modules/auth/auth_module.dart';
-import 'package:highvibe/modules/discover/discover_module.dart';
-import 'package:highvibe/modules/home/home_module.dart';
-import 'package:highvibe/modules/profile/profile_module.dart';
-import 'package:highvibe/modules/wallet/wallet_module.dart';
-import 'package:highvibe/services/auth_service.dart';
-import 'package:highvibe/services/store_service.dart';
+import 'package:hvn/modules/app/app_store.dart';
+import 'package:hvn/modules/app/app_widget.dart';
+import 'package:hvn/modules/auth/auth_module.dart';
+import 'package:hvn/modules/discover/discover_module.dart';
+import 'package:hvn/modules/home/home_module.dart';
+import 'package:hvn/modules/profile/profile_module.dart';
+import 'package:hvn/modules/wallet/wallet_module.dart';
+import 'package:hvn/services/auth_service.dart';
+import 'package:hvn/services/store_service.dart';
 
 class AppModule extends MainModule {
   @override

@@ -3,8 +3,8 @@ import 'dart:convert';
 import 'package:built_collection/built_collection.dart';
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
-import 'package:highvibe/models/message/message.dart';
-import 'package:highvibe/models/serializer/serializer.dart';
+import 'package:hvn/models/message/message.dart';
+import 'package:hvn/models/serializer/serializer.dart';
 
 part 'channel.g.dart';
 

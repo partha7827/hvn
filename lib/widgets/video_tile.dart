@@ -1,8 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:highvibe/models/models.dart' show Video;
-import 'package:highvibe/values/themes.dart';
+import 'package:hvn/models/models.dart' show Video;
+import 'package:hvn/values/themes.dart';
 
 class VideoTile extends StatelessWidget {
   final Video videoFile;

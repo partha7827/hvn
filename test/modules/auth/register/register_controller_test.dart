@@ -1,11 +1,11 @@
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_modular/flutter_modular_test.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:highvibe/modules/app/app_store.dart';
-import 'package:highvibe/modules/auth/auth_module.dart';
-import 'package:highvibe/modules/auth/register/register_controller.dart';
-import 'package:highvibe/services/auth_service.dart';
-import 'package:highvibe/services/store_service.dart';
+import 'package:hvn/modules/app/app_store.dart';
+import 'package:hvn/modules/auth/auth_module.dart';
+import 'package:hvn/modules/auth/register/register_controller.dart';
+import 'package:hvn/services/auth_service.dart';
+import 'package:hvn/services/store_service.dart';
 
 void main() {
   initModule(AuthModule(), changeBinds: [

@@ -1,6 +1,6 @@
-import 'package:highvibe/modules/bottom_navigation/bottom_navigation_controller.dart';
+import 'package:hvn/modules/bottom_navigation/bottom_navigation_controller.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:highvibe/modules/bottom_navigation/bottom_navigation_page.dart';
+import 'package:hvn/modules/bottom_navigation/bottom_navigation_page.dart';
 
 class BottomNavigationModule extends ChildModule {
   @override

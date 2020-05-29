@@ -1,6 +1,6 @@
-import 'package:highvibe/modules/meditation/meditation_controller.dart';
+import 'package:hvn/modules/meditation/meditation_controller.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:highvibe/modules/meditation/meditation_page.dart';
+import 'package:hvn/modules/meditation/meditation_page.dart';
 
 class MeditationModule extends ChildModule {
   @override

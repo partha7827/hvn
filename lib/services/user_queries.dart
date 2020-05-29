@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:highvibe/services/store_service.dart';
+import 'package:hvn/services/store_service.dart';
 
 mixin UserQueries on IStoreService {
   void follow(String follower, String following) {

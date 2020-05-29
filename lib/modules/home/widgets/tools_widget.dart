@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:highvibe/modules/meditation/meditation_timer.dart';
-import 'package:highvibe/values/Strings.dart';
-import 'package:highvibe/values/themes.dart';
+import 'package:hvn/modules/meditation/meditation_timer.dart';
+import 'package:hvn/values/Strings.dart';
+import 'package:hvn/values/themes.dart';
 
 class ToolsWidget extends StatelessWidget {
   @override

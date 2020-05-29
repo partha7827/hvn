@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:highvibe/models/models.dart';
-import 'package:highvibe/values/Strings.dart';
-import 'package:highvibe/widgets/audio_tile.dart';
-import 'package:highvibe/widgets/header_row.dart';
-import 'package:highvibe/widgets/repeat_widget.dart';
-import 'package:highvibe/widgets/splash_widget.dart';
+import 'package:hvn/models/models.dart';
+import 'package:hvn/values/Strings.dart';
+import 'package:hvn/widgets/audio_tile.dart';
+import 'package:hvn/widgets/header_row.dart';
+import 'package:hvn/widgets/repeat_widget.dart';
+import 'package:hvn/widgets/splash_widget.dart';
 import 'package:mobx/mobx.dart';
 
 import 'audio_controller.dart';

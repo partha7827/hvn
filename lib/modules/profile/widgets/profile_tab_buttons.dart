@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:highvibe/values/themes.dart';
-import 'package:highvibe/widgets/underline_gradient_indicator.dart';
+import 'package:hvn/values/themes.dart';
+import 'package:hvn/widgets/underline_gradient_indicator.dart';
 
 class ProfileTabButtons extends StatelessWidget {
   final TabController controller;

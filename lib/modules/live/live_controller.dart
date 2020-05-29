@@ -1,8 +1,8 @@
 import 'package:agora_rtc_engine/agora_rtc_engine.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:highvibe/models/models.dart' show User;
-import 'package:highvibe/modules/app/app_store.dart';
-import 'package:highvibe/values/config.dart';
+import 'package:hvn/models/models.dart' show User;
+import 'package:hvn/modules/app/app_store.dart';
+import 'package:hvn/values/config.dart';
 import 'package:mobx/mobx.dart';
 
 part 'live_controller.g.dart';

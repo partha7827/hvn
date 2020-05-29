@@ -1,11 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:highvibe/models/message/message.dart';
-import 'package:highvibe/models/models.dart' show User;
-import 'package:highvibe/modules/chat/chat_controller.dart';
-import 'package:highvibe/modules/chat/single_message_tile.dart';
-import 'package:highvibe/values/themes.dart';
+import 'package:hvn/models/message/message.dart';
+import 'package:hvn/models/models.dart' show User;
+import 'package:hvn/modules/chat/chat_controller.dart';
+import 'package:hvn/modules/chat/single_message_tile.dart';
+import 'package:hvn/values/themes.dart';
 
 import 'message_composer.dart';
 

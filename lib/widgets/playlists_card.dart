@@ -1,9 +1,9 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:highvibe/models/audio/mock_audio_files.dart';
-import 'package:highvibe/modules/app/media_overlays.dart';
-import 'package:highvibe/values/Strings.dart';
-import 'package:highvibe/values/themes.dart';
+import 'package:hvn/models/audio/mock_audio_files.dart';
+import 'package:hvn/modules/app/media_overlays.dart';
+import 'package:hvn/values/Strings.dart';
+import 'package:hvn/values/themes.dart';
 
 import 'audio_tile.dart';
 

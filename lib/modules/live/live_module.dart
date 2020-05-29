@@ -1,6 +1,6 @@
-import 'package:highvibe/modules/live/live_controller.dart';
+import 'package:hvn/modules/live/live_controller.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:highvibe/modules/live/live_page.dart';
+import 'package:hvn/modules/live/live_page.dart';
 
 class LiveModule extends ChildModule {
   String userId;

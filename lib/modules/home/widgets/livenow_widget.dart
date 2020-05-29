@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:highvibe/values/Strings.dart';
-import 'package:highvibe/values/themes.dart';
-import 'package:highvibe/widgets/header_row.dart';
-import 'package:highvibe/widgets/stream_card.dart';
+import 'package:hvn/values/Strings.dart';
+import 'package:hvn/values/themes.dart';
+import 'package:hvn/widgets/header_row.dart';
+import 'package:hvn/widgets/stream_card.dart';
 
 class LiveNowWidget extends StatelessWidget {
   const LiveNowWidget({Key key}) : super(key: key);

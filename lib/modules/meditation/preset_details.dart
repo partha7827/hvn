@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:highvibe/modules/meditation/starting_bell.dart';
-import 'package:highvibe/values/themes.dart';
-import 'package:highvibe/widgets/gradient_chip.dart';
+import 'package:hvn/modules/meditation/starting_bell.dart';
+import 'package:hvn/values/themes.dart';
+import 'package:hvn/widgets/gradient_chip.dart';
 
 class PresetDetails extends StatefulWidget {
   @override

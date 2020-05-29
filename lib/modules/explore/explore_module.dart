@@ -1,6 +1,6 @@
-import 'package:highvibe/modules/explore/explore_controller.dart';
+import 'package:hvn/modules/explore/explore_controller.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:highvibe/modules/explore/explore_page.dart';
+import 'package:hvn/modules/explore/explore_page.dart';
 
 class ExploreModule extends ChildModule {
   @override

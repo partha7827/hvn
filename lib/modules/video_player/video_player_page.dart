@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:highvibe/models/models.dart' show Video;
-import 'package:highvibe/modules/app/media_overlays.dart';
-import 'package:highvibe/modules/video_player/widgets/widgets.dart'
+import 'package:hvn/models/models.dart' show Video;
+import 'package:hvn/modules/app/media_overlays.dart';
+import 'package:hvn/modules/video_player/widgets/widgets.dart'
     show PlayPauseOverlay;
-import 'package:highvibe/utils/utils.dart';
-import 'package:highvibe/values/themes.dart';
-import 'package:highvibe/widgets/responsive_safe_area.dart';
+import 'package:hvn/utils/utils.dart';
+import 'package:hvn/values/themes.dart';
+import 'package:hvn/widgets/responsive_safe_area.dart';
 import 'package:video_player/video_player.dart';
 
 enum VideoPlayerMode { fullScreenMode, minimised, none }

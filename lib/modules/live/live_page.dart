@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:highvibe/modules/live/live_controller.dart';
-import 'package:highvibe/modules/live/live_module.dart';
-import 'package:highvibe/widgets/event_card.dart';
-import 'package:highvibe/widgets/header_row.dart';
-import 'package:highvibe/widgets/stream_card.dart';
-import 'package:highvibe/values/Strings.dart';
-import 'package:highvibe/values/themes.dart';
+import 'package:hvn/modules/live/live_controller.dart';
+import 'package:hvn/modules/live/live_module.dart';
+import 'package:hvn/widgets/event_card.dart';
+import 'package:hvn/widgets/header_row.dart';
+import 'package:hvn/widgets/stream_card.dart';
+import 'package:hvn/values/Strings.dart';
+import 'package:hvn/values/themes.dart';
 
 class LivePage extends StatefulWidget {
   final String userId;

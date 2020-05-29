@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:highvibe/modules/wallet/resources/app_colors.dart';
+import 'package:hvn/modules/wallet/resources/app_colors.dart';
 
 class UserContainer extends StatelessWidget {
   final EdgeInsets margin;

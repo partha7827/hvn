@@ -1,6 +1,6 @@
-import 'package:highvibe/modules/wallet/wallet_controller.dart';
+import 'package:hvn/modules/wallet/wallet_controller.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:highvibe/modules/wallet/wallet_page.dart';
+import 'package:hvn/modules/wallet/wallet_page.dart';
 
 class WalletModule extends ChildModule {
   @override

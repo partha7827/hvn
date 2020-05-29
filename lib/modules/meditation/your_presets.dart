@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:highvibe/modules/meditation/preset_details.dart';
+import 'package:hvn/modules/meditation/preset_details.dart';
 
 class YourPresets extends StatelessWidget {
   @override

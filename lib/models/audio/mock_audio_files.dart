@@ -1,4 +1,4 @@
-import 'package:highvibe/models/models.dart';
+import 'package:hvn/models/models.dart';
 
 const _artworkUrl =
     'https://takelessons.com/blog/wp-content/uploads/2020/03/flute-for-beginners.jpg';

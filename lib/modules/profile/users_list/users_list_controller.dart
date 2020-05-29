@@ -1,7 +1,7 @@
 import 'package:built_collection/built_collection.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:highvibe/models/user/user.dart';
-import 'package:highvibe/services/firestore_service.dart';
+import 'package:hvn/models/user/user.dart';
+import 'package:hvn/services/firestore_service.dart';
 import 'package:mobx/mobx.dart';
 part 'users_list_controller.g.dart';
 
