@@ -1,46 +1,55 @@
+import 'package:built_collection/built_collection.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:highvibe/modules/app/app_store.dart';
-import 'package:highvibe/services/auth_service.dart';
-import 'package:highvibe/services/store_service.dart';
-import 'package:mobx/mobx.dart';
-
+import 'package:highvibe/services/firestore_service.dart';
 import 'package:highvibe/models/models.dart';
+import 'package:mobx/mobx.dart';
 
 part 'home_controller.g.dart';
 
 class HomeController = _HomeControllerBase with _$HomeController;
 
 abstract class _HomeControllerBase with Store {
-  final appStore = Modular.get<AppStore>();
+  final firestore = Modular.get<FirestoreService>();
 
-  final authService = Modular.get<AuthService>();
+  @observable
+  ObservableFuture<BuiltList<Audio>> audios;
 
-  final firestore = Modular.get<StoreService>();
+  @observable
+  ObservableFuture<BuiltList<Video>> videos;
 
-  get currentUser => appStore.currentUser.toString();
+  @observable
+  ObservableFuture<BuiltList<User>> authors;
 
   @action
-  Future<void> logout() async {
-    await authService.logout();
-
-    appStore.setCurrentUser(null);
+  ObservableFuture<BuiltList<Audio>> loadRecommendedAudios() {
+    return audios = ObservableFuture(
+      firestore.audioCollection
+          //.where("tags", arrayContains: "recommended")
+          .where("isRecommended", isEqualTo: true)
+          .getDocuments()
+          .then((s) => Audio.parseListOfAudios(s)),
+    );
   }
 
   @action
-  Future<List<Video>> getVideos() async {
-    print("get videos");
-
-    final querySnapshot = await firestore.videoCollection.getDocuments();
-
-    return Video.parseListOfVideos(querySnapshot).toList();
+  ObservableFuture<BuiltList<Video>> loadRecommendedVideos() {
+    return videos = ObservableFuture(
+      firestore.videoCollection
+          // .where("tags", arrayContains: "recommended")
+          .where("isRecommended", isEqualTo: true)
+          .getDocuments()
+          .then((s) => Video.parseListOfVideos(s)),
+    );
   }
 
   @action
-  Future<List<User>> getAuthors() async {
-    final querySnapshot = await firestore.userCollection
-        .where("isRecommended", isEqualTo: true)
-        .getDocuments();
-
-    return User.parseListOfUsers(querySnapshot).toList();
+  ObservableFuture<BuiltList<User>> loadRecommendedAuthors() {
+    return authors = ObservableFuture(
+      firestore.userCollection
+          // .where("tags", arrayContains: "recommended")
+          .where("isRecommended", isEqualTo: true)
+          .getDocuments()
+          .then((s) => User.parseListOfUsers(s)),
+    );
   }
 }

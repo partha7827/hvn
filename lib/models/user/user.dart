@@ -7,6 +7,7 @@ import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:highvibe/models/serializer/serializer.dart';
+import 'package:highvibe/values/assets.dart';
 import 'package:uuid/uuid.dart';
 
 part 'user.g.dart';
@@ -32,6 +33,7 @@ abstract class User implements Built<User, UserBuilder> {
   bool get isLive;
   bool get isOnline;
   bool get isRecommended;
+  bool get isAuthor;
   DateTime get accountCreationTime;
   BuiltList<String> get badges;
   BuiltList<String> get featured;
@@ -40,6 +42,7 @@ abstract class User implements Built<User, UserBuilder> {
   BuiltList<String> get scheduled;
   BuiltList<String> get videos;
   BuiltList<String> get audios;
+  BuiltList<String> get tags;
 
   String toJson() {
     return json.encode(serializers.serializeWith(User.serializer, this));
@@ -67,13 +70,14 @@ abstract class User implements Built<User, UserBuilder> {
     ..status = "Author"
     ..email = ""
     ..name = ""
-    ..photoUrl = ""
+    ..photoUrl = Assets.dummyAvatarUrl
     ..bio = ""
     ..experiencePoints = 0
     ..karmaPoints = 0
     ..isLive = false
     ..isOnline = false
     ..isRecommended = false
+    ..isAuthor = false
     ..accountCreationTime = DateTime.now().toUtc()
     ..badges = BuiltList<String>([]).toBuilder()
     ..featured = BuiltList<String>([]).toBuilder()

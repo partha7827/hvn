@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:highvibe/models/models.dart' show User;
 import 'package:highvibe/models/serializer/serializer.dart';
-import 'package:highvibe/modules/app/app_store.dart';
+import 'package:highvibe/modules/app/app_controller.dart';
 import 'package:highvibe/services/auth_service.dart';
-import 'package:highvibe/services/store_service.dart';
+import 'package:highvibe/services/firestore_service.dart';
 import 'package:highvibe/utils/utils.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:mobx/mobx.dart';
@@ -17,8 +17,8 @@ class CurrentUserController = _CurrentUserControllerBase
 
 abstract class _CurrentUserControllerBase with Store {
   final auth = Modular.get<AuthService>();
-  final store = Modular.get<StoreService>();
-  final currentUserStore = Modular.get<AppStore>();
+  final store = Modular.get<FirestoreService>();
+  final currentUserStore = Modular.get<AppController>();
 
   final nameController = TextEditingController();
   final statusController = TextEditingController();

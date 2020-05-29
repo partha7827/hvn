@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:highvibe/modules/discover/audio/audio_list_page.dart';
+import 'package:highvibe/modules/discover/audios/discover_audios.dart';
+import 'package:highvibe/modules/discover/authors/discover_authors.dart';
 import 'package:highvibe/modules/discover/discover_controller.dart';
-import 'package:highvibe/modules/discover/live_now/live_list_page.dart';
-import 'package:highvibe/modules/discover/users/discover_users.dart';
-import 'package:highvibe/modules/discover/video/video_list_page.dart';
 import 'package:highvibe/values/Strings.dart';
 import 'package:highvibe/values/themes.dart';
 import 'package:highvibe/widgets/outline_tab_indicator.dart';
@@ -21,10 +19,9 @@ class _DiscoverPageState extends ModularState<DiscoverPage, DiscoverController>
     with SingleTickerProviderStateMixin {
   TabController _tabController;
   final _tabs = [
-    Strings.creator,
-    Strings.liveNow,
-    Strings.audio,
-    Strings.video,
+    Strings.discoverAudios,
+    // Strings.discoverVideos,
+    Strings.discoverAuthors,
   ];
 
   @override
@@ -45,12 +42,6 @@ class _DiscoverPageState extends ModularState<DiscoverPage, DiscoverController>
           Strings.discover,
           style: bold20PlayfairWhite,
         ),
-        actions: [
-          IconButton(
-            icon: Icon(Icons.search),
-            onPressed: () {},
-          )
-        ],
         bottom: TabBar(
           controller: _tabController,
           indicator: OutlineTabIndicator(
@@ -75,10 +66,9 @@ class _DiscoverPageState extends ModularState<DiscoverPage, DiscoverController>
       body: TabBarView(
         controller: _tabController,
         children: [
-          DiscoverUsers(),
-          LiveListPage(),
-          AudioListPage(),
-          VideoListPage(),
+          DiscoverAudios(),
+          // DiscoverVideos(),
+          DiscoverAuthors(),
         ],
       ),
     );

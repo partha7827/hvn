@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:highvibe/modules/audio_player/audio_player_service.dart';
 
 class AudioPlayerSkipButton<S> extends StatelessWidget {
@@ -29,11 +28,11 @@ class AudioPlayerSkipButton<S> extends StatelessWidget {
     );
   }
 
-  SvgPicture _configureIcon() {
+  Icon _configureIcon() {
     if (buttonType == AudioPlayerSkipButtonType.fastForward) {
-      return SvgPicture.asset('assets/ic_forward.svg');
+      return Icon(Icons.fast_forward, color: Colors.white, size: 36);
     } else {
-      return SvgPicture.asset('assets/ic_backward.svg');
+      return Icon(Icons.fast_rewind, color: Colors.white, size: 36);
     }
   }
 }

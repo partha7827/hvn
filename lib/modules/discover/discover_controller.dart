@@ -1,6 +1,6 @@
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:highvibe/models/user/user.dart';
-import 'package:highvibe/services/store_service.dart';
+import 'package:highvibe/services/firestore_service.dart';
 import 'package:mobx/mobx.dart';
 
 part 'discover_controller.g.dart';
@@ -8,7 +8,7 @@ part 'discover_controller.g.dart';
 class DiscoverController = _DiscoverController with _$DiscoverController;
 
 abstract class _DiscoverController with Store {
-  final firestore = Modular.get<StoreService>();
+  final firestore = Modular.get<FirestoreService>();
 
   @observable
   int selectedTab = 0;

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:highvibe/values/themes.dart';
 import 'package:highvibe/widgets/underline_gradient_indicator.dart';
 
@@ -23,20 +22,13 @@ class ProfileTabButtons extends StatelessWidget {
             insets: const EdgeInsets.symmetric(horizontal: 16.0),
           ),
           tabs: [
-            Tab(
-              icon: Image.asset(controller.index == 0
-                  ? 'assets/ic_audio_colored.png'
-                  : 'assets/ic_audio.png'),
-            ),
-            Tab(icon: SvgPicture.asset('assets/ic_chat.svg')),
-            Tab(icon: SvgPicture.asset('assets/ic_broadcasting.svg')),
+            Tab(icon: Image.asset('assets/ic_audio_colored.png')),
           ],
         ),
       ),
     );
   }
 }
-
 
 class _SliverAppBarDelegate extends SliverPersistentHeaderDelegate {
   _SliverAppBarDelegate({this.tabBar, this.color});
@@ -63,4 +55,3 @@ class _SliverAppBarDelegate extends SliverPersistentHeaderDelegate {
     return false;
   }
 }
-

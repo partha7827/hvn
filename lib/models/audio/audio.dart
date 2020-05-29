@@ -22,13 +22,15 @@ abstract class Audio implements Built<Audio, AudioBuilder> {
   String get id;
   String get userId;
   String get userName;
+  String get userAvatar;
   String get title;
   String get subTitle;
   String get author;
   String get artworkUrlPath;
   String get audioUrlPath;
+  bool get isRecommended;
   int get duration;
-  BuiltList<String> get tagIds;
+  BuiltList<String> get tags;
 
   String toJson() {
     return json.encode(serializers.serializeWith(Audio.serializer, this));
@@ -57,11 +59,13 @@ abstract class Audio implements Built<Audio, AudioBuilder> {
     ..id = Uuid().v4()
     ..userId = Uuid().v4()
     ..userName = ""
+    ..userAvatar = ""
     ..title = Strings.audioTitlePlaceholder
     ..subTitle = ""
     ..author = ""
     ..artworkUrlPath = Assets.audioArtworkPlaceholder
     ..audioUrlPath = ""
     ..duration = 0
-    ..tagIds = BuiltList<String>([]).toBuilder();
+    ..isRecommended = false
+    ..tags = BuiltList<String>([]).toBuilder();
 }

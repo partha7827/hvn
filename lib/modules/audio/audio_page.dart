@@ -3,13 +3,12 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:highvibe/models/models.dart';
 import 'package:highvibe/modules/app/media_overlays.dart';
+import 'package:highvibe/modules/profile/audio/audio_controller.dart';
 import 'package:highvibe/values/Strings.dart';
 import 'package:highvibe/widgets/audio_tile.dart';
 import 'package:highvibe/widgets/header_row.dart';
 import 'package:highvibe/widgets/splash_widget.dart';
 import 'package:mobx/mobx.dart';
-
-import 'audio_controller.dart';
 
 class AudioPage extends StatefulWidget {
   final String title;

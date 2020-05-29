@@ -45,6 +45,14 @@ class AudioPlayerService {
     if (result == 1) _playerState = PlayerState.playing;
   }
 
+  void enableLoopMode() {
+    audioPlayer.setReleaseMode(ReleaseMode.LOOP);
+  }
+
+  void disableLoopMode() {
+    audioPlayer.setReleaseMode(ReleaseMode.RELEASE);
+  }
+
   Future<void> seekToPosition(double value) async {
     final position = value * audioFile.duration;
     audioPlayer.seek(Duration(milliseconds: position.round()));

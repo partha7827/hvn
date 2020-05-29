@@ -1,4 +1,4 @@
-package com.example.highvibe
+package network.highvibe.hvn
 
 import androidx.annotation.NonNull;
 import io.flutter.embedding.android.FlutterActivity

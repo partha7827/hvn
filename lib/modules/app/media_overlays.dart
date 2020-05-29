@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:highvibe/models/models.dart' show Audio, Video;
-import 'package:highvibe/modules/audio_player/audio_player_page.dart';
+import 'package:highvibe/modules/audio_player/audio_player_module.dart';
 import 'package:highvibe/modules/video_player/video_player_page.dart';
 
 class MediaOverlays {
@@ -32,7 +32,7 @@ class MediaOverlays {
     _mediaOverlayState = Overlay.of(context);
     _removeAllOverlays();
     _audioOverlayEntry = OverlayEntry(
-      builder: (_) => AudioPlayerPage(audioFile: audioFile),
+      builder: (_) => AudioPlayerModule(audioFile),
     );
     _mediaOverlayState.insert(_audioOverlayEntry);
   }

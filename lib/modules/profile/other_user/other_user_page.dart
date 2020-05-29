@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:highvibe/modules/profile/audio/audio_module.dart';
 import 'package:highvibe/modules/profile/profile_module.dart';
 import 'package:highvibe/modules/profile/widgets/profile_avatar.dart';
 import 'package:highvibe/modules/profile/widgets/profile_tab_buttons.dart';
-import 'package:highvibe/modules/profile/widgets/profile_tab_pages.dart';
 import 'package:highvibe/values/Strings.dart';
 import 'package:highvibe/values/themes.dart';
 import 'package:highvibe/widgets/gradient_outline_button.dart';
+import 'package:highvibe/widgets/image_viewer.dart';
 import 'other_user_controller.dart';
 
 class OtherUserPage extends StatefulWidget {
@@ -26,7 +27,7 @@ class _OtherUserPageState
 
   @override
   void initState() {
-    _tabController = TabController(initialIndex: 0, length: 3, vsync: this);
+    _tabController = TabController(initialIndex: 0, length: 1, vsync: this);
     super.initState();
   }
 
@@ -78,10 +79,19 @@ class _OtherUserPageState
                           Row(
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: <Widget>[
-                              Hero(
-                                tag: "author#${controller.otherUser.id}",
-                                child: ProfileAvatar(
-                                    controller.otherUser.photoUrl),
+                              GestureDetector(
+                                onTap: () => ProfileModule.toAvatarPicture(
+                                  ImageViewerArguments(
+                                    heroTag:
+                                        "author#${controller.otherUser.id}",
+                                    imageUrl: controller.otherUser.photoUrl,
+                                  ),
+                                ),
+                                child: Hero(
+                                  tag: "author#${controller.otherUser.id}",
+                                  child: ProfileAvatar(
+                                      controller.otherUser.photoUrl),
+                                ),
                               ),
                               Padding(
                                 padding: const EdgeInsets.only(left: 16.0),
@@ -183,8 +193,7 @@ class _OtherUserPageState
           ProfileTabButtons(controller: _tabController),
         ];
       },
-      body: ProfileTabPages(
-          userId: controller.otherUser.id, controller: _tabController),
+      body: AudioModule(controller.otherUser.id),
     );
   }
 }

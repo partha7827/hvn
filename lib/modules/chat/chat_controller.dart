@@ -3,8 +3,8 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:highvibe/models/message/message.dart';
 import 'package:highvibe/models/serializer/serializer.dart';
 import 'package:highvibe/models/user/user.dart';
-import 'package:highvibe/modules/app/app_store.dart';
-import 'package:highvibe/services/store_service.dart';
+import 'package:highvibe/modules/app/app_controller.dart';
+import 'package:highvibe/services/firestore_service.dart';
 import 'package:mobx/mobx.dart';
 
 part 'chat_controller.g.dart';
@@ -15,9 +15,9 @@ abstract class _ChatControllerBase with Store {
   final String channelId;
   _ChatControllerBase(this.channelId);
 
-  final appStore = Modular.get<AppStore>();
+  final appStore = Modular.get<AppController>();
 
-  final firestore = Modular.get<StoreService>();
+  final firestore = Modular.get<FirestoreService>();
 
   User get currentUser => appStore.currentUser;
 
