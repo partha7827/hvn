@@ -5,7 +5,6 @@ import 'package:highvibe/modules/profile/audio/audio_module.dart';
 import 'package:highvibe/modules/profile/profile_module.dart';
 import 'package:highvibe/modules/profile/widgets/profile_avatar.dart';
 import 'package:highvibe/modules/profile/widgets/profile_tab_buttons.dart';
-import 'package:highvibe/modules/profile/widgets/profile_tab_pages.dart';
 import 'package:highvibe/values/Strings.dart';
 import 'package:highvibe/values/themes.dart';
 import 'package:highvibe/widgets/gradient_outline_button.dart';

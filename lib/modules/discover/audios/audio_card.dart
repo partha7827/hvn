@@ -2,10 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:highvibe/models/models.dart' show Audio;
-import 'package:highvibe/values/Strings.dart';
-import 'package:highvibe/values/assets.dart';
 import 'package:highvibe/values/themes.dart';
-import 'package:highvibe/widgets/stream_card.dart';
 
 class AudioCard extends StatelessWidget {
   final Audio audio;

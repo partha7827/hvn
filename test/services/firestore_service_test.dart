@@ -1,8 +1,8 @@
 import 'package:highvibe/services/firestore_service.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:mock_cloud_firestore/mock_cloud_firestore.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:highvibe/mocks/mock_database.dart';
+import 'package:highvibe/mocks/mock_video_files.dart';
 import 'package:highvibe/models/models.dart';
 
 main() async {
@@ -46,9 +46,5 @@ main() async {
     var document = await firestore.channelCollection.document("default").get();
 
     expect(document.data["id"], equals("default"));
-  });
-
-  test("get message document", () async {
-    
   });
 }

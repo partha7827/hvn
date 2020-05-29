@@ -18,7 +18,7 @@ class FirestoreService extends IFirestoreService with UserQueries {
     messageCollection = firestore.collection("messages");
     channelCollection = firestore.collection("channels");
     tagCollection = firestore.collection("tags");
-    videoCollection = firestore.collection("videos");
+    videoCollection = firestore.collection("video");
     audioCollection = firestore.collection("audio");
   }
 

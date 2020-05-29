@@ -1,12 +1,9 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:highvibe/modules/home/widgets/audios_widget.dart';
 import 'package:highvibe/modules/home/widgets/authors_widget.dart';
-import 'package:highvibe/modules/home/widgets/videos_widget.dart';
 import 'package:highvibe/values/Strings.dart';
-import 'package:highvibe/values/assets.dart';
 import 'package:highvibe/values/themes.dart';
 
 import 'home_controller.dart';

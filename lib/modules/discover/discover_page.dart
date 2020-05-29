@@ -3,7 +3,6 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:highvibe/modules/discover/audios/discover_audios.dart';
 import 'package:highvibe/modules/discover/authors/discover_authors.dart';
 import 'package:highvibe/modules/discover/discover_controller.dart';
-import 'package:highvibe/modules/discover/videos/discover_videos.dart';
 import 'package:highvibe/values/Strings.dart';
 import 'package:highvibe/values/themes.dart';
 import 'package:highvibe/widgets/outline_tab_indicator.dart';

@@ -24,26 +24,25 @@ class AudioPlayerService {
     _configure();
   }
 
-  void dispose() {
-    audioPlayer.dispose();
+  void dispose() async {
+    await audioPlayer.stop();
     positionSubscription?.cancel();
     playerStateSubscription?.cancel();
+    audioPlayer.dispose();
   }
 
-  Future<int> _pause() async {
+  Future<void> _pause() async {
     final result = await audioPlayer.pause();
     if (result == 1) _playerState = PlayerState.paused;
-    return result;
   }
 
-  Future<int> _play({@required Duration playPosition}) async {
+  Future<void> _play({@required Duration playPosition}) async {
     final result = await audioPlayer.play(
       audioFile.audioUrlPath,
       position: playPosition,
     );
 
     if (result == 1) _playerState = PlayerState.playing;
-    return result;
   }
 
   void enableLoopMode() {
@@ -71,13 +70,12 @@ class AudioPlayerService {
     audioPlayer.seek(trackPosition);
   }
 
-  Future<int> stop() async {
+  Future<void> stop() async {
     final result = await audioPlayer.stop();
     if (result == 1) {
       _playerState = PlayerState.stopped;
       _position = Duration();
     }
-    return result;
   }
 
   void _configure() {
@@ -100,8 +98,6 @@ class AudioPlayerService {
       } else {
         _playerState = PlayerState.stopped;
       }
-
-      print(_playerState);
     });
   }
 

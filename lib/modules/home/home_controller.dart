@@ -21,8 +21,8 @@ abstract class _HomeControllerBase with Store {
   ObservableFuture<BuiltList<User>> authors;
 
   @action
-  void loadRecommendedAudios() {
-    audios = ObservableFuture(
+  ObservableFuture<BuiltList<Audio>> loadRecommendedAudios() {
+    return audios = ObservableFuture(
       firestore.audioCollection
           //.where("tags", arrayContains: "recommended")
           .where("isRecommended", isEqualTo: true)
@@ -32,8 +32,8 @@ abstract class _HomeControllerBase with Store {
   }
 
   @action
-  void loadRecommendedVideos() {
-    videos = ObservableFuture(
+  ObservableFuture<BuiltList<Video>> loadRecommendedVideos() {
+    return videos = ObservableFuture(
       firestore.videoCollection
           // .where("tags", arrayContains: "recommended")
           .where("isRecommended", isEqualTo: true)
@@ -43,8 +43,8 @@ abstract class _HomeControllerBase with Store {
   }
 
   @action
-  void loadRecommendedAuthors() {
-    authors = ObservableFuture(
+  ObservableFuture<BuiltList<User>> loadRecommendedAuthors() {
+    return authors = ObservableFuture(
       firestore.userCollection
           // .where("tags", arrayContains: "recommended")
           .where("isRecommended", isEqualTo: true)

@@ -1,5 +1,4 @@
 import 'package:built_collection/built_collection.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:highvibe/models/user/user.dart';
 import 'package:highvibe/modules/app/app_controller.dart';

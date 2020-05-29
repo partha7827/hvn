@@ -40,9 +40,7 @@ class _VideoPlayerPageState extends State<VideoPlayerPage> {
   void dispose() {
     _portretScreenOrientaionModes();
     _controller.dispose();
-    if (videoOverlayEntry != null) {
-      videoOverlayEntry.remove();
-    }
+    MediaOverlays.disposeVideoOverlayEntry();
     super.dispose();
   }
 
@@ -64,7 +62,7 @@ class _VideoPlayerPageState extends State<VideoPlayerPage> {
 
   void _close(BuildContext context) {
     _controller.pause();
-    videoOverlayEntry.remove();
+    MediaOverlays.disposeVideoOverlayEntry();
   }
 
   void _configureVideoController() {
@@ -158,9 +156,9 @@ class _VideoPlayerPageState extends State<VideoPlayerPage> {
           alignment: _isMinimised ? Alignment.bottomCenter : Alignment.center,
           child: Container(
             margin: _isMinimised
-                ? const EdgeInsets.only(left: 8, right: 8)
+                ? const EdgeInsets.only(left: 8, right: 8, bottom: 8)
                 : EdgeInsets.only(left: 0, right: 0),
-            color: secondaryColor,
+            color: mediaPlayerBackgroundColor,
             height: _isMinimised ? 80 : null,
             width: _isMinimised ? size.width : null,
             child: AspectRatio(

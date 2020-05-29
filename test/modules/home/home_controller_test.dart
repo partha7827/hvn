@@ -1,12 +1,11 @@
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_modular/flutter_modular_test.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:highvibe/mocks/mock_database.dart';
-import 'package:highvibe/modules/app/app_controller.dart';
 import 'package:highvibe/modules/home/home_controller.dart';
 import 'package:highvibe/modules/home/home_module.dart';
 import 'package:highvibe/services/auth_service.dart';
 import 'package:highvibe/services/firestore_service.dart';
+import 'package:mobx/mobx.dart';
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
@@ -17,15 +16,27 @@ void main() {
   ]);
 
   HomeController home;
-  AppController appStore;
+  // AppController appStore;
 
   setUp(() {
     home = Modular.get<HomeController>();
-    appStore = Modular.get<AppController>();
+    // appStore = Modular.get<AppController>();
   });
 
   test("controller", () async {
     expect(home, isInstanceOf<HomeController>());
+  });
+
+  test("get recommended authors", () async {
+    await home.loadRecommendedAuthors();
+
+    expect(home.authors.status, equals(FutureStatus.fulfilled));
+  });
+
+  test("get recommended audio", () async {
+    await home.loadRecommendedAudios();
+
+    expect(home.audios.status, equals(FutureStatus.fulfilled));
   });
 
   // test("logout", () async {

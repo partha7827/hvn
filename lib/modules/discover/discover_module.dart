@@ -1,5 +1,4 @@
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:highvibe/modules/app/routes/transparent_route.dart';
 import 'package:highvibe/modules/discover/discover_controller.dart';
 import 'package:highvibe/modules/discover/discover_page.dart';
 import 'package:highvibe/services/firestore_service.dart';
