@@ -61,14 +61,4 @@ class MessageComposer extends StatelessWidget {
       ),
     );
   }
-
-  // _sendMessage() async {
-    // Message newMessage = Message();
-    // newMessage.content = _messageController.text.trim();
-    // newMessage.senderName = user.name;
-    // newMessage.senderId = user.id;
-    // newMessage.senderPhotoUrl = user.photoUrl;
-    // newMessage.channelId = user.id;
-    // await newMessage.save();
-  // }
 }

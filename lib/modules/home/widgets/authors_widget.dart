@@ -71,17 +71,6 @@ class _AuthorsWidgetState extends ModularState<AuthorsWidget, HomeController> {
       ],
     );
   }
-
-  // return FutureBuilder(
-  //   future: Modular.get<HomeController>().getAuthors(),
-  //   builder: (_, snapshot) {
-  //     if (snapshot.hasData) {
-
-  //     } else {
-  //       return Container();
-  //     }
-  //   },
-  // );
 }
 
 Widget _authorCard({
