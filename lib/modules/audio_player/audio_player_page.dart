@@ -17,11 +17,13 @@ class AudioPlayerPage extends StatefulWidget {
   _AudioPlayerPageState createState() => _AudioPlayerPageState();
 }
 
-class _AudioPlayerPageState extends ModularState<AudioPlayerPage, AudioPlayerController>
-    with SingleTickerProviderStateMixin {
+class _AudioPlayerPageState
+    extends ModularState<AudioPlayerPage, AudioPlayerController>
+    with TickerProviderStateMixin {
   AudioPlayerService _audioPlayerService;
   AnimationController playButtonAnimation;
 
+  bool isVisible;
   String _positionText;
   Duration _trackPosition;
   bool _isPlaying = false;
@@ -56,6 +58,11 @@ class _AudioPlayerPageState extends ModularState<AudioPlayerPage, AudioPlayerCon
       vsync: this,
       duration: Duration(milliseconds: 300),
     );
+    Future.delayed(Duration(milliseconds: 1), () {
+      setState(() {
+        isVisible = true;
+      });
+    });
     super.initState();
   }
 
@@ -73,14 +80,21 @@ class _AudioPlayerPageState extends ModularState<AudioPlayerPage, AudioPlayerCon
           children: [
             Opacity(
               opacity: _isMinimised ? 1 : 0.5,
-              child: Container(
-                width: _isMinimised ? 80 : null,
-                height: _isMinimised ? 80 : null,
-                decoration: BoxDecoration(
-                  image: DecorationImage(
-                    fit: BoxFit.cover,
-                    image: CachedNetworkImageProvider(
-                      controller.audioFile.artworkUrlPath,
+              child: AnimatedOpacity(
+                duration: Duration(milliseconds: 2000),
+                opacity: isVisible == true ? 1 : 0,
+                child: Hero(
+                  tag: "audio#${controller.audioFile.id}",
+                  child: Container(
+                    width: _isMinimised ? 80 : null,
+                    height: _isMinimised ? 80 : null,
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                        fit: BoxFit.cover,
+                        image: CachedNetworkImageProvider(
+                          controller.audioFile.artworkUrlPath,
+                        ),
+                      ),
                     ),
                   ),
                 ),

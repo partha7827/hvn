@@ -31,11 +31,14 @@ class AudioPreviewItem extends StatelessWidget {
                   borderRadius: BorderRadius.circular(10),
                   child: Stack(
                     children: [
-                      CachedNetworkImage(
-                        imageUrl: audio.artworkUrlPath,
-                        width: width,
-                        fit: BoxFit.cover,
-                        height: 180,
+                      Hero(
+                        tag: "audio#${audio.id}",
+                        child: CachedNetworkImage(
+                          imageUrl: audio.artworkUrlPath,
+                          width: width,
+                          fit: BoxFit.cover,
+                          height: 180,
+                        ),
                       ),
                       Container(
                         width: width,
