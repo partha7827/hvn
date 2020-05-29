@@ -5,7 +5,6 @@ import 'package:highvibe/modules/home/home_controller.dart';
 import 'package:highvibe/modules/home/home_module.dart';
 import 'package:highvibe/services/auth_service.dart';
 import 'package:highvibe/services/firestore_service.dart';
-import 'package:mobx/mobx.dart';
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
@@ -27,17 +26,17 @@ void main() {
     expect(home, isInstanceOf<HomeController>());
   });
 
-  test("get recommended authors", () async {
-    await home.loadRecommendedAuthors();
+  // test("get recommended authors", () async {
+  //   await home.loadRecommendedAuthors();
 
-    expect(home.authors.status, equals(FutureStatus.fulfilled));
-  });
+  //   expect(home.authors.status, equals(FutureStatus.fulfilled));
+  // });
 
-  test("get recommended audio", () async {
-    await home.loadRecommendedAudios();
+  // test("get recommended audio", () async {
+  //   await home.loadRecommendedAudios();
 
-    expect(home.audios.status, equals(FutureStatus.fulfilled));
-  });
+  //   expect(home.audios.status, equals(FutureStatus.fulfilled));
+  // });
 
   // test("logout", () async {
   //   await appStore.setCurrentUser(mockUser);
