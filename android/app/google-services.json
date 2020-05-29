@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "468548202200",
+    "firebase_url": "https://highvibe-8601d.firebaseio.com",
+    "project_id": "highvibe-8601d",
+    "storage_bucket": "highvibe-8601d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:468548202200:android:f2845f4fafd78b88d931ad",
+        "android_client_info": {
+          "package_name": "network.highvibe.hvn"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "468548202200-750vb8vhg3tb9iquga3ks95ppq6asc8d.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAenZbe4u7djq8tr591GsMQMMPxq1veBR0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "468548202200-750vb8vhg3tb9iquga3ks95ppq6asc8d.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "468548202200-709hu7uni0n4c1l3ppd8n35c39r0de9r.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "network.highvibe.hvn"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

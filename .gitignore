@@ -1,11 +1,3 @@
-# App Secrets
-
-./GoogleService-Info.plist
-**/ios/Runner/GoogleService-Info.plist
-
-./google-services.json
-**/android/app/src/google-services.json
-
 # Miscellaneous
 *.class
 *.log
