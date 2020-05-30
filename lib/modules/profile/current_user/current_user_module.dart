@@ -8,7 +8,7 @@ import 'package:highvibe/services/firestore_service.dart';
 
 class CurrentUserModule extends WidgetModule {
   @override
-  List<Bind> get binds => [
+  List<Bind<Object>> get binds => [
         Bind<CurrentUserController>((_) => CurrentUserController(),
             singleton: false),
         Bind<FirestoreService>((_) => FirestoreService.withFirebase()),

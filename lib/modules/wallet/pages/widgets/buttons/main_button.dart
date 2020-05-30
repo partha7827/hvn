@@ -26,7 +26,7 @@ class MainButton extends StatelessWidget {
         height: height,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(15),
-          gradient: LinearGradient(
+          gradient: const LinearGradient(
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,
               colors: AppColors.buttonGradient),

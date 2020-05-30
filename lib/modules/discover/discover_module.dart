@@ -7,13 +7,13 @@ class DiscoverModule extends ChildModule {
   static const discover = '/discover';
 
   @override
-  List<Bind> get binds => [
+  List<Bind<Object>> get binds => [
         Bind<FirestoreService>((i) => FirestoreService.withFirebase()),
         Bind<DiscoverController>((i) => DiscoverController()),
       ];
 
   @override
-  List<Router> get routers => [
+  List<Router<Object>> get routers => [
         Router(
           discover,
           child: (_, args) => DiscoverPage(pageIndex: args.data),
@@ -21,15 +21,15 @@ class DiscoverModule extends ChildModule {
         ),
       ];
 
-  static Future toDiscover({int pageIndex}) =>
+  static Future<Object> toDiscover({int pageIndex}) =>
       Modular.to.pushNamed(discover, arguments: pageIndex);
 
-  static Future toDiscoverAudios() =>
+  static Future<Object> toDiscoverAudios() =>
       Modular.to.pushNamed(discover, arguments: 0);
 
-  static Future toDiscoverVideos() =>
+  static Future<Object> toDiscoverVideos() =>
       Modular.to.pushNamed(discover, arguments: 1);
 
-  static Future toDiscoverAuthors() =>
+  static Future<Object> toDiscoverAuthors() =>
       Modular.to.pushNamed(discover, arguments: 1);
 }

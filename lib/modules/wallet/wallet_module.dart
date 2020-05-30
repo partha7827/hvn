@@ -4,14 +4,14 @@ import 'package:highvibe/modules/wallet/wallet_page.dart';
 
 class WalletModule extends ChildModule {
   @override
-  List<Bind> get binds => [
+  List<Bind<Object>> get binds => [
         Bind((i) => WalletController()),
       ];
 
   @override
-  List<Router> get routers => [
+  List<Router<Object>> get routers => [
         Router('/wallet', child: (_, args) => const WalletPage()),
       ];
 
-  static Inject get to => Inject<WalletModule>.of();
+  static Inject<WalletModule> get to => Inject<WalletModule>.of();
 }

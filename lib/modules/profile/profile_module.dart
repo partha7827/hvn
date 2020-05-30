@@ -8,13 +8,13 @@ import 'package:highvibe/widgets/image_viewer.dart';
 class ProfileModule extends ChildModule {
   static String profileRoute = '/profile';
 
-  static Inject get to => Inject<ProfileModule>.of();
+  static Inject<ProfileModule> get to => Inject<ProfileModule>.of();
 
   @override
-  List<Bind> get binds => [];
+  List<Bind<Object>> get binds => [];
 
   @override
-  List<Router> get routers => [
+  List<Router<Object>> get routers => [
         Router(
           profileRoute,
           child: (_, args) => CurrentUserModule(),
@@ -44,21 +44,21 @@ class ProfileModule extends ChildModule {
         ),
       ];
 
-  static Future toAvatarPicture(ImageViewerArguments arguments) =>
+  static Future<Object> toAvatarPicture(ImageViewerArguments arguments) =>
       Modular.to.pushNamed('$profileRoute/avatar', arguments: arguments);
 
-  static Future toFollowers(List<String> followers) =>
+  static Future<Object> toFollowers(List<String> followers) =>
       Modular.to.pushNamed('$profileRoute/followers', arguments: followers);
 
-  static Future toFollowing(List<String> following) =>
+  static Future<Object> toFollowing(List<String> following) =>
       Modular.to.pushNamed('$profileRoute/following', arguments: following);
 
   static void toHome() => Modular.to.pop();
 
-  static Future toOtherProfile(User user) => Modular.to.pushNamedAndRemoveUntil(
-      '$profileRoute/user/${user.id}',
-      (route) => !(route.settings.name ?? '').startsWith(profileRoute),
-      arguments: user);
+  static Future<Object> toOtherProfile(User user) =>
+      Modular.to.pushNamedAndRemoveUntil('$profileRoute/user/${user.id}',
+          (route) => !(route.settings.name ?? '').startsWith(profileRoute),
+          arguments: user);
 
-  static Future toProfile() => Modular.to.pushNamed(profileRoute);
+  static Future<Object> toProfile() => Modular.to.pushNamed(profileRoute);
 }

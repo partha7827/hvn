@@ -14,7 +14,7 @@ final List<Bind<Object>> commonBinds = [
 
 class DiscoverAuthors extends WidgetModule {
   @override
-  List<Bind> get binds => [
+  List<Bind<Object>> get binds => [
         ...commonBinds,
         Bind((_) => DiscoverAuthorsController()),
       ];

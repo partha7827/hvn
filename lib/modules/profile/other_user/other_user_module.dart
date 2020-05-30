@@ -13,7 +13,7 @@ class OtherUserModule extends WidgetModule {
   OtherUserModule(this.user);
 
   @override
-  List<Bind> get binds => [
+  List<Bind<Object>> get binds => [
         Bind<OtherUserController>((_) => OtherUserController(user),
             singleton: false),
         Bind<FirestoreService>((_) => FirestoreService.withFirebase()),

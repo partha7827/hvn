@@ -2,7 +2,8 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:dio/dio.dart';
 
 class GetstreamRepository extends Disposable {
-  Future fetchPost(Dio client) async {
+  // FIXME: - Replace Object with actual type
+  Future<Object> fetchPost(Dio client) async {
     final response =
         await client.get('https://jsonplaceholder.typicode.com/posts/1');
     return response.data;

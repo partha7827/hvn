@@ -8,8 +8,8 @@ class AudioPlayerService {
   final AudioPlayer audioPlayer;
   final Audio audioFile;
 
-  StreamSubscription positionSubscription;
-  StreamSubscription playerStateSubscription;
+  StreamSubscription<Duration> positionSubscription;
+  StreamSubscription<AudioPlayerState> playerStateSubscription;
 
   bool get isPlaying => _playerState == PlayerState.playing;
 

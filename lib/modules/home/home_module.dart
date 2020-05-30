@@ -7,13 +7,13 @@ class HomeModule extends ChildModule {
   static const home = '/home';
 
   @override
-  List<Bind> get binds => [
+  List<Bind<Object>> get binds => [
         Bind<HomeController>((i) => HomeController()),
         Bind<FirestoreService>((i) => FirestoreService.withFirebase()),
       ];
 
   @override
-  List<Router> get routers => [
+  List<Router<Object>> get routers => [
         Router(
           home,
           child: (_, args) => const HomePage(),
@@ -21,6 +21,6 @@ class HomeModule extends ChildModule {
         ),
       ];
 
-  static Future toHome() =>
+  static Future<Object> toHome() =>
       Modular.to.pushNamedAndRemoveUntil(home, (_) => false);
 }

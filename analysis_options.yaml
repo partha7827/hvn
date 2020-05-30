@@ -3,7 +3,7 @@ include: package:pedantic/analysis_options.yaml
 analyzer:
   language:
     strict-inference: true
-    # strict-raw-types: true
+    strict-raw-types: true
   errors:
     missing_required_param: error
     always_put_required_named_parameters_first: error
@@ -11,6 +11,7 @@ analyzer:
     avoid_relative_lib_imports: error
   exclude:
     - lib/generated_plugin_registrant.dart
+    - lib/**.g.dart
     - lib/mocks/**
     - test/**
 

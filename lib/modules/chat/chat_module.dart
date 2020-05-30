@@ -4,16 +4,16 @@ import 'package:highvibe/modules/chat/chat_controller.dart';
 import 'package:highvibe/modules/chat/chat_page.dart';
 
 class ChatModule extends WidgetModule {
+  static Inject<ChatModule> get to => Inject<ChatModule>.of();
+
   final String channelId;
 
   ChatModule(this.channelId);
 
   @override
-  List<Bind> get binds => [
+  List<Bind<Object>> get binds => [
         Bind((i) => ChatController(channelId), singleton: false),
       ];
-
-  static Inject get to => Inject<ChatModule>.of();
 
   @override
   Widget get view => const ChatPage();

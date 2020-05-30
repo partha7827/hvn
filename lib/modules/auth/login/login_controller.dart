@@ -104,7 +104,7 @@ abstract class _LoginControllerBase with Store {
     passwordController.dispose();
   }
 
-  Future _getGoogleUser() async {
+  Future<GoogleSignInAccount> _getGoogleUser() async {
     var googleUser = _googleSignIn.currentUser;
 
     googleUser ??= await _googleSignIn.signInSilently();
