@@ -48,7 +48,7 @@ class _DiscoverPageState extends ModularState<DiscoverPage, DiscoverController>
             gradient: primaryGradient,
           ),
           indicatorSize: TabBarIndicatorSize.label,
-          labelPadding: EdgeInsets.symmetric(horizontal: 4.0),
+          labelPadding: const EdgeInsets.symmetric(horizontal: 4.0),
           tabs: _tabs.map((title) {
             return Container(
               height: 40,

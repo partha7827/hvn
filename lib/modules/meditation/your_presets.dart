@@ -4,7 +4,7 @@ import 'package:highvibe/modules/meditation/preset_details.dart';
 class YourPresets extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    List<String> _presets = [
+    final _presets = [
       'Deep Breathing',
       'Yoga',
       'Mindfulness Meditation',
@@ -27,7 +27,7 @@ class YourPresets extends StatelessWidget {
                 onTap: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(
+                    MaterialPageRoute<PresetDetails>(
                       builder: (_) => PresetDetails(),
                     ),
                   );

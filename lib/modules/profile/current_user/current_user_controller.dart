@@ -16,21 +16,21 @@ class CurrentUserController = _CurrentUserControllerBase
     with _$CurrentUserController;
 
 abstract class _CurrentUserControllerBase with Store {
-  final auth = Modular.get<AuthService>();
-  final store = Modular.get<FirestoreService>();
-  final currentUserStore = Modular.get<AppController>();
+  final AuthService auth = Modular.get<AuthService>();
+  final FirestoreService store = Modular.get<FirestoreService>();
+  final AppController currentUserStore = Modular.get<AppController>();
 
-  final nameController = TextEditingController();
-  final statusController = TextEditingController();
+  final TextEditingController nameController = TextEditingController();
+  final TextEditingController statusController = TextEditingController();
 
-  final scaffoldKey = GlobalKey<ScaffoldState>();
+  final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
 
   User get currentUser => currentUserStore.currentUser;
 
   @action
   Future<void> init() async {
     when((_) => currentUserStore.authState == AuthState.unauthenticated, () {
-      Modular.to.pushReplacementNamed("/login");
+      Modular.to.pushReplacementNamed('/login');
     });
   }
 
@@ -59,7 +59,7 @@ abstract class _CurrentUserControllerBase with Store {
     final img = await ImagePicker.pickImage(source: ImageSource.gallery);
     if (img != null) {
       try {
-        String url = await uploadFile(img, "avatar");
+        final url = await uploadFile(img, 'avatar');
         currentUser.rebuild((b) => b..photoUrl = url);
 
         await store.userCollection

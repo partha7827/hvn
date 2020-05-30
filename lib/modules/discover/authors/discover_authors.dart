@@ -6,7 +6,7 @@ import 'package:highvibe/modules/discover/authors/discover_authors_view.dart';
 import 'package:highvibe/services/auth_service.dart';
 import 'package:highvibe/services/firestore_service.dart';
 
-final commonBinds = [
+final List<Bind<Object>> commonBinds = [
   Bind<AuthService>((_) => AuthService.withFirebase()),
   Bind<FirestoreService>((_) => FirestoreService.withFirebase()),
   Bind((_) => AppController()),

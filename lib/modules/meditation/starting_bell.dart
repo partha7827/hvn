@@ -16,7 +16,7 @@ class _StartingBellState extends State<StartingBell> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Starting Bell'),
+        title: const Text('Starting Bell'),
         leading: IconButton(
           icon: Icon(
             Icons.close,
@@ -29,7 +29,7 @@ class _StartingBellState extends State<StartingBell> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           CupertinoTheme(
-            data: CupertinoThemeData(),
+            data: const CupertinoThemeData(),
             child: CupertinoTimerPicker(
               mode: CupertinoTimerPickerMode.hm,
               onTimerDurationChanged: (duration) {},

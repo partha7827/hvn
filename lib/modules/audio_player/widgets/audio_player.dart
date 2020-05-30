@@ -15,8 +15,10 @@ class _AudioPlayerState extends State<AudioPlayer>
 
   @override
   void initState() {
-    _controller =
-        AnimationController(vsync: this, duration: Duration(milliseconds: 300));
+    _controller = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 300),
+    );
     super.initState();
   }
 
@@ -28,7 +30,7 @@ class _AudioPlayerState extends State<AudioPlayer>
 
   @override
   Widget build(BuildContext context) {
-    var imgUrl =
+    final imgUrl =
         'https://images.unsplash.com/photo-1520206183501-b80df61043c2?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1351&q=80';
     return Scaffold(
       body: Stack(
@@ -67,7 +69,7 @@ class _AudioPlayerState extends State<AudioPlayer>
                   Padding(
                     padding: const EdgeInsets.only(top: 16.0),
                     child: Text(
-                      'A simple way of freeing your mind, forgetting about daily anxieties and focusing on mental relaxation.',
+                      '''A simple way of freeing your mind, forgetting about daily anxieties and focusing on mental relaxation.''',
                       style: normal16White,
                       textAlign: TextAlign.center,
                     ),

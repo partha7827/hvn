@@ -10,7 +10,7 @@ class WalletModule extends ChildModule {
 
   @override
   List<Router> get routers => [
-        Router("/wallet", child: (_, args) => WalletPage()),
+        Router('/wallet', child: (_, args) => const WalletPage()),
       ];
 
   static Inject get to => Inject<WalletModule>.of();

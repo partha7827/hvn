@@ -35,29 +35,29 @@ class Strings {
   static const forgotPassword = 'Forgot Password?';
   static const login = 'Login';
   static const dontHaveAccount = "Don't have an account?";
-  static const alreadyHaveAccount = "Already have an account?";
-  static const signUp = "Sign Up";
-  static const signIn = "Sign In";
-  static const facebook = "Facebook";
-  static const google = "Google";
-  static const letsGetSignedUp = "Let’s get you signed up";
-  static const name = "Name";
+  static const alreadyHaveAccount = 'Already have an account?';
+  static const signUp = 'Sign Up';
+  static const signIn = 'Sign In';
+  static const facebook = 'Facebook';
+  static const google = 'Google';
+  static const letsGetSignedUp = 'Let’s get you signed up';
+  static const name = 'Name';
   static const userNotFound =
-      "User with given email and password does not exist";
-  static const resetPassword = "Email Sent, Please check it to change password";
+      'User with given email and password does not exist';
+  static const resetPassword = 'Email Sent, Please check it to change password';
   static const defaultQuote =
       "It's time to start living the life you've imagined";
-  static const authorsTitle = "Explore Creators";
-  static const audioTitlePlaceholder = "No Title";
-  static const submit = "Submit";
-  static const thankYou = "Thank You";
-  static const backToLogin = "Back to Login";
-  static const discover = "Discover";
+  static const authorsTitle = 'Explore Creators';
+  static const audioTitlePlaceholder = 'No Title';
+  static const submit = 'Submit';
+  static const thankYou = 'Thank You';
+  static const backToLogin = 'Back to Login';
+  static const discover = 'Discover';
   static const discoverAuthors = 'Authors';
   static const discoverAudios = 'Audio';
   static const discoverVideos = 'Video';
 
   ///Messages
-  static emailToChangePassword(String email) =>
-      "An e-mail to change your password has been send to $email";
+  static String emailToChangePassword(String email) =>
+      'An e-mail to change your password has been send to $email';
 }

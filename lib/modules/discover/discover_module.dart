@@ -4,7 +4,7 @@ import 'package:highvibe/modules/discover/discover_page.dart';
 import 'package:highvibe/services/firestore_service.dart';
 
 class DiscoverModule extends ChildModule {
-  static const DISCOVER = '/discover';
+  static const discover = '/discover';
 
   @override
   List<Bind> get binds => [
@@ -15,21 +15,21 @@ class DiscoverModule extends ChildModule {
   @override
   List<Router> get routers => [
         Router(
-          DISCOVER,
+          discover,
           child: (_, args) => DiscoverPage(pageIndex: args.data),
           transition: TransitionType.fadeIn,
         ),
       ];
 
   static Future toDiscover({int pageIndex}) =>
-      Modular.to.pushNamed(DISCOVER, arguments: pageIndex);
+      Modular.to.pushNamed(discover, arguments: pageIndex);
 
   static Future toDiscoverAudios() =>
-      Modular.to.pushNamed(DISCOVER, arguments: 0);
+      Modular.to.pushNamed(discover, arguments: 0);
 
   static Future toDiscoverVideos() =>
-      Modular.to.pushNamed(DISCOVER, arguments: 1);
+      Modular.to.pushNamed(discover, arguments: 1);
 
   static Future toDiscoverAuthors() =>
-      Modular.to.pushNamed(DISCOVER, arguments: 1);
+      Modular.to.pushNamed(discover, arguments: 1);
 }

@@ -54,17 +54,18 @@ class AuthorCard extends StatelessWidget {
               ),
             ),
           ),
-          isFollowing
-              ? GradientRaisedButton(
-                  label: Strings.unfollow,
-                  minHeight: 40,
-                  onPressed: onFollow,
-                )
-              : GradientRaisedButton(
-                  label: Strings.follow,
-                  minHeight: 40,
-                  onPressed: onFollow,
-                ),
+          if (isFollowing)
+            GradientRaisedButton(
+              label: Strings.unfollow,
+              minHeight: 40,
+              onPressed: onFollow,
+            )
+          else
+            GradientRaisedButton(
+              label: Strings.follow,
+              minHeight: 40,
+              onPressed: onFollow,
+            ),
         ],
       ),
     );

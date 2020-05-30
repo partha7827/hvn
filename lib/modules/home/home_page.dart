@@ -10,7 +10,7 @@ import 'home_controller.dart';
 
 class HomePage extends StatefulWidget {
   final String title;
-  const HomePage({Key key, this.title = "Home"}) : super(key: key);
+  const HomePage({Key key, this.title = 'Home'}) : super(key: key);
 
   @override
   _HomePageState createState() => _HomePageState();
@@ -29,7 +29,7 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
               colorFilter: ColorFilter.mode(
                   Colors.black.withOpacity(0.4), BlendMode.dstATop),
               child: Image.asset(
-                "assets/home_background.jpg",
+                'assets/home_background.jpg',
                 fit: BoxFit.cover,
               ),
             ),
@@ -50,15 +50,15 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
             child: ListView(
               children: [
                 Padding(
-                  padding: EdgeInsets.only(top: 80, bottom: 40),
+                  padding: const EdgeInsets.only(top: 80, bottom: 40),
                   child: buildQuoteWidget(),
                 ),
                 Padding(
-                  padding: EdgeInsets.symmetric(vertical: 40),
+                  padding: const EdgeInsets.symmetric(vertical: 40),
                   child: AudiosWidget(),
                 ),
                 Padding(
-                  padding: EdgeInsets.symmetric(vertical: 40),
+                  padding: const EdgeInsets.symmetric(vertical: 40),
                   child: AuthorsWidget(),
                 ),
               ],
@@ -69,7 +69,7 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
     );
   }
 
-  buildQuoteWidget() {
+  Column buildQuoteWidget() {
     return Column(
       children: <Widget>[
         SvgPicture.asset('assets/ic_quote.svg'),

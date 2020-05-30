@@ -34,7 +34,7 @@ class _AudioPageState extends ModularState<AudioPage, AudioController> {
           case FutureStatus.rejected:
             return RepeatWidget(controller.loadAudios);
           default:
-            return SplashWidget();
+            return const SplashWidget();
         }
       },
     );

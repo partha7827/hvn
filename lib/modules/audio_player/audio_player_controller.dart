@@ -12,7 +12,7 @@ abstract class _AudioPlayerControllerBase with Store {
   Audio audioFile;
   _AudioPlayerControllerBase(this.audioFile);
 
-  final player = Modular.get<AudioPlayerService>();
+  final AudioPlayerService player = Modular.get<AudioPlayerService>();
 
   @observable
   bool isLoopMode = false;

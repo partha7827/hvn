@@ -49,12 +49,12 @@ class _VideoPageState extends ModularState<VideoPage, VideoController> {
         case FutureStatus.rejected:
           return RepeatWidget(controller.loadVideos);
         default:
-          return SplashWidget();
+          return const SplashWidget();
       }
     });
   }
 
   void _showVideoPlayer(BuildContext context, Video videoFile) {
-    Modular.to.pushNamed("/videoplayer", arguments: videoFile);
+    Modular.to.pushNamed('/videoplayer', arguments: videoFile);
   }
 }

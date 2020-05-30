@@ -15,5 +15,6 @@ class AudioPlayerModule extends WidgetModule {
         Bind((i) => AudioPlayerService(audioFile: audioFile)),
       ];
 
+  @override
   Widget get view => AudioPlayerPage();
 }

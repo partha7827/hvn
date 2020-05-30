@@ -41,9 +41,9 @@ abstract class Audio implements Built<Audio, AudioBuilder> {
         Audio.serializer, json.decode(jsonString));
   }
 
-  static String listOfAudiosToJson(List<Audio> Audios) {
+  static String listOfAudiosToJson(List<Audio> audios) {
     final data = <String>[];
-    Audios.forEach((item) => data.add(item.toJson()));
+    audios.forEach((item) => data.add(item.toJson()));
     return '$data';
   }
 
@@ -58,13 +58,13 @@ abstract class Audio implements Built<Audio, AudioBuilder> {
   static void _initializeBuilder(AudioBuilder b) => b
     ..id = Uuid().v4()
     ..userId = Uuid().v4()
-    ..userName = ""
-    ..userAvatar = ""
+    ..userName = ''
+    ..userAvatar = ''
     ..title = Strings.audioTitlePlaceholder
-    ..subTitle = ""
-    ..author = ""
+    ..subTitle = ''
+    ..author = ''
     ..artworkUrlPath = Assets.audioArtworkPlaceholder
-    ..audioUrlPath = ""
+    ..audioUrlPath = ''
     ..duration = 0
     ..isRecommended = false
     ..tags = BuiltList<String>([]).toBuilder();

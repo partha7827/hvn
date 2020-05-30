@@ -11,7 +11,7 @@ import 'login_controller.dart';
 
 class ForgotPasswordPage extends StatelessWidget {
   final String email;
-  final emailController = TextEditingController();
+  final TextEditingController emailController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
 
   ForgotPasswordPage({this.email});
@@ -36,7 +36,7 @@ class ForgotPasswordPage extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.only(top: 24.0, bottom: 40),
                   child: Text(
-                    'Enter your e-mail below and we will send you a link to create a new password.',
+                    '''Enter your e-mail below and we will send you a link to create a new password.''',
                     style: normal16Hint,
                   ),
                 ),

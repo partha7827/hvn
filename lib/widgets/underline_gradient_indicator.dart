@@ -12,7 +12,7 @@ class UnderlineGradientIndicator extends Decoration {
   });
 
   @override
-  BoxPainter createBoxPainter([onChanged]) {
+  BoxPainter createBoxPainter([VoidCallback onChanged]) {
     return _UnderlinePainter(this, onChanged);
   }
 }
@@ -31,7 +31,7 @@ class _UnderlinePainter extends BoxPainter {
   Rect _indicatorRectFor(Rect rect, TextDirection textDirection) {
     assert(rect != null);
     assert(textDirection != null);
-    final Rect indicator = insets.resolve(textDirection).deflateRect(rect);
+    final indicator = insets.resolve(textDirection).deflateRect(rect);
     return Rect.fromLTWH(
       indicator.left,
       indicator.bottom - borderSide.width,
@@ -44,11 +44,11 @@ class _UnderlinePainter extends BoxPainter {
   void paint(Canvas canvas, Offset offset, ImageConfiguration configuration) {
     assert(configuration != null);
     assert(configuration.size != null);
-    final Rect rect = offset & configuration.size;
-    final TextDirection textDirection = configuration.textDirection;
-    Rect indicator =
+    final rect = offset & configuration.size;
+    final textDirection = configuration.textDirection;
+    final indicator =
         _indicatorRectFor(rect, textDirection).deflate(borderSide.width / 2.0);
-    final Paint paint = borderSide.toPaint()
+    final paint = borderSide.toPaint()
       ..strokeCap = StrokeCap.square
       ..shader = gradient.createShader(indicator);
     canvas.drawLine(indicator.bottomLeft, indicator.bottomRight, paint);

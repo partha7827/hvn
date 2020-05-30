@@ -11,8 +11,8 @@ class DiscoverAuthorsController = _DiscoverAuthorsController
     with _$DiscoverAuthorsController;
 
 abstract class _DiscoverAuthorsController with Store {
-  final firestore = Modular.get<FirestoreService>();
-  final app = Modular.get<AppController>();
+  final FirestoreService firestore = Modular.get<FirestoreService>();
+  final AppController app = Modular.get<AppController>();
 
   User get currentUser => app.currentUser;
 
@@ -30,7 +30,7 @@ abstract class _DiscoverAuthorsController with Store {
     authors = ObservableFuture(
       firestore.userCollection
           // .where("tags", arrayContains: "author")
-          .where("isAuthor", isEqualTo: true)
+          .where('isAuthor', isEqualTo: true)
           .getDocuments()
           .then((s) => User.parseListOfUsers(s)),
     );
@@ -58,7 +58,7 @@ abstract class _DiscoverAuthorsController with Store {
 
   @action
   void followUser(String userId) {
-    bool alreadyFollowing = isFollowing[userId] == true;
+    final alreadyFollowing = isFollowing[userId] == true;
 
     if (alreadyFollowing) {
       numberOfFollowers[userId] =

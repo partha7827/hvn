@@ -10,7 +10,8 @@ class MeditationModule extends ChildModule {
 
   @override
   List<Router> get routers => [
-        Router(Modular.initialRoute, child: (_, args) => MeditationPage()),
+        Router(Modular.initialRoute,
+            child: (_, args) => const MeditationPage()),
       ];
 
   static Inject get to => Inject<MeditationModule>.of();

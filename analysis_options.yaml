@@ -3,7 +3,7 @@ include: package:pedantic/analysis_options.yaml
 analyzer:
   language:
     strict-inference: true
-    strict-raw-types: true
+    # strict-raw-types: true
   errors:
     missing_required_param: error
     always_put_required_named_parameters_first: error
@@ -16,7 +16,7 @@ analyzer:
 
 linter:
   rules:
-    - avoid_catches_without_on_clauses
+    # - avoid_catches_without_on_clauses
     - avoid_private_typedef_functions
     - avoid_returning_null
     - avoid_setters_without_getters

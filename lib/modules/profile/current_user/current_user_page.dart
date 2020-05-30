@@ -14,7 +14,7 @@ import 'current_user_controller.dart';
 
 class CurrentUserPage extends StatefulWidget {
   final String title;
-  const CurrentUserPage({Key key, this.title = "OtherUser"}) : super(key: key);
+  const CurrentUserPage({Key key, this.title = 'OtherUser'}) : super(key: key);
 
   @override
   _CurrentUserPageState createState() => _CurrentUserPageState();
@@ -101,7 +101,7 @@ class _CurrentUserPageState
                                     child: Center(
                                       child: ClipOval(
                                         child: CachedNetworkImage(
-                                          imageUrl: user.photoUrl ?? "",
+                                          imageUrl: user.photoUrl ?? '',
                                           width: 100,
                                           height: 100,
                                           fit: BoxFit.cover,
@@ -177,7 +177,7 @@ class _CurrentUserPageState
                               Column(
                                 children: <Widget>[
                                   Text(
-                                    "${user.followers.length ?? 0}",
+                                    '${user.followers.length ?? 0}',
                                     style: bold20White,
                                   ),
                                   Text('Followers', style: normal16Hint)
@@ -186,7 +186,7 @@ class _CurrentUserPageState
                               Column(
                                 children: <Widget>[
                                   Text(
-                                    "${user.following.length ?? 0}",
+                                    '${user.following.length ?? 0}',
                                     style: bold20White,
                                   ),
                                   Text('Following', style: normal16Hint)
@@ -229,13 +229,12 @@ class _CurrentUserPageState
             },
             body: TabBarView(
               controller: _tabController,
-              children: <Widget>[
-              ],
+              children: <Widget>[],
             ),
           );
         },
       ),
-      bottomNavigationBar: BottomNavigation(),
+      bottomNavigationBar: const BottomNavigation(),
     );
   }
 

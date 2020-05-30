@@ -5,14 +5,11 @@ import 'package:highvibe/modules/wallet/pages/send/send_page.dart';
 import 'package:highvibe/modules/wallet/pages/widgets/containers/user_container.dart';
 
 class UsersPage extends StatefulWidget {
-
   @override
   UsersPageState createState() => UsersPageState();
 }
 
 class UsersPageState extends State<UsersPage> {
-
-
   @override
   void initState() {
     super.initState();
@@ -25,61 +22,50 @@ class UsersPageState extends State<UsersPage> {
   Widget buildAppBar() {
     return AppBar(
       backgroundColor: AppColors.backgroundDarkBlue,
-      title: Text('Transfer token'),
+      title: const Text('Transfer token'),
     );
   }
 
   void onQr() {
     Navigator.push(
       context,
-      MaterialPageRoute(
-        builder: (context) => ScanPage()
-      ),
+      MaterialPageRoute<ScanPage>(builder: (context) => ScanPage()),
     );
   }
 
   void onUser() {
     Navigator.push(
       context,
-      MaterialPageRoute(
-        builder: (context) => SendPage()
-      ),
+      MaterialPageRoute<SendPage>(builder: (context) => SendPage()),
     );
   }
 
   Widget buildSearch() {
     return Container(
-      margin: EdgeInsets.only(left: 20, right: 20, bottom: 20),
+      margin: const EdgeInsets.only(left: 20, right: 20, bottom: 20),
       child: Row(
         children: [
           Expanded(
             child: Container(
               alignment: Alignment.center,
               height: 48,
-              margin: EdgeInsets.only(right: 10),
+              margin: const EdgeInsets.only(right: 10),
               decoration: BoxDecoration(
-                color: AppColors.backgroundLightBlue,
-                borderRadius: BorderRadius.circular(10)
-              ),
+                  color: AppColors.backgroundLightBlue,
+                  borderRadius: BorderRadius.circular(10)),
               child: TextField(
-                style: TextStyle(
-                  color: Colors.white
-                ),
+                style: TextStyle(color: Colors.white),
                 decoration: InputDecoration(
-                  isDense: false,
-                  prefixIcon: Padding(
-                    padding: EdgeInsets.only(),
-                    child: Icon(Icons.search, color: AppColors.textGrey),
-                  ),
-                  focusedBorder: InputBorder.none,
-                  hintText: 'Search',
-                  hintStyle: TextStyle(
-                    color: AppColors.textGrey
-                  )
-                ),
-                
-              )
-            ) 
+                    isDense: false,
+                    prefixIcon: Padding(
+                      padding: const EdgeInsets.only(),
+                      child: Icon(Icons.search, color: AppColors.textGrey),
+                    ),
+                    focusedBorder: InputBorder.none,
+                    hintText: 'Search',
+                    hintStyle: TextStyle(color: AppColors.textGrey)),
+              ),
+            ),
           ),
           InkWell(
             onTap: onQr,
@@ -87,35 +73,34 @@ class UsersPageState extends State<UsersPage> {
               height: 48,
               width: 48,
               alignment: Alignment.center,
-              padding: EdgeInsets.all(12),
+              padding: const EdgeInsets.all(12),
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
-                gradient: LinearGradient(
-                  colors: AppColors.buttonGradient,
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter
-                )
-              ),
-              child: Image.asset('assets/icons/qr.png')
-            )
+                  borderRadius: BorderRadius.circular(10),
+                  gradient: LinearGradient(
+                      colors: AppColors.buttonGradient,
+                      begin: Alignment.topCenter,
+                      end: Alignment.bottomCenter)),
+              child: Image.asset('assets/icons/qr.png'),
+            ),
           )
-        ]
-      )
+        ],
+      ),
     );
   }
 
   Widget buildUsers() {
     return Expanded(
       child: ListView(
-        children: List.generate(30, 
+        children: List.generate(
+          30,
           (index) {
             return UserContainer(
-              margin: EdgeInsets.only(bottom: 20, right: 20, left: 20),
+              margin: const EdgeInsets.only(bottom: 20, right: 20, left: 20),
               onPressed: onUser,
             );
-          }
-        )
-      )
+          },
+        ),
+      ),
     );
   }
 
@@ -126,10 +111,7 @@ class UsersPageState extends State<UsersPage> {
       appBar: buildAppBar(),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          buildSearch(),
-          buildUsers()
-        ],
+        children: [buildSearch(), buildUsers()],
       ),
     );
   }

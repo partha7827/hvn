@@ -13,12 +13,12 @@ class LiveModule extends ChildModule {
 
   @override
   List<Router> get routers => [
-        Router("/", child: (_, args) => LivePage(userId)),
-        Router("/live/:userId",
+        Router('/', child: (_, args) => LivePage(userId)),
+        Router('/live/:userId',
             child: (_, args) => LivePage(args.params['userId'])),
       ];
 
   static Inject get to => Inject<LiveModule>.of();
 
-  static Future toLive(String userId) => Modular.to.pushNamed("/live/$userId");
+  static Future toLive(String userId) => Modular.to.pushNamed('/live/$userId');
 }

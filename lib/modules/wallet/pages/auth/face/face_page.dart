@@ -2,15 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:highvibe/modules/wallet/resources/app_colors.dart';
 import 'package:highvibe/modules/wallet/pages/auth/passcode/passcode_page.dart';
 
-
 class FacePage extends StatefulWidget {
-
   @override
   FacePageState createState() => FacePageState();
 }
 
 class FacePageState extends State<FacePage> {
-
   @override
   void initState() {
     super.initState();
@@ -19,46 +16,40 @@ class FacePageState extends State<FacePage> {
   void onPassCode() {
     Navigator.push(
       context,
-      MaterialPageRoute(
-        builder: (context) => PassCodePage()
-      ),
+      MaterialPageRoute<PassCodePage>(builder: (context) => PassCodePage()),
     );
   }
 
   Widget buildMain() {
     final height = MediaQuery.of(context).size.height;
     return Container(
-      margin: EdgeInsets.only(top: height * 0.10),
-      alignment: Alignment.center,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: <Widget>[
-          Image.asset('assets/icons/faceid.png',
-            width: 63,
-            height: 63,
-          ),
-          Padding(
-            padding: EdgeInsets.only(top: 34),
-            child: Text('Authorize to continue',
-              style: TextStyle(
-                fontWeight: FontWeight.w600,
-                color: Colors.white,
-                fontSize: 24
-              ),
-            )
-          ),
-          Padding(
-            padding: EdgeInsets.only(top: 20),
-            child: Text('HV Wallet',
-              style: TextStyle(
-                color: AppColors.textGrey,
-                fontSize: 18
-              ),
-            )
-          )
-        ],
-      )
-    );
+        margin: EdgeInsets.only(top: height * 0.10),
+        alignment: Alignment.center,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+            Image.asset(
+              'assets/icons/faceid.png',
+              width: 63,
+              height: 63,
+            ),
+            Padding(
+                padding: const EdgeInsets.only(top: 34),
+                child: Text(
+                  'Authorize to continue',
+                  style: TextStyle(
+                      fontWeight: FontWeight.w600,
+                      color: Colors.white,
+                      fontSize: 24),
+                )),
+            Padding(
+                padding: const EdgeInsets.only(top: 20),
+                child: Text(
+                  'HV Wallet',
+                  style: TextStyle(color: AppColors.textGrey, fontSize: 18),
+                ))
+          ],
+        ));
   }
 
   @override
@@ -69,24 +60,20 @@ class FacePageState extends State<FacePage> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(
-            padding: EdgeInsets.only(top: MediaQuery.of(context).padding.top),
-            child: BackButton(
-              color: Colors.white,
-            )
-          ),
+              padding: EdgeInsets.only(top: MediaQuery.of(context).padding.top),
+              child: BackButton(
+                color: Colors.white,
+              )),
           buildMain()
         ],
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: FlatButton(
-        onPressed: onPassCode,
-        child: Text('Use Passcode',
-          style: TextStyle(
-            color: AppColors.textBlue,
-            fontSize: 18
-          ),
-        )
-      ),
+          onPressed: onPassCode,
+          child: Text(
+            'Use Passcode',
+            style: TextStyle(color: AppColors.textBlue, fontSize: 18),
+          )),
     );
   }
 }

@@ -9,11 +9,11 @@ class VideoPlayerModule extends ChildModule {
   @override
   List<Router> get routers => [
         Router(
-          "/videoplayer",
+          '/videoplayer',
           child: (_, args) => VideoPlayerPage(video: args.data),
         ),
       ];
 
   static Future toPlayer(Video video) =>
-      Modular.to.pushNamed("videoplayer", arguments: video);
+      Modular.to.pushNamed('videoplayer', arguments: video);
 }

@@ -67,11 +67,11 @@ abstract class User implements Built<User, UserBuilder> {
     ..address = b.id
     ..chatId = b.id
     ..liveId = b.id
-    ..status = "Author"
-    ..email = ""
-    ..name = ""
+    ..status = 'Author'
+    ..email = ''
+    ..name = ''
     ..photoUrl = Assets.dummyAvatarUrl
-    ..bio = ""
+    ..bio = ''
     ..experiencePoints = 0
     ..karmaPoints = 0
     ..isLive = false

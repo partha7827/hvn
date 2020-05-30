@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:highvibe/values/Strings.dart';
 import 'package:highvibe/values/themes.dart';
 
-var dummyImgUrl =
+String dummyImgUrl =
     'https://takelessons.com/blog/wp-content/uploads/2020/03/flute-for-beginners.jpg';
 
 class StreamCard extends StatelessWidget {

@@ -44,7 +44,7 @@ class _DiscoverAuthorsViewState
         case FutureStatus.rejected:
           return RepeatWidget(controller.loadAuthors);
         default:
-          return SplashWidget();
+          return const SplashWidget();
       }
     });
   }

@@ -25,9 +25,9 @@ class AuthModule extends ChildModule {
 
   @override
   List<Router> get routers => [
-        Router('/autologin', child: (_, args) => AutoLoginPage()),
-        Router('/register', child: (_, args) => RegisterPage()),
-        Router('/login', child: (_, args) => LoginPage()),
+        Router('/autologin', child: (_, args) => const AutoLoginPage()),
+        Router('/register', child: (_, args) => const RegisterPage()),
+        Router('/login', child: (_, args) => const LoginPage()),
         Router('/forgotPassword',
             child: (_, args) => ForgotPasswordPage(
                   email: args.data,
@@ -39,11 +39,11 @@ class AuthModule extends ChildModule {
 
   static Future toRegister() => Modular.to.pushNamed('/register');
 
-  static Future toLogin() => Modular.to.pushNamed("/login");
+  static Future toLogin() => Modular.to.pushNamed('/login');
 
-  static Future toForgotPassword(email) =>
-      Modular.to.pushNamed("/forgotPassword", arguments: email);
+  static Future toForgotPassword(String email) =>
+      Modular.to.pushNamed('/forgotPassword', arguments: email);
 
-  static Future toThankYouPage(args) =>
-      Modular.to.pushReplacementNamed("/thankYou", arguments: args);
+  static Future toThankYouPage(String args) =>
+      Modular.to.pushReplacementNamed('/thankYou', arguments: args);
 }

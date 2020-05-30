@@ -9,16 +9,24 @@ class OutlineButton extends StatelessWidget {
   final Function onPressed;
   final Widget icon;
 
-  OutlineButton({this.title, this.height = 48, this.fontSize = 16, this.icon, this.margin, this.onPressed});
+  OutlineButton({
+    this.title,
+    this.height = 48,
+    this.fontSize = 16,
+    this.icon,
+    this.margin,
+    this.onPressed,
+  });
 
-  Widget build(BuildContext context) { 
+  @override
+  Widget build(BuildContext context) {
     return Container(
       margin: margin,
       child: Container(
         height: height,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(15),
-          border: Border.all(color: AppColors.textBlue, width: 2)
+          border: Border.all(color: AppColors.textBlue, width: 2),
         ),
         child: FlatButton(
           onPressed: onPressed,
@@ -26,27 +34,19 @@ class OutlineButton extends StatelessWidget {
           child: Container(
             height: height,
             alignment: Alignment.center,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Container(
-                  child: icon,
-                  margin: EdgeInsets.only(right: icon != null ? 10 : 0),
-                ),
-                Text(title,
+            child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+              Container(
+                child: icon,
+                margin: EdgeInsets.only(right: icon != null ? 10 : 0),
+              ),
+              Text(title,
                   textAlign: TextAlign.center,
-                  style: TextStyle(
-                    color: AppColors.textBlue,
-                    fontSize: fontSize
-                  )
-                )
-              ]
-            ),
+                  style:
+                      TextStyle(color: AppColors.textBlue, fontSize: fontSize))
+            ]),
           ),
-        )
-      )
-    
-      
+        ),
+      ),
     );
   }
 }

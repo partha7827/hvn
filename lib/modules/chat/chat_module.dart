@@ -10,11 +10,11 @@ class ChatModule extends WidgetModule {
 
   @override
   List<Bind> get binds => [
-    Bind((i) => ChatController(channelId), singleton: false),
-  ];
+        Bind((i) => ChatController(channelId), singleton: false),
+      ];
 
   static Inject get to => Inject<ChatModule>.of();
 
   @override
-  Widget get view => ChatPage();
+  Widget get view => const ChatPage();
 }

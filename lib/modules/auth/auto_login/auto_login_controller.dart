@@ -12,11 +12,11 @@ part 'auto_login_controller.g.dart';
 class AutoLoginController = _AutoLoginControllerBase with _$AutoLoginController;
 
 abstract class _AutoLoginControllerBase with Store {
-  final auth = Modular.get<AuthService>();
+  final AuthService auth = Modular.get<AuthService>();
 
-  final firestore = Modular.get<FirestoreService>();
+  final FirestoreService firestore = Modular.get<FirestoreService>();
 
-  final appStore = Modular.get<AppController>();
+  final AppController appStore = Modular.get<AppController>();
 
   @action
   Future<void> init() async {
@@ -29,9 +29,9 @@ abstract class _AutoLoginControllerBase with Store {
 
       if (!user.exists) throw LoginException(Strings.userNotFound);
 
-      appStore.setCurrentUser(User.fromSnapshot(user));
-    } catch (e) {
-      appStore.setCurrentUser(null);
+      await appStore.setCurrentUser(User.fromSnapshot(user));
+    } catch (_) {
+      await appStore.setCurrentUser(null);
     }
   }
 }
