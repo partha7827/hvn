@@ -27,7 +27,7 @@ class _VideoPageState extends ModularState<VideoPage, VideoController> {
     return ListView(
       padding: const EdgeInsets.only(left: 20, top: 10, bottom: 80, right: 8),
       children: [
-        HeaderRow(title: Strings.uploads),
+        const HeaderRow(title: Strings.uploads),
         ...videos
             .map(
               (item) => VideoTile(

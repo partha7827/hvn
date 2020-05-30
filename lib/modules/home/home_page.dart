@@ -3,6 +3,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:highvibe/modules/home/widgets/audios_widget.dart';
 import 'package:highvibe/modules/home/widgets/authors_widget.dart';
+import 'package:highvibe/modules/home/widgets/exit_app.dart';
 import 'package:highvibe/values/Strings.dart';
 import 'package:highvibe/values/themes.dart';
 
@@ -19,52 +20,55 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends ModularState<HomePage, HomeController> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Stack(
-        children: [
-          Positioned(
-            top: 0,
-            right: 0,
-            child: ColorFiltered(
-              colorFilter: ColorFilter.mode(
-                  Colors.black.withOpacity(0.4), BlendMode.dstATop),
-              child: Image.asset(
-                'assets/home_background.jpg',
-                fit: BoxFit.cover,
+    return WillPopScope(
+      onWillPop: willPop,
+      child: Scaffold(
+        body: Stack(
+          children: [
+            Positioned(
+              top: 0,
+              right: 0,
+              child: ColorFiltered(
+                colorFilter: ColorFilter.mode(
+                    Colors.black.withOpacity(0.4), BlendMode.dstATop),
+                child: Image.asset(
+                  'assets/home_background.jpg',
+                  fit: BoxFit.cover,
+                ),
               ),
             ),
-          ),
-          Positioned(
-            bottom: 0,
-            left: 0,
-            right: 0,
-            child: Container(
-              width: double.maxFinite,
-              height: MediaQuery.of(context).size.height * 0.7,
-              decoration: BoxDecoration(
-                gradient: homeHeaderGradient,
+            Positioned(
+              bottom: 0,
+              left: 0,
+              right: 0,
+              child: Container(
+                width: double.maxFinite,
+                height: MediaQuery.of(context).size.height * 0.7,
+                decoration: BoxDecoration(
+                  gradient: homeHeaderGradient,
+                ),
               ),
             ),
-          ),
-          SafeArea(
-            child: ListView(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(top: 80, bottom: 40),
-                  child: buildQuoteWidget(),
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 40),
-                  child: AudiosWidget(),
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 40),
-                  child: AuthorsWidget(),
-                ),
-              ],
-            ),
-          )
-        ],
+            SafeArea(
+              child: ListView(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(top: 80, bottom: 40),
+                    child: buildQuoteWidget(),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 40),
+                    child: AudiosWidget(),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 40),
+                    child: AuthorsWidget(),
+                  ),
+                ],
+              ),
+            )
+          ],
+        ),
       ),
     );
   }
@@ -88,5 +92,10 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
         ),
       ],
     );
+  }
+
+  Future<bool> willPop() async {
+    final shouldExit = await showExitDialog(context);
+    return shouldExit;
   }
 }
