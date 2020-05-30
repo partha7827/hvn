@@ -6,6 +6,7 @@ import 'package:mock_cloud_firestore/mock_cloud_firestore.dart';
 class FirestoreService extends IFirestoreService with UserQueries {
   CollectionReference _messageCollection;
 
+  // FIXME: Fix this warnings
   FirestoreService(firestore) {
     userCollection = firestore.collection('users');
     messageCollection = firestore.collection('messages');
@@ -15,12 +16,14 @@ class FirestoreService extends IFirestoreService with UserQueries {
     audioCollection = firestore.collection('audio');
   }
 
-  factory FirestoreService.withFirebase() =>
-      FirestoreService(Firestore.instance);
+  factory FirestoreService.withFirebase() {
+    return FirestoreService(Firestore.instance);
+  }
 
   factory FirestoreService.withMock() {
     return FirestoreService(MockCloudFirestore(mockDatabase));
   }
+
   @override
   CollectionReference get messageCollection => _messageCollection;
 
