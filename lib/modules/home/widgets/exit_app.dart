@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:highvibe/modules/wallet/resources/app_colors.dart';
+import 'package:highvibe/values/Strings.dart';
 import 'package:highvibe/values/themes.dart';
 
 showExitDialog(BuildContext context) async {
@@ -16,19 +17,19 @@ showExitDialog(BuildContext context) async {
           ),
           backgroundColor: AppColors.backgroundLightBlue,
           title: Text(
-            'Are you sure?',
+            Strings.exitConfirmation,
             style: bold18PlayfairWhite,
           ),
           actions: <Widget>[
             DialogFlatButton(
-              title: 'Yes',
+              title: Strings.yes,
               onPressed: () {
                 Modular.to.pop();
                 shouldExit = true;
               },
             ),
             DialogFlatButton(
-              title: 'No',
+              title: Strings.no,
               color: Theme.of(context).primaryColor,
               onPressed: () {
                 Modular.to.pop();
