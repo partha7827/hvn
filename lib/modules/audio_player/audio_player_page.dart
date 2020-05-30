@@ -9,8 +9,7 @@ import 'package:highvibe/modules/audio_player/widgets/widgets.dart';
 import 'package:highvibe/utils/utils.dart';
 import 'package:highvibe/values/themes.dart';
 import 'package:highvibe/widgets/responsive_safe_area.dart';
-
-enum AudioPlayerMode { fullScreen, minimised, none }
+import 'package:mobx/mobx.dart';
 
 class AudioPlayerPage extends StatefulWidget {
   @override
@@ -20,20 +19,11 @@ class AudioPlayerPage extends StatefulWidget {
 class _AudioPlayerPageState
     extends ModularState<AudioPlayerPage, AudioPlayerController>
     with TickerProviderStateMixin {
-  AudioPlayerService _audioPlayerService;
   AnimationController playButtonAnimation;
-
-  bool isVisible;
-  String _positionText;
-  Duration _trackPosition;
-  bool _isPlaying = false;
-  AudioPlayerMode _audioPlayerMode = AudioPlayerMode.none;
-
-  bool get _isMinimised => _audioPlayerMode == AudioPlayerMode.minimised;
 
   @override
   Widget build(BuildContext context) {
-    if (!_isMinimised) {
+    if (!controller.isMinimized) {
       return Material(child: _audioWidget(context));
     } else {
       return ResponsiveSafeArea(
@@ -46,48 +36,48 @@ class _AudioPlayerPageState
 
   @override
   void dispose() {
-    _audioPlayerService.dispose();
     playButtonAnimation.dispose();
     super.dispose();
   }
 
   @override
   void initState() {
-    _configure();
-    playButtonAnimation = AnimationController(
-      vsync: this,
-      duration: Duration(milliseconds: 300),
-    );
-    Future.delayed(Duration(milliseconds: 1), () {
-      setState(() {
-        isVisible = true;
-      });
+    controller.configure();
+
+    reaction((_) => controller.isPlaying, (val) {
+      if (val) {
+        playButtonAnimation.forward();
+      } else {
+        playButtonAnimation.reverse();
+      }
     });
+
     super.initState();
   }
 
   Widget _audioWidget(BuildContext context) {
     return Align(
-      alignment: _isMinimised ? Alignment.bottomCenter : Alignment.center,
+      alignment:
+          controller.isMinimized ? Alignment.bottomCenter : Alignment.center,
       child: Container(
-        color: _isMinimised ? mediaPlayerBackgroundColor : null,
-        height: _isMinimised ? 80 : null,
+        color: controller.isMinimized ? mediaPlayerBackgroundColor : null,
+        height: controller.isMinimized ? 80 : null,
         width: screenWidth(context),
-        margin: _isMinimised
+        margin: controller.isMinimized
             ? const EdgeInsets.only(left: 8, right: 8, bottom: 8)
             : EdgeInsets.only(left: 0, right: 0),
         child: Stack(
           children: [
             Opacity(
-              opacity: _isMinimised ? 1 : 0.5,
+              opacity: controller.isMinimized ? 1 : 0.5,
               child: AnimatedOpacity(
                 duration: Duration(milliseconds: 2000),
-                opacity: isVisible == true ? 1 : 0,
+                opacity: controller.isArtworkVisible == true ? 1 : 0,
                 child: Hero(
                   tag: "audio#${controller.audioFile.id}",
                   child: Container(
-                    width: _isMinimised ? 80 : null,
-                    height: _isMinimised ? 80 : null,
+                    width: controller.isMinimized ? 80 : null,
+                    height: controller.isMinimized ? 80 : null,
                     decoration: BoxDecoration(
                       image: DecorationImage(
                         fit: BoxFit.cover,
@@ -100,8 +90,8 @@ class _AudioPlayerPageState
                 ),
               ),
             ),
-            if (!_isMinimised) ..._fullScreenAudioPlayer(),
-            if (_isMinimised) ..._minimisedAudioPlayer(),
+            if (!controller.isMinimized) ..._fullScreenAudioPlayer(),
+            if (controller.isMinimized) ..._minimisedAudioPlayer(),
           ],
         ),
       ),
@@ -109,7 +99,7 @@ class _AudioPlayerPageState
   }
 
   void _close() async {
-    await _audioPlayerService.stop();
+    controller.player.stop();
     MediaOverlays.disposeAudioOverlayEntry();
   }
 
@@ -128,22 +118,12 @@ class _AudioPlayerPageState
     );
   }
 
-  void _configure() {
-    _configureAudioPlayerService();
-    _updateTrackPosition();
-    _updatePlayerState();
-  }
-
-  void _configureAudioPlayerService() {
-    _audioPlayerService = AudioPlayerService(audioFile: controller.audioFile);
-  }
-
   AudioPlayerSkipButton _fastForwardButton() {
     return AudioPlayerSkipButton(
       buttonType: AudioPlayerSkipButtonType.fastForward,
-      onPressed: () => _audioPlayerService.skip15seconds(
+      onPressed: () => controller.player.skip15seconds(
         buttonType: AudioPlayerSkipButtonType.fastForward,
-        trackPosition: _trackPosition,
+        trackPosition: controller.trackPosition,
       ),
     );
   }
@@ -197,10 +177,12 @@ class _AudioPlayerPageState
             child: Column(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                AudioPlayerSlider(
-                  trackPosition: _updateSliderPosition(),
-                  onChanged: (value) =>
-                      _audioPlayerService.seekToPosition(value),
+                Observer(
+                  builder: (_) => AudioPlayerSlider(
+                    trackPosition: controller.sliderPosition,
+                    onChanged: (value) =>
+                        controller.player.seekToPosition(value),
+                  ),
                 ),
                 Container(
                   padding: const EdgeInsets.fromLTRB(16, 0, 16, 0),
@@ -208,9 +190,11 @@ class _AudioPlayerPageState
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
-                      Text(
-                        '${_positionText ?? ''}',
-                        style: const TextStyle(color: Colors.white),
+                      Observer(
+                        builder: (_) => Text(
+                          '${controller.positionText ?? ''}',
+                          style: const TextStyle(color: Colors.white),
+                        ),
                       ),
                       Text(
                         mediaTimeFormarter(
@@ -231,7 +215,7 @@ class _AudioPlayerPageState
                       _rewindButton(),
                       AudioPlayerPlayButton(
                         progress: playButtonAnimation,
-                        onPressed: () => _togglePlayStop(),
+                        onPressed: () => controller.togglePlayStop(),
                       ),
                       _fastForwardButton(),
                     ],
@@ -315,7 +299,7 @@ class _AudioPlayerPageState
           height: 45,
           child: AudioPlayerPlayButton(
             progress: playButtonAnimation,
-            onPressed: () => _togglePlayStop(),
+            onPressed: () => controller.togglePlayStop(),
           ),
         ),
       ),
@@ -327,15 +311,17 @@ class _AudioPlayerPageState
             maxWidth: 80,
             maxHeight: 40,
           ),
-          child: Text(
-            '${_positionText ?? ''}',
-            maxLines: 1,
-            overflow: TextOverflow.clip,
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: 12,
-              fontWeight: FontWeight.normal,
-              decoration: TextDecoration.none,
+          child: Observer(
+            builder: (_) => Text(
+              '${controller.positionText ?? ''}',
+              maxLines: 1,
+              overflow: TextOverflow.clip,
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 12,
+                fontWeight: FontWeight.normal,
+                decoration: TextDecoration.none,
+              ),
             ),
           ),
         ),
@@ -345,18 +331,18 @@ class _AudioPlayerPageState
           width: screenWidth(context) / 1.5,
           color: Colors.transparent,
         ),
-        onTap: () => _toggleAudioPlayerMode(),
+        onTap: () => controller.toggleAudioPlayerMode(),
       ),
     ];
   }
 
   Widget _minimizeScreenButton() {
-    if (!_isMinimised) {
+    if (!controller.isMinimized) {
       return Positioned(
         top: 40,
         left: -16,
         child: FlatButton(
-          onPressed: () => _toggleAudioPlayerMode(),
+          onPressed: () => controller.toggleAudioPlayerMode(),
           child: Icon(
             Icons.keyboard_arrow_down,
             color: Colors.white,
@@ -372,61 +358,10 @@ class _AudioPlayerPageState
   AudioPlayerSkipButton _rewindButton() {
     return AudioPlayerSkipButton(
       buttonType: AudioPlayerSkipButtonType.rewind,
-      onPressed: () => _audioPlayerService.skip15seconds(
+      onPressed: () => controller.player.skip15seconds(
         buttonType: AudioPlayerSkipButtonType.rewind,
-        trackPosition: _trackPosition,
+        trackPosition: controller.trackPosition,
       ),
     );
-  }
-
-  void _toggleAudioPlayerMode() {
-    if (_audioPlayerMode != AudioPlayerMode.minimised) {
-      setState(() => _audioPlayerMode = AudioPlayerMode.minimised);
-    } else {
-      setState(() => _audioPlayerMode = AudioPlayerMode.none);
-    }
-  }
-
-  void _togglePlayStop() {
-    setState(() {
-      _isPlaying
-          ? playButtonAnimation.forward()
-          : playButtonAnimation.reverse();
-    });
-    _audioPlayerService.toggle(playPosition: _trackPosition);
-  }
-
-  void _updatePlayerState() {
-    _audioPlayerService.playerStateSubscription.onData((state) {
-      setState(() {
-        _isPlaying = _audioPlayerService.isPlaying;
-        _isPlaying
-            ? playButtonAnimation.forward()
-            : playButtonAnimation.reverse();
-      });
-    });
-  }
-
-  double _updateSliderPosition() {
-    return (_trackPosition != null &&
-            controller.audioFile.duration != null &&
-            _trackPosition.inMilliseconds > 0 &&
-            _trackPosition.inMilliseconds < controller.audioFile.duration)
-        ? _trackPosition.inMilliseconds / controller.audioFile.duration
-        : 0;
-  }
-
-  void _updateTrackPosition() {
-    _audioPlayerService.positionSubscription.onData((position) {
-      setState(() {
-        _trackPosition = position;
-        if (_trackPosition >=
-            Duration(milliseconds: controller.audioFile.duration)) {
-          _trackPosition = Duration(milliseconds: 0);
-        }
-        _positionText = _trackPosition?.toString()?.split('.')?.first ?? '';
-        _updateSliderPosition();
-      });
-    });
   }
 }
