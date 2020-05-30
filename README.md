@@ -16,7 +16,7 @@ To get started, see [Contributing](#contributing)
 
 ## Requirements
 
-- Flutter: the latest version on `flutter beta channel`
+- Flutter: the latest version on `flutter stable channel`
 - Dart: 2.8.1+
 - Xcode: 11.4.0+
 - Androind Studio 3.6.0+
@@ -37,6 +37,7 @@ flutter run
 ```
 
 ### Update App Icon
+
 ```
 flutter pub run flutter_launcher_icons:main
 ```
