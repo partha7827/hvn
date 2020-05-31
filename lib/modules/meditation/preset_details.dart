@@ -26,7 +26,7 @@ class _PresetDetailsState extends State<PresetDetails> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  Text(
+                  const Text(
                     '20',
                     style: TextStyle(
                       fontSize: 60.0,
@@ -121,7 +121,7 @@ class _PresetDetailsState extends State<PresetDetails> {
                           width: 16,
                           height: 16,
                         ),
-                        label: Text(
+                        label: const Text(
                           'Edit',
                           style: TextStyle(
                             fontSize: 16,
@@ -142,7 +142,7 @@ class _PresetDetailsState extends State<PresetDetails> {
                           Icons.delete_outline,
                           color: Colors.white,
                         ),
-                        label: Text(
+                        label: const Text(
                           'Delete',
                           style: TextStyle(
                             fontSize: 16,
@@ -190,7 +190,7 @@ class _PresetDetailsState extends State<PresetDetails> {
               children: <Widget>[
                 Text(
                   title,
-                  style: TextStyle(
+                  style: const TextStyle(
                     color: Colors.white,
                     fontSize: 16.0,
                   ),
@@ -199,7 +199,7 @@ class _PresetDetailsState extends State<PresetDetails> {
                   children: <Widget>[
                     Text(
                       subtitle,
-                      style: TextStyle(
+                      style: const TextStyle(
                         color: Colors.white,
                         fontSize: 16.0,
                       ),

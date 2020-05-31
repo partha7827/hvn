@@ -100,7 +100,7 @@ class PastMeditations extends StatelessWidget {
                   ),
                   Text(
                     duration,
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 16.0,
                       color: Colors.white,
                     ),
@@ -142,7 +142,7 @@ class PastMeditations extends StatelessWidget {
                       child: Text(
                         note,
                         maxLines: 2,
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: 14,
                           color: Colors.white,
                         ),

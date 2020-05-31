@@ -64,8 +64,8 @@ class StreamCard extends StatelessWidget {
                     '$reactions ${Strings.reactions}',
                     style: normal12Hint,
                   ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 4),
+                  const Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 4),
                     child: CircleAvatar(
                       radius: 2,
                       backgroundColor: hintTextColor,
@@ -75,8 +75,8 @@ class StreamCard extends StatelessWidget {
                     '$messages ${Strings.messages}',
                     style: normal12Hint,
                   ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 4),
+                  const Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 4),
                     child: CircleAvatar(
                       radius: 2,
                       backgroundColor: hintTextColor,

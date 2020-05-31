@@ -37,7 +37,7 @@ class GradientOutlineButton extends StatelessWidget {
           child: Container(
             constraints: BoxConstraints(minWidth: 48, minHeight: minHeight),
             child: isLoading
-                ? Center(
+                ? const Center(
                     child: SizedBox(
                       width: 24,
                       height: 24,

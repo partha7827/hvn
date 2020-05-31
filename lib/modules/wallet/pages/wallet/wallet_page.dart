@@ -60,66 +60,70 @@ class WalletPageState extends State<WalletPage> {
                 'assets/images/star.png',
                 width: width * 0.4,
               )),
-          Column(crossAxisAlignment: CrossAxisAlignment.start, children: <
-              Widget>[
-            Padding(
-                padding:
-                    EdgeInsets.only(top: MediaQuery.of(context).padding.top),
-                child: BackButton(
-                  color: Colors.white,
-                  onPressed: onBack,
-                )),
-            Container(
-                padding: const EdgeInsets.only(
-                    left: 20, top: 20, right: 20, bottom: 30),
-                child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      Text(
-                        'Wallet Balance',
-                        style: TextStyle(
-                            fontWeight: FontWeight.w600,
-                            color: Colors.white,
-                            fontSize: 14),
-                      ),
-                      Padding(
-                          padding: const EdgeInsets.only(top: 15),
-                          child: Text(
-                            '20,653',
-                            style: TextStyle(color: Colors.white, fontSize: 42),
-                          )),
-                      Padding(
-                          padding: const EdgeInsets.only(top: 15, bottom: 40),
-                          child: Text(
-                            'HV TOKENS',
-                            style: TextStyle(
-                                color: AppColors.textGrey, fontSize: 14),
-                          )),
-                      Row(
+          Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Padding(
+                    padding: EdgeInsets.only(
+                        top: MediaQuery.of(context).padding.top),
+                    child: BackButton(
+                      color: Colors.white,
+                      onPressed: onBack,
+                    )),
+                Container(
+                    padding: const EdgeInsets.only(
+                        left: 20, top: 20, right: 20, bottom: 30),
+                    child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
-                          Expanded(
-                              child: MainButton(
-                            title: 'Send',
-                            icon: Icon(
-                              Icons.arrow_upward,
-                              color: Colors.white,
+                          Text(
+                            'Wallet Balance',
+                            style: TextStyle(
+                                fontWeight: FontWeight.w600,
+                                color: Colors.white,
+                                fontSize: 14),
+                          ),
+                          const Padding(
+                            padding: EdgeInsets.only(top: 15),
+                            child: Text(
+                              '20,653',
+                              style:
+                                  TextStyle(color: Colors.white, fontSize: 42),
                             ),
-                            onPressed: onSend,
-                          )),
-                          const Padding(padding: EdgeInsets.only(left: 20)),
-                          Expanded(
-                              child: MainButton(
-                            title: 'Receive',
-                            icon: Icon(
-                              Icons.arrow_downward,
-                              color: Colors.white,
+                          ),
+                          const Padding(
+                            padding: EdgeInsets.only(top: 15, bottom: 40),
+                            child: Text(
+                              'HV TOKENS',
+                              style: TextStyle(
+                                  color: AppColors.textGrey, fontSize: 14),
                             ),
-                            onPressed: onReceive,
-                          ))
-                        ],
-                      )
-                    ]))
-          ])
+                          ),
+                          Row(
+                            children: <Widget>[
+                              Expanded(
+                                  child: MainButton(
+                                title: 'Send',
+                                icon: Icon(
+                                  Icons.arrow_upward,
+                                  color: Colors.white,
+                                ),
+                                onPressed: onSend,
+                              )),
+                              const Padding(padding: EdgeInsets.only(left: 20)),
+                              Expanded(
+                                  child: MainButton(
+                                title: 'Receive',
+                                icon: Icon(
+                                  Icons.arrow_downward,
+                                  color: Colors.white,
+                                ),
+                                onPressed: onReceive,
+                              ))
+                            ],
+                          )
+                        ]))
+              ])
         ]));
   }
 
@@ -141,7 +145,7 @@ class WalletPageState extends State<WalletPage> {
                 padding: const EdgeInsets.only(top: 4),
                 child: FlatButton(
                   onPressed: onSeeAll,
-                  child: Text(
+                  child: const Text(
                     'See All',
                     style: TextStyle(fontSize: 14, color: AppColors.textGrey),
                   ),
