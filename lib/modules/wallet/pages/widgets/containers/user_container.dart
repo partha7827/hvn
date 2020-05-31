@@ -35,8 +35,8 @@ class UserContainer extends StatelessWidget {
                       maxLines: 1,
                       style: TextStyle(color: textColor, fontSize: 16),
                     ),
-                    Padding(
-                        padding: const EdgeInsets.only(top: 2),
+                    const Padding(
+                        padding: EdgeInsets.only(top: 2),
                         child: Text(
                           'hvn.one/bill',
                           style: TextStyle(

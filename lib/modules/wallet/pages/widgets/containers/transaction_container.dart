@@ -32,7 +32,7 @@ class TransactionContainer extends StatelessWidget {
                     child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(
+                          const Text(
                             'Bill Murray fdssf ddf ',
                             maxLines: 1,
                             style: TextStyle(color: Colors.white, fontSize: 16),
@@ -50,7 +50,7 @@ class TransactionContainer extends StatelessWidget {
           Container(
               padding: const EdgeInsets.only(left: 10),
               child: Row(children: [
-                Text(
+                const Text(
                   '12345',
                   maxLines: 1,
                   style: TextStyle(color: Colors.white, fontSize: 20),

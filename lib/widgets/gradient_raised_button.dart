@@ -38,7 +38,7 @@ class GradientRaisedButton extends StatelessWidget {
                   child: Icon(icon),
                 ),
               if (isLoading)
-                SizedBox(
+                const SizedBox(
                   width: 24,
                   height: 24,
                   child: CircularProgressIndicator(
@@ -48,7 +48,7 @@ class GradientRaisedButton extends StatelessWidget {
               else
                 Text(
                   label,
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 16,
                     color: Colors.white,
                   ),

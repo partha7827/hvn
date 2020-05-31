@@ -55,12 +55,12 @@ class TransactionsPageState extends State<TransactionsPage>
       decoration: BoxDecoration(
           color: AppColors.backgroundLightBlue,
           borderRadius: BorderRadius.circular(10)),
-      child: TextField(
+      child: const TextField(
         style: TextStyle(color: Colors.white),
         decoration: InputDecoration(
             isDense: false,
             prefixIcon: Padding(
-              padding: const EdgeInsets.only(),
+              padding: EdgeInsets.only(),
               child: Icon(Icons.search, color: AppColors.textGrey),
             ),
             focusedBorder: InputBorder.none,
@@ -75,7 +75,7 @@ class TransactionsPageState extends State<TransactionsPage>
         margin: const EdgeInsets.only(left: 20, right: 20, bottom: 20),
         child: Row(
           children: <Widget>[
-            Expanded(
+            const Expanded(
               child: Divider(
                 color: AppColors.textGrey,
               ),
@@ -84,9 +84,10 @@ class TransactionsPageState extends State<TransactionsPage>
                 padding: const EdgeInsets.only(left: 15, right: 15),
                 child: Text(
                   text,
-                  style: TextStyle(color: AppColors.textGrey, fontSize: 14),
+                  style:
+                      const TextStyle(color: AppColors.textGrey, fontSize: 14),
                 )),
-            Expanded(
+            const Expanded(
               child: Divider(
                 color: AppColors.textGrey,
               ),
