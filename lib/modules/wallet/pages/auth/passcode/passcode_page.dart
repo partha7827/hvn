@@ -78,7 +78,7 @@ class PassCodePageState extends State<PassCodePage> {
               return Container(
                 width: 27,
                 height: 27,
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   shape: BoxShape.circle,
                   gradient: LinearGradient(
                       colors: AppColors.buttonGradient,

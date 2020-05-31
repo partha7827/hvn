@@ -43,13 +43,13 @@ class ReceivePageState extends State<ReceivePage> {
       child: TextField(
         controller: textController,
         style: const TextStyle(color: Colors.white),
-        decoration: InputDecoration(
+        decoration: const InputDecoration(
           labelText: 'Your Wallet Address',
           labelStyle: TextStyle(color: AppColors.textGrey),
-          contentPadding: const EdgeInsets.only(top: 5, bottom: 5),
+          contentPadding: EdgeInsets.only(top: 5, bottom: 5),
           enabledBorder: UnderlineInputBorder(
               borderSide: BorderSide(color: AppColors.textGrey, width: 3)),
-          focusedBorder: const UnderlineInputBorder(
+          focusedBorder: UnderlineInputBorder(
             borderSide: BorderSide(color: Colors.white, width: 2),
           ),
         ),

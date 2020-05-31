@@ -76,7 +76,7 @@ class UsersPageState extends State<UsersPage> {
               padding: const EdgeInsets.all(12),
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
-                  gradient: LinearGradient(
+                  gradient: const LinearGradient(
                       colors: AppColors.buttonGradient,
                       begin: Alignment.topCenter,
                       end: Alignment.bottomCenter)),
