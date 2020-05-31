@@ -23,33 +23,36 @@ class FacePageState extends State<FacePage> {
   Widget buildMain() {
     final height = MediaQuery.of(context).size.height;
     return Container(
-        margin: EdgeInsets.only(top: height * 0.10),
-        alignment: Alignment.center,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: <Widget>[
-            Image.asset(
-              'assets/icons/faceid.png',
-              width: 63,
-              height: 63,
+      margin: EdgeInsets.only(top: height * 0.10),
+      alignment: Alignment.center,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: <Widget>[
+          Image.asset(
+            'assets/icons/faceid.png',
+            width: 63,
+            height: 63,
+          ),
+          const Padding(
+            padding: EdgeInsets.only(top: 34),
+            child: Text(
+              'Authorize to continue',
+              style: TextStyle(
+                  fontWeight: FontWeight.w600,
+                  color: Colors.white,
+                  fontSize: 24),
             ),
-            Padding(
-                padding: const EdgeInsets.only(top: 34),
-                child: Text(
-                  'Authorize to continue',
-                  style: TextStyle(
-                      fontWeight: FontWeight.w600,
-                      color: Colors.white,
-                      fontSize: 24),
-                )),
-            Padding(
-                padding: const EdgeInsets.only(top: 20),
-                child: Text(
-                  'HV Wallet',
-                  style: TextStyle(color: AppColors.textGrey, fontSize: 18),
-                ))
-          ],
-        ));
+          ),
+          const Padding(
+            padding: EdgeInsets.only(top: 20),
+            child: Text(
+              'HV Wallet',
+              style: TextStyle(color: AppColors.textGrey, fontSize: 18),
+            ),
+          )
+        ],
+      ),
+    );
   }
 
   @override
@@ -60,20 +63,20 @@ class FacePageState extends State<FacePage> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(
-              padding: EdgeInsets.only(top: MediaQuery.of(context).padding.top),
-              child: BackButton(
-                color: Colors.white,
-              )),
+            padding: EdgeInsets.only(top: MediaQuery.of(context).padding.top),
+            child: const BackButton(color: Colors.white),
+          ),
           buildMain()
         ],
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: FlatButton(
-          onPressed: onPassCode,
-          child: Text(
-            'Use Passcode',
-            style: TextStyle(color: AppColors.textBlue, fontSize: 18),
-          )),
+        onPressed: onPassCode,
+        child: Text(
+          'Use Passcode',
+          style: TextStyle(color: AppColors.textBlue, fontSize: 18),
+        ),
+      ),
     );
   }
 }

@@ -49,27 +49,31 @@ class PassCodePageState extends State<PassCodePage> {
   }
 
   Widget buildMain() {
-    return Column(children: <Widget>[
-      Text(
-        'Authorize to continue',
-        style: TextStyle(
-            fontWeight: FontWeight.w600, color: Colors.white, fontSize: 24),
-      ),
-      Padding(
-          padding: const EdgeInsets.only(top: 20),
-          child: Text(
-            'HV Wallet',
-            style: TextStyle(color: AppColors.textGrey, fontSize: 18),
-          )),
-    ]);
+    return Column(
+      children: <Widget>[
+        const Text(
+          'Authorize to continue',
+          style: TextStyle(
+              fontWeight: FontWeight.w600, color: Colors.white, fontSize: 24),
+        ),
+        const Padding(
+            padding: EdgeInsets.only(top: 20),
+            child: Text(
+              'HV Wallet',
+              style: TextStyle(color: AppColors.textGrey, fontSize: 18),
+            )),
+      ],
+    );
   }
 
   Widget buildDots() {
     return Container(
       width: MediaQuery.of(context).size.width * 0.6,
       child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: List.generate(4, (index) {
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: List.generate(
+          4,
+          (index) {
             if (index == text.length) {
               return Container(
                 width: 27,
@@ -84,26 +88,30 @@ class PassCodePageState extends State<PassCodePage> {
                 child: Container(
                   margin: const EdgeInsets.all(3),
                   decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: AppColors.backgroundDarkBlue),
+                    shape: BoxShape.circle,
+                    color: AppColors.backgroundDarkBlue,
+                  ),
                 ),
               );
             } else {
               return Container(
-                  width: 27,
-                  height: 27,
-                  alignment: Alignment.center,
-                  child: Container(
-                    width: 12,
-                    height: 12,
-                    decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: index < text.length
-                            ? AppColors.textBlue
-                            : AppColors.textGrey),
-                  ));
+                width: 27,
+                height: 27,
+                alignment: Alignment.center,
+                child: Container(
+                  width: 12,
+                  height: 12,
+                  decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: index < text.length
+                          ? AppColors.textBlue
+                          : AppColors.textGrey),
+                ),
+              );
             }
-          })),
+          },
+        ),
+      ),
     );
   }
 

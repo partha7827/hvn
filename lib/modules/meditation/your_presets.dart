@@ -39,14 +39,14 @@ class YourPresets extends StatelessWidget {
                     children: <Widget>[
                       Text(
                         _presets[index],
-                        style: TextStyle(
+                        style: const TextStyle(
                           color: Colors.white,
                           fontSize: 16.0,
                         ),
                       ),
                       Row(
                         children: <Widget>[
-                          Text(
+                          const Text(
                             '10 mins',
                             style: TextStyle(
                               color: Colors.white,
