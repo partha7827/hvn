@@ -6,8 +6,7 @@ import 'package:mock_cloud_firestore/mock_cloud_firestore.dart';
 class FirestoreService extends IFirestoreService with UserQueries {
   CollectionReference _messageCollection;
 
-  // FIXME: Fix this warning
-  FirestoreService(firestore) {
+  FirestoreService(dynamic firestore) {
     userCollection = firestore.collection('users');
     messageCollection = firestore.collection('messages');
     channelCollection = firestore.collection('channels');

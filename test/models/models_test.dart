@@ -4,11 +4,11 @@ import 'package:highvibe/models/serializer/serializer.dart';
 import 'package:highvibe/values/assets.dart';
 import 'package:highvibe/values/Strings.dart';
 
-main() async {
-  test("user model", () async {
-    final user = User((b) => b..id = "default");
+void main() async {
+  test('user model', () async {
+    final user = User((b) => b..id = 'default');
 
-    expect(user.id, equals("default"));
+    expect(user.id, equals('default'));
     expect(user.chatId, equals(user.liveId));
 
     final serialized = serializers.serializeWith(User.serializer, user);
@@ -19,7 +19,7 @@ main() async {
     expect(deserialized, user);
   });
 
-  test("audio model", () async {
+  test('audio model', () async {
     final audio = Audio();
 
     expect(audio.artworkUrlPath, Assets.audioArtworkPlaceholder);
@@ -33,7 +33,7 @@ main() async {
     expect(deserialized, audio);
   });
 
-  test("message model", () async {
+  test('message model', () async {
     final message = Message();
 
     final serialized = serializers.serializeWith(Message.serializer, message);
@@ -44,7 +44,7 @@ main() async {
     expect(deserialized, message);
   });
 
-  test("tag model", () async {
+  test('tag model', () async {
     final tag = Tag();
 
     final serialized = serializers.serializeWith(Tag.serializer, tag);
@@ -55,7 +55,7 @@ main() async {
     expect(deserialized, tag);
   });
 
-  test("video model", () async {
+  test('video model', () async {
     final video = Video();
 
     final serialized = serializers.serializeWith(Video.serializer, video);
@@ -65,14 +65,14 @@ main() async {
     expect(deserialized, video);
   });
 
-  test("message model", () async {
+  test('message model', () async {
     final messageInstance = Message((b) => b
-      ..id = "1"
-      ..authorId = "1"
-      ..authorName = "1"
-      ..authorPhotoUrl = "1"
-      ..chatId = "1"
-      ..content = "message");
+      ..id = '1'
+      ..authorId = '1'
+      ..authorName = '1'
+      ..authorPhotoUrl = '1'
+      ..chatId = '1'
+      ..content = 'message');
 
     final serialized =
         serializers.serializeWith(Message.serializer, messageInstance);
@@ -83,8 +83,8 @@ main() async {
     expect(deserialized, messageInstance);
   });
 
-  test("channel model", () async {
-    final channelInstance = Channel((b) => b..id = "default");
+  test('channel model', () async {
+    final channelInstance = Channel((b) => b..id = 'default');
 
     final serialized =
         serializers.serializeWith(Channel.serializer, channelInstance);

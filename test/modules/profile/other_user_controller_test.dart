@@ -25,29 +25,29 @@ void main() {
     appStore = Modular.get<AppController>();
   });
 
-  test("controller", () async {
+  test('controller', () async {
     expect(controller, isInstanceOf<OtherUserController>());
     expect(controller.otherUser, equals(mockAnotherUser));
     expect(controller.otherUser.id, equals(mockAnotherUser.id));
   });
 
-  test("follow/unfollow user", () async {
+  test('follow/unfollow user', () async {
     await appStore.setCurrentUser(mockUser);
 
-    expect(controller.followers.toList(), equals([]));
-    expect(controller.following.toList(), equals([]));
+    expect(controller.followers.toList(), equals(<String>[]));
+    expect(controller.following.toList(), equals(<String>[]));
     expect(controller.isFollowing, equals(false));
 
     await controller.followUser();
 
     expect(controller.followers.toList(), equals([mockUser.id]));
-    expect(controller.following.toList(), equals([]));
+    expect(controller.following.toList(), equals(<String>[]));
     expect(controller.isFollowing, equals(true));
 
     await controller.followUser();
 
-    expect(controller.followers.toList(), equals([]));
-    expect(controller.following.toList(), equals([]));
+    expect(controller.followers.toList(), equals(<String>[]));
+    expect(controller.following.toList(), equals(<String>[]));
     expect(controller.isFollowing, equals(false));
   });
 }

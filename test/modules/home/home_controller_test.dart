@@ -22,23 +22,23 @@ void main() {
     // appStore = Modular.get<AppController>();
   });
 
-  test("controller", () async {
+  test('controller', () async {
     expect(home, isInstanceOf<HomeController>());
   });
 
-  // test("get recommended authors", () async {
+  // test('get recommended authors', () async {
   //   await home.loadRecommendedAuthors();
 
   //   expect(home.authors.status, equals(FutureStatus.fulfilled));
   // });
 
-  // test("get recommended audio", () async {
+  // test('get recommended audio', () async {
   //   await home.loadRecommendedAudios();
 
   //   expect(home.audios.status, equals(FutureStatus.fulfilled));
   // });
 
-  // test("logout", () async {
+  // test('logout', () async {
   //   await appStore.setCurrentUser(mockUser);
   //   expect(appStore.authState, equals(AuthState.authenticated));
 
@@ -46,13 +46,13 @@ void main() {
   //   expect(appStore.authState, equals(AuthState.unauthenticated));
   // });
 
-//  test("getAuthors", () async {
+//  test('getAuthors', () async {
 //    final authors = await home.getAuthors();
 //
 //    expect(authors[0], equals(mockUser));
 //  });
 
-  // test("getVideos", () async {
+  // test('getVideos', () async {
   //   final videos = await home.getVideos();
 
   //   expect(videos[0], equals(mockVideo));
