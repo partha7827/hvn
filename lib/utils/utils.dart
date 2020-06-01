@@ -11,7 +11,7 @@ double aspectRatio(BuildContext context) =>
 bool portraitOrientation(BuildContext context) =>
     MediaQuery.of(context).orientation == Orientation.portrait;
 
-String mediaTimeFormarter(Duration d) =>
+String mediaTimeFormatter(Duration d) =>
     d.toString().split('.').first.padLeft(8, '0');
 
 Future<String> uploadFile(File file, String childName,

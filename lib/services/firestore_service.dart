@@ -23,11 +23,9 @@ class FirestoreService extends IFirestoreService with UserQueries {
   }
 
   factory FirestoreService.withFirebase() => FirestoreService(Firestore.instance);
-  CollectionReference _messageCollection;
 
   factory FirestoreService.withMock() =>
       FirestoreService(MockCloudFirestore(mockDatabase));
-  CollectionReference get messageCollection => _messageCollection;
 
   void dispose() {}
 }

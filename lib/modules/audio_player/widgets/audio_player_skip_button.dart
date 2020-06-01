@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:highvibe/modules/audio_player/audio_player_service.dart';
+import 'package:highvibe/services/audio_player_service.dart';
 
 class AudioPlayerSkipButton<S> extends StatelessWidget {
   final Color activeColor;

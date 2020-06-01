@@ -1,11 +1,10 @@
+import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:highvibe/models/audio/audio.dart';
-import 'package:highvibe/modules/audio_player/audio_player_service.dart';
+import 'package:highvibe/services/audio_player_service.dart';
 import 'package:mobx/mobx.dart';
 
 part 'audio_player_controller.g.dart';
-
-enum AudioPlayerMode { fullScreen, minimized, none }
 
 class AudioPlayerController = _AudioPlayerControllerBase
     with _$AudioPlayerController;
@@ -20,19 +19,19 @@ abstract class _AudioPlayerControllerBase with Store {
   AudioPlayerMode audioPlayerMode = AudioPlayerMode.fullScreen;
 
   @observable
-  bool isArtworkVisible;
-
-  @observable
-  bool isMinimized;
-
-  @observable
-  bool isPlaying;
-
-  @observable
   bool isLoopMode = false;
 
   @observable
   Duration trackPosition;
+
+  @observable
+  AudioPlayerState playerState;
+
+  @computed
+  bool get isMinimized => audioPlayerMode == AudioPlayerMode.minimized;
+
+  @computed
+  bool get isPlaying => playerState == AudioPlayerState.PLAYING;
 
   @computed
   String get positionText => trackPosition?.toString()?.split('.')?.first ?? '';
@@ -46,28 +45,27 @@ abstract class _AudioPlayerControllerBase with Store {
       : 0;
 
   @action
-  void configure() {
-    player.playerStateSubscription.onData((state) {
-      isPlaying = player.isPlaying;
-    });
+  void init() {
+    player.play(audioFile.audioUrlPath);
 
     player.positionSubscription.onData((position) {
-      if (position >= Duration(milliseconds: audioFile.duration)) {
-        trackPosition = Duration(milliseconds: 0);
-      } else {
-        trackPosition = position;
-      }
+      if (position >= Duration(milliseconds: audioFile.duration))
+        return trackPosition = Duration(milliseconds: 0);
+
+      return trackPosition = position;
+    });
+
+    player.playerStateSubscription.onData((state) {
+      playerState = state;
     });
   }
 
   @action
-  void switchLoopMode() {
+  void toggleLoopMode() {
     if (isLoopMode) {
-      isLoopMode = false;
-      player.disableLoopMode();
+      disableLoopMode();
     } else {
-      isLoopMode = true;
-      player.enableLoopMode();
+      enableLoopMode();
     }
   }
 
@@ -82,7 +80,29 @@ abstract class _AudioPlayerControllerBase with Store {
 
   @action
   void togglePlayStop() {
-    isPlaying = !isPlaying;
-    player.toggle(playPosition: trackPosition);
+    if (playerState == AudioPlayerState.STOPPED ||
+        playerState == AudioPlayerState.COMPLETED) {
+      player.play(audioFile.audioUrlPath);
+    } else if (playerState == AudioPlayerState.PAUSED) {
+      player.resume();
+    } else if (playerState == AudioPlayerState.PLAYING) {
+      player.pause();
+    }
   }
+
+  void enableLoopMode() => player.setReleaseMode(ReleaseMode.LOOP);
+
+  void disableLoopMode() => player.setReleaseMode(ReleaseMode.RELEASE);
+
+  void seekToPosition(double value) => player.seek(Duration(
+        milliseconds: (value * audioFile.duration).round(),
+      ));
+      
+  void skip15Seconds({
+    AudioPlayerSkipButtonType buttonType,
+    Duration trackPosition,
+  }) =>
+      buttonType == AudioPlayerSkipButtonType.fastForward
+          ? player.seek(trackPosition + Duration(seconds: 15))
+          : player.seek(trackPosition - Duration(seconds: 15));
 }
