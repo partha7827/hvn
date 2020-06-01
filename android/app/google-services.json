@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "468548202200-9lmfnq981vi1kgn11ee17ok9ne6jk2m7.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "network.highvibe.hvn",
+            "certificate_hash": "17590bb1d9624093ed4769bcd36ab0b783f543cc"
+          }
+        },
+        {
           "client_id": "468548202200-750vb8vhg3tb9iquga3ks95ppq6asc8d.apps.googleusercontent.com",
           "client_type": 3
         }
