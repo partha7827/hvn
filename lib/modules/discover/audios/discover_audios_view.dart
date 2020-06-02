@@ -32,7 +32,7 @@ class _DiscoverAudiosViewState
           case FutureStatus.rejected:
             return RepeatWidget(controller.loadAudios);
           default:
-            return SplashWidget();
+            return const SplashWidget();
         }
       },
     );

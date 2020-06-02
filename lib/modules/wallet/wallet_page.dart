@@ -5,7 +5,7 @@ import 'wallet_controller.dart';
 
 class WalletPage extends StatefulWidget {
   final String title;
-  const WalletPage({Key key, this.title = "Wallet"}) : super(key: key);
+  const WalletPage({Key key, this.title = 'Wallet'}) : super(key: key);
 
   @override
   _WalletPageState createState() => _WalletPageState();

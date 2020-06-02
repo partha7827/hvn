@@ -2,62 +2,62 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 //Colors
-const primaryColor = const Color(0xFF000222);
-const secondaryColor = const Color(0xFF212342);
-const primaryLightColor = const Color(0xFF2E304C);
+const primaryColor = Color(0xFF000222);
+const secondaryColor = Color(0xFF212342);
+const primaryLightColor = Color(0xFF2E304C);
 const primaryTextColor = Colors.white;
-const accentColor = const Color(0xFF66CCCC);
-const hintTextColor = const Color(0xFF8E8F99);
-const redColor = const Color(0xFFFF0000);
+const accentColor = Color(0xFF66CCCC);
+const hintTextColor = Color(0xFF8E8F99);
+const redColor = Color(0xFFFF0000);
 const mediaPlayerBackgroundColor = Color(0xFF525366);
 
-const LinearGradient primaryGradient = const LinearGradient(
+const LinearGradient primaryGradient = LinearGradient(
   begin: Alignment.topCenter,
   end: Alignment.bottomCenter,
   colors: [
-    const Color(0xFF666CCC),
-    const Color(0xFF66CCCC),
+    Color(0xFF666CCC),
+    Color(0xFF66CCCC),
   ],
 );
 
-const LinearGradient primaryGradientHorizontal = const LinearGradient(
+const LinearGradient primaryGradientHorizontal = LinearGradient(
   begin: Alignment.centerLeft,
   end: Alignment.centerRight,
   colors: [
-    const Color(0xFF666CCC),
-    const Color(0xFF66CCCC),
+    Color(0xFF666CCC),
+    Color(0xFF66CCCC),
   ],
 );
 
-LinearGradient secondaryGradient = LinearGradient(colors: [
-  const Color(0xFF66E3A0),
-  const Color(0xFF66CCCC),
+LinearGradient secondaryGradient = const LinearGradient(colors: [
+  Color(0xFF66E3A0),
+  Color(0xFF66CCCC),
 ]);
 
-const darkToTransparentGradient = const LinearGradient(
+const darkToTransparentGradient = LinearGradient(
   begin: Alignment.bottomCenter,
   end: Alignment.topCenter,
   colors: [
-    const Color(0x7006081A),
+    Color(0x7006081A),
     Colors.transparent,
   ],
 );
 
-const darkToTransparentGradientTop = const LinearGradient(
+const darkToTransparentGradientTop = LinearGradient(
   begin: Alignment.topCenter,
   end: Alignment.bottomCenter,
   colors: [
-    const Color(0xFF000222),
+    Color(0xFF000222),
     Colors.transparent,
   ],
 );
 
-const homeHeaderGradient = const LinearGradient(
+const homeHeaderGradient = LinearGradient(
   begin: Alignment.topCenter,
   end: Alignment.bottomCenter,
   colors: [
     Colors.transparent,
-    const Color(0xFF000222),
+    Color(0xFF000222),
   ],
 );
 
@@ -98,71 +98,71 @@ TextStyle bold20White = TextStyle(
   color: Colors.white,
 );
 
-var bold22White = TextStyle(
+TextStyle bold22White = TextStyle(
   fontWeight: FontWeight.bold,
   fontSize: 22,
   color: Colors.white,
 );
 
-TextStyle normal16Accent = TextStyle(
+TextStyle normal16Accent = const TextStyle(
   fontSize: 16,
   color: accentColor,
 );
 
-TextStyle normal12Accent = TextStyle(
+TextStyle normal12Accent = const TextStyle(
   fontSize: 12,
   color: accentColor,
 );
-TextStyle normal14White = TextStyle(
+TextStyle normal14White = const TextStyle(
   fontSize: 14,
   color: Colors.white,
 );
-TextStyle normal14Accent = TextStyle(
+TextStyle normal14Accent = const TextStyle(
   fontSize: 14,
   color: accentColor,
 );
 
-TextStyle normal16White = TextStyle(
+TextStyle normal16White = const TextStyle(
   fontSize: 16,
   color: Colors.white,
 );
 
-TextStyle normal12White = TextStyle(
+TextStyle normal12White = const TextStyle(
   fontSize: 12,
   color: Colors.white,
 );
 
-TextStyle normal14Hint = TextStyle(
+TextStyle normal14Hint = const TextStyle(
   fontSize: 14,
   color: hintTextColor,
 );
-TextStyle normal12Hint = TextStyle(
+TextStyle normal12Hint = const TextStyle(
   fontSize: 12,
   color: hintTextColor,
 );
 
-TextStyle normal10Hint = TextStyle(
+TextStyle normal10Hint = const TextStyle(
   fontSize: 10,
   color: hintTextColor,
 );
 
-TextStyle normal16Hint = TextStyle(
+TextStyle normal16Hint = const TextStyle(
   fontSize: 16,
   color: hintTextColor,
 );
 
-final appTheme = ThemeData(
+final ThemeData appTheme = ThemeData(
   backgroundColor: const Color(0xFF000222),
   canvasColor: const Color(0xFF000222),
   primaryColor: const Color(0xFF000222),
-  appBarTheme: AppBarTheme(
+  appBarTheme: const AppBarTheme(
     elevation: 0,
-    color: const Color(0xFF000222),
+    color: Color(0xFF000222),
   ),
-  iconTheme: IconThemeData(
+  iconTheme: const IconThemeData(
     color: Colors.white,
   ),
-  buttonTheme: ButtonThemeData(
-    buttonColor: const Color(0xFF212342),
+  buttonTheme: const ButtonThemeData(
+    buttonColor: Color(0xFF212342),
   ),
 );

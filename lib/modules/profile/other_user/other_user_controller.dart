@@ -9,7 +9,7 @@ part 'other_user_controller.g.dart';
 class OtherUserController = _OtherUserControllerBase with _$OtherUserController;
 
 abstract class _OtherUserControllerBase with Store {
-  final store = Modular.get<FirestoreService>();
+  final FirestoreService store = Modular.get<FirestoreService>();
   User get currentUser => Modular.get<AppController>().currentUser;
   String get currentUserId => currentUser.id;
 

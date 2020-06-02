@@ -8,7 +8,7 @@ part 'users_list_controller.g.dart';
 class UsersListController = _UsersListControllerBase with _$UsersListController;
 
 abstract class _UsersListControllerBase with Store {
-  final firestore = Modular.get<FirestoreService>();
+  final FirestoreService firestore = Modular.get<FirestoreService>();
 
   final List<String> userIds;
   _UsersListControllerBase(this.userIds);
@@ -21,7 +21,7 @@ abstract class _UsersListControllerBase with Store {
     if (userIds.isNotEmpty) {
       users = ObservableFuture(
         firestore.userCollection
-            .where("id", whereIn: userIds)
+            .where('id', whereIn: userIds)
             .getDocuments()
             .then((s) => User.parseListOfUsers(s)),
       );

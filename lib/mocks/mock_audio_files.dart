@@ -5,7 +5,7 @@ const _artworkUrl =
 const _audioFileUrl =
     'https://storage.googleapis.com/download/storage/v1/b/highvibe-8601d.appspot.com/o/sample.mp3?alt=media';
 
-final mockAudioItemsList = [
+final List<Audio> mockAudioItemsList = [
   Audio(
     (b) => b
       ..author = 'Author'

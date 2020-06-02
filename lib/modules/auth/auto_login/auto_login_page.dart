@@ -5,13 +5,14 @@ import 'package:highvibe/widgets/splash_widget.dart';
 
 class AutoLoginPage extends StatefulWidget {
   final String title;
-  const AutoLoginPage({Key key, this.title = "AutoLogin"}) : super(key: key);
+  const AutoLoginPage({Key key, this.title = 'AutoLogin'}) : super(key: key);
 
   @override
   _AutoLoginPageState createState() => _AutoLoginPageState();
 }
 
-class _AutoLoginPageState extends ModularState<AutoLoginPage, AutoLoginController> {
+class _AutoLoginPageState
+    extends ModularState<AutoLoginPage, AutoLoginController> {
   @override
   void initState() {
     super.initState();
@@ -20,7 +21,7 @@ class _AutoLoginPageState extends ModularState<AutoLoginPage, AutoLoginControlle
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return const Scaffold(
       body: SplashWidget(),
     );
   }

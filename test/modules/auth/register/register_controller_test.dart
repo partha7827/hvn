@@ -21,14 +21,14 @@ void main() {
   });
 
   group('RegisterController Test', () {
-    test("initModule", () {
+    test('initModule', () {
       expect(register, isInstanceOf<RegisterController>());
     });
 
-    test("registerUser", () async {
+    test('registerUser', () async {
       await register.registerUser();
 
-      expect(appStore.currentUser.id, equals("default"));
+      expect(appStore.currentUser.id, equals('default'));
     });
   });
 }

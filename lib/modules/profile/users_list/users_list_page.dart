@@ -44,7 +44,7 @@ class _UsersListPageState
             case FutureStatus.rejected:
               return RepeatWidget(controller.loadUsers);
             default:
-              return SplashWidget();
+              return const SplashWidget();
           }
         },
       ),

@@ -21,25 +21,25 @@ class BottomNavigation extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
             _bottomBarItem(
-              title: 'Home',
-              asset: 'assets/ic_home.svg',
-              onPressed: () => HomeModule.toHome(),
-              selected: false //Modular.actualRoute == HomeModule.HOME,
-            ),
+                title: 'Home',
+                asset: 'assets/ic_home.svg',
+                onPressed: () => HomeModule.toHome(),
+                selected: false //Modular.actualRoute == HomeModule.HOME,
+                ),
             _bottomBarItem(
-              title: 'Profile',
-              asset: 'assets/ic_profile.svg',
-              onPressed: () => ProfileModule.toProfile(),
-              selected: false //Modular.actualRoute == ProfileModule.profileRoute,
-            ),
+                title: 'Profile',
+                asset: 'assets/ic_profile.svg',
+                onPressed: () => ProfileModule.toProfile(),
+                selected:
+                    false //Modular.actualRoute == ProfileModule.profileRoute,
+                ),
           ],
         ),
       ),
     );
   }
 
-
-  _bottomBarItem({
+  Container _bottomBarItem({
     String title,
     String asset,
     Function onPressed,
@@ -76,5 +76,5 @@ class BottomNavigation extends StatelessWidget {
         ),
       ),
     );
-  }  
+  }
 }

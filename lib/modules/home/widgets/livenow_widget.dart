@@ -30,8 +30,8 @@ class LiveNowWidget extends StatelessWidget {
             scrollDirection: Axis.horizontal,
             padding: const EdgeInsets.only(left: 12),
             itemBuilder: (context, index) {
-              return Padding(
-                padding: const EdgeInsets.all(8.0),
+              return const Padding(
+                padding: EdgeInsets.all(8.0),
                 child: StreamCard(
                   title: 'Spritual Meditations',
                   subTitle: 'Deep knowlege of spritual meditation...',

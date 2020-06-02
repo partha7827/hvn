@@ -20,7 +20,7 @@ class AudioTile extends StatelessWidget {
       child: Row(
         children: <Widget>[
           Hero(
-            tag: "audio#${audioFile.id}",
+            tag: 'audio#${audioFile.id}',
             child: ClipRRect(
               borderRadius: BorderRadius.circular(10),
               child: CachedNetworkImage(

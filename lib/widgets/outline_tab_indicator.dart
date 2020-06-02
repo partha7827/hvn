@@ -12,7 +12,7 @@ class OutlineTabIndicator extends Decoration {
   });
 
   @override
-  BoxPainter createBoxPainter([onChanged]) {
+  BoxPainter createBoxPainter([VoidCallback onChanged]) {
     return _OutlinePainter(this, onChanged);
   }
 }
@@ -32,15 +32,15 @@ class _OutlinePainter extends BoxPainter {
   void paint(Canvas canvas, Offset offset, ImageConfiguration configuration) {
     assert(configuration != null);
     assert(configuration.size != null);
-    var size = configuration.size;
-    final Rect rect = Rect.fromLTWH(
+    final size = configuration.size;
+    final rect = Rect.fromLTWH(
       offset.dx,
       strokeWidth / 2,
       size.width - strokeWidth,
       size.height - strokeWidth,
     );
-    final RRect rRect = RRect.fromRectAndRadius(rect, radius ?? Radius.zero);
-    final Paint _paint = Paint()
+    final rRect = RRect.fromRectAndRadius(rect, radius ?? Radius.zero);
+    final _paint = Paint()
       ..style = PaintingStyle.stroke
       ..strokeWidth = strokeWidth
       ..shader = gradient.createShader(rect);

@@ -10,9 +10,9 @@ part 'live_controller.g.dart';
 class LiveController = _LiveControllerBase with _$LiveController;
 
 abstract class _LiveControllerBase with Store {
-  final authController = Modular.get<AppController>();
+  final AppController authController = Modular.get<AppController>();
 
-  get currentUser => authController.currentUser;
+  User get currentUser => authController.currentUser;
 
   @observable
   User currentCreator;
@@ -21,12 +21,12 @@ abstract class _LiveControllerBase with Store {
   Future<void> init(User user) async {
     currentCreator = user;
 
-    var creatorId = currentCreator.liveId;
-    var channelId = "$creatorId-channel";
+    final creatorId = currentCreator.liveId;
+    final channelId = '$creatorId-channel';
     //ignore: unused_local_variable
-    var userId = currentUser.id;
+    final userId = currentUser.id;
 
-    await AgoraRtcEngine.create(AGORA_APP_ID);
+    await AgoraRtcEngine.create(agoraAppId);
     await AgoraRtcEngine.enableVideo();
     await AgoraRtcEngine.joinChannel('null', channelId, 'null', 1);
   }

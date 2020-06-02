@@ -8,7 +8,7 @@ part 'discover_controller.g.dart';
 class DiscoverController = _DiscoverController with _$DiscoverController;
 
 abstract class _DiscoverController with Store {
-  final firestore = Modular.get<FirestoreService>();
+  final FirestoreService firestore = Modular.get<FirestoreService>();
 
   @observable
   int selectedTab = 0;

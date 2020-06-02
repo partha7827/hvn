@@ -19,8 +19,8 @@ class EventCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var _startTime = DateFormat('h:mm aa').format(startTime);
-    var _endTime = DateFormat('h:mm aa').format(endTime);
+    final _startTime = DateFormat('h:mm aa').format(startTime);
+    final _endTime = DateFormat('h:mm aa').format(endTime);
     return Container(
       width: 280,
       height: 160,

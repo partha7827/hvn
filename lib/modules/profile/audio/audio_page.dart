@@ -34,7 +34,7 @@ class _AudioPageState extends ModularState<AudioPage, AudioController> {
           case FutureStatus.rejected:
             return RepeatWidget(controller.loadAudios);
           default:
-            return SplashWidget();
+            return const SplashWidget();
         }
       },
     );
@@ -44,7 +44,7 @@ class _AudioPageState extends ModularState<AudioPage, AudioController> {
     return ListView(
       padding: const EdgeInsets.only(left: 20, top: 10, bottom: 80, right: 8),
       children: [
-        HeaderRow(title: Strings.uploads),
+        const HeaderRow(title: Strings.uploads),
         ...audios
             .map(
               (item) => AudioTile(

@@ -16,7 +16,7 @@ class _StartingBellState extends State<StartingBell> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Starting Bell'),
+        title: const Text('Starting Bell'),
         leading: IconButton(
           icon: Icon(
             Icons.close,
@@ -29,7 +29,7 @@ class _StartingBellState extends State<StartingBell> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           CupertinoTheme(
-            data: CupertinoThemeData(),
+            data: const CupertinoThemeData(),
             child: CupertinoTimerPicker(
               mode: CupertinoTimerPickerMode.hm,
               onTimerDurationChanged: (duration) {},
@@ -45,9 +45,9 @@ class _StartingBellState extends State<StartingBell> {
                 padding: const EdgeInsets.all(20.0),
                 child: Text(
                   Strings.count,
-                  style: TextStyle(
+                  style: const TextStyle(
                     color: Colors.white,
-                    fontSize: 16.0,
+                    fontSize: 16,
                   ),
                 ),
               ),
@@ -74,8 +74,8 @@ class _StartingBellState extends State<StartingBell> {
                         onPressed: () {},
                       ),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 16),
+                    const Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 16),
                       child: Text(
                         '2',
                         style: TextStyle(
@@ -115,7 +115,7 @@ class _StartingBellState extends State<StartingBell> {
             padding: const EdgeInsets.all(20.0),
             child: Text(
               Strings.sound,
-              style: TextStyle(
+              style: const TextStyle(
                 color: Colors.white,
                 fontSize: 16.0,
               ),

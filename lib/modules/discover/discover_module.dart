@@ -4,32 +4,32 @@ import 'package:highvibe/modules/discover/discover_page.dart';
 import 'package:highvibe/services/firestore_service.dart';
 
 class DiscoverModule extends ChildModule {
-  static const DISCOVER = '/discover';
+  static const discover = '/discover';
 
   @override
-  List<Bind> get binds => [
+  List<Bind<Object>> get binds => [
         Bind<FirestoreService>((i) => FirestoreService.withFirebase()),
         Bind<DiscoverController>((i) => DiscoverController()),
       ];
 
   @override
-  List<Router> get routers => [
+  List<Router<Object>> get routers => [
         Router(
-          DISCOVER,
+          discover,
           child: (_, args) => DiscoverPage(pageIndex: args.data),
           transition: TransitionType.fadeIn,
         ),
       ];
 
-  static Future toDiscover({int pageIndex}) =>
-      Modular.to.pushNamed(DISCOVER, arguments: pageIndex);
+  static Future<Object> toDiscover({int pageIndex}) =>
+      Modular.to.pushNamed(discover, arguments: pageIndex);
 
-  static Future toDiscoverAudios() =>
-      Modular.to.pushNamed(DISCOVER, arguments: 0);
+  static Future<Object> toDiscoverAudios() =>
+      Modular.to.pushNamed(discover, arguments: 0);
 
-  static Future toDiscoverVideos() =>
-      Modular.to.pushNamed(DISCOVER, arguments: 1);
+  static Future<Object> toDiscoverVideos() =>
+      Modular.to.pushNamed(discover, arguments: 1);
 
-  static Future toDiscoverAuthors() =>
-      Modular.to.pushNamed(DISCOVER, arguments: 1);
+  static Future<Object> toDiscoverAuthors() =>
+      Modular.to.pushNamed(discover, arguments: 1);
 }

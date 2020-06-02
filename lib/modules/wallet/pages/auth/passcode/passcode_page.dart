@@ -4,15 +4,12 @@ import 'package:highvibe/modules/wallet/pages/auth/face/face_page.dart';
 import 'package:highvibe/modules/wallet/pages/wallet/wallet_page.dart';
 import 'package:virtual_keyboard/virtual_keyboard.dart';
 
-
 class PassCodePage extends StatefulWidget {
-
   @override
   PassCodePageState createState() => PassCodePageState();
 }
 
 class PassCodePageState extends State<PassCodePage> {
-
   String text = '';
 
   @override
@@ -23,19 +20,17 @@ class PassCodePageState extends State<PassCodePage> {
   void onFaceId() {
     Navigator.push(
       context,
-      MaterialPageRoute(
-        builder: (context) => FacePage()
-      ),
+      MaterialPageRoute<FacePage>(builder: (context) => FacePage()),
     );
   }
-  
+
   void onBack() {
     Navigator.pop(context);
   }
 
   void onKey(VirtualKeyboardKey key) {
     if (key.action == VirtualKeyboardKeyAction.Backspace) {
-      if (text.length > 0) {
+      if (text.isNotEmpty) {
         setState(() {
           text = text.substring(0, text.length - 1);
         });
@@ -48,9 +43,7 @@ class PassCodePageState extends State<PassCodePage> {
     if (text.length >= 4) {
       Navigator.push(
         context,
-        MaterialPageRoute(
-          builder: (context) => WalletPage()
-        ),
+        MaterialPageRoute<WalletPage>(builder: (context) => WalletPage()),
       );
     }
   }
@@ -58,23 +51,18 @@ class PassCodePageState extends State<PassCodePage> {
   Widget buildMain() {
     return Column(
       children: <Widget>[
-        Text('Authorize to continue',
+        const Text(
+          'Authorize to continue',
           style: TextStyle(
-            fontWeight: FontWeight.w600,
-            color: Colors.white,
-            fontSize: 24
-          ),
+              fontWeight: FontWeight.w600, color: Colors.white, fontSize: 24),
         ),
-        Padding(
-          padding: EdgeInsets.only(top: 20),
-          child: Text('HV Wallet',
-            style: TextStyle(
-              color: AppColors.textGrey,
-              fontSize: 18
-            ),
-          )
-        ),
-      ]
+        const Padding(
+            padding: EdgeInsets.only(top: 20),
+            child: Text(
+              'HV Wallet',
+              style: TextStyle(color: AppColors.textGrey, fontSize: 18),
+            )),
+      ],
     );
   }
 
@@ -83,25 +71,25 @@ class PassCodePageState extends State<PassCodePage> {
       width: MediaQuery.of(context).size.width * 0.6,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: List.generate(4, 
-          (index) { 
-            if (index  == text.length) {
+        children: List.generate(
+          4,
+          (index) {
+            if (index == text.length) {
               return Container(
                 width: 27,
                 height: 27,
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   shape: BoxShape.circle,
                   gradient: LinearGradient(
-                    colors: AppColors.buttonGradient,
-                    begin: Alignment.topCenter,
-                    end: Alignment.bottomCenter
-                  ),
+                      colors: AppColors.buttonGradient,
+                      begin: Alignment.topCenter,
+                      end: Alignment.bottomCenter),
                 ),
                 child: Container(
-                  margin: EdgeInsets.all(3),
+                  margin: const EdgeInsets.all(3),
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
-                    color: AppColors.backgroundDarkBlue
+                    color: AppColors.backgroundDarkBlue,
                   ),
                 ),
               );
@@ -114,43 +102,38 @@ class PassCodePageState extends State<PassCodePage> {
                   width: 12,
                   height: 12,
                   decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: index < text.length ? AppColors.textBlue : AppColors.textGrey
-                  ),
-                )
+                      shape: BoxShape.circle,
+                      color: index < text.length
+                          ? AppColors.textBlue
+                          : AppColors.textGrey),
+                ),
               );
             }
-          }
-        )
+          },
+        ),
       ),
     );
   }
 
   Widget buildKeyboard() {
     final height = MediaQuery.of(context).size.height;
-    return Column(
-      children: [
-        Padding(
-          padding: EdgeInsets.only(bottom: 25),
+    return Column(children: [
+      Padding(
+          padding: const EdgeInsets.only(bottom: 25),
           child: FlatButton(
             onPressed: onFaceId,
-            child: Text('Use Face ID',
-              style: TextStyle(
-                color: AppColors.textBlue,
-                fontSize: 18
-              ),
+            child: Text(
+              'Use Face ID',
+              style: TextStyle(color: AppColors.textBlue, fontSize: 18),
             ),
-          )
-        ),
-        VirtualKeyboard(
+          )),
+      VirtualKeyboard(
           height: height * 0.3,
           fontSize: 25,
           textColor: Colors.white,
           type: VirtualKeyboardType.Numeric,
-          onKeyPress: onKey
-        ),
-      ]
-    );
+          onKeyPress: onKey),
+    ]);
   }
 
   @override
@@ -161,23 +144,21 @@ class PassCodePageState extends State<PassCodePage> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(
-            padding: EdgeInsets.only(top: MediaQuery.of(context).padding.top),
-            child: BackButton(
-              color: Colors.white,
-              onPressed: onBack,
-            )
-          ),
+              padding: EdgeInsets.only(top: MediaQuery.of(context).padding.top),
+              child: BackButton(
+                color: Colors.white,
+                onPressed: onBack,
+              )),
           Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: <Widget>[
-                buildMain(),
-                buildDots(),
-                buildKeyboard(),
-              ],
-            )
-          )
+              child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: <Widget>[
+              buildMain(),
+              buildDots(),
+              buildKeyboard(),
+            ],
+          ))
         ],
       ),
     );

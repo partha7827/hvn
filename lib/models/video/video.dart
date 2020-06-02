@@ -45,6 +45,5 @@ abstract class Video implements Built<Video, VideoBuilder> {
     ..id = Uuid().v4()
     ..fileDetails = FileDetails().toBuilder()
     ..snippet = Snippet().toBuilder()
-    ..isRecommended = false  
-  ;
+    ..isRecommended = false;
 }
