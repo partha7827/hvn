@@ -7,15 +7,17 @@ import 'package:mockito/mockito.dart';
 import 'mock_auth_result.dart';
 
 class MockFirebaseAuth extends Mock implements FirebaseAuth {
-  final stateChangedStreamController = StreamController<FirebaseUser>();
+  final StreamController<FirebaseUser> stateChangedStreamController =
+      StreamController<FirebaseUser>();
   FirebaseUser _currentUser;
 
-  MockFirebaseAuth({signedIn = false}) {
+  MockFirebaseAuth({bool signedIn = false}) {
     if (signedIn) {
       signInWithCredential(null);
     }
   }
 
+  @override
   Future<FirebaseUser> currentUser() {
     return Future.value(_currentUser);
   }
@@ -51,7 +53,8 @@ class MockFirebaseAuth extends Mock implements FirebaseAuth {
     return _fakeSignIn();
   }
 
-  @override Future<AuthResult> signInWithCustomToken({@required String token}) {
+  @override
+  Future<AuthResult> signInWithCustomToken({@required String token}) {
     return _fakeSignIn();
   }
 

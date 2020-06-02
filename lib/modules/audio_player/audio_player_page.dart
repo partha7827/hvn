@@ -56,9 +56,9 @@ class _AudioPlayerPageState
     _configure();
     playButtonAnimation = AnimationController(
       vsync: this,
-      duration: Duration(milliseconds: 300),
+      duration: const Duration(milliseconds: 300),
     );
-    Future.delayed(Duration(milliseconds: 1), () {
+    Future.delayed(const Duration(milliseconds: 1), () {
       setState(() {
         isVisible = true;
       });
@@ -75,16 +75,16 @@ class _AudioPlayerPageState
         width: screenWidth(context),
         margin: _isMinimised
             ? const EdgeInsets.only(left: 8, right: 8, bottom: 8)
-            : EdgeInsets.only(left: 0, right: 0),
+            : const EdgeInsets.only(left: 0, right: 0),
         child: Stack(
           children: [
             Opacity(
               opacity: _isMinimised ? 1 : 0.5,
               child: AnimatedOpacity(
-                duration: Duration(milliseconds: 2000),
+                duration: const Duration(milliseconds: 2000),
                 opacity: isVisible == true ? 1 : 0,
                 child: Hero(
-                  tag: "audio#${controller.audioFile.id}",
+                  tag: 'audio#${controller.audioFile.id}',
                   child: Container(
                     width: _isMinimised ? 80 : null,
                     height: _isMinimised ? 80 : null,
@@ -269,7 +269,7 @@ class _AudioPlayerPageState
         left: 90,
         top: 8,
         child: ConstrainedBox(
-          constraints: BoxConstraints(
+          constraints: const BoxConstraints(
             maxWidth: 160,
             maxHeight: 40,
           ),
@@ -290,7 +290,7 @@ class _AudioPlayerPageState
         left: 90,
         top: 50,
         child: ConstrainedBox(
-          constraints: BoxConstraints(
+          constraints: const BoxConstraints(
             maxWidth: 160,
             maxHeight: 40,
           ),
@@ -323,7 +323,7 @@ class _AudioPlayerPageState
         right: 12,
         bottom: 4,
         child: ConstrainedBox(
-          constraints: BoxConstraints(
+          constraints: const BoxConstraints(
             maxWidth: 80,
             maxHeight: 40,
           ),
@@ -422,7 +422,7 @@ class _AudioPlayerPageState
         _trackPosition = position;
         if (_trackPosition >=
             Duration(milliseconds: controller.audioFile.duration)) {
-          _trackPosition = Duration(milliseconds: 0);
+          _trackPosition = const Duration(milliseconds: 0);
         }
         _positionText = _trackPosition?.toString()?.split('.')?.first ?? '';
         _updateSliderPosition();

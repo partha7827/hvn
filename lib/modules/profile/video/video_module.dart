@@ -9,7 +9,7 @@ class VideoModule extends WidgetModule {
   VideoModule(this.userId);
 
   @override
-  List<Bind> get binds => [
+  List<Bind<Object>> get binds => [
         Bind((i) => VideoController(userId)),
       ];
 

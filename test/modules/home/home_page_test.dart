@@ -9,7 +9,7 @@ import 'package:highvibe/values/Strings.dart';
 class MockHomeController extends HomeController {
 }
 
-main() {
+void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
 
   initModule(HomeModule(), changeBinds: [
@@ -17,9 +17,9 @@ main() {
   ]);
 
   testWidgets('Home page', (WidgetTester tester) async {
-    await tester.pumpWidget(buildTestableWidget(HomePage()));
+    await tester.pumpWidget(buildTestableWidget(const HomePage()));
 
-    var quoteFinder = find.text(Strings.defaultQuote);
+    final quoteFinder = find.text(Strings.defaultQuote);
 
     expect(quoteFinder, findsOneWidget);
   });

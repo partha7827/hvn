@@ -8,7 +8,7 @@ part 'audio_controller.g.dart';
 class AudioController = _AudioControllerBase with _$AudioController;
 
 abstract class _AudioControllerBase with Store {
-  final store = Modular.get<FirestoreService>();
+  final FirestoreService store = Modular.get<FirestoreService>();
 
   @observable
   ObservableFuture<List<Audio>> audios;
@@ -20,7 +20,7 @@ abstract class _AudioControllerBase with Store {
   void loadAudios() {
     audios = ObservableFuture(
       store.audioCollection
-          .where("userId", isEqualTo: userId)
+          .where('userId', isEqualTo: userId)
           .getDocuments()
           .then((s) => Audio.parseListOfAudios(s).toList()),
     );

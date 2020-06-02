@@ -1,4 +1,3 @@
-
 import 'package:built_collection/built_collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
@@ -19,25 +18,24 @@ class VideosWidget extends StatefulWidget {
 }
 
 class _VideosWidgetState extends ModularState<VideosWidget, HomeController> {
-  final sliderController = PageController();
+  final PageController sliderController = PageController();
 
   @override
-  void initState() { 
+  void initState() {
     super.initState();
     controller.loadRecommendedVideos();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Observer(
-      builder: (_) {
-        if (controller.videos.status == FutureStatus.fulfilled && controller.videos.value.isNotEmpty) {
-          return buildVideos(controller.videos.value);
-        } else {
-          return Container();
-        }
+    return Observer(builder: (_) {
+      if (controller.videos.status == FutureStatus.fulfilled &&
+          controller.videos.value.isNotEmpty) {
+        return buildVideos(controller.videos.value);
+      } else {
+        return Container();
       }
-    );
+    });
   }
 
   Widget buildVideos(BuiltList<Video> videos) {
@@ -71,6 +69,6 @@ class _VideosWidgetState extends ModularState<VideosWidget, HomeController> {
           ),
         ],
       ),
-    ); 
+    );
   }
 }

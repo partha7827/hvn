@@ -18,7 +18,7 @@ class AudiosWidget extends StatefulWidget {
 }
 
 class _AudiosWidgetState extends ModularState<AudiosWidget, HomeController> {
-  final sliderController = PageController();
+  final PageController sliderController = PageController();
 
   @override
   void initState() {
@@ -29,13 +29,13 @@ class _AudiosWidgetState extends ModularState<AudiosWidget, HomeController> {
   @override
   Widget build(BuildContext context) {
     return Observer(builder: (_) {
-      bool isVisible = controller.audios.status == FutureStatus.fulfilled &&
+      final isVisible = controller.audios.status == FutureStatus.fulfilled &&
           controller.audios.value.isNotEmpty;
 
       return AnimatedOpacity(
         child: isVisible ? buildAudios(controller.audios.value) : Container(),
         opacity: isVisible ? 1 : 0,
-        duration: Duration(seconds: 1),
+        duration: const Duration(seconds: 1),
       );
     });
   }

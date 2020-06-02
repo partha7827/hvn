@@ -9,8 +9,8 @@ class LiveListPage extends StatelessWidget {
         itemCount: 5,
         padding: const EdgeInsets.all(20.0),
         itemBuilder: (context, index) {
-          return Padding(
-            padding: const EdgeInsets.only(top: 20.0),
+          return const Padding(
+            padding: EdgeInsets.only(top: 20.0),
             child: StreamCard(
               title: 'Spritual Meditations',
               subTitle: 'Deep knowlege of spritual meditation...',

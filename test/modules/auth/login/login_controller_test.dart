@@ -26,19 +26,19 @@ void main() {
   });
 
   group('LoginController Test', () {
-    test("initModule", () {
+    test('initModule', () {
       expect(login, isInstanceOf<LoginController>());
     });
 
-    test("loginUser", () async {
+    test('loginUser', () async {
       await login.loginUser();
 
       expect(appStore.currentUser, equals(mockUser));
       expect(login.inProgress, equals(false));
     });
 
-    test("resetPassword", () async {
-      await login.resetPassword("default@gmail.com");
+    test('resetPassword', () async {
+      await login.resetPassword('default@gmail.com');
 
       expect(login.inProgress, equals(false));
     });

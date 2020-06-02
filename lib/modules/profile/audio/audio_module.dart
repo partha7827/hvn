@@ -9,7 +9,7 @@ class AudioModule extends WidgetModule {
   AudioModule(this.userId);
 
   @override
-  List<Bind> get binds => [
+  List<Bind<Object>> get binds => [
         Bind((i) => AudioController(userId)),
       ];
 

@@ -8,10 +8,10 @@ class AudioPlayerService {
   final AudioPlayer audioPlayer;
   final Audio audioFile;
 
-  StreamSubscription positionSubscription;
-  StreamSubscription playerStateSubscription;
+  StreamSubscription<Duration> positionSubscription;
+  StreamSubscription<AudioPlayerState> playerStateSubscription;
 
-  get isPlaying => _playerState == PlayerState.playing;
+  bool get isPlaying => _playerState == PlayerState.playing;
 
   PlayerState _playerState = PlayerState.stopped;
   // ignore: unused_field
@@ -26,9 +26,9 @@ class AudioPlayerService {
 
   void dispose() async {
     await audioPlayer.stop();
-    positionSubscription?.cancel();
-    playerStateSubscription?.cancel();
-    audioPlayer.dispose();
+    await positionSubscription?.cancel();
+    await playerStateSubscription?.cancel();
+    await audioPlayer.dispose();
   }
 
   Future<void> _pause() async {
@@ -55,7 +55,7 @@ class AudioPlayerService {
 
   Future<void> seekToPosition(double value) async {
     final position = value * audioFile.duration;
-    audioPlayer.seek(Duration(milliseconds: position.round()));
+    await audioPlayer.seek(Duration(milliseconds: position.round()));
   }
 
   Future<void> skip15seconds({
@@ -63,18 +63,18 @@ class AudioPlayerService {
     @required Duration trackPosition,
   }) async {
     if (buttonType == AudioPlayerSkipButtonType.fastForward) {
-      trackPosition = trackPosition + Duration(milliseconds: 15000);
+      trackPosition = trackPosition + const Duration(milliseconds: 15000);
     } else {
-      trackPosition = trackPosition - Duration(milliseconds: 15000);
+      trackPosition = trackPosition - const Duration(milliseconds: 15000);
     }
-    audioPlayer.seek(trackPosition);
+    await audioPlayer.seek(trackPosition);
   }
 
   Future<void> stop() async {
     final result = await audioPlayer.stop();
     if (result == 1) {
       _playerState = PlayerState.stopped;
-      _position = Duration();
+      _position = const Duration();
     }
   }
 

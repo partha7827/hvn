@@ -9,7 +9,7 @@ class DiscoverAudiosController = _DiscoverAudiosControllerBase
     with _$DiscoverAudiosController;
 
 abstract class _DiscoverAudiosControllerBase with Store {
-  final firestore = Modular.get<FirestoreService>();
+  final FirestoreService firestore = Modular.get<FirestoreService>();
 
   @observable
   ObservableFuture<BuiltList<Audio>> audios;

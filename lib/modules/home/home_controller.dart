@@ -9,7 +9,7 @@ part 'home_controller.g.dart';
 class HomeController = _HomeControllerBase with _$HomeController;
 
 abstract class _HomeControllerBase with Store {
-  final firestore = Modular.get<FirestoreService>();
+  final FirestoreService firestore = Modular.get<FirestoreService>();
 
   @observable
   ObservableFuture<BuiltList<Audio>> audios;
@@ -25,7 +25,7 @@ abstract class _HomeControllerBase with Store {
     return audios = ObservableFuture(
       firestore.audioCollection
           //.where("tags", arrayContains: "recommended")
-          .where("isRecommended", isEqualTo: true)
+          .where('isRecommended', isEqualTo: true)
           .getDocuments()
           .then((s) => Audio.parseListOfAudios(s)),
     );
@@ -36,7 +36,7 @@ abstract class _HomeControllerBase with Store {
     return videos = ObservableFuture(
       firestore.videoCollection
           // .where("tags", arrayContains: "recommended")
-          .where("isRecommended", isEqualTo: true)
+          .where('isRecommended', isEqualTo: true)
           .getDocuments()
           .then((s) => Video.parseListOfVideos(s)),
     );
@@ -47,7 +47,7 @@ abstract class _HomeControllerBase with Store {
     return authors = ObservableFuture(
       firestore.userCollection
           // .where("tags", arrayContains: "recommended")
-          .where("isRecommended", isEqualTo: true)
+          .where('isRecommended', isEqualTo: true)
           .getDocuments()
           .then((s) => User.parseListOfUsers(s)),
     );

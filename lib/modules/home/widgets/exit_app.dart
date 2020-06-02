@@ -4,8 +4,8 @@ import 'package:highvibe/modules/wallet/resources/app_colors.dart';
 import 'package:highvibe/values/Strings.dart';
 import 'package:highvibe/values/themes.dart';
 
-showExitDialog(BuildContext context) async {
-  bool shouldExit = false;
+Future<bool> showExitDialog(BuildContext context) async {
+  var shouldExit = false;
   await showDialog(
       context: context,
       builder: (BuildContext context) {

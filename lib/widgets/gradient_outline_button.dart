@@ -19,10 +19,10 @@ class GradientOutlineButton extends StatelessWidget {
     this.label,
     this.minHeight = 48,
     this.isLoading = false,
-  })  : this._painter = _GradientPainter(
+  })  : _painter = _GradientPainter(
             strokeWidth: strokeWidth, radius: radius, gradient: gradient),
-        this._callback = onPressed,
-        this._radius = radius;
+        _callback = onPressed,
+        _radius = radius;
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +37,7 @@ class GradientOutlineButton extends StatelessWidget {
           child: Container(
             constraints: BoxConstraints(minWidth: 48, minHeight: minHeight),
             child: isLoading
-                ? Center(
+                ? const Center(
                     child: SizedBox(
                       width: 24,
                       height: 24,
@@ -75,30 +75,27 @@ class _GradientPainter extends CustomPainter {
       {@required double strokeWidth,
       @required double radius,
       @required Gradient gradient})
-      : this.strokeWidth = strokeWidth,
-        this.radius = radius,
-        this.gradient = gradient;
+      : strokeWidth = strokeWidth,
+        radius = radius,
+        gradient = gradient;
 
   @override
   void paint(Canvas canvas, Size size) {
-    // create outer rectangle equals size
-    Rect outerRect = Offset.zero & size;
-    var outerRRect =
+    final outerRect = Offset.zero & size;
+    final outerRRect =
         RRect.fromRectAndRadius(outerRect, Radius.circular(radius));
 
-    // create inner rectangle smaller by strokeWidth
-    Rect innerRect = Rect.fromLTWH(strokeWidth, strokeWidth,
+    final innerRect = Rect.fromLTWH(strokeWidth, strokeWidth,
         size.width - strokeWidth * 2, size.height - strokeWidth * 2);
-    var innerRRect = RRect.fromRectAndRadius(
+    final innerRRect = RRect.fromRectAndRadius(
         innerRect, Radius.circular(radius - strokeWidth));
 
-    // apply gradient shader
     _paint.shader = gradient.createShader(outerRect);
 
     // create difference between outer and inner paths and draw it
-    Path path1 = Path()..addRRect(outerRRect);
-    Path path2 = Path()..addRRect(innerRRect);
-    var path = Path.combine(PathOperation.difference, path1, path2);
+    final path1 = Path()..addRRect(outerRRect);
+    final path2 = Path()..addRRect(innerRRect);
+    final path = Path.combine(PathOperation.difference, path1, path2);
     canvas.drawPath(path, _paint);
   }
 

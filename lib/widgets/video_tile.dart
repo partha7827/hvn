@@ -20,7 +20,7 @@ class VideoTile extends StatelessWidget {
       child: Row(
         children: <Widget>[
           Hero(
-            tag: "video#${videoFile.id}",
+            tag: 'video#${videoFile.id}',
             child: ClipRRect(
               borderRadius: BorderRadius.circular(10),
               child: CachedNetworkImage(

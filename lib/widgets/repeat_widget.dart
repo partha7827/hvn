@@ -10,9 +10,9 @@ class RepeatWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: OutlineButton(
-        borderSide: BorderSide(width: 5, color: Colors.white),
+        borderSide: const BorderSide(width: 5, color: Colors.white),
         onPressed: onPressed,
-        child: Text("Try again", style: normal14White),
+        child: Text('Try again', style: normal14White),
       ),
     );
   }

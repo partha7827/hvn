@@ -9,17 +9,18 @@ import 'package:highvibe/services/firestore_service.dart';
 
 class OtherUserModule extends WidgetModule {
   final User user;
-  
+
   OtherUserModule(this.user);
 
   @override
-  List<Bind> get binds => [
-    Bind<OtherUserController>((_) => OtherUserController(user), singleton: false),
-    Bind<FirestoreService>((_) => FirestoreService.withFirebase()),
-    Bind<AuthService>((_) => AuthService.withFirebase()),
-    Bind<AppController>((_) => AppController()),
-  ];
+  List<Bind<Object>> get binds => [
+        Bind<OtherUserController>((_) => OtherUserController(user),
+            singleton: false),
+        Bind<FirestoreService>((_) => FirestoreService.withFirebase()),
+        Bind<AuthService>((_) => AuthService.withFirebase()),
+        Bind<AppController>((_) => AppController()),
+      ];
 
   @override
-  Widget get view => OtherUserPage();
+  Widget get view => const OtherUserPage();
 }

@@ -4,19 +4,19 @@ import 'package:highvibe/services/firestore_service.dart';
 mixin UserQueries on IFirestoreService {
   void follow(String follower, String following) {
     userCollection.document(follower).updateData({
-      "following": FieldValue.arrayUnion([following])
+      'following': FieldValue.arrayUnion([following])
     });
     userCollection.document(following).updateData({
-      "followers": FieldValue.arrayUnion([follower])
+      'followers': FieldValue.arrayUnion([follower])
     });
   }
 
   void unfollow(String follower, String following) {
     userCollection.document(follower).updateData({
-      "following": FieldValue.arrayRemove([following])
+      'following': FieldValue.arrayRemove([following])
     });
     userCollection.document(following).updateData({
-      "followers": FieldValue.arrayRemove([follower])
+      'followers': FieldValue.arrayRemove([follower])
     });
   }
 }

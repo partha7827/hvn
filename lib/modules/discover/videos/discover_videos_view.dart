@@ -31,13 +31,14 @@ class _DiscoverVideosViewState
         case FutureStatus.rejected:
           return RepeatWidget(controller.loadVideos);
         default:
-          return SplashWidget();
+          return const SplashWidget();
       }
     });
   }
 
   Widget buildVideos(List<Video> videos) => ListView.builder(
         itemCount: videos.length,
-        itemBuilder: (_, index) => VideoCard(videos[index], onPlayTap: () => VideoPlayerModule.toPlayer(videos[index])),
+        itemBuilder: (_, index) => VideoCard(videos[index],
+            onPlayTap: () => VideoPlayerModule.toPlayer(videos[index])),
       );
 }

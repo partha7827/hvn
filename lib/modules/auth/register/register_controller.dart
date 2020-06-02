@@ -12,16 +12,16 @@ part 'register_controller.g.dart';
 class RegisterController = _RegisterControllerBase with _$RegisterController;
 
 abstract class _RegisterControllerBase with Store {
-  final auth = Modular.get<AuthService>();
-  final firestore = Modular.get<FirestoreService>();
-  final appStore = Modular.get<AppController>();
+  final AuthService auth = Modular.get<AuthService>();
+  final FirestoreService firestore = Modular.get<FirestoreService>();
+  final AppController appStore = Modular.get<AppController>();
 
-  final usernameController = TextEditingController();
-  final emailController = TextEditingController();
-  final passwordController = TextEditingController();
+  final TextEditingController usernameController = TextEditingController();
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
 
-  final scaffoldKey = GlobalKey<ScaffoldState>();
-  final formKey = GlobalKey<FormState>();
+  final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
+  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
   @observable
   bool inProgress = false;
@@ -43,7 +43,7 @@ abstract class _RegisterControllerBase with Store {
         .document(user.id)
         .setData(serializers.serialize(user));
 
-    appStore.setCurrentUser(user);
+    await appStore.setCurrentUser(user);
 
     inProgress = false;
   }

@@ -20,16 +20,16 @@ final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
 class LoginController = _LoginControllerBase with _$LoginController;
 
 abstract class _LoginControllerBase with Store {
-  final auth = Modular.get<AuthService>();
-  final firestore = Modular.get<FirestoreService>();
-  final appStore = Modular.get<AppController>();
+  final AuthService auth = Modular.get<AuthService>();
+  final FirestoreService firestore = Modular.get<FirestoreService>();
+  final AppController appStore = Modular.get<AppController>();
 
-  final emailController = TextEditingController();
-  final passwordController = TextEditingController();
-  final usernameController = TextEditingController();
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+  final TextEditingController usernameController = TextEditingController();
 
-  final scaffoldKey = GlobalKey<ScaffoldState>();
-  final formKey = GlobalKey<FormState>();
+  final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
+  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
   @observable
   bool inProgress = false;
@@ -42,8 +42,10 @@ abstract class _LoginControllerBase with Store {
     inProgress = true;
 
     try {
-      final uid =
-          await auth.login(emailController.text, passwordController.text);
+      final uid = await auth.login(
+        emailController.text,
+        passwordController.text,
+      );
 
       if (uid == null) throw LoginException(Strings.userNotFound);
 
@@ -51,9 +53,9 @@ abstract class _LoginControllerBase with Store {
 
       if (!user.exists) throw LoginException(Strings.userNotFound);
 
-      appStore.setCurrentUser(User.fromSnapshot(user));
+      await appStore.setCurrentUser(User.fromSnapshot(user));
     } catch (e) {
-      throw e;
+      rethrow;
     } finally {
       inProgress = false;
     }
@@ -68,14 +70,13 @@ abstract class _LoginControllerBase with Store {
       final googleSignInAuthentication =
           await googleSignInAccount.authentication;
 
-      final AuthCredential credential = GoogleAuthProvider.getCredential(
+      final credential = GoogleAuthProvider.getCredential(
         accessToken: googleSignInAuthentication.accessToken,
         idToken: googleSignInAuthentication.idToken,
       );
 
-      final AuthResult authResult =
-          await _firebaseAuth.signInWithCredential(credential);
-      FirebaseUser firebaseUser = authResult.user;
+      final authResult = await _firebaseAuth.signInWithCredential(credential);
+      final firebaseUser = authResult.user;
 
       if (firebaseUser.uid != null) {
         debugPrint('googlogin userName: ${firebaseUser.uid}');
@@ -96,7 +97,7 @@ abstract class _LoginControllerBase with Store {
         throw LoginException(Strings.userNotFound);
       }
     } catch (e) {
-      throw e;
+      rethrow;
     } finally {
       inProgressGoogleSignIn = false;
     }
@@ -113,8 +114,8 @@ abstract class _LoginControllerBase with Store {
     passwordController.dispose();
   }
 
-  Future _getGoogleUser() async {
-    GoogleSignInAccount googleUser = _googleSignIn.currentUser;
+  Future<GoogleSignInAccount> _getGoogleUser() async {
+    var googleUser = _googleSignIn.currentUser;
 
     if (googleUser != null) {
       googleUser ??= await _googleSignIn.signInSilently();

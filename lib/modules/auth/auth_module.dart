@@ -13,8 +13,10 @@ import 'login/forgot_password_page.dart';
 import 'login/thank_you_page.dart';
 
 class AuthModule extends ChildModule {
+  static Inject<AuthModule> get to => Inject<AuthModule>.of();
+
   @override
-  List<Bind> get binds => [
+  List<Bind<Object>> get binds => [
         Bind((i) => AppController()),
         Bind<FirestoreService>((i) => FirestoreService.withFirebase()),
         Bind<AuthService>((i) => AuthService.withFirebase()),
@@ -24,26 +26,24 @@ class AuthModule extends ChildModule {
       ];
 
   @override
-  List<Router> get routers => [
-        Router('/autologin', child: (_, args) => AutoLoginPage()),
-        Router('/register', child: (_, args) => RegisterPage()),
-        Router('/login', child: (_, args) => LoginPage()),
-        Router('/forgotPassword',
-            child: (_, args) => ForgotPasswordPage(
-                  email: args.data,
-                )),
+  List<Router<Object>> get routers => [
+        Router('/autologin', child: (_, args) => const AutoLoginPage()),
+        Router('/register', child: (_, args) => const RegisterPage()),
+        Router('/login', child: (_, args) => const LoginPage()),
+        Router(
+          '/forgotPassword',
+          child: (_, args) => ForgotPasswordPage(email: args.data),
+        ),
         Router('/thankYou', child: (_, args) => ThankYouPage(email: args.data)),
       ];
 
-  static Inject get to => Inject<AuthModule>.of();
+  static Future<Object> toForgotPassword(String email) =>
+      Modular.to.pushNamed('/forgotPassword', arguments: email);
 
-  static Future toRegister() => Modular.to.pushNamed('/register');
+  static Future<Object> toLogin() => Modular.to.pushNamed('/login');
 
-  static Future toLogin() => Modular.to.pushNamed("/login");
+  static Future<Object> toRegister() => Modular.to.pushNamed('/register');
 
-  static Future toForgotPassword(email) =>
-      Modular.to.pushNamed("/forgotPassword", arguments: email);
-
-  static Future toThankYouPage(args) =>
-      Modular.to.pushReplacementNamed("/thankYou", arguments: args);
+  static Future<Object> toThankYouPage(String args) =>
+      Modular.to.pushReplacementNamed('/thankYou', arguments: args);
 }
