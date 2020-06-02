@@ -44,7 +44,7 @@ class _DiscoverPageState extends ModularState<DiscoverPage, DiscoverController>
         ),
         bottom: TabBar(
           controller: _tabController,
-          indicator: OutlineTabIndicator(
+          indicator: const OutlineTabIndicator(
             gradient: primaryGradient,
           ),
           indicatorSize: TabBarIndicatorSize.label,
