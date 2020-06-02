@@ -44,7 +44,7 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
               child: Container(
                 width: double.maxFinite,
                 height: MediaQuery.of(context).size.height * 0.7,
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   gradient: homeHeaderGradient,
                 ),
               ),

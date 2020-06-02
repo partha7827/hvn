@@ -3,9 +3,16 @@ import 'package:highvibe/mocks/mock_database.dart';
 import 'package:highvibe/services/user_queries.dart';
 import 'package:mock_cloud_firestore/mock_cloud_firestore.dart';
 
-class FirestoreService extends IFirestoreService with UserQueries {
-  CollectionReference _messageCollection;
+abstract class IFirestoreService {
+  CollectionReference userCollection;
+  CollectionReference messageCollection;
+  CollectionReference channelCollection;
+  CollectionReference tagCollection;
+  CollectionReference videoCollection;
+  CollectionReference audioCollection;
+}
 
+class FirestoreService extends IFirestoreService with UserQueries {
   FirestoreService(dynamic firestore) {
     userCollection = firestore.collection('users');
     messageCollection = firestore.collection('messages');
@@ -15,25 +22,11 @@ class FirestoreService extends IFirestoreService with UserQueries {
     audioCollection = firestore.collection('audio');
   }
 
-  factory FirestoreService.withFirebase() {
-    return FirestoreService(Firestore.instance);
-  }
+  factory FirestoreService.withFirebase() =>
+      FirestoreService(Firestore.instance);
 
-  factory FirestoreService.withMock() {
-    return FirestoreService(MockCloudFirestore(mockDatabase));
-  }
-
-  @override
-  CollectionReference get messageCollection => _messageCollection;
+  factory FirestoreService.withMock() =>
+      FirestoreService(MockCloudFirestore(mockDatabase));
 
   void dispose() {}
-}
-
-abstract class IFirestoreService {
-  CollectionReference userCollection;
-  CollectionReference messageCollection;
-  CollectionReference channelCollection;
-  CollectionReference tagCollection;
-  CollectionReference videoCollection;
-  CollectionReference audioCollection;
 }

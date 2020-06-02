@@ -21,7 +21,7 @@ DateTime getDateTime(dynamic dateTime) {
               : (dateTime as DateTime);
 }
 
-String mediaTimeFormarter(Duration d) =>
+String mediaTimeFormatter(Duration d) =>
     d.toString().split('.').first.padLeft(8, '0');
 
 bool portraitOrientation(BuildContext context) =>
