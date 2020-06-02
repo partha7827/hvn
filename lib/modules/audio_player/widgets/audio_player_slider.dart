@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-typedef double UpdateTrackPosition();
+typedef UpdateTrackPosition = double Function();
 
 class AudioPlayerSlider extends StatelessWidget {
   final double trackPosition;

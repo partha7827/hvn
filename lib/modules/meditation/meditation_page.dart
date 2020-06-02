@@ -4,7 +4,7 @@ import 'meditation_controller.dart';
 
 class MeditationPage extends StatefulWidget {
   final String title;
-  const MeditationPage({Key key, this.title = "Meditation"}) : super(key: key);
+  const MeditationPage({Key key, this.title = 'Meditation'}) : super(key: key);
 
   @override
   _MeditationPageState createState() => _MeditationPageState();

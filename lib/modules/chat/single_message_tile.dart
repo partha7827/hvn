@@ -11,7 +11,7 @@ class SingleMessageTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var timeFormatter = DateFormat('hh:mm a');
+    final timeFormatter = DateFormat('hh:mm a');
     return ListTile(
       leading: ClipRRect(
         borderRadius: BorderRadius.circular(50.0),
@@ -33,11 +33,11 @@ class SingleMessageTile extends StatelessWidget {
                 message.authorName,
                 style: bold16White,
               ),
-              Padding(
-                padding: const EdgeInsets.only(left: 4.0),
+              const Padding(
+                padding: EdgeInsets.only(left: 4.0),
                 child: CircleAvatar(
                   radius: 4,
-                  backgroundColor: const Color(0xFF73F077),
+                  backgroundColor: Color(0xFF73F077),
                 ),
               )
             ],

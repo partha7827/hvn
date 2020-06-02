@@ -13,7 +13,7 @@ import 'register_controller.dart';
 
 class RegisterPage extends StatefulWidget {
   final String title;
-  const RegisterPage({Key key, this.title = "Register"}) : super(key: key);
+  const RegisterPage({Key key, this.title = 'Register'}) : super(key: key);
 
   @override
   _RegisterPageState createState() => _RegisterPageState();
@@ -47,7 +47,7 @@ class _RegisterPageState
                     controller: controller.usernameController,
                     maxLength: 15,
                     validator: (str) =>
-                        str.length < 2 && str.isNotEmpty ? "Add a Name" : null,
+                        str.length < 2 && str.isNotEmpty ? 'Add a Name' : null,
                   ),
                 ),
                 Padding(
@@ -59,7 +59,7 @@ class _RegisterPageState
                       keyboardType: TextInputType.emailAddress,
                       validator: (str) => EmailValidator.validate(str)
                           ? null
-                          : "Invalid Email"),
+                          : 'Invalid Email'),
                 ),
                 Padding(
                   padding: const EdgeInsets.only(top: 20.0),
@@ -69,7 +69,7 @@ class _RegisterPageState
                     icon: Icons.lock_open,
                     controller: controller.passwordController,
                     validator: (str) => str.length < 8 && str.isNotEmpty
-                        ? "Must Contain At Least 8 characters"
+                        ? 'Must Contain At Least 8 characters'
                         : null,
                   ),
                 ),
@@ -92,7 +92,7 @@ class _RegisterPageState
                         ),
                       ),
                       Text(
-                        "I Accept All Terms & Conditions",
+                        'I Accept All Terms & Conditions',
                         style: normal14White,
                       ),
                     ],

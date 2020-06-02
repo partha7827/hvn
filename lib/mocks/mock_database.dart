@@ -3,33 +3,33 @@ import 'package:highvibe/models/models.dart';
 import './mock_audio_files.dart';
 import './mock_video_files.dart';
 
-var mockUser = User((b) => b
-  ..id = "default"
-  ..name = "Default User"
+User mockUser = User((b) => b
+  ..id = 'default'
+  ..name = 'Default User'
   ..isRecommended = true);
 
-var mockAnotherUser = User((b) => b
-  ..id = "another"
-  ..name = "Another User");
+final User mockAnotherUser = User((b) => b
+  ..id = 'another'
+  ..name = 'Another User');
 
-final mockMessages = BuiltList<Message>.from([
+final BuiltList<Message> mockMessages = BuiltList<Message>.from([
   Message((b) => b
-    ..id = "1"
-    ..chatId = "default"
-    ..authorId = "default"
-    ..content = "first message"),
+    ..id = '1'
+    ..chatId = 'default'
+    ..authorId = 'default'
+    ..content = 'first message'),
   Message((b) => b
-    ..id = "2"
-    ..chatId = "default"
-    ..authorId = "default"
-    ..content = "second message"),
+    ..id = '2'
+    ..chatId = 'default'
+    ..authorId = 'default'
+    ..content = 'second message'),
 ]);
 
-final mockChannel = Channel((b) => b
-  ..id = "default"
+final Channel mockChannel = Channel((b) => b
+  ..id = 'default'
   ..messages = mockMessages.toBuilder());
 
-final mockDatabase = """
+final String mockDatabase = '''
       {
         "users": {
           "${mockUser.id}": ${mockUser.toJson()},
@@ -66,4 +66,4 @@ final mockDatabase = """
           }
         }
       }
-    """;
+    ''';

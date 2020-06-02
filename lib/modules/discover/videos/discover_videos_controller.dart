@@ -9,7 +9,7 @@ class DiscoverVideosController = _DiscoverVideosControllerBase
     with _$DiscoverVideosController;
 
 abstract class _DiscoverVideosControllerBase with Store {
-  final firestore = Modular.get<FirestoreService>();
+  final FirestoreService firestore = Modular.get<FirestoreService>();
 
   @observable
   ObservableFuture<BuiltList<Video>> videos;

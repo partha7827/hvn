@@ -22,7 +22,7 @@ class AudioPreviewItem extends StatelessWidget {
       behavior: HitTestBehavior.opaque,
       onTap: () => onTap(audio),
       child: Container(
-        padding: EdgeInsets.all(4),
+        padding: const EdgeInsets.all(4),
         child: Stack(
           children: [
             Column(
@@ -32,7 +32,7 @@ class AudioPreviewItem extends StatelessWidget {
                   child: Stack(
                     children: [
                       Hero(
-                        tag: "audio#${audio.id}",
+                        tag: 'audio#${audio.id}',
                         child: CachedNetworkImage(
                           imageUrl: audio.artworkUrlPath,
                           width: width,

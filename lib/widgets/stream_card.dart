@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:highvibe/values/Strings.dart';
 import 'package:highvibe/values/themes.dart';
 
-var dummyImgUrl =
+String dummyImgUrl =
     'https://takelessons.com/blog/wp-content/uploads/2020/03/flute-for-beginners.jpg';
 
 class StreamCard extends StatelessWidget {
@@ -64,8 +64,8 @@ class StreamCard extends StatelessWidget {
                     '$reactions ${Strings.reactions}',
                     style: normal12Hint,
                   ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 4),
+                  const Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 4),
                     child: CircleAvatar(
                       radius: 2,
                       backgroundColor: hintTextColor,
@@ -75,8 +75,8 @@ class StreamCard extends StatelessWidget {
                     '$messages ${Strings.messages}',
                     style: normal12Hint,
                   ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 4),
+                  const Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 4),
                     child: CircleAvatar(
                       radius: 2,
                       backgroundColor: hintTextColor,

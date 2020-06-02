@@ -12,7 +12,7 @@ import 'message_composer.dart';
 class ChatPage extends StatefulWidget {
   final String title;
   final User user;
-  const ChatPage({Key key, this.user, this.title = "Chat"}) : super(key: key);
+  const ChatPage({Key key, this.user, this.title = 'Chat'}) : super(key: key);
 
   @override
   _ChatPageState createState() => _ChatPageState();
@@ -31,7 +31,7 @@ class _ChatPageState extends ModularState<ChatPage, ChatController>
       body: StreamBuilder<QuerySnapshot>(
         stream: controller.getChannelMessages(),
         builder: (context, snapshot) {
-          if (!snapshot.hasData || snapshot.data.documents.length <= 0) {
+          if (!snapshot.hasData || snapshot.data.documents.isEmpty) {
             return Center(
               child: Text(
                 'No messages available',
@@ -43,7 +43,7 @@ class _ChatPageState extends ModularState<ChatPage, ChatController>
           return ListView.builder(
             itemCount: snapshot.data.documents.length,
             itemBuilder: (context, index) {
-              Message message =
+              final message =
                   Message.fromSnapshot(snapshot.data.documents[index]);
 
               return SingleMessageTile(

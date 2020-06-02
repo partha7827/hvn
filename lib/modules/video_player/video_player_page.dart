@@ -28,6 +28,7 @@ class _VideoPlayerPageState extends State<VideoPlayerPage> {
   VideoPlayerMode _videoPlayerMode = VideoPlayerMode.none;
   bool get _isMinimised => _videoPlayerMode == VideoPlayerMode.minimised;
 
+  @override
   Widget build(BuildContext context) {
     if (_isMinimised) {
       return _videoWidget();
@@ -157,7 +158,7 @@ class _VideoPlayerPageState extends State<VideoPlayerPage> {
           child: Container(
             margin: _isMinimised
                 ? const EdgeInsets.only(left: 8, right: 8, bottom: 8)
-                : EdgeInsets.only(left: 0, right: 0),
+                : const EdgeInsets.only(left: 0, right: 0),
             color: mediaPlayerBackgroundColor,
             height: _isMinimised ? 80 : null,
             width: _isMinimised ? size.width : null,
@@ -198,7 +199,7 @@ class _VideoPlayerPageState extends State<VideoPlayerPage> {
                       left: 130,
                       top: 8,
                       child: ConstrainedBox(
-                        constraints: BoxConstraints(
+                        constraints: const BoxConstraints(
                           maxWidth: 120,
                           maxHeight: 40,
                         ),
@@ -218,7 +219,7 @@ class _VideoPlayerPageState extends State<VideoPlayerPage> {
                       left: 130,
                       top: 50,
                       child: ConstrainedBox(
-                        constraints: BoxConstraints(
+                        constraints: const BoxConstraints(
                           maxWidth: 120,
                           maxHeight: 40,
                         ),

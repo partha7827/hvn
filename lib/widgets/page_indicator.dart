@@ -9,8 +9,8 @@ class PageIndicator extends AnimatedWidget {
   final double radius;
 
   const PageIndicator({
-    this.controller,
-    this.count,
+    @required this.controller,
+    @required this.count,
     this.indicatorWidth = 12,
     this.indicatorHeight = 4,
     this.radius = 10,
@@ -63,8 +63,8 @@ class IndicatorPainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    double distance = 0;
-    for (int i = 0; i < count; i++) {
+    var distance = 0.0;
+    for (var i = 0; i < count; i++) {
       canvas.drawRRect(
         RRect.fromLTRBR(
           distance,
@@ -78,7 +78,7 @@ class IndicatorPainter extends CustomPainter {
       distance = distance + indicatorWidth * 2;
     }
 
-    var dx = controller.page * indicatorWidth * 2;
+    final dx = controller.page * indicatorWidth * 2;
     canvas.drawRRect(
       RRect.fromLTRBR(
         dx,

@@ -16,7 +16,7 @@ class PastMeditations extends StatelessWidget {
             time: '3:45 PM',
             status: 'Completed',
             note:
-                'I love this exercise, I will do this every day at least 3 times. Reduced stress, feeling...',
+                '''I love this exercise, I will do this every day at least 3 times. Reduced stress, feeling...''',
             exp: 20,
           ),
           _item(
@@ -25,7 +25,7 @@ class PastMeditations extends StatelessWidget {
             time: '7:18 PM',
             status: 'Incomplete',
             note:
-                'I love this exercise, I will do this every day at least 3 times. Reduced stress, feeling...',
+                '''I love this exercise, I will do this every day at least 3 times. Reduced stress, feeling...''',
           ),
           _dateWidget('Yesterday'),
           _item(
@@ -53,9 +53,9 @@ class PastMeditations extends StatelessWidget {
           padding: const EdgeInsets.all(8.0),
           child: Text(
             s,
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 14,
-              color: const Color(0xFF8E8F99),
+              color: Color(0xFF8E8F99),
             ),
           ),
         ),
@@ -100,7 +100,7 @@ class PastMeditations extends StatelessWidget {
                   ),
                   Text(
                     duration,
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 16.0,
                       color: Colors.white,
                     ),
@@ -113,23 +113,23 @@ class PastMeditations extends StatelessWidget {
                   children: <Widget>[
                     Text(
                       time,
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 14,
-                        color: const Color(0xFF8E8F99),
+                        color: Color(0xFF8E8F99),
                       ),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 4.0, right: 4.0),
+                    const Padding(
+                      padding: EdgeInsets.only(left: 4.0, right: 4.0),
                       child: CircleAvatar(
-                        backgroundColor: const Color(0xFF8E8F99),
+                        backgroundColor: Color(0xFF8E8F99),
                         radius: 2,
                       ),
                     ),
                     Text(
                       status,
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 14,
-                        color: const Color(0xFF8E8F99),
+                        color: Color(0xFF8E8F99),
                       ),
                     ),
                   ],
@@ -142,7 +142,7 @@ class PastMeditations extends StatelessWidget {
                       child: Text(
                         note,
                         maxLines: 2,
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: 14,
                           color: Colors.white,
                         ),

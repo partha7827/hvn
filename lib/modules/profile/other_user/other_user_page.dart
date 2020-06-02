@@ -13,7 +13,7 @@ import 'other_user_controller.dart';
 
 class OtherUserPage extends StatefulWidget {
   final String title;
-  const OtherUserPage({Key key, this.title = "OtherUser"}) : super(key: key);
+  const OtherUserPage({Key key, this.title = 'OtherUser'}) : super(key: key);
 
   @override
   _OtherUserPageState createState() => _OtherUserPageState();
@@ -23,7 +23,7 @@ class _OtherUserPageState
     extends ModularState<OtherUserPage, OtherUserController>
     with SingleTickerProviderStateMixin {
   TabController _tabController;
-  var top = 0.0;
+  double top = 0.0;
 
   @override
   void initState() {
@@ -47,7 +47,7 @@ class _OtherUserPageState
               floating: false,
               pinned: true,
               backgroundColor: secondaryColor,
-              leading: BackButton(
+              leading: const BackButton(
                 onPressed: ProfileModule.toHome,
               ),
               flexibleSpace: LayoutBuilder(
@@ -83,12 +83,12 @@ class _OtherUserPageState
                                 onTap: () => ProfileModule.toAvatarPicture(
                                   ImageViewerArguments(
                                     heroTag:
-                                        "author#${controller.otherUser.id}",
+                                        'author#${controller.otherUser.id}',
                                     imageUrl: controller.otherUser.photoUrl,
                                   ),
                                 ),
                                 child: Hero(
-                                  tag: "author#${controller.otherUser.id}",
+                                  tag: 'author#${controller.otherUser.id}',
                                   child: ProfileAvatar(
                                       controller.otherUser.photoUrl),
                                 ),
@@ -149,9 +149,10 @@ class _OtherUserPageState
                               Observer(builder: (_) {
                                 return InkWell(
                                   onTap: () {
-                                    if (controller.followers.length > 0)
+                                    if (controller.followers.isNotEmpty) {
                                       ProfileModule.toFollowers(
                                           controller.followers);
+                                    }
                                   },
                                   child: Column(
                                     children: <Widget>[
@@ -167,9 +168,10 @@ class _OtherUserPageState
                               Observer(builder: (_) {
                                 return InkWell(
                                   onTap: () {
-                                    if (controller.following.length > 0)
+                                    if (controller.following.isNotEmpty) {
                                       ProfileModule.toFollowing(
                                           controller.following);
+                                    }
                                   },
                                   child: Column(
                                     children: <Widget>[

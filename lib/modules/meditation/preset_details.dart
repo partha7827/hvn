@@ -15,7 +15,7 @@ class _PresetDetailsState extends State<PresetDetails> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Preset Details'),
+        title: const Text('Preset Details'),
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20.0),
@@ -26,7 +26,7 @@ class _PresetDetailsState extends State<PresetDetails> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  Text(
+                  const Text(
                     '20',
                     style: TextStyle(
                       fontSize: 60.0,
@@ -36,11 +36,11 @@ class _PresetDetailsState extends State<PresetDetails> {
                 ],
               ),
             ),
-            Text(
+            const Text(
               'Minute',
               style: TextStyle(
                 fontSize: 16,
-                color: const Color(0xFF8E8F99),
+                color: Color(0xFF8E8F99),
               ),
             ),
             Padding(
@@ -60,7 +60,7 @@ class _PresetDetailsState extends State<PresetDetails> {
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(
+                    MaterialPageRoute<StartingBell>(
                       builder: (_) => StartingBell(),
                     ),
                   );
@@ -121,7 +121,7 @@ class _PresetDetailsState extends State<PresetDetails> {
                           width: 16,
                           height: 16,
                         ),
-                        label: Text(
+                        label: const Text(
                           'Edit',
                           style: TextStyle(
                             fontSize: 16,
@@ -142,7 +142,7 @@ class _PresetDetailsState extends State<PresetDetails> {
                           Icons.delete_outline,
                           color: Colors.white,
                         ),
-                        label: Text(
+                        label: const Text(
                           'Delete',
                           style: TextStyle(
                             fontSize: 16,
@@ -168,7 +168,7 @@ class _PresetDetailsState extends State<PresetDetails> {
     );
   }
 
-  _singleLineCard({
+  Container _singleLineCard({
     String title,
     String subtitle,
     Function onPressed,
@@ -190,7 +190,7 @@ class _PresetDetailsState extends State<PresetDetails> {
               children: <Widget>[
                 Text(
                   title,
-                  style: TextStyle(
+                  style: const TextStyle(
                     color: Colors.white,
                     fontSize: 16.0,
                   ),
@@ -199,7 +199,7 @@ class _PresetDetailsState extends State<PresetDetails> {
                   children: <Widget>[
                     Text(
                       subtitle,
-                      style: TextStyle(
+                      style: const TextStyle(
                         color: Colors.white,
                         fontSize: 16.0,
                       ),
@@ -215,7 +215,7 @@ class _PresetDetailsState extends State<PresetDetails> {
     );
   }
 
-  _gradientBorderCircularButton() {
+  Container _gradientBorderCircularButton() {
     return Container(
       width: 60,
       height: 60,
@@ -227,11 +227,11 @@ class _PresetDetailsState extends State<PresetDetails> {
           height: 48,
           decoration: BoxDecoration(
               color: Colors.white, borderRadius: BorderRadius.circular(50)),
-          child: Center(
+          child: const Center(
             child: Text(
               'Start',
               style: TextStyle(
-                color: const Color(0xFF666CCC),
+                color: Color(0xFF666CCC),
               ),
             ),
           ),

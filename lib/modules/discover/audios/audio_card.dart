@@ -53,7 +53,7 @@ class AudioCard extends StatelessWidget {
     );
   }
 
-  _playWidget() {
+  InkWell _playWidget() {
     return InkWell(
       onTap: onPlayTap,
       child: Stack(
@@ -82,7 +82,7 @@ class AudioCard extends StatelessWidget {
                     .toString()
                     .split('.')
                     .first
-                    .padLeft(8, "0"),
+                    .padLeft(8, '0'),
                 style: normal12White,
               ),
             ),
@@ -103,7 +103,7 @@ class AudioCard extends StatelessWidget {
     );
   }
 
-  _headerWidget() {
+  Row _headerWidget() {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -112,33 +112,38 @@ class AudioCard extends StatelessWidget {
           style: bold20White,
           overflow: TextOverflow.clip,
         ),
-        audio.tags.isNotEmpty
-            ? Text(
-                audio.tags[0],
-                style: normal16White,
-              )
-            : Container(),
+        if (audio.tags.isNotEmpty)
+          Text(
+            audio.tags[0],
+            style: normal16White,
+          )
+        else
+          Container(),
       ],
     );
   }
 
-  _authorWidget() {
+  Padding _authorWidget() {
     return Padding(
       padding: const EdgeInsets.only(top: 8.0),
       child: Row(
         children: [
-          audio.userAvatar.isNotEmpty ? 
-          ClipRRect(
-            borderRadius: BorderRadius.circular(50),
-            child: CachedNetworkImage(
-              imageUrl: audio.userAvatar,
-              width: 32,
-              height: 32,
-              fit: BoxFit.cover,
-            ),
-          ) : Container(),
+          if (audio.userAvatar.isNotEmpty)
+            ClipRRect(
+              borderRadius: BorderRadius.circular(50),
+              child: CachedNetworkImage(
+                imageUrl: audio.userAvatar,
+                width: 32,
+                height: 32,
+                fit: BoxFit.cover,
+              ),
+            )
+          else
+            Container(),
           Padding(
-            padding: audio.userAvatar.isNotEmpty ? const EdgeInsets.only(left: 8.0) : const EdgeInsets.all(0),
+            padding: audio.userAvatar.isNotEmpty
+                ? const EdgeInsets.only(left: 8.0)
+                : const EdgeInsets.all(0),
             child: Text(
               audio.userName,
               style: normal14Hint,
@@ -149,7 +154,7 @@ class AudioCard extends StatelessWidget {
     );
   }
 
-  _infoWidget() {
+  Container _infoWidget() {
     return Container();
   }
 }

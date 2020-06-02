@@ -2,15 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:highvibe/modules/wallet/resources/app_colors.dart';
 import 'package:highvibe/modules/wallet/pages/auth/passcode/passcode_page.dart';
 
-
 class FacePage extends StatefulWidget {
-
   @override
   FacePageState createState() => FacePageState();
 }
 
 class FacePageState extends State<FacePage> {
-
   @override
   void initState() {
     super.initState();
@@ -19,9 +16,7 @@ class FacePageState extends State<FacePage> {
   void onPassCode() {
     Navigator.push(
       context,
-      MaterialPageRoute(
-        builder: (context) => PassCodePage()
-      ),
+      MaterialPageRoute<PassCodePage>(builder: (context) => PassCodePage()),
     );
   }
 
@@ -33,31 +28,30 @@ class FacePageState extends State<FacePage> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
-          Image.asset('assets/icons/faceid.png',
+          Image.asset(
+            'assets/icons/faceid.png',
             width: 63,
             height: 63,
           ),
-          Padding(
+          const Padding(
             padding: EdgeInsets.only(top: 34),
-            child: Text('Authorize to continue',
+            child: Text(
+              'Authorize to continue',
               style: TextStyle(
-                fontWeight: FontWeight.w600,
-                color: Colors.white,
-                fontSize: 24
-              ),
-            )
+                  fontWeight: FontWeight.w600,
+                  color: Colors.white,
+                  fontSize: 24),
+            ),
           ),
-          Padding(
+          const Padding(
             padding: EdgeInsets.only(top: 20),
-            child: Text('HV Wallet',
-              style: TextStyle(
-                color: AppColors.textGrey,
-                fontSize: 18
-              ),
-            )
+            child: Text(
+              'HV Wallet',
+              style: TextStyle(color: AppColors.textGrey, fontSize: 18),
+            ),
           )
         ],
-      )
+      ),
     );
   }
 
@@ -70,9 +64,7 @@ class FacePageState extends State<FacePage> {
         children: [
           Padding(
             padding: EdgeInsets.only(top: MediaQuery.of(context).padding.top),
-            child: BackButton(
-              color: Colors.white,
-            )
+            child: const BackButton(color: Colors.white),
           ),
           buildMain()
         ],
@@ -80,12 +72,10 @@ class FacePageState extends State<FacePage> {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: FlatButton(
         onPressed: onPassCode,
-        child: Text('Use Passcode',
-          style: TextStyle(
-            color: AppColors.textBlue,
-            fontSize: 18
-          ),
-        )
+        child: Text(
+          'Use Passcode',
+          style: TextStyle(color: AppColors.textBlue, fontSize: 18),
+        ),
       ),
     );
   }

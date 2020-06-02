@@ -11,9 +11,9 @@ enum AuthState { initial, authenticated, unauthenticated }
 class AppController = _AppControllerBase with _$AppController;
 
 abstract class _AppControllerBase with Store {
-  final auth = Modular.get<AuthService>();
+  final AuthService auth = Modular.get<AuthService>();
 
-  final firestore = Modular.get<FirestoreService>();
+  final FirestoreService firestore = Modular.get<FirestoreService>();
 
   @observable
   AuthState authState = AuthState.initial;
@@ -27,10 +27,10 @@ abstract class _AppControllerBase with Store {
       currentUser = user;
 
       _setAuthenticated(true);
-      await _setUserOnline(true);
+      _setUserOnline(true);
     } else {
       _setAuthenticated(false);
-      await _setUserOnline(false);
+      _setUserOnline(false);
     }
   }
 
@@ -45,7 +45,7 @@ abstract class _AppControllerBase with Store {
   void _setUserOnline(bool active) {
     if (currentUser != null) {
       firestore.userCollection.document(currentUser.id).updateData({
-        "isOnline": active,
+        'isOnline': active,
         // "lastTimeSeen": serializers.serialize(DateTime.now().toUtc())
       });
     }

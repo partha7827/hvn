@@ -15,7 +15,7 @@ publish_to: "none" # Remove this line if you wish to publish to pub.dev
 version: 0.0.4+4
 
 environment:
-  sdk: ">=2.8.2 <3.0.0"
+  sdk: ">=2.8.3 <3.0.0"
 
 dependencies:
   flutter:
@@ -70,7 +70,7 @@ dependencies:
   timeago: ^2.0.25
   url_launcher: ^5.4.1
   uuid: ^2.0.4
-  video_player: ">=0.10.10 <2.0.0"
+  video_player: ">=0.10.11+1 <2.0.0"
   virtual_keyboard: ^0.1.4
   flutter_spinkit: ^4.1.2+1
   flutter_launcher_icons: ^0.7.5

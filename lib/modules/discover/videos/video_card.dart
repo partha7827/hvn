@@ -23,7 +23,7 @@ class VideoCard extends StatelessWidget {
     );
   }
 
-  _playerWidget() {
+  InkWell _playerWidget() {
     return InkWell(
       onTap: onPlayTap,
       child: Stack(
@@ -51,7 +51,7 @@ class VideoCard extends StatelessWidget {
                     .toString()
                     .split('.')
                     .first
-                    .padLeft(8, "0"),
+                    .padLeft(8, '0'),
                 style: normal12White,
               ),
             ),
@@ -76,7 +76,7 @@ class VideoCard extends StatelessWidget {
     );
   }
 
-  _infoWidget() {
+  Padding _infoWidget() {
     return Padding(
       padding: const EdgeInsets.only(top: 10.0),
       child: Column(
@@ -88,21 +88,22 @@ class VideoCard extends StatelessWidget {
                 video.snippet.title,
                 style: normal16White,
               ),
-              video.snippet.tags.isNotEmpty
-                  ? GradientOutlineButton(
-                      minHeight: 24,
-                      radius: 50,
-                      onPressed: () {},
-                      label: Padding(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 8.0, vertical: 8.0),
-                        child: Text(
-                          video.snippet.tags[0],
-                          style: normal12White,
-                        ),
-                      ),
-                    )
-                  : Container(),
+              if (video.snippet.tags.isNotEmpty)
+                GradientOutlineButton(
+                  minHeight: 24,
+                  radius: 50,
+                  onPressed: () {},
+                  label: Padding(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 8.0, vertical: 8.0),
+                    child: Text(
+                      video.snippet.tags[0],
+                      style: normal12White,
+                    ),
+                  ),
+                )
+              else
+                Container(),
             ],
           ),
         ],

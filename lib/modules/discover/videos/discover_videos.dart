@@ -5,7 +5,7 @@ import 'package:highvibe/modules/discover/videos/discover_videos_view.dart';
 
 class DiscoverVideos extends WidgetModule {
   @override
-  final List<Bind> binds = [
+  final List<Bind<Object>> binds = [
     Bind((i) => DiscoverVideosController()),
   ];
 

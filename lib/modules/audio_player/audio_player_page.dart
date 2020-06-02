@@ -80,7 +80,7 @@ class _AudioPlayerPageState
               child: FadeTransition(
                 opacity: artworkAnimation.drive(CurveTween(curve: Curves.easeOut)),
                 child: Hero(
-                  tag: "audio#${controller.audioFile.id}",
+                  tag: 'audio#${controller.audioFile.id}',
                   child: Container(
                     width: controller.isMinimized ? 80 : null,
                     height: controller.isMinimized ? 80 : null,
@@ -258,7 +258,7 @@ class _AudioPlayerPageState
         left: 90,
         top: 8,
         child: ConstrainedBox(
-          constraints: BoxConstraints(
+          constraints: const BoxConstraints(
             maxWidth: 160,
             maxHeight: 40,
           ),
@@ -279,7 +279,7 @@ class _AudioPlayerPageState
         left: 90,
         top: 50,
         child: ConstrainedBox(
-          constraints: BoxConstraints(
+          constraints: const BoxConstraints(
             maxWidth: 160,
             maxHeight: 40,
           ),
@@ -312,7 +312,7 @@ class _AudioPlayerPageState
         right: 12,
         bottom: 4,
         child: ConstrainedBox(
-          constraints: BoxConstraints(
+          constraints: const BoxConstraints(
             maxWidth: 80,
             maxHeight: 40,
           ),

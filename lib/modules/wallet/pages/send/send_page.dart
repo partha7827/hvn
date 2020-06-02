@@ -2,19 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:highvibe/modules/wallet/resources/app_colors.dart';
 import 'package:highvibe/modules/wallet/pages/auth/face/face_page.dart';
 import 'package:highvibe/modules/wallet/pages/widgets/buttons/main_button.dart';
-import 'package:highvibe/modules/wallet/pages/widgets/buttons/outline_button.dart' as o;
+import 'package:highvibe/modules/wallet/pages/widgets/buttons/outline_button.dart'
+    as o;
 import 'package:highvibe/modules/wallet/pages/widgets/containers/user_container.dart';
 import 'package:virtual_keyboard/virtual_keyboard.dart';
 
-
 class SendPage extends StatefulWidget {
-
   @override
   SendPageState createState() => SendPageState();
 }
 
 class SendPageState extends State<SendPage> {
-
   String text = '';
 
   @override
@@ -25,12 +23,10 @@ class SendPageState extends State<SendPage> {
   void onFaceId() {
     Navigator.push(
       context,
-      MaterialPageRoute(
-        builder: (context) => FacePage()
-      ),
+      MaterialPageRoute<FacePage>(builder: (context) => FacePage()),
     );
   }
-  
+
   void onBack() {
     Navigator.pop(context);
   }
@@ -41,16 +37,18 @@ class SendPageState extends State<SendPage> {
 
   void onKey(VirtualKeyboardKey key) {
     if (key.action == VirtualKeyboardKeyAction.Backspace) {
-      if (text.length > 0) {
+      if (text.isNotEmpty) {
         setState(() {
           text = text.substring(0, text.length - 1);
         });
       }
     } else {
       if (text.length < 5) {
-        setState(() {
-          text += key.text;
-        });
+        setState(
+          () {
+            text += key.text;
+          },
+        );
       }
     }
   }
@@ -60,14 +58,14 @@ class SendPageState extends State<SendPage> {
       context: context,
       builder: (BuildContext context) {
         return buildConfirm();
-      }
+      },
     );
   }
 
   Widget buildAppBar() {
     return AppBar(
       backgroundColor: AppColors.backgroundDarkBlue,
-      title: Text('Sending to '),
+      title: const Text('Sending to '),
     );
   }
 
@@ -76,12 +74,11 @@ class SendPageState extends State<SendPage> {
       type: MaterialType.transparency,
       child: Center(
         child: Container(
-          margin: EdgeInsets.only(left: 20, right: 20, top: 100, bottom: 100),
-          padding: EdgeInsets.only(top: 20, bottom: 20),
+          margin:
+              const EdgeInsets.only(left: 20, right: 20, top: 100, bottom: 100),
+          padding: const EdgeInsets.only(top: 20, bottom: 20),
           decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(20)
-          ),
+              color: Colors.white, borderRadius: BorderRadius.circular(20)),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
@@ -89,7 +86,7 @@ class SendPageState extends State<SendPage> {
               buildUser(textColor: Colors.black),
               Row(
                 children: <Widget>[
-                  Expanded(
+                  const Expanded(
                     child: Divider(
                       color: AppColors.textGrey,
                     ),
@@ -98,14 +95,14 @@ class SendPageState extends State<SendPage> {
                     width: 48,
                     height: 48,
                     decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: AppColors.red.withOpacity(0.8)
-                    ),
-                    child: Icon(Icons.arrow_upward,
+                        shape: BoxShape.circle,
+                        color: AppColors.red.withOpacity(0.8)),
+                    child: Icon(
+                      Icons.arrow_upward,
                       color: Colors.white,
                     ),
                   ),
-                  Expanded(
+                  const Expanded(
                     child: Divider(
                       color: AppColors.textGrey,
                     ),
@@ -114,42 +111,48 @@ class SendPageState extends State<SendPage> {
               ),
               buildUser(textColor: Colors.black),
               Container(
-                margin: EdgeInsets.all(20),
+                margin: const EdgeInsets.all(20),
                 child: Row(
                   children: <Widget>[
                     Expanded(
-                      child: o.OutlineButton(
-                        title: 'Cancel',
-                        icon: Icon(Icons.close,
-                          color: AppColors.textBlue,
-                        ),
-                        onPressed: onCancel,
-                      )
-                    ),
-                    Padding(padding: EdgeInsets.only(left: 20)),
+                        child: o.OutlineButton(
+                      title: 'Cancel',
+                      icon: Icon(
+                        Icons.close,
+                        color: AppColors.textBlue,
+                      ),
+                      onPressed: onCancel,
+                    )),
+                    const Padding(padding: EdgeInsets.only(left: 20)),
                     Expanded(
                       child: MainButton(
                         title: 'Confirm',
-                        icon: Icon(Icons.check,
+                        icon: Icon(
+                          Icons.check,
                           color: Colors.white,
                         ),
                         onPressed: onCancel,
-                      )
+                      ),
                     )
                   ],
                 ),
               )
             ],
-          )
-        )
-      )
+          ),
+        ),
+      ),
     );
   }
 
   Widget buildUser({Color textColor = Colors.white}) {
     return UserContainer(
-      margin: EdgeInsets.only(bottom: 20, right: 20, left: 20, top: 20), 
-      textColor: textColor
+      margin: const EdgeInsets.only(
+        bottom: 20,
+        right: 20,
+        left: 20,
+        top: 20,
+      ),
+      textColor: textColor,
     );
   }
 
@@ -159,23 +162,21 @@ class SendPageState extends State<SendPage> {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.end,
         children: <Widget>[
-          Text(text.length > 0 ? text : '0.0', 
+          Text(
+            text.isNotEmpty ? text : '0.0',
             style: TextStyle(
-              color: text.length > 0 ? color : AppColors.textGrey,
-              fontSize: 60
-            ),
+                color: text.isNotEmpty ? color : AppColors.textGrey,
+                fontSize: 60),
           ),
-          Padding(
+          const Padding(
             padding: EdgeInsets.only(bottom: 10, left: 10),
-            child: Text('HVN', 
-              style: TextStyle(
-                color: AppColors.textGrey,
-                fontSize: 18
-              ),
-            )
+            child: Text(
+              'HVN',
+              style: TextStyle(color: AppColors.textGrey, fontSize: 18),
+            ),
           )
         ],
-      )
+      ),
     );
   }
 
@@ -183,25 +184,24 @@ class SendPageState extends State<SendPage> {
     final height = MediaQuery.of(context).size.height;
     return Column(
       children: [
-        text.length > 0 ?
-        MainButton(
-          title: 'Send',
-          margin: EdgeInsets.only(left: 20, right: 20, bottom: 30),
-          icon: Icon(Icons.check, color: Colors.white),
-          onPressed: onSend,
-        ) : 
-        Container(height: 78),
-        Padding(
-          padding: EdgeInsets.only(bottom: 40),
-          child: VirtualKeyboard(
-            height: height * 0.3,
-            fontSize: 25,
-            textColor: Colors.white,
-            type: VirtualKeyboardType.Numeric,
-            onKeyPress: onKey
+        if (text.isNotEmpty)
+          MainButton(
+            title: 'Send',
+            margin: const EdgeInsets.only(left: 20, right: 20, bottom: 30),
+            icon: Icon(Icons.check, color: Colors.white),
+            onPressed: onSend,
           )
-        ),
-      ]
+        else
+          Container(height: 78),
+        Padding(
+            padding: const EdgeInsets.only(bottom: 40),
+            child: VirtualKeyboard(
+                height: height * 0.3,
+                fontSize: 25,
+                textColor: Colors.white,
+                type: VirtualKeyboardType.Numeric,
+                onKeyPress: onKey)),
+      ],
     );
   }
 
@@ -214,16 +214,15 @@ class SendPageState extends State<SendPage> {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                buildUser(),
-                buildText(),
-                buildKeyboard(),
-              ],
-            )
-          )
+              child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: <Widget>[
+              buildUser(),
+              buildText(),
+              buildKeyboard(),
+            ],
+          ))
         ],
       ),
     );

@@ -37,9 +37,9 @@ final _mockVideoThumbnail = Thumbnail(
     ..height = 1080,
 );
 
-final mockVideo = Video(
+final Video mockVideo = Video(
   (b) => b
-    ..id = "1"
+    ..id = '1'
     ..fileDetails = _mockFileDetails.toBuilder()
     ..snippet = _mockSnippet.toBuilder(),
 );

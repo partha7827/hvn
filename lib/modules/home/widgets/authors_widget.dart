@@ -23,17 +23,17 @@ class _AuthorsWidgetState extends ModularState<AuthorsWidget, HomeController> {
     super.initState();
     controller.loadRecommendedAuthors();
   }
-  
+
   @override
   Widget build(BuildContext context) {
     return Observer(builder: (_) {
-      bool isVisible = controller.authors.status == FutureStatus.fulfilled &&
+      final isVisible = controller.authors.status == FutureStatus.fulfilled &&
           controller.authors.value.isNotEmpty;
 
       return AnimatedOpacity(
         child: isVisible ? buildAuthors(controller.authors.value) : Container(),
         opacity: isVisible ? 1 : 0,
-        duration: Duration(seconds: 1),
+        duration: const Duration(seconds: 1),
       );
     });
   }
@@ -90,7 +90,7 @@ Widget _authorCard({
         child: Stack(
           children: <Widget>[
             Hero(
-              tag: "author#${user.id}",
+              tag: 'author#${user.id}',
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(10.0),
                 child: CachedNetworkImage(

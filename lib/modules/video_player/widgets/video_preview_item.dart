@@ -22,7 +22,7 @@ class VideoPreviewItem extends StatelessWidget {
       behavior: HitTestBehavior.opaque,
       onTap: () => onTap(video),
       child: Container(
-        padding: EdgeInsets.all(4),
+        padding: const EdgeInsets.all(4),
         child: Stack(
           children: [
             Column(

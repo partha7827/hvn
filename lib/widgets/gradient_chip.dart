@@ -5,7 +5,7 @@ class GradientChip extends StatefulWidget {
   final String label;
   final IconData icon;
   final bool selected;
-  final Function(bool value) onSelected;
+  final void Function(bool value) onSelected;
 
   const GradientChip({
     this.label,
@@ -23,36 +23,36 @@ class _GradientChipState extends State<GradientChip> {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () => widget.onSelected(!widget.selected),
-      borderRadius: BorderRadius.circular(50.0),
+      borderRadius: BorderRadius.circular(50),
       child: Container(
-        height: 40.0,
+        height: 40,
         decoration: BoxDecoration(
           gradient: (widget.selected) ? primaryGradient : null,
           border: Border.all(
             color:
                 widget.selected ? Colors.transparent : const Color(0xFF8E8F99),
           ),
-          borderRadius: BorderRadius.circular(50.0),
+          borderRadius: BorderRadius.circular(50),
         ),
-        padding: const EdgeInsets.symmetric(horizontal: 20.0),
+        padding: const EdgeInsets.symmetric(horizontal: 20),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             if (widget.icon != null)
               Padding(
-                padding: const EdgeInsets.only(right: 10.0),
+                padding: const EdgeInsets.only(right: 10),
                 child: Icon(
                   widget.icon,
                   color: (widget.selected)
                       ? Colors.white
                       : const Color(0xFF8E8F99),
-                  size: 16.0,
+                  size: 16,
                 ),
               ),
             Text(
               widget.label,
               style: TextStyle(
-                fontSize: 14.0,
+                fontSize: 14,
                 color:
                     (widget.selected) ? Colors.white : const Color(0xFF8E8F99),
               ),
