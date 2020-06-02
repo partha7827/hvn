@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -80,19 +79,19 @@ abstract class _LoginControllerBase with Store {
 
       if (firebaseUser.uid != null) {
         debugPrint('googlogin userName: ${firebaseUser.uid}');
-        DocumentSnapshot user =
+        var userSnapshot =
             await firestore.userCollection.document(firebaseUser.uid).get();
-        if (!user.exists) {
+        if (!userSnapshot.exists) {
           // set user data in firebase
           await firestore.userCollection.document(firebaseUser.uid).setData({
             'id': firebaseUser.uid,
             'email': firebaseUser.email,
             'name': firebaseUser.displayName,
           });
-          user =
+          userSnapshot =
               await firestore.userCollection.document(firebaseUser.uid).get();
         }
-        appStore.setCurrentUser(User.fromSnapshot(user));
+        await appStore.setCurrentUser(User.fromSnapshot(userSnapshot));
       } else {
         throw LoginException(Strings.userNotFound);
       }
