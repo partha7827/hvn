@@ -38,6 +38,10 @@ class _OtherUserPageState
     );
   }
 
+  void _showEditProfile() {
+    Modular.to.pushNamed('/editProfile');
+  }
+
   Widget buildProfilePage() {
     return NestedScrollView(
       headerSliverBuilder: (context, innerBoxIsScrolled) {
@@ -50,6 +54,15 @@ class _OtherUserPageState
               leading: const BackButton(
                 onPressed: ProfileModule.toHome,
               ),
+              actions: <Widget>[
+              IconButton(
+                icon: Icon(
+                  Icons.edit,
+                  color: Colors.white,
+                ),
+                onPressed: _showEditProfile,
+              ),
+            ],
               flexibleSpace: LayoutBuilder(
                 builder: (BuildContext context, BoxConstraints constraints) {
                   top = constraints.biggest.height;
