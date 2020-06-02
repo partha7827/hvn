@@ -18,41 +18,41 @@ class InputTextWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 24),
+      padding: const EdgeInsets.symmetric(horizontal: 24),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Text(
             '$title',
-            style: TextStyle(
+            style: const TextStyle(
               color: Color(0xFF525366),
               fontSize: 14,
             ),
           ),
           Theme(
-            data: new ThemeData(
+            data: ThemeData(
               primaryColor: Colors.white24,
             ),
             child: TextFormField(
               controller: controller,
               decoration: InputDecoration(
-                contentPadding: EdgeInsets.symmetric(vertical: 20),
+                contentPadding: const EdgeInsets.symmetric(vertical: 20),
                 border: UnderlineInputBorder(
-                    borderSide: new BorderSide(color: Colors.white24)),
+                    borderSide: BorderSide(color: Colors.white24)),
                 hintText: '$hintText',
-                hintStyle: TextStyle(
+                hintStyle: const TextStyle(
                   color: Color(0xFF525366),
                 ),
               ),
               maxLines: maxLines,
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 14,
                 color: Colors.white,
               ),
               validator: validator,
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 30,
           ),
         ],

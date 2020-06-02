@@ -44,7 +44,7 @@ class ProfileModule extends ChildModule {
           transition: TransitionType.fadeIn,
         ),
         Router(
-          "editProfile",
+          'editProfile',
           child: (_, args) => EditProfile(),
         ),
       ];

@@ -5,7 +5,7 @@ import 'package:highvibe/values/themes.dart';
 import 'current_user/current_user_controller.dart';
 import 'widgets/profile_input_field.dart';
 
-var imgUrl =
+final String imgUrl =
     'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=80';
 
 class EditProfile extends StatelessWidget {
@@ -52,7 +52,7 @@ class EditProfile extends StatelessWidget {
             child: ListView(
               children: <Widget>[
                 Container(
-                  margin: EdgeInsets.symmetric(vertical: 42),
+                  margin: const EdgeInsets.symmetric(vertical: 42),
                   alignment: Alignment.center,
                   child: Stack(
                     alignment: Alignment.bottomRight,
@@ -62,7 +62,7 @@ class EditProfile extends StatelessWidget {
                         child: Container(
                           height: 100,
                           width: 100,
-                          decoration: BoxDecoration(
+                          decoration: const BoxDecoration(
                             color: Colors.white,
                           ),
                           child: Image.network(
@@ -120,7 +120,7 @@ class EditProfile extends StatelessWidget {
                         : 'Please enter about information';
                   },
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 24,
                 ),
               ],
