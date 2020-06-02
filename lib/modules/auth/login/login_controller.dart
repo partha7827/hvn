@@ -79,10 +79,19 @@ abstract class _LoginControllerBase with Store {
 
       if (firebaseUser.uid != null) {
         debugPrint('googlogin userName: ${firebaseUser.uid}');
-        final user =
+        var userSnapshot =
             await firestore.userCollection.document(firebaseUser.uid).get();
-        if (!user.exists) throw LoginException(Strings.userNotFound);
-        await appStore.setCurrentUser(User.fromSnapshot(user));
+        if (!userSnapshot.exists) {
+          // set user data in firebase
+          await firestore.userCollection.document(firebaseUser.uid).setData({
+            'id': firebaseUser.uid,
+            'email': firebaseUser.email,
+            'name': firebaseUser.displayName,
+          });
+          userSnapshot =
+              await firestore.userCollection.document(firebaseUser.uid).get();
+        }
+        await appStore.setCurrentUser(User.fromSnapshot(userSnapshot));
       } else {
         throw LoginException(Strings.userNotFound);
       }
@@ -107,8 +116,11 @@ abstract class _LoginControllerBase with Store {
   Future<GoogleSignInAccount> _getGoogleUser() async {
     var googleUser = _googleSignIn.currentUser;
 
-    googleUser ??= await _googleSignIn.signInSilently();
-    googleUser ??= await _googleSignIn.signIn();
+    if (googleUser != null) {
+      googleUser ??= await _googleSignIn.signInSilently();
+    } else {
+      googleUser ??= await _googleSignIn.signIn();
+    }
 
     return googleUser;
   }
