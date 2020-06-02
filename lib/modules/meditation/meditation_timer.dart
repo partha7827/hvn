@@ -29,7 +29,7 @@ class _MeditationTimerState extends State<MeditationTimer>
         bottom: TabBar(
           controller: _tabController,
           indicatorPadding: const EdgeInsets.only(left: 10.0),
-          indicator: OutlineTabIndicator(
+          indicator: const OutlineTabIndicator(
             gradient: primaryGradient,
           ),
           indicatorSize: TabBarIndicatorSize.label,

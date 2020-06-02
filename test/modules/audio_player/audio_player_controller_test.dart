@@ -20,7 +20,7 @@ void main() {
     controller = Modular.get<AudioPlayerController>();
   });
 
-  test("controller", () async {
+  test('controller', () async {
     expect(controller.player, isInstanceOf<AudioPlayerService>());
     expect(controller.audioFile, isInstanceOf<Audio>());
   });

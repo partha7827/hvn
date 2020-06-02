@@ -10,7 +10,7 @@ class AudioPlayerModule extends WidgetModule {
   AudioPlayerModule(this.audioFile);
 
   @override
-  List<Bind> get binds => [
+  List<Bind<Object>> get binds => [
         Bind<AudioPlayerService>((i) => AudioPlayerService.withPlayer()),
         Bind<AudioPlayerController>((i) => AudioPlayerController(audioFile)),
       ];

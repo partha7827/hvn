@@ -6,9 +6,9 @@ const primaryColor = Color(0xFF000222);
 const secondaryColor = Color(0xFF212342);
 const primaryLightColor = Color(0xFF2E304C);
 const primaryTextColor = Colors.white;
-const accentColor = const Color(0xFF66CCCC);
-const hintTextColor = const Color(0xFF8E8F99);
-const redColor = const Color(0xFFFF0000);
+const accentColor = Color(0xFF66CCCC);
+const hintTextColor = Color(0xFF8E8F99);
+const redColor = Color(0xFFFF0000);
 const mediaPlayerBackgroundColor = Color(0xFF000222);
 
 const LinearGradient primaryGradient = LinearGradient(

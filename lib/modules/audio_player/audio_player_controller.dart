@@ -49,8 +49,9 @@ abstract class _AudioPlayerControllerBase with Store {
     player.play(audioFile.audioUrlPath);
 
     player.positionSubscription.onData((position) {
-      if (position >= Duration(milliseconds: audioFile.duration))
-        return trackPosition = Duration(milliseconds: 0);
+      if (position >= Duration(milliseconds: audioFile.duration)) {
+        return trackPosition = const Duration(milliseconds: 0);
+      }
 
       return trackPosition = position;
     });
@@ -103,6 +104,6 @@ abstract class _AudioPlayerControllerBase with Store {
     Duration trackPosition,
   }) =>
       buttonType == AudioPlayerSkipButtonType.fastForward
-          ? player.seek(trackPosition + Duration(seconds: 15))
-          : player.seek(trackPosition - Duration(seconds: 15));
+          ? player.seek(trackPosition + const Duration(seconds: 15))
+          : player.seek(trackPosition - const Duration(seconds: 15));
 }

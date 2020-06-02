@@ -44,13 +44,13 @@ class _AudioPlayerPageState
 
     artworkAnimation = AnimationController(
       vsync: this,
-      duration: Duration(milliseconds: 1500),
+      duration: const Duration(milliseconds: 1500),
     );
     artworkAnimation.forward();
 
     playButtonAnimation = AnimationController(
       vsync: this,
-      duration: Duration(milliseconds: 500),
+      duration: const Duration(milliseconds: 500),
     );
 
     reaction((_) => controller.isPlaying, (val) {
@@ -72,13 +72,14 @@ class _AudioPlayerPageState
         color: controller.isMinimized ? mediaPlayerBackgroundColor : null,
         height: controller.isMinimized ? 80 : null,
         width: screenWidth(context),
-        margin: EdgeInsets.only(left: 0, right: 0),
+        margin: const EdgeInsets.only(left: 0, right: 0),
         child: Stack(
           children: [
             Opacity(
               opacity: controller.isMinimized ? 1 : 0.5,
               child: FadeTransition(
-                opacity: artworkAnimation.drive(CurveTween(curve: Curves.easeOut)),
+                opacity:
+                    artworkAnimation.drive(CurveTween(curve: Curves.easeOut)),
                 child: Hero(
                   tag: 'audio#${controller.audioFile.id}',
                   child: Container(
@@ -105,7 +106,7 @@ class _AudioPlayerPageState
   }
 
   void _close() async {
-    controller.player.stop();
+    await controller.player.stop();
     MediaOverlays.disposeAudioOverlayEntry();
   }
 
