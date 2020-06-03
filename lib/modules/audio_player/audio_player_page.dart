@@ -12,11 +12,12 @@ import 'package:highvibe/widgets/responsive_safe_area.dart';
 import 'package:mobx/mobx.dart';
 
 class AudioPlayerPage extends StatefulWidget {
+  AudioPlayerPage({Key key}) : super(key: key);
   @override
-  _AudioPlayerPageState createState() => _AudioPlayerPageState();
+  AudioPlayerPageState createState() => AudioPlayerPageState();
 }
 
-class _AudioPlayerPageState
+class AudioPlayerPageState
     extends ModularState<AudioPlayerPage, AudioPlayerController>
     with TickerProviderStateMixin {
   AnimationController playButtonAnimation;
