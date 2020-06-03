@@ -78,15 +78,14 @@ class _AudioPlayerPageState
             ),
             width: screenWidth(context),
             margin: const EdgeInsets.only(left: 0, right: 0),
-            padding: const EdgeInsets.symmetric(vertical: 24),
+            padding: const EdgeInsets.symmetric(vertical: 16),
             child: _minimizedAudioPlayer(context),
           ),
         ),
       );
     }
     return Align(
-      alignment:
-          Alignment.center,
+      alignment: Alignment.center,
       child: Container(
         color: null,
         height: null,
@@ -116,8 +115,7 @@ class _AudioPlayerPageState
                 ),
               ),
             ),
-            if (!controller.isMinimized)
-              ..._fullScreenAudioPlayer(),
+            if (!controller.isMinimized) ..._fullScreenAudioPlayer(),
           ],
         ),
       ),
@@ -131,7 +129,7 @@ class _AudioPlayerPageState
       children: [
         Container(
           padding: const EdgeInsets.symmetric(
-            horizontal: 24,
+            horizontal: 20,
           ),
           child: Column(
             mainAxisSize: MainAxisSize.min,
@@ -143,7 +141,7 @@ class _AudioPlayerPageState
                   children: <Widget>[
                     _audioArtwork(),
                     const SizedBox(
-                      width: 12,
+                      width: 10,
                     ),
                     _audioDetails(),
                     _audioPlayerButtons(),
@@ -171,8 +169,8 @@ class _AudioPlayerPageState
           child: ClipRRect(
             borderRadius: BorderRadius.circular(12),
             child: Container(
-              width: 60,
-              height: 60,
+              width: 48,
+              height: 48,
               decoration: BoxDecoration(
                 image: DecorationImage(
                   fit: BoxFit.cover,
@@ -198,6 +196,7 @@ class _AudioPlayerPageState
               icon: Icon(
                 Icons.favorite_border,
                 color: Colors.white,
+                size: 30,
               ),
               onPressed: () {}),
           AudioPlayerPlayButton(
@@ -217,7 +216,7 @@ class _AudioPlayerPageState
         children: <Widget>[
           Text(
             '${controller.audioFile.title}',
-            style: bold18White,
+            style: bold16White,
             overflow: TextOverflow.ellipsis,
           ),
           const SizedBox(
@@ -225,7 +224,7 @@ class _AudioPlayerPageState
           ),
           Text(
             '${controller.audioFile.subTitle}',
-            style: normal16White,
+            style: normal14White,
             overflow: TextOverflow.ellipsis,
           ),
         ],
@@ -242,7 +241,8 @@ class _AudioPlayerPageState
         builder: (_) => Container(
           width: controller.sliderPosition * screenWidth(context),
           decoration: BoxDecoration(
-            gradient: LinearGradient(colors: [Colors.indigo, Colors.cyan]),
+            gradient: const LinearGradient(
+                colors: [Color(0xFF666CCC), Color(0xFF66CCCC)]),
             borderRadius: BorderRadius.circular(4),
           ),
         ),
