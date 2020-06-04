@@ -17,9 +17,9 @@ class ProfileTabButtons extends StatelessWidget {
           controller: controller,
           labelColor: Colors.white,
           unselectedLabelColor: Colors.grey,
-          indicator: UnderlineGradientIndicator(
+          indicator: const UnderlineGradientIndicator(
             gradient: primaryGradientHorizontal,
-            insets: const EdgeInsets.symmetric(horizontal: 16.0),
+            insets: EdgeInsets.symmetric(horizontal: 16.0),
           ),
           tabs: [
             Tab(icon: Image.asset('assets/ic_audio_colored.png')),

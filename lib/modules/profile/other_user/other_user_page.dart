@@ -55,14 +55,14 @@ class _OtherUserPageState
                 onPressed: ProfileModule.toHome,
               ),
               actions: <Widget>[
-              IconButton(
-                icon: Icon(
-                  Icons.edit,
-                  color: Colors.white,
+                IconButton(
+                  icon: const Icon(
+                    Icons.edit,
+                    color: Colors.white,
+                  ),
+                  onPressed: _showEditProfile,
                 ),
-                onPressed: _showEditProfile,
-              ),
-            ],
+              ],
               flexibleSpace: LayoutBuilder(
                 builder: (BuildContext context, BoxConstraints constraints) {
                   top = constraints.biggest.height;

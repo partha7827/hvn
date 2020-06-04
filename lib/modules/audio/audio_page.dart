@@ -35,7 +35,7 @@ class _AudioPageState extends ModularState<AudioPage, AudioController> {
               padding: const EdgeInsets.only(
                   left: 20, top: 10, bottom: 80, right: 8),
               children: [
-                HeaderRow(title: Strings.uploads),
+                const HeaderRow(title: Strings.uploads),
                 for (final audioItem in controller.audios.value)
                   AudioTile(
                     audioFile: audioItem,

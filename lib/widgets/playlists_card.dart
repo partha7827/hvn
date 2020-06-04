@@ -50,7 +50,7 @@ class PlaylistsCard extends StatelessWidget {
               '$playlistLength ${Strings.meditations}',
               style: normal14Hint,
             ),
-            trailing: Icon(Icons.playlist_play, color: Colors.white),
+            trailing: const Icon(Icons.playlist_play, color: Colors.white),
             children: <Widget>[
               for (final audioItem in mockAudioItemsList)
                 AudioTile(

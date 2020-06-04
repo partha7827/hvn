@@ -21,9 +21,9 @@ class EditProfile extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         leading: IconButton(
-            icon: Icon(Icons.arrow_back, color: Colors.white),
+            icon: const Icon(Icons.arrow_back, color: Colors.white),
             onPressed: () => Modular.to.pop()),
-        title: Text(
+        title: const Text(
           'Edit Profile',
           style: TextStyle(
             fontWeight: FontWeight.bold,
@@ -31,7 +31,7 @@ class EditProfile extends StatelessWidget {
         ),
         actions: <Widget>[
           IconButton(
-            icon: Icon(
+            icon: const Icon(
               Icons.check,
               color: Colors.white,
             ),

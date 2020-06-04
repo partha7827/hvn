@@ -45,8 +45,8 @@ class _AudiosWidgetState extends ModularState<AudiosWidget, HomeController> {
       padding: const EdgeInsets.only(bottom: 16),
       child: Column(
         children: [
-          Padding(
-            padding: const EdgeInsets.only(left: 16),
+          const Padding(
+            padding: EdgeInsets.only(left: 16),
             child: HeaderRow(
               title: Strings.recommendedAudios,
               showTrailing: true,

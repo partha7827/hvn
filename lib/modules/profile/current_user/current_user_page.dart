@@ -60,7 +60,7 @@ class _CurrentUserPageState
                       onPressed: () {},
                     ),
                     IconButton(
-                      icon: Icon(Icons.exit_to_app),
+                      icon: const Icon(Icons.exit_to_app),
                       onPressed: controller.logout,
                     ),
                   ],
@@ -207,9 +207,9 @@ class _CurrentUserPageState
                       controller: _tabController,
                       labelColor: Colors.white,
                       unselectedLabelColor: Colors.grey,
-                      indicator: UnderlineGradientIndicator(
+                      indicator: const UnderlineGradientIndicator(
                         gradient: primaryGradientHorizontal,
-                        insets: const EdgeInsets.symmetric(horizontal: 16.0),
+                        insets: EdgeInsets.symmetric(horizontal: 16.0),
                       ),
                       tabs: [
                         Tab(

@@ -116,7 +116,7 @@ class _AudioPlayerPageState
       right: -16,
       child: FlatButton(
         onPressed: () => _close(),
-        child: Icon(
+        child: const Icon(
           Icons.close,
           color: Colors.white,
           size: 32,
@@ -140,7 +140,7 @@ class _AudioPlayerPageState
       Container(
         width: double.maxFinite,
         constraints: BoxConstraints(minHeight: screenHeight(context) * 0.4),
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           gradient: darkToTransparentGradientTop,
         ),
         child: Padding(
@@ -178,7 +178,7 @@ class _AudioPlayerPageState
           constraints: BoxConstraints(
             minHeight: screenHeight(context) * 0.4,
           ),
-          decoration: BoxDecoration(gradient: darkToTransparentGradient),
+          decoration: const BoxDecoration(gradient: darkToTransparentGradient),
           child: Padding(
             padding: const EdgeInsets.only(left: 40, right: 40, bottom: 20),
             child: Column(
@@ -267,7 +267,7 @@ class _AudioPlayerPageState
             controller.audioFile.title,
             maxLines: 2,
             overflow: TextOverflow.clip,
-            style: TextStyle(
+            style: const TextStyle(
               color: Colors.white,
               fontSize: 18,
               fontWeight: FontWeight.normal,
@@ -288,7 +288,7 @@ class _AudioPlayerPageState
             controller.audioFile.subTitle,
             maxLines: 2,
             overflow: TextOverflow.clip,
-            style: TextStyle(
+            style: const TextStyle(
               color: Colors.grey,
               fontSize: 12,
               fontWeight: FontWeight.normal,
@@ -322,7 +322,7 @@ class _AudioPlayerPageState
               '${controller.positionText ?? ''}',
               maxLines: 1,
               overflow: TextOverflow.clip,
-              style: TextStyle(
+              style: const TextStyle(
                 color: Colors.white,
                 fontSize: 12,
                 fontWeight: FontWeight.normal,
@@ -349,7 +349,7 @@ class _AudioPlayerPageState
         left: -16,
         child: FlatButton(
           onPressed: () => controller.toggleAudioPlayerMode(),
-          child: Icon(
+          child: const Icon(
             Icons.keyboard_arrow_down,
             color: Colors.white,
             size: 32,
