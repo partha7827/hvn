@@ -12,14 +12,15 @@ part 'serializer.g.dart';
 
 @SerializersFor([
   Audio,
+  Channel,
   FileDetails,
+  Message,
+  PlayList,
   Snippet,
   Tag,
   Thumbnail,
-  Message,
   User,
   Video,
-  Channel,
 ])
 final Serializers serializers = (_$serializers.toBuilder()
       ..addPlugin(StandardJsonPlugin())
