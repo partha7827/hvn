@@ -8,7 +8,7 @@ part 'video_controller.g.dart';
 class VideoController = _VideoControllerBase with _$VideoController;
 
 abstract class _VideoControllerBase with Store {
-  final store = Modular.get<FirestoreService>();
+  final FirestoreService store = Modular.get<FirestoreService>();
 
   final String userId;
   _VideoControllerBase(this.userId);
@@ -20,7 +20,7 @@ abstract class _VideoControllerBase with Store {
   void loadVideos() {
     videos = ObservableFuture(
       store.videoCollection
-          .where("userId", isEqualTo: userId)
+          .where('userId', isEqualTo: userId)
           .getDocuments()
           .then((s) => Video.parseListOfVideos(s).toList()),
     );

@@ -4,16 +4,16 @@ import 'package:highvibe/modules/video_player/video_player_page.dart';
 
 class VideoPlayerModule extends ChildModule {
   @override
-  List<Bind> get binds => [];
+  List<Bind<Object>> get binds => [];
 
   @override
-  List<Router> get routers => [
+  List<Router<Object>> get routers => [
         Router(
-          "/videoplayer",
+          '/videoplayer',
           child: (_, args) => VideoPlayerPage(video: args.data),
         ),
       ];
 
-  static Future toPlayer(Video video) =>
-      Modular.to.pushNamed("videoplayer", arguments: video);
+  static Future<Object> toPlayer(Video video) =>
+      Modular.to.pushNamed('videoplayer', arguments: video);
 }

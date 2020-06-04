@@ -7,7 +7,7 @@ import 'package:highvibe/values/themes.dart';
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setSystemUIOverlayStyle(
-    SystemUiOverlayStyle(
+    const SystemUiOverlayStyle(
       systemNavigationBarColor: primaryColor,
       statusBarColor: Colors.transparent,
     ),

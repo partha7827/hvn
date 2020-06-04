@@ -47,11 +47,11 @@ class CustomTextForm extends StatelessWidget {
           counterStyle: normal12White,
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(borderRadius ?? 10),
-            borderSide: BorderSide(color: Colors.white),
+            borderSide: const BorderSide(color: Colors.white),
           ),
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(borderRadius ?? 10),
-            borderSide: BorderSide(color: Colors.white),
+            borderSide: const BorderSide(color: Colors.white),
           ),
           prefixIcon: Icon(
             icon,

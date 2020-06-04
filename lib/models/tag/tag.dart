@@ -47,7 +47,7 @@ abstract class Tag implements Built<Tag, TagBuilder> {
 
   static void _initializeBuilder(TagBuilder b) => b
     ..id = Uuid().v4()
-    ..name = ""
+    ..name = ''
     ..isRecommended = false
     ..isVisible = false
     ..createdAt = DateTime.now().toUtc();

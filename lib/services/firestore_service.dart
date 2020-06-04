@@ -13,21 +13,20 @@ abstract class IFirestoreService {
 }
 
 class FirestoreService extends IFirestoreService with UserQueries {
-  FirestoreService(firestore) {
-    userCollection = firestore.collection("users");
-    messageCollection = firestore.collection("messages");
-    channelCollection = firestore.collection("channels");
-    tagCollection = firestore.collection("tags");
-    videoCollection = firestore.collection("video");
-    audioCollection = firestore.collection("audio");
+  FirestoreService(dynamic firestore) {
+    userCollection = firestore.collection('users');
+    messageCollection = firestore.collection('messages');
+    channelCollection = firestore.collection('channels');
+    tagCollection = firestore.collection('tags');
+    videoCollection = firestore.collection('video');
+    audioCollection = firestore.collection('audio');
   }
 
-  factory FirestoreService.withFirebase() => FirestoreService(Firestore.instance);
-  CollectionReference _messageCollection;
+  factory FirestoreService.withFirebase() =>
+      FirestoreService(Firestore.instance);
 
   factory FirestoreService.withMock() =>
       FirestoreService(MockCloudFirestore(mockDatabase));
-  CollectionReference get messageCollection => _messageCollection;
 
   void dispose() {}
 }

@@ -42,10 +42,10 @@ abstract class Message implements Built<Message, MessageBuilder> {
 
   static void _initializeBuilder(MessageBuilder b) => b
     ..id = Uuid().v4()
-    ..chatId = ""
-    ..authorId = ""
-    ..authorName = ""
-    ..authorPhotoUrl = ""
-    ..content = ""
+    ..chatId = ''
+    ..authorId = ''
+    ..authorName = ''
+    ..authorPhotoUrl = ''
+    ..content = ''
     ..createdAt = DateTime.now().toUtc();
 }

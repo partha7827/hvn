@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class AudioPlayerPlayButton extends StatelessWidget {
   final Color color;
   final VoidCallback onPressed;
-  final Animation progress;
+  final Animation<double> progress;
 
   AudioPlayerPlayButton({
     @required this.onPressed,

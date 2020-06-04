@@ -5,7 +5,7 @@ import 'package:highvibe/modules/discover/audios/discover_audios_view.dart';
 
 class DiscoverAudios extends WidgetModule {
   @override
-  final List<Bind> binds = [
+  final List<Bind<Object>> binds = [
     Bind((i) => DiscoverAudiosController()),
   ];
 

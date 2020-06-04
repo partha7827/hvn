@@ -15,7 +15,7 @@ import 'login_controller.dart';
 
 class LoginPage extends StatefulWidget {
   final String title;
-  const LoginPage({this.title = "Login"});
+  const LoginPage({this.title = 'Login'});
 
   @override
   _LoginPageState createState() => _LoginPageState();
@@ -83,8 +83,9 @@ class _LoginPageState extends ModularState<LoginPage, LoginController> {
                       label: Strings.login,
                       isLoading: controller.inProgress,
                       onPressed: () async {
-                        if (!controller.formKey.currentState.validate())
+                        if (!controller.formKey.currentState.validate()) {
                           return null;
+                        }
                         try {
                           await controller.loginUser();
                         } catch (e) {

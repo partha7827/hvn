@@ -15,9 +15,9 @@ abstract class _ChatControllerBase with Store {
   final String channelId;
   _ChatControllerBase(this.channelId);
 
-  final appStore = Modular.get<AppController>();
+  final AppController appStore = Modular.get<AppController>();
 
-  final firestore = Modular.get<FirestoreService>();
+  final FirestoreService firestore = Modular.get<FirestoreService>();
 
   User get currentUser => appStore.currentUser;
 
@@ -32,26 +32,26 @@ abstract class _ChatControllerBase with Store {
     final serializedMessage =
         serializers.serializeWith(Message.serializer, message);
 
-    firestore.messageCollection.add(serializedMessage);
+    await firestore.messageCollection.add(serializedMessage);
 
-    firestore.channelCollection
+    await firestore.channelCollection
         .document(channelId)
-        .collection("messages")
+        .collection('messages')
         .add(serializedMessage);
   }
 
   Stream<QuerySnapshot> getChannelMessages() {
     return firestore.channelCollection
         .document(channelId)
-        .collection("messages")
-        .orderBy("createdAt", descending: false)
+        .collection('messages')
+        .orderBy('createdAt', descending: false)
         .snapshots();
   }
 
   Stream<QuerySnapshot> findMessagesByChannel() {
     return firestore.messageCollection
-        .where("channelId", isEqualTo: channelId)
-        .orderBy("createdAt", descending: false)
+        .where('channelId', isEqualTo: channelId)
+        .orderBy('createdAt', descending: false)
         .snapshots();
   }
 }

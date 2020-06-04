@@ -12,23 +12,23 @@ import 'package:highvibe/services/firestore_service.dart';
 
 class AppModule extends MainModule {
   @override
-  List<Bind> get binds => [
+  List<Bind<dynamic>> get binds => [
         Bind((i) => AppController()),
         Bind((i) => AuthService.withFirebase()),
         Bind((i) => FirestoreService.withFirebase()),
       ];
 
   @override
-  List<Router> get routers => [
-        Router("", module: AuthModule()),
-        Router("", module: HomeModule()),
-        Router("", module: ProfileModule()),
-        Router("", module: WalletModule()),
-        Router("", module: DiscoverModule()),
+  List<Router<dynamic>> get routers => [
+        Router('', module: AuthModule()),
+        Router('', module: HomeModule()),
+        Router('', module: ProfileModule()),
+        Router('', module: WalletModule()),
+        Router('', module: DiscoverModule()),
       ];
 
   @override
-  Widget get bootstrap => AppWidget();
+  Widget get bootstrap => const AppWidget();
 
-  static Inject get to => Inject<AppModule>.of();
+  static Inject<AppModule> get to => Inject<AppModule>.of();
 }

@@ -5,8 +5,8 @@ import 'package:highvibe/widgets/custom_fab.dart';
 
 class MessageComposer extends StatelessWidget {
   final Function sendMessage;
-  
-  MessageComposer({ @required this.sendMessage });
+
+  MessageComposer({@required this.sendMessage});
 
   final _messageController = TextEditingController();
 

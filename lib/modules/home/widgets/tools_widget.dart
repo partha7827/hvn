@@ -76,8 +76,8 @@ class ToolsWidget extends StatelessWidget {
                     child: InkWell(
                       onTap: () => Navigator.push(
                         context,
-                        MaterialPageRoute(
-                          builder: (_) => MeditationTimer(),
+                        MaterialPageRoute<MeditationTimer>(
+                          builder: (context) => MeditationTimer(),
                         ),
                       ),
                       borderRadius: BorderRadius.circular(10.0),

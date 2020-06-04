@@ -16,8 +16,7 @@ class LivePage extends StatefulWidget {
   _LivePageState createState() => _LivePageState();
 }
 
-class _LivePageState
-    extends ModularState<LivePage, LiveController> {
+class _LivePageState extends ModularState<LivePage, LiveController> {
   @override
   Widget build(BuildContext context) {
     return ListView(
@@ -43,7 +42,7 @@ class _LivePageState
         ),
         Container(
           width: double.maxFinite,
-          child: StreamCard(
+          child: const StreamCard(
             title: 'Spritual Meditations',
             subTitle: 'Deep knowlege of spritual meditation...',
             shares: '8k',
@@ -52,7 +51,7 @@ class _LivePageState
           ),
         ),
         OutlineButton(
-          child: Text("JOIN NOW"),
+          child: const Text('JOIN NOW'),
           onPressed: () {
             LiveModule.toLive(widget.userId);
           },
@@ -103,8 +102,8 @@ class _LivePageState
             itemCount: 4,
             scrollDirection: Axis.horizontal,
             itemBuilder: (context, index) {
-              return Padding(
-                padding: const EdgeInsets.all(8.0),
+              return const Padding(
+                padding: EdgeInsets.all(8.0),
                 child: StreamCard(
                   title: 'Spritual Meditations',
                   subTitle: 'Deep knowlege of spritual meditation...',

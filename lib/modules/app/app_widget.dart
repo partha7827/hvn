@@ -12,7 +12,7 @@ class AppWidget extends StatefulWidget {
 }
 
 class _AppWidgetState extends State<AppWidget> {
-  final appStore = Modular.get<AppController>();
+  final AppController appStore = Modular.get<AppController>();
 
   @override
   Widget build(BuildContext context) {
@@ -32,9 +32,9 @@ class _AppWidgetState extends State<AppWidget> {
 
     reaction((_) => appStore.authState, (authState) {
       if (authState == AuthState.unauthenticated) {
-        Modular.to.pushNamedAndRemoveUntil("/login", (_) => false);
+        Modular.to.pushNamedAndRemoveUntil('/login', (_) => false);
       } else if (authState == AuthState.authenticated) {
-        Modular.to.pushNamedAndRemoveUntil("/home", (_) => false);
+        Modular.to.pushNamedAndRemoveUntil('/home', (_) => false);
       }
     });
   }
