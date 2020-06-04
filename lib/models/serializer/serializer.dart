@@ -16,6 +16,7 @@ part 'serializer.g.dart';
   FileDetails,
   Message,
   PlayList,
+  Privacy,
   Snippet,
   Tag,
   Thumbnail,
