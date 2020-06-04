@@ -10,9 +10,7 @@ class AudioPlayerController = _AudioPlayerControllerBase
     with _$AudioPlayerController;
 
 abstract class _AudioPlayerControllerBase with Store {
-  Audio audioFile;
-  _AudioPlayerControllerBase(this.audioFile);
-
+  final Audio audioFile;
   final AudioPlayerService player = Modular.get<AudioPlayerService>();
 
   @observable
@@ -26,6 +24,8 @@ abstract class _AudioPlayerControllerBase with Store {
 
   @observable
   AudioPlayerState playerState;
+
+  _AudioPlayerControllerBase(this.audioFile);
 
   @computed
   bool get isMinimized => audioPlayerMode == AudioPlayerMode.minimized;
@@ -44,6 +44,10 @@ abstract class _AudioPlayerControllerBase with Store {
       ? trackPosition.inMilliseconds / audioFile.duration
       : 0;
 
+  void disableLoopMode() => player.setReleaseMode(ReleaseMode.RELEASE);
+
+  void enableLoopMode() => player.setReleaseMode(ReleaseMode.LOOP);
+
   @action
   void init() {
     player.play(audioFile.audioUrlPath);
@@ -61,14 +65,17 @@ abstract class _AudioPlayerControllerBase with Store {
     });
   }
 
-  @action
-  void toggleLoopMode() {
-    if (isLoopMode) {
-      disableLoopMode();
-    } else {
-      enableLoopMode();
-    }
-  }
+  void seekToPosition(double value) => player.seek(Duration(
+        milliseconds: (value * audioFile.duration).round(),
+      ));
+
+  void skip15Seconds({
+    AudioPlayerSkipButtonType buttonType,
+    Duration trackPosition,
+  }) =>
+      buttonType == AudioPlayerSkipButtonType.fastForward
+          ? player.seek(trackPosition + const Duration(seconds: 15))
+          : player.seek(trackPosition - const Duration(seconds: 15));
 
   @action
   void toggleAudioPlayerMode() {
@@ -76,6 +83,15 @@ abstract class _AudioPlayerControllerBase with Store {
       audioPlayerMode = AudioPlayerMode.minimized;
     } else {
       audioPlayerMode = AudioPlayerMode.none;
+    }
+  }
+
+  @action
+  void toggleLoopMode() {
+    if (isLoopMode) {
+      disableLoopMode();
+    } else {
+      enableLoopMode();
     }
   }
 
@@ -91,19 +107,6 @@ abstract class _AudioPlayerControllerBase with Store {
     }
   }
 
-  void enableLoopMode() => player.setReleaseMode(ReleaseMode.LOOP);
-
-  void disableLoopMode() => player.setReleaseMode(ReleaseMode.RELEASE);
-
-  void seekToPosition(double value) => player.seek(Duration(
-        milliseconds: (value * audioFile.duration).round(),
-      ));
-      
-  void skip15Seconds({
-    AudioPlayerSkipButtonType buttonType,
-    Duration trackPosition,
-  }) =>
-      buttonType == AudioPlayerSkipButtonType.fastForward
-          ? player.seek(trackPosition + const Duration(seconds: 15))
-          : player.seek(trackPosition - const Duration(seconds: 15));
+  @override
+  void noSuchMethod(Invocation i) => super.noSuchMethod(i);
 }
