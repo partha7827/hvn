@@ -36,10 +36,10 @@ class DrawerWidget extends StatelessWidget {
                       gradient: primaryGradient,
                     ),
                     padding: const EdgeInsets.all(2),
-                    child: CircleAvatar(
+                    child: const CircleAvatar(
                       backgroundColor: primaryColor,
                       radius: 30,
-                      child: const CircleAvatar(
+                      child: CircleAvatar(
                         radius: 26,
                         backgroundImage: AssetImage('assets/ic_avatar.jpg'),
                       ),
