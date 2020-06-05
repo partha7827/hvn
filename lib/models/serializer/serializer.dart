@@ -28,8 +28,8 @@ final Serializers serializers = (_$serializers.toBuilder()
       ..add(Iso8601DateTimeSerializer()))
     .build();
 
-T deserialize<T>(dynamic value) =>
+T deserialize<T>(Object value) =>
     serializers.deserializeWith<T>(serializers.serializerForType(T), value);
 
-BuiltList<T> deserializeListOf<T>(dynamic items) => BuiltList.from(
-    items.map((dynamic item) => deserialize<T>(item)).toList(growable: false));
+BuiltList<T> deserializeListOf<T>(Iterable<Object> items) => BuiltList.from(
+    items.map((Object item) => deserialize<T>(item)).toList(growable: false));
