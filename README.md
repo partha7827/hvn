@@ -36,12 +36,6 @@ flutter pub run build_runner build --delete-conflicting-outputs && \
 flutter run
 ```
 
-### Update App Icon
-
-```sh
-flutter pub run flutter_launcher_icons:main
-```
-
 ### Codecov (_WIP_)
 
 You can use [Codecov](https://codecov.io) automatically as long as the repository's owner is a paid Codecov member (assuming this is a private repo).
@@ -119,3 +113,24 @@ All non-trivial code should be tested. Contributors are encouraged to use [TDD](
 
 All development branches must pass CI before merging.
 Save yourself some trouble and run `flutter test test/all.dart` before filing a pull request.
+
+### Release
+
+#### Define the version and build number for your application
+
+The following defines the version and build number for your application.
+A version number is three numbers separated by dots, like 1.2.43
+followed by an optional build number separated by a +.
+Both the version and the builder number may be overridden in flutter
+build by specifying --build-name and --build-number, respectively.
+
+In **Android**, build-name is used as versionName while build-number used as versionCode.
+Read more about Android versioning at [https://developer.android.com/studio/publish/versioning](https://developer.android.com/studio/publish/versioning)
+
+In **iOS**, build-name is used as CFBundleShortVersionString while build-number used as CFBundleVersion. Read more about iOS versioning at [https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html](https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html)
+
+#### Update App Icon
+
+```sh
+flutter pub run flutter_launcher_icons:main
+```
