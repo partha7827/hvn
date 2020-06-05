@@ -3,6 +3,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:highvibe/modules/home/widgets/audios_widget.dart';
 import 'package:highvibe/modules/home/widgets/authors_widget.dart';
+import 'package:highvibe/modules/home/widgets/drawer_widget.dart';
 import 'package:highvibe/modules/home/widgets/exit_app.dart';
 import 'package:highvibe/values/Strings.dart';
 import 'package:highvibe/values/themes.dart';
@@ -18,11 +19,19 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends ModularState<HomePage, HomeController> {
+    final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+
+  void _openDrawer() {
+    _scaffoldKey.currentState.openDrawer();
+  }
+
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: willPop,
       child: Scaffold(
+        key: _scaffoldKey,
+        drawer: DrawerWidget(),
         body: Stack(
           children: [
             Positioned(
@@ -66,7 +75,14 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
                   ),
                 ],
               ),
-            )
+            ),
+            Positioned(
+                top: 40,
+                left: 10,
+                child: IconButton(
+                  icon: Icon(Icons.dehaze),
+                  onPressed: _openDrawer,
+                )),
           ],
         ),
       ),
