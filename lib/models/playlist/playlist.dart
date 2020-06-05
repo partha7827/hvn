@@ -22,7 +22,7 @@ abstract class PlayList implements Built<PlayList, PlayListBuilder> {
   String get desscription;
   String get title;
   Privacy get privacy;
-  BuiltList<Audio> get audioFiles;
+  BuiltList<String> get audioFilesIds;
 
   String toJson() {
     return json.encode(serializers.serializeWith(PlayList.serializer, this));
