@@ -64,7 +64,9 @@ dependencies:
   virtual_keyboard: ^0.1.4
   flutter_spinkit: ^4.1.2+1
   flutter_launcher_icons: ^0.7.5
-
+  file_picker: ^1.7.1
+  firebase_storage_mocks: ^0.1.0
+  
 dev_dependencies:
   flutter_driver:
     sdk: flutter
