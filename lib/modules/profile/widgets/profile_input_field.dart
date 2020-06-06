@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class InputTextWidget extends StatelessWidget {
-  const InputTextWidget(
+class ProfileInputField extends StatelessWidget {
+  const ProfileInputField(
       {Key key,
       this.title = '',
       this.hintText = '',
