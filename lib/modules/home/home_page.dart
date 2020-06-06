@@ -6,6 +6,7 @@ import 'package:highvibe/modules/home/widgets/authors_widget.dart';
 import 'package:highvibe/modules/home/widgets/exit_app.dart';
 import 'package:highvibe/values/strings.dart';
 import 'package:highvibe/values/themes.dart';
+import 'package:highvibe/widgets/playlists_card.dart';
 
 import 'home_controller.dart';
 
@@ -21,7 +22,7 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
-      onWillPop: willPop,
+      onWillPop: _willPop,
       child: Scaffold(
         body: Stack(
           children: [
@@ -54,7 +55,11 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
                 children: [
                   Padding(
                     padding: const EdgeInsets.only(top: 80, bottom: 40),
-                    child: buildQuoteWidget(),
+                    child: _buildQuoteWidget(),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 80, bottom: 40),
+                    child: _playlist(),
                   ),
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: 40),
@@ -73,7 +78,14 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
     );
   }
 
-  Column buildQuoteWidget() {
+  Widget _playlist() {
+    return const PlaylistsCard(
+      playlistLength: 5,
+      title: 'My Play List',
+    );
+  }
+
+  Column _buildQuoteWidget() {
     return Column(
       children: <Widget>[
         SvgPicture.asset('assets/ic_quote.svg'),
@@ -94,7 +106,7 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
     );
   }
 
-  Future<bool> willPop() async {
+  Future<bool> _willPop() async {
     final shouldExit = await showExitDialog(context);
     return shouldExit;
   }
