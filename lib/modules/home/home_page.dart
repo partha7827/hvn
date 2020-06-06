@@ -6,7 +6,7 @@ import 'package:highvibe/modules/home/widgets/authors_widget.dart';
 import 'package:highvibe/modules/home/widgets/exit_app.dart';
 import 'package:highvibe/values/strings.dart';
 import 'package:highvibe/values/themes.dart';
-import 'package:highvibe/widgets/playlists_card.dart';
+import 'package:highvibe/modules/playlist/widgets/playlists_card.dart';
 
 import 'home_controller.dart';
 

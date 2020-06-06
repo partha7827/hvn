@@ -4,8 +4,7 @@ import 'package:highvibe/mocks/mock_audio_files.dart';
 import 'package:highvibe/modules/app/media_overlays.dart';
 import 'package:highvibe/values/strings.dart';
 import 'package:highvibe/values/themes.dart';
-
-import 'audio_tile.dart';
+import 'package:highvibe/widgets/audio_tile.dart';
 
 const _dummyImgUrl =
     'https://takelessons.com/blog/wp-content/uploads/2020/03/flute-for-beginners.jpg';
