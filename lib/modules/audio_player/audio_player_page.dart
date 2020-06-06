@@ -65,26 +65,44 @@ class _AudioPlayerPageState
   }
 
   Widget _audioWidget(BuildContext context) {
+    if (controller.isMinimized) {
+      return GestureDetector(
+        onTap: controller.toggleAudioPlayerMode,
+        child: Align(
+          alignment: Alignment.bottomCenter,
+          child: Container(
+            decoration: const BoxDecoration(
+              color: Color(0xFF212342),
+              borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(20), topRight: Radius.circular(20)),
+            ),
+            width: screenWidth(context),
+            margin: const EdgeInsets.only(left: 0, right: 0),
+            padding: const EdgeInsets.symmetric(vertical: 16),
+            child: _minimizedAudioPlayer(context),
+          ),
+        ),
+      );
+    }
     return Align(
-      alignment:
-          controller.isMinimized ? Alignment.bottomCenter : Alignment.center,
+      alignment: Alignment.center,
       child: Container(
-        color: controller.isMinimized ? mediaPlayerBackgroundColor : null,
-        height: controller.isMinimized ? 80 : null,
+        color: null,
+        height: null,
         width: screenWidth(context),
         margin: const EdgeInsets.only(left: 0, right: 0),
         child: Stack(
           children: [
             Opacity(
-              opacity: controller.isMinimized ? 1 : 0.5,
+              opacity: 0.5,
               child: FadeTransition(
                 opacity:
                     artworkAnimation.drive(CurveTween(curve: Curves.easeOut)),
                 child: Hero(
                   tag: 'audio#${controller.audioFile.id}',
                   child: Container(
-                    width: controller.isMinimized ? 80 : null,
-                    height: controller.isMinimized ? 80 : null,
+                    width: null,
+                    height: null,
                     decoration: BoxDecoration(
                       image: DecorationImage(
                         fit: BoxFit.cover,
@@ -98,8 +116,135 @@ class _AudioPlayerPageState
               ),
             ),
             if (!controller.isMinimized) ..._fullScreenAudioPlayer(),
-            if (controller.isMinimized) ..._minimizedAudioPlayer(),
           ],
+        ),
+      ),
+    );
+  }
+
+  Column _minimizedAudioPlayer(BuildContext context) {
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      mainAxisAlignment: MainAxisAlignment.start,
+      children: [
+        Container(
+          padding: const EdgeInsets.symmetric(
+            horizontal: 20,
+          ),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              Material(
+                color: Colors.transparent,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    _audioArtwork(),
+                    const SizedBox(
+                      width: 10,
+                    ),
+                    _audioDetails(),
+                    _audioPlayerButtons(),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
+        const SizedBox(
+          height: 16,
+        ),
+        _linearProgressIndicator(context),
+      ],
+    );
+  }
+
+  Opacity _audioArtwork() {
+    return Opacity(
+      opacity: 1,
+      child: FadeTransition(
+        opacity: artworkAnimation.drive(CurveTween(curve: Curves.easeOut)),
+        child: Hero(
+          tag: 'audio#${controller.audioFile.id}',
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(12),
+            child: Container(
+              width: 48,
+              height: 48,
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  fit: BoxFit.cover,
+                  image: CachedNetworkImageProvider(
+                    controller.audioFile.artworkUrlPath,
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Expanded _audioPlayerButtons() {
+    return Expanded(
+      flex: 2,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: <Widget>[
+          IconButton(
+              icon: Icon(
+                Icons.favorite_border,
+                color: Colors.white,
+                size: 30,
+              ),
+              onPressed: () {}),
+          AudioPlayerPlayButton(
+            progress: playButtonAnimation,
+            onPressed: () => controller.togglePlayStop(),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Expanded _audioDetails() {
+    return Expanded(
+      flex: 3,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          Text(
+            '${controller.audioFile.title}',
+            style: bold16White,
+            overflow: TextOverflow.ellipsis,
+          ),
+          const SizedBox(
+            height: 8,
+          ),
+          Text(
+            '${controller.audioFile.subTitle}',
+            style: normal14White,
+            overflow: TextOverflow.ellipsis,
+          ),
+        ],
+      ),
+    );
+  }
+
+  Container _linearProgressIndicator(BuildContext context) {
+    return Container(
+      color: mediaPlayerBackgroundColor,
+      height: 5,
+      alignment: Alignment.centerLeft,
+      child: Observer(
+        builder: (_) => Container(
+          width: controller.sliderPosition * screenWidth(context),
+          decoration: BoxDecoration(
+            gradient: const LinearGradient(
+                colors: [Color(0xFF666CCC), Color(0xFF66CCCC)]),
+            borderRadius: BorderRadius.circular(4),
+          ),
         ),
       ),
     );
@@ -249,95 +394,6 @@ class _AudioPlayerPageState
             ),
           ),
         ),
-      ),
-    ];
-  }
-
-  List<Widget> _minimizedAudioPlayer() {
-    return [
-      Positioned(
-        left: 90,
-        top: 8,
-        child: ConstrainedBox(
-          constraints: const BoxConstraints(
-            maxWidth: 160,
-            maxHeight: 40,
-          ),
-          child: Text(
-            controller.audioFile.title,
-            maxLines: 2,
-            overflow: TextOverflow.clip,
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: 18,
-              fontWeight: FontWeight.normal,
-              decoration: TextDecoration.none,
-            ),
-          ),
-        ),
-      ),
-      Positioned(
-        left: 90,
-        top: 50,
-        child: ConstrainedBox(
-          constraints: const BoxConstraints(
-            maxWidth: 160,
-            maxHeight: 40,
-          ),
-          child: Text(
-            controller.audioFile.subTitle,
-            maxLines: 2,
-            overflow: TextOverflow.clip,
-            style: TextStyle(
-              color: Colors.grey,
-              fontSize: 12,
-              fontWeight: FontWeight.normal,
-              decoration: TextDecoration.none,
-            ),
-          ),
-        ),
-      ),
-      Positioned(
-        right: 12,
-        top: 8,
-        child: Container(
-          width: 45,
-          height: 45,
-          child: AudioPlayerPlayButton(
-            progress: playButtonAnimation,
-            onPressed: () => controller.togglePlayStop(),
-          ),
-        ),
-      ),
-      Positioned(
-        right: 12,
-        bottom: 4,
-        child: ConstrainedBox(
-          constraints: const BoxConstraints(
-            maxWidth: 80,
-            maxHeight: 40,
-          ),
-          child: Observer(
-            builder: (_) => Text(
-              '${controller.positionText ?? ''}',
-              maxLines: 1,
-              overflow: TextOverflow.clip,
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 12,
-                fontWeight: FontWeight.normal,
-                decoration: TextDecoration.none,
-              ),
-            ),
-          ),
-        ),
-      ),
-      GestureDetector(
-        child: Container(
-          width: screenWidth(context) / 1.5,
-          color: Colors.transparent,
-        ),
-        onTap: () => controller.toggleAudioPlayerMode(),
       ),
     ];
   }
