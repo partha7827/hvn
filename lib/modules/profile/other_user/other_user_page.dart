@@ -71,8 +71,8 @@ class _OtherUserPageState
                     stretchModes: [
                       StretchMode.fadeTitle,
                     ],
-                    title: Opacity(
-                      opacity: top > 100 ? 0 : 1,
+                    title: Visibility(
+                      visible: top < 100,
                       child: Text(
                         controller.otherUser.name,
                         style: bold20White,
