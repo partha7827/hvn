@@ -7,7 +7,7 @@ import 'package:highvibe/modules/discover/discover_module.dart';
 import 'package:highvibe/modules/home/home_controller.dart';
 import 'package:highvibe/modules/video_player/video_player_module.dart';
 import 'package:highvibe/modules/video_player/widgets/video_preview_item.dart';
-import 'package:highvibe/values/Strings.dart';
+import 'package:highvibe/values/strings.dart';
 import 'package:highvibe/widgets/header_row.dart';
 import 'package:highvibe/widgets/page_indicator.dart';
 import 'package:mobx/mobx.dart';

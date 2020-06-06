@@ -5,7 +5,7 @@ import 'package:highvibe/modules/live/live_module.dart';
 import 'package:highvibe/widgets/event_card.dart';
 import 'package:highvibe/widgets/header_row.dart';
 import 'package:highvibe/widgets/stream_card.dart';
-import 'package:highvibe/values/Strings.dart';
+import 'package:highvibe/values/strings.dart';
 import 'package:highvibe/values/themes.dart';
 
 class LivePage extends StatefulWidget {

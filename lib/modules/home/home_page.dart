@@ -4,7 +4,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:highvibe/modules/home/widgets/audios_widget.dart';
 import 'package:highvibe/modules/home/widgets/authors_widget.dart';
 import 'package:highvibe/modules/home/widgets/exit_app.dart';
-import 'package:highvibe/values/Strings.dart';
+import 'package:highvibe/values/strings.dart';
 import 'package:highvibe/values/themes.dart';
 
 import 'home_controller.dart';

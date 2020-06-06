@@ -2,7 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:highvibe/mocks/mock_audio_files.dart';
 import 'package:highvibe/modules/app/media_overlays.dart';
-import 'package:highvibe/values/Strings.dart';
+import 'package:highvibe/values/strings.dart';
 import 'package:highvibe/values/themes.dart';
 
 import 'audio_tile.dart';
