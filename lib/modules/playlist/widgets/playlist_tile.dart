@@ -32,13 +32,31 @@ class _PlaylistTileState extends State<PlaylistTile> {
                 borderRadius: BorderRadius.circular(10),
                 child: CachedNetworkImage(
                   imageUrl: widget.playList.coverUrlPath,
-                  width: 48,
-                  height: 48,
+                  width: 70,
+                  height: 70,
                   fit: BoxFit.cover,
                 ),
               ),
-              Text('45', style: normal16White),
-              const Icon(Icons.playlist_play),
+              Container(
+                width: 70,
+                height: 70,
+                color: const Color.fromRGBO(0, 0, 0, 0.5),
+              ),
+              Positioned(
+                top: 8,
+                child: Text(
+                  '${widget.playList.audioFilesIds.length}',
+                  style: const TextStyle(
+                    fontSize: 20,
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+              const Positioned(
+                bottom: 8,
+                child: Icon(Icons.playlist_play, size: 32),
+              ),
             ],
           ),
           Expanded(
@@ -47,7 +65,8 @@ class _PlaylistTileState extends State<PlaylistTile> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  Text(widget.playList.title, style: normal16White),
+                  Text(widget.playList.title, style: normaBoldl16White),
+                  const SizedBox(height: 8),
                   Text('Total duration', style: normal14Hint),
                 ],
               ),

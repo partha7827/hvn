@@ -1,7 +1,8 @@
 import 'package:flappy_search_bar/flappy_search_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+import 'package:highvibe/models/models.dart' show PlayList;
+import 'package:highvibe/models/playlist/mock_playlist.dart';
 import 'package:highvibe/modules/playlist/playlist_controller.dart';
 import 'package:highvibe/modules/playlist/widgets/widgets.dart'
     show PlaylistTile;
@@ -16,6 +17,9 @@ class PlaylistPage extends StatefulWidget {
 
 class _PlaylistPageState
     extends ModularState<PlaylistPage, PlaylistController> {
+  final SearchBarController<PlayList> _searchBarController =
+      SearchBarController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -46,18 +50,17 @@ class _PlaylistPageState
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           const HeaderRow(title: 'Playlist'),
-                          SizedBox(
-                            height: 20,
-                            width: 120,
-                            child: SvgPicture.asset('assets/new_playlist.svg'),
-                          )
+                          // SizedBox(
+                          //   height: 20,
+                          //   width: 120,
+                          //   child: SvgPicture.asset('assets/new_playlist.svg'),
+                          // )
                         ],
                       ),
                     ),
                   ),
                   Positioned(
                     child: SearchBar(
-                      shrinkWrap: true,
                       icon: const Padding(
                         padding: EdgeInsets.fromLTRB(8, 0, 0, 0),
                         child: Icon(
@@ -76,11 +79,16 @@ class _PlaylistPageState
                         'Cancel',
                         style: TextStyle(color: Colors.white),
                       ),
-                      //suggestions: ,
+                      searchBarController: _searchBarController,
+                      suggestions: mockPlaylists,
                       onItemFound: (item, index) {
-                        return Container();
+                        return PlaylistTile(playList: item);
                       },
                       onSearch: _findPlaylists,
+                      emptyWidget: const Text(
+                        'Sorry, we cannot find any matches',
+                        style: TextStyle(color: Colors.white, fontSize: 12),
+                      ),
                     ),
                   ),
                   Positioned(
@@ -101,5 +109,11 @@ class _PlaylistPageState
     );
   }
 
-  Future<List<PlaylistTile>> _findPlaylists(String text) async {}
+  Future<List<PlayList>> _findPlaylists(String searchTerm) async {
+    return mockPlaylists
+        .where(
+          (element) => element.title.startsWith(searchTerm),
+        )
+        .toList();
+  }
 }
