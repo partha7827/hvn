@@ -4,9 +4,9 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:highvibe/modules/home/widgets/audios_widget.dart';
 import 'package:highvibe/modules/home/widgets/authors_widget.dart';
 import 'package:highvibe/modules/home/widgets/exit_app.dart';
+import 'package:highvibe/modules/playlist/playlist_module.dart';
 import 'package:highvibe/values/strings.dart';
 import 'package:highvibe/values/themes.dart';
-import 'package:highvibe/modules/playlist/widgets/playlists_card.dart';
 
 import 'home_controller.dart';
 
@@ -79,9 +79,12 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
   }
 
   Widget _playlist() {
-    return const PlaylistsCard(
-      playlistLength: 5,
-      title: 'My Play List',
+    return IconButton(
+      icon: const Icon(
+        Icons.playlist_add,
+        color: Colors.white,
+      ),
+      onPressed: () => PlaylistModule.toAddToPlaylist(),
     );
   }
 
