@@ -19,6 +19,8 @@ class PlaylistTile extends StatefulWidget {
 }
 
 class _PlaylistTileState extends State<PlaylistTile> {
+  bool _isSelected = false;
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -73,11 +75,31 @@ class _PlaylistTileState extends State<PlaylistTile> {
             ),
           ),
           IconButton(
-            icon: SvgPicture.asset('assets/ic_play.svg'),
-            onPressed: () => print('Selected'),
+            icon: _configureIcon(),
+            onPressed: () => _toggle(),
           )
         ],
       ),
     );
+  }
+
+  Widget _configureIcon() {
+    if (_isSelected) {
+      return SvgPicture.asset('assets/radio_button_active.svg');
+    } else {
+      return SvgPicture.asset('assets/radio_button_not_active.svg');
+    }
+  }
+
+  void _toggle() {
+    if (_isSelected) {
+      setState(() {
+        _isSelected = false;
+      });
+    } else {
+      setState(() {
+        _isSelected = true;
+      });
+    }
   }
 }

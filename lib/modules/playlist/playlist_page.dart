@@ -1,6 +1,7 @@
 import 'package:flappy_search_bar/flappy_search_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:highvibe/models/models.dart' show PlayList;
 import 'package:highvibe/models/playlist/mock_playlist.dart';
 import 'package:highvibe/modules/playlist/playlist_controller.dart';
@@ -50,11 +51,15 @@ class _PlaylistPageState
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           const HeaderRow(title: 'Playlist'),
-                          // SizedBox(
-                          //   height: 20,
-                          //   width: 120,
-                          //   child: SvgPicture.asset('assets/new_playlist.svg'),
-                          // )
+                          GestureDetector(
+                            onTap: () => print('Create New Playlist'),
+                            child: SizedBox(
+                              height: 20,
+                              width: 120,
+                              child:
+                                  SvgPicture.asset('assets/new_playlist.svg'),
+                            ),
+                          )
                         ],
                       ),
                     ),
