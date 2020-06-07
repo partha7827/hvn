@@ -41,7 +41,7 @@ class _PlaylistPageState
           return Align(
             alignment: Alignment.topCenter,
             child: Container(
-              padding: const EdgeInsets.fromLTRB(10, 8, 10, 8),
+              padding: const EdgeInsets.fromLTRB(12, 8, 12, 8),
               child: Stack(
                 children: [
                   Positioned(
@@ -64,7 +64,8 @@ class _PlaylistPageState
                       ),
                     ),
                   ),
-                  Positioned(
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(0, 30, 0, 0),
                     child: SearchBar(
                       icon: const Padding(
                         padding: EdgeInsets.fromLTRB(8, 0, 0, 0),

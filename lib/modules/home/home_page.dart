@@ -83,6 +83,7 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
       icon: const Icon(
         Icons.playlist_add,
         color: Colors.white,
+        size: 70,
       ),
       onPressed: () => PlaylistModule.toAddToPlaylist(),
     );
