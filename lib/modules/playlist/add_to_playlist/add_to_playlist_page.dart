@@ -4,20 +4,21 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:highvibe/models/models.dart' show PlayList;
 import 'package:highvibe/models/playlist/mock_playlist.dart';
-import 'package:highvibe/modules/playlist/playlist_controller.dart';
+import 'package:highvibe/modules/playlist/add_to_playlist/add_to_playlist_controller.dart';
+import 'package:highvibe/modules/playlist/playlist_module.dart';
 import 'package:highvibe/modules/playlist/widgets/widgets.dart'
     show PlaylistTile;
 import 'package:highvibe/widgets/gradient_raised_button.dart';
 import 'package:highvibe/widgets/header_row.dart';
 import 'package:highvibe/widgets/responsive_safe_area.dart';
 
-class PlaylistPage extends StatefulWidget {
+class AddToPlaylistPage extends StatefulWidget {
   @override
-  _PlaylistPageState createState() => _PlaylistPageState();
+  _AddToPlaylistPageState createState() => _AddToPlaylistPageState();
 }
 
-class _PlaylistPageState
-    extends ModularState<PlaylistPage, PlaylistController> {
+class _AddToPlaylistPageState
+    extends ModularState<AddToPlaylistPage, AddToPlaylistController> {
   final SearchBarController<PlayList> _searchBarController =
       SearchBarController();
 
@@ -52,7 +53,7 @@ class _PlaylistPageState
                         children: [
                           const HeaderRow(title: 'Playlist'),
                           GestureDetector(
-                            onTap: () => print('Create New Playlist'),
+                            onTap: () => PlaylistModule.toCreateNewPlaylist(),
                             child: SizedBox(
                               height: 20,
                               width: 120,
