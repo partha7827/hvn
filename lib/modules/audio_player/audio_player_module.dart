@@ -4,6 +4,7 @@ import 'package:highvibe/models/audio/audio.dart';
 import 'package:highvibe/modules/audio_player/audio_player_controller.dart';
 import 'package:highvibe/modules/audio_player/audio_player_page.dart';
 import 'package:highvibe/services/audio_player_service.dart';
+import 'package:highvibe/values/global_key.dart';
 
 class AudioPlayerModule extends WidgetModule {
   final Audio audioFile;
@@ -16,5 +17,5 @@ class AudioPlayerModule extends WidgetModule {
       ];
 
   @override
-  Widget get view => AudioPlayerPage();
+  Widget get view => AudioPlayerPage(key: audioKey,);
 }

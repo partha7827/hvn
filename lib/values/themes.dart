@@ -133,6 +133,11 @@ TextStyle normaBoldl16White = const TextStyle(
   fontWeight: FontWeight.bold,
 );
 
+TextStyle normal18White = const TextStyle(
+  fontSize: 18,
+  color: Colors.white,
+);
+
 TextStyle normal12White = const TextStyle(
   fontSize: 12,
   color: Colors.white,

@@ -3,7 +3,8 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:highvibe/models/models.dart';
 import 'package:highvibe/modules/app/media_overlays.dart';
-import 'package:highvibe/values/strings.dart';
+import 'package:highvibe/utils/utils.dart';
+import 'package:highvibe/values/Strings.dart';
 import 'package:highvibe/widgets/audio_tile.dart';
 import 'package:highvibe/widgets/header_row.dart';
 import 'package:highvibe/widgets/repeat_widget.dart';
@@ -26,17 +27,20 @@ class _AudioPageState extends ModularState<AudioPage, AudioController> {
 
   @override
   Widget build(BuildContext context) {
-    return Observer(
-      builder: (_) {
-        switch (controller.audios.status) {
-          case FutureStatus.fulfilled:
-            return buildAudios(controller.audios.value);
-          case FutureStatus.rejected:
-            return RepeatWidget(controller.loadAudios);
-          default:
-            return const SplashWidget();
-        }
-      },
+    return WillPopScope(
+      onWillPop: onWillPop,
+      child: Observer(
+        builder: (_) {
+          switch (controller.audios.status) {
+            case FutureStatus.fulfilled:
+              return buildAudios(controller.audios.value);
+            case FutureStatus.rejected:
+              return RepeatWidget(controller.loadAudios);
+            default:
+              return const SplashWidget();
+          }
+        },
+      ),
     );
   }
 

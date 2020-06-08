@@ -7,7 +7,8 @@ import 'package:highvibe/modules/app/media_overlays.dart';
 import 'package:highvibe/modules/audio_player/widgets/audio_preview_item.dart';
 import 'package:highvibe/modules/discover/discover_module.dart';
 import 'package:highvibe/modules/home/home_controller.dart';
-import 'package:highvibe/values/strings.dart';
+import 'package:highvibe/utils/utils.dart';
+import 'package:highvibe/values/Strings.dart';
 import 'package:highvibe/widgets/header_row.dart';
 import 'package:highvibe/widgets/page_indicator.dart';
 import 'package:mobx/mobx.dart';
@@ -28,16 +29,18 @@ class _AudiosWidgetState extends ModularState<AudiosWidget, HomeController> {
 
   @override
   Widget build(BuildContext context) {
-    return Observer(builder: (_) {
-      final isVisible = controller.audios.status == FutureStatus.fulfilled &&
-          controller.audios.value.isNotEmpty;
-
-      return AnimatedOpacity(
-        child: isVisible ? buildAudios(controller.audios.value) : Container(),
-        opacity: isVisible ? 1 : 0,
-        duration: const Duration(seconds: 1),
-      );
-    });
+    return WillPopScope(
+      onWillPop: onWillPop,
+      child: Observer(builder: (_) {
+        final isVisible = controller.audios.status == FutureStatus.fulfilled &&
+            controller.audios.value.isNotEmpty;
+        return AnimatedOpacity(
+          child: isVisible ? buildAudios(controller.audios.value) : Container(),
+          opacity: isVisible ? 1 : 0,
+          duration: const Duration(seconds: 1),
+        );
+      }),
+    );
   }
 
   Widget buildAudios(BuiltList<Audio> audios) {

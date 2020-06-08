@@ -24,6 +24,9 @@ class _EditPlayListPageState
             fontWeight: FontWeight.bold,
           ),
         ),
+        leading: IconButton(
+            icon: const Icon(Icons.arrow_back, color: Colors.white),
+            onPressed: () => Modular.to.pop()),
       ),
       body: ResponsiveSafeArea(
         builder: (context, size) {
