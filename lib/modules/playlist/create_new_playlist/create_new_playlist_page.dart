@@ -178,6 +178,9 @@ class _CreateNewPlaylistPage
                   ],
                 ),
                 const SizedBox(height: 20),
+                const PlaylistAudioItemTile(),
+                const PlaylistAudioItemTile(),
+                const SizedBox(height: 20),
                 GradientRaisedButton(
                   label: PlaylistStrings.save,
                   onPressed: () => _showDialog(),
