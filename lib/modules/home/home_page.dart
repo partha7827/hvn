@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:highvibe/modules/app/media_overlays.dart';
 import 'package:highvibe/modules/home/widgets/audios_widget.dart';
 import 'package:highvibe/modules/home/widgets/authors_widget.dart';
 import 'package:highvibe/modules/home/widgets/exit_app.dart';
+import 'package:highvibe/utils/utils.dart';
 import 'package:highvibe/values/Strings.dart';
+import 'package:highvibe/values/global_key.dart';
 import 'package:highvibe/values/themes.dart';
 
 import 'home_controller.dart';
@@ -95,7 +98,21 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
   }
 
   Future<bool> willPop() async {
-    final shouldExit = await showExitDialog(context);
-    return shouldExit;
+    final shouldPop = await onWillPop();
+    if (shouldPop) {
+      final shouldExit = await showExitDialog(context);
+      if (shouldExit) {
+        // close audio
+        if (audioKey.currentState != null &&
+            audioKey.currentState.controller != null) {
+          if (audioKey.currentState.controller.player != null) {
+            await audioKey.currentState.controller.player.stop();
+            MediaOverlays.disposeAudioOverlayEntry();
+          }
+        }
+      }
+      return shouldExit;
+    }
+    return shouldPop;
   }
 }
