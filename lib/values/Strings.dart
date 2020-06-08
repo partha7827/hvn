@@ -59,6 +59,7 @@ class Strings {
   static const exitConfirmation = 'Do you want to close app?';
   static const yes = 'Yes';
   static const no = 'No';
+  static const editProfile = 'Edit Profile';
 
   ///Messages
   static String emailToChangePassword(String email) =>
