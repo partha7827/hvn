@@ -28,7 +28,7 @@ class _AddToPlaylistPageState
       appBar: AppBar(
         centerTitle: false,
         title: const Text(
-          'Add to Playlist',
+          PlaylistStrings.addToPlaylist,
           style: TextStyle(
             fontWeight: FontWeight.bold,
           ),
@@ -51,7 +51,7 @@ class _AddToPlaylistPageState
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          const HeaderRow(title: 'Playlist'),
+                          const HeaderRow(title: PlaylistStrings.playlist),
                           GestureDetector(
                             onTap: () => PlaylistModule.toCreateNewPlaylist(),
                             child: SizedBox(
@@ -74,7 +74,7 @@ class _AddToPlaylistPageState
                           color: Color(0xFF8E8F99),
                         ),
                       ),
-                      hintText: 'Search',
+                      hintText: PlaylistStrings.search,
                       hintStyle: const TextStyle(
                         color: Color(0xFF8E8F99),
                         fontSize: 18,
@@ -82,7 +82,7 @@ class _AddToPlaylistPageState
                       iconActiveColor: Colors.white,
                       textStyle: const TextStyle(color: Colors.white),
                       cancellationWidget: const Text(
-                        'Cancel',
+                        PlaylistStrings.cancel,
                         style: TextStyle(color: Colors.white),
                       ),
                       searchBarController: _searchBarController,
@@ -92,7 +92,7 @@ class _AddToPlaylistPageState
                       },
                       onSearch: _findPlaylists,
                       emptyWidget: const Text(
-                        'Sorry, we cannot find any matches',
+                        PlaylistStrings.noMatches,
                         style: TextStyle(color: Colors.white, fontSize: 12),
                       ),
                     ),
@@ -102,7 +102,7 @@ class _AddToPlaylistPageState
                     left: 0,
                     bottom: 8,
                     child: GradientRaisedButton(
-                      label: 'Save',
+                      label: PlaylistStrings.save,
                       onPressed: () => print('Save'),
                     ),
                   ),

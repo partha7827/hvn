@@ -1,6 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:highvibe/models/models.dart' show PlayList;
 import 'package:highvibe/modules/playlist/resources/resources.dart';
 import 'package:highvibe/values/themes.dart';
