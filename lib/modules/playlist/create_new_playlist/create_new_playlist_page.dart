@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:highvibe/modules/playlist/create_new_playlist/create_new_playlist_controller.dart';
 import 'package:highvibe/modules/playlist/resources/resources.dart';
-import 'package:highvibe/modules/playlist/widgets/playlist_modal_alert.dart';
+import 'package:highvibe/modules/playlist/widgets/widgets.dart';
 import 'package:highvibe/widgets/gradient_raised_button.dart';
 import 'package:highvibe/widgets/header_row.dart';
 import 'package:highvibe/widgets/responsive_safe_area.dart';
