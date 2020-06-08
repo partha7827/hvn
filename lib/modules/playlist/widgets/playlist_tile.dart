@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:highvibe/models/models.dart' show PlayList;
+import 'package:highvibe/modules/playlist/resources/resources.dart';
 import 'package:highvibe/values/themes.dart';
 
 class PlaylistTile extends StatefulWidget {
@@ -85,9 +86,9 @@ class _PlaylistTileState extends State<PlaylistTile> {
 
   Widget _configureIcon() {
     if (_isSelected) {
-      return SvgPicture.asset('assets/radio_button_active.svg');
+      return PlaylistImageAssets.radioButtonActive;
     } else {
-      return SvgPicture.asset('assets/radio_button_not_active.svg');
+      return PlaylistImageAssets.radioButtonNotActive;
     }
   }
 

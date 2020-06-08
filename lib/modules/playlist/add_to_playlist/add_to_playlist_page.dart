@@ -1,11 +1,11 @@
 import 'package:flappy_search_bar/flappy_search_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:highvibe/models/models.dart' show PlayList;
 import 'package:highvibe/models/playlist/mock_playlist.dart';
 import 'package:highvibe/modules/playlist/add_to_playlist/add_to_playlist_controller.dart';
 import 'package:highvibe/modules/playlist/playlist_module.dart';
+import 'package:highvibe/modules/playlist/resources/resources.dart';
 import 'package:highvibe/modules/playlist/widgets/widgets.dart'
     show PlaylistTile;
 import 'package:highvibe/widgets/gradient_raised_button.dart';
@@ -57,8 +57,7 @@ class _AddToPlaylistPageState
                             child: SizedBox(
                               height: 20,
                               width: 120,
-                              child:
-                                  SvgPicture.asset('assets/new_playlist.svg'),
+                              child: PlaylistImageAssets.newPlaylist,
                             ),
                           )
                         ],
