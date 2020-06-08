@@ -5,6 +5,7 @@ import 'package:highvibe/models/models.dart';
 import 'package:highvibe/modules/app/media_overlays.dart';
 import 'package:highvibe/utils/utils.dart';
 import 'package:highvibe/values/Strings.dart';
+import 'package:highvibe/values/global_key.dart';
 import 'package:highvibe/widgets/audio_tile.dart';
 import 'package:highvibe/widgets/header_row.dart';
 import 'package:highvibe/widgets/repeat_widget.dart';
@@ -53,10 +54,19 @@ class _AudioPageState extends ModularState<AudioPage, AudioController> {
             .map(
               (item) => AudioTile(
                 audioFile: item,
-                onTap: (_) => MediaOverlays.presentAudioPlayerAsOverlay(
+                onTap: (_) { 
+                  if (audioKey.currentState != null &&
+                        audioKey.currentState.controller != null &&
+                        audioKey.currentState.controller.player != null) {
+                      audioKey.currentState.controller.player
+                          .play(item.audioUrlPath);
+                      audioKey.currentState.controller.audioFile =
+                          item;
+                    }
+                  MediaOverlays.presentAudioPlayerAsOverlay(
                   context: context,
                   audioFile: item,
-                ),
+                );},
               ),
             )
             .toList(),
