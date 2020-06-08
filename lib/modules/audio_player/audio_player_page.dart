@@ -8,7 +8,6 @@ import 'package:highvibe/modules/audio_player/widgets/widgets.dart';
 import 'package:highvibe/services/audio_player_service.dart';
 import 'package:highvibe/utils/utils.dart';
 import 'package:highvibe/values/themes.dart';
-import 'package:highvibe/widgets/responsive_safe_area.dart';
 import 'package:mobx/mobx.dart';
 
 class AudioPlayerPage extends StatefulWidget {
@@ -27,15 +26,15 @@ class AudioPlayerPageState
   Widget build(BuildContext context) {
     return Observer(
       builder: (_) => controller.isMinimized
-          ? ResponsiveSafeArea(
-              builder: (context, size) => _audioWidget(context))
-          : Material(child: _audioWidget(context)),
+          ? SafeArea(child: _minimizedAudioPlayer())
+          : Material(child: _fullScreenAudioPlayer()),
     );
   }
 
   @override
   void dispose() {
     playButtonAnimation.dispose();
+    artworkAnimation.dispose();
     super.dispose();
   }
 
@@ -65,98 +64,56 @@ class AudioPlayerPageState
     super.initState();
   }
 
-  Widget _audioWidget(BuildContext context) {
-    if (controller.isMinimized) {
-      return GestureDetector(
-        onTap: controller.toggleAudioPlayerMode,
-        child: Align(
-          alignment: Alignment.bottomCenter,
-          child: Container(
-            decoration: const BoxDecoration(
-              color: Color(0xFF212342),
-              borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(20), topRight: Radius.circular(20)),
-            ),
-            width: screenWidth(context),
-            margin: const EdgeInsets.only(left: 0, right: 0),
-            padding: const EdgeInsets.symmetric(vertical: 16),
-            child: _minimizedAudioPlayer(context),
+  Widget _minimizedAudioPlayer() {
+    return GestureDetector(
+      onTap: controller.toggleAudioPlayerMode,
+      child: Align(
+        alignment: Alignment.bottomCenter,
+        child: Container(
+          decoration: const BoxDecoration(
+            color: Color(0xFF212342),
+            borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(20), topRight: Radius.circular(20)),
           ),
-        ),
-      );
-    }
-    return Align(
-      alignment: Alignment.center,
-      child: Container(
-        color: null,
-        height: null,
-        width: screenWidth(context),
-        margin: const EdgeInsets.only(left: 0, right: 0),
-        child: Stack(
-          children: [
-            Opacity(
-              opacity: 0.5,
-              child: FadeTransition(
-                opacity:
-                    artworkAnimation.drive(CurveTween(curve: Curves.easeOut)),
-                child: Hero(
-                  tag: 'audio#${controller.audioFile.id}',
-                  child: Container(
-                    width: null,
-                    height: null,
-                    decoration: BoxDecoration(
-                      image: DecorationImage(
-                        fit: BoxFit.cover,
-                        image: CachedNetworkImageProvider(
-                          controller.audioFile.artworkUrlPath,
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-            ),
-            if (!controller.isMinimized) ..._fullScreenAudioPlayer(),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Column _minimizedAudioPlayer(BuildContext context) {
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      mainAxisAlignment: MainAxisAlignment.start,
-      children: [
-        Container(
-          padding: const EdgeInsets.symmetric(
-            horizontal: 20,
-          ),
+          width: screenWidth(context),
+          margin: const EdgeInsets.only(left: 0, right: 0),
+          padding: const EdgeInsets.symmetric(vertical: 16),
           child: Column(
             mainAxisSize: MainAxisSize.min,
-            children: <Widget>[
-              Material(
-                color: Colors.transparent,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Container(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 20,
+                ),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
                   children: <Widget>[
-                    _audioArtwork(),
-                    const SizedBox(
-                      width: 10,
+                    Material(
+                      color: Colors.transparent,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: <Widget>[
+                          _audioArtwork(),
+                          const SizedBox(
+                            width: 10,
+                          ),
+                          _audioDetails(),
+                          _audioPlayerButtons(),
+                        ],
+                      ),
                     ),
-                    _audioDetails(),
-                    _audioPlayerButtons(),
                   ],
                 ),
               ),
+              const SizedBox(
+                height: 16,
+              ),
+              _linearProgressIndicator(context),
             ],
           ),
         ),
-        const SizedBox(
-          height: 16,
-        ),
-        _linearProgressIndicator(context),
-      ],
+      ),
     );
   }
 
@@ -251,11 +208,6 @@ class AudioPlayerPageState
     );
   }
 
-  void _close() async {
-    await controller.player.stop();
-    MediaOverlays.disposeAudioOverlayEntry();
-  }
-
   Widget _closeScreenButton() {
     return Positioned(
       top: 32,
@@ -281,122 +233,154 @@ class AudioPlayerPageState
     );
   }
 
-  List<Widget> _fullScreenAudioPlayer() {
-    return [
-      Container(
-        width: double.maxFinite,
-        constraints: BoxConstraints(minHeight: screenHeight(context) * 0.4),
-        decoration: BoxDecoration(
-          gradient: darkToTransparentGradientTop,
-        ),
-        child: Padding(
-          padding: const EdgeInsets.only(left: 16, right: 16, top: 32),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.center,
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Text(
-                controller.audioFile.title,
-                style: bold24PlayfairWhite,
-                textAlign: TextAlign.center,
+  Widget _fullScreenAudioPlayer() {
+    return Align(
+      alignment: Alignment.center,
+      child: Container(
+        width: screenWidth(context),
+        margin: const EdgeInsets.only(left: 0, right: 0),
+        child: Stack(
+          children: [
+            Opacity(
+              opacity: 0.5,
+              child: FadeTransition(
+                opacity:
+                    artworkAnimation.drive(CurveTween(curve: Curves.easeOut)),
+                child: Hero(
+                  tag: 'audio#${controller.audioFile.id}',
+                  child: Container(
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                        fit: BoxFit.cover,
+                        image: CachedNetworkImageProvider(
+                          controller.audioFile.artworkUrlPath,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
               ),
-              Padding(
-                padding: const EdgeInsets.only(top: 16),
-                child: Text(
-                  controller.audioFile.subTitle,
-                  style: normal16White,
-                  textAlign: TextAlign.center,
-                ),
-              )
-            ],
-          ),
-        ),
-      ),
-      _closeScreenButton(),
-      _minimizeScreenButton(),
-      Positioned(
-        bottom: 0,
-        left: 0,
-        right: 0,
-        child: Container(
-          width: double.maxFinite,
-          constraints: BoxConstraints(
-            minHeight: screenHeight(context) * 0.4,
-          ),
-          decoration: BoxDecoration(gradient: darkToTransparentGradient),
-          child: Padding(
-            padding: const EdgeInsets.only(left: 40, right: 40, bottom: 20),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                Observer(
-                  builder: (_) => AudioPlayerSlider(
-                    trackPosition: controller.sliderPosition,
-                    onChanged: (value) => controller.seekToPosition(value),
-                  ),
-                ),
-                Container(
-                  padding: const EdgeInsets.fromLTRB(16, 0, 16, 0),
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: <Widget>[
-                      Observer(
-                        builder: (_) => Text(
-                          '${controller.positionText ?? ''}',
-                          style: const TextStyle(color: Colors.white),
-                        ),
-                      ),
-                      Text(
-                        mediaTimeFormatter(
-                          Duration(
-                            milliseconds: controller.audioFile.duration,
-                          ),
-                        ),
-                        style: const TextStyle(color: Colors.white),
-                      ),
-                    ],
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 20),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      _rewindButton(),
-                      AudioPlayerPlayButton(
-                        progress: playButtonAnimation,
-                        onPressed: () => controller.togglePlayStop(),
-                      ),
-                      _fastForwardButton(),
-                    ],
-                  ),
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            ),
+            Container(
+              width: double.maxFinite,
+              constraints:
+                  BoxConstraints(minHeight: screenHeight(context) * 0.4),
+              decoration: BoxDecoration(
+                gradient: darkToTransparentGradientTop,
+              ),
+              child: Padding(
+                padding: const EdgeInsets.only(left: 16, right: 16, top: 32),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisSize: MainAxisSize.min,
                   children: [
-                    Observer(
-                      builder: (_) {
-                        return IconButton(
-                          icon: Icon(
-                            Icons.repeat,
-                            color: controller.isLoopMode
-                                ? Colors.blue
-                                : Colors.white,
-                          ),
-                          onPressed: controller.toggleLoopMode,
-                        );
-                      },
+                    Text(
+                      controller.audioFile.title,
+                      style: bold24PlayfairWhite,
+                      textAlign: TextAlign.center,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 16),
+                      child: Text(
+                        controller.audioFile.subTitle,
+                        style: normal16White,
+                        textAlign: TextAlign.center,
+                      ),
                     )
                   ],
                 ),
-              ],
+              ),
             ),
-          ),
+            _closeScreenButton(),
+            _minimizeScreenButton(),
+            Positioned(
+              bottom: 0,
+              left: 0,
+              right: 0,
+              child: Container(
+                width: double.maxFinite,
+                constraints: BoxConstraints(
+                  minHeight: screenHeight(context) * 0.4,
+                ),
+                decoration: BoxDecoration(gradient: darkToTransparentGradient),
+                child: Padding(
+                  padding:
+                      const EdgeInsets.only(left: 40, right: 40, bottom: 20),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      Observer(
+                        builder: (_) => AudioPlayerSlider(
+                          trackPosition: controller.sliderPosition,
+                          onChanged: (value) =>
+                              controller.seekToPosition(value),
+                        ),
+                      ),
+                      Container(
+                        padding: const EdgeInsets.fromLTRB(16, 0, 16, 0),
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: <Widget>[
+                            Observer(
+                              builder: (_) => Text(
+                                '${controller.positionText ?? ''}',
+                                style: const TextStyle(color: Colors.white),
+                              ),
+                            ),
+                            Text(
+                              mediaTimeFormatter(
+                                Duration(
+                                  milliseconds: controller.audioFile.duration,
+                                ),
+                              ),
+                              style: const TextStyle(color: Colors.white),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 20),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            _rewindButton(),
+                            AudioPlayerPlayButton(
+                              progress: playButtonAnimation,
+                              onPressed: () => controller.togglePlayStop(),
+                            ),
+                            _fastForwardButton(),
+                          ],
+                        ),
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Observer(
+                            builder: (_) {
+                              return IconButton(
+                                icon: Icon(
+                                  Icons.repeat,
+                                  color: controller.isLoopMode
+                                      ? Colors.blue
+                                      : Colors.white,
+                                ),
+                                onPressed: controller.toggleLoopMode,
+                              );
+                            },
+                          )
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          ],
         ),
       ),
-    ];
+    );
   }
 
   Widget _minimizeScreenButton() {
@@ -426,5 +410,10 @@ class AudioPlayerPageState
         trackPosition: controller.trackPosition,
       ),
     );
+  }
+
+  void _close() async {
+    await controller.player.stop();
+    MediaOverlays.disposeAudioOverlayEntry();
   }
 }
