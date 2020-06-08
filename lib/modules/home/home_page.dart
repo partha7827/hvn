@@ -4,6 +4,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:highvibe/modules/app/media_overlays.dart';
 import 'package:highvibe/modules/home/widgets/audios_widget.dart';
 import 'package:highvibe/modules/home/widgets/authors_widget.dart';
+import 'package:highvibe/modules/home/widgets/drawer_widget.dart';
 import 'package:highvibe/modules/home/widgets/exit_app.dart';
 import 'package:highvibe/utils/utils.dart';
 import 'package:highvibe/values/Strings.dart';
@@ -21,11 +22,17 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends ModularState<HomePage, HomeController> {
+  void _openDrawer() {
+    controller.scaffoldKey.currentState.openDrawer();
+  }
+
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: willPop,
       child: Scaffold(
+        key: controller.scaffoldKey,
+        drawer: DrawerWidget(controller),
         body: Stack(
           children: [
             Positioned(
@@ -69,7 +76,23 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
                   ),
                 ],
               ),
-            )
+            ),
+            Positioned(
+              top: 40,
+              left: 10,
+              child: Container(
+                width: screenWidth(context),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    IconButton(
+                      onPressed: _openDrawer,
+                      icon: SvgPicture.asset('assets/ic_hamburger.svg'),
+                    ),
+                  ],
+                ),
+              ),
+            ),
           ],
         ),
       ),

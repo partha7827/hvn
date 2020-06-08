@@ -1,5 +1,8 @@
 import 'package:built_collection/built_collection.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:highvibe/modules/app/app_controller.dart';
+import 'package:highvibe/services/auth_service.dart';
 import 'package:highvibe/services/firestore_service.dart';
 import 'package:highvibe/models/models.dart';
 import 'package:mobx/mobx.dart';
@@ -10,6 +13,10 @@ class HomeController = _HomeControllerBase with _$HomeController;
 
 abstract class _HomeControllerBase with Store {
   final FirestoreService firestore = Modular.get<FirestoreService>();
+  final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
+  final AuthService auth = Modular.get<AuthService>();
+  final AppController currentUserStore = Modular.get<AppController>();
+
 
   @observable
   ObservableFuture<BuiltList<Audio>> audios;
@@ -51,5 +58,11 @@ abstract class _HomeControllerBase with Store {
           .getDocuments()
           .then((s) => User.parseListOfUsers(s)),
     );
+  }
+
+  @action
+  Future<void> logout() async {
+    await auth.logout();
+    await currentUserStore.setCurrentUser(null);
   }
 }
