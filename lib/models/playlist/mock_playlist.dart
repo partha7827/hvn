@@ -24,7 +24,7 @@ final List<PlayList> mockPlaylists = [
       ..title = 'Pure Positive Vibes'
       ..privacy = Privacy.public
       ..audioFilesIds.addAll(
-        BuiltList.from(Iterable<String>.generate(9, (item) => '').toList()),
+        BuiltList.from(Iterable<String>.generate(0, (item) => '').toList()),
       ),
   ),
   PlayList(
@@ -47,6 +47,17 @@ final List<PlayList> mockPlaylists = [
       ..privacy = Privacy.public
       ..audioFilesIds.addAll(
         BuiltList.from(Iterable<String>.generate(75, (item) => '').toList()),
+      ),
+  ),
+  PlayList(
+    (b) => b
+      ..coverUrlPath =
+          'https://takelessons.com/blog/wp-content/uploads/2020/03/flute-for-beginners.jpg'
+      ..desscription = ''
+      ..title = 'Noise'
+      ..privacy = Privacy.public
+      ..audioFilesIds.addAll(
+        BuiltList.from(Iterable<String>.generate(110, (item) => '').toList()),
       ),
   ),
 ];

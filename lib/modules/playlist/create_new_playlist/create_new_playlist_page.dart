@@ -104,8 +104,8 @@ class _CreateNewPlaylistPage
                   ),
                 ),
                 const SizedBox(height: 10),
-                const TextField(
-                  decoration: InputDecoration(
+                TextField(
+                  decoration: const InputDecoration(
                     enabledBorder: UnderlineInputBorder(
                       borderSide:
                           BorderSide(color: Color(0xFF525366), width: 1),
@@ -117,7 +117,10 @@ class _CreateNewPlaylistPage
                     hintText: PlaylistStrings.enterPlaylistName,
                     hintStyle: TextStyle(color: Colors.white),
                   ),
-                  style: TextStyle(color: Colors.white),
+                  style: const TextStyle(color: Colors.white),
+                  onSubmitted: (name) {
+                    print(name);
+                  },
                 ),
                 const SizedBox(height: 20),
                 const Align(
@@ -128,8 +131,8 @@ class _CreateNewPlaylistPage
                   ),
                 ),
                 const SizedBox(height: 10),
-                const TextField(
-                  decoration: InputDecoration(
+                TextField(
+                  decoration: const InputDecoration(
                     enabledBorder: UnderlineInputBorder(
                       borderSide:
                           BorderSide(color: Color(0xFF525366), width: 1),
@@ -141,7 +144,10 @@ class _CreateNewPlaylistPage
                     hintText: PlaylistStrings.enterDescription,
                     hintStyle: TextStyle(color: Colors.white),
                   ),
-                  style: TextStyle(color: Colors.white),
+                  style: const TextStyle(color: Colors.white),
+                  onSubmitted: (description) {
+                    print(description);
+                  },
                 ),
                 const SizedBox(height: 30),
                 const HeaderRow(title: PlaylistStrings.privacy),
@@ -151,7 +157,7 @@ class _CreateNewPlaylistPage
                       icon: !_isPrivate
                           ? PlaylistImageAssets.radioButtonActive
                           : PlaylistImageAssets.radioButtonNotActive,
-                      onPressed: () => _toggle(),
+                      onPressed: () => _togglePrivacy(),
                     ),
                     const Text(
                       PlaylistStrings.public,
@@ -162,7 +168,7 @@ class _CreateNewPlaylistPage
                       icon: _isPrivate
                           ? PlaylistImageAssets.radioButtonActive
                           : PlaylistImageAssets.radioButtonNotActive,
-                      onPressed: () => _toggle(),
+                      onPressed: () => _togglePrivacy(),
                     ),
                     const Text(
                       PlaylistStrings.private,
@@ -183,16 +189,8 @@ class _CreateNewPlaylistPage
     );
   }
 
-  void _toggle() {
-    if (_isPrivate) {
-      setState(() {
-        _isPrivate = false;
-      });
-    } else {
-      setState(() {
-        _isPrivate = true;
-      });
-    }
+  void _deleteCover() {
+    setState(() => _imagePath = '');
   }
 
   Future<void> _selectCover() async {
@@ -208,9 +206,11 @@ class _CreateNewPlaylistPage
     }
   }
 
-  void _deleteCover() {
-    setState(() {
-      _imagePath = '';
-    });
+  void _togglePrivacy() {
+    if (_isPrivate) {
+      setState(() => _isPrivate = false);
+    } else {
+      setState(() => _isPrivate = true);
+    }
   }
 }

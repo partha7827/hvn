@@ -101,7 +101,7 @@ class _AddToPlaylistPageState
                   Positioned(
                     right: 0,
                     left: 0,
-                    bottom: 8,
+                    bottom: 2,
                     child: GradientRaisedButton(
                       label: PlaylistStrings.save,
                       onPressed: () => print('Save'),

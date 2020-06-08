@@ -20,6 +20,7 @@ class PlaylistTile extends StatefulWidget {
 
 class _PlaylistTileState extends State<PlaylistTile> {
   bool _isSelected = false;
+  bool get _isEmptyOrHasOneTune => widget.playList.audioFilesIds.length <= 1;
 
   @override
   Widget build(BuildContext context) {
@@ -44,21 +45,23 @@ class _PlaylistTileState extends State<PlaylistTile> {
                 height: 70,
                 color: const Color.fromRGBO(0, 0, 0, 0.5),
               ),
-              Positioned(
-                top: 8,
-                child: Text(
-                  '${widget.playList.audioFilesIds.length}',
-                  style: const TextStyle(
-                    fontSize: 20,
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
+              if (!_isEmptyOrHasOneTune) ...[
+                Positioned(
+                  top: 8,
+                  child: Text(
+                    '${widget.playList.audioFilesIds.length}',
+                    style: const TextStyle(
+                      fontSize: 20,
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ),
-              ),
-              const Positioned(
-                bottom: 8,
-                child: Icon(Icons.playlist_play, size: 32),
-              ),
+                const Positioned(
+                  bottom: 8,
+                  child: Icon(Icons.playlist_play, size: 32),
+                ),
+              ]
             ],
           ),
           Expanded(
