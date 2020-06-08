@@ -1,10 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:highvibe/modules/home/home_controller.dart';
 import 'package:highvibe/modules/home/widgets/drawer_button.dart';
+import 'package:highvibe/modules/home/widgets/logout_button.dart';
 import 'package:highvibe/values/Strings.dart';
 import 'package:highvibe/values/themes.dart';
 
 class DrawerWidget extends StatelessWidget {
+  const DrawerWidget(this._controller);
+
+  final HomeController _controller;
+
   void _closeDrawer() {
     Modular.to.pop();
   }
@@ -49,14 +55,14 @@ class DrawerWidget extends StatelessWidget {
                     height: 8,
                   ),
                   Text(
-                    Strings.dummyName,
+                    '${_controller.currentUserStore.currentUser.name}',
                     style: bold16White,
                   ),
                   const SizedBox(
                     height: 8,
                   ),
                   Text(
-                    Strings.dummyName,
+                    '${_controller.currentUserStore.currentUser.status}',
                     style: normal14Hint,
                   ),
                 ],
@@ -68,11 +74,21 @@ class DrawerWidget extends StatelessWidget {
             Expanded(
               child: Column(
                 children: [
+                  // My Profile, My Wallet, Activity History, Bookmarks
                   DrawerButton(
-                    iconPath: 'assets/ic_time.svg',
-                    title: Strings.meditationTimer,
+                    iconPath: 'assets/ic_profile.svg',
+                    title: Strings.myProfile,
                     onTap: () {
                       _closeDrawer();
+                      Modular.to.pushNamed('profile');
+                    },
+                  ),
+                  DrawerButton(
+                    iconPath: 'assets/ic_wallet.svg',
+                    title: Strings.myWallet,
+                    onTap: () {
+                      _closeDrawer();
+                      Modular.to.pushNamed('profile');
                     },
                   ),
                   DrawerButton(
@@ -80,45 +96,26 @@ class DrawerWidget extends StatelessWidget {
                     title: Strings.activityHistory,
                     onTap: () {
                       _closeDrawer();
+                      Modular.to.pushNamed('profile');
                     },
                   ),
                   DrawerButton(
-                    iconPath: 'assets/ic_mood.svg',
-                    title: Strings.moodTracker,
+                    iconPath: 'assets/ic_bookmark.svg',
+                    title: Strings.bookmarks,
                     onTap: () {
                       _closeDrawer();
-                    },
-                  ),
-                  DrawerButton(
-                    iconPath: 'assets/ic_wallet.svg',
-                    title: Strings.wallet,
-                    onTap: () {
-                      _closeDrawer();
-                    },
-                  ),
-                  DrawerButton(
-                    iconPath: 'assets/ic_invite.svg',
-                    title: Strings.inviteFriends,
-                    onTap: () {
-                      _closeDrawer();
-                    },
-                  ),
-                  DrawerButton(
-                    iconPath: 'assets/ic_settings.svg',
-                    title: Strings.settings,
-                    onTap: () {
-                      _closeDrawer();
+                      Modular.to.pushNamed('profile');
                     },
                   ),
                 ],
               ),
             ),
-            DrawerButton(
+            LogoutButton(
               iconPath: 'assets/ic_logout.svg',
               title: Strings.logout,
-              isLogout: true,
               onTap: () {
                 _closeDrawer();
+                _controller.logout();
               },
             ),
             const SizedBox(height: 32),

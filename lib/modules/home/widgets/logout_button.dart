@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:highvibe/values/themes.dart';
 
-class DrawerButton extends StatelessWidget {
-  const DrawerButton({
+class LogoutButton extends StatelessWidget {
+  const LogoutButton({
     Key key,
     this.iconPath = '',
     this.title = '',
@@ -24,7 +24,7 @@ class DrawerButton extends StatelessWidget {
       ),
       title: Text(
         title,
-        style: normal16White,
+        style: normal18White,
       ),
     );
   }

@@ -64,12 +64,14 @@ class Strings {
   static String emailToChangePassword(String email) =>
       'An e-mail to change your password has been send to $email';
 
-  static const String dummyName = 'Jayden Massey';
-
   static const String activityHistory = 'Activity History';
   static const String moodTracker = 'Mood Tracker';
   static const String wallet = 'Wallet';
   static const String inviteFriends = 'Invite friends';
   static const String settings = 'Settings';
   static const String logout = 'Logout';
+
+  static const String myProfile = 'My Profile';
+  static const String myWallet = 'My Wallet';
+  static const String bookmarks = 'Bookmarks';
 }
