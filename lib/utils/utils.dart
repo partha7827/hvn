@@ -26,6 +26,18 @@ DateTime getDateTime(dynamic dateTime) {
 String mediaTimeFormatter(Duration d) =>
     d.toString().split('.').first.padLeft(8, '0');
 
+Future<bool> onWillPop() async {
+  if (audioKey.currentState != null &&
+      audioKey.currentState.controller != null) {
+    if (!audioKey.currentState.controller.isMinimized) {
+      await audioKey.currentState.controller.player.stop();
+      MediaOverlays.disposeAudioOverlayEntry();
+      return false;
+    }
+  }
+  return true;
+}
+
 bool portraitOrientation(BuildContext context) =>
     MediaQuery.of(context).orientation == Orientation.portrait;
 
@@ -75,15 +87,3 @@ Future<String> uploadFile(File file, String childName,
     return null;
   }
 }
-
-Future<bool> onWillPop() async {
-    if (audioKey.currentState != null &&
-        audioKey.currentState.controller != null) {
-      if (!audioKey.currentState.controller.isMinimized) {
-        await audioKey.currentState.controller.player.stop();
-        MediaOverlays.disposeAudioOverlayEntry();
-        return false;
-      }
-    }
-    return true;
-  }
