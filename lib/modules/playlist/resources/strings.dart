@@ -6,6 +6,7 @@ class PlaylistStrings {
   static const String save = 'Save';
   static const String noMatches = 'Sorry, we cannot find any matches';
   static const String createNew = 'Create New Playlist';
+  static const String selectCover = 'Select Cover';
   static const String playlistName = 'Playlist Name';
   static const String enterPlaylistName = 'Eneter Playlist Name';
   static const String description = 'Description';

@@ -1,7 +1,10 @@
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:highvibe/modules/playlist/create_new_playlist/create_new_playlist_controller.dart';
+import 'package:highvibe/modules/playlist/resources/resources.dart';
 import 'package:highvibe/widgets/gradient_raised_button.dart';
+import 'package:highvibe/widgets/header_row.dart';
 import 'package:highvibe/widgets/responsive_safe_area.dart';
 
 class CreateNewPlaylistPage extends StatefulWidget {
@@ -13,41 +16,201 @@ class CreateNewPlaylistPage extends StatefulWidget {
 
 class _CreateNewPlaylistPage
     extends ModularState<CreateNewPlaylistPage, CreateNewPlaylistController> {
+  bool _isPrivate = false;
+  String _imagePath = '';
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         centerTitle: false,
         title: const Text(
-          'Create New Playlist',
+          PlaylistStrings.createNew,
           style: TextStyle(
             fontWeight: FontWeight.bold,
           ),
         ),
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back, color: Colors.white),
+          onPressed: () => Modular.to.pop(),
+        ),
       ),
       body: ResponsiveSafeArea(
         builder: (context, size) {
-          return Align(
-            alignment: Alignment.topCenter,
-            child: Container(
-              padding: const EdgeInsets.fromLTRB(12, 8, 12, 8),
-              child: Stack(
-                children: [
-                  Positioned(
-                    right: 0,
-                    left: 0,
-                    bottom: 8,
-                    child: GradientRaisedButton(
-                      label: 'Save',
-                      onPressed: () => print('Save'),
+          return Container(
+            padding: const EdgeInsets.fromLTRB(20, 8, 20, 8),
+            child: ListView(
+              children: [
+                Container(
+                  height: 190,
+                  decoration: BoxDecoration(
+                    border: Border.all(
+                      color: const Color(0xFF525366),
+                      width: 1,
                     ),
+                    borderRadius: BorderRadius.circular(12),
                   ),
-                ],
-              ),
+                  child: _imagePath.isEmpty
+                      ? GestureDetector(
+                          onTap: () async => _selectCover(),
+                          child: Stack(
+                            alignment: Alignment.topCenter,
+                            children: [
+                              Positioned(
+                                top: 60,
+                                child: PlaylistImageAssets.selectImage,
+                              ),
+                              const Positioned(
+                                top: 120,
+                                child: Text(
+                                  PlaylistStrings.selectCover,
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 18,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        )
+                      : Stack(
+                          fit: StackFit.expand,
+                          alignment: Alignment.center,
+                          children: [
+                            ClipRRect(
+                              borderRadius: BorderRadius.circular(12),
+                              child: Image.asset(
+                                _imagePath,
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                            Positioned(
+                              top: 12,
+                              right: 12,
+                              child: GestureDetector(
+                                onTap: () => _deleteCover(),
+                                child: PlaylistImageAssets.deletePlaylistCover,
+                              ),
+                            ),
+                          ],
+                        ),
+                ),
+                const SizedBox(height: 20),
+                const Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    PlaylistStrings.playlistName,
+                    style: TextStyle(color: Color(0xFF525366)),
+                  ),
+                ),
+                const SizedBox(height: 10),
+                const TextField(
+                  decoration: InputDecoration(
+                    enabledBorder: UnderlineInputBorder(
+                      borderSide:
+                          BorderSide(color: Color(0xFF525366), width: 1),
+                    ),
+                    focusedBorder: UnderlineInputBorder(
+                      borderSide:
+                          BorderSide(color: Color(0xFF525366), width: 1),
+                    ),
+                    hintText: PlaylistStrings.enterPlaylistName,
+                    hintStyle: TextStyle(color: Colors.white),
+                  ),
+                  style: TextStyle(color: Colors.white),
+                ),
+                const SizedBox(height: 20),
+                const Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    PlaylistStrings.description,
+                    style: TextStyle(color: Color(0xFF525366)),
+                  ),
+                ),
+                const SizedBox(height: 10),
+                const TextField(
+                  decoration: InputDecoration(
+                    enabledBorder: UnderlineInputBorder(
+                      borderSide:
+                          BorderSide(color: Color(0xFF525366), width: 1),
+                    ),
+                    focusedBorder: UnderlineInputBorder(
+                      borderSide:
+                          BorderSide(color: Color(0xFF525366), width: 1),
+                    ),
+                    hintText: PlaylistStrings.enterDescription,
+                    hintStyle: TextStyle(color: Colors.white),
+                  ),
+                  style: TextStyle(color: Colors.white),
+                ),
+                const SizedBox(height: 30),
+                const HeaderRow(title: PlaylistStrings.privacy),
+                Row(
+                  children: [
+                    IconButton(
+                      icon: !_isPrivate
+                          ? PlaylistImageAssets.radioButtonActive
+                          : PlaylistImageAssets.radioButtonNotActive,
+                      onPressed: () => _toggle(),
+                    ),
+                    const Text(
+                      PlaylistStrings.public,
+                      style: TextStyle(color: Color(0xFF8E8F99)),
+                    ),
+                    const SizedBox(width: 20),
+                    IconButton(
+                      icon: _isPrivate
+                          ? PlaylistImageAssets.radioButtonActive
+                          : PlaylistImageAssets.radioButtonNotActive,
+                      onPressed: () => _toggle(),
+                    ),
+                    const Text(
+                      PlaylistStrings.private,
+                      style: TextStyle(color: Color(0xFF8E8F99)),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 20),
+                GradientRaisedButton(
+                  label: PlaylistStrings.save,
+                  onPressed: () => print('Save'),
+                ),
+              ],
             ),
           );
         },
       ),
     );
+  }
+
+  void _toggle() {
+    if (_isPrivate) {
+      setState(() {
+        _isPrivate = false;
+      });
+    } else {
+      setState(() {
+        _isPrivate = true;
+      });
+    }
+  }
+
+  Future<void> _selectCover() async {
+    try {
+      final file = await FilePicker.getFile(type: FileType.image);
+      if (file != null) {
+        setState(() {
+          _imagePath = file.path;
+        });
+      }
+    } catch (error) {
+      print(error);
+    }
+  }
+
+  void _deleteCover() {
+    setState(() {
+      _imagePath = '';
+    });
   }
 }

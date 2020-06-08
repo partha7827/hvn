@@ -34,8 +34,9 @@ class _AddToPlaylistPageState
           ),
         ),
         leading: IconButton(
-            icon: const Icon(Icons.close, color: Colors.white),
-            onPressed: () => Modular.to.pop()),
+          icon: const Icon(Icons.close, color: Colors.white),
+          onPressed: () => Modular.to.pop(),
+        ),
       ),
       body: ResponsiveSafeArea(
         builder: (context, size) {
