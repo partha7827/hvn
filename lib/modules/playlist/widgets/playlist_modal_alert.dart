@@ -7,6 +7,16 @@ import 'package:highvibe/utils/utils.dart';
 import 'package:highvibe/widgets/gradient_raised_button.dart';
 
 class PlaylistModalAlert extends StatelessWidget {
+  final String title;
+  final String subTitle;
+  final String buttonTitle;
+
+  const PlaylistModalAlert({
+    @required this.title,
+    @required this.subTitle,
+    this.buttonTitle = PlaylistStrings.save,
+  });
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,19 +45,19 @@ class PlaylistModalAlert extends StatelessWidget {
                   const SizedBox(height: 16),
                   PlaylistImageAssets.checkMarkRounded,
                   const SizedBox(height: 32),
-                  const Text(
-                    PlaylistStrings.newPlaylistSuccessTitle,
-                    style: TextStyle(
+                  Text(
+                    title,
+                    style: const TextStyle(
                       color: Colors.white,
                       fontSize: 24,
                     ),
                   ),
                   const SizedBox(height: 16),
-                  const Text(
-                    PlaylistStrings.newPlaylistSuccessSubTitle,
+                  Text(
+                    subTitle,
                     maxLines: 2,
                     textAlign: TextAlign.center,
-                    style: TextStyle(
+                    style: const TextStyle(
                       color: Colors.grey,
                       fontSize: 20,
                     ),
@@ -57,7 +67,7 @@ class PlaylistModalAlert extends StatelessWidget {
                     width: 160,
                     height: 48,
                     child: GradientRaisedButton(
-                      label: PlaylistStrings.save,
+                      label: buttonTitle,
                       onPressed: () => Navigator.of(context).pop(),
                     ),
                   ),

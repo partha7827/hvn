@@ -183,7 +183,7 @@ class _CreateNewPlaylistPage
                 const SizedBox(height: 20),
                 GradientRaisedButton(
                   label: PlaylistStrings.save,
-                  onPressed: () => _showDialog(),
+                  onPressed: () => _showSuccessDialog(),
                 ),
               ],
             ),
@@ -193,8 +193,14 @@ class _CreateNewPlaylistPage
     );
   }
 
-  void _showDialog() {
-    showDialog(context: context, builder: (_) => PlaylistModalAlert());
+  void _showSuccessDialog() {
+    showDialog(
+      context: context,
+      builder: (_) => const PlaylistModalAlert(
+        title: PlaylistStrings.newPlaylistSuccessTitle,
+        subTitle: PlaylistStrings.newPlaylistSuccessSubTitle,
+      ),
+    );
   }
 
   void _deleteCover() {

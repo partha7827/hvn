@@ -7,7 +7,7 @@ import 'package:highvibe/modules/playlist/add_to_playlist/add_to_playlist_contro
 import 'package:highvibe/modules/playlist/playlist_module.dart';
 import 'package:highvibe/modules/playlist/resources/resources.dart';
 import 'package:highvibe/modules/playlist/widgets/widgets.dart'
-    show PlaylistTile;
+    show PlaylistModalAlert, PlaylistTile;
 import 'package:highvibe/widgets/gradient_raised_button.dart';
 import 'package:highvibe/widgets/header_row.dart';
 import 'package:highvibe/widgets/responsive_safe_area.dart';
@@ -104,7 +104,7 @@ class _AddToPlaylistPageState
                     bottom: 2,
                     child: GradientRaisedButton(
                       label: PlaylistStrings.save,
-                      onPressed: () => print('Save'),
+                      onPressed: () => _showSuccessDialog(),
                     ),
                   ),
                 ],
@@ -112,6 +112,16 @@ class _AddToPlaylistPageState
             ),
           );
         },
+      ),
+    );
+  }
+
+  void _showSuccessDialog() {
+    showDialog(
+      context: context,
+      builder: (_) => const PlaylistModalAlert(
+        title: PlaylistStrings.audioAddedSuccessTitle,
+        subTitle: PlaylistStrings.audioAddedSuccessSubTitle,
       ),
     );
   }

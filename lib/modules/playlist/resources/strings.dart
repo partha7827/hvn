@@ -19,4 +19,7 @@ class PlaylistStrings {
   static const String newPlaylistSuccessTitle = 'New Playlist Created';
   static const String newPlaylistSuccessSubTitle =
       'Your new playlist successfully created';
+  static const String audioAddedSuccessTitle = 'Successfully Added';
+  static const String audioAddedSuccessSubTitle =
+      'Your content has been successfully added to playlist';
 }
