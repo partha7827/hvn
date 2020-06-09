@@ -28,4 +28,8 @@ class PlaylistImageAssets {
   static final Image checkMarkRounded = const Image(
     image: AssetImage('assets/icons/check_mark_rounded.png'),
   );
+
+  static final Image more = const Image(
+    image: AssetImage('assets/icons/playlist_more.png'),
+  );
 }

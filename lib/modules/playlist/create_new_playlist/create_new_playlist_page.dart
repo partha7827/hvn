@@ -1,8 +1,10 @@
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:highvibe/models/models.dart' show PlayList, Privacy;
 import 'package:highvibe/modules/playlist/create_new_playlist/create_new_playlist_controller.dart';
 import 'package:highvibe/modules/playlist/resources/resources.dart';
+import 'package:highvibe/models/playlist/mock_playlist.dart';
 import 'package:highvibe/modules/playlist/widgets/widgets.dart';
 import 'package:highvibe/widgets/gradient_raised_button.dart';
 import 'package:highvibe/widgets/header_row.dart';
@@ -19,6 +21,8 @@ class _CreateNewPlaylistPage
     extends ModularState<CreateNewPlaylistPage, CreateNewPlaylistController> {
   bool _isPrivate = false;
   String _imagePath = '';
+  String _playlistTitle = '';
+  String _playlistDescription = '';
 
   @override
   Widget build(BuildContext context) {
@@ -119,8 +123,8 @@ class _CreateNewPlaylistPage
                     hintStyle: TextStyle(color: Colors.white),
                   ),
                   style: const TextStyle(color: Colors.white),
-                  onSubmitted: (name) {
-                    print(name);
+                  onSubmitted: (title) {
+                    _playlistTitle = title;
                   },
                 ),
                 const SizedBox(height: 20),
@@ -147,7 +151,7 @@ class _CreateNewPlaylistPage
                   ),
                   style: const TextStyle(color: Colors.white),
                   onSubmitted: (description) {
-                    print(description);
+                    _playlistDescription = description;
                   },
                 ),
                 const SizedBox(height: 30),
@@ -178,8 +182,8 @@ class _CreateNewPlaylistPage
                   ],
                 ),
                 const SizedBox(height: 20),
-                const PlaylistAudioItemTile(),
-                const PlaylistAudioItemTile(),
+                // const PlaylistAudioItemTile(),
+                // const PlaylistAudioItemTile(),
                 const SizedBox(height: 20),
                 GradientRaisedButton(
                   label: PlaylistStrings.save,
@@ -194,6 +198,17 @@ class _CreateNewPlaylistPage
   }
 
   void _showSuccessDialog() {
+    final playlist = PlayList(
+      (b) => b
+        ..coverUrlPath =
+            'https://takelessons.com/blog/wp-content/uploads/2020/03/flute-for-beginners.jpg'
+        ..desscription = _playlistDescription
+        ..title = _playlistTitle
+        ..privacy = Privacy.public,
+    );
+
+    tempInMemoryPlaylistCollection.add(playlist);
+
     showDialog(
       context: context,
       builder: (_) => const PlaylistModalAlert(

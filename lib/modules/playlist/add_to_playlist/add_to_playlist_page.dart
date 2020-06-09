@@ -85,7 +85,7 @@ class _AddToPlaylistPageState
                         style: TextStyle(color: Colors.white),
                       ),
                       searchBarController: _searchBarController,
-                      suggestions: mockPlaylists,
+                      suggestions: tempInMemoryPlaylistCollection.toList(),
                       onItemFound: (item, index) {
                         return PlaylistTile(playList: item);
                       },
@@ -125,7 +125,7 @@ class _AddToPlaylistPageState
   }
 
   Future<List<PlayList>> _findPlaylists(String searchTerm) async {
-    return mockPlaylists
+    return tempInMemoryPlaylistCollection
         .where(
           (element) => element.title.startsWith(searchTerm),
         )

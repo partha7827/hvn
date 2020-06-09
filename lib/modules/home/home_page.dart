@@ -6,7 +6,6 @@ import 'package:highvibe/modules/home/widgets/audios_widget.dart';
 import 'package:highvibe/modules/home/widgets/authors_widget.dart';
 import 'package:highvibe/modules/home/widgets/drawer_widget.dart';
 import 'package:highvibe/modules/home/widgets/exit_app.dart';
-import 'package:highvibe/modules/playlist/playlist_module.dart';
 import 'package:highvibe/utils/utils.dart';
 import 'package:highvibe/values/Strings.dart';
 import 'package:highvibe/values/global_key.dart';

@@ -6,10 +6,12 @@ import 'package:highvibe/values/themes.dart';
 
 class PlaylistTile extends StatefulWidget {
   final PlayList playList;
+  final bool isInEditMode;
   final ValueChanged<PlayList> onTap;
 
   PlaylistTile({
     @required this.playList,
+    this.isInEditMode = false,
     this.onTap,
     Key key,
   }) : super(key: key);
@@ -79,7 +81,7 @@ class _PlaylistTileState extends State<PlaylistTile> {
           ),
           IconButton(
             icon: _configureIcon(),
-            onPressed: () => _toggle(),
+            onPressed: () => _onPressed(),
           )
         ],
       ),
@@ -87,11 +89,27 @@ class _PlaylistTileState extends State<PlaylistTile> {
   }
 
   Widget _configureIcon() {
-    if (_isSelected) {
-      return PlaylistImageAssets.radioButtonActive;
+    if (widget.isInEditMode) {
+      if (_isSelected) {
+        return PlaylistImageAssets.radioButtonActive;
+      } else {
+        return PlaylistImageAssets.radioButtonNotActive;
+      }
     } else {
-      return PlaylistImageAssets.radioButtonNotActive;
+      return PlaylistImageAssets.more;
     }
+  }
+
+  void _onPressed() {
+    if (widget.isInEditMode) {
+      _toggle();
+    } else {
+      _showContextMenu();
+    }
+  }
+
+  void _showContextMenu() {
+    print('_showContextMenu');
   }
 
   void _toggle() {

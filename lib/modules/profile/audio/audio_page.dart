@@ -5,6 +5,7 @@ import 'package:highvibe/models/models.dart';
 import 'package:highvibe/modules/app/media_overlays.dart';
 import 'package:highvibe/modules/playlist/playlist_module.dart';
 import 'package:highvibe/modules/playlist/resources/resources.dart';
+import 'package:highvibe/modules/playlist/widgets/widgets.dart';
 import 'package:highvibe/utils/utils.dart';
 import 'package:highvibe/values/Strings.dart';
 import 'package:highvibe/widgets/audio_tile.dart';
@@ -74,6 +75,10 @@ class _AudioPageState extends ModularState<AudioPage, AudioController> {
             )
           ],
         ),
+        const SizedBox(height: 10),
+        for (final item in tempInMemoryPlaylistCollection) ...[
+          PlaylistTile(playList: item)
+        ],
       ],
     );
   }
