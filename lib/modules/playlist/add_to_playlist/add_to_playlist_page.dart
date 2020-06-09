@@ -29,9 +29,7 @@ class _AddToPlaylistPageState
         centerTitle: false,
         title: const Text(
           PlaylistStrings.addToPlaylist,
-          style: TextStyle(
-            fontWeight: FontWeight.bold,
-          ),
+          style: TextStyle(fontWeight: FontWeight.bold),
         ),
         leading: IconButton(
           icon: const Icon(Icons.close, color: Colors.white),

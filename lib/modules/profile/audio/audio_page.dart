@@ -3,6 +3,8 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:highvibe/models/models.dart';
 import 'package:highvibe/modules/app/media_overlays.dart';
+import 'package:highvibe/modules/playlist/playlist_module.dart';
+import 'package:highvibe/modules/playlist/resources/resources.dart';
 import 'package:highvibe/utils/utils.dart';
 import 'package:highvibe/values/Strings.dart';
 import 'package:highvibe/widgets/audio_tile.dart';
@@ -49,17 +51,29 @@ class _AudioPageState extends ModularState<AudioPage, AudioController> {
       padding: const EdgeInsets.only(left: 20, top: 10, bottom: 80, right: 8),
       children: [
         const HeaderRow(title: Strings.uploads),
-        ...audios
-            .map(
-              (item) => AudioTile(
-                audioFile: item,
-                onTap: (_) => MediaOverlays.presentAudioPlayerAsOverlay(
-                  context: context,
-                  audioFile: item,
-                ),
+        for (final item in audios) ...[
+          AudioTile(
+            audioFile: item,
+            onTap: (_) => MediaOverlays.presentAudioPlayerAsOverlay(
+              context: context,
+              audioFile: item,
+            ),
+          ),
+        ],
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            const HeaderRow(title: PlaylistStrings.playlist),
+            GestureDetector(
+              onTap: () => PlaylistModule.toCreateNewPlaylist(),
+              child: SizedBox(
+                height: 20,
+                width: 120,
+                child: PlaylistImageAssets.newPlaylist,
               ),
             )
-            .toList(),
+          ],
+        ),
       ],
     );
   }

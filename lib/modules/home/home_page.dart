@@ -68,10 +68,6 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
                     child: _buildQuoteWidget(),
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(top: 80, bottom: 40),
-                    child: _playlist(),
-                  ),
-                  Padding(
                     padding: const EdgeInsets.symmetric(vertical: 40),
                     child: AudiosWidget(),
                   ),
@@ -101,17 +97,6 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
           ],
         ),
       ),
-    );
-  }
-
-  Widget _playlist() {
-    return IconButton(
-      icon: const Icon(
-        Icons.playlist_add,
-        color: Colors.white,
-        size: 70,
-      ),
-      onPressed: () => PlaylistModule.toAddToPlaylist(),
     );
   }
 
