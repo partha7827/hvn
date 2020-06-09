@@ -1,8 +1,8 @@
 import 'package:flappy_search_bar/flappy_search_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:highvibe/models/models.dart' show PlayList;
-import 'package:highvibe/models/playlist/mock_playlist.dart';
+import 'package:highvibe/models/models.dart'
+    show PlayList, tempInMemoryPlaylistCollection;
 import 'package:highvibe/modules/playlist/add_to_playlist/add_to_playlist_controller.dart';
 import 'package:highvibe/modules/playlist/playlist_module.dart';
 import 'package:highvibe/modules/playlist/resources/resources.dart';
@@ -87,7 +87,12 @@ class _AddToPlaylistPageState
                       searchBarController: _searchBarController,
                       suggestions: tempInMemoryPlaylistCollection.toList(),
                       onItemFound: (item, index) {
-                        return PlaylistTile(playList: item);
+                        return PlaylistTile(
+                          playList: item,
+                          onTap: (item) {
+                            print(item);
+                          },
+                        );
                       },
                       onSearch: _findPlaylists,
                       emptyWidget: const Text(

@@ -22,4 +22,9 @@ class PlaylistStrings {
   static const String audioAddedSuccessTitle = 'Successfully Added';
   static const String audioAddedSuccessSubTitle =
       'Your content has been successfully added to playlist';
+  static const String options = 'Options';
+  static const String edit = 'Edit';
+  static const String addToWayPoints = 'Add WayPoints';
+  static const String delete = 'Delete';
+  static const String share = 'Share';
 }

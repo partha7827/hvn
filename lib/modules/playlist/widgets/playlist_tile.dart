@@ -11,8 +11,8 @@ class PlaylistTile extends StatefulWidget {
 
   PlaylistTile({
     @required this.playList,
+    @required this.onTap,
     this.isInEditMode = false,
-    this.onTap,
     Key key,
   }) : super(key: key);
 
@@ -104,12 +104,8 @@ class _PlaylistTileState extends State<PlaylistTile> {
     if (widget.isInEditMode) {
       _toggle();
     } else {
-      _showContextMenu();
+      widget.onTap(widget.playList);
     }
-  }
-
-  void _showContextMenu() {
-    print('_showContextMenu');
   }
 
   void _toggle() {

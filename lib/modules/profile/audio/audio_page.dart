@@ -77,7 +77,10 @@ class _AudioPageState extends ModularState<AudioPage, AudioController> {
         ),
         const SizedBox(height: 10),
         for (final item in tempInMemoryPlaylistCollection) ...[
-          PlaylistTile(playList: item)
+          PlaylistTile(
+            playList: item,
+            onTap: (item) => playlistContextMenue(context, item),
+          )
         ],
       ],
     );

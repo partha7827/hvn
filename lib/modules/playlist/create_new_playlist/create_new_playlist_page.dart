@@ -1,10 +1,10 @@
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:highvibe/models/models.dart' show PlayList, Privacy;
+import 'package:highvibe/models/models.dart'
+    show PlayList, Privacy, tempInMemoryPlaylistCollection;
 import 'package:highvibe/modules/playlist/create_new_playlist/create_new_playlist_controller.dart';
 import 'package:highvibe/modules/playlist/resources/resources.dart';
-import 'package:highvibe/models/playlist/mock_playlist.dart';
 import 'package:highvibe/modules/playlist/widgets/widgets.dart';
 import 'package:highvibe/widgets/gradient_raised_button.dart';
 import 'package:highvibe/widgets/header_row.dart';
