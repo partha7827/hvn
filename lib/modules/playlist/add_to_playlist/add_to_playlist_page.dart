@@ -100,7 +100,7 @@ class _AddToPlaylistPageState
                           playList: item,
                           isInEditMode: true,
                           onTap: (selectedPlaylist) =>
-                              _configire(selectedPlaylist),
+                              _populatePlaylistItems(selectedPlaylist),
                         );
                       },
                       onSearch: _findPlaylists,
@@ -128,15 +128,6 @@ class _AddToPlaylistPageState
     );
   }
 
-  // FIXME: - Find a better name
-  void _configire(PlayList playlist) {
-    if (_listOfPlaylistToAddAudio.contains(playlist)) {
-      _listOfPlaylistToAddAudio.remove(playlist);
-    } else {
-      _listOfPlaylistToAddAudio.add(playlist);
-    }
-  }
-
   void _addAudioFileToPlaylist(PlayList playlist) {
     final updatedPlaylist = PlayList(
       (b) => b
@@ -152,6 +143,22 @@ class _AddToPlaylistPageState
     tempInMemoryPlaylistCollection.add(updatedPlaylist);
   }
 
+  Future<List<PlayList>> _findPlaylists(String searchTerm) async {
+    return tempInMemoryPlaylistCollection
+        .where(
+          (element) => element.title.startsWith(searchTerm),
+        )
+        .toList();
+  }
+
+  void _populatePlaylistItems(PlayList playlist) {
+    if (_listOfPlaylistToAddAudio.contains(playlist)) {
+      _listOfPlaylistToAddAudio.remove(playlist);
+    } else {
+      _listOfPlaylistToAddAudio.add(playlist);
+    }
+  }
+
   void _showSuccessDialog() {
     for (final item in _listOfPlaylistToAddAudio) {
       _addAudioFileToPlaylist(item);
@@ -164,13 +171,5 @@ class _AddToPlaylistPageState
         subTitle: PlaylistStrings.audioAddedSuccessSubTitle,
       ),
     );
-  }
-
-  Future<List<PlayList>> _findPlaylists(String searchTerm) async {
-    return tempInMemoryPlaylistCollection
-        .where(
-          (element) => element.title.startsWith(searchTerm),
-        )
-        .toList();
   }
 }
