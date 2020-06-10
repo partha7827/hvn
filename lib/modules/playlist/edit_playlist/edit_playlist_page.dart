@@ -26,11 +26,12 @@ class EditPlaylistPage extends StatefulWidget {
 class _EditPlayListPageState
     extends ModularState<EditPlaylistPage, EditPlaylistController>
     with SingleTickerProviderStateMixin {
+  String _imagePath;
+  Privacy _privacy;
+  bool _isPrivate;
   TextEditingController _titleTextEditingController;
   TextEditingController _descriptionTextEditingController;
-
   TabController _tabController;
-  bool get _isPrivate => widget.playlist.privacy == Privacy.private;
 
   @override
   Widget build(BuildContext context) {
@@ -82,12 +83,21 @@ class _EditPlayListPageState
   @override
   void dispose() {
     _tabController.dispose();
+    _titleTextEditingController.dispose();
+    _descriptionTextEditingController.dispose();
     super.dispose();
   }
 
   @override
   void initState() {
     super.initState();
+    _configure();
+  }
+
+  void _configure() {
+    _imagePath = widget.playlist.coverUrlPath;
+    _privacy = widget.playlist.privacy;
+    _isPrivate = widget.playlist.privacy == Privacy.private;
     _titleTextEditingController = TextEditingController(
       text: widget.playlist.title,
     );
@@ -120,10 +130,7 @@ class _EditPlayListPageState
   }
 
   void _deleteCover() {
-    print('_deleteCover');
-    setState(() => widget.playlist.rebuild((b) => b..coverUrlPath = ''));
-    widget.playlist.rebuild((b) => b..coverUrlPath = 'dddd');
-    print('${widget.playlist.coverUrlPath}');
+    setState(() => _imagePath = '');
   }
 
   Widget _editPlaylist() {
@@ -140,7 +147,7 @@ class _EditPlayListPageState
               ),
               borderRadius: BorderRadius.circular(12),
             ),
-            child: widget.playlist.coverUrlPath.isEmpty
+            child: _imagePath.isEmpty
                 ? GestureDetector(
                     onTap: () async => _selectCover(),
                     child: Stack(
@@ -170,7 +177,7 @@ class _EditPlayListPageState
                       ClipRRect(
                         borderRadius: BorderRadius.circular(12),
                         child: CachedNetworkImage(
-                          imageUrl: widget.playlist.coverUrlPath,
+                          imageUrl: _imagePath,
                           fit: BoxFit.cover,
                         ),
                       ),
@@ -279,7 +286,10 @@ class _EditPlayListPageState
       final file = await FilePicker.getFile(type: FileType.image);
       if (file != null) {
         setState(() {
-          widget.playlist.rebuild((b) => b..coverUrlPath = file.path);
+          _imagePath = file.path;
+          // FIXME: - temporarily overide. Implement image upload.
+          _imagePath =
+              'https://takelessons.com/blog/wp-content/uploads/2020/03/flute-for-beginners.jpg';
         });
       }
     } catch (error) {
@@ -288,11 +298,17 @@ class _EditPlayListPageState
   }
 
   void _showSuccessDialog() {
-    widget.playlist.rebuild(
+    final updatePlaylist = PlayList(
       (b) => b
-        ..coverUrlPath =
-            'https://takelessons.com/blog/wp-content/uploads/2020/03/flute-for-beginners.jpg',
+        ..coverUrlPath = _imagePath
+        ..desscription = _descriptionTextEditingController.text
+        ..title = _titleTextEditingController.text
+        ..privacy = _privacy,
     );
+
+    tempInMemoryPlaylistCollection.remove(widget.playlist);
+    tempInMemoryPlaylistCollection.add(updatePlaylist);
+    print(updatePlaylist);
 
     showDialog(
       context: context,
@@ -304,13 +320,15 @@ class _EditPlayListPageState
   }
 
   void _togglePrivacy() {
-    if (widget.playlist.privacy == Privacy.public) {
+    if (_isPrivate) {
       setState(() {
-        widget.playlist.rebuild((b) => b..privacy = Privacy.private);
+        _privacy = Privacy.public;
+        _isPrivate = false;
       });
     } else {
       setState(() {
-        widget.playlist.rebuild((b) => b..privacy = Privacy.public);
+        _privacy = Privacy.private;
+        _isPrivate = true;
       });
     }
   }

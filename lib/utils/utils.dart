@@ -9,6 +9,7 @@ import 'package:highvibe/values/global_key.dart';
 
 double aspectRatio(BuildContext context) =>
     screenWidth(context) / screenHeight(context);
+
 Future<bool> checkStoragePermission() async {
   return true;
 }
@@ -36,6 +37,18 @@ Future<bool> onWillPop() async {
     }
   }
   return true;
+}
+
+bool isWebUrl(String path) => Uri.parse(path).host != null;
+
+void popUntil({
+  @required int numberOfPops,
+  BuildContext context,
+}) {
+  var count = 0;
+  Navigator.popUntil(context, (route) {
+    return count++ == numberOfPops;
+  });
 }
 
 bool portraitOrientation(BuildContext context) =>

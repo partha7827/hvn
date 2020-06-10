@@ -68,7 +68,10 @@ class PlaylistModalAlert extends StatelessWidget {
                     height: 48,
                     child: GradientRaisedButton(
                       label: buttonTitle,
-                      onPressed: () => Navigator.of(context).pop(),
+                      onPressed: () => popUntil(
+                        numberOfPops: 2,
+                        context: context,
+                      ),
                     ),
                   ),
                 ],
