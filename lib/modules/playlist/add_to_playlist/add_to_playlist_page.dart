@@ -2,7 +2,7 @@ import 'package:flappy_search_bar/flappy_search_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:highvibe/models/models.dart'
-    show PlayList, tempInMemoryPlaylistCollection;
+    show Audio, PlayList, tempInMemoryPlaylistCollection;
 import 'package:highvibe/modules/playlist/add_to_playlist/add_to_playlist_controller.dart';
 import 'package:highvibe/modules/playlist/playlist_module.dart';
 import 'package:highvibe/modules/playlist/resources/resources.dart';
@@ -13,6 +13,13 @@ import 'package:highvibe/widgets/header_row.dart';
 import 'package:highvibe/widgets/responsive_safe_area.dart';
 
 class AddToPlaylistPage extends StatefulWidget {
+  final Audio audioFile;
+
+  const AddToPlaylistPage({
+    @required this.audioFile,
+    Key key,
+  }) : super(key: key);
+
   @override
   _AddToPlaylistPageState createState() => _AddToPlaylistPageState();
 }
@@ -21,6 +28,8 @@ class _AddToPlaylistPageState
     extends ModularState<AddToPlaylistPage, AddToPlaylistController> {
   final SearchBarController<PlayList> _searchBarController =
       SearchBarController();
+
+  final Set<PlayList> _listOfPlaylistToAddAudio = {};
 
   @override
   Widget build(BuildContext context) {
@@ -89,9 +98,9 @@ class _AddToPlaylistPageState
                       onItemFound: (item, index) {
                         return PlaylistTile(
                           playList: item,
-                          onTap: (item) {
-                            print(item);
-                          },
+                          isInEditMode: true,
+                          onTap: (selectedPlaylist) =>
+                              _configire(selectedPlaylist),
                         );
                       },
                       onSearch: _findPlaylists,
@@ -119,7 +128,35 @@ class _AddToPlaylistPageState
     );
   }
 
+  // FIXME: - Find a better name
+  void _configire(PlayList playlist) {
+    if (_listOfPlaylistToAddAudio.contains(playlist)) {
+      _listOfPlaylistToAddAudio.remove(playlist);
+    } else {
+      _listOfPlaylistToAddAudio.add(playlist);
+    }
+  }
+
+  void _addAudioFileToPlaylist(PlayList playlist) {
+    final updatedPlaylist = PlayList(
+      (b) => b
+        ..coverUrlPath = playlist.coverUrlPath
+        ..desscription = playlist.desscription
+        ..title = playlist.title
+        ..privacy = playlist.privacy
+        ..audioFiles.addAll(playlist.audioFiles)
+        ..audioFiles.add(widget.audioFile),
+    );
+
+    tempInMemoryPlaylistCollection.remove(playlist);
+    tempInMemoryPlaylistCollection.add(updatedPlaylist);
+  }
+
   void _showSuccessDialog() {
+    for (final item in _listOfPlaylistToAddAudio) {
+      _addAudioFileToPlaylist(item);
+    }
+
     showDialog(
       context: context,
       builder: (_) => const PlaylistModalAlert(

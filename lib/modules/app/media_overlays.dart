@@ -1,14 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:highvibe/models/models.dart' show Audio, Video;
 import 'package:highvibe/modules/audio_player/audio_player_module.dart';
+import 'package:highvibe/modules/playlist/add_to_playlist/add_to_playlist_page.dart';
 import 'package:highvibe/modules/video_player/video_player_page.dart';
 
 class MediaOverlays {
   static OverlayState _mediaOverlayState;
   static OverlayEntry _videoOverlayEntry;
   static OverlayEntry _audioOverlayEntry;
+  static OverlayEntry _addToPlaylistOverlayEntry;
 
   const MediaOverlays._();
+
+  static void disposeAddToPlaylistOverlayEntry() {
+    _addToPlaylistOverlayEntry?.remove();
+    _addToPlaylistOverlayEntry = null;
+  }
 
   static void disposeAudioOverlayEntry() {
     _audioOverlayEntry?.remove();
@@ -23,6 +30,7 @@ class MediaOverlays {
   static void _removeAllOverlays() {
     disposeAudioOverlayEntry();
     disposeVideoOverlayEntry();
+    disposeAddToPlaylistOverlayEntry();
   }
 
   static void presentAudioPlayerAsOverlay({
@@ -47,5 +55,16 @@ class MediaOverlays {
       builder: (_) => VideoPlayerPage(video: video),
     );
     _mediaOverlayState.insert(_videoOverlayEntry);
+  }
+
+  static void presentAddToPlaylistAsOverlay({
+    @required BuildContext context,
+    @required Audio audioFile,
+  }) {
+    _mediaOverlayState = Overlay.of(context);
+    _addToPlaylistOverlayEntry = OverlayEntry(
+      builder: (_) => AddToPlaylistPage(audioFile: audioFile),
+    );
+    _mediaOverlayState.insert(_addToPlaylistOverlayEntry);
   }
 }

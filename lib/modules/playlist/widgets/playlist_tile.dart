@@ -103,6 +103,7 @@ class _PlaylistTileState extends State<PlaylistTile> {
   void _onPressed() {
     if (widget.isInEditMode) {
       _toggle();
+      widget.onTap(widget.playList);
     } else {
       widget.onTap(widget.playList);
     }

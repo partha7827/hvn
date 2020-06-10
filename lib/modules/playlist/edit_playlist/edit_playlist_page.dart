@@ -92,6 +92,7 @@ class _EditPlayListPageState
   void initState() {
     super.initState();
     _configure();
+    print(widget.playlist);
   }
 
   void _configure() {
@@ -127,10 +128,6 @@ class _EditPlayListPageState
         ),
       );
     }
-  }
-
-  void _deleteCover() {
-    setState(() => _imagePath = '');
   }
 
   Widget _editPlaylist() {
@@ -185,7 +182,7 @@ class _EditPlayListPageState
                         top: 12,
                         right: 12,
                         child: GestureDetector(
-                          onTap: () => _deleteCover(),
+                          onTap: () => setState(() => _imagePath = ''),
                           child: PlaylistImageAssets.deletePlaylistCover,
                         ),
                       ),
@@ -308,7 +305,6 @@ class _EditPlayListPageState
 
     tempInMemoryPlaylistCollection.remove(widget.playlist);
     tempInMemoryPlaylistCollection.add(updatePlaylist);
-    print(updatePlaylist);
 
     showDialog(
       context: context,

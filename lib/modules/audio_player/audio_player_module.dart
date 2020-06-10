@@ -17,5 +17,5 @@ class AudioPlayerModule extends WidgetModule {
       ];
 
   @override
-  Widget get view => AudioPlayerPage(key: audioKey,);
+  Widget get view => AudioPlayerPage(key: audioKey);
 }
