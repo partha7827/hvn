@@ -28,7 +28,7 @@ class _EditPlayListPageState
         centerTitle: false,
         backgroundColor: const Color(0xFF212140),
         title: const Text(
-          'Edit Playlist',
+          PlaylistStrings.editPlaylist,
           style: TextStyle(
             fontWeight: FontWeight.bold,
           ),

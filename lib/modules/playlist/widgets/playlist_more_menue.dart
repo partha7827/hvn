@@ -52,7 +52,10 @@ Widget _buildBottomNavigationMenu(PlayList playlist) {
               color: Colors.white,
             ),
           ),
-          onTap: () => PlaylistModule.toEditPlaylist(),
+          onTap: () {
+            Modular.to.pop();
+            PlaylistModule.toEditPlaylist(playList: playlist);
+          },
         ),
         ListTile(
           leading: PlaylistImageAssets.addToPlaylistBottonSheet,

@@ -30,4 +30,5 @@ class PlaylistStrings {
   static const String information = 'Information';
   static const String tracks = 'Tracks';
   static const String noAudio = 'No Audio Files';
+  static const String editPlaylist = ' Edit Playlist';
 }

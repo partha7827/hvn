@@ -1,4 +1,6 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:highvibe/models/models.dart';
 import 'package:highvibe/modules/playlist/add_to_playlist/add_to_playlist_controller.dart';
 import 'package:highvibe/modules/playlist/add_to_playlist/add_to_playlist_page.dart';
 import 'package:highvibe/modules/playlist/create_new_playlist/create_new_playlist_controller.dart';
@@ -43,6 +45,7 @@ class PlaylistModule extends ChildModule {
   static Future<Object> toCreateNewPlaylist() =>
       Modular.to.pushNamed('$_playlistRoute/create_new_playlist');
 
-  static Future<Object> toEditPlaylist() =>
-      Modular.to.pushNamed('$_playlistRoute/edit_playlist');
+  static Future<Object> toEditPlaylist({@required PlayList playList}) =>
+      Modular.to
+          .pushNamed('$_playlistRoute/edit_playlist', arguments: playList);
 }
