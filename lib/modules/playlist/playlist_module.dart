@@ -27,12 +27,12 @@ class PlaylistModule extends ChildModule {
         ),
         Router(
           '$_playlistRoute/create_new_playlist',
-          child: (_, args) => CreateNewPlaylistPage(),
+          child: (_, args) => CreateNewPlaylistPage(editMode: false),
           transition: TransitionType.rightToLeft,
         ),
         Router(
           '$_playlistRoute/edit_playlist',
-          child: (_, args) => EditPlaylistPage(),
+          child: (_, args) => EditPlaylistPage(playlist: args.data),
           transition: TransitionType.rightToLeft,
         ),
       ];

@@ -1,10 +1,16 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:highvibe/models/models.dart';
 import 'package:highvibe/modules/playlist/resources/resources.dart';
 import 'package:highvibe/values/themes.dart';
 
 class PlaylistAudioItemTile extends StatelessWidget {
-  const PlaylistAudioItemTile({Key key}) : super(key: key);
+  final Audio audioFile;
+
+  const PlaylistAudioItemTile({
+    @required this.audioFile,
+    Key key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -18,8 +24,7 @@ class PlaylistAudioItemTile extends StatelessWidget {
               ClipRRect(
                 borderRadius: BorderRadius.circular(10),
                 child: CachedNetworkImage(
-                  imageUrl:
-                      'https://takelessons.com/blog/wp-content/uploads/2020/03/flute-for-beginners.jpg',
+                  imageUrl: audioFile.audioUrlPath,
                   width: 70,
                   height: 70,
                   fit: BoxFit.cover,
@@ -38,9 +43,9 @@ class PlaylistAudioItemTile extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  Text('Mock Audio File', style: normaBoldl16White),
+                  Text('${audioFile.title}', style: normaBoldl16White),
                   const SizedBox(height: 8),
-                  Text('Duration', style: normal14Hint),
+                  Text('${audioFile.duration}', style: normal14Hint),
                 ],
               ),
             ),

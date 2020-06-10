@@ -11,7 +11,8 @@ import 'package:highvibe/widgets/header_row.dart';
 import 'package:highvibe/widgets/responsive_safe_area.dart';
 
 class CreateNewPlaylistPage extends StatefulWidget {
-  CreateNewPlaylistPage({Key key}) : super(key: key);
+  final bool editMode;
+  CreateNewPlaylistPage({@required this.editMode, Key key}) : super(key: key);
 
   @override
   _CreateNewPlaylistPage createState() => _CreateNewPlaylistPage();
@@ -27,19 +28,21 @@ class _CreateNewPlaylistPage
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        centerTitle: false,
-        title: const Text(
-          PlaylistStrings.createNew,
-          style: TextStyle(
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: Colors.white),
-          onPressed: () => Modular.to.pop(),
-        ),
-      ),
+      appBar: !widget.editMode
+          ? AppBar(
+              centerTitle: false,
+              title: const Text(
+                PlaylistStrings.createNew,
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              leading: IconButton(
+                icon: const Icon(Icons.arrow_back, color: Colors.white),
+                onPressed: () => Modular.to.pop(),
+              ),
+            )
+          : null,
       body: ResponsiveSafeArea(
         builder: (context, size) {
           return Container(
@@ -181,9 +184,6 @@ class _CreateNewPlaylistPage
                     ),
                   ],
                 ),
-                const SizedBox(height: 20),
-                // const PlaylistAudioItemTile(),
-                // const PlaylistAudioItemTile(),
                 const SizedBox(height: 20),
                 GradientRaisedButton(
                   label: PlaylistStrings.save,

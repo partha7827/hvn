@@ -27,4 +27,7 @@ class PlaylistStrings {
   static const String addToWayPoints = 'Add WayPoints';
   static const String delete = 'Delete';
   static const String share = 'Share';
+  static const String information = 'Information';
+  static const String tracks = 'Tracks';
+  static const String noAudio = 'No Audio Files';
 }
