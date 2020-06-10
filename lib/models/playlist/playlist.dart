@@ -6,7 +6,7 @@ import 'package:built_collection/built_collection.dart';
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:highvibe/models/models.dart' show Privacy;
+import 'package:highvibe/models/models.dart' show Audio, Privacy;
 import 'package:highvibe/models/serializer/serializer.dart';
 
 part 'playlist.g.dart';
@@ -24,7 +24,7 @@ abstract class PlayList implements Built<PlayList, PlayListBuilder> {
   String get desscription;
   String get title;
   Privacy get privacy;
-  BuiltList<String> get audioFilesIds;
+  BuiltSet<Audio> get audioFilesIds;
 
   String toJson() {
     return json.encode(serializers.serializeWith(PlayList.serializer, this));

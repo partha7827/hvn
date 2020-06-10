@@ -56,4 +56,8 @@ class PlaylistImageAssets {
   static final Image shareBottomSheet = const Image(
     image: AssetImage('assets/icons/share_bottom_sheet.png'),
   );
+
+  static final Image reorderAudioItemInPlaylist = const Image(
+    image: AssetImage('assets/icons/reorder_playlist.png'),
+  );
 }

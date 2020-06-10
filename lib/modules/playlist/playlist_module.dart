@@ -3,6 +3,7 @@ import 'package:highvibe/modules/playlist/add_to_playlist/add_to_playlist_contro
 import 'package:highvibe/modules/playlist/add_to_playlist/add_to_playlist_page.dart';
 import 'package:highvibe/modules/playlist/create_new_playlist/create_new_playlist_controller.dart';
 import 'package:highvibe/modules/playlist/create_new_playlist/create_new_playlist_page.dart';
+import 'package:highvibe/modules/playlist/edit_playlist/edit_playlist_page.dart';
 import 'package:highvibe/modules/playlist/edit_playlist/edit_playlist_page_controller.dart';
 import 'package:highvibe/modules/playlist/playlist_controller.dart';
 
@@ -31,7 +32,7 @@ class PlaylistModule extends ChildModule {
         ),
         Router(
           '$_playlistRoute/edit_playlist',
-          child: (_, args) => CreateNewPlaylistPage(),
+          child: (_, args) => EditPlaylistPage(),
           transition: TransitionType.rightToLeft,
         ),
       ];

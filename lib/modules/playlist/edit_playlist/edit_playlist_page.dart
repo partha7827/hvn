@@ -4,15 +4,15 @@ import 'package:highvibe/modules/playlist/edit_playlist/edit_playlist_page_contr
 import 'package:highvibe/widgets/gradient_raised_button.dart';
 import 'package:highvibe/widgets/responsive_safe_area.dart';
 
-class EditPlayListPage extends StatefulWidget {
-  EditPlayListPage({Key key}) : super(key: key);
+class EditPlaylistPage extends StatefulWidget {
+  EditPlaylistPage({Key key}) : super(key: key);
 
   @override
   _EditPlayListPageState createState() => _EditPlayListPageState();
 }
 
 class _EditPlayListPageState
-    extends ModularState<EditPlayListPage, EditPlaylistController> {
+    extends ModularState<EditPlaylistPage, EditPlaylistController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
