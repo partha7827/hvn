@@ -1,3 +1,4 @@
+import 'package:built_collection/built_collection.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
@@ -32,6 +33,7 @@ class _EditPlayListPageState
   TextEditingController _titleTextEditingController;
   TextEditingController _descriptionTextEditingController;
   TabController _tabController;
+  List<Audio> _audioItems;
 
   @override
   Widget build(BuildContext context) {
@@ -72,7 +74,7 @@ class _EditPlayListPageState
             controller: _tabController,
             children: [
               _editPlaylist(),
-              _audioFiles(),
+              _audioFilesListView(),
             ],
           );
         },
@@ -94,26 +96,16 @@ class _EditPlayListPageState
     _configure();
   }
 
-  void _configure() {
-    _imagePath = widget.playlist.coverUrlPath;
-    _privacy = widget.playlist.privacy;
-    _isPrivate = widget.playlist.privacy == Privacy.private;
-    _titleTextEditingController = TextEditingController(
-      text: widget.playlist.title,
-    );
-    _descriptionTextEditingController = TextEditingController(
-      text: widget.playlist.desscription,
-    );
-    _tabController = TabController(vsync: this, length: 2);
-  }
-
-  Widget _audioFiles() {
-    if (widget.playlist.audioFiles.isNotEmpty) {
+  Widget _audioFilesListView() {
+    if (_audioItems.isNotEmpty) {
       return ListView.builder(
-        itemCount: widget.playlist.audioFiles.length,
+        itemCount: _audioItems.length,
         itemBuilder: (context, index) {
           return PlaylistAudioItemTile(
-            audioFile: widget.playlist.audioFiles.toList()[index],
+            audioFile: _audioItems[index],
+            onDelete: (item) {
+              setState(() => _audioItems.remove(item));
+            },
           );
         },
       );
@@ -127,6 +119,20 @@ class _EditPlayListPageState
         ),
       );
     }
+  }
+
+  void _configure() {
+    _audioItems = widget.playlist.audioFiles.toList();
+    _imagePath = widget.playlist.coverUrlPath;
+    _privacy = widget.playlist.privacy;
+    _isPrivate = widget.playlist.privacy == Privacy.private;
+    _titleTextEditingController = TextEditingController(
+      text: widget.playlist.title,
+    );
+    _descriptionTextEditingController = TextEditingController(
+      text: widget.playlist.desscription,
+    );
+    _tabController = TabController(vsync: this, length: 2);
   }
 
   Widget _editPlaylist() {
@@ -294,7 +300,7 @@ class _EditPlayListPageState
         ..desscription = _descriptionTextEditingController.text
         ..title = _titleTextEditingController.text
         ..privacy = _privacy
-        ..audioFiles = widget.playlist.audioFiles.toBuilder(),
+        ..audioFiles = BuiltSet<Audio>.from(_audioItems).toBuilder(),
     );
 
     tempInMemoryPlaylistCollection.remove(widget.playlist);
