@@ -11,8 +11,7 @@ import 'package:highvibe/widgets/header_row.dart';
 import 'package:highvibe/widgets/responsive_safe_area.dart';
 
 class CreateNewPlaylistPage extends StatefulWidget {
-  final bool editMode;
-  CreateNewPlaylistPage({@required this.editMode, Key key}) : super(key: key);
+  CreateNewPlaylistPage({Key key}) : super(key: key);
 
   @override
   _CreateNewPlaylistPage createState() => _CreateNewPlaylistPage();
@@ -24,25 +23,24 @@ class _CreateNewPlaylistPage
   String _imagePath = '';
   String _playlistTitle = '';
   String _playlistDescription = '';
+  Privacy _privacy = Privacy.public;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: !widget.editMode
-          ? AppBar(
-              centerTitle: false,
-              title: const Text(
-                PlaylistStrings.createNew,
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              leading: IconButton(
-                icon: const Icon(Icons.arrow_back, color: Colors.white),
-                onPressed: () => Modular.to.pop(),
-              ),
-            )
-          : null,
+      appBar: AppBar(
+        centerTitle: false,
+        title: const Text(
+          PlaylistStrings.createNew,
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back, color: Colors.white),
+          onPressed: () => Modular.to.pop(),
+        ),
+      ),
       body: ResponsiveSafeArea(
         builder: (context, size) {
           return Container(
@@ -87,10 +85,7 @@ class _CreateNewPlaylistPage
                           children: [
                             ClipRRect(
                               borderRadius: BorderRadius.circular(12),
-                              child: Image.asset(
-                                _imagePath,
-                                fit: BoxFit.cover,
-                              ),
+                              child: Image.asset(_imagePath, fit: BoxFit.cover),
                             ),
                             Positioned(
                               top: 12,
@@ -204,9 +199,8 @@ class _CreateNewPlaylistPage
             'https://takelessons.com/blog/wp-content/uploads/2020/03/flute-for-beginners.jpg'
         ..desscription = _playlistDescription
         ..title = _playlistTitle
-        ..privacy = Privacy.public,
+        ..privacy = _privacy,
     );
-
     tempInMemoryPlaylistCollection.add(playlist);
 
     showDialog(
@@ -237,9 +231,15 @@ class _CreateNewPlaylistPage
 
   void _togglePrivacy() {
     if (_isPrivate) {
-      setState(() => _isPrivate = false);
+      setState(() {
+        _privacy = Privacy.public;
+        _isPrivate = false;
+      });
     } else {
-      setState(() => _isPrivate = true);
+      setState(() {
+        _privacy = Privacy.private;
+        _isPrivate = true;
+      });
     }
   }
 }

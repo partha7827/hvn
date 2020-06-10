@@ -29,7 +29,7 @@ class PlaylistModule extends ChildModule {
         ),
         Router(
           '$_playlistRoute/create_new_playlist',
-          child: (_, args) => CreateNewPlaylistPage(editMode: false),
+          child: (_, args) => CreateNewPlaylistPage(),
           transition: TransitionType.rightToLeft,
         ),
         Router(
