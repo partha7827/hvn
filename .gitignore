@@ -24,7 +24,7 @@
 .idea/
 
 # Flutter/Dart/Pub related
-*.g.dart
+# *.g.dart
 **/doc/api/
 .dart_tool/
 .flutter-plugins
