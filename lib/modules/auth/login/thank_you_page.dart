@@ -11,7 +11,6 @@ class ThankYouPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print('args: $email');
     return Scaffold(
       appBar: AppBar(),
       body: Padding(

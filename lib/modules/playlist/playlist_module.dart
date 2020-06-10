@@ -13,9 +13,6 @@ import 'package:highvibe/modules/playlist/playlist_controller.dart';
 class PlaylistModule extends ChildModule {
   static final _playlistRoute = '/playlist';
 
-  // @override
-  // Widget get view => AddToPlaylistPage();
-
   @override
   List<Bind<Object>> get binds => [
         Bind<PlaylistController>((_) => PlaylistController()),

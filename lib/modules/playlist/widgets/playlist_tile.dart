@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:highvibe/models/models.dart' show PlayList;
 import 'package:highvibe/modules/playlist/resources/resources.dart';
+import 'package:highvibe/utils/utils.dart';
 import 'package:highvibe/values/themes.dart';
 
 class PlaylistTile extends StatefulWidget {
@@ -12,7 +13,7 @@ class PlaylistTile extends StatefulWidget {
   PlaylistTile({
     @required this.playList,
     @required this.onTap,
-    this.isInEditMode = false,
+    @required this.isInEditMode,
     Key key,
   }) : super(key: key);
 
@@ -74,7 +75,13 @@ class _PlaylistTileState extends State<PlaylistTile> {
                 children: <Widget>[
                   Text(widget.playList.title, style: normaBoldl16White),
                   const SizedBox(height: 8),
-                  Text('Total duration', style: normal14Hint),
+                  Text(
+                      mediaTimeFormatter(
+                        Duration(
+                          milliseconds: _calculateTotalDuration(),
+                        ),
+                      ),
+                      style: normal14Hint),
                 ],
               ),
             ),
@@ -86,6 +93,14 @@ class _PlaylistTileState extends State<PlaylistTile> {
         ],
       ),
     );
+  }
+
+  int _calculateTotalDuration() {
+    var totalDurration = 0;
+    for (final item in widget.playList.audioFiles) {
+      totalDurration += item.duration;
+    }
+    return totalDurration;
   }
 
   Widget _configureIcon() {

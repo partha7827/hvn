@@ -95,8 +95,6 @@ Future<String> uploadFile(File file, String childName,
 
     return await snap.ref.getDownloadURL();
   } catch (e) {
-    print('Exception $e');
-
     return null;
   }
 }

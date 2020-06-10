@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:highvibe/models/models.dart'
     show Audio, PlayList, tempInMemoryPlaylistCollection;
+import 'package:highvibe/modules/app/media_overlays.dart';
 import 'package:highvibe/modules/playlist/add_to_playlist/add_to_playlist_controller.dart';
 import 'package:highvibe/modules/playlist/playlist_module.dart';
 import 'package:highvibe/modules/playlist/resources/resources.dart';
@@ -30,6 +31,12 @@ class _AddToPlaylistPageState
       SearchBarController();
 
   final Set<PlayList> _listOfPlaylistToAddAudio = {};
+
+  @override
+  void dispose() {
+    MediaOverlays.disposeAudioOverlayEntry();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {

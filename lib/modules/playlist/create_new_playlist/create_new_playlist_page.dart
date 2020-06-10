@@ -1,8 +1,9 @@
+import 'package:built_collection/built_collection.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:highvibe/models/models.dart'
-    show PlayList, Privacy, tempInMemoryPlaylistCollection;
+    show Audio, PlayList, Privacy, tempInMemoryPlaylistCollection;
 import 'package:highvibe/modules/playlist/create_new_playlist/create_new_playlist_controller.dart';
 import 'package:highvibe/modules/playlist/resources/resources.dart';
 import 'package:highvibe/modules/playlist/widgets/widgets.dart';
@@ -19,11 +20,32 @@ class CreateNewPlaylistPage extends StatefulWidget {
 
 class _CreateNewPlaylistPage
     extends ModularState<CreateNewPlaylistPage, CreateNewPlaylistController> {
-  bool _isPrivate = false;
-  String _imagePath = '';
-  String _playlistTitle = '';
-  String _playlistDescription = '';
-  Privacy _privacy = Privacy.public;
+  String _imagePath;
+  Privacy _privacy;
+  bool _isPrivate;
+  TextEditingController _titleTextEditingController;
+  TextEditingController _descriptionTextEditingController;
+
+  @override
+  void dispose() {
+    _titleTextEditingController.dispose();
+    _descriptionTextEditingController.dispose();
+    super.dispose();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _configure();
+  }
+
+  void _configure() {
+    _imagePath = '';
+    _privacy = Privacy.private;
+    _isPrivate = true;
+    _titleTextEditingController = TextEditingController(text: '');
+    _descriptionTextEditingController = TextEditingController(text: '');
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -108,6 +130,7 @@ class _CreateNewPlaylistPage
                 ),
                 const SizedBox(height: 10),
                 TextField(
+                  controller: _titleTextEditingController,
                   decoration: const InputDecoration(
                     enabledBorder: UnderlineInputBorder(
                       borderSide:
@@ -121,9 +144,6 @@ class _CreateNewPlaylistPage
                     hintStyle: TextStyle(color: Colors.white),
                   ),
                   style: const TextStyle(color: Colors.white),
-                  onSubmitted: (title) {
-                    _playlistTitle = title;
-                  },
                 ),
                 const SizedBox(height: 20),
                 const Align(
@@ -135,6 +155,7 @@ class _CreateNewPlaylistPage
                 ),
                 const SizedBox(height: 10),
                 TextField(
+                  controller: _descriptionTextEditingController,
                   decoration: const InputDecoration(
                     enabledBorder: UnderlineInputBorder(
                       borderSide:
@@ -148,9 +169,6 @@ class _CreateNewPlaylistPage
                     hintStyle: TextStyle(color: Colors.white),
                   ),
                   style: const TextStyle(color: Colors.white),
-                  onSubmitted: (description) {
-                    _playlistDescription = description;
-                  },
                 ),
                 const SizedBox(height: 30),
                 const HeaderRow(title: PlaylistStrings.privacy),
@@ -197,10 +215,14 @@ class _CreateNewPlaylistPage
       (b) => b
         ..coverUrlPath =
             'https://takelessons.com/blog/wp-content/uploads/2020/03/flute-for-beginners.jpg'
-        ..desscription = _playlistDescription
-        ..title = _playlistTitle
-        ..privacy = _privacy,
+        ..desscription = _descriptionTextEditingController.text
+        ..title = _titleTextEditingController.text
+        ..privacy = _privacy
+        ..audioFiles = BuiltSet<Audio>().toBuilder(),
     );
+
+    print('CreateNewPlaylistPage $playlist');
+
     tempInMemoryPlaylistCollection.add(playlist);
 
     showDialog(

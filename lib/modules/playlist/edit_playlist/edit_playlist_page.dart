@@ -92,7 +92,6 @@ class _EditPlayListPageState
   void initState() {
     super.initState();
     _configure();
-    print(widget.playlist);
   }
 
   void _configure() {
@@ -211,9 +210,6 @@ class _EditPlayListPageState
               hintStyle: TextStyle(color: Colors.white),
             ),
             style: const TextStyle(color: Colors.white),
-            onSubmitted: (title) {
-              widget.playlist.rebuild((b) => b..title = title);
-            },
           ),
           const SizedBox(height: 20),
           const Align(
@@ -237,9 +233,6 @@ class _EditPlayListPageState
               hintStyle: TextStyle(color: Colors.white),
             ),
             style: const TextStyle(color: Colors.white),
-            onSubmitted: (description) {
-              widget.playlist.rebuild((b) => b..desscription = description);
-            },
           ),
           const SizedBox(height: 30),
           const HeaderRow(title: PlaylistStrings.privacy),
@@ -300,7 +293,8 @@ class _EditPlayListPageState
         ..coverUrlPath = _imagePath
         ..desscription = _descriptionTextEditingController.text
         ..title = _titleTextEditingController.text
-        ..privacy = _privacy,
+        ..privacy = _privacy
+        ..audioFiles = widget.playlist.audioFiles.toBuilder(),
     );
 
     tempInMemoryPlaylistCollection.remove(widget.playlist);

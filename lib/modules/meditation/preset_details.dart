@@ -78,7 +78,6 @@ class _PresetDetailsState extends State<PresetDetails> {
                       label: 'Vibrate',
                       icon: Icons.vibration,
                       onSelected: (value) {
-                        print('vibrate: $value');
                         setState(() {
                           isVibrate = value;
                         });

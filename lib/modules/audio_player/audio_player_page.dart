@@ -376,18 +376,15 @@ class AudioPlayerPageState
                             },
                           ),
                           IconButton(
-                            icon: const Icon(
-                              Icons.playlist_add,
-                              color: Colors.white,
-                            ),
-                            onPressed: () => PlaylistModule.toAddToPlaylist(
-                              audioFile: controller.audioFile,
-                            ),
-                            //     MediaOverlays.presentAddToPlaylistAsOverlay(
-                            //   context: context,
-                            //   audioFile: controller.audioFile,
-                            // ),
-                          ),
+                              icon: const Icon(
+                                Icons.playlist_add,
+                                color: Colors.white,
+                              ),
+                              onPressed: () {
+                                PlaylistModule.toAddToPlaylist(
+                                  audioFile: controller.audioFile,
+                                );
+                              }),
                         ],
                       ),
                     ],
