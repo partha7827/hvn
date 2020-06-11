@@ -13,14 +13,8 @@ class _SplashState extends State<Splash> {
   @override
   void initState() {
     super.initState();
-    _navigate();
   }
 
-  void _navigate(){
-    Future.delayed(const Duration(milliseconds: 142),(){
-        //navigate to next screen
-   });
-  }
   
   @override
   Widget build(BuildContext context) {
