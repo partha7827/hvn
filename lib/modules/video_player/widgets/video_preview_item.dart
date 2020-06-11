@@ -41,7 +41,7 @@ class VideoPreviewItem extends StatelessWidget {
                         width: width,
                         height: 180,
                         color: Colors.black26,
-                        child: Center(
+                        child: const Center(
                           child: Icon(
                             Icons.play_arrow,
                             color: Colors.white,
