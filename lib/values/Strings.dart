@@ -75,4 +75,15 @@ class Strings {
   static const String myProfile = 'My Profile';
   static const String myWallet = 'My Wallet';
   static const String bookmarks = 'Bookmarks';
+
+  static const String about = 'About';
+  static const String viewMore = 'View More';
+  static const String swag = 'Swag';
+  static const String karma = 'Karma';
+  static const String experiencePoint = 'Experience Points';
+  static const String hvnEarned = 'HVN\nEarned';
+  static const String sessionCount = 'Session\nCount';
+  static const String currentStreak = 'Current\nStreak';
+  static const String questCompletion = 'Quest\nCompletion';
+  static const String shareYourStats = 'Share your stats';
 }
