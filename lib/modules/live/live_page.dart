@@ -63,7 +63,7 @@ class _LivePageState extends ModularState<LivePage, LiveController> {
   Widget _upcomingEventsWidget() {
     return Column(
       children: <Widget>[
-        HeaderRow(
+        const HeaderRow(
           title: Strings.upcomingEvents,
           showTrailing: true,
         ),

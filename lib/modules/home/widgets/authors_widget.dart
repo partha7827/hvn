@@ -42,8 +42,8 @@ class _AuthorsWidgetState extends ModularState<AuthorsWidget, HomeController> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        Padding(
-          padding: const EdgeInsets.only(left: 20.0),
+        const Padding(
+          padding: EdgeInsets.only(left: 20.0),
           child: HeaderRow(
             title: Strings.authorsTitle,
             showTrailing: true,
