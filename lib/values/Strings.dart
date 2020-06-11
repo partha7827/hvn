@@ -75,4 +75,10 @@ class Strings {
   static const String myProfile = 'My Profile';
   static const String myWallet = 'My Wallet';
   static const String bookmarks = 'Bookmarks';
+
+  // playlist screen
+  static const String addToPlaylist = 'Add to playlist';
+  static const String playList = 'Playlist';
+  static const String newPlayList = '+ New Playlist';
+  static const String search = 'Search';
 }
