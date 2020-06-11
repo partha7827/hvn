@@ -3,7 +3,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:highvibe/modules/home/home_controller.dart';
 import 'package:highvibe/modules/home/widgets/drawer_button.dart';
 import 'package:highvibe/modules/home/widgets/logout_button.dart';
-import 'package:highvibe/values/Strings.dart';
+import 'package:highvibe/values/strings.dart';
 import 'package:highvibe/values/themes.dart';
 
 class DrawerWidget extends StatelessWidget {

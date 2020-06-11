@@ -7,7 +7,7 @@ import 'package:highvibe/modules/playlist/playlist_module.dart';
 import 'package:highvibe/modules/playlist/resources/resources.dart';
 import 'package:highvibe/modules/playlist/widgets/widgets.dart';
 import 'package:highvibe/utils/utils.dart';
-import 'package:highvibe/values/Strings.dart';
+import 'package:highvibe/values/strings.dart';
 import 'package:highvibe/widgets/audio_tile.dart';
 import 'package:highvibe/widgets/header_row.dart';
 import 'package:highvibe/widgets/repeat_widget.dart';

@@ -5,7 +5,7 @@ import 'package:highvibe/models/models.dart';
 import 'package:highvibe/modules/app/media_overlays.dart';
 import 'package:highvibe/modules/profile/audio/audio_controller.dart';
 import 'package:highvibe/utils/utils.dart';
-import 'package:highvibe/values/Strings.dart';
+import 'package:highvibe/values/strings.dart';
 import 'package:highvibe/widgets/audio_tile.dart';
 import 'package:highvibe/widgets/header_row.dart';
 import 'package:highvibe/widgets/splash_widget.dart';
