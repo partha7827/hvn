@@ -35,17 +35,17 @@ class _StartingBellState extends State<StartingBell> {
               onTimerDurationChanged: (duration) {},
             ),
           ),
-          Divider(
+          const Divider(
             color: hintTextColor,
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
-              Padding(
-                padding: const EdgeInsets.all(20.0),
+              const Padding(
+                padding: EdgeInsets.all(20.0),
                 child: Text(
                   Strings.count,
-                  style: const TextStyle(
+                  style: TextStyle(
                     color: Colors.white,
                     fontSize: 16,
                   ),
@@ -62,7 +62,7 @@ class _StartingBellState extends State<StartingBell> {
                         highlightedBorderColor: accentColor,
                         splashColor: hintTextColor,
                         padding: const EdgeInsets.all(0.0),
-                        borderSide: BorderSide(color: hintTextColor),
+                        borderSide: const BorderSide(color: hintTextColor),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(6.0),
                         ),
@@ -91,7 +91,7 @@ class _StartingBellState extends State<StartingBell> {
                         highlightedBorderColor: accentColor,
                         splashColor: hintTextColor,
                         padding: const EdgeInsets.all(0.0),
-                        borderSide: BorderSide(color: hintTextColor),
+                        borderSide: const BorderSide(color: hintTextColor),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(6.0),
                         ),
@@ -108,14 +108,14 @@ class _StartingBellState extends State<StartingBell> {
               )
             ],
           ),
-          Divider(
+          const Divider(
             color: hintTextColor,
           ),
-          Padding(
-            padding: const EdgeInsets.all(20.0),
+          const Padding(
+            padding: EdgeInsets.all(20.0),
             child: Text(
               Strings.sound,
-              style: const TextStyle(
+              style: TextStyle(
                 color: Colors.white,
                 fontSize: 16.0,
               ),

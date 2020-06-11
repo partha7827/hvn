@@ -43,8 +43,8 @@ class _VideosWidgetState extends ModularState<VideosWidget, HomeController> {
       padding: const EdgeInsets.only(bottom: 16),
       child: Column(
         children: [
-          Padding(
-            padding: const EdgeInsets.only(left: 16),
+          const Padding(
+            padding: EdgeInsets.only(left: 16),
             child: HeaderRow(
               title: Strings.recommendedVideos,
               showTrailing: true,
