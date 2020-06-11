@@ -75,4 +75,8 @@ class Strings {
   static const String myProfile = 'My Profile';
   static const String myWallet = 'My Wallet';
   static const String bookmarks = 'Bookmarks';
+
+  static const String createPlaylist = 'Create Playlist';
+  static const String goLive = 'Go Live';
+  static const String uploadContent = 'Upload Content';
 }
