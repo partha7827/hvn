@@ -72,7 +72,7 @@ class FacePageState extends State<FacePage> {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: FlatButton(
         onPressed: onPassCode,
-        child: Text(
+        child: const Text(
           'Use Passcode',
           style: TextStyle(color: AppColors.textBlue, fontSize: 18),
         ),
