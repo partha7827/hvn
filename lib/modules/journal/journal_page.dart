@@ -6,18 +6,19 @@ import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:highvibe/modules/journal/journal_controller.dart';
 import 'package:highvibe/utils/utils.dart';
 import 'package:highvibe/values/Strings.dart';
 import 'package:highvibe/values/themes.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:video_player/video_player.dart';
 
-class CameraScreen extends StatefulWidget {
+class JournalPage extends StatefulWidget {
   @override
-  _CameraExampleHomeState createState() => _CameraExampleHomeState();
+  _JournalPageState createState() => _JournalPageState();
 }
 
-class _CameraExampleHomeState extends State<CameraScreen>
+class _JournalPageState extends ModularState<JournalPage, JournalController>
     with WidgetsBindingObserver {
   CameraController _controller;
   String imagePath;
