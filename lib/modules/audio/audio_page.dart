@@ -6,7 +6,6 @@ import 'package:highvibe/modules/app/media_overlays.dart';
 import 'package:highvibe/modules/profile/audio/audio_controller.dart';
 import 'package:highvibe/utils/utils.dart';
 import 'package:highvibe/values/Strings.dart';
-import 'package:highvibe/values/global_key.dart';
 import 'package:highvibe/widgets/audio_tile.dart';
 import 'package:highvibe/widgets/header_row.dart';
 import 'package:highvibe/widgets/splash_widget.dart';
@@ -42,21 +41,13 @@ class _AudioPageState extends ModularState<AudioPage, AudioController> {
                   const HeaderRow(title: Strings.uploads),
                   for (final audioItem in controller.audios.value)
                     AudioTile(
-                      audioFile: audioItem,
-                      onTap: (item) {
-                        if (audioKey.currentState != null &&
-                        audioKey.currentState.controller != null &&
-                        audioKey.currentState.controller.player != null) {
-                      audioKey.currentState.controller.player
-                          .play(audioItem.audioUrlPath);
-                      audioKey.currentState.controller.audioFile =
-                          audioItem;
-                    }
+                        audioFile: audioItem,
+                        onTap: (item) {
                           MediaOverlays.presentAudioPlayerAsOverlay(
-                        context: context,
-                        audioFile: item,
-                      );}
-                    ),
+                            context: context,
+                            audioFile: item,
+                          );
+                        }),
                 ],
               );
             case FutureStatus.rejected:

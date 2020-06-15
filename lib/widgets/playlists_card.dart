@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:highvibe/mocks/mock_audio_files.dart';
 import 'package:highvibe/modules/app/media_overlays.dart';
 import 'package:highvibe/values/Strings.dart';
-import 'package:highvibe/values/global_key.dart';
 import 'package:highvibe/values/themes.dart';
 
 import 'audio_tile.dart';
@@ -57,13 +56,6 @@ class PlaylistsCard extends StatelessWidget {
                 AudioTile(
                   audioFile: audioItem,
                   onTap: (item) {
-                    if (audioKey.currentState != null &&
-                        audioKey.currentState.controller != null &&
-                        audioKey.currentState.controller.player != null) {
-                      audioKey.currentState.controller.player
-                          .play(audioItem.audioUrlPath);
-                      audioKey.currentState.controller.audioFile = audioItem;
-                    }
                     MediaOverlays.presentAudioPlayerAsOverlay(
                       context: context,
                       audioFile: item,

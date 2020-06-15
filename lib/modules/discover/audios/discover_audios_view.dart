@@ -6,7 +6,6 @@ import 'package:highvibe/modules/app/media_overlays.dart';
 import 'package:highvibe/modules/discover/audios/audio_card.dart';
 import 'package:highvibe/modules/discover/audios/discover_audios_controller.dart';
 import 'package:highvibe/utils/utils.dart';
-import 'package:highvibe/values/global_key.dart';
 import 'package:highvibe/widgets/repeat_widget.dart';
 import 'package:highvibe/widgets/splash_widget.dart';
 import 'package:mobx/mobx.dart';
@@ -47,13 +46,6 @@ class _DiscoverAudiosViewState
         itemBuilder: (_, index) => AudioCard(
           audios[index],
           onPlayTap: () {
-            if (audioKey.currentState != null &&
-                audioKey.currentState.controller != null &&
-                audioKey.currentState.controller.player != null) {
-              audioKey.currentState.controller.player
-                  .play(audios[index].audioUrlPath);
-              audioKey.currentState.controller.audioFile = audios[index];
-            }
             MediaOverlays.presentAudioPlayerAsOverlay(
               context: context,
               audioFile: audios[index],

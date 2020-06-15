@@ -8,7 +8,6 @@ import 'package:highvibe/modules/home/widgets/drawer_widget.dart';
 import 'package:highvibe/modules/home/widgets/exit_app.dart';
 import 'package:highvibe/utils/utils.dart';
 import 'package:highvibe/values/Strings.dart';
-import 'package:highvibe/values/global_key.dart';
 import 'package:highvibe/values/themes.dart';
 
 import 'home_controller.dart';
@@ -126,12 +125,9 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
       final shouldExit = await showExitDialog(context);
       if (shouldExit) {
         // close audio
-        if (audioKey.currentState != null &&
-            audioKey.currentState.controller != null) {
-          if (audioKey.currentState.controller.player != null) {
-            await audioKey.currentState.controller.player.stop();
-            MediaOverlays.disposeAudioOverlayEntry();
-          }
+        if (MediaOverlays.audioKey?.currentState?.controller?.player != null) {
+          await MediaOverlays.audioKey.currentState.controller.player.stop();
+          MediaOverlays.disposeAudioOverlayEntry();
         }
       }
       return shouldExit;

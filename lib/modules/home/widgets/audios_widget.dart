@@ -9,7 +9,6 @@ import 'package:highvibe/modules/discover/discover_module.dart';
 import 'package:highvibe/modules/home/home_controller.dart';
 import 'package:highvibe/utils/utils.dart';
 import 'package:highvibe/values/Strings.dart';
-import 'package:highvibe/values/global_key.dart';
 import 'package:highvibe/widgets/header_row.dart';
 import 'package:highvibe/widgets/page_indicator.dart';
 import 'package:mobx/mobx.dart';
@@ -66,14 +65,6 @@ class _AudiosWidgetState extends ModularState<AudiosWidget, HomeController> {
               itemBuilder: (_, index) => AudioPreviewItem(
                   audio: audios[index],
                   onTap: (item) {
-                    if (audioKey.currentState != null &&
-                        audioKey.currentState.controller != null &&
-                        audioKey.currentState.controller.player != null) {
-                      audioKey.currentState.controller.player
-                          .play(audios[index].audioUrlPath);
-                      audioKey.currentState.controller.audioFile =
-                          audios[index];
-                    }
                     MediaOverlays.presentAudioPlayerAsOverlay(
                       context: context,
                       audioFile: item,
