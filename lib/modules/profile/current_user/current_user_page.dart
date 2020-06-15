@@ -70,9 +70,9 @@ class _CurrentUserPageState
         controller: tabController,
         labelColor: Colors.white,
         unselectedLabelColor: Colors.grey,
-        indicator: UnderlineGradientIndicator(
+        indicator: const UnderlineGradientIndicator(
           gradient: primaryGradientHorizontal,
-          insets: const EdgeInsets.symmetric(horizontal: 16),
+          insets: EdgeInsets.symmetric(horizontal: 16),
         ),
         tabs: [
           Tab(

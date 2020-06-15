@@ -76,7 +76,7 @@ class WalletPageState extends State<WalletPage> {
                     child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
-                          Text(
+                          const Text(
                             'Wallet Balance',
                             style: TextStyle(
                                 fontWeight: FontWeight.w600,
@@ -104,7 +104,7 @@ class WalletPageState extends State<WalletPage> {
                               Expanded(
                                   child: MainButton(
                                 title: 'Send',
-                                icon: Icon(
+                                icon: const Icon(
                                   Icons.arrow_upward,
                                   color: Colors.white,
                                 ),
@@ -114,7 +114,7 @@ class WalletPageState extends State<WalletPage> {
                               Expanded(
                                   child: MainButton(
                                 title: 'Receive',
-                                icon: Icon(
+                                icon: const Icon(
                                   Icons.arrow_downward,
                                   color: Colors.white,
                                 ),
@@ -134,7 +134,7 @@ class WalletPageState extends State<WalletPage> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Text(
+            const Text(
               'Recent Transactions',
               style: TextStyle(
                   color: Colors.white,
