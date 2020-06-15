@@ -20,6 +20,7 @@ class PlaylistAudioItemTile extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(left: 10, top: 20, bottom: 10),
       child: Row(
+        mainAxisSize: MainAxisSize.min,
         children: <Widget>[
           IconButton(
             icon: PlaylistImageAssets.reorderAudioItemInPlaylist,
@@ -44,6 +45,7 @@ class PlaylistAudioItemTile extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.only(left: 16),
               child: Column(
+                mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   Text('${audioFile.title}', style: normaBoldl16White),

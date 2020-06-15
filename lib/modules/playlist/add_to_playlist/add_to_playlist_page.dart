@@ -137,8 +137,9 @@ class _AddToPlaylistPageState
   }
 
   void _addAudioFileToPlaylist(PlayList playlist) {
-    List<Audio> _playlist = [];
-    if (playlist.audioFiles.asList().isNotEmpty) {
+    //ignore: prefer_final_locals
+    var _playlist = <Audio>[];
+    if (playlist.audioFiles.isNotEmpty) {
       _playlist.addAll(playlist.audioFiles.asList());
     }
     _playlist.add(widget.audioFile);

@@ -98,16 +98,18 @@ class _EditPlayListPageState
 
   Widget _audioFilesListView() {
     if (_audioItems.isNotEmpty) {
-      return ListView.builder(
-        itemCount: _audioItems.length,
-        itemBuilder: (context, index) {
-          return PlaylistAudioItemTile(
-            audioFile: _audioItems[index],
-            onDelete: (item) {
-              setState(() => _audioItems.remove(item));
-            },
-          );
-        },
+      return ReorderableListView(
+        children: [
+          for (final item in _audioItems)
+            PlaylistAudioItemTile(
+              key: ValueKey(item),
+              audioFile: item,
+              onDelete: (item) {
+                setState(() => _audioItems.remove(item));
+              },
+            ),
+        ],
+        onReorder: _handleListReorder,
       );
     } else {
       return Center(
@@ -119,6 +121,16 @@ class _EditPlayListPageState
         ),
       );
     }
+  }
+
+  void _handleListReorder(int oldIndex, int newIndex) {
+    if (oldIndex < newIndex) {
+      newIndex -= 1;
+    }
+    setState(() {
+      final oldItem = _audioItems.removeAt(oldIndex);
+      _audioItems.insert(newIndex, oldItem);
+    });
   }
 
   void _configure() {
