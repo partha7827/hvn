@@ -12,7 +12,7 @@ import 'package:highvibe/values/themes.dart';
 import 'package:mobx/mobx.dart';
 
 class AudioPlayerPage extends StatefulWidget {
-  AudioPlayerPage({Key key}) : super(key: key);
+  AudioPlayerPage() : super(key: MediaOverlays.audioKey);
   @override
   AudioPlayerPageState createState() => AudioPlayerPageState();
 }
