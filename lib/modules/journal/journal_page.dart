@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -10,6 +11,7 @@ import 'package:highvibe/modules/journal/journal_controller.dart';
 import 'package:highvibe/utils/utils.dart';
 import 'package:highvibe/values/Strings.dart';
 import 'package:highvibe/values/themes.dart';
+import 'package:image_gallery/image_gallery.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:video_player/video_player.dart';
 
@@ -30,6 +32,10 @@ class _JournalPageState extends ModularState<JournalPage, JournalController>
   bool isRotateClicked = false;
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
+  List<dynamic> allImage = [];
+
+  double _opacity = 0.0;
+
   void logError(String code, String message) =>
       print('Error: $code\nError Message: $message');
 
@@ -37,6 +43,7 @@ class _JournalPageState extends ModularState<JournalPage, JournalController>
   void initState() {
     super.initState();
     _fetchCameras();
+    _fetchGalleryImages();
     WidgetsBinding.instance.addObserver(this);
   }
 
@@ -52,6 +59,15 @@ class _JournalPageState extends ModularState<JournalPage, JournalController>
     } on CameraException catch (e) {
       logError(e.code, e.description);
     }
+  }
+
+  Future<Null> _fetchGalleryImages() async {
+    Map<dynamic, dynamic> allImageMap;
+    allImageMap = await FlutterGallaryPlugin.getAllImages;
+
+    setState(() {
+      allImage = allImageMap['URIList'] as List;
+    });
   }
 
   @override
@@ -87,7 +103,6 @@ class _JournalPageState extends ModularState<JournalPage, JournalController>
             _cameraPreviewWidget(),
             _buildDraggableScrollableSheet(),
             _headerControlWidget(),
-            _cameraBottomView(),
           ],
         ),
       ),
@@ -97,37 +112,75 @@ class _JournalPageState extends ModularState<JournalPage, JournalController>
   Widget _buildDraggableScrollableSheet() {
     return DraggableScrollableSheet(
       builder: (BuildContext context, ScrollController scrollController) {
-        return Container(
-          child: Scrollbar(
-            child: ListView.builder(
-              controller: scrollController,
-              itemCount: 25,
-              itemBuilder: (BuildContext context, int index) {
-                final _opacity = _getOpacity(scrollController);
-                return Opacity(
-                  opacity: _opacity,
-                  child: Container(
-                    color: primaryColor,
-                    height: 60,
-                  ),
-                );
-              },
-            ),
+        if (scrollController.hasClients) {
+          _opacity = _getOpacity(scrollController);
+        }
+
+        return NotificationListener<OverscrollIndicatorNotification>(
+          onNotification: (OverscrollIndicatorNotification overscroll) {
+            overscroll.disallowGlow();
+            return true;
+          },
+          child: CustomScrollView(
+            controller: scrollController,
+            slivers: <Widget>[
+              SliverList(
+                delegate: SliverChildListDelegate(
+                  [
+                    Opacity(
+                      opacity: 1 - _opacity,
+                      child: Container(
+                        height: 380,
+                        child: Stack(
+                          children: <Widget>[
+                            _cameraBottomView(),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              SliverGrid.count(
+                crossAxisCount: 3,
+                childAspectRatio: 1.0,
+                children: List.generate(
+                  allImage.length,
+                  (index) {
+                    return Visibility(
+                      visible: _opacity != 0,
+                      child: GestureDetector(
+                        onTap: () {},
+                        child: Container(
+                          margin: const EdgeInsets.all(5.0),
+                          child: Image.file(
+                            File(allImage[index].toString()),
+                            width: 70.0,
+                            height: 70.0,
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                      ),
+                    );
+                  },
+                ),
+              ),
+            ],
           ),
         );
       },
-      initialChildSize: 0.15,
-      minChildSize: 0.15,
+      initialChildSize: 0.35,
+      minChildSize: 0.35,
       maxChildSize: 1,
     );
   }
 
   double _getOpacity(ScrollController scrollController) {
-    var _opacity =
-        ((scrollController.position.viewportDimension / 80).round()) / 10;
-    if (_opacity > 1.0) {
+    _opacity =
+        ((scrollController.position.viewportDimension / 150).round()) / 10;
+    if (_opacity > 0.5) {
       _opacity = 1.0;
-    } else if (_opacity < 0.25) {
+    } else if (_opacity < 0.4) {
       _opacity = 0;
     }
     return _opacity;
@@ -197,17 +250,23 @@ class _JournalPageState extends ModularState<JournalPage, JournalController>
           Container(
             height: 100,
             child: ListView.builder(
-                shrinkWrap: true,
-                itemCount: 12,
-                scrollDirection: Axis.horizontal,
-                itemBuilder: (context, index) {
-                  return Container(
+              shrinkWrap: true,
+              itemCount: allImage.length,
+              scrollDirection: Axis.horizontal,
+              itemBuilder: (context, index) {
+                return Container(
+                  width: 70,
+                  height: 70,
+                  margin: const EdgeInsets.all(5),
+                  child: Image.file(
+                    File(allImage[index].toString()),
                     width: 70,
                     height: 70,
-                    margin: const EdgeInsets.all(5),
-                    child: Image.asset('assets/ic_avatar.jpg'),
-                  );
-                }),
+                    fit: BoxFit.cover,
+                  ),
+                );
+              },
+            ),
           ),
         ],
       ),
