@@ -88,6 +88,10 @@ class Strings {
 
   static const String facebookLoginError =
       'Error while logging in with Facebook';
+
+  static const String createPlaylist = 'Create Playlist';
+  static const String goLive = 'Go Live';
+  static const String uploadContent = 'Upload Content';
   static const String myMoodTracker = 'Mood Tracker';
 
   // Emoji
