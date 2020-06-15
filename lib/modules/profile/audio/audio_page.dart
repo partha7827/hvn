@@ -29,7 +29,7 @@ class _AudioPageState extends ModularState<AudioPage, AudioController> {
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: onWillPop,
-          child: Observer(
+      child: Observer(
         builder: (_) {
           switch (controller.audios.status) {
             case FutureStatus.fulfilled:
@@ -53,10 +53,12 @@ class _AudioPageState extends ModularState<AudioPage, AudioController> {
             .map(
               (item) => AudioTile(
                 audioFile: item,
-                onTap: (_) => MediaOverlays.presentAudioPlayerAsOverlay(
-                  context: context,
-                  audioFile: item,
-                ),
+                onTap: (_) {
+                  MediaOverlays.presentAudioPlayerAsOverlay(
+                    context: context,
+                    audioFile: item,
+                  );
+                },
               ),
             )
             .toList(),

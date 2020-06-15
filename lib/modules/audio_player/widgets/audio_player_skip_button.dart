@@ -30,9 +30,9 @@ class AudioPlayerSkipButton extends StatelessWidget {
 
   Icon _configureIcon() {
     if (buttonType == AudioPlayerSkipButtonType.fastForward) {
-      return Icon(Icons.fast_forward, color: Colors.white, size: 36);
+      return const Icon(Icons.fast_forward, color: Colors.white, size: 36);
     } else {
-      return Icon(Icons.fast_rewind, color: Colors.white, size: 36);
+      return const Icon(Icons.fast_rewind, color: Colors.white, size: 36);
     }
   }
 }

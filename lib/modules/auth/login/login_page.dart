@@ -115,11 +115,22 @@ class _LoginPageState extends ModularState<LoginPage, LoginController> {
                       ),
                     ),
                     Expanded(
-                      child: Padding(
-                        padding: const EdgeInsets.only(right: 8.0, left: 8.0),
-                        child: GradientOutlineButton(
-                          icon: SvgPicture.asset('assets/ic_facebook.svg'),
-                          onPressed: () {},
+                      child: Observer(
+                        builder: (_) => Padding(
+                          padding: const EdgeInsets.only(right: 8.0, left: 8.0),
+                          child: GradientOutlineButton(
+                            isLoading: controller.inProgressFacebookLogIn,
+                            icon: SvgPicture.asset('assets/ic_facebook.svg'),
+                            onPressed: () async {
+                              try {
+                                await controller.facebookLogin();
+                              } catch (e) {
+                                showSnackBarMsg(
+                                    controller.scaffoldKey.currentState,
+                                    e.toString());
+                              }
+                            },
+                          ),
                         ),
                       ),
                     ),

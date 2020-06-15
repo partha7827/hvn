@@ -58,7 +58,7 @@ class _MeditationTimerState extends State<MeditationTimer>
         ],
       ),
       floatingActionButton: CustomFloatingActionButton(
-        child: Icon(Icons.add),
+        child: const Icon(Icons.add),
         onPressed: () {
           print('Add meditation Timer');
         },

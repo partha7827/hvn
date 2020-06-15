@@ -81,4 +81,7 @@ class Strings {
   static const String playList = 'Playlist';
   static const String newPlayList = '+ New Playlist';
   static const String search = 'Search';
+
+  static const String facebookLoginError =
+      'Error while logging in with Facebook';
 }

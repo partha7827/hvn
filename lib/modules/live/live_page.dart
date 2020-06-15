@@ -33,7 +33,7 @@ class _LivePageState extends ModularState<LivePage, LiveController> {
     return Column(
       mainAxisSize: MainAxisSize.max,
       children: <Widget>[
-        HeaderRow(
+        const HeaderRow(
           title: Strings.liveNow,
           leading: CircleAvatar(
             backgroundColor: redColor,
@@ -92,7 +92,7 @@ class _LivePageState extends ModularState<LivePage, LiveController> {
   Widget _pastStreamWidget(BuildContext context) {
     return Column(
       children: <Widget>[
-        HeaderRow(
+        const HeaderRow(
           title: Strings.pastStreams,
           showTrailing: true,
         ),
