@@ -12,8 +12,8 @@ class LiveNowWidget extends StatelessWidget {
     return Column(
       mainAxisSize: MainAxisSize.max,
       children: <Widget>[
-        Padding(
-          padding: const EdgeInsets.only(left: 20.0),
+        const Padding(
+          padding: EdgeInsets.only(left: 20.0),
           child: HeaderRow(
             title: Strings.liveNow,
             leading: CircleAvatar(

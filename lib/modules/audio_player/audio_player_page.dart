@@ -151,7 +151,7 @@ class AudioPlayerPageState
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: <Widget>[
           IconButton(
-              icon: Icon(
+              icon: const Icon(
                 Icons.favorite_border,
                 color: Colors.white,
                 size: 30,
@@ -214,7 +214,7 @@ class AudioPlayerPageState
       right: -16,
       child: FlatButton(
         onPressed: () => _close(),
-        child: Icon(
+        child: const Icon(
           Icons.close,
           color: Colors.white,
           size: 32,
@@ -265,7 +265,7 @@ class AudioPlayerPageState
               width: double.maxFinite,
               constraints:
                   BoxConstraints(minHeight: screenHeight(context) * 0.4),
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 gradient: darkToTransparentGradientTop,
               ),
               child: Padding(
@@ -303,7 +303,8 @@ class AudioPlayerPageState
                 constraints: BoxConstraints(
                   minHeight: screenHeight(context) * 0.4,
                 ),
-                decoration: BoxDecoration(gradient: darkToTransparentGradient),
+                decoration:
+                    const BoxDecoration(gradient: darkToTransparentGradient),
                 child: Padding(
                   padding:
                       const EdgeInsets.only(left: 40, right: 40, bottom: 20),
@@ -390,7 +391,7 @@ class AudioPlayerPageState
         left: -16,
         child: FlatButton(
           onPressed: () => controller.toggleAudioPlayerMode(),
-          child: Icon(
+          child: const Icon(
             Icons.keyboard_arrow_down,
             color: Colors.white,
             size: 32,

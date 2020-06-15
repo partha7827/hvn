@@ -87,7 +87,7 @@ class PassCodePageState extends State<PassCodePage> {
                 ),
                 child: Container(
                   margin: const EdgeInsets.all(3),
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                     shape: BoxShape.circle,
                     color: AppColors.backgroundDarkBlue,
                   ),
@@ -122,7 +122,7 @@ class PassCodePageState extends State<PassCodePage> {
           padding: const EdgeInsets.only(bottom: 25),
           child: FlatButton(
             onPressed: onFaceId,
-            child: Text(
+            child: const Text(
               'Use Face ID',
               style: TextStyle(color: AppColors.textBlue, fontSize: 18),
             ),
