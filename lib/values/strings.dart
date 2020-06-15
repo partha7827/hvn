@@ -75,4 +75,21 @@ class Strings {
   static const String myProfile = 'My Profile';
   static const String myWallet = 'My Wallet';
   static const String bookmarks = 'Bookmarks';
+  static const String myJournal = 'My Journal';
+
+  static const String create = 'CREATE';
+  static const String normal = 'NORMAL';
+
+  // playlist screen
+  static const String addToPlaylist = 'Add to playlist';
+  static const String playList = 'Playlist';
+  static const String newPlayList = '+ New Playlist';
+  static const String search = 'Search';
+
+  static const String facebookLoginError =
+      'Error while logging in with Facebook';
+
+  static const String createPlaylist = 'Create Playlist';
+  static const String goLive = 'Go Live';
+  static const String uploadContent = 'Upload Content';
 }

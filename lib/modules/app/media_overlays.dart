@@ -5,12 +5,14 @@ import 'package:highvibe/modules/playlist/add_to_playlist/add_to_playlist_module
 import 'package:highvibe/modules/video_player/video_player_page.dart';
 
 class MediaOverlays {
+  static final GlobalKey<AudioPlayerPageState> audioKey = GlobalKey();
+
   static OverlayState _mediaOverlayState;
   static OverlayEntry _videoOverlayEntry;
   static OverlayEntry _audioOverlayEntry;
   static OverlayEntry _addToPlaylistOverlayEntry;
 
-  const MediaOverlays._();
+  MediaOverlays._();
 
   static void disposeAddToPlaylistOverlayEntry() {
     _addToPlaylistOverlayEntry?.remove();
@@ -20,6 +22,7 @@ class MediaOverlays {
   static void disposeAudioOverlayEntry() {
     _audioOverlayEntry?.remove();
     _audioOverlayEntry = null;
+    audioKey?.currentState?.controller?.player?.stop();
   }
 
   static void disposeVideoOverlayEntry() {
@@ -46,8 +49,14 @@ class MediaOverlays {
     @required BuildContext context,
     @required Audio audioFile,
   }) {
-    _mediaOverlayState = Overlay.of(context);
     _removeAllOverlays();
+
+    if (audioKey.currentState?.controller?.player != null) {
+      audioKey.currentState.controller.player.play(audioFile.audioUrlPath);
+      audioKey.currentState.controller.audioFile = audioFile;
+    }
+
+    _mediaOverlayState = Overlay.of(context);
     _audioOverlayEntry = OverlayEntry(
       builder: (_) => AudioPlayerModule(audioFile),
     );
