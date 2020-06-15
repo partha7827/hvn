@@ -92,6 +92,24 @@ class Strings {
   static const String createPlaylist = 'Create Playlist';
   static const String goLive = 'Go Live';
   static const String uploadContent = 'Upload Content';
+  static const String myMoodTracker = 'Mood Tracker';
+
+  // Emoji
+  static const String ecstatic = 'Ecstatic';
+  static const String happy = 'Happy';
+  static const String excited = 'Excited';
+  static const String grateful = 'Grateful';
+  static const String relaxed = 'Relaxed';
+  static const String content = 'Content';
+  static const String unsure = 'Unsure';
+  static const String bored = 'Bored';
+  static const String anxious = 'Anxious';
+  static const String angry = 'Angry';
+  static const String stressed = 'Stressed';
+  static const String sad = 'Sad';
+  static const String goodMorning = 'Good Morning';
+  static const String howAreYouFeeling = 'How are you feeling?';
+
 
   static const String about = 'About';
   static const String viewMore = 'View More';

@@ -104,3 +104,4 @@ flutter:
   assets:
     - assets/
     - assets/animation/splash_animation.json
+    - assets/emoji/

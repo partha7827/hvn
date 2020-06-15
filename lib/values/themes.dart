@@ -80,6 +80,12 @@ TextStyle bold24PlayfairWhite = GoogleFonts.playfairDisplay(
   color: Colors.white,
 );
 
+TextStyle bold30PlayfairWhite = GoogleFonts.playfairDisplay(
+  fontSize: 30,
+  fontWeight: FontWeight.bold,
+  color: Colors.white,
+);
+
 TextStyle bold18PlayfairWhite = GoogleFonts.playfairDisplay(
   fontSize: 18,
   fontWeight: FontWeight.bold,
