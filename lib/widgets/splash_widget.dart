@@ -17,7 +17,7 @@ class _SplashWidgetState extends State<SplashWidget>
     _controller = AnimationController(vsync: this)
       ..value = 0
       ..duration = const Duration(
-        seconds: 1,
+        seconds: 3,
       );
 
     final start = 0.0;
@@ -44,9 +44,8 @@ class _SplashWidgetState extends State<SplashWidget>
         child: Lottie.asset(
           'assets/animation/splash_animation.json',
           controller: _controller,
-          onLoaded: (composition) {
+          onLoaded: (LottieComposition composition) {
             setState(() {
-              print('animation');
               _controller.duration = composition.duration;
             });
           },

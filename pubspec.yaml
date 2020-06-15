@@ -101,4 +101,4 @@ flutter:
   uses-material-design: true
   assets:
     - assets/
-    - assets/animation/
+    - assets/animation/splash_animation.json
