@@ -26,7 +26,7 @@ class _PlaylistPageState
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
-          icon: Icon(Icons.close, color: Colors.white),
+          icon: const Icon(Icons.close, color: Colors.white),
           onPressed: () => Modular.to.pop(),
         ),
         title: Text(
