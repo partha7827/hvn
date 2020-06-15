@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:highvibe/modules/app/media_overlays.dart';
 
 double aspectRatio(BuildContext context) =>
     screenWidth(context) / screenHeight(context);
@@ -72,4 +73,13 @@ Future<String> uploadFile(File file, String childName,
 
     return null;
   }
+}
+
+Future<bool> onWillPop() async {
+  if (MediaOverlays.audioKey?.currentState?.controller?.isMinimized == true) {
+    await MediaOverlays.audioKey.currentState.controller.player.stop();
+    MediaOverlays.disposeAudioOverlayEntry();
+    return false;
+  }
+  return true;
 }

@@ -78,7 +78,7 @@ class _VideoPlayerPageState extends State<VideoPlayerPage> {
       right: -24,
       child: FlatButton(
         onPressed: () => _toggleFullscreenMode(),
-        child: Icon(
+        child: const Icon(
           Icons.fullscreen,
           color: Colors.white,
           size: 32,
@@ -89,9 +89,9 @@ class _VideoPlayerPageState extends State<VideoPlayerPage> {
 
   Icon _minimisedPlaybackIcon() {
     if (_controller.value.isPlaying) {
-      return Icon(Icons.pause, color: Colors.white, size: 48);
+      return const Icon(Icons.pause, color: Colors.white, size: 48);
     } else {
-      return Icon(Icons.play_arrow, color: Colors.white, size: 48);
+      return const Icon(Icons.play_arrow, color: Colors.white, size: 48);
     }
   }
 
@@ -102,7 +102,7 @@ class _VideoPlayerPageState extends State<VideoPlayerPage> {
         left: -24,
         child: FlatButton(
           onPressed: () => _toggleVideoPlayerMode(),
-          child: Icon(
+          child: const Icon(
             Icons.keyboard_arrow_down,
             color: Colors.white,
             size: 32,
@@ -180,7 +180,7 @@ class _VideoPlayerPageState extends State<VideoPlayerPage> {
                     right: _isMinimised ? -12 : -24,
                     child: FlatButton(
                       onPressed: () => _close(context),
-                      child: Icon(
+                      child: const Icon(
                         Icons.close,
                         color: Colors.white,
                         size: 32,
@@ -207,7 +207,7 @@ class _VideoPlayerPageState extends State<VideoPlayerPage> {
                           widget.video.snippet.title,
                           maxLines: 2,
                           overflow: TextOverflow.clip,
-                          style: TextStyle(
+                          style: const TextStyle(
                             color: Colors.white,
                             fontSize: 12,
                             decoration: TextDecoration.none,
@@ -227,7 +227,7 @@ class _VideoPlayerPageState extends State<VideoPlayerPage> {
                           widget.video.snippet.description,
                           maxLines: 2,
                           overflow: TextOverflow.clip,
-                          style: TextStyle(
+                          style: const TextStyle(
                             color: Colors.grey,
                             fontSize: 12,
                             fontWeight: FontWeight.normal,

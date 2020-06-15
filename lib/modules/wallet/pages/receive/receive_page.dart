@@ -87,7 +87,7 @@ class ReceivePageState extends State<ReceivePage> {
             Expanded(
               child: o.OutlineButton(
                 title: 'Download',
-                icon: Icon(
+                icon: const Icon(
                   Icons.file_download,
                   size: 20,
                   color: AppColors.textBlue,
@@ -98,7 +98,7 @@ class ReceivePageState extends State<ReceivePage> {
             Expanded(
               child: o.OutlineButton(
                 title: 'Share',
-                icon: Icon(
+                icon: const Icon(
                   Icons.share,
                   size: 20,
                   color: AppColors.textBlue,

@@ -49,7 +49,7 @@ class MessageComposer extends StatelessWidget {
             padding: const EdgeInsets.only(left: 10.0),
             child: CustomFloatingActionButton(
               size: 48,
-              child: Icon(Icons.send),
+              child: const Icon(Icons.send),
               onPressed: () {
                 final content = _messageController.text.trim();
                 sendMessage(content);

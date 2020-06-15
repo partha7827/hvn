@@ -93,7 +93,7 @@ class PastMeditations extends StatelessWidget {
                 children: <Widget>[
                   Text(
                     title,
-                    style: TextStyle(
+                    style: const TextStyle(
                         fontSize: 16.0,
                         fontWeight: FontWeight.bold,
                         color: Colors.white),
@@ -157,18 +157,18 @@ class PastMeditations extends StatelessWidget {
                       label: RichText(
                         text: TextSpan(
                             text: '$exp ',
-                            style: TextStyle(
+                            style: const TextStyle(
                               fontSize: 16.0,
                               fontWeight: FontWeight.bold,
-                              color: const Color(0xFF525366),
+                              color: Color(0xFF525366),
                             ),
                             children: [
-                              TextSpan(
+                              const TextSpan(
                                 text: 'XP Earned',
                                 style: TextStyle(
                                   fontSize: 14.0,
                                   fontWeight: FontWeight.normal,
-                                  color: const Color(0xFF525366),
+                                  color: Color(0xFF525366),
                                 ),
                               )
                             ]),

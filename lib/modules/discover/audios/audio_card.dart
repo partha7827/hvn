@@ -104,23 +104,26 @@ class AudioCard extends StatelessWidget {
     );
   }
 
-  Row _headerWidget() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Text(
-          audio.title,
-          style: bold20White,
-          overflow: TextOverflow.clip,
-        ),
-        if (audio.tags.isNotEmpty)
+  GestureDetector _headerWidget() {
+    return GestureDetector(
+      onTap: onPlayTap,
+          child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
           Text(
-            audio.tags[0],
-            style: normal16White,
-          )
-        else
-          Container(),
-      ],
+            audio.title,
+            style: bold20White,
+            overflow: TextOverflow.clip,
+          ),
+          if (audio.tags.isNotEmpty)
+            Text(
+              audio.tags[0],
+              style: normal16White,
+            )
+          else
+            Container(),
+        ],
+      ),
     );
   }
 

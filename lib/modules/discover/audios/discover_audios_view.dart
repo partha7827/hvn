@@ -7,6 +7,7 @@ import 'package:highvibe/models/user/user.dart';
 import 'package:highvibe/modules/app/media_overlays.dart';
 import 'package:highvibe/modules/discover/audios/audio_card.dart';
 import 'package:highvibe/modules/discover/audios/discover_audios_controller.dart';
+import 'package:highvibe/utils/utils.dart';
 import 'package:highvibe/widgets/repeat_widget.dart';
 import 'package:highvibe/widgets/splash_widget.dart';
 import 'package:mobx/mobx.dart';
@@ -30,17 +31,20 @@ class _DiscoverAudiosViewState
 
   @override
   Widget build(BuildContext context) {
-    return Observer(
-      builder: (_) {
-        switch (controller.audios.status) {
-          case FutureStatus.fulfilled:
-            return buildAudios(controller.audios.value.toList());
-          case FutureStatus.rejected:
-            return RepeatWidget(controller.loadAudios);
-          default:
-            return const SplashWidget();
-        }
-      },
+    return WillPopScope(
+      onWillPop: onWillPop,
+      child: Observer(
+        builder: (_) {
+          switch (controller.audios.status) {
+            case FutureStatus.fulfilled:
+              return buildAudios(controller.audios.value.toList());
+            case FutureStatus.rejected:
+              return RepeatWidget(controller.loadAudios);
+            default:
+              return const SplashWidget();
+          }
+        },
+      ),
     );
   }
 

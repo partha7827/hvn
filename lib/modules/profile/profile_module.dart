@@ -1,7 +1,7 @@
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:highvibe/models/models.dart' show User;
 import 'package:highvibe/modules/profile/current_user/current_user_module.dart';
-import 'package:highvibe/modules/profile/edit_profile.dart';
+import 'package:highvibe/modules/profile/current_user/edit_profile/edit_profile.dart';
 import 'package:highvibe/modules/profile/other_user/other_user_module.dart';
 import 'package:highvibe/modules/profile/users_list/users_list_module.dart';
 import 'package:highvibe/widgets/image_viewer.dart';
@@ -47,8 +47,9 @@ class ProfileModule extends ChildModule {
           transition: TransitionType.fadeIn,
         ),
         Router(
-          'editProfile',
+          '$profileRoute/editProfile',
           child: (_, args) => EditProfile(),
+          transition: TransitionType.fadeIn,
         ),
       ];
 
@@ -75,4 +76,6 @@ class ProfileModule extends ChildModule {
       );
 
   static Future<Object> toProfile() => Modular.to.pushNamed(profileRoute);
+
+  static Future<Object> toEditProfile() => Modular.to.pushNamed('$profileRoute/editProfile');
 }

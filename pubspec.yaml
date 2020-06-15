@@ -56,6 +56,7 @@ dependencies:
   image_picker: ^0.6.3+1
   intl: ^0.16.1
   logger: ^0.8.3
+  lottie: ^0.4.0+1
   mobx: ^1.2.0
   mock_cloud_firestore: ^0.0.20
   path_provider: ^1.5.1
@@ -74,7 +75,11 @@ dependencies:
   virtual_keyboard: ^0.1.4
   flutter_spinkit: ^4.1.2+1
   flutter_launcher_icons: ^0.7.5
-
+  file_picker: ^1.7.1
+  firebase_storage_mocks: ^0.1.0
+  gradient_text: ^1.0.2
+  flutter_facebook_login: ^3.0.0
+  
 dev_dependencies:
   flutter_driver:
     sdk: flutter
@@ -98,3 +103,5 @@ flutter:
   uses-material-design: true
   assets:
     - assets/
+    - assets/animation/splash_animation.json
+    - assets/emoji/

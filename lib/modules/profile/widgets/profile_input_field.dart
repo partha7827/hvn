@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class InputTextWidget extends StatelessWidget {
-  const InputTextWidget(
+class ProfileInputField extends StatelessWidget {
+  const ProfileInputField(
       {Key key,
       this.title = '',
       this.hintText = '',
@@ -37,7 +37,7 @@ class InputTextWidget extends StatelessWidget {
               controller: controller,
               decoration: InputDecoration(
                 contentPadding: const EdgeInsets.symmetric(vertical: 20),
-                border: UnderlineInputBorder(
+                border: const UnderlineInputBorder(
                     borderSide: BorderSide(color: Colors.white24)),
                 hintText: '$hintText',
                 hintStyle: const TextStyle(

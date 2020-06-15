@@ -24,5 +24,5 @@ class OtherUserModule extends WidgetModule {
       ];
 
   @override
-  Widget get view => const OtherUserPage();
+  Widget get view => OtherUserPage();
 }
