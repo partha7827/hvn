@@ -31,7 +31,7 @@ class _AudiosWidgetState extends ModularState<AudiosWidget, HomeController> {
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: onWillPop,
-          child: Observer(builder: (_) {
+      child: Observer(builder: (_) {
         final isVisible = controller.audios.status == FutureStatus.fulfilled &&
             controller.audios.value.isNotEmpty;
         return AnimatedOpacity(
@@ -48,8 +48,8 @@ class _AudiosWidgetState extends ModularState<AudiosWidget, HomeController> {
       padding: const EdgeInsets.only(bottom: 16),
       child: Column(
         children: [
-          Padding(
-            padding: const EdgeInsets.only(left: 16),
+          const Padding(
+            padding: EdgeInsets.only(left: 16),
             child: HeaderRow(
               title: Strings.recommendedAudios,
               showTrailing: true,
@@ -63,12 +63,13 @@ class _AudiosWidgetState extends ModularState<AudiosWidget, HomeController> {
               scrollDirection: Axis.horizontal,
               itemCount: audios.length,
               itemBuilder: (_, index) => AudioPreviewItem(
-                audio: audios[index],
-                onTap: (item) => MediaOverlays.presentAudioPlayerAsOverlay(
-                  context: context,
-                  audioFile: item,
-                ),
-              ),
+                  audio: audios[index],
+                  onTap: (item) {
+                    MediaOverlays.presentAudioPlayerAsOverlay(
+                      context: context,
+                      audioFile: item,
+                    );
+                  }),
             ),
           ),
           PageIndicator(

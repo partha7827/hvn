@@ -47,7 +47,7 @@ class ToolsWidget extends StatelessWidget {
                               height: 40,
                             ),
                           ),
-                          Text(
+                          const Text(
                             Strings.showYourGratitude,
                             style: TextStyle(
                               fontSize: 16,
@@ -105,7 +105,7 @@ class ToolsWidget extends StatelessWidget {
                                       height: 40,
                                     ),
                                   ),
-                                  Text(
+                                  const Text(
                                     Strings.meditationTimer,
                                     style: TextStyle(
                                       fontSize: 16,
@@ -154,7 +154,7 @@ class ToolsWidget extends StatelessWidget {
                                     height: 40,
                                   ),
                                 ),
-                                Text(
+                                const Text(
                                   Strings.setYourMood,
                                   style: TextStyle(
                                     fontSize: 16,

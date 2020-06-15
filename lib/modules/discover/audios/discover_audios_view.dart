@@ -45,10 +45,12 @@ class _DiscoverAudiosViewState
   Widget buildAudios(List<Audio> audios) => ListView.builder(
         itemBuilder: (_, index) => AudioCard(
           audios[index],
-          onPlayTap: () => MediaOverlays.presentAudioPlayerAsOverlay(
-            context: context,
-            audioFile: audios[index],
-          ),
+          onPlayTap: () {
+            MediaOverlays.presentAudioPlayerAsOverlay(
+              context: context,
+              audioFile: audios[index],
+            );
+          },
         ),
         itemCount: audios.length,
       );
