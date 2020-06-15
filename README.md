@@ -16,8 +16,8 @@ To get started, see [Contributing](#contributing)
 
 ## Requirements
 
-- Flutter: the latest version on `flutter stable channel`
-- Dart: 2.8.1+
+- Flutter: the latest version on `flutter beta channel`
+- Dart: 2.8.4+
 - Xcode: 11.5.0+
 - Androind Studio 4.0.0+
 - Ruby: 2.6.0+

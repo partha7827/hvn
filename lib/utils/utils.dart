@@ -26,17 +26,17 @@ DateTime getDateTime(dynamic dateTime) {
 String mediaTimeFormatter(Duration d) =>
     d.toString().split('.').first.padLeft(8, '0');
 
-Future<bool> onWillPop() async {
-  if (audioKey.currentState != null &&
-      audioKey.currentState.controller != null) {
-    if (!audioKey.currentState.controller.isMinimized) {
-      await audioKey.currentState.controller.player.stop();
-      MediaOverlays.disposeAudioOverlayEntry();
-      return false;
-    }
-  }
-  return true;
-}
+// Future<bool> onWillPop() async {
+//   if (audioKey.currentState != null &&
+//       audioKey.currentState.controller != null) {
+//     if (!audioKey.currentState.controller.isMinimized) {
+//       await audioKey.currentState.controller.player.stop();
+//       MediaOverlays.disposeAudioOverlayEntry();
+//       return false;
+//     }
+//   }
+//   return true;
+// }
 
 bool isWebUrl(String path) => Uri.parse(path).host != null;
 

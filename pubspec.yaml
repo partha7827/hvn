@@ -70,7 +70,7 @@ dependencies:
   virtual_keyboard: ^0.1.4
   gradient_text: ^1.0.2
   flutter_facebook_login: ^3.0.0
-  
+
 dev_dependencies:
   flutter_driver:
     sdk: flutter

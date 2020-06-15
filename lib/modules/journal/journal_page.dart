@@ -189,7 +189,7 @@ class _JournalPageState extends ModularState<JournalPage, JournalController>
       child: Column(
         children: [
           IconButton(
-            icon: Icon(
+            icon: const Icon(
               Icons.keyboard_arrow_up,
             ),
             onPressed: () {},
