@@ -5,7 +5,6 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:highvibe/modules/app/media_overlays.dart';
 import 'package:highvibe/modules/audio_player/audio_player_controller.dart';
 import 'package:highvibe/modules/audio_player/widgets/widgets.dart';
-import 'package:highvibe/modules/playlist/playlist_module.dart';
 import 'package:highvibe/services/audio_player_service.dart';
 import 'package:highvibe/utils/utils.dart';
 import 'package:highvibe/values/themes.dart';
@@ -376,15 +375,22 @@ class AudioPlayerPageState
                             },
                           ),
                           IconButton(
-                              icon: const Icon(
-                                Icons.playlist_add,
-                                color: Colors.white,
-                              ),
-                              onPressed: () {
-                                PlaylistModule.toAddToPlaylist(
-                                  audioFile: controller.audioFile,
-                                );
-                              }),
+                            icon: const Icon(
+                              Icons.playlist_add,
+                              color: Colors.white,
+                            ),
+                            // onPressed: () {
+                            //   PlaylistModule.toAddToPlaylist(
+                            //     audioFile: controller.audioFile,
+                            //   );
+                            // },),
+                            onPressed: () {
+                              MediaOverlays.presentAddToPlaylistAsOverlay(
+                                context: context,
+                                audioFile: controller.audioFile,
+                              );
+                            },
+                          )
                         ],
                       ),
                     ],

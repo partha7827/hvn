@@ -10,10 +10,12 @@ class PlaylistModalAlert extends StatelessWidget {
   final String title;
   final String subTitle;
   final String buttonTitle;
+  final int popsCount;
 
   const PlaylistModalAlert({
     @required this.title,
     @required this.subTitle,
+    this.popsCount = 2,
     this.buttonTitle = PlaylistStrings.save,
   });
 
@@ -69,7 +71,7 @@ class PlaylistModalAlert extends StatelessWidget {
                     child: GradientRaisedButton(
                       label: buttonTitle,
                       onPressed: () => popUntil(
-                        numberOfPops: 2,
+                        numberOfPops: popsCount,
                         context: context,
                       ),
                     ),

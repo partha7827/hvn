@@ -49,7 +49,7 @@ class _AddToPlaylistPageState
         ),
         leading: IconButton(
           icon: const Icon(Icons.close, color: Colors.white),
-          onPressed: () => Modular.to.pop(),
+          onPressed: () => MediaOverlays.disposeAddToPlaylistOverlayEntry(),
         ),
       ),
       body: ResponsiveSafeArea(
@@ -171,11 +171,14 @@ class _AddToPlaylistPageState
       _addAudioFileToPlaylist(item);
     }
 
+    MediaOverlays.disposeAddToPlaylistOverlayEntry();
+
     showDialog(
       context: context,
       builder: (_) => const PlaylistModalAlert(
         title: PlaylistStrings.audioAddedSuccessTitle,
         subTitle: PlaylistStrings.audioAddedSuccessSubTitle,
+        popsCount: 1,
       ),
     );
   }
