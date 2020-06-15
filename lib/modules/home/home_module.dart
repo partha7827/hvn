@@ -21,7 +21,7 @@ class HomeModule extends ChildModule {
         Router(
           home,
           child: (_, args) => const HomePage(),
-          transition: TransitionType.noTransition,
+          transition: TransitionType.fadeIn,
         ),
       ];
 
