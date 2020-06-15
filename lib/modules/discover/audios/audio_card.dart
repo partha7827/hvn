@@ -2,16 +2,14 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:highvibe/models/models.dart' show Audio;
-import 'package:highvibe/models/user/user.dart';
 import 'package:highvibe/modules/profile/profile_module.dart';
 import 'package:highvibe/values/themes.dart';
 
 class AudioCard extends StatelessWidget {
   final Audio audio;
-  final User user;
   final Function onPlayTap;
 
-  AudioCard(this.audio, this.user, {this.onPlayTap});
+  AudioCard(this.audio, {this.onPlayTap});
 
   @override
   Widget build(BuildContext context) {
@@ -127,14 +125,11 @@ class AudioCard extends StatelessWidget {
   }
 
   GestureDetector _authorWidget() {
-    
     return GestureDetector(
-      onTap: (){
-        if(user != null) {
-          ProfileModule.toOtherProfile(user);
-        }
+      onTap: () {
+        ProfileModule.toOtherProfileId(audio.userId);
       },
-          child: Padding(
+      child: Padding(
         padding: const EdgeInsets.only(top: 8.0),
         child: Row(
           children: [

@@ -26,7 +26,6 @@ class _DiscoverAudiosViewState
   void initState() {
     super.initState();
     controller.loadAudios();
-    controller.loadAudioAuthors(widget.users);
   }
 
   @override
@@ -47,19 +46,8 @@ class _DiscoverAudiosViewState
 
   Widget buildAudios(List<Audio> audios) => ListView.builder(
         itemBuilder: (_, index) {
-          final audioAuthor = controller.audioAuthorMap[audios[index].userId];
-          // if (widget.users != null) {
-          //   for (var i = 0; i < widget.users.length; i++) {
-          //     if (widget.users[i].id == audios[index].userId) {
-          //       audioAuthor = widget.users[i];
-          //       break;
-          //     }
-          //   }
-          // }
-
           return AudioCard(
             audios[index],
-            audioAuthor,
             onPlayTap: () => MediaOverlays.presentAudioPlayerAsOverlay(
               context: context,
               audioFile: audios[index],

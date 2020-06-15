@@ -9,6 +9,7 @@ import 'package:highvibe/values/Strings.dart';
 import 'package:highvibe/values/themes.dart';
 import 'package:highvibe/widgets/gradient_outline_button.dart';
 import 'package:highvibe/widgets/image_viewer.dart';
+import 'package:highvibe/widgets/splash_widget.dart';
 import 'other_user_controller.dart';
 
 class OtherUserPage extends StatefulWidget {
@@ -34,7 +35,11 @@ class _OtherUserPageState
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: buildProfilePage(),
+      body: Observer(
+        builder: (_) => controller.otherUser != null
+            ? buildProfilePage()
+            : const SplashWidget(),
+      ),
     );
   }
 
@@ -55,14 +60,14 @@ class _OtherUserPageState
                 onPressed: ProfileModule.toHome,
               ),
               actions: <Widget>[
-              IconButton(
-                icon: Icon(
-                  Icons.edit,
-                  color: Colors.white,
+                IconButton(
+                  icon: Icon(
+                    Icons.edit,
+                    color: Colors.white,
+                  ),
+                  onPressed: _showEditProfile,
                 ),
-                onPressed: _showEditProfile,
-              ),
-            ],
+              ],
               flexibleSpace: LayoutBuilder(
                 builder: (BuildContext context, BoxConstraints constraints) {
                   top = constraints.biggest.height;
@@ -164,7 +169,7 @@ class _OtherUserPageState
                                   onTap: () {
                                     if (controller.followers.isNotEmpty) {
                                       ProfileModule.toFollowers(
-                                          controller.followers);
+                                          controller.followers.toList());
                                     }
                                   },
                                   child: Column(
@@ -183,7 +188,7 @@ class _OtherUserPageState
                                   onTap: () {
                                     if (controller.following.isNotEmpty) {
                                       ProfileModule.toFollowing(
-                                          controller.following);
+                                          controller.following.toList());
                                     }
                                   },
                                   child: Column(
