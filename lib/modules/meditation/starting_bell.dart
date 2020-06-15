@@ -18,7 +18,7 @@ class _StartingBellState extends State<StartingBell> {
       appBar: AppBar(
         title: const Text('Starting Bell'),
         leading: IconButton(
-          icon: Icon(
+          icon: const Icon(
             Icons.close,
             color: Colors.white,
           ),
@@ -66,7 +66,7 @@ class _StartingBellState extends State<StartingBell> {
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(6.0),
                         ),
-                        child: Icon(
+                        child: const Icon(
                           Icons.remove,
                           size: 20.0,
                           color: accentColor,
@@ -95,7 +95,7 @@ class _StartingBellState extends State<StartingBell> {
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(6.0),
                         ),
-                        child: Icon(
+                        child: const Icon(
                           Icons.add,
                           size: 20.0,
                           color: accentColor,
@@ -154,11 +154,11 @@ class _StartingBellState extends State<StartingBell> {
           SizedBox(
             width: MediaQuery.of(context).size.width * 0.4,
             child: GradientOutlineButton(
-              icon: Icon(
+              icon: const Icon(
                 Icons.close,
                 color: accentColor,
               ),
-              label: Text(
+              label: const Text(
                 Strings.cancel,
                 style: TextStyle(
                   color: accentColor,

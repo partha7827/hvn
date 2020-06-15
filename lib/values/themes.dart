@@ -86,25 +86,25 @@ TextStyle bold18PlayfairWhite = GoogleFonts.playfairDisplay(
   color: Colors.white,
 );
 
-TextStyle bold18White = TextStyle(
+TextStyle bold18White = const TextStyle(
   fontSize: 18,
   fontWeight: FontWeight.bold,
   color: Colors.white,
 );
 
-TextStyle bold16White = TextStyle(
+TextStyle bold16White = const TextStyle(
   fontSize: 16,
   fontWeight: FontWeight.bold,
   color: Colors.white,
 );
 
-TextStyle bold20White = TextStyle(
+TextStyle bold20White = const TextStyle(
   fontWeight: FontWeight.bold,
   fontSize: 20,
   color: Colors.white,
 );
 
-TextStyle bold22White = TextStyle(
+TextStyle bold22White = const TextStyle(
   fontWeight: FontWeight.bold,
   fontSize: 22,
   color: Colors.white,

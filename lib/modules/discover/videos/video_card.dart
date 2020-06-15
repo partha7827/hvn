@@ -56,7 +56,7 @@ class VideoCard extends StatelessWidget {
               ),
             ),
           ),
-          Positioned(
+          const Positioned(
             top: 0,
             bottom: 0,
             right: 0,
@@ -64,7 +64,7 @@ class VideoCard extends StatelessWidget {
             child: Center(
               child: CircleAvatar(
                 radius: 20,
-                backgroundColor: const Color(0x40000222),
+                backgroundColor: Color(0x40000222),
                 child: Center(
                   child: Icon(Icons.play_arrow),
                 ),

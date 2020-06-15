@@ -37,7 +37,7 @@ class ProfileInputField extends StatelessWidget {
               controller: controller,
               decoration: InputDecoration(
                 contentPadding: const EdgeInsets.symmetric(vertical: 20),
-                border: UnderlineInputBorder(
+                border: const UnderlineInputBorder(
                     borderSide: BorderSide(color: Colors.white24)),
                 hintText: '$hintText',
                 hintStyle: const TextStyle(

@@ -20,7 +20,7 @@ class PlayPauseOverlay extends StatelessWidget {
               ? const SizedBox.shrink()
               : Container(
                   color: Colors.black26,
-                  child: Center(
+                  child: const Center(
                     child: Icon(
                       Icons.play_arrow,
                       color: Colors.white,

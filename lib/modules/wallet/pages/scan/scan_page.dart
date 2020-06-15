@@ -83,7 +83,7 @@ class ScanPageState extends State<ScanPage> {
                   ),
                   padding: const EdgeInsets.all(5),
                   margin: const EdgeInsets.only(top: 15, bottom: 10),
-                  child: Icon(Icons.close, color: Colors.white),
+                  child: const Icon(Icons.close, color: Colors.white),
                 ),
               ],
             ),
