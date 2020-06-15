@@ -23,7 +23,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends ModularState<HomePage, HomeController> {
   void _openDrawer() {
-    Modular.to.pushNamed('playList');
+    controller.scaffoldKey.currentState.openDrawer();
   }
 
   @override
