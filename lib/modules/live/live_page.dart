@@ -33,7 +33,7 @@ class _LivePageState extends ModularState<LivePage, LiveController> {
     return Column(
       mainAxisSize: MainAxisSize.max,
       children: <Widget>[
-        HeaderRow(
+        const HeaderRow(
           title: Strings.liveNow,
           leading: CircleAvatar(
             backgroundColor: redColor,

@@ -46,9 +46,9 @@ class _EditProfileViewState
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         leading: IconButton(
-            icon: Icon(Icons.arrow_back, color: Colors.white),
+            icon: const Icon(Icons.arrow_back, color: Colors.white),
             onPressed: () => Modular.to.pop()),
-        title: Text(
+        title: const Text(
           'Edit Profile',
           style: TextStyle(
             fontWeight: FontWeight.bold,
@@ -60,7 +60,7 @@ class _EditProfileViewState
                 ? SizedBox.fromSize(
                     size: const Size(15, 15), child: const SplashWidget())
                 : IconButton(
-                    icon: Icon(
+                    icon: const Icon(
                       Icons.check,
                       color: Colors.white,
                     ),

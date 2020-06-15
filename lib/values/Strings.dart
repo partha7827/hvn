@@ -79,4 +79,7 @@ class Strings {
 
   static const String create = 'CREATE';
   static const String normal = 'NORMAL';
+
+  static const String facebookLoginError =
+      'Error while logging in with Facebook';
 }
