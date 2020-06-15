@@ -124,9 +124,7 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
     if (shouldPop) {
       final shouldExit = await showExitDialog(context);
       if (shouldExit) {
-        // close audio
         if (MediaOverlays.audioKey?.currentState?.controller?.player != null) {
-          await MediaOverlays.audioKey.currentState.controller.player.stop();
           MediaOverlays.disposeAudioOverlayEntry();
         }
       }

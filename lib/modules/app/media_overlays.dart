@@ -16,6 +16,7 @@ class MediaOverlays {
   static void disposeAudioOverlayEntry() {
     _audioOverlayEntry?.remove();
     _audioOverlayEntry = null;
+    audioKey?.currentState?.controller?.player?.stop();
   }
 
   static void disposeVideoOverlayEntry() {
@@ -32,12 +33,14 @@ class MediaOverlays {
     @required BuildContext context,
     @required Audio audioFile,
   }) {
+    _removeAllOverlays();
+
     if (audioKey.currentState?.controller?.player != null) {
       audioKey.currentState.controller.player.play(audioFile.audioUrlPath);
       audioKey.currentState.controller.audioFile = audioFile;
     }
+
     _mediaOverlayState = Overlay.of(context);
-    _removeAllOverlays();
     _audioOverlayEntry = OverlayEntry(
       builder: (_) => AudioPlayerModule(audioFile),
     );
