@@ -75,6 +75,10 @@ class Strings {
   static const String myProfile = 'My Profile';
   static const String myWallet = 'My Wallet';
   static const String bookmarks = 'Bookmarks';
+  static const String myJournal = 'My Journal';
+
+  static const String create = 'CREATE';
+  static const String normal = 'NORMAL';
 
   static const String facebookLoginError =
       'Error while logging in with Facebook';
