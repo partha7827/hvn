@@ -63,12 +63,13 @@ class _AudiosWidgetState extends ModularState<AudiosWidget, HomeController> {
               scrollDirection: Axis.horizontal,
               itemCount: audios.length,
               itemBuilder: (_, index) => AudioPreviewItem(
-                audio: audios[index],
-                onTap: (item) => MediaOverlays.presentAudioPlayerAsOverlay(
-                  context: context,
-                  audioFile: item,
-                ),
-              ),
+                  audio: audios[index],
+                  onTap: (item) {
+                    MediaOverlays.presentAudioPlayerAsOverlay(
+                      context: context,
+                      audioFile: item,
+                    );
+                  }),
             ),
           ),
           PageIndicator(
