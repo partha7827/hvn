@@ -100,6 +100,14 @@ class DrawerWidget extends StatelessWidget {
                     },
                   ),
                   DrawerButton(
+                    iconPath: 'assets/ic_bookmark.svg',
+                    title: Strings.myMoodTracker,
+                    onTap: () {
+                      _closeDrawer();
+                      Modular.to.pushNamed('/moodtracker');
+                    }
+                  ),
+                  DrawerButton(
                     iconPath: 'assets/ic_activity_history.svg',
                     title: Strings.activityHistory,
                     onTap: () {
