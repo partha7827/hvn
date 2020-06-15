@@ -16,13 +16,14 @@ class _AutoLoginPageState
   @override
   void initState() {
     super.initState();
-    controller.init();
   }
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: SplashWidget(),
+    return Scaffold(
+      body: SplashWidget(
+        animationCompleteCallback: () => controller.init(),
+      ),
     );
   }
 }
