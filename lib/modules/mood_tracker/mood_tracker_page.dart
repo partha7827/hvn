@@ -1,16 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:highvibe/modules/mood_tracker/mood_tracker_controller.dart';
 import 'package:highvibe/utils/utils.dart';
 import 'package:highvibe/values/Strings.dart';
 import 'package:highvibe/values/themes.dart';
 
-class MoodTracker extends StatefulWidget {
+class MoodTrackerPage extends StatefulWidget {
   @override
-  _MoodTrackerState createState() => _MoodTrackerState();
+  _MoodTrackerPageState createState() => _MoodTrackerPageState();
 }
 
-class _MoodTrackerState extends State<MoodTracker> {
+class _MoodTrackerPageState
+    extends ModularState<MoodTrackerPage, MoodTrackerController> {
   final List<String> emojiPathList = [
     'assets/emoji/ic_ecstatic.png',
     'assets/emoji/ic_happy.png',

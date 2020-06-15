@@ -75,6 +75,7 @@ class Strings {
   static const String myProfile = 'My Profile';
   static const String myWallet = 'My Wallet';
   static const String bookmarks = 'Bookmarks';
+  static const String myMoodTracker = 'Mood Tracker';
 
   // Emoji
   static const String ecstatic = 'Ecstatic';
