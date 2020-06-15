@@ -300,7 +300,7 @@ class _EditPlayListPageState
         ..desscription = _descriptionTextEditingController.text
         ..title = _titleTextEditingController.text
         ..privacy = _privacy
-        ..audioFiles = BuiltSet<Audio>.from(_audioItems).toBuilder(),
+        ..audioFiles = BuiltList<Audio>.from(_audioItems).toBuilder(),
     );
 
     tempInMemoryPlaylistCollection.remove(widget.playlist);

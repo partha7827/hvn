@@ -1,3 +1,4 @@
+import 'package:built_collection/built_collection.dart';
 import 'package:flappy_search_bar/flappy_search_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -136,14 +137,20 @@ class _AddToPlaylistPageState
   }
 
   void _addAudioFileToPlaylist(PlayList playlist) {
+    List<Audio> _playlist = [];
+    if (playlist.audioFiles.asList().isNotEmpty) {
+      _playlist.addAll(playlist.audioFiles.asList());
+    }
+    _playlist.add(widget.audioFile);
+
     final updatedPlaylist = PlayList(
       (b) => b
         ..coverUrlPath = playlist.coverUrlPath
         ..desscription = playlist.desscription
         ..title = playlist.title
         ..privacy = playlist.privacy
-        ..audioFiles.addAll(playlist.audioFiles)
-        ..audioFiles.add(widget.audioFile),
+        ..audioFiles =
+            BuiltSet<Audio>.from(_playlist).toBuiltList().toBuilder(),
     );
 
     tempInMemoryPlaylistCollection.remove(playlist);

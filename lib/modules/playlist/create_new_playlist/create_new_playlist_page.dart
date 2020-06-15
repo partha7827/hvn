@@ -218,7 +218,7 @@ class _CreateNewPlaylistPage
         ..desscription = _descriptionTextEditingController.text
         ..title = _titleTextEditingController.text
         ..privacy = _privacy
-        ..audioFiles = BuiltSet<Audio>().toBuilder(),
+        ..audioFiles = BuiltList<Audio>().toBuilder(),
     );
 
     print('CreateNewPlaylistPage $playlist');
