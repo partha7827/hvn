@@ -127,10 +127,12 @@ class _JournalPageState extends ModularState<JournalPage, JournalController>
               SliverList(
                 delegate: SliverChildListDelegate(
                   [
-                    Opacity(
+                    AnimatedOpacity(
+                      duration: const Duration(milliseconds: 200),
                       opacity: 1 - _opacity,
                       child: Container(
-                        height: 380,
+                        height: screenHeight(context) * 0.8,
+                        alignment: Alignment.bottomCenter,
                         child: Stack(
                           children: <Widget>[
                             _cameraBottomView(),
@@ -169,18 +171,17 @@ class _JournalPageState extends ModularState<JournalPage, JournalController>
           ),
         );
       },
-      initialChildSize: 0.35,
-      minChildSize: 0.35,
+      initialChildSize: 0.8,
+      minChildSize: 0.8,
       maxChildSize: 1,
     );
   }
 
   double _getOpacity(ScrollController scrollController) {
-    _opacity =
-        ((scrollController.position.viewportDimension / 150).round()) / 10;
-    if (_opacity > 0.5) {
-      _opacity = 1.0;
-    } else if (_opacity < 0.4) {
+    if (scrollController.position.viewportDimension >
+        0.85 * MediaQuery.of(context).size.height) {
+      _opacity = 1;
+    } else {
       _opacity = 0;
     }
     return _opacity;
