@@ -46,16 +46,37 @@ class MediaOverlays {
     );
   }
 
+  static void presentAddToPlaylistAsOverlayOverAudio({
+    @required BuildContext context,
+    @required Audio audioFile,
+  }) {
+    _mediaOverlayState = Overlay.of(context);
+
+    _addToPlaylistOverlayEntry = OverlayEntry(
+      builder: (_) => AddToPlaylistModule(audioFile: audioFile),
+    );
+
+    _mediaOverlayState.rearrange(
+      [_audioOverlayEntry, _addToPlaylistOverlayEntry],
+      above: _audioOverlayEntry,
+    );
+
+    // _mediaOverlayState.insert(
+    //   _addToPlaylistOverlayEntry,
+    //   above: _audioOverlayEntry,
+    // );
+  }
+
   static void presentAudioPlayerAsOverlay({
     @required BuildContext context,
     @required Audio audioFile,
   }) {
     _removeAllOverlays();
 
-    if (audioKey.currentState?.controller?.player != null) {
-      audioKey.currentState.controller.player.play(audioFile.audioUrlPath);
-      //audioKey.currentState.controller.audioFile = audioFile;
-    }
+    // if (audioKey.currentState?.controller?.player != null) {
+    //   audioKey.currentState.controller.player.play(audioFile.audioUrlPath);
+    //   audioKey.currentState.controller.audioFile = audioFile;
+    // }
 
     _mediaOverlayState = Overlay.of(context);
     _audioOverlayEntry = OverlayEntry(

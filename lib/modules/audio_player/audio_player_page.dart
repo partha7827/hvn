@@ -8,6 +8,7 @@ import 'package:highvibe/modules/audio_player/widgets/widgets.dart';
 import 'package:highvibe/services/audio_player_service.dart';
 import 'package:highvibe/utils/utils.dart';
 import 'package:highvibe/values/themes.dart';
+
 import 'package:mobx/mobx.dart';
 
 class AudioPlayerPage extends StatefulWidget {
@@ -180,9 +181,7 @@ class AudioPlayerPageState
             style: bold16White,
             overflow: TextOverflow.ellipsis,
           ),
-          const SizedBox(
-            height: 8,
-          ),
+          const SizedBox(height: 8),
           Text(
             '${controller.audioFile.subTitle}',
             style: normal14White,
@@ -379,13 +378,9 @@ class AudioPlayerPageState
                               Icons.playlist_add,
                               color: Colors.white,
                             ),
-                            // onPressed: () {
-                            //   PlaylistModule.toAddToPlaylist(
-                            //     audioFile: controller.audioFile,
-                            //   );
-                            // },),
                             onPressed: () {
-                              MediaOverlays.presentAddToPlaylistAsOverlay(
+                              MediaOverlays
+                                  .presentAddToPlaylistAsOverlayOverAudio(
                                 context: context,
                                 audioFile: controller.audioFile,
                               );
