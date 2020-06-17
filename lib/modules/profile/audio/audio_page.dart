@@ -65,14 +65,6 @@ class _AudioPageState extends ModularState<AudioPage, AudioController> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             const HeaderRow(title: PlaylistStrings.playlist),
-            GestureDetector(
-              onTap: () => PlaylistModule.toCreateNewPlaylist(),
-              child: SizedBox(
-                height: 20,
-                width: 120,
-                child: PlaylistImageAssets.newPlaylist,
-              ),
-            )
           ],
         ),
         const SizedBox(height: 10),
