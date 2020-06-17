@@ -10,7 +10,7 @@ import 'package:highvibe/services/audio_player_service.dart';
 void main() {
   final audioFile = mockAudioItemsList[0];
 
-  initModule(AudioPlayerModule(audioFile), changeBinds: [
+  initModule(AudioPlayerModule(audioFile: audioFile), changeBinds: [
     Bind<AudioPlayerService>((i) => AudioPlayerService.withMock()),
   ]);
 

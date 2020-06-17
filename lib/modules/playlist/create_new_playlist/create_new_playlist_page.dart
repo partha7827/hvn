@@ -221,8 +221,6 @@ class _CreateNewPlaylistPage
         ..audioFiles = BuiltList<Audio>().toBuilder(),
     );
 
-    print('CreateNewPlaylistPage $playlist');
-
     tempInMemoryPlaylistCollection.add(playlist);
 
     showDialog(

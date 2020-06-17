@@ -7,7 +7,8 @@ import 'package:highvibe/services/audio_player_service.dart';
 
 class AudioPlayerModule extends WidgetModule {
   final Audio audioFile;
-  AudioPlayerModule(this.audioFile);
+
+  AudioPlayerModule({@required this.audioFile});
 
   @override
   List<Bind<Object>> get binds => [

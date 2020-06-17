@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class OverlayBuilder extends StatefulWidget {
-  final Object Function(BuildContext) overlayBuilder;
+  final Widget Function(BuildContext) overlayBuilder;
   final Widget child;
   final bool showOverlay;
 

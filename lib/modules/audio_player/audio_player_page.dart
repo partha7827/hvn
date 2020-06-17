@@ -13,6 +13,7 @@ import 'package:mobx/mobx.dart';
 
 class AudioPlayerPage extends StatefulWidget {
   AudioPlayerPage() : super(key: MediaOverlays.audioKey);
+
   @override
   AudioPlayerPageState createState() => AudioPlayerPageState();
 }
@@ -22,13 +23,17 @@ class AudioPlayerPageState
     with TickerProviderStateMixin {
   AnimationController playButtonAnimation;
   AnimationController artworkAnimation;
+  bool isOffstage = false;
 
   @override
   Widget build(BuildContext context) {
-    return Observer(
-      builder: (_) => controller.isMinimized
-          ? SafeArea(child: _minimizedAudioPlayer())
-          : Material(child: _fullScreenAudioPlayer()),
+    return Offstage(
+      offstage: isOffstage,
+      child: Observer(
+        builder: (_) => controller.isMinimized
+            ? SafeArea(child: _minimizedAudioPlayer())
+            : Material(child: _fullScreenAudioPlayer()),
+      ),
     );
   }
 
@@ -379,8 +384,8 @@ class AudioPlayerPageState
                               color: Colors.white,
                             ),
                             onPressed: () {
-                              MediaOverlays
-                                  .presentAddToPlaylistAsOverlayOverAudio(
+                              setState(() => isOffstage = true);
+                              MediaOverlays.presentAddToPlaylistAsOverlay(
                                 context: context,
                                 audioFile: controller.audioFile,
                               );

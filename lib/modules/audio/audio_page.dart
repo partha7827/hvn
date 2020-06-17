@@ -41,13 +41,14 @@ class _AudioPageState extends ModularState<AudioPage, AudioController> {
                   const HeaderRow(title: Strings.uploads),
                   for (final audioItem in controller.audios.value)
                     AudioTile(
-                        audioFile: audioItem,
-                        onTap: (item) {
-                          MediaOverlays.presentAudioPlayerAsOverlay(
-                            context: context,
-                            audioFile: item,
-                          );
-                        }),
+                      audioFile: audioItem,
+                      onTap: (_) {
+                        MediaOverlays.presentAudioPlayerAsOverlay(
+                          context: context,
+                          audioFile: audioItem,
+                        );
+                      },
+                    ),
                 ],
               );
             case FutureStatus.rejected:
