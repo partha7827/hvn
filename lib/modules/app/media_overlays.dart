@@ -9,6 +9,7 @@ class MediaOverlays {
   static GlobalKey<AudioPlayerPageState> audioKey = GlobalKey();
 
   static OverlayState _mediaOverlayState;
+
   static OverlayEntry _videoOverlayEntry;
   static OverlayEntry _audioOverlayEntry;
   static OverlayEntry _addToPlaylistOverlayEntry;
@@ -50,22 +51,6 @@ class MediaOverlays {
     );
   }
 
-  // static void presentAddToPlaylistAsOverlayOverAudio({
-  //   @required BuildContext context,
-  //   @required Audio audioFile,
-  // }) {
-  //   _mediaOverlayState = Overlay.of(context);
-
-  //   _addToPlaylistOverlayEntry = OverlayEntry(
-  //     builder: (_) => AddToPlaylistModule(audioFile: audioFile),
-  //   );
-
-  //   _mediaOverlayState.rearrange(
-  //     [_audioOverlayEntry, _addToPlaylistOverlayEntry],
-  //     above: _audioOverlayEntry,
-  //   );
-  // }
-
   static void presentAudioPlayerAsOverlay({
     @required BuildContext context,
     @required Audio audioFile,
@@ -73,6 +58,7 @@ class MediaOverlays {
     _removeAllOverlays();
 
     _mediaOverlayState = Overlay.of(context);
+
     _audioOverlayEntry = OverlayEntry(
       builder: (_) => AudioPlayerModule(audioFile: audioFile),
     );
@@ -84,7 +70,9 @@ class MediaOverlays {
     @required Video video,
   }) {
     _mediaOverlayState = Overlay.of(context);
+
     _removeAllOverlays();
+
     _videoOverlayEntry = OverlayEntry(
       builder: (_) => VideoPlayerPage(video: video),
     );

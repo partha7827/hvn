@@ -14,6 +14,8 @@ import 'package:highvibe/services/auth_service.dart';
 import 'package:highvibe/services/firestore_service.dart';
 
 class AppModule extends MainModule {
+  static bool audioPlayerPageIsOffstage = false;
+
   @override
   List<Bind<Object>> get binds => [
         Bind((i) => AppController()),

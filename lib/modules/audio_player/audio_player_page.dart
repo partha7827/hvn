@@ -2,10 +2,10 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:highvibe/modules/app/app_module.dart';
 import 'package:highvibe/modules/app/media_overlays.dart';
 import 'package:highvibe/modules/audio_player/audio_player_controller.dart';
 import 'package:highvibe/modules/audio_player/widgets/widgets.dart';
-import 'package:highvibe/modules/playlist/add_to_playlist/add_to_playlist_module.dart';
 import 'package:highvibe/modules/playlist/playlist_module.dart';
 import 'package:highvibe/services/audio_player_service.dart';
 import 'package:highvibe/utils/utils.dart';
@@ -25,12 +25,11 @@ class AudioPlayerPageState
     with TickerProviderStateMixin {
   AnimationController playButtonAnimation;
   AnimationController artworkAnimation;
-  bool isOffstage = false;
 
   @override
   Widget build(BuildContext context) {
     return Offstage(
-      offstage: isOffstage,
+      offstage: AppModule.audioPlayerPageIsOffstage,
       child: Observer(
         builder: (_) => controller.isMinimized
             ? SafeArea(child: _minimizedAudioPlayer())
@@ -383,7 +382,8 @@ class AudioPlayerPageState
                               color: Colors.white,
                             ),
                             onPressed: () {
-                              setState(() => isOffstage = true);
+                              setState(() =>
+                                  AppModule.audioPlayerPageIsOffstage = true);
                               MediaOverlays.presentAddToPlaylistAsOverlay(
                                 context: context,
                                 audioFile: controller.audioFile,

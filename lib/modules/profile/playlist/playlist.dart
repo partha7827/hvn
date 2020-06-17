@@ -4,7 +4,7 @@
 // import 'package:gradient_text/gradient_text.dart';
 // import 'package:highvibe/modules/profile/playlist/playlist_controller.dart';
 // import 'package:highvibe/utils/utils.dart';
-// import 'package:highvibe/values/Strings.dart';
+// import 'package:highvibe/values/strings.dart';
 // import 'package:highvibe/values/themes.dart';
 // import 'package:highvibe/widgets/gradient_raised_button.dart';
 
