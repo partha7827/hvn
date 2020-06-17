@@ -6,7 +6,12 @@ import 'package:highvibe/modules/playlist/add_to_playlist/add_to_playlist_page.d
 
 class AddToPlaylistModule extends WidgetModule {
   final Audio audioFile;
-  AddToPlaylistModule({@required this.audioFile});
+  final bool isPresentedAsOverlay;
+
+  AddToPlaylistModule({
+    @required this.audioFile,
+    @required this.isPresentedAsOverlay,
+  });
 
   @override
   List<Bind<Object>> get binds => [
@@ -14,5 +19,8 @@ class AddToPlaylistModule extends WidgetModule {
       ];
 
   @override
-  Widget get view => AddToPlaylistPage(audioFile: audioFile);
+  Widget get view => AddToPlaylistPage(
+        audioFile: audioFile,
+        isPresentedAsOverlay: isPresentedAsOverlay,
+      );
 }

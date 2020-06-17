@@ -16,9 +16,11 @@ import 'package:highvibe/widgets/responsive_safe_area.dart';
 
 class AddToPlaylistPage extends StatefulWidget {
   final Audio audioFile;
+  final bool isPresentedAsOverlay;
 
   const AddToPlaylistPage({
     @required this.audioFile,
+    @required this.isPresentedAsOverlay,
     Key key,
   }) : super(key: key);
 
@@ -39,6 +41,15 @@ class _AddToPlaylistPageState
     super.dispose();
   }
 
+  void _close() {
+    print(widget.isPresentedAsOverlay);
+    if (widget.isPresentedAsOverlay) {
+      MediaOverlays.disposeAddToPlaylistOverlayEntry();
+    } else {
+      Modular.to.pop();
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -50,7 +61,7 @@ class _AddToPlaylistPageState
         ),
         leading: IconButton(
           icon: const Icon(Icons.close, color: Colors.white),
-          onPressed: () => MediaOverlays.disposeAddToPlaylistOverlayEntry(),
+          onPressed: _close,
         ),
       ),
       body: ResponsiveSafeArea(
@@ -73,7 +84,9 @@ class _AddToPlaylistPageState
                             child: SizedBox(
                               height: 20,
                               width: 120,
-                              child: PlaylistImageAssets.newPlaylist,
+                              child: !widget.isPresentedAsOverlay
+                                  ? PlaylistImageAssets.newPlaylist
+                                  : null,
                             ),
                           )
                         ],
@@ -121,7 +134,7 @@ class _AddToPlaylistPageState
                   Positioned(
                     right: 0,
                     left: 0,
-                    bottom: 2,
+                    bottom: widget.isPresentedAsOverlay ? 8 : 120,
                     child: GradientRaisedButton(
                       label: PlaylistStrings.save,
                       onPressed: () => _showSuccessDialog(),
@@ -179,7 +192,7 @@ class _AddToPlaylistPageState
       _addAudioFileToPlaylist(item);
     }
 
-    MediaOverlays.disposeAddToPlaylistOverlayEntry();
+    _close();
 
     showDialog(
       context: context,

@@ -38,7 +38,10 @@ class MediaOverlays {
     _mediaOverlayState = Overlay.of(context);
 
     _addToPlaylistOverlayEntry = OverlayEntry(
-      builder: (_) => AddToPlaylistModule(audioFile: audioFile),
+      builder: (_) => AddToPlaylistModule(
+        audioFile: audioFile,
+        isPresentedAsOverlay: true,
+      ),
     );
 
     _mediaOverlayState.insert(

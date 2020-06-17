@@ -25,7 +25,10 @@ class PlaylistModule extends ChildModule {
   List<Router<Object>> get routers => [
         Router(
           '$_playlistRoute/add_to_playlist',
-          child: (_, args) => AddToPlaylistPage(audioFile: args.data),
+          child: (_, args) => AddToPlaylistPage(
+            audioFile: args.data,
+            isPresentedAsOverlay: false,
+          ),
           transition: TransitionType.fadeIn,
         ),
         Router(

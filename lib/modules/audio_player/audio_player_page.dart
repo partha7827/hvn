@@ -5,6 +5,8 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:highvibe/modules/app/media_overlays.dart';
 import 'package:highvibe/modules/audio_player/audio_player_controller.dart';
 import 'package:highvibe/modules/audio_player/widgets/widgets.dart';
+import 'package:highvibe/modules/playlist/add_to_playlist/add_to_playlist_module.dart';
+import 'package:highvibe/modules/playlist/playlist_module.dart';
 import 'package:highvibe/services/audio_player_service.dart';
 import 'package:highvibe/utils/utils.dart';
 import 'package:highvibe/values/themes.dart';
@@ -92,9 +94,7 @@ class AudioPlayerPageState
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Container(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 20,
-                ),
+                padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: <Widget>[
@@ -104,9 +104,7 @@ class AudioPlayerPageState
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: <Widget>[
                           _audioArtwork(),
-                          const SizedBox(
-                            width: 10,
-                          ),
+                          const SizedBox(width: 10),
                           _audioDetails(),
                           _audioPlayerButtons(),
                         ],
@@ -115,9 +113,7 @@ class AudioPlayerPageState
                   ],
                 ),
               ),
-              const SizedBox(
-                height: 16,
-              ),
+              const SizedBox(height: 16),
               _linearProgressIndicator(context),
             ],
           ),
@@ -160,12 +156,15 @@ class AudioPlayerPageState
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: <Widget>[
           IconButton(
-              icon: const Icon(
-                Icons.favorite_border,
-                color: Colors.white,
-                size: 30,
-              ),
-              onPressed: () {}),
+            icon: const Icon(
+              Icons.favorite_border,
+              color: Colors.white,
+              size: 30,
+            ),
+            onPressed: () => PlaylistModule.toAddToPlaylist(
+              audioFile: controller.audioFile,
+            ),
+          ),
           AudioPlayerPlayButton(
             progress: playButtonAnimation,
             onPressed: () => controller.togglePlayStop(),
