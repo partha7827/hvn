@@ -7,6 +7,7 @@ import 'package:highvibe/modules/discover/discover_module.dart';
 import 'package:highvibe/modules/home/home_module.dart';
 import 'package:highvibe/modules/journal/journal_module.dart';
 import 'package:highvibe/modules/mood_tracker/mood_tracker_module.dart';
+import 'package:highvibe/modules/playlist/playlist_module.dart';
 import 'package:highvibe/modules/profile/profile_module.dart';
 import 'package:highvibe/modules/wallet/wallet_module.dart';
 import 'package:highvibe/services/auth_service.dart';
@@ -29,6 +30,7 @@ class AppModule extends MainModule {
         Router('', module: DiscoverModule()),
         Router('', module: JournalModule()),
         Router('', module: MoodTrackerModule()),
+        Router('', module: PlaylistModule()),
       ];
 
   @override
