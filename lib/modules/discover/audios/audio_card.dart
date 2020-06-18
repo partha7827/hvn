@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:highvibe/models/models.dart' show Audio;
+import 'package:highvibe/modules/profile/profile_module.dart';
 import 'package:highvibe/values/themes.dart';
 
 class AudioCard extends StatelessWidget {
@@ -126,33 +127,38 @@ class AudioCard extends StatelessWidget {
     );
   }
 
-  Padding _authorWidget() {
-    return Padding(
-      padding: const EdgeInsets.only(top: 8.0),
-      child: Row(
-        children: [
-          if (audio.userAvatar.isNotEmpty)
-            ClipRRect(
-              borderRadius: BorderRadius.circular(50),
-              child: CachedNetworkImage(
-                imageUrl: audio.userAvatar,
-                width: 32,
-                height: 32,
-                fit: BoxFit.cover,
+  GestureDetector _authorWidget() {
+    return GestureDetector(
+      onTap: () {
+        ProfileModule.toOtherProfileId(audio.userId);
+      },
+      child: Padding(
+        padding: const EdgeInsets.only(top: 8.0),
+        child: Row(
+          children: [
+            if (audio.userAvatar.isNotEmpty)
+              ClipRRect(
+                borderRadius: BorderRadius.circular(50),
+                child: CachedNetworkImage(
+                  imageUrl: audio.userAvatar,
+                  width: 32,
+                  height: 32,
+                  fit: BoxFit.cover,
+                ),
+              )
+            else
+              Container(),
+            Padding(
+              padding: audio.userAvatar.isNotEmpty
+                  ? const EdgeInsets.only(left: 8.0)
+                  : const EdgeInsets.all(0),
+              child: Text(
+                audio.userName,
+                style: normal14Hint,
               ),
-            )
-          else
-            Container(),
-          Padding(
-            padding: audio.userAvatar.isNotEmpty
-                ? const EdgeInsets.only(left: 8.0)
-                : const EdgeInsets.all(0),
-            child: Text(
-              audio.userName,
-              style: normal14Hint,
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

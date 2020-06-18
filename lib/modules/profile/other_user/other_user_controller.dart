@@ -13,14 +13,28 @@ abstract class _OtherUserControllerBase with Store {
   User get currentUser => Modular.get<AppController>().currentUser;
   String get currentUserId => currentUser.id;
 
-  final User otherUser;
-  _OtherUserControllerBase(this.otherUser) {
-    followers = ObservableList.of(otherUser.followers);
-    following = ObservableList.of(otherUser.following);
+  _OtherUserControllerBase({User user, String userId}) {
+    if (user != null) {
+      otherUser = user;
+      followers = ObservableList.of(otherUser.followers);
+      following = ObservableList.of(otherUser.following);
+    } else {
+      store.userCollection
+          .document(userId)
+          .get()
+          .then((snapshot) => User.fromSnapshot(snapshot))
+          .then(
+        (value) {
+          otherUser = value;
+          followers = ObservableList.of(otherUser.followers);
+          following = ObservableList.of(otherUser.following);
+        },
+      );
+    }
   }
 
   @observable
-  ObservableFuture<User> otherUserFuture;
+  User otherUser;
 
   @observable
   ObservableList<String> followers = ObservableList.of([]);
@@ -34,10 +48,10 @@ abstract class _OtherUserControllerBase with Store {
   @action
   Future<void> followUser() async {
     if (isFollowing) {
-      followers.remove(currentUserId);
+      followers.remove(currentUser.id);
       store.unfollow(currentUser.id, otherUser.id);
     } else {
-      followers.add(currentUserId);
+      followers.add(currentUser.id);
       store.follow(currentUser.id, otherUser.id);
     }
   }

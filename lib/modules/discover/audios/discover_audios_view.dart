@@ -1,7 +1,9 @@
+import 'package:built_collection/built_collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:highvibe/models/audio/audio.dart';
+import 'package:highvibe/models/user/user.dart';
 import 'package:highvibe/modules/app/media_overlays.dart';
 import 'package:highvibe/modules/discover/audios/audio_card.dart';
 import 'package:highvibe/modules/discover/audios/discover_audios_controller.dart';
@@ -12,6 +14,10 @@ import 'package:highvibe/widgets/load_widget.dart';
 import 'package:mobx/mobx.dart';
 
 class DiscoverAudiosView extends StatefulWidget {
+  const DiscoverAudiosView({this.users});
+
+  final BuiltList<User> users;
+
   @override
   _DiscoverAudiosViewState createState() => _DiscoverAudiosViewState();
 }
@@ -44,15 +50,15 @@ class _DiscoverAudiosViewState
   }
 
   Widget buildAudios(List<Audio> audios) => ListView.builder(
-        itemBuilder: (_, index) => AudioCard(
-          audios[index],
-          onPlayTap: () {
-            MediaOverlays.presentAudioPlayerAsOverlay(
+        itemBuilder: (_, index) {
+          return AudioCard(
+            audios[index],
+            onPlayTap: () => MediaOverlays.presentAudioPlayerAsOverlay(
               context: context,
               audioFile: audios[index],
-            );
-          },
-        ),
+            ),
+          );
+        },
         itemCount: audios.length,
       );
 }

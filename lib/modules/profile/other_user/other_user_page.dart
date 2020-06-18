@@ -7,6 +7,7 @@ import 'package:highvibe/modules/profile/widgets/profile_widget.dart';
 import 'package:highvibe/values/Strings.dart';
 import 'package:highvibe/values/themes.dart';
 import 'package:highvibe/widgets/gradient_outline_button.dart';
+import 'package:highvibe/widgets/splash_widget.dart';
 import 'package:highvibe/widgets/underline_gradient_indicator.dart';
 import 'other_user_controller.dart';
 
@@ -32,6 +33,14 @@ class _OtherUserPageState
 
   @override
   Widget build(BuildContext context) {
+    return Observer(
+      builder: (_) => controller.otherUser != null
+          ? buildProfileWidget()
+          : const SplashWidget(),
+    );
+  }
+
+  Widget buildProfileWidget() {
     return ProfileWidget(
       userName: controller.otherUser.name,
       userStatus: controller.otherUser.status,
