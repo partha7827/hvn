@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:highvibe/models/models.dart'
     show Audio, PlayList, Privacy, tempInMemoryPlaylistCollection;
+import 'package:highvibe/modules/app/media_overlays.dart';
 import 'package:highvibe/modules/playlist/create_new_playlist/create_new_playlist_controller.dart';
 import 'package:highvibe/modules/playlist/resources/resources.dart';
 import 'package:highvibe/modules/playlist/widgets/widgets.dart';
@@ -12,7 +13,12 @@ import 'package:highvibe/widgets/header_row.dart';
 import 'package:highvibe/widgets/responsive_safe_area.dart';
 
 class CreateNewPlaylistPage extends StatefulWidget {
-  CreateNewPlaylistPage({Key key}) : super(key: key);
+  final bool isPresentedAsOverlay;
+
+  CreateNewPlaylistPage({
+    @required this.isPresentedAsOverlay,
+    Key key,
+  }) : super(key: key);
 
   @override
   _CreateNewPlaylistPage createState() => _CreateNewPlaylistPage();
@@ -27,27 +33,6 @@ class _CreateNewPlaylistPage
   TextEditingController _descriptionTextEditingController;
 
   @override
-  void dispose() {
-    _titleTextEditingController.dispose();
-    _descriptionTextEditingController.dispose();
-    super.dispose();
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    _configure();
-  }
-
-  void _configure() {
-    _imagePath = '';
-    _privacy = Privacy.private;
-    _isPrivate = true;
-    _titleTextEditingController = TextEditingController(text: '');
-    _descriptionTextEditingController = TextEditingController(text: '');
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -60,7 +45,7 @@ class _CreateNewPlaylistPage
         ),
         leading: IconButton(
           icon: const Icon(Icons.arrow_back, color: Colors.white),
-          onPressed: () => Modular.to.pop(),
+          onPressed: () => _close(),
         ),
       ),
       body: ResponsiveSafeArea(
@@ -200,7 +185,7 @@ class _CreateNewPlaylistPage
                 const SizedBox(height: 20),
                 GradientRaisedButton(
                   label: PlaylistStrings.save,
-                  onPressed: () => _showSuccessDialog(),
+                  onPressed: _savePlaylistAndShowSuccessDialog,
                 ),
               ],
             ),
@@ -210,26 +195,33 @@ class _CreateNewPlaylistPage
     );
   }
 
-  void _showSuccessDialog() {
-    final playlist = PlayList(
-      (b) => b
-        ..coverUrlPath =
-            'https://takelessons.com/blog/wp-content/uploads/2020/03/flute-for-beginners.jpg'
-        ..desscription = _descriptionTextEditingController.text
-        ..title = _titleTextEditingController.text
-        ..privacy = _privacy
-        ..audioFiles = BuiltList<Audio>().toBuilder(),
-    );
+  @override
+  void dispose() {
+    _titleTextEditingController.dispose();
+    _descriptionTextEditingController.dispose();
+    super.dispose();
+  }
 
-    tempInMemoryPlaylistCollection.add(playlist);
+  @override
+  void initState() {
+    super.initState();
+    _configure();
+  }
 
-    showDialog(
-      context: context,
-      builder: (_) => const PlaylistModalAlert(
-        title: PlaylistStrings.newPlaylistSuccessTitle,
-        subTitle: PlaylistStrings.newPlaylistSuccessSubTitle,
-      ),
-    );
+  void _close() {
+    if (widget.isPresentedAsOverlay) {
+      MediaOverlays.disposeCreateNewPlaylistOverlayEntry();
+    } else {
+      Modular.to.maybePop();
+    }
+  }
+
+  void _configure() {
+    _imagePath = '';
+    _privacy = Privacy.private;
+    _isPrivate = true;
+    _titleTextEditingController = TextEditingController(text: '');
+    _descriptionTextEditingController = TextEditingController(text: '');
   }
 
   void _deleteCover() {
@@ -246,6 +238,39 @@ class _CreateNewPlaylistPage
       }
     } catch (error) {
       print(error);
+    }
+  }
+
+  void _savePlaylist() {
+    final playlist = PlayList(
+      (b) => b
+        ..coverUrlPath =
+            'https://takelessons.com/blog/wp-content/uploads/2020/03/flute-for-beginners.jpg'
+        ..desscription = _descriptionTextEditingController.text
+        ..title = _titleTextEditingController.text
+        ..privacy = _privacy
+        ..audioFiles = BuiltList<Audio>().toBuilder(),
+    );
+
+    tempInMemoryPlaylistCollection.add(playlist);
+  }
+
+  void _savePlaylistAndShowSuccessDialog() {
+    _savePlaylist();
+
+    final modalAlert = PlaylistModalAlert(
+      title: PlaylistStrings.newPlaylistSuccessTitle,
+      subTitle: PlaylistStrings.newPlaylistSuccessSubTitle,
+      isPresentedAsOverlay: widget.isPresentedAsOverlay,
+    );
+
+    if (widget.isPresentedAsOverlay) {
+      MediaOverlays.presentShowDialogAsOverlay(
+        context: context,
+        modalAlert: modalAlert,
+      );
+    } else {
+      showDialog(context: context, builder: (_) => modalAlert);
     }
   }
 

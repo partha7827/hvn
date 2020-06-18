@@ -36,6 +36,16 @@ class _AddToPlaylistPageState
 
   final Set<PlayList> _listOfPlaylistToAddAudio = {};
 
+  void _presentCreateNewPlaylist(BuildContext contex) {
+    if (widget.isPresentedAsOverlay) {
+      MediaOverlays.presentCreateNewPlaylistAsOverlay(
+        context: context,
+      );
+    } else {
+      PlaylistModule.toCreateNewPlaylist();
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -66,13 +76,11 @@ class _AddToPlaylistPageState
                         children: [
                           const HeaderRow(title: PlaylistStrings.playlist),
                           GestureDetector(
-                            onTap: () => PlaylistModule.toCreateNewPlaylist(),
+                            onTap: () => _presentCreateNewPlaylist(context),
                             child: SizedBox(
                               height: 20,
                               width: 120,
-                              child: !widget.isPresentedAsOverlay
-                                  ? PlaylistImageAssets.newPlaylist
-                                  : null,
+                              child: PlaylistImageAssets.newPlaylist,
                             ),
                           )
                         ],

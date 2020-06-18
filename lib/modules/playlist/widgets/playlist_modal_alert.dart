@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:highvibe/modules/app/media_overlays.dart';
 import 'package:highvibe/modules/playlist/resources/resources.dart';
 import 'package:highvibe/modules/wallet/resources/app_colors.dart';
 import 'package:highvibe/utils/utils.dart';
@@ -11,10 +12,12 @@ class PlaylistModalAlert extends StatelessWidget {
   final String subTitle;
   final String buttonTitle;
   final int popsCount;
+  final bool isPresentedAsOverlay;
 
   const PlaylistModalAlert({
     @required this.title,
     @required this.subTitle,
+    this.isPresentedAsOverlay = false,
     this.popsCount = 2,
     this.buttonTitle = PlaylistStrings.save,
   });
@@ -70,10 +73,7 @@ class PlaylistModalAlert extends StatelessWidget {
                     height: 48,
                     child: GradientRaisedButton(
                       label: buttonTitle,
-                      onPressed: () => popUntil(
-                        numberOfPops: popsCount,
-                        context: context,
-                      ),
+                      onPressed: () => _close(context),
                     ),
                   ),
                 ],
@@ -83,5 +83,17 @@ class PlaylistModalAlert extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  void _close(BuildContext context) {
+    if (isPresentedAsOverlay) {
+      MediaOverlays.disposeModalAlertOverlayEntry();
+      MediaOverlays.disposeCreateNewPlaylistOverlayEntry();
+    } else {
+      popUntil(
+        numberOfPops: popsCount,
+        context: context,
+      );
+    }
   }
 }
