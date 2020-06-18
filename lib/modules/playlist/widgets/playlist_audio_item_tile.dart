@@ -22,10 +22,7 @@ class PlaylistAudioItemTile extends StatelessWidget {
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
-          IconButton(
-            icon: PlaylistImageAssets.reorderAudioItemInPlaylist,
-            onPressed: () => _reorderAudiofilesInPlayList(),
-          ),
+          PlaylistImageAssets.reorderAudioItemInPlaylist,
           const SizedBox(width: 10),
           Stack(
             alignment: AlignmentDirectional.center,
@@ -68,9 +65,5 @@ class PlaylistAudioItemTile extends StatelessWidget {
         ],
       ),
     );
-  }
-
-  void _reorderAudiofilesInPlayList() {
-    print('_reorderAudiofilesInPlayList');
   }
 }

@@ -5,7 +5,7 @@ import 'package:highvibe/modules/playlist/playlist_module.dart';
 import 'package:highvibe/modules/playlist/resources/resources.dart';
 import 'package:highvibe/widgets/header_row.dart';
 
-void playlistContextMenue(BuildContext context, PlayList playlist) {
+void playlistContextMenu(BuildContext context, PlayList playlist) {
   showModalBottomSheet(
     context: context,
     builder: (context) {
@@ -44,7 +44,7 @@ Widget _buildBottomNavigationMenu(PlayList playlist) {
           ],
         ),
         ListTile(
-          leading: PlaylistImageAssets.editBottonSheet,
+          leading: PlaylistImageAssets.editBottomSheet,
           title: const Text(
             PlaylistStrings.edit,
             style: TextStyle(

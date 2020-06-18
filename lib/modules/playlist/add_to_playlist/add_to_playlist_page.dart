@@ -162,7 +162,7 @@ class _AddToPlaylistPageState
       MediaOverlays.disposeAddToPlaylistOverlayEntry();
       setState(() => AppModule.audioPlayerPageIsOffstage = false);
     } else {
-      Modular.to.pop();
+      Modular.to.maybePop();
     }
   }
 

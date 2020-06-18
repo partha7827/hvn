@@ -71,7 +71,7 @@ class _AudioPageState extends ModularState<AudioPage, AudioController> {
           PlaylistTile(
             isInEditMode: false,
             playList: item,
-            onTap: (item) => playlistContextMenue(context, item),
+            onTap: (item) => playlistContextMenu(context, item),
           )
         ],
       ],

@@ -96,11 +96,11 @@ class _PlaylistTileState extends State<PlaylistTile> {
   }
 
   int _calculateTotalDuration() {
-    var totalDurration = 0;
+    var totalDuration = 0;
     for (final item in widget.playList.audioFiles) {
-      totalDurration += item.duration;
+      totalDuration += item.duration;
     }
-    return totalDurration;
+    return totalDuration;
   }
 
   Widget _configureIcon() {

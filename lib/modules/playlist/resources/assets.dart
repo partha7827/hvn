@@ -49,7 +49,7 @@ class PlaylistImageAssets {
     image: AssetImage('assets/icons/delete_bottom_sheet.png'),
   );
 
-  static final Image editBottonSheet = const Image(
+  static final Image editBottomSheet = const Image(
     image: AssetImage('assets/icons/edit_botton_sheet.png'),
   );
 
