@@ -9,6 +9,7 @@ import 'package:highvibe/widgets/audio_tile.dart';
 import 'package:highvibe/widgets/header_row.dart';
 import 'package:highvibe/widgets/repeat_widget.dart';
 import 'package:highvibe/widgets/splash_widget.dart';
+import 'package:highvibe/widgets/load_widget.dart';
 import 'package:mobx/mobx.dart';
 
 import 'audio_controller.dart';
@@ -29,7 +30,7 @@ class _AudioPageState extends ModularState<AudioPage, AudioController> {
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: onWillPop,
-      child: Observer(
+      child: LoadWidget(child: Observer(
         builder: (_) {
           switch (controller.audios.status) {
             case FutureStatus.fulfilled:
@@ -41,7 +42,7 @@ class _AudioPageState extends ModularState<AudioPage, AudioController> {
           }
         },
       ),
-    );
+    ),);
   }
 
   Widget buildAudios(List<Audio> audios) {

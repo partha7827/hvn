@@ -7,6 +7,7 @@ import 'package:highvibe/values/Strings.dart';
 import 'package:highvibe/widgets/header_row.dart';
 import 'package:highvibe/widgets/repeat_widget.dart';
 import 'package:highvibe/widgets/splash_widget.dart';
+import 'package:highvibe/widgets/load_widget.dart';
 import 'package:highvibe/widgets/video_tile.dart';
 import 'package:mobx/mobx.dart';
 import 'video_controller.dart';
@@ -42,7 +43,7 @@ class _VideoPageState extends ModularState<VideoPage, VideoController> {
 
   @override
   Widget build(BuildContext context) {
-    return Observer(builder: (_) {
+    return LoadWidget(child: Observer(builder: (_) {
       switch (controller.videos.status) {
         case FutureStatus.fulfilled:
           return buildVideos(controller.videos.value);
@@ -51,7 +52,7 @@ class _VideoPageState extends ModularState<VideoPage, VideoController> {
         default:
           return const SplashWidget();
       }
-    });
+    },),);
   }
 
   void _showVideoPlayer(BuildContext context, Video videoFile) {
