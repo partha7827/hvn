@@ -2,7 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 
 class SplashWidget extends StatefulWidget {
-  const SplashWidget({Key key}) : super(key: key);
+  const SplashWidget({
+    Key key,
+    this.animationCompleteCallback,
+  }) : super(key: key);
+
+  final AnimationCompleteCallback animationCompleteCallback;
 
   @override
   _SplashWidgetState createState() => _SplashWidgetState();
@@ -20,14 +25,15 @@ class _SplashWidgetState extends State<SplashWidget>
         seconds: 3,
       );
 
-    final start = 0.0;
-    final stop = 1.0;
-    _controller.repeat(
-      min: start,
-      max: stop,
-      reverse: true,
-      period: _controller.duration,
-    );
+    _controller.forward();
+
+    _controller.addStatusListener((status) {
+      if (status == AnimationStatus.completed) {
+        if(widget.animationCompleteCallback != null) {
+          widget.animationCompleteCallback();
+        }
+      }
+    });
     super.initState();
   }
 
@@ -54,3 +60,5 @@ class _SplashWidgetState extends State<SplashWidget>
     );
   }
 }
+
+typedef AnimationCompleteCallback = void Function();

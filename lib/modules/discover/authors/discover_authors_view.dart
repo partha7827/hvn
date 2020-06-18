@@ -5,6 +5,7 @@ import 'package:highvibe/modules/discover/authors/author_card.dart';
 import 'package:highvibe/modules/profile/profile_module.dart';
 import 'package:highvibe/widgets/repeat_widget.dart';
 import 'package:highvibe/widgets/splash_widget.dart';
+import 'package:highvibe/widgets/load_widget.dart';
 import 'package:mobx/mobx.dart';
 import './discover_authors_controller.dart';
 
@@ -23,7 +24,7 @@ class _DiscoverAuthorsViewState
 
   @override
   Widget build(BuildContext context) {
-    return Observer(builder: (_) {
+    return LoadWidget(child:Observer(builder: (_) {
       final authors = controller.authors.value;
       switch (controller.authors.status) {
         case FutureStatus.fulfilled:
@@ -46,6 +47,6 @@ class _DiscoverAuthorsViewState
         default:
           return const SplashWidget();
       }
-    });
+    },),);
   }
 }

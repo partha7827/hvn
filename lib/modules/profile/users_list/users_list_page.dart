@@ -7,6 +7,7 @@ import 'package:highvibe/modules/profile/users_list/user_card.dart';
 import 'package:highvibe/modules/profile/users_list/users_list_controller.dart';
 import 'package:highvibe/widgets/repeat_widget.dart';
 import 'package:highvibe/widgets/splash_widget.dart';
+import 'package:highvibe/widgets/load_widget.dart';
 import 'package:mobx/mobx.dart';
 
 class UsersListPage extends StatefulWidget {
@@ -36,7 +37,7 @@ class _UsersListPageState
           ),
         ],
       ),
-      body: Observer(
+      body: LoadWidget(child: Observer(
         builder: (_) {
           switch (controller.users.status) {
             case FutureStatus.fulfilled:
@@ -48,7 +49,7 @@ class _UsersListPageState
           }
         },
       ),
-    );
+    ),);
   }
 
   Widget buildUsers(List<User> users) {
