@@ -49,10 +49,10 @@ abstract class _OtherUserControllerBase with Store {
   Future<void> followUser() async {
     if (isFollowing) {
       followers.remove(currentUser.id);
-      await store.unfollow(currentUser.id, otherUser.id);
+      store.unfollow(currentUser.id, otherUser.id);
     } else {
       followers.add(currentUser.id);
-      await store.follow(currentUser.id, otherUser.id);
+      store.follow(currentUser.id, otherUser.id);
     }
   }
 }
