@@ -2,16 +2,20 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:highvibe/modules/app/app_module.dart';
 import 'package:highvibe/modules/app/media_overlays.dart';
 import 'package:highvibe/modules/audio_player/audio_player_controller.dart';
 import 'package:highvibe/modules/audio_player/widgets/widgets.dart';
+import 'package:highvibe/modules/playlist/playlist_module.dart';
 import 'package:highvibe/services/audio_player_service.dart';
 import 'package:highvibe/utils/utils.dart';
 import 'package:highvibe/values/themes.dart';
+
 import 'package:mobx/mobx.dart';
 
 class AudioPlayerPage extends StatefulWidget {
   AudioPlayerPage() : super(key: MediaOverlays.audioKey);
+
   @override
   AudioPlayerPageState createState() => AudioPlayerPageState();
 }
@@ -24,10 +28,13 @@ class AudioPlayerPageState
 
   @override
   Widget build(BuildContext context) {
-    return Observer(
-      builder: (_) => controller.isMinimized
-          ? SafeArea(child: _minimizedAudioPlayer())
-          : Material(child: _fullScreenAudioPlayer()),
+    return Offstage(
+      offstage: AppModule.audioPlayerPageIsOffstage,
+      child: Observer(
+        builder: (_) => controller.isMinimized
+            ? SafeArea(child: _minimizedAudioPlayer())
+            : Material(child: _fullScreenAudioPlayer()),
+      ),
     );
   }
 
@@ -53,13 +60,16 @@ class AudioPlayerPageState
       duration: const Duration(milliseconds: 500),
     );
 
-    reaction((_) => controller.isPlaying, (val) {
-      if (val) {
-        playButtonAnimation.forward();
-      } else {
-        playButtonAnimation.reverse();
-      }
-    });
+    reaction(
+      (_) => controller.isPlaying,
+      (val) {
+        if (val) {
+          playButtonAnimation.forward();
+        } else {
+          playButtonAnimation.reverse();
+        }
+      },
+    );
 
     super.initState();
   }
@@ -83,9 +93,7 @@ class AudioPlayerPageState
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Container(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 20,
-                ),
+                padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: <Widget>[
@@ -95,9 +103,7 @@ class AudioPlayerPageState
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: <Widget>[
                           _audioArtwork(),
-                          const SizedBox(
-                            width: 10,
-                          ),
+                          const SizedBox(width: 10),
                           _audioDetails(),
                           _audioPlayerButtons(),
                         ],
@@ -106,9 +112,7 @@ class AudioPlayerPageState
                   ],
                 ),
               ),
-              const SizedBox(
-                height: 16,
-              ),
+              const SizedBox(height: 16),
               _linearProgressIndicator(context),
             ],
           ),
@@ -151,12 +155,15 @@ class AudioPlayerPageState
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: <Widget>[
           IconButton(
-              icon: const Icon(
-                Icons.favorite_border,
-                color: Colors.white,
-                size: 30,
-              ),
-              onPressed: () {}),
+            icon: const Icon(
+              Icons.favorite_border,
+              color: Colors.white,
+              size: 30,
+            ),
+            onPressed: () => PlaylistModule.toAddToPlaylist(
+              audioFile: controller.audioFile,
+            ),
+          ),
           AudioPlayerPlayButton(
             progress: playButtonAnimation,
             onPressed: () => controller.togglePlayStop(),
@@ -177,9 +184,7 @@ class AudioPlayerPageState
             style: bold16White,
             overflow: TextOverflow.ellipsis,
           ),
-          const SizedBox(
-            height: 8,
-          ),
+          const SizedBox(height: 8),
           Text(
             '${controller.audioFile.subTitle}',
             style: normal14White,
@@ -368,6 +373,20 @@ class AudioPlayerPageState
                                       : Colors.white,
                                 ),
                                 onPressed: controller.toggleLoopMode,
+                              );
+                            },
+                          ),
+                          IconButton(
+                            icon: const Icon(
+                              Icons.playlist_add,
+                              color: Colors.white,
+                            ),
+                            onPressed: () {
+                              setState(() =>
+                                  AppModule.audioPlayerPageIsOffstage = true);
+                              MediaOverlays.presentAddToPlaylistAsOverlay(
+                                context: context,
+                                audioFile: controller.audioFile,
                               );
                             },
                           )

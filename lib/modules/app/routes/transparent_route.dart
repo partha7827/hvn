@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class TransparentRoute extends PageRoute<dynamic> {
+class TransparentRoute extends PageRoute<Object> {
   final WidgetBuilder builder;
   final Widget Function(
     BuildContext,

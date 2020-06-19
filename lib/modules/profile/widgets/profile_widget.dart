@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:highvibe/models/fab_icon/fab_icon_model.dart';
+import 'package:highvibe/modules/playlist/playlist_module.dart';
 import 'package:highvibe/modules/profile/profile_module.dart';
 import 'package:highvibe/modules/profile/widgets/fab_with_icons.dart';
 import 'package:highvibe/modules/profile/widgets/profile_avatar.dart';
-import 'package:highvibe/values/Strings.dart';
+import 'package:highvibe/values/strings.dart';
 import 'package:highvibe/values/themes.dart';
 import 'package:highvibe/widgets/gradient_outline_button.dart';
 import 'package:highvibe/widgets/image_viewer.dart';
@@ -162,7 +163,15 @@ class _ProfileWidgetState extends State<ProfileWidget> {
       ),
       floatingActionButton: FabWithIcons(
         icons: fabicons,
-        onIconTapped: (int iconIndex) {},
+        onIconTapped: (iconIndex) {
+          switch (iconIndex) {
+            case 2:
+              PlaylistModule.toCreateNewPlaylist();
+              break;
+            default:
+              break;
+          }
+        },
       ),
     );
   }

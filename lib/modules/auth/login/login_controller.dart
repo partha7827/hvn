@@ -9,7 +9,7 @@ import 'package:highvibe/modules/app/app_controller.dart';
 import 'package:highvibe/modules/auth/exceptions.dart';
 import 'package:highvibe/services/auth_service.dart';
 import 'package:highvibe/services/firestore_service.dart';
-import 'package:highvibe/values/Strings.dart';
+import 'package:highvibe/values/strings.dart';
 import 'package:mobx/mobx.dart';
 
 part 'login_controller.g.dart';

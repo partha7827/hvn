@@ -30,18 +30,18 @@ class AudioPlayerService extends Disposable {
         AudioPlayerMock(),
       );
 
-  Future<int> play(String url, {Duration position = Duration.zero}) =>
+  Future<void> play(String url, {Duration position = Duration.zero}) =>
       audioPlayer.play(url, position: position);
 
-  Future<int> pause() => audioPlayer.pause();
+  Future<void> pause() => audioPlayer.pause();
 
-  Future<int> resume() => audioPlayer.resume();
+  Future<void> resume() => audioPlayer.resume();
 
-  Future<int> stop() => audioPlayer.stop();
+  Future<void> stop() => audioPlayer.stop();
 
-  Future<int> seek(Duration position) => audioPlayer.seek(position);
+  Future<void> seek(Duration position) => audioPlayer.seek(position);
 
-  Future<int> setReleaseMode(ReleaseMode mode) =>
+  Future<void> setReleaseMode(ReleaseMode mode) =>
       audioPlayer.setReleaseMode(mode);
 
   @override

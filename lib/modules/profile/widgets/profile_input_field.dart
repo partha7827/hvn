@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
 
 class ProfileInputField extends StatelessWidget {
-  const ProfileInputField(
-      {Key key,
-      this.title = '',
-      this.hintText = '',
-      this.maxLines,
-      this.validator,
-      this.controller})
-      : super(key: key);
-
   final String title, hintText;
   final int maxLines;
   final TextEditingController controller;
   final Function validator;
+
+  const ProfileInputField({
+    Key key,
+    this.title = '',
+    this.hintText = '',
+    this.maxLines,
+    this.validator,
+    this.controller,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

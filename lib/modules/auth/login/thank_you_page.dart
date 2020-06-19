@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:highvibe/values/Strings.dart';
+import 'package:highvibe/values/strings.dart';
 import 'package:highvibe/values/themes.dart';
 import 'package:highvibe/widgets/gradient_raised_button.dart';
 
@@ -11,7 +11,6 @@ class ThankYouPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print('args: $email');
     return Scaffold(
       appBar: AppBar(),
       body: Padding(

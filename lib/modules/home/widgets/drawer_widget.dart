@@ -3,17 +3,13 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:highvibe/modules/home/home_controller.dart';
 import 'package:highvibe/modules/home/widgets/drawer_button.dart';
 import 'package:highvibe/modules/home/widgets/logout_button.dart';
-import 'package:highvibe/values/Strings.dart';
+import 'package:highvibe/values/strings.dart';
 import 'package:highvibe/values/themes.dart';
 
 class DrawerWidget extends StatelessWidget {
-  const DrawerWidget(this._controller);
-
   final HomeController _controller;
 
-  void _closeDrawer() {
-    Modular.to.pop();
-  }
+  const DrawerWidget(this._controller);
 
   @override
   Widget build(BuildContext context) {
@@ -74,7 +70,6 @@ class DrawerWidget extends StatelessWidget {
             Expanded(
               child: Column(
                 children: [
-                  // My Profile, My Wallet, Activity History, Bookmarks
                   DrawerButton(
                     iconPath: 'assets/ic_profile.svg',
                     title: Strings.myProfile,
@@ -139,5 +134,9 @@ class DrawerWidget extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  void _closeDrawer() {
+    Modular.to.pop();
   }
 }
