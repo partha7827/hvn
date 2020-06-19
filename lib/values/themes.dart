@@ -10,6 +10,7 @@ const accentColor = Color(0xFF66CCCC);
 const hintTextColor = Color(0xFF8E8F99);
 const redColor = Color(0xFFFF0000);
 const mediaPlayerBackgroundColor = Color(0xFF000222);
+const greenColor = Color(0xFF39C16C);
 
 const LinearGradient primaryGradient = LinearGradient(
   begin: Alignment.topCenter,
@@ -74,6 +75,11 @@ TextStyle bold24White = const TextStyle(
   color: Colors.white,
 );
 
+TextStyle normal25White = const TextStyle(
+  fontSize: 25,
+  color: Colors.white,
+);
+
 TextStyle bold24PlayfairWhite = GoogleFonts.playfairDisplay(
   fontSize: 24,
   fontWeight: FontWeight.bold,
@@ -129,6 +135,14 @@ TextStyle normal14White = const TextStyle(
   fontSize: 14,
   color: Colors.white,
 );
+TextStyle normal13White = const TextStyle(
+  fontSize: 13,
+  color: Colors.white,
+);
+TextStyle normal13Green = const TextStyle(
+  fontSize: 13,
+  color: greenColor,
+);
 TextStyle normal14Accent = const TextStyle(
   fontSize: 14,
   color: accentColor,
@@ -148,6 +162,11 @@ TextStyle normaBoldl16White = const TextStyle(
 TextStyle normal18White = const TextStyle(
   fontSize: 18,
   color: Colors.white,
+);
+
+TextStyle normal18Hint = const TextStyle(
+  fontSize: 18,
+  color: Color(0xFF8E8F99),
 );
 
 TextStyle normal12White = const TextStyle(
