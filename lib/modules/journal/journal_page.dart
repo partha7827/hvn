@@ -11,8 +11,8 @@ import 'package:highvibe/modules/journal/journal_controller.dart';
 import 'package:highvibe/utils/utils.dart';
 import 'package:highvibe/values/Strings.dart';
 import 'package:highvibe/values/themes.dart';
-import 'package:image_gallery/image_gallery.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:photo_manager/photo_manager.dart';
 import 'package:video_player/video_player.dart';
 
 class JournalPage extends StatefulWidget {
@@ -35,6 +35,9 @@ class _JournalPageState extends ModularState<JournalPage, JournalController>
   List<dynamic> allImage = [];
 
   double _opacity = 0.0;
+
+  int currentPage = 0;
+  int lastPage;
 
   void logError(String code, String message) =>
       print('Error: $code\nError Message: $message');
@@ -62,12 +65,67 @@ class _JournalPageState extends ModularState<JournalPage, JournalController>
   }
 
   Future<Null> _fetchGalleryImages() async {
-    Map<dynamic, dynamic> allImageMap;
-    allImageMap = await FlutterGallaryPlugin.getAllImages;
+//    Map<dynamic, dynamic> allImageMap;
+//    allImageMap = await FlutterGallaryPlugin.getAllImages;
+//    setState(() {
+//      allImage = allImageMap['URIList'] as List;
+//    });
 
-    setState(() {
-      allImage = allImageMap['URIList'] as List;
-    });
+    var result = await PhotoManager.requestPermission();
+    if (result) {
+      // success
+      List<AssetPathEntity> albums =
+          await PhotoManager.getAssetPathList(onlyAll: true);
+      print('======${albums}');
+      List<AssetEntity> media =
+          await albums[0].getAssetListPaged(currentPage, 60);
+      ;
+      print('======media ${media}');
+
+      List<Widget> temp = [];
+      for (var asset in media) {
+        temp.add(
+          FutureBuilder(
+            future: asset.thumbDataWithSize(200, 200),
+            builder: (BuildContext context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.done)
+                return Stack(
+                  children: <Widget>[
+                    Positioned.fill(
+                      child: Image.memory(
+                        snapshot.data,
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                    if (asset.type == AssetType.video)
+                      Align(
+                        alignment: Alignment.bottomRight,
+                        child: Padding(
+                          padding: EdgeInsets.only(right: 5, bottom: 5),
+                          child: Icon(
+                            Icons.videocam,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ),
+                  ],
+                );
+              return Container();
+            },
+          ),
+        );
+      }
+
+      setState(() {
+        allImage.addAll(temp);
+        currentPage++;
+        // allImage = media;
+      });
+    } else {
+      PhotoManager.openSetting();
+      // fail
+      /// if result is fail, you can call `PhotoManager.openSetting();`  to open android/ios applicaton's setting to get permission
+    }
   }
 
   @override
@@ -155,12 +213,13 @@ class _JournalPageState extends ModularState<JournalPage, JournalController>
                         onTap: () {},
                         child: Container(
                           margin: const EdgeInsets.all(5.0),
-                          child: Image.file(
-                            File(allImage[index].toString()),
-                            width: 70.0,
-                            height: 70.0,
-                            fit: BoxFit.cover,
-                          ),
+                          child: allImage[index],
+//                          child: Image.file(
+//                            File(allImage[index].toString()),
+//                            width: 70.0,
+//                            height: 70.0,
+//                            fit: BoxFit.cover,
+//                          ),
                         ),
                       ),
                     );
@@ -259,12 +318,13 @@ class _JournalPageState extends ModularState<JournalPage, JournalController>
                   width: 70,
                   height: 70,
                   margin: const EdgeInsets.all(5),
-                  child: Image.file(
-                    File(allImage[index].toString()),
-                    width: 70,
-                    height: 70,
-                    fit: BoxFit.cover,
-                  ),
+                  child: allImage[index],
+//                  child: Image.file(
+//                    File(allImage[index].toString()),
+//                    width: 70,
+//                    height: 70,
+//                    fit: BoxFit.cover,
+//                  ),
                 );
               },
             ),
