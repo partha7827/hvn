@@ -76,6 +76,7 @@ class Strings {
   static const String myWallet = 'My Wallet';
   static const String bookmarks = 'Bookmarks';
   static const String myJournal = 'My Journal';
+  static const String changeTheme = 'Change Theme';
 
   static const String create = 'CREATE';
   static const String normal = 'NORMAL';
@@ -121,4 +122,8 @@ class Strings {
   static const String currentStreak = 'Current\nStreak';
   static const String questCompletion = 'Quest\nCompletion';
   static const String shareYourStats = 'Share your stats';
+
+  static const String theme ='Theme';
+  static const String wallpaper ='Wallpaper';
+  static const String apply ='Apply';
 }
