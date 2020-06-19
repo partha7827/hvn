@@ -118,6 +118,14 @@ class DrawerWidget extends StatelessWidget {
                       Modular.to.pushNamed('profile');
                     },
                   ),
+                  DrawerButton(
+                    iconPath: 'assets/ic_bookmark.svg',
+                    title: Strings.changeTheme,
+                    onTap: () {
+                      _closeDrawer();
+                      Modular.to.pushNamed('changeTheme');
+                    },
+                  ),
                 ],
               ),
             ),

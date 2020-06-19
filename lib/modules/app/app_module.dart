@@ -3,6 +3,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:highvibe/modules/app/app_controller.dart';
 import 'package:highvibe/modules/app/app_widget.dart';
 import 'package:highvibe/modules/auth/auth_module.dart';
+import 'package:highvibe/modules/change_theme/change_theme_module.dart';
 import 'package:highvibe/modules/discover/discover_module.dart';
 import 'package:highvibe/modules/home/home_module.dart';
 import 'package:highvibe/modules/journal/journal_module.dart';
@@ -33,6 +34,7 @@ class AppModule extends MainModule {
         Router('', module: JournalModule()),
         Router('', module: MoodTrackerModule()),
         Router('', module: PlaylistModule()),
+        Router('', module: ChangeThemeModule()),
       ];
 
   @override
