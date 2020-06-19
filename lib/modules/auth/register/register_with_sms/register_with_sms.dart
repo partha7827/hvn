@@ -63,6 +63,7 @@ class _RegisterWithSmsState
             Strings.dontHaveAccount,
             style: normal16White,
           ),
+          const SizedBox(width: 8),
           GestureDetector(
             onTap: () {},
             child: Text(
