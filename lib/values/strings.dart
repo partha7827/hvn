@@ -32,6 +32,7 @@ class Strings {
   static const recommendedAuthors = 'Authors';
   static const email = 'Email';
   static const password = 'Password';
+  static const retypePassword = 'Retype Password';
   static const forgotPassword = 'Forgot Password?';
   static const login = 'Login';
   static const dontHaveAccount = "Don't have an account?";
@@ -60,6 +61,24 @@ class Strings {
   static const yes = 'Yes';
   static const no = 'No';
   static const editProfile = 'Edit Profile';
+  static const createPassword = 'Create a password';
+  static const passwordStrength = 'Password strength';
+  static const strong = 'Strong';
+  static const congratulations = 'Congratulations!';
+  static const welcomeToHighVibe =
+      'Thank you for Signing up and \nWelcome to the HighVibe ';
+  static const enterTheHighVibeEcosystem = 'Enter the HighVibe Ecosystem';
+  static const passwordValidationError = 'Must Contain At Least 8 characters';
+  static const passwordMismatch = 'Passwords do not match';
+  static const fullName = 'Full Name';
+  static const username = 'Username';
+  static const next = 'Next';
+  static const resend = 'Resend';
+  static const continueText = 'Continue';
+  static const getStarted = 'Get Started';
+  static const loginWithSocialAccount = 'Or login with your social account';
+  static const signUpViaEmail = 'Sign Up via E-mail';
+  static const invalidPhoneNumber = 'Invalid Phone number';
 
   ///Messages
   static String emailToChangePassword(String email) =>
@@ -109,7 +128,6 @@ class Strings {
   static const String sad = 'Sad';
   static const String goodMorning = 'Good Morning';
   static const String howAreYouFeeling = 'How are you feeling?';
-
 
   static const String about = 'About';
   static const String viewMore = 'View More';
