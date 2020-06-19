@@ -11,8 +11,8 @@ import 'package:highvibe/modules/journal/journal_controller.dart';
 import 'package:highvibe/utils/utils.dart';
 import 'package:highvibe/values/Strings.dart';
 import 'package:highvibe/values/themes.dart';
-import 'package:image_gallery/image_gallery.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:photo_manager/photo_manager.dart';
 import 'package:video_player/video_player.dart';
 
 class JournalPage extends StatefulWidget {
@@ -35,6 +35,10 @@ class _JournalPageState extends ModularState<JournalPage, JournalController>
   List<dynamic> allImage = [];
 
   double _opacity = 0.0;
+  int selectedCameraIdx;
+  int currentPage = 0;
+  int lastPage;
+  List<Widget> temp = [];
 
   void logError(String code, String message) =>
       print('Error: $code\nError Message: $message');
@@ -54,7 +58,9 @@ class _JournalPageState extends ModularState<JournalPage, JournalController>
       if (_controller == null) {
         _controller = CameraController(cameras[0], ResolutionPreset.veryHigh);
         await _controller.initialize();
-        setState(() {});
+        setState(() {
+          selectedCameraIdx = 0;
+        });
       }
     } on CameraException catch (e) {
       logError(e.code, e.description);
@@ -62,12 +68,65 @@ class _JournalPageState extends ModularState<JournalPage, JournalController>
   }
 
   Future<Null> _fetchGalleryImages() async {
-    Map<dynamic, dynamic> allImageMap;
-    allImageMap = await FlutterGallaryPlugin.getAllImages;
+    lastPage = currentPage;
+    final result = await PhotoManager.requestPermission();
+    if (result) {
+      // success
+      final albums = await PhotoManager.getAssetPathList(onlyAll: true);
+      final media = await albums[0].getAssetListPaged(currentPage, 60);
 
-    setState(() {
-      allImage = allImageMap['URIList'] as List;
-    });
+      temp = [];
+
+      for (var asset in media) {
+        temp.add(
+          FutureBuilder(
+            future: asset.thumbDataWithSize(200, 200),
+            builder: (BuildContext context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.done) {
+                return Stack(
+                  children: <Widget>[
+                    Positioned.fill(
+                      child: Image.memory(
+                        snapshot.data,
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                    if (asset.type == AssetType.video)
+                      const Align(
+                        alignment: Alignment.bottomRight,
+                        child: Padding(
+                          padding: EdgeInsets.only(right: 5, bottom: 5),
+                          child: Icon(
+                            Icons.videocam,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ),
+                  ],
+                );
+              }
+              return Container();
+            },
+          ),
+        );
+      }
+
+      setState(() {
+        allImage.addAll(temp);
+        currentPage++;
+      });
+    } else {
+      PhotoManager.openSetting();
+      // fail
+      /// if result is fail, you can call `PhotoManager.openSetting();`  
+      /// to open android/ios applicaton's setting to get permission
+    }
+  }
+
+  void _handleScrollEvent(OverscrollIndicatorNotification scroll) {
+    if (currentPage != lastPage) {
+      _fetchGalleryImages();
+    }
   }
 
   @override
@@ -118,10 +177,13 @@ class _JournalPageState extends ModularState<JournalPage, JournalController>
 
         return NotificationListener<OverscrollIndicatorNotification>(
           onNotification: (OverscrollIndicatorNotification overscroll) {
+            _handleScrollEvent(overscroll);
             overscroll.disallowGlow();
             return true;
           },
           child: CustomScrollView(
+            physics:
+                allImage.isEmpty ? const NeverScrollableScrollPhysics() : null,
             controller: scrollController,
             slivers: <Widget>[
               SliverList(
@@ -129,7 +191,7 @@ class _JournalPageState extends ModularState<JournalPage, JournalController>
                   [
                     AnimatedOpacity(
                       duration: const Duration(milliseconds: 200),
-                      opacity: 1 - _opacity,
+                      opacity: allImage.isEmpty ? 1 : 1 - _opacity,
                       child: Container(
                         height: screenHeight(context) * 0.8,
                         alignment: Alignment.bottomCenter,
@@ -155,12 +217,7 @@ class _JournalPageState extends ModularState<JournalPage, JournalController>
                         onTap: () {},
                         child: Container(
                           margin: const EdgeInsets.all(5.0),
-                          child: Image.file(
-                            File(allImage[index].toString()),
-                            width: 70.0,
-                            height: 70.0,
-                            fit: BoxFit.cover,
-                          ),
+                          child: allImage[index],
                         ),
                       ),
                     );
@@ -226,7 +283,7 @@ class _JournalPageState extends ModularState<JournalPage, JournalController>
       bottom: 0,
       child: Column(
         children: [
-          _galleryView(),
+          Visibility(visible: allImage.isNotEmpty, child: _galleryView()),
           Padding(
             padding: const EdgeInsets.only(bottom: 7),
             child: _captureControlRowWidget(),
@@ -243,7 +300,7 @@ class _JournalPageState extends ModularState<JournalPage, JournalController>
       child: Column(
         children: [
           IconButton(
-            icon: Icon(
+            icon: const Icon(
               Icons.keyboard_arrow_up,
             ),
             onPressed: () {},
@@ -259,12 +316,7 @@ class _JournalPageState extends ModularState<JournalPage, JournalController>
                   width: 70,
                   height: 70,
                   margin: const EdgeInsets.all(5),
-                  child: Image.file(
-                    File(allImage[index].toString()),
-                    width: 70,
-                    height: 70,
-                    fit: BoxFit.cover,
-                  ),
+                  child: allImage[index],
                 );
               },
             ),
@@ -303,19 +355,16 @@ class _JournalPageState extends ModularState<JournalPage, JournalController>
     );
   }
 
-  void _toggleCamera() {
+  void _toggleCamera() async {
     if (_controller != null) {
-      isRotateClicked = !isRotateClicked;
-      if (!isRotateClicked) {
-        onNewCameraSelected(CameraDescription(
-            name: '0',
-            lensDirection: CameraLensDirection.back,
-            sensorOrientation: 90));
-      } else {
-        onNewCameraSelected(CameraDescription(
-            name: '1',
-            lensDirection: CameraLensDirection.front,
-            sensorOrientation: 270));
+      try {
+        final cameras = await availableCameras();
+        selectedCameraIdx =
+            selectedCameraIdx < cameras.length - 1 ? selectedCameraIdx + 1 : 0;
+        final selectedCamera = cameras[selectedCameraIdx];
+        onNewCameraSelected(selectedCamera);
+      } on CameraException catch (e) {
+        logError(e.code, e.description);
       }
     }
   }
