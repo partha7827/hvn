@@ -21,6 +21,18 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends ModularState<HomePage, HomeController> {
+  bool showQuote = false;
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    Future.delayed(const Duration(milliseconds: 100), () {
+      setState(() {
+        showQuote = true;
+      });
+    });
+  }
+
   void _openDrawer() {
     controller.scaffoldKey.currentState.openDrawer();
   }
@@ -31,7 +43,7 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
       onWillPop: _willPop,
       child: Scaffold(
         key: controller.scaffoldKey,
-        drawer: DrawerWidget(controller),
+        drawer: DrawerWidget(),
         body: Stack(
           children: [
             Positioned(
@@ -63,7 +75,11 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
                 children: [
                   Padding(
                     padding: const EdgeInsets.only(top: 80, bottom: 40),
-                    child: _buildQuoteWidget(),
+                    child: AnimatedOpacity(
+                      opacity: showQuote ? 1 : 0,
+                      duration: const Duration(seconds: 1),
+                      child: _buildQuoteWidget(),
+                    ),
                   ),
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: 40),

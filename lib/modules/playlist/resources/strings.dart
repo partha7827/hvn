@@ -1,6 +1,8 @@
 class PlaylistStrings {
   static const String addToPlaylist = 'Add to Playlist';
   static const String playlist = 'Playlist';
+  static const String playlists = 'Playlists';
+  static const String noPlaylists = 'No Playlists';
   static const String search = 'Search';
   static const String cancel = 'Cancel';
   static const String save = 'Save';
