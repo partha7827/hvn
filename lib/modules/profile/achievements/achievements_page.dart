@@ -27,7 +27,7 @@ class _AchievementsPageState
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          HeaderRow(title: Strings.achievements),
+          const HeaderRow(title: Strings.achievements),
           _badges(),
           _userPoints(),
           Container(
