@@ -7,6 +7,7 @@ import 'package:highvibe/modules/discover/videos/video_card.dart';
 import 'package:highvibe/modules/video_player/video_player_module.dart';
 import 'package:highvibe/widgets/repeat_widget.dart';
 import 'package:highvibe/widgets/splash_widget.dart';
+import 'package:highvibe/widgets/load_widget.dart';
 import 'package:mobx/mobx.dart';
 
 class DiscoverVideosView extends StatefulWidget {
@@ -24,7 +25,7 @@ class _DiscoverVideosViewState
 
   @override
   Widget build(BuildContext context) {
-    return Observer(builder: (_) {
+    return LoadWidget(child: Observer(builder: (_) {
       switch (controller.videos.status) {
         case FutureStatus.fulfilled:
           return buildVideos(controller.videos.value.toList());
@@ -33,7 +34,7 @@ class _DiscoverVideosViewState
         default:
           return const SplashWidget();
       }
-    });
+    },),);
   }
 
   Widget buildVideos(List<Video> videos) => ListView.builder(

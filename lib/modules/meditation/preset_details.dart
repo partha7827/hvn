@@ -43,8 +43,8 @@ class _PresetDetailsState extends State<PresetDetails> {
                 color: Color(0xFF8E8F99),
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.all(16.0),
+            const Padding(
+              padding: EdgeInsets.all(16.0),
               child: Text(
                 'Deep Breathing',
                 style: TextStyle(
@@ -78,7 +78,6 @@ class _PresetDetailsState extends State<PresetDetails> {
                       label: 'Vibrate',
                       icon: Icons.vibration,
                       onSelected: (value) {
-                        print('vibrate: $value');
                         setState(() {
                           isVibrate = value;
                         });
@@ -138,7 +137,7 @@ class _PresetDetailsState extends State<PresetDetails> {
                       width: MediaQuery.of(context).size.width * 0.4,
                       height: 40,
                       child: RaisedButton.icon(
-                        icon: Icon(
+                        icon: const Icon(
                           Icons.delete_outline,
                           color: Colors.white,
                         ),
@@ -204,7 +203,7 @@ class _PresetDetailsState extends State<PresetDetails> {
                         fontSize: 16.0,
                       ),
                     ),
-                    Icon(Icons.chevron_right)
+                    const Icon(Icons.chevron_right)
                   ],
                 )
               ],

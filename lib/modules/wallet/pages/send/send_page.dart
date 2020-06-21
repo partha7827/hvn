@@ -97,7 +97,7 @@ class SendPageState extends State<SendPage> {
                     decoration: BoxDecoration(
                         shape: BoxShape.circle,
                         color: AppColors.red.withOpacity(0.8)),
-                    child: Icon(
+                    child: const Icon(
                       Icons.arrow_upward,
                       color: Colors.white,
                     ),
@@ -117,7 +117,7 @@ class SendPageState extends State<SendPage> {
                     Expanded(
                         child: o.OutlineButton(
                       title: 'Cancel',
-                      icon: Icon(
+                      icon: const Icon(
                         Icons.close,
                         color: AppColors.textBlue,
                       ),
@@ -127,7 +127,7 @@ class SendPageState extends State<SendPage> {
                     Expanded(
                       child: MainButton(
                         title: 'Confirm',
-                        icon: Icon(
+                        icon: const Icon(
                           Icons.check,
                           color: Colors.white,
                         ),
@@ -188,7 +188,7 @@ class SendPageState extends State<SendPage> {
           MainButton(
             title: 'Send',
             margin: const EdgeInsets.only(left: 20, right: 20, bottom: 30),
-            icon: Icon(Icons.check, color: Colors.white),
+            icon: const Icon(Icons.check, color: Colors.white),
             onPressed: onSend,
           )
         else

@@ -12,7 +12,7 @@ import 'package:highvibe/services/firestore_service.dart';
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
 
-  initModule(OtherUserModule(mockAnotherUser), changeBinds: [
+  initModule(OtherUserModule(user: mockAnotherUser), changeBinds: [
     Bind<AuthService>((i) => AuthService.withMock()),
     Bind<FirestoreService>((i) => FirestoreService.withMock()),
   ]);

@@ -10,6 +10,7 @@ abstract class IFirestoreService {
   CollectionReference tagCollection;
   CollectionReference videoCollection;
   CollectionReference audioCollection;
+  CollectionReference playlistCollection;
 }
 
 class FirestoreService extends IFirestoreService with UserQueries {
@@ -20,6 +21,7 @@ class FirestoreService extends IFirestoreService with UserQueries {
     tagCollection = firestore.collection('tags');
     videoCollection = firestore.collection('video');
     audioCollection = firestore.collection('audio');
+    playlistCollection = firestore.collection('playlists');
   }
 
   factory FirestoreService.withFirebase() =>

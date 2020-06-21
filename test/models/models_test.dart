@@ -2,7 +2,7 @@ import 'package:highvibe/models/models.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:highvibe/models/serializer/serializer.dart';
 import 'package:highvibe/values/assets.dart';
-import 'package:highvibe/values/Strings.dart';
+import 'package:highvibe/values/strings.dart';
 
 void main() async {
   test('user model', () async {

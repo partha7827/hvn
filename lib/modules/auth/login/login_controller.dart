@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_facebook_login/flutter_facebook_login.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:highvibe/models/models.dart';
@@ -8,12 +9,13 @@ import 'package:highvibe/modules/app/app_controller.dart';
 import 'package:highvibe/modules/auth/exceptions.dart';
 import 'package:highvibe/services/auth_service.dart';
 import 'package:highvibe/services/firestore_service.dart';
-import 'package:highvibe/values/Strings.dart';
+import 'package:highvibe/values/strings.dart';
 import 'package:mobx/mobx.dart';
 
 part 'login_controller.g.dart';
 
 final GoogleSignIn _googleSignIn = GoogleSignIn();
+final FacebookLogin _facebookLogin = FacebookLogin();
 final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
 
 class LoginController = _LoginControllerBase with _$LoginController;
@@ -36,6 +38,9 @@ abstract class _LoginControllerBase with Store {
   @observable
   bool inProgressGoogleSignIn = false;
 
+  @observable
+  bool inProgressFacebookLogIn = false;
+
   @action
   Future<void> loginUser() async {
     inProgress = true;
@@ -57,6 +62,60 @@ abstract class _LoginControllerBase with Store {
       rethrow;
     } finally {
       inProgress = false;
+    }
+  }
+
+  @action
+  Future<void> facebookLogin() async {
+    inProgressFacebookLogIn = true;
+    try {
+      final _facebookLoginResult =
+          await _facebookLogin.logIn(['email', 'public_profile']);
+
+      switch (_facebookLoginResult.status) {
+        case FacebookLoginStatus.loggedIn:
+          final facebookToken = _facebookLoginResult.accessToken.token;
+
+          final authCredential =
+              FacebookAuthProvider.getCredential(accessToken: facebookToken);
+
+          final authResult =
+              await _firebaseAuth.signInWithCredential(authCredential);
+
+          final firebaseUser = authResult.user;
+
+          if (firebaseUser.uid != null) {
+            var userSnapshot =
+                await firestore.userCollection.document(firebaseUser.uid).get();
+            if (!userSnapshot.exists) {
+              // set user data in firebase
+              await firestore.userCollection
+                  .document(firebaseUser.uid)
+                  .setData({
+                'id': firebaseUser.uid,
+                'email': firebaseUser.email,
+                'name': firebaseUser.displayName,
+              });
+              userSnapshot = await firestore.userCollection
+                  .document(firebaseUser.uid)
+                  .get();
+            }
+            await appStore.setCurrentUser(User.fromSnapshot(userSnapshot));
+          } else {
+            throw LoginException(Strings.userNotFound);
+          }
+          break;
+        case FacebookLoginStatus.cancelledByUser:
+          print('user cancelled login with facebook');
+          break;
+        case FacebookLoginStatus.error:
+          throw LoginException(Strings.facebookLoginError);
+          break;
+      }
+    } catch (e) {
+      rethrow;
+    } finally {
+      inProgressFacebookLogIn = false;
     }
   }
 

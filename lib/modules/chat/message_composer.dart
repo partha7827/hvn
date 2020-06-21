@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:highvibe/values/Strings.dart';
+import 'package:highvibe/values/strings.dart';
 import 'package:highvibe/values/themes.dart';
 import 'package:highvibe/widgets/custom_fab.dart';
 
@@ -49,7 +49,7 @@ class MessageComposer extends StatelessWidget {
             padding: const EdgeInsets.only(left: 10.0),
             child: CustomFloatingActionButton(
               size: 48,
-              child: Icon(Icons.send),
+              child: const Icon(Icons.send),
               onPressed: () {
                 final content = _messageController.text.trim();
                 sendMessage(content);

@@ -1,4 +1,6 @@
+import 'package:built_collection/built_collection.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:highvibe/models/user/user.dart';
 import 'package:highvibe/modules/discover/discover_controller.dart';
 import 'package:highvibe/modules/discover/discover_page.dart';
 import 'package:highvibe/services/firestore_service.dart';
@@ -16,7 +18,10 @@ class DiscoverModule extends ChildModule {
   List<Router<Object>> get routers => [
         Router(
           discover,
-          child: (_, args) => DiscoverPage(pageIndex: args.data),
+          child: (_, args) => DiscoverPage(
+            pageIndex: args.data[0],
+            users: args.data[1],
+          ),
           transition: TransitionType.fadeIn,
         ),
       ];
@@ -30,6 +35,6 @@ class DiscoverModule extends ChildModule {
   static Future<Object> toDiscoverVideos() =>
       Modular.to.pushNamed(discover, arguments: 1);
 
-  static Future<Object> toDiscoverAuthors() =>
-      Modular.to.pushNamed(discover, arguments: 1);
+  static Future<Object> toDiscoverAuthors(BuiltList<User> list) =>
+      Modular.to.pushNamed(discover, arguments: [1, list]);
 }

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:highvibe/modules/meditation/meditation_timer.dart';
-import 'package:highvibe/values/Strings.dart';
+import 'package:highvibe/values/strings.dart';
 import 'package:highvibe/values/themes.dart';
 
 class ToolsWidget extends StatelessWidget {
@@ -47,7 +47,7 @@ class ToolsWidget extends StatelessWidget {
                               height: 40,
                             ),
                           ),
-                          Text(
+                          const Text(
                             Strings.showYourGratitude,
                             style: TextStyle(
                               fontSize: 16,
@@ -105,7 +105,7 @@ class ToolsWidget extends StatelessWidget {
                                       height: 40,
                                     ),
                                   ),
-                                  Text(
+                                  const Text(
                                     Strings.meditationTimer,
                                     style: TextStyle(
                                       fontSize: 16,
@@ -154,7 +154,7 @@ class ToolsWidget extends StatelessWidget {
                                     height: 40,
                                   ),
                                 ),
-                                Text(
+                                const Text(
                                   Strings.setYourMood,
                                   style: TextStyle(
                                     fontSize: 16,

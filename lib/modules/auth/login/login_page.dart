@@ -5,7 +5,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:highvibe/modules/auth/auth_module.dart';
 import 'package:highvibe/utils/utils.dart';
-import 'package:highvibe/values/Strings.dart';
+import 'package:highvibe/values/strings.dart';
 import 'package:highvibe/values/themes.dart';
 import 'package:highvibe/widgets/custom_text_form.dart';
 import 'package:highvibe/widgets/gradient_outline_button.dart';
@@ -115,11 +115,22 @@ class _LoginPageState extends ModularState<LoginPage, LoginController> {
                       ),
                     ),
                     Expanded(
-                      child: Padding(
-                        padding: const EdgeInsets.only(right: 8.0, left: 8.0),
-                        child: GradientOutlineButton(
-                          icon: SvgPicture.asset('assets/ic_facebook.svg'),
-                          onPressed: () {},
+                      child: Observer(
+                        builder: (_) => Padding(
+                          padding: const EdgeInsets.only(right: 8.0, left: 8.0),
+                          child: GradientOutlineButton(
+                            isLoading: controller.inProgressFacebookLogIn,
+                            icon: SvgPicture.asset('assets/ic_facebook.svg'),
+                            onPressed: () async {
+                              try {
+                                await controller.facebookLogin();
+                              } catch (e) {
+                                showSnackBarMsg(
+                                    controller.scaffoldKey.currentState,
+                                    e.toString());
+                              }
+                            },
+                          ),
                         ),
                       ),
                     ),

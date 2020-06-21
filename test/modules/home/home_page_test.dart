@@ -4,10 +4,9 @@ import 'package:flutter_modular/flutter_modular_test.dart';
 import 'package:highvibe/modules/home/home_page.dart';
 import 'package:highvibe/modules/home/home_module.dart';
 import 'package:highvibe/modules/home/home_controller.dart';
-import 'package:highvibe/values/Strings.dart';
+import 'package:highvibe/values/strings.dart';
 
-class MockHomeController extends HomeController {
-}
+class MockHomeController extends HomeController {}
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();

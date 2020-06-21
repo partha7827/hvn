@@ -7,7 +7,7 @@ import 'package:highvibe/modules/discover/discover_module.dart';
 import 'package:highvibe/modules/home/home_controller.dart';
 import 'package:highvibe/modules/video_player/video_player_module.dart';
 import 'package:highvibe/modules/video_player/widgets/video_preview_item.dart';
-import 'package:highvibe/values/Strings.dart';
+import 'package:highvibe/values/strings.dart';
 import 'package:highvibe/widgets/header_row.dart';
 import 'package:highvibe/widgets/page_indicator.dart';
 import 'package:mobx/mobx.dart';
@@ -43,8 +43,8 @@ class _VideosWidgetState extends ModularState<VideosWidget, HomeController> {
       padding: const EdgeInsets.only(bottom: 16),
       child: Column(
         children: [
-          Padding(
-            padding: const EdgeInsets.only(left: 16),
+          const Padding(
+            padding: EdgeInsets.only(left: 16),
             child: HeaderRow(
               title: Strings.recommendedVideos,
               showTrailing: true,

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:highvibe/widgets/gradient_outline_button.dart';
-import 'package:highvibe/values/Strings.dart';
+import 'package:highvibe/values/strings.dart';
 import 'package:highvibe/values/themes.dart';
 import 'package:intl/intl.dart';
 

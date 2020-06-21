@@ -5,7 +5,7 @@ import 'package:highvibe/modules/live/live_module.dart';
 import 'package:highvibe/widgets/event_card.dart';
 import 'package:highvibe/widgets/header_row.dart';
 import 'package:highvibe/widgets/stream_card.dart';
-import 'package:highvibe/values/Strings.dart';
+import 'package:highvibe/values/strings.dart';
 import 'package:highvibe/values/themes.dart';
 
 class LivePage extends StatefulWidget {
@@ -33,7 +33,7 @@ class _LivePageState extends ModularState<LivePage, LiveController> {
     return Column(
       mainAxisSize: MainAxisSize.max,
       children: <Widget>[
-        HeaderRow(
+        const HeaderRow(
           title: Strings.liveNow,
           leading: CircleAvatar(
             backgroundColor: redColor,
@@ -63,7 +63,7 @@ class _LivePageState extends ModularState<LivePage, LiveController> {
   Widget _upcomingEventsWidget() {
     return Column(
       children: <Widget>[
-        HeaderRow(
+        const HeaderRow(
           title: Strings.upcomingEvents,
           showTrailing: true,
         ),
@@ -92,7 +92,7 @@ class _LivePageState extends ModularState<LivePage, LiveController> {
   Widget _pastStreamWidget(BuildContext context) {
     return Column(
       children: <Widget>[
-        HeaderRow(
+        const HeaderRow(
           title: Strings.pastStreams,
           showTrailing: true,
         ),

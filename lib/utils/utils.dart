@@ -4,9 +4,11 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:highvibe/modules/app/media_overlays.dart';
 
 double aspectRatio(BuildContext context) =>
     screenWidth(context) / screenHeight(context);
+
 Future<bool> checkStoragePermission() async {
   return true;
 }
@@ -23,6 +25,30 @@ DateTime getDateTime(dynamic dateTime) {
 
 String mediaTimeFormatter(Duration d) =>
     d.toString().split('.').first.padLeft(8, '0');
+
+// Future<bool> onWillPop() async {
+//   if (audioKey.currentState != null &&
+//       audioKey.currentState.controller != null) {
+//     if (!audioKey.currentState.controller.isMinimized) {
+//       await audioKey.currentState.controller.player.stop();
+//       MediaOverlays.disposeAudioOverlayEntry();
+//       return false;
+//     }
+//   }
+//   return true;
+// }
+
+bool isWebUrl(String path) => Uri.parse(path).host != null;
+
+void popUntil({
+  @required int numberOfPops,
+  BuildContext context,
+}) {
+  var count = 0;
+  Navigator.popUntil(context, (route) {
+    return count++ == numberOfPops;
+  });
+}
 
 bool portraitOrientation(BuildContext context) =>
     MediaQuery.of(context).orientation == Orientation.portrait;
@@ -68,8 +94,15 @@ Future<String> uploadFile(File file, String childName,
 
     return await snap.ref.getDownloadURL();
   } catch (e) {
-    print('Exception $e');
-
     return null;
   }
+}
+
+Future<bool> onWillPop() async {
+  if (MediaOverlays.audioKey?.currentState?.controller?.isMinimized == true) {
+    await MediaOverlays.audioKey.currentState.controller.player.stop();
+    MediaOverlays.disposeAudioOverlayEntry();
+    return false;
+  }
+  return true;
 }

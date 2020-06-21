@@ -53,7 +53,7 @@ class YourPresets extends StatelessWidget {
                               fontSize: 16.0,
                             ),
                           ),
-                          Icon(Icons.chevron_right)
+                          const Icon(Icons.chevron_right)
                         ],
                       )
                     ],

@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
 
-class InputTextWidget extends StatelessWidget {
-  const InputTextWidget(
-      {Key key,
-      this.title = '',
-      this.hintText = '',
-      this.maxLines,
-      this.validator,
-      this.controller})
-      : super(key: key);
-
+class ProfileInputField extends StatelessWidget {
   final String title, hintText;
   final int maxLines;
   final TextEditingController controller;
   final Function validator;
+
+  const ProfileInputField({
+    Key key,
+    this.title = '',
+    this.hintText = '',
+    this.maxLines,
+    this.validator,
+    this.controller,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +37,7 @@ class InputTextWidget extends StatelessWidget {
               controller: controller,
               decoration: InputDecoration(
                 contentPadding: const EdgeInsets.symmetric(vertical: 20),
-                border: UnderlineInputBorder(
+                border: const UnderlineInputBorder(
                     borderSide: BorderSide(color: Colors.white24)),
                 hintText: '$hintText',
                 hintStyle: const TextStyle(

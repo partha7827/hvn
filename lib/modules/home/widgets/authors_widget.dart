@@ -7,7 +7,7 @@ import 'package:highvibe/models/user/user.dart';
 import 'package:highvibe/modules/discover/discover_module.dart';
 import 'package:highvibe/modules/home/home_controller.dart';
 import 'package:highvibe/modules/profile/profile_module.dart';
-import 'package:highvibe/values/Strings.dart';
+import 'package:highvibe/values/strings.dart';
 import 'package:highvibe/values/themes.dart';
 import 'package:highvibe/widgets/header_row.dart';
 import 'package:mobx/mobx.dart';
@@ -47,7 +47,11 @@ class _AuthorsWidgetState extends ModularState<AuthorsWidget, HomeController> {
           child: HeaderRow(
             title: Strings.authorsTitle,
             showTrailing: true,
-            onPressedTrailing: DiscoverModule.toDiscoverAuthors,
+            onPressedTrailing: () {
+              DiscoverModule.toDiscoverAuthors(
+                controller.authors.value,
+              );
+            }, 
           ),
         ),
         Padding(

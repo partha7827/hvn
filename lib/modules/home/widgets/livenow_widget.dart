@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:highvibe/values/Strings.dart';
+import 'package:highvibe/values/strings.dart';
 import 'package:highvibe/values/themes.dart';
 import 'package:highvibe/widgets/header_row.dart';
 import 'package:highvibe/widgets/stream_card.dart';
@@ -12,8 +12,8 @@ class LiveNowWidget extends StatelessWidget {
     return Column(
       mainAxisSize: MainAxisSize.max,
       children: <Widget>[
-        Padding(
-          padding: const EdgeInsets.only(left: 20.0),
+        const Padding(
+          padding: EdgeInsets.only(left: 20.0),
           child: HeaderRow(
             title: Strings.liveNow,
             leading: CircleAvatar(
