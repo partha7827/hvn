@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flare_flutter/flare_actor.dart';
 import 'package:flutter/material.dart';
 import 'package:highvibe/models/audio/audio.dart';
 import 'package:highvibe/modules/playlist/resources/resources.dart';
@@ -65,13 +66,13 @@ class PlayListAudioTile extends StatelessWidget {
           ),
           Visibility(
             visible: isPlaying,
-            child: IconButton(
-              icon: Image.asset(
-                'assets/ic_playing.png',
-                height: 24,
-                width: 24,
+            child: const SizedBox(
+              height: 24,
+              width: 24,
+              child: FlareActor(
+                'assets/animation/playing_music.flr',
+                animation: 'play',
               ),
-              onPressed: () {},
             ),
           ),
           IconButton(

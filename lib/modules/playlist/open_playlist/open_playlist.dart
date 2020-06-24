@@ -1,25 +1,28 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:highvibe/models/playlist/playlist.dart';
 import 'package:highvibe/modules/audio_player/widgets/audio_player_slider.dart';
+import 'package:highvibe/modules/playlist/open_playlist/open_playlist_controller.dart';
 import 'package:highvibe/modules/profile/audio/playlist_audio_tile.dart';
 import 'package:highvibe/utils/utils.dart';
 import 'package:highvibe/values/themes.dart';
 
-class AudioPlayerPage extends StatefulWidget {
-  final PlayList playList;
-
-  const AudioPlayerPage({
+class OpenPlaylistPage extends StatefulWidget {
+  OpenPlaylistPage({
     @required this.playList,
   });
 
+  final PlayList playList;
+
   @override
-  _AudioPlayerPageState createState() => _AudioPlayerPageState();
+  _OpenPlaylistPageState createState() => _OpenPlaylistPageState();
 }
 
-class _AudioPlayerPageState extends State<AudioPlayerPage>
+class _OpenPlaylistPageState
+    extends ModularState<OpenPlaylistPage, OpenPlaylistController>
     with SingleTickerProviderStateMixin {
   AnimationController artworkAnimation;
   bool isAudioPlaying = false, isFavourite = false;
@@ -109,7 +112,7 @@ class _AudioPlayerPageState extends State<AudioPlayerPage>
           itemBuilder: (BuildContext context, int index) {
             return PlayListAudioTile(
               audio: widget.playList.audioFiles[index],
-              isPlaying: index == 0, // for displaying playing status
+              isPlaying: index == 0,
             );
           },
         ),
@@ -226,19 +229,18 @@ class _AudioPlayerPageState extends State<AudioPlayerPage>
         child: Row(
           children: <Widget>[
             IconButton(
-                icon: Icon(
-                  Icons.keyboard_arrow_down,
-                  color: Colors.white,
-                ),
-                onPressed: () {
-                  Navigator.of(context).pop();
-                }),
+              icon: Icon(
+                Icons.keyboard_arrow_down,
+                color: Colors.white,
+              ),
+              onPressed: () => Modular.to.pop(),
+            ),
             Expanded(
               child: Container(
                   margin: const EdgeInsets.only(
                     left: 10,
                   ),
-                  child: Text('Calm River Meditation', style: bold18White)),
+                  child: Text('${widget.playList.title}', style: bold18White)),
             ),
             IconButton(
                 icon: SvgPicture.asset('assets/ic_playlist.svg'),

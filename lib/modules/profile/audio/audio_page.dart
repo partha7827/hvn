@@ -3,6 +3,7 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:highvibe/models/models.dart';
 import 'package:highvibe/modules/app/media_overlays.dart';
+import 'package:highvibe/modules/playlist/playlist_module.dart';
 import 'package:highvibe/modules/playlist/resources/resources.dart';
 import 'package:highvibe/modules/playlist/widgets/widgets.dart';
 import 'package:highvibe/utils/utils.dart';
@@ -32,19 +33,21 @@ class _AudioPageState extends ModularState<AudioPage, AudioController> {
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: onWillPop,
-      child: LoadWidget(child: Observer(
-        builder: (_) {
-          switch (controller.audios.status) {
-            case FutureStatus.fulfilled:
-              return buildAudios(controller.audios.value);
-            case FutureStatus.rejected:
-              return RepeatWidget(controller.loadAudios);
-            default:
-              return const SplashWidget();
-          }
-        },
+      child: LoadWidget(
+        child: Observer(
+          builder: (_) {
+            switch (controller.audios.status) {
+              case FutureStatus.fulfilled:
+                return buildAudios(controller.audios.value);
+              case FutureStatus.rejected:
+                return RepeatWidget(controller.loadAudios);
+              default:
+                return const SplashWidget();
+            }
+          },
+        ),
       ),
-    ),);
+    );
   }
 
   Widget buildAudios(List<Audio> audios) {
@@ -69,10 +72,15 @@ class _AudioPageState extends ModularState<AudioPage, AudioController> {
         ),
         const SizedBox(height: 10),
         for (final item in tempInMemoryPlaylistCollection) ...[
-          PlaylistTile(
-            isInEditMode: false,
-            playList: item,
-            onTap: (item) => playlistContextMenu(context, item),
+          GestureDetector(
+            onTap: () => PlaylistModule.toOpenPlaylist(
+              playList: item,
+            ),
+            child: PlaylistTile(
+              isInEditMode: false,
+              playList: item,
+              onTap: (item) => playlistContextMenu(context, item),
+            ),
           )
         ],
       ],

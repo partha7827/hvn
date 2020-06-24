@@ -8,9 +8,15 @@ import 'package:highvibe/modules/playlist/create_new_playlist/create_new_playlis
 import 'package:highvibe/modules/playlist/create_new_playlist/create_new_playlist_page.dart';
 import 'package:highvibe/modules/playlist/edit_playlist/edit_playlist_page.dart';
 import 'package:highvibe/modules/playlist/edit_playlist/edit_playlist_page_controller.dart';
+import 'package:highvibe/modules/playlist/open_playlist/open_playlist.dart';
+import 'package:highvibe/modules/playlist/open_playlist/open_playlist_controller.dart';
 import 'package:highvibe/modules/playlist/playlist_controller.dart';
 
 class PlaylistModule extends ChildModule {
+  PlaylistModule({this.playList});
+
+  final PlayList playList;
+
   static final _playlistRoute = '/playlist';
 
   @override
@@ -19,6 +25,9 @@ class PlaylistModule extends ChildModule {
         Bind<AddToPlaylistController>((_) => AddToPlaylistController()),
         Bind<CreateNewPlaylistController>((_) => CreateNewPlaylistController()),
         Bind<EditPlaylistController>((_) => EditPlaylistController()),
+        Bind<OpenPlaylistController>(
+          (_) => OpenPlaylistController(),
+        ),
       ];
 
   @override
@@ -43,6 +52,13 @@ class PlaylistModule extends ChildModule {
           child: (_, args) => EditPlaylistPage(playlist: args.data),
           transition: TransitionType.rightToLeft,
         ),
+        Router(
+          '$_playlistRoute/open_playlist',
+          child: (_, args) => OpenPlaylistPage(
+            playList: args.data,
+          ),
+          transition: TransitionType.rightToLeft,
+        ),
       ];
 
   static Future<Object> toAddToPlaylist({@required Audio audioFile}) =>
@@ -55,4 +71,8 @@ class PlaylistModule extends ChildModule {
   static Future<Object> toEditPlaylist({@required PlayList playList}) =>
       Modular.to
           .pushNamed('$_playlistRoute/edit_playlist', arguments: playList);
+
+  static Future<Object> toOpenPlaylist({@required PlayList playList}) =>
+      Modular.to
+          .pushNamed('$_playlistRoute/open_playlist', arguments: playList);
 }
