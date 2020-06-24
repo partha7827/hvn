@@ -14,7 +14,7 @@ class CreateNewPlaylistModule extends WidgetModule {
       ];
 
   @override
-  Widget get view => CreateNewPlaylistPage(
-        isPresentedAsOverlay: isPresentedAsOverlay,
-      );
+  Widget get view {
+    return CreateNewPlaylistPage(isPresentedAsOverlay: isPresentedAsOverlay);
+  }
 }
