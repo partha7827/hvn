@@ -394,7 +394,7 @@ class _OpenPlaylistPageState
   Container _gradientOverlay(BuildContext context) {
     return Container(
       height: screenHeight(context) * 0.55,
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         gradient: darkToTransparentGradientBottom,
       ),
     );
