@@ -75,11 +75,7 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
                 children: [
                   Padding(
                     padding: const EdgeInsets.only(top: 80, bottom: 40),
-                    child: AnimatedOpacity(
-                      opacity: showQuote ? 1 : 0,
-                      duration: const Duration(seconds: 1),
-                      child: _buildQuoteWidget(),
-                    ),
+                    child: _buildQuoteWidget(),
                   ),
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: 40),
