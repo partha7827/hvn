@@ -8,7 +8,7 @@ class FirestoreApiService {
 
   Stream<List<T>> collectionStream<T>({
     @required String path,
-    T Function(Map<String, Object> data, String documentId) builder,
+    @required T Function(Map<String, Object> data, String documentId) builder,
     Query Function(Query query) queryBuilder,
     int Function(T lhs, T rhs) sort,
   }) {
@@ -37,7 +37,7 @@ class FirestoreApiService {
 
   Stream<T> documentStream<T>({
     @required String path,
-    T Function(Map<String, dynamic> data, String documentID) builder,
+    @required T Function(Map<String, Object> data, String documentID) builder,
   }) {
     final reference = Firestore.instance.document(path);
     final snapshots = reference.snapshots();

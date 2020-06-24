@@ -1,6 +1,7 @@
 export 'package:highvibe/models/audio/audio.dart';
 export 'package:highvibe/models/channel/channel.dart';
 export 'package:highvibe/models/message/message.dart';
+export 'package:highvibe/models/playlist/playlist+firestore.dart';
 export 'package:highvibe/models/playlist/playlist.dart';
 export 'package:highvibe/models/privacy/privacy.dart';
 export 'package:highvibe/models/tag/tag.dart';
