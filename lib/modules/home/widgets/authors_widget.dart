@@ -48,10 +48,8 @@ class _AuthorsWidgetState extends ModularState<AuthorsWidget, HomeController> {
             title: Strings.authorsTitle,
             showTrailing: true,
             onPressedTrailing: () {
-              DiscoverModule.toDiscoverAuthors(
-                controller.authors.value,
-              );
-            }, 
+              DiscoverModule.toDiscoverAuthors();
+            },
           ),
         ),
         Padding(

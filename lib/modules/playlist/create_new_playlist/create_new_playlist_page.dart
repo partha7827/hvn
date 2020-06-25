@@ -246,7 +246,7 @@ class _CreateNewPlaylistPage
       (b) => b
         ..coverUrlPath =
             'https://takelessons.com/blog/wp-content/uploads/2020/03/flute-for-beginners.jpg'
-        ..desscription = _descriptionTextEditingController.text
+        ..description = _descriptionTextEditingController.text
         ..title = _titleTextEditingController.text
         ..privacy = _privacy
         ..audioFiles = BuiltList<Audio>().toBuilder(),

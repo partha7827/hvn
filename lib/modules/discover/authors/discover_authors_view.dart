@@ -15,7 +15,11 @@ class DiscoverAuthorsView extends StatefulWidget {
 }
 
 class _DiscoverAuthorsViewState
-    extends ModularState<DiscoverAuthorsView, DiscoverAuthorsController> {
+    extends ModularState<DiscoverAuthorsView, DiscoverAuthorsController>
+    with AutomaticKeepAliveClientMixin {
+  @override
+  bool get wantKeepAlive => true;
+
   @override
   void initState() {
     super.initState();
@@ -24,29 +28,34 @@ class _DiscoverAuthorsViewState
 
   @override
   Widget build(BuildContext context) {
-    return LoadWidget(child:Observer(builder: (_) {
-      final authors = controller.authors.value;
-      switch (controller.authors.status) {
-        case FutureStatus.fulfilled:
-          return ListView.builder(
-            itemCount: authors.length,
-            itemBuilder: (_, index) {
-              final user = authors[index];
-              return Observer(
-                builder: (_) => AuthorCard(
-                  user: user,
-                  onChoose: () => ProfileModule.toOtherProfile(user),
-                  onFollow: () => controller.followUser(user.id),
-                  isFollowing: controller.isFollowing[user.id] == true,
-                ),
+    super.build(context);
+    return LoadWidget(
+      child: Observer(
+        builder: (_) {
+          final authors = controller.authors.value;
+          switch (controller.authors.status) {
+            case FutureStatus.fulfilled:
+              return ListView.builder(
+                itemCount: authors.length,
+                itemBuilder: (_, index) {
+                  final user = authors[index];
+                  return Observer(
+                    builder: (_) => AuthorCard(
+                      user: user,
+                      onChoose: () => ProfileModule.toOtherProfile(user),
+                      onFollow: () => controller.followUser(user.id),
+                      isFollowing: controller.isFollowing[user.id] == true,
+                    ),
+                  );
+                },
               );
-            },
-          );
-        case FutureStatus.rejected:
-          return RepeatWidget(controller.loadAuthors);
-        default:
-          return const SplashWidget();
-      }
-    },),);
+            case FutureStatus.rejected:
+              return RepeatWidget(controller.loadAuthors);
+            default:
+              return const SplashWidget();
+          }
+        },
+      ),
+    );
   }
 }
