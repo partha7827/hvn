@@ -114,6 +114,8 @@ class Strings {
   static const String about = 'About';
   static const String viewMore = 'View More';
   static const String swag = 'Swag';
+  static const String badges = 'Badges';
+  static const String achievements = 'Achievements';
   static const String karma = 'Karma';
   static const String experiencePoint = 'Experience Points';
   static const String hvnEarned = 'HVN\nEarned';
