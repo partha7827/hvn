@@ -2,19 +2,29 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:highvibe/models/models.dart';
+import 'package:highvibe/modules/app/app_controller.dart';
 import 'package:highvibe/modules/playlist/add_to_playlist/add_to_playlist_controller.dart';
 import 'package:highvibe/modules/playlist/add_to_playlist/add_to_playlist_page.dart';
+import 'package:highvibe/modules/playlist/api/firestore_playlist_service.dart';
 import 'package:highvibe/modules/playlist/create_new_playlist/create_new_playlist_controller.dart';
 import 'package:highvibe/modules/playlist/create_new_playlist/create_new_playlist_page.dart';
 import 'package:highvibe/modules/playlist/edit_playlist/edit_playlist_page.dart';
 import 'package:highvibe/modules/playlist/edit_playlist/edit_playlist_page_controller.dart';
 import 'package:highvibe/modules/playlist/playlist_controller.dart';
+import 'package:highvibe/services/storage_service.dart';
 
 class PlaylistModule extends ChildModule {
   static final _playlistRoute = '/playlist';
+  final _currentUserStore = Modular.get<AppController>();
 
   @override
   List<Bind<Object>> get binds => [
+        Bind<FirestorePlaylistService>(
+          (_) => FirestorePlaylistService(
+            userId: _currentUserStore.currentUser.id,
+          ),
+        ),
+        Bind<StorageService>((_) => StorageService.withFirebase()),
         Bind<PlaylistController>((_) => PlaylistController()),
         Bind<AddToPlaylistController>((_) => AddToPlaylistController()),
         Bind<CreateNewPlaylistController>((_) => CreateNewPlaylistController()),

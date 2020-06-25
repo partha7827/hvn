@@ -158,7 +158,7 @@ PODS:
     - abseil/base/base_internal
     - abseil/base/config
     - abseil/meta/type_traits
-  - agora_rtc_engine (1.0.12):
+  - agora_rtc_engine (1.0.13):
     - AgoraRtcEngine_iOS_Crypto (= 2.9.1)
     - Flutter
   - AgoraRtcEngine_iOS_Crypto (2.9.1)
@@ -420,7 +420,7 @@ PODS:
     - Flutter
   - path_provider_macos (0.0.1):
     - Flutter
-  - permission_handler (5.0.1):
+  - "permission_handler (5.0.1+1)":
     - Flutter
   - PromisesObjC (1.2.8)
   - Protobuf (3.11.4)
@@ -607,13 +607,13 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   abseil: 18063d773f5366ff8736a050fe035a28f635fd27
-  agora_rtc_engine: 1fe3b8d1949467e5884c4b57fd02c45c887533a5
+  agora_rtc_engine: 4e1678a60aeb2c868cb37181eeb79f9e8788306d
   AgoraRtcEngine_iOS_Crypto: c2bca616406c6dda9ae254d59637a18ba0fae8f0
   AppAuth: 73574f3013a1e65b9601a3ddc8b3158cce68c09d
   audioplayers: 84f968cea3f2deab00ec4f8ff53358b3c0b3992c
   BoringSSL-GRPC: db8764df3204ccea016e1c8dd15d9a9ad63ff318
   camera: 38cc83ae9a5667bb5a71c7d9edaf60a91920fd4e
-  cloud_firestore: 4cc700e236ebfe2d5d980e49cb066d202cfee0e9
+  cloud_firestore: 2a4f8f802fb0b701cf809b283b6bec7477ebaa6f
   cloud_firestore_web: 9ec3dc7f5f98de5129339802d491c1204462bfec
   DKImagePickerController: 4a3e7948a848c4348e600b3fe5ce41478835fa10
   DKPhotoGallery: 0290d32343574f06eaa4c26f8f2f8a1035e916be
@@ -665,7 +665,7 @@ SPEC CHECKSUMS:
   path_provider: abfe2b5c733d04e238b0d8691db0cfd63a27a93c
   path_provider_linux: 4d630dc393e1f20364f3e3b4a2ff41d9674a84e4
   path_provider_macos: f760a3c5b04357c380e2fddb6f9db6f3015897e0
-  permission_handler: 7022f8972d2d85ce95c1040db945f28bdbfa45d1
+  permission_handler: eac8e15b4a1a3fba55b761d19f3f4e6b005d15b6
   PromisesObjC: c119f3cd559f50b7ae681fa59dc1acd19173b7e6
   Protobuf: 176220c526ad8bd09ab1fb40a978eac3fef665f7
   SDWebImage: 97351f6582ceca541ea294ba66a1fcb342a331c2

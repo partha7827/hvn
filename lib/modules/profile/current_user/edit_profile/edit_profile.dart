@@ -13,6 +13,7 @@ import 'package:highvibe/utils/utils.dart';
 import 'package:highvibe/values/themes.dart';
 import 'package:highvibe/widgets/splash_widget.dart';
 
+// TODO: - Consider to refactor it to EditProfileModule in a separate file
 class EditProfile extends WidgetModule {
   @override
   final List<Bind<Object>> binds = [
