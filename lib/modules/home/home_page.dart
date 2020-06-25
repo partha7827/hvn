@@ -21,16 +21,9 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends ModularState<HomePage, HomeController> {
-  bool showQuote = false;
-
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    Future.delayed(const Duration(milliseconds: 100), () {
-      setState(() {
-        showQuote = true;
-      });
-    });
   }
 
   void _openDrawer() {
