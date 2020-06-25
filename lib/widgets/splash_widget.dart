@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 
 class SplashWidget extends StatefulWidget {
+  final Duration duration;
   const SplashWidget({
     Key key,
     this.animationCompleteCallback,
+    this.duration = const Duration(seconds: 1),
   }) : super(key: key);
 
   final AnimationCompleteCallback animationCompleteCallback;
@@ -21,15 +23,13 @@ class _SplashWidgetState extends State<SplashWidget>
   void initState() {
     _controller = AnimationController(vsync: this)
       ..value = 0
-      ..duration = const Duration(
-        seconds: 3,
-      );
+      ..duration = widget.duration;
 
     _controller.forward();
 
     _controller.addStatusListener((status) {
       if (status == AnimationStatus.completed) {
-        if(widget.animationCompleteCallback != null) {
+        if (widget.animationCompleteCallback != null) {
           widget.animationCompleteCallback();
         }
       }

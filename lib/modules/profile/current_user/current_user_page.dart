@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:highvibe/modules/playlist/show_playlists/show_playlists_module.dart';
+import 'package:highvibe/modules/profile/achievements/achievements_module.dart';
 import 'package:highvibe/modules/profile/audio/audio_module.dart';
 import 'package:highvibe/modules/profile/profile_module.dart';
 import 'package:highvibe/modules/profile/widgets/profile_widget.dart';
@@ -27,7 +30,11 @@ class _CurrentUserPageState
   @override
   void initState() {
     super.initState();
-    tabController = TabController(initialIndex: 0, length: 1, vsync: this);
+    tabController = TabController(
+      initialIndex: 0,
+      length: 3,
+      vsync: this,
+    );
   }
 
   @override
@@ -76,14 +83,25 @@ class _CurrentUserPageState
         ),
         tabs: [
           Tab(
+            icon: Image.asset('assets/ic_badge_one.png'),
+          ),
+          Tab(
             icon: Image.asset('assets/ic_audio_colored.png'),
+          ),
+          Tab(
+            icon: SvgPicture.asset(
+              'assets/ic_playlist.svg',
+              color: Colors.blueAccent,
+            ),
           ),
         ],
       ),
       tabView: TabBarView(
         controller: tabController,
         children: <Widget>[
+          AchievementsModule(controller.currentUser),
           AudioModule(controller.currentUser.id),
+          ShowPlaylistsModule(controller.currentUser.id),
         ],
       ),
     );
