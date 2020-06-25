@@ -12,6 +12,7 @@ import 'package:highvibe/modules/playlist/open_playlist/open_playlist_controller
 import 'package:highvibe/modules/playlist/playlist_module.dart';
 import 'package:highvibe/modules/profile/audio/playlist_audio_tile.dart';
 import 'package:highvibe/utils/utils.dart';
+import 'package:highvibe/values/constants.dart';
 import 'package:highvibe/values/themes.dart';
 import 'package:mobx/mobx.dart';
 
@@ -31,7 +32,7 @@ class _OpenPlaylistPageState
     with TickerProviderStateMixin {
   AnimationController artworkAnimation;
   AnimationController playButtonAnimation;
-  bool isAudioPlaying = true, isFavourite = false;
+  bool isFavourite = false;
 
   @override
   void initState() {
@@ -227,7 +228,7 @@ class _OpenPlaylistPageState
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
                 Text(
-                  '00:00',
+                  mediaTimeFormatter(controller.trackPosition),
                   style: normal14Hint,
                 ),
                 Text(
@@ -352,18 +353,24 @@ class _OpenPlaylistPageState
             icon: _getIcon(),
             onPressed: _toggleFavourite,
           ),
-          IconButton(
-            icon: SvgPicture.asset('assets/ic_backward.svg'),
-            onPressed: () {},
+          Opacity(
+            opacity: _getPreviousButtonOpacity(),
+            child: IconButton(
+              icon: SvgPicture.asset('assets/ic_backward.svg'),
+              onPressed: controller.playPreviousTrack,
+            ),
           ),
           FloatingActionButton(
             backgroundColor: Colors.white,
             onPressed: _toggleAudioPlay,
             child: _getAudioButton(),
           ),
-          IconButton(
-            icon: SvgPicture.asset('assets/ic_forward.svg'),
-            onPressed: () {},
+          Opacity(
+            opacity: _getForwardButtonOpacity(),
+            child: IconButton(
+              icon: SvgPicture.asset('assets/ic_forward.svg'),
+              onPressed: controller.playNextTrack,
+            ),
           ),
           IconButton(
             icon: Image.asset(
@@ -378,10 +385,17 @@ class _OpenPlaylistPageState
     );
   }
 
+  double _getForwardButtonOpacity() {
+    return controller.index == controller.playList.audioFiles.length - 1
+        ? disabledOpacity
+        : enabledOpacity;
+  }
+
+  double _getPreviousButtonOpacity() {
+    return controller.index == 0 ? disabledOpacity : enabledOpacity;
+  }
+
   void _toggleAudioPlay() {
-    setState(() {
-      isAudioPlaying = !isAudioPlaying;
-    });
     controller.togglePlayStop();
   }
 

@@ -25,7 +25,7 @@ abstract class _OpenPlaylistControllerBase with Store {
   bool get isMinimized => audioPlayerMode == AudioPlayerMode.minimized;
 
   @observable
-  Duration trackPosition;
+  Duration trackPosition = const Duration(seconds: 0);
 
   @observable
   AudioPlayerState playerState;
@@ -79,6 +79,22 @@ abstract class _OpenPlaylistControllerBase with Store {
   @action
   void setCurrentPlayingAudioIndex(int audioIndex) {
     index = audioIndex;
+  }
+
+  @action
+  void playNextTrack() {
+    if (index < playList.audioFiles.length - 1) {
+      player.stop();
+      player.play(playList.audioFiles[++index].audioUrlPath);
+    }
+  }
+
+  @action
+  void playPreviousTrack() {
+    if (index > 0) {
+      player.stop();
+      player.play(playList.audioFiles[--index].audioUrlPath);
+    }
   }
 
   @computed

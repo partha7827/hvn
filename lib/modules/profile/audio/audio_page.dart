@@ -72,10 +72,12 @@ class _AudioPageState extends ModularState<AudioPage, AudioController> {
         const SizedBox(height: 10),
         for (final item in tempInMemoryPlaylistCollection) ...[
           GestureDetector(
-            onTap: () => MediaOverlays.presentPlayListPlayerAsOverlay(
-              context: context,
-              playList: item,
-            ),
+            onTap: () async {
+              MediaOverlays.presentPlayListPlayerAsOverlay(
+                context: context,
+                playList: item,
+              );
+            },
             child: PlaylistTile(
               isInEditMode: false,
               playList: item,
