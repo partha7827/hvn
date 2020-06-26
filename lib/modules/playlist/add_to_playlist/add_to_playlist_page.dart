@@ -154,7 +154,7 @@ class _AddToPlaylistPageState
     final updatedPlaylist = PlayList(
       (b) => b
         ..coverUrlPath = playlist.coverUrlPath
-        ..desscription = playlist.desscription
+        ..description = playlist.description
         ..title = playlist.title
         ..privacy = playlist.privacy
         ..audioFiles =

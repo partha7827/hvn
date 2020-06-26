@@ -1,7 +1,5 @@
-import 'package:built_collection/built_collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:highvibe/models/user/user.dart';
 import 'package:highvibe/modules/discover/audios/discover_audios.dart';
 import 'package:highvibe/modules/discover/authors/discover_authors.dart';
 import 'package:highvibe/modules/discover/discover_controller.dart';
@@ -11,9 +9,8 @@ import 'package:highvibe/widgets/outline_tab_indicator.dart';
 
 class DiscoverPage extends StatefulWidget {
   final int pageIndex;
-  final BuiltList<User> users;
 
-  const DiscoverPage({this.pageIndex = 0, this.users});
+  const DiscoverPage(this.pageIndex);
 
   @override
   _DiscoverPageState createState() => _DiscoverPageState();
@@ -31,6 +28,7 @@ class _DiscoverPageState extends ModularState<DiscoverPage, DiscoverController>
   @override
   void initState() {
     _tabController = TabController(
+
       initialIndex: widget.pageIndex,
       length: _tabs.length,
       vsync: this,
@@ -68,11 +66,10 @@ class _DiscoverPageState extends ModularState<DiscoverPage, DiscoverController>
         ),
       ),
       body: TabBarView(
+        physics: const NeverScrollableScrollPhysics(),
         controller: _tabController,
         children: [
-          DiscoverAudios(
-            widget.users,
-          ),
+          DiscoverAudios(),
           // DiscoverVideos(),
           DiscoverAuthors(),
         ],

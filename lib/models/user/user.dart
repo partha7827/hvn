@@ -30,6 +30,10 @@ abstract class User implements Built<User, UserBuilder> {
   String get bio;
   int get experiencePoints;
   int get karmaPoints;
+  int get hvnEarned;
+  int get sessionCount;
+  int get currentStreak;
+  int get questCompletion;
   bool get isLive;
   bool get isOnline;
   bool get isRecommended;
@@ -74,6 +78,10 @@ abstract class User implements Built<User, UserBuilder> {
     ..bio = ''
     ..experiencePoints = 0
     ..karmaPoints = 0
+    ..hvnEarned = 0
+    ..sessionCount = 0
+    ..currentStreak = 0
+    ..questCompletion = 0
     ..isLive = false
     ..isOnline = false
     ..isRecommended = false

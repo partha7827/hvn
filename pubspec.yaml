@@ -71,6 +71,7 @@ dependencies:
   virtual_keyboard: ^0.1.4
   gradient_text: ^1.0.2
   flutter_facebook_login: ^3.0.0
+  flare_flutter: ^2.0.3
 
 dev_dependencies:
   flutter_driver:
@@ -95,6 +96,6 @@ flutter:
   uses-material-design: true
   assets:
     - assets/
-    - assets/animation/splash_animation.json
+    - assets/animation/
     - assets/icons/
     - assets/emoji/

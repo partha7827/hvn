@@ -21,8 +21,8 @@ abstract class PlayList implements Built<PlayList, PlayListBuilder> {
 
   BuiltList<Audio> get audioFiles;
   String get coverUrlPath;
-  String get desscription;
-  String get id;
+  String get description;
+  String get title;
   Privacy get privacy;
   String get title;
 
