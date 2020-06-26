@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:highvibe/models/models.dart' show Audio, Video;
+import 'package:highvibe/models/playlist/playlist.dart';
 import 'package:highvibe/modules/audio_player/audio_player_module.dart';
 import 'package:highvibe/modules/audio_player/audio_player_page.dart';
 import 'package:highvibe/modules/playlist/add_to_playlist/add_to_playlist_module.dart';
 import 'package:highvibe/modules/playlist/create_new_playlist/create_new_playlist_module.dart';
+import 'package:highvibe/modules/playlist/open_playlist/open_playlist_module.dart';
 import 'package:highvibe/modules/playlist/widgets/widgets.dart';
 import 'package:highvibe/modules/video_player/video_player_page.dart';
 
@@ -75,6 +77,20 @@ class MediaOverlays {
 
     _audioOverlayEntry = OverlayEntry(
       builder: (_) => AudioPlayerModule(audioFile: audioFile),
+    );
+    _mediaOverlayState.insert(_audioOverlayEntry);
+  }
+
+  static void presentPlayListPlayerAsOverlay({
+    @required BuildContext context,
+    @required PlayList playList,
+  }) {
+    _removeAllOverlays();
+
+    _mediaOverlayState = Overlay.of(context);
+
+    _audioOverlayEntry = OverlayEntry(
+      builder: (_) => OpenPlayListModule(playList: playList,),
     );
     _mediaOverlayState.insert(_audioOverlayEntry);
   }
