@@ -3,38 +3,21 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:highvibe/modules/app/app_controller.dart';
-import 'package:highvibe/modules/profile/current_user/edit_profile/edit_profile_controller.dart';
 import 'package:highvibe/modules/profile/widgets/profile_input_field.dart';
-import 'package:highvibe/services/auth_service.dart';
-import 'package:highvibe/services/firestore_service.dart';
-import 'package:highvibe/services/storage_service.dart';
 import 'package:highvibe/utils/utils.dart';
 import 'package:highvibe/values/themes.dart';
 import 'package:highvibe/widgets/splash_widget.dart';
+import 'edit_profile_controller.dart';
 
-// TODO: - Consider to refactor it to EditProfileModule in a separate file
-class EditProfile extends WidgetModule {
-  @override
-  final List<Bind<Object>> binds = [
-    Bind<EditProfileController>((_) => EditProfileController()),
-    Bind<AppController>((_) => AppController()),
-    Bind<AuthService>((_) => AuthService.withFirebase()),
-    Bind<StorageService>((_) => StorageService.withFirebase()),
-    Bind<FirestoreService>((_) => FirestoreService.withFirebase()),
-  ];
+class EditProfilePage extends StatefulWidget {
+  const EditProfilePage();
 
   @override
-  Widget get view => EditProfileView();
+  _EditProfilePageState createState() => _EditProfilePageState();
 }
 
-class EditProfileView extends StatefulWidget {
-  @override
-  _EditProfileViewState createState() => _EditProfileViewState();
-}
-
-class _EditProfileViewState
-    extends ModularState<EditProfileView, EditProfileController> {
+class _EditProfilePageState
+    extends ModularState<EditProfilePage, EditProfileController> {
   @override
   void initState() {
     controller.init();

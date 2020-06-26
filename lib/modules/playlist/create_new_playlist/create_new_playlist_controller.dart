@@ -53,7 +53,7 @@ abstract class _CreateNewPlaylistControllerBase with Store {
         (b) => b
           ..audioFiles = BuiltList<Audio>().toBuilder()
           ..coverUrlPath = playlistCoverStoragePath
-          ..desscription = descriptionTextEditingController.text
+          ..description = descriptionTextEditingController.text
           ..id = uuid.v4()
           ..title = titleTextEditingController.text
           ..privacy = privacy,

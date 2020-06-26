@@ -19,12 +19,12 @@ abstract class PlayList implements Built<PlayList, PlayListBuilder> {
 
   PlayList._();
 
+  String get id;
   BuiltList<Audio> get audioFiles;
   String get coverUrlPath;
   String get description;
   String get title;
   Privacy get privacy;
-  String get title;
 
   String toJson() {
     return json.encode(serializers.serializeWith(PlayList.serializer, this));

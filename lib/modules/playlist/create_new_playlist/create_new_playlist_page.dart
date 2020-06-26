@@ -239,17 +239,4 @@ class _CreateNewPlaylistPage
       showDialog(context: context, builder: (_) => modalAlert);
     }
   }
-  
-  Future<void> _selectCover() async {
-    try {
-      final file = await FilePicker.getFile(type: FileType.image);
-      if (file != null) {
-        setState(() {
-          _imagePath = file.path;
-        });
-      }
-    } catch (error) {
-      print(error);
-    }
-  }
 }

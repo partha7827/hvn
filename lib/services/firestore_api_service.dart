@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart' show required;
 
 class FirestoreApiService {
-  static final instance = FirestoreApiService._();
+  static final FirestoreApiService instance = FirestoreApiService._();
 
   FirestoreApiService._();
 
