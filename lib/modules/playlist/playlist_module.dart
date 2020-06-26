@@ -8,8 +8,6 @@ import 'package:highvibe/modules/playlist/create_new_playlist/create_new_playlis
 import 'package:highvibe/modules/playlist/create_new_playlist/create_new_playlist_page.dart';
 import 'package:highvibe/modules/playlist/edit_playlist/edit_playlist_page.dart';
 import 'package:highvibe/modules/playlist/edit_playlist/edit_playlist_page_controller.dart';
-import 'package:highvibe/modules/playlist/open_playlist/open_playlist_controller.dart';
-import 'package:highvibe/modules/playlist/open_playlist/open_playlist_page.dart';
 import 'package:highvibe/modules/playlist/playlist_controller.dart';
 import 'package:highvibe/modules/playlist/show_playlists/show_playlists_module.dart';
 
@@ -22,7 +20,6 @@ class PlaylistModule extends ChildModule {
         Bind<AddToPlaylistController>((_) => AddToPlaylistController()),
         Bind<CreateNewPlaylistController>((_) => CreateNewPlaylistController()),
         Bind<EditPlaylistController>((_) => EditPlaylistController()),
-        Bind<OpenPlaylistController>((_) => OpenPlaylistController()),
       ];
 
   @override
@@ -30,11 +27,6 @@ class PlaylistModule extends ChildModule {
         Router(
           '$_playlistRoute/show_playlists',
           child: (_, args) => ShowPlaylistsModule(args.data),
-          transition: TransitionType.fadeIn,
-        ),
-        Router(
-          '$_playlistRoute/open_playlist',
-          child: (_, args) => const OpenPlaylistPage(),
           transition: TransitionType.fadeIn,
         ),
         Router(
