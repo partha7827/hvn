@@ -4,7 +4,6 @@ import 'package:highvibe/models/models.dart' show Audio;
 import 'package:highvibe/models/options_model/options_model.dart';
 import 'package:highvibe/modules/playlist/resources/assets.dart';
 import 'package:highvibe/utils/utils.dart';
-import 'package:highvibe/values/constants.dart';
 import 'package:highvibe/values/themes.dart';
 
 class AudioTile extends StatelessWidget {
