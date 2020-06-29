@@ -83,16 +83,35 @@ class _CurrentUserPageState
         ),
         tabs: [
           Tab(
-            icon: Image.asset('assets/ic_badge_one.png'),
+            icon: tabController.index == 0
+                ? Image.asset(
+                    'assets/ic_stats_and_reward_active.png',
+                    height: 36,
+                    width: 36,
+                  )
+                : Image.asset(
+                    'assets/ic_stats_and_reward_inactive.png',
+                    height: 36,
+                    width: 36,
+                  ),
           ),
           Tab(
-            icon: Image.asset('assets/ic_audio_colored.png'),
+            icon: tabController.index == 1
+                ? Image.asset('assets/ic_audio_colored.png')
+                : Image.asset('assets/ic_audio.png'),
           ),
           Tab(
-            icon: SvgPicture.asset(
-              'assets/ic_playlist.svg',
-              color: Colors.blueAccent,
-            ),
+            icon: tabController.index == 2
+                ? Image.asset(
+                    'assets/ic_playlist_active.png',
+                    height: 36,
+                    width: 36,
+                  )
+                : Image.asset(
+                    'assets/ic_playlist_inactive.png',
+                    height: 36,
+                    width: 36,
+                  ),
           ),
         ],
       ),
