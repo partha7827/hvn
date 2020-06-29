@@ -6,7 +6,9 @@ import 'package:highvibe/modules/app/media_overlays.dart';
 import 'package:highvibe/modules/playlist/resources/resources.dart';
 import 'package:highvibe/modules/playlist/widgets/widgets.dart';
 import 'package:highvibe/utils/utils.dart';
+import 'package:highvibe/values/constants.dart';
 import 'package:highvibe/values/strings.dart';
+import 'package:highvibe/values/themes.dart';
 import 'package:highvibe/widgets/audio_tile.dart';
 import 'package:highvibe/widgets/header_row.dart';
 import 'package:highvibe/widgets/repeat_widget.dart';
@@ -26,6 +28,7 @@ class _AudioPageState extends ModularState<AudioPage, AudioController> {
   void initState() {
     super.initState();
     controller.loadAudios();
+    controller.loadOptionsList();
   }
 
   @override
@@ -61,6 +64,9 @@ class _AudioPageState extends ModularState<AudioPage, AudioController> {
               context: context,
               audioFile: item,
             ),
+            optionsModelList: controller.optionsModelList,
+            onOptionsTap: (Audio audioFile, String value) =>
+                selectedOption(audioFile, value),
           ),
         ],
         Row(
@@ -87,5 +93,29 @@ class _AudioPageState extends ModularState<AudioPage, AudioController> {
         ],
       ],
     );
+  }
+
+  void selectedOption(Audio audioFile, String value) {
+    final optionId = int.parse(value);
+    switch (optionId) {
+      case edit:
+        // Edit
+        break;
+      case addToPlaylist:
+        // Add to playlist
+        break;
+      case addWayPoints:
+        // Add Waypoints
+        break;
+      case addToFavorites:
+        // Add to favorites
+        break;
+      case delete:
+        // Delete
+        break;
+      case share:
+        // Share
+        break;
+    }
   }
 }
