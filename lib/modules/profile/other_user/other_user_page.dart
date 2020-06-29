@@ -104,22 +104,25 @@ class _OtherUserPageState
         ),
         tabs: [
           Tab(
-            icon: Image.asset('assets/ic_badge_one.png'),
-          ),
-          Tab(
             icon: Image.asset('assets/ic_audio_colored.png'),
           ),
           Tab(
-            icon: SvgPicture.asset('assets/ic_playlist.svg', color: Colors.blueAccent,),
+            icon: SvgPicture.asset(
+              'assets/ic_playlist.svg',
+              color: Colors.blueAccent,
+            ),
+          ),
+          Tab(
+            icon: Image.asset('assets/ic_badge_one.png'),
           ),
         ],
       ),
       tabView: TabBarView(
         controller: tabController,
         children: <Widget>[
-          AchievementsModule(controller.otherUser),
           AudioModule(controller.otherUser.id),
           ShowPlaylistsModule(controller.otherUser.id),
+          AchievementsModule(controller.otherUser),
         ],
       ),
     );

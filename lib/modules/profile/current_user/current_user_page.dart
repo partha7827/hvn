@@ -83,9 +83,6 @@ class _CurrentUserPageState
         ),
         tabs: [
           Tab(
-            icon: Image.asset('assets/ic_badge_one.png'),
-          ),
-          Tab(
             icon: Image.asset('assets/ic_audio_colored.png'),
           ),
           Tab(
@@ -94,14 +91,17 @@ class _CurrentUserPageState
               color: Colors.blueAccent,
             ),
           ),
+          Tab(
+            icon: Image.asset('assets/ic_badge_one.png'),
+          ),
         ],
       ),
       tabView: TabBarView(
         controller: tabController,
         children: <Widget>[
-          AchievementsModule(controller.currentUser),
           AudioModule(controller.currentUser.id),
           ShowPlaylistsModule(controller.currentUser.id),
+          AchievementsModule(controller.currentUser),
         ],
       ),
     );
