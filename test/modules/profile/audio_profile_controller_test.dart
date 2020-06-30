@@ -10,10 +10,10 @@ import 'package:highvibe/services/firestore_service.dart';
 import 'package:highvibe/services/storage_service.dart';
 import 'package:mobx/mobx.dart';
 import 'package:highvibe/modules/profile/audio/audio_controller.dart';
+import 'package:highvibe/modules/profile/audio/audio_module.dart';
 
-import '../../../lib/mocks/mock_audio_files.dart';
-import '../../../lib/mocks/mock_database.dart' as database;
-import '../../../lib/modules/profile/audio/audio_module.dart';
+import 'package:highvibe/mocks/mock_audio_files.dart';
+import 'package:highvibe/mocks/mock_database.dart' as database;
 
 
 void main() {

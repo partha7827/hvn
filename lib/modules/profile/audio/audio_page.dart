@@ -73,12 +73,11 @@ class _AudioPageState extends ModularState<AudioPage, AudioController> {
             Observer(builder: (_) {
               switch (controller.uploadStatus) {
                 case FutureStatus.pending:
-                  return CircularProgressIndicator();
+                  return const CircularProgressIndicator();
                 default:
                   return IconButton(
                     icon: Icon(Icons.file_upload),
                     onPressed: () {
-                      print('pressed');
                       controller.uploadAudio(mockAudioItemsList.first);
                     },
                   );

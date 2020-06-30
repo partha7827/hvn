@@ -32,16 +32,12 @@ abstract class _AudioControllerBase with Store {
 
   @action
   Future<void> uploadAudio(Audio audio) async {
-    print(uploadStatus);
     uploadStatus = FutureStatus.pending;
-    print(uploadStatus);
-    await Future.delayed(Duration(seconds: 2));
     try {
       await store.audioCollection.document(audio.id).setData(audio.toMap());
       uploadStatus = FutureStatus.fulfilled;
     } catch (error) {
       uploadStatus = FutureStatus.rejected;
     }
-    print(uploadStatus);
   }
 }
