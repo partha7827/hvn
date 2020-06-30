@@ -123,4 +123,7 @@ class Strings {
   static const String currentStreak = 'Current\nStreak';
   static const String questCompletion = 'Quest\nCompletion';
   static const String shareYourStats = 'Share your stats';
+
+  static const String audioFileUploaded = 'Audio file uploaded';
+  static const String audioFileUploadFailed = 'Error uploading file!';
 }

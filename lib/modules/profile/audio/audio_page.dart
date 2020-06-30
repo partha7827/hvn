@@ -14,6 +14,7 @@ import 'package:highvibe/widgets/splash_widget.dart';
 import 'package:highvibe/widgets/load_widget.dart';
 import 'package:mobx/mobx.dart';
 
+import '../../../mocks/mock_audio_files.dart';
 import 'audio_controller.dart';
 
 class AudioPage extends StatefulWidget {
@@ -26,6 +27,16 @@ class _AudioPageState extends ModularState<AudioPage, AudioController> {
   void initState() {
     super.initState();
     controller.loadAudios();
+    reaction((reaction) => controller.uploadStatus, (status) {
+      switch (status) {
+        case FutureStatus.fulfilled:
+          showSnackBarMsg(Scaffold.of(context), Strings.audioFileUploaded);
+          break;
+        case FutureStatus.rejected:
+          showSnackBarMsg(Scaffold.of(context), Strings.audioFileUploadFailed);
+          break;
+      }
+    });
   }
 
   @override
@@ -53,7 +64,28 @@ class _AudioPageState extends ModularState<AudioPage, AudioController> {
     return ListView(
       padding: const EdgeInsets.only(left: 20, top: 10, bottom: 80, right: 8),
       children: [
-        const HeaderRow(title: Strings.uploads),
+        Row(
+          mainAxisSize: MainAxisSize.max,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+            const HeaderRow(title: Strings.uploads),
+            Observer(builder: (_) {
+              switch (controller.uploadStatus) {
+                case FutureStatus.pending:
+                  return CircularProgressIndicator();
+                default:
+                  return IconButton(
+                    icon: Icon(Icons.file_upload),
+                    onPressed: () {
+                      print('pressed');
+                      controller.uploadAudio(mockAudioItemsList.first);
+                    },
+                  );
+              }
+            }),
+          ],
+        ),
         for (final item in audios) ...[
           AudioTile(
             audioFile: item,

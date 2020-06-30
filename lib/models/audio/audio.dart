@@ -35,6 +35,9 @@ abstract class Audio implements Built<Audio, AudioBuilder> {
   String toJson() {
     return json.encode(serializers.serializeWith(Audio.serializer, this));
   }
+  Map<String, dynamic> toMap() {
+    return serializers.serializeWith(Audio.serializer, this);
+  }
 
   static Audio fromJson(String jsonString) {
     return serializers.deserializeWith(

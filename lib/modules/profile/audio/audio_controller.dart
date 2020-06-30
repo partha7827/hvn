@@ -13,7 +13,11 @@ abstract class _AudioControllerBase with Store {
   @observable
   ObservableFuture<List<Audio>> audios;
 
+  @observable
+  FutureStatus uploadStatus = FutureStatus.fulfilled;
+
   final String userId;
+
   _AudioControllerBase(this.userId);
 
   @action
@@ -24,5 +28,20 @@ abstract class _AudioControllerBase with Store {
           .getDocuments()
           .then((s) => Audio.parseListOfAudios(s).toList()),
     );
+  }
+
+  @action
+  Future<void> uploadAudio(Audio audio) async {
+    print(uploadStatus);
+    uploadStatus = FutureStatus.pending;
+    print(uploadStatus);
+    await Future.delayed(Duration(seconds: 2));
+    try {
+      await store.audioCollection.document(audio.id).setData(audio.toMap());
+      uploadStatus = FutureStatus.fulfilled;
+    } catch (error) {
+      uploadStatus = FutureStatus.rejected;
+    }
+    print(uploadStatus);
   }
 }
