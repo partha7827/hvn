@@ -1,3 +1,4 @@
+import 'package:built_collection/built_collection.dart';
 import 'package:highvibe/models/models.dart';
 
 const _artworkUrl =
@@ -37,3 +38,7 @@ final List<Audio> mockAudioItemsList = [
       ..subTitle = 'Lorem ipsum dolar sit a mat',
   ),
 ];
+
+final PlayList mockPlaylist = PlayList(
+  (b) => b..audioFiles = BuiltList.of(mockAudioItemsList).toBuilder(),
+);

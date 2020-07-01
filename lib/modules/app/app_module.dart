@@ -3,6 +3,8 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:highvibe/modules/app/app_controller.dart';
 import 'package:highvibe/modules/app/app_widget.dart';
 import 'package:highvibe/modules/auth/auth_module.dart';
+import 'package:highvibe/modules/dev/dev_module.dart';
+import 'package:highvibe/modules/dev/dev_page.dart';
 import 'package:highvibe/modules/discover/discover_module.dart';
 import 'package:highvibe/modules/home/home_module.dart';
 import 'package:highvibe/modules/journal/journal_module.dart';
@@ -16,6 +18,8 @@ import 'package:highvibe/services/firestore_service.dart';
 class AppModule extends MainModule {
   static bool audioPlayerPageIsOffstage = false;
 
+  static bool isDevMode = true;
+
   @override
   List<Bind<Object>> get binds => [
         Bind((i) => AppController()),
@@ -25,6 +29,7 @@ class AppModule extends MainModule {
 
   @override
   List<Router<Object>> get routers => [
+        Router('', module: DevModule()),
         Router('', module: AuthModule()),
         Router('', module: HomeModule()),
         Router('', module: ProfileModule()),
