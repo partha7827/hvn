@@ -105,24 +105,11 @@ class _OtherUserPageState
         tabs: [
           Tab(
             icon: tabController.index == 0
-                ? Image.asset(
-                    'assets/ic_stats_and_reward_active.png',
-                    height: 36,
-                    width: 36,
-                  )
-                : Image.asset(
-                    'assets/ic_stats_and_reward_inactive.png',
-                    height: 36,
-                    width: 36,
-                  ),
-          ),
-          Tab(
-            icon: tabController.index == 1
                 ? Image.asset('assets/ic_audio_colored.png')
                 : Image.asset('assets/ic_audio.png'),
           ),
           Tab(
-            icon: tabController.index == 2
+            icon: tabController.index == 1
                 ? Image.asset(
                     'assets/ic_playlist_active.png',
                     height: 36,
@@ -130,6 +117,19 @@ class _OtherUserPageState
                   )
                 : Image.asset(
                     'assets/ic_playlist_inactive.png',
+                    height: 36,
+                    width: 36,
+                  ),
+          ),
+          Tab(
+            icon: tabController.index == 2
+                ? Image.asset(
+                    'assets/ic_stats_and_reward_active.png',
+                    height: 36,
+                    width: 36,
+                  )
+                : Image.asset(
+                    'assets/ic_stats_and_reward_inactive.png',
                     height: 36,
                     width: 36,
                   ),
