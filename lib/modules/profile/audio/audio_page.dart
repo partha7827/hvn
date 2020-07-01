@@ -57,7 +57,7 @@ class _AudioPageState extends ModularState<AudioPage, AudioController> {
         for (final item in audios) ...[
           AudioTile(
             audioFile: item,
-            onTap: (_) => MediaOverlays.presentAudioPlayerAsOverlay(
+            onTap: (_) => controller.toAudioPlayer(
               context: context,
               audioFile: item,
             ),

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:highvibe/models/audio/audio.dart';
-import 'package:highvibe/modules/app/media_overlays.dart';
 import 'package:highvibe/modules/discover/audios/audio_card.dart';
 import 'package:highvibe/modules/discover/audios/discover_audios_controller.dart';
 import 'package:highvibe/utils/utils.dart';
@@ -57,7 +56,7 @@ class _DiscoverAudiosViewState
         itemBuilder: (_, index) {
           return AudioCard(
             audios[index],
-            onPlayTap: () => MediaOverlays.presentAudioPlayerAsOverlay(
+            onPlayTap: () => controller.toAudioPlayer(
               context: context,
               audioFile: audios[index],
             ),

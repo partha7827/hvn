@@ -16,7 +16,7 @@ abstract class _HomeControllerBase with Store {
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
   final AuthService auth = Modular.get<AuthService>();
   final AppController currentUserStore = Modular.get<AppController>();
-
+  final AppController app = Modular.get<AppController>();
 
   @observable
   ObservableFuture<BuiltList<Audio>> audios;
@@ -64,5 +64,9 @@ abstract class _HomeControllerBase with Store {
   Future<void> logout() async {
     await auth.logout();
     await currentUserStore.setCurrentUser(null);
+  }
+
+  void toAudioPlayer({ BuildContext context, Audio audioFile }) {
+    app.toAudioPlayer(context: context, audioFile: audioFile);
   }
 }
