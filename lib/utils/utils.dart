@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:highvibe/modules/app/media_overlays.dart';
 
 double aspectRatio(BuildContext context) =>
@@ -105,4 +106,15 @@ Future<bool> onWillPop() async {
     return false;
   }
   return true;
+}
+
+Future<void> showToast({String message = '',}) async {
+  await Fluttertoast.showToast(
+            msg: message,
+            toastLength: Toast.LENGTH_LONG,
+            gravity: ToastGravity.BOTTOM,
+            timeInSecForIosWeb: 1,
+            backgroundColor: Colors.red,
+            textColor: Colors.white,
+            fontSize: 16.0);
 }

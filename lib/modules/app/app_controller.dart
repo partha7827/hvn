@@ -1,7 +1,11 @@
+import 'dart:async';
+
+import 'package:connectivity/connectivity.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:highvibe/models/models.dart' show User;
 import 'package:highvibe/services/auth_service.dart';
 import 'package:highvibe/services/firestore_service.dart';
+import 'package:highvibe/utils/utils.dart';
 import 'package:mobx/mobx.dart';
 
 part 'app_controller.g.dart';
@@ -14,6 +18,8 @@ abstract class _AppControllerBase with Store {
   final AuthService auth = Modular.get<AuthService>();
 
   final FirestoreService firestore = Modular.get<FirestoreService>();
+  
+  final Connectivity connectivity = Connectivity();
 
   @observable
   AuthState authState = AuthState.initial;
@@ -48,6 +54,24 @@ abstract class _AppControllerBase with Store {
         'isOnline': active,
         // "lastTimeSeen": serializers.serialize(DateTime.now().toUtc())
       });
+    }
+  }
+
+  Future<void> updateConnectionStatus(ConnectivityResult result) async {
+    switch (result) {
+      case ConnectivityResult.wifi:
+        // Connected to WiFi
+        break;
+      case ConnectivityResult.mobile:
+        // Connected to Mobile
+        break;
+      case ConnectivityResult.none:
+        // No connection
+        await showToast(message: 'No connection');
+        break;
+      default:
+        await showToast(message: 'No connection');
+        break;
     }
   }
 }
