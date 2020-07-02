@@ -197,7 +197,6 @@ class _AddToPlaylistPageState
 
     _close();
 
-    // TODO: - Rethink how we notify a user about results of the operation
     // showDialog(
     //   context: context,
     //   builder: (_) => const PlaylistModalAlert(

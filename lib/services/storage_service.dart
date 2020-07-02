@@ -44,7 +44,6 @@ class StorageService extends Disposable {
   }
 
   Future<String> uploadPlaylistCover({@required File file}) async {
-    // TODO: - We might need to consider to resize an image before upload.
     final snapshot = await playlistsCovers.putFile(file).onComplete;
     return (await snapshot.ref.getDownloadURL()).toString();
   }
