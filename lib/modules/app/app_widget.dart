@@ -42,6 +42,7 @@ class _AppWidgetState extends State<AppWidget> {
     }
 
     reaction((_) => appStore.overlay, (overlay) {
+      print('reaction goes here');
       Overlay.of(appStore.overlayContext).insert(overlay);
     });
   }

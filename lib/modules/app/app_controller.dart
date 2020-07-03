@@ -13,12 +13,21 @@ part 'app_controller.g.dart';
 
 enum AuthState { initial, authenticated, unauthenticated }
 
+class OverlayEntryContainer {
+  OverlayEntry overlay;
+}
+
 class AppController = _AppControllerBase with _$AppController;
 
-abstract class _AppControllerBase with Store, MediaOverlaysMixin {
+abstract class _AppControllerBase extends OverlayEntryContainer
+    with Store, MediaOverlaysMixin {
   final AuthService auth = Modular.get<AuthService>();
 
   final FirestoreService firestore = Modular.get<FirestoreService>();
+
+  @override
+  @observable
+  OverlayEntry overlay;
 
   @observable
   AuthState authState = AuthState.initial;

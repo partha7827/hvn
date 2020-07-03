@@ -3,14 +3,12 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:highvibe/mocks/mock_audio_files.dart';
 import 'package:highvibe/models/audio/audio.dart';
 import 'package:highvibe/models/models.dart';
+import 'package:highvibe/modules/app/app_controller.dart';
 import 'package:highvibe/modules/audio_player/audio_player_module.dart';
 import 'package:highvibe/modules/playlist/open_playlist/open_playlist_module.dart';
 import 'package:mobx/mobx.dart';
 
-mixin MediaOverlaysMixin {
-  @observable
-  OverlayEntry overlay;
-
+mixin MediaOverlaysMixin on OverlayEntryContainer {
   BuildContext overlayContext;
 
   @action
@@ -18,6 +16,7 @@ mixin MediaOverlaysMixin {
     overlay = OverlayEntry(
       builder: (_) => AudioPlayerModule(audioFile: audioFile),
     );
+    print('overlay changed');
     overlayContext = context;
   }
 
