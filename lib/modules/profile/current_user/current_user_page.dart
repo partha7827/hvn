@@ -80,6 +80,7 @@ class _CurrentUserPageState
           gradient: primaryGradientHorizontal,
           insets: EdgeInsets.symmetric(horizontal: 16),
         ),
+        onTap: (index) => setState(() {}),
         tabs: [
           Tab(
             icon: tabController.index == 0
