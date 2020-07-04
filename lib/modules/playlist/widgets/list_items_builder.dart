@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:highvibe/modules/playlist/resources/resources.dart';
 import 'package:highvibe/modules/playlist/widgets/widgets.dart'
     show EmptyContent;
 
@@ -18,7 +19,7 @@ class ListItemsBuilder<T> extends StatelessWidget {
   Widget build(BuildContext context) {
     if (snapshot.hasData) {
       final items = snapshot.data;
-      print(items);
+      print('ListItemsBuilder: \n $items');
       if (items.isNotEmpty) {
         return _buildList(items);
       } else {
@@ -26,8 +27,8 @@ class ListItemsBuilder<T> extends StatelessWidget {
       }
     } else if (snapshot.hasError) {
       return const EmptyContent(
-        title: 'Something went wrong',
-        message: 'Can\'t load items right now',
+        title: PlaylistStrings.emptyContentErrorTitle,
+        message: PlaylistStrings.emptyContentErrorDescription,
       );
     }
     return const Center(child: CircularProgressIndicator());
