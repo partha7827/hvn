@@ -12,29 +12,37 @@ class FirestorePlaylistService implements PlaylistService {
   FirestorePlaylistService({@required this.userId}) : assert(userId != null);
 
   @override
-  Future<void> deletePlaylist(PlayList playlist) async => _service.deleteData(
-        path: FirebasePlaylistApiPath.playlist(userId, playlist.id),
-      );
+  Future<void> deletePlaylist({@required PlayList playlist}) async {
+    return _service.deleteData(
+      path: FirebasePlaylistApiPath.playlist(userId, playlist.id),
+    );
+  }
 
   @override
-  Stream<List<PlayList>> playlistCollectionStream() =>
-      _service.collectionStream(
-        path: FirebasePlaylistApiPath.playlistItems(userId),
-        builder: (data, documentId) =>
-            PlaylistPlusFirestore.fromMap(data, documentId),
-      );
+  Stream<List<PlayList>> playlistCollectionStream() {
+    return _service.collectionStream(
+      path: FirebasePlaylistApiPath.playlistItems(userId),
+      builder: (data, documentId) {
+        return PlaylistPlusFirestore.fromMap(data, documentId);
+      },
+    );
+  }
 
   @override
-  Stream<PlayList> playlistStream({String playlistId}) =>
-      _service.documentStream(
-        path: FirebasePlaylistApiPath.playlist(userId, playlistId),
-        builder: (data, documentId) =>
-            PlaylistPlusFirestore.fromMap(data, documentId),
-      );
+  Stream<PlayList> playlistStream({String playlistId}) {
+    return _service.documentStream(
+      path: FirebasePlaylistApiPath.playlist(userId, playlistId),
+      builder: (data, documentId) {
+        return PlaylistPlusFirestore.fromMap(data, documentId);
+      },
+    );
+  }
 
   @override
-  Future<void> setPlaylist(PlayList playlist) async => _service.setData(
-        path: FirebasePlaylistApiPath.playlist(userId, playlist.id),
-        data: playlist.toMap(),
-      );
+  Future<void> setPlaylist({@required PlayList playlist}) async {
+    return _service.setData(
+      path: FirebasePlaylistApiPath.playlist(userId, playlist.id),
+      data: playlist.toMap(),
+    );
+  }
 }

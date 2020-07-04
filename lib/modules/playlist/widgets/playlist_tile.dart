@@ -126,13 +126,9 @@ class _PlaylistTileState extends State<PlaylistTile> {
 
   void _toggle() {
     if (_isSelected) {
-      setState(() {
-        _isSelected = false;
-      });
+      setState(() => _isSelected = false);
     } else {
-      setState(() {
-        _isSelected = true;
-      });
+      setState(() => _isSelected = true);
     }
   }
 }

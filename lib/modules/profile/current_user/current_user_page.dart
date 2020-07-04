@@ -44,17 +44,19 @@ class _CurrentUserPageState
       userStatus: controller.currentUser.status,
       userBio: controller.currentUser.bio,
       userAvatar: controller.currentUser.photoUrl,
-      userFollowersWidget: Observer(builder: (_) {
-        return Column(
-          children: <Widget>[
-            Text(
-              controller.currentUser.followers.length.toString(),
-              style: bold20White,
-            ),
-            Text('Followers', style: normal16Hint)
-          ],
-        );
-      }),
+      userFollowersWidget: Observer(
+        builder: (_) {
+          return Column(
+            children: <Widget>[
+              Text(
+                controller.currentUser.followers.length.toString(),
+                style: bold20White,
+              ),
+              Text('Followers', style: normal16Hint)
+            ],
+          );
+        },
+      ),
       userFollowingWidget: Observer(builder: (_) {
         return Column(
           children: <Widget>[
@@ -67,10 +69,7 @@ class _CurrentUserPageState
         );
       }),
       buttonWidget: GradientOutlineButton(
-        label: Text(
-          Strings.editProfile,
-          style: normal16Accent,
-        ),
+        label: Text(Strings.editProfile, style: normal16Accent),
         onPressed: () => ProfileModule.toEditProfile(),
       ),
       tabBar: TabBar(
@@ -82,12 +81,8 @@ class _CurrentUserPageState
           insets: EdgeInsets.symmetric(horizontal: 16),
         ),
         tabs: [
-          Tab(
-            icon: Image.asset('assets/ic_badge_one.png'),
-          ),
-          Tab(
-            icon: Image.asset('assets/ic_audio_colored.png'),
-          ),
+          Tab(icon: Image.asset('assets/ic_badge_one.png')),
+          Tab(icon: Image.asset('assets/ic_audio_colored.png')),
           Tab(
             icon: SvgPicture.asset(
               'assets/ic_playlist.svg',
@@ -101,7 +96,7 @@ class _CurrentUserPageState
         children: <Widget>[
           AchievementsModule(controller.currentUser),
           AudioModule(controller.currentUser.id),
-          ShowPlaylistsModule(controller.currentUser.id),
+          ShowPlaylistsModule(userId: controller.currentUser.id),
         ],
       ),
     );

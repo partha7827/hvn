@@ -11,8 +11,9 @@ import 'package:highvibe/modules/playlist/create_new_playlist/create_new_playlis
 import 'package:highvibe/modules/playlist/edit_playlist/edit_playlist_page.dart';
 import 'package:highvibe/modules/playlist/edit_playlist/edit_playlist_page_controller.dart';
 import 'package:highvibe/modules/playlist/playlist_controller.dart';
-import 'package:highvibe/services/storage_service.dart';
+import 'package:highvibe/modules/playlist/show_playlists/show_playlists_controller.dart';
 import 'package:highvibe/modules/playlist/show_playlists/show_playlists_module.dart';
+import 'package:highvibe/services/storage_service.dart';
 
 class PlaylistModule extends ChildModule {
   static final _playlistRoute = '/playlist';
@@ -30,13 +31,18 @@ class PlaylistModule extends ChildModule {
         Bind<AddToPlaylistController>((_) => AddToPlaylistController()),
         Bind<CreateNewPlaylistController>((_) => CreateNewPlaylistController()),
         Bind<EditPlaylistController>((_) => EditPlaylistController()),
+        Bind<ShowPlaylistsController>(
+          (_) => ShowPlaylistsController(
+            userId: _currentUserStore.currentUser.id,
+          ),
+        ),
       ];
 
   @override
   List<Router<Object>> get routers => [
         Router(
           '$_playlistRoute/show_playlists',
-          child: (_, args) => ShowPlaylistsModule(args.data),
+          child: (_, args) => ShowPlaylistsModule(userId: args.data),
           transition: TransitionType.fadeIn,
         ),
         Router(
@@ -76,4 +82,6 @@ class PlaylistModule extends ChildModule {
       Modular.to
           .pushNamed('$_playlistRoute/open_playlist', arguments: playList);
 
+  static Future<Object> toShowPlaylists() =>
+      Modular.to.pushNamed('$_playlistRoute/show_playlists');
 }

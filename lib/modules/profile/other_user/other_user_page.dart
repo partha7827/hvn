@@ -110,7 +110,10 @@ class _OtherUserPageState
             icon: Image.asset('assets/ic_audio_colored.png'),
           ),
           Tab(
-            icon: SvgPicture.asset('assets/ic_playlist.svg', color: Colors.blueAccent,),
+            icon: SvgPicture.asset(
+              'assets/ic_playlist.svg',
+              color: Colors.blueAccent,
+            ),
           ),
         ],
       ),
@@ -119,7 +122,7 @@ class _OtherUserPageState
         children: <Widget>[
           AchievementsModule(controller.otherUser),
           AudioModule(controller.otherUser.id),
-          ShowPlaylistsModule(controller.otherUser.id),
+          ShowPlaylistsModule(userId: controller.otherUser.id),
         ],
       ),
     );

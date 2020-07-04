@@ -59,7 +59,7 @@ abstract class _CreateNewPlaylistControllerBase with Store {
           ..privacy = privacy,
       );
 
-      await _firestorePlaylistService.setPlaylist(playlist);
+      await _firestorePlaylistService.setPlaylist(playlist: playlist);
     } catch (error) {
       print(error);
       hasError = true;
