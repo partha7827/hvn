@@ -43,67 +43,55 @@ Widget _buildBottomNavigationMenu(PlayList playlist) {
             )
           ],
         ),
-        ListTile(
-          leading: PlaylistImageAssets.editBottomSheet,
-          title: const Text(
-            PlaylistStrings.edit,
-            style: TextStyle(
-              fontSize: 18,
-              color: Colors.white,
-            ),
-          ),
+        _playlistMoreItemTile(
+          image: PlaylistImageAssets.editBottomSheet,
+          title: PlaylistStrings.edit,
           onTap: () {
             Modular.to.pop();
             PlaylistModule.toEditPlaylist(playList: playlist);
           },
         ),
-        ListTile(
-          leading: PlaylistImageAssets.addToPlaylistBottonSheet,
-          title: const Text(
-            PlaylistStrings.addToPlaylist,
-            style: TextStyle(
-              fontSize: 18,
-              color: Colors.white,
-            ),
-          ),
+        _playlistMoreItemTile(
+          image: PlaylistImageAssets.addToPlaylistBottonSheet,
+          title: PlaylistStrings.addToPlaylist,
           onTap: () => Modular.to.pop(),
         ),
-        ListTile(
-          leading: PlaylistImageAssets.addWaypointBottomSheet,
-          title: const Text(
-            PlaylistStrings.addToWayPoints,
-            style: TextStyle(
-              fontSize: 18,
-              color: Colors.white,
-            ),
-          ),
+        _playlistMoreItemTile(
+          image: PlaylistImageAssets.addWaypointBottomSheet,
+          title: PlaylistStrings.addToWayPoints,
           onTap: () => Modular.to.pop(),
         ),
-        ListTile(
-          leading: PlaylistImageAssets.deleteBottomSheet,
-          title: const Text(
-            PlaylistStrings.delete,
-            style: TextStyle(
-              fontSize: 18,
-              color: Colors.white,
-            ),
-          ),
+        _playlistMoreItemTile(
+          image: PlaylistImageAssets.deleteBottomSheet,
+          title: PlaylistStrings.delete,
           onTap: () {
             print('DELETE PLAYLIST');
           },
         ),
-        ListTile(
-          leading: PlaylistImageAssets.shareBottomSheet,
-          title: const Text(
-            PlaylistStrings.share,
-            style: TextStyle(
-              fontSize: 18,
-              color: Colors.white,
-            ),
-          ),
+        _playlistMoreItemTile(
+          image: PlaylistImageAssets.shareBottomSheet,
+          title: PlaylistStrings.share,
           onTap: () => Modular.to.pop(),
         ),
       ],
     ),
+  );
+}
+
+Widget _playlistMoreItemTile({
+  @required Image image,
+  @required String title,
+  @required GestureTapCallback onTap,
+}) {
+  return ListTile(
+    leading: image,
+    title: Text(
+      title,
+      style: const TextStyle(
+        fontSize: 18,
+        color: Colors.white,
+      ),
+    ),
+    onTap: onTap,
   );
 }
