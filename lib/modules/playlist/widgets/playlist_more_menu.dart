@@ -3,6 +3,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:highvibe/models/models.dart';
 import 'package:highvibe/modules/playlist/playlist_module.dart';
 import 'package:highvibe/modules/playlist/resources/resources.dart';
+import 'package:highvibe/values/themes.dart';
 import 'package:highvibe/widgets/header_row.dart';
 
 void playlistContextMenu(BuildContext context, PlayList playlist) {
@@ -88,7 +89,9 @@ Widget _buildBottomNavigationMenu(PlayList playlist) {
               color: Colors.white,
             ),
           ),
-          onTap: () => Modular.to.pop(),
+          onTap: () {
+            print('DELETE PLAYLIST');
+          },
         ),
         ListTile(
           leading: PlaylistImageAssets.shareBottomSheet,

@@ -18,11 +18,11 @@ class EmptyContent extends StatelessWidget {
         children: <Widget>[
           Text(
             title,
-            style: TextStyle(fontSize: 32, color: Colors.white),
+            style: const TextStyle(fontSize: 32, color: Colors.white),
           ),
           Text(
             message,
-            style: TextStyle(fontSize: 16, color: Colors.white),
+            style: const TextStyle(fontSize: 16, color: Colors.white),
           ),
         ],
       ),
