@@ -3,6 +3,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:highvibe/models/models.dart';
 import 'package:highvibe/modules/playlist/playlist_module.dart';
 import 'package:highvibe/modules/playlist/resources/resources.dart';
+import 'package:highvibe/modules/playlist/widgets/widgets.dart';
 import 'package:highvibe/widgets/header_row.dart';
 
 void playlistContextMenu(BuildContext context, PlayList playlist) {
@@ -43,7 +44,7 @@ Widget _buildBottomNavigationMenu(PlayList playlist) {
             )
           ],
         ),
-        _playlistMoreItemTile(
+        PlaylistMoreItemTile(
           image: PlaylistImageAssets.editBottomSheet,
           title: PlaylistStrings.edit,
           onTap: () {
@@ -51,47 +52,29 @@ Widget _buildBottomNavigationMenu(PlayList playlist) {
             PlaylistModule.toEditPlaylist(playList: playlist);
           },
         ),
-        _playlistMoreItemTile(
+        PlaylistMoreItemTile(
           image: PlaylistImageAssets.addToPlaylistBottonSheet,
           title: PlaylistStrings.addToPlaylist,
           onTap: () => Modular.to.pop(),
         ),
-        _playlistMoreItemTile(
+        PlaylistMoreItemTile(
           image: PlaylistImageAssets.addWaypointBottomSheet,
           title: PlaylistStrings.addToWayPoints,
           onTap: () => Modular.to.pop(),
         ),
-        _playlistMoreItemTile(
+        PlaylistMoreItemTile(
           image: PlaylistImageAssets.deleteBottomSheet,
           title: PlaylistStrings.delete,
           onTap: () {
             print('DELETE PLAYLIST');
           },
         ),
-        _playlistMoreItemTile(
+        PlaylistMoreItemTile(
           image: PlaylistImageAssets.shareBottomSheet,
           title: PlaylistStrings.share,
           onTap: () => Modular.to.pop(),
         ),
       ],
     ),
-  );
-}
-
-Widget _playlistMoreItemTile({
-  @required Image image,
-  @required String title,
-  @required GestureTapCallback onTap,
-}) {
-  return ListTile(
-    leading: image,
-    title: Text(
-      title,
-      style: const TextStyle(
-        fontSize: 18,
-        color: Colors.white,
-      ),
-    ),
-    onTap: onTap,
   );
 }
