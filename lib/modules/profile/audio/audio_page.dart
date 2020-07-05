@@ -5,6 +5,7 @@ import 'package:highvibe/models/models.dart';
 import 'package:highvibe/modules/app/media_overlays.dart';
 import 'package:highvibe/modules/playlist/playlist_module.dart';
 import 'package:highvibe/modules/playlist/resources/resources.dart';
+import 'package:highvibe/modules/playlist/show_playlists/show_playlists_module.dart';
 import 'package:highvibe/modules/playlist/widgets/widgets.dart';
 import 'package:highvibe/utils/utils.dart';
 import 'package:highvibe/values/strings.dart';
@@ -66,26 +67,30 @@ class _AudioPageState extends ModularState<AudioPage, AudioController> {
         ],
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            const HeaderRow(title: PlaylistStrings.playlist),
-          ],
+          children: [const HeaderRow(title: PlaylistStrings.playlist)],
         ),
         const SizedBox(height: 10),
-        for (final item in tempInMemoryPlaylistCollection) ...[
-          GestureDetector(
-            onTap: () async {
-              MediaOverlays.presentPlayListPlayerAsOverlay(
-                context: context,
-                playList: item,
-              );
-            },
-            child: PlaylistTile(
-              isInEditMode: false,
-              playList: item,
-              onTap: (item) => PlaylistModule.toContextMenu(playList: item),
-            ),
-          )
-        ],
+        Container(
+          height: 500,
+          child: ShowPlaylistsModule(
+            userId: controller.currentUserStore.currentUser.id,
+          ),
+        ),
+        // for (final item in tempInMemoryPlaylistCollection) ...[
+        //   GestureDetector(
+        //     onTap: () async {
+        //       MediaOverlays.presentPlayListPlayerAsOverlay(
+        //         context: context,
+        //         playList: item,
+        //       );
+        //     },
+        //     child: PlaylistTile(
+        //       isInEditMode: false,
+        //       playList: item,
+        //       onTap: (item) => PlaylistModule.toContextMenu(playList: item),
+        //     ),
+        //   )
+        // ],
       ],
     );
   }
