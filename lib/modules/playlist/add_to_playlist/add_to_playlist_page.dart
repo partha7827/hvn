@@ -196,14 +196,5 @@ class _AddToPlaylistPageState
     }
 
     _close();
-
-    // showDialog(
-    //   context: context,
-    //   builder: (_) => const PlaylistModalAlert(
-    //     title: PlaylistStrings.audioAddedSuccessTitle,
-    //     subTitle: PlaylistStrings.audioAddedSuccessSubTitle,
-    //     popsCount: 1,
-    //   ),
-    // );
   }
 }

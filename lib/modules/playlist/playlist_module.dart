@@ -11,6 +11,8 @@ import 'package:highvibe/modules/playlist/create_new_playlist/create_new_playlis
 import 'package:highvibe/modules/playlist/edit_playlist/edit_playlist_page.dart';
 import 'package:highvibe/modules/playlist/edit_playlist/edit_playlist_page_controller.dart';
 import 'package:highvibe/modules/playlist/playlist_controller.dart';
+import 'package:highvibe/modules/playlist/playlist_more_menu/playlist_more_menu_controller.dart';
+import 'package:highvibe/modules/playlist/playlist_more_menu/playlist_more_menu_page.dart';
 import 'package:highvibe/modules/playlist/show_playlists/show_playlists_controller.dart';
 import 'package:highvibe/modules/playlist/show_playlists/show_playlists_module.dart';
 import 'package:highvibe/services/storage_service.dart';
@@ -36,10 +38,16 @@ class PlaylistModule extends ChildModule {
             userId: _currentUserStore.currentUser.id,
           ),
         ),
+        Bind<PlaylistMoreMenuController>((_) => PlaylistMoreMenuController()),
       ];
 
   @override
   List<Router<Object>> get routers => [
+        Router(
+          '$_playlistRoute/context_menu',
+          child: (_, args) => PlaylistMoreMenuPage(playlist: args.data),
+          transition: TransitionType.downToUp,
+        ),
         Router(
           '$_playlistRoute/show_playlists',
           child: (_, args) => ShowPlaylistsModule(userId: args.data),
@@ -84,4 +92,7 @@ class PlaylistModule extends ChildModule {
 
   static Future<Object> toShowPlaylists() =>
       Modular.to.pushNamed('$_playlistRoute/show_playlists');
+
+  static Future<Object> toContextMenu({@required PlayList playList}) =>
+      Modular.to.pushNamed('$_playlistRoute/context_menu', arguments: playList);
 }

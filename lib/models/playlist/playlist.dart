@@ -24,6 +24,7 @@ abstract class PlayList implements Built<PlayList, PlayListBuilder> {
   String get coverUrlPath;
   @nullable
   String get description;
+  @nullable
   String get title;
   Privacy get privacy;
 

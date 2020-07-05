@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:highvibe/models/playlist/playlist.dart';
-import 'package:highvibe/modules/playlist/playlist_more_menu/playlist_more_menu.dart';
+import 'package:highvibe/modules/playlist/playlist_module.dart';
 import 'package:highvibe/modules/playlist/widgets/playlist_tile.dart';
 import 'package:highvibe/modules/playlist/widgets/widgets.dart';
 import 'show_playlists_controller.dart';
@@ -32,7 +32,7 @@ class _ShowPlaylistsPageState
             return PlaylistTile(
               isInEditMode: false,
               playList: item,
-              onTap: (item) => playlistContextMenu(context, item),
+              onTap: (item) => PlaylistModule.toContextMenu(playList: item),
             );
           },
         );

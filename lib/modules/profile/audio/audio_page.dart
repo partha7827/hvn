@@ -3,6 +3,7 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:highvibe/models/models.dart';
 import 'package:highvibe/modules/app/media_overlays.dart';
+import 'package:highvibe/modules/playlist/playlist_module.dart';
 import 'package:highvibe/modules/playlist/resources/resources.dart';
 import 'package:highvibe/modules/playlist/widgets/widgets.dart';
 import 'package:highvibe/utils/utils.dart';
@@ -81,7 +82,7 @@ class _AudioPageState extends ModularState<AudioPage, AudioController> {
             child: PlaylistTile(
               isInEditMode: false,
               playList: item,
-              onTap: (item) => playlistContextMenu(context, item),
+              onTap: (item) => PlaylistModule.toContextMenu(playList: item),
             ),
           )
         ],

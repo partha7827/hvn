@@ -24,9 +24,7 @@ class StorageService extends Disposable {
   factory StorageService.withMock() => StorageService(MockFirebaseStorage());
 
   @override
-  void dispose() {
-    // TODO:- Do we really need it?
-  }
+  void dispose() {}
 
   Future<String> uploadAudio(File file, String userId) async {
     final snapshot = await audioStorage.putFile(file).onComplete;

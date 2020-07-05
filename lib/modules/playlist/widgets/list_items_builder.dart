@@ -19,7 +19,6 @@ class ListItemsBuilder<T> extends StatelessWidget {
   Widget build(BuildContext context) {
     if (snapshot.hasData) {
       final items = snapshot.data;
-      print('=====ListItemsBuilder=====: \n $items');
       if (items.isNotEmpty) {
         return _buildList(items);
       } else {

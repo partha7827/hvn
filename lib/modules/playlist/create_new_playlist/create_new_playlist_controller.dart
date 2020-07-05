@@ -43,11 +43,15 @@ abstract class _CreateNewPlaylistControllerBase with Store {
   Future<void> createPlaylist() async {
     try {
       final uuid = Uuid();
+      var playlistCoverStoragePath = '';
 
-      final playlistCoverStoragePath =
-          await _firebaseStorage.uploadPlaylistCover(
-        file: playlistCoverFile,
-      );
+      if (playlistCoverFile == null) {
+        playlistCoverStoragePath = _defaultCover;
+      } else {
+        playlistCoverStoragePath = await _firebaseStorage.uploadPlaylistCover(
+          file: playlistCoverFile,
+        );
+      }
 
       final playlist = PlayList(
         (b) => b
@@ -61,8 +65,8 @@ abstract class _CreateNewPlaylistControllerBase with Store {
 
       await _firestorePlaylistService.setPlaylist(playlist: playlist);
     } catch (error) {
-      print(error);
       hasError = true;
+      throw Exception(error.toString());
     }
   }
 
@@ -88,7 +92,7 @@ abstract class _CreateNewPlaylistControllerBase with Store {
       }
     } catch (error) {
       hasError = true;
-      print(error);
+      throw Exception(error.toString());
     }
   }
 
@@ -103,3 +107,6 @@ abstract class _CreateNewPlaylistControllerBase with Store {
     }
   }
 }
+
+final _defaultCover =
+    'https://images.unsplash.com/photo-1593455071238-92dd081a39b1?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80';
