@@ -8,12 +8,14 @@ part 'playlist_controller.g.dart';
 
 class PlaylistController = _PlaylistControllerBase with _$PlaylistController;
 
-abstract class _PlaylistControllerBase with Store {
-  final _firestorePlaylistService = Modular.get<FirestorePlaylistService>();
+abstract class _PlaylistControllerBase with Store {}
 
-  @action
-  Future<void> deletePlaylistCover({@required PlayList playlist}) async {
-    print('DELETE PLAYLIST');
+final _firestorePlaylistService = Modular.get<FirestorePlaylistService>();
+
+Future<void> deletePlaylistCover({@required PlayList playlist}) async {
+  try {
     await _firestorePlaylistService.deletePlaylist(playlist: playlist);
+  } catch (e) {
+    throw Exception(e);
   }
 }

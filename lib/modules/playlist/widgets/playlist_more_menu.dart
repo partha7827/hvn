@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:highvibe/models/models.dart';
+import 'package:highvibe/modules/playlist/playlist_controller.dart';
 import 'package:highvibe/modules/playlist/playlist_module.dart';
 import 'package:highvibe/modules/playlist/resources/resources.dart';
 import 'package:highvibe/modules/playlist/widgets/widgets.dart';
@@ -63,12 +64,12 @@ Widget _buildBottomNavigationMenu(PlayList playlist) {
           onTap: () => Modular.to.pop(),
         ),
         PlaylistMoreItemTile(
-          image: PlaylistImageAssets.deleteBottomSheet,
-          title: PlaylistStrings.delete,
-          onTap: () {
-            print('DELETE PLAYLIST');
-          },
-        ),
+            image: PlaylistImageAssets.deleteBottomSheet,
+            title: PlaylistStrings.delete,
+            onTap: () {
+              deletePlaylistCover(playlist: playlist);
+              Modular.to.pop();
+            }),
         PlaylistMoreItemTile(
           image: PlaylistImageAssets.shareBottomSheet,
           title: PlaylistStrings.share,
