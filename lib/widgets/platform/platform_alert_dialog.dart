@@ -10,15 +10,18 @@ class PlatformAlertDialog extends PlatformWidget {
   final String content;
   final String cancelActionText;
   final String defaultActionText;
+  final VoidCallback defaultOnPressed;
 
   PlatformAlertDialog({
     @required this.title,
     @required this.content,
     @required this.defaultActionText,
+    @required this.defaultOnPressed,
     this.cancelActionText,
   })  : assert(title != null),
         assert(content != null),
-        assert(defaultActionText != null);
+        assert(defaultActionText != null),
+        assert(defaultOnPressed != null);
 
   @override
   Widget buildCupertinoWidget(BuildContext context) {
@@ -64,7 +67,7 @@ class PlatformAlertDialog extends PlatformWidget {
     actions.add(
       PlatformAlertDialogAction(
         child: Text(defaultActionText),
-        onPressed: () => Navigator.of(context).pop(true),
+        onPressed: defaultOnPressed,
       ),
     );
     return actions;

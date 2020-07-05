@@ -1,4 +1,5 @@
 import 'package:flutter/services.dart';
+import 'package:flutter/widgets.dart';
 import 'package:highvibe/widgets/platform/platform_alert_dialog.dart';
 import 'package:meta/meta.dart';
 
@@ -11,10 +12,12 @@ class PlatformExceptionAlertDialog extends PlatformAlertDialog {
   PlatformExceptionAlertDialog({
     @required String title,
     @required PlatformException exception,
+    @required BuildContext context,
   }) : super(
             title: title,
             content: _message(exception),
-            defaultActionText: 'OK');
+            defaultActionText: 'OK',
+            defaultOnPressed: () => Navigator.of(context).pop());
 
   static String _message(PlatformException exception) {
     if (exception.message == 'FIRFirestoreErrorDomain') {
