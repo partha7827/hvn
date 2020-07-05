@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:highvibe/widgets/platform/platform_alert_dialog_action.dart';
 import 'package:highvibe/widgets/platform/platform_widget.dart';
 
 class PlatformAlertDialog extends PlatformWidget {
