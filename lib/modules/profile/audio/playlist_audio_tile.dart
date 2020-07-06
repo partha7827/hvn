@@ -1,11 +1,11 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flare_flutter/flare_actor.dart';
 import 'package:flutter/material.dart';
 import 'package:highvibe/models/audio/audio.dart';
 import 'package:highvibe/modules/playlist/resources/resources.dart';
 import 'package:highvibe/modules/profile/profile_module.dart';
 import 'package:highvibe/utils/utils.dart';
 import 'package:highvibe/values/themes.dart';
+import 'package:lottie/lottie.dart';
 
 class PlayListAudioTile extends StatelessWidget {
   const PlayListAudioTile({
@@ -73,12 +73,11 @@ class PlayListAudioTile extends StatelessWidget {
           ),
           Visibility(
             visible: isPlaying,
-            child: const SizedBox(
+            child: SizedBox(
               height: 24,
               width: 24,
-              child: FlareActor(
-                'assets/animation/playing_music.flr',
-                animation: 'play',
+              child: Lottie.asset(
+                'assets/animation/audio_play.json',
               ),
             ),
           ),
