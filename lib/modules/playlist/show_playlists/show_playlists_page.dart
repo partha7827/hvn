@@ -7,7 +7,6 @@ import 'package:highvibe/modules/playlist/resources/strings.dart';
 import 'package:highvibe/modules/playlist/widgets/playlist_more_menu.dart';
 import 'package:highvibe/modules/playlist/widgets/playlist_tile.dart';
 import 'package:highvibe/widgets/header_row.dart';
-import 'package:highvibe/widgets/load_widget.dart';
 import 'show_playlists_controller.dart';
 
 class ShowPlaylistsPage extends StatefulWidget {
