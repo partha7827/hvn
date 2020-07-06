@@ -3,6 +3,7 @@ import 'package:flare_flutter/flare_actor.dart';
 import 'package:flutter/material.dart';
 import 'package:highvibe/models/audio/audio.dart';
 import 'package:highvibe/modules/playlist/resources/resources.dart';
+import 'package:highvibe/modules/profile/profile_module.dart';
 import 'package:highvibe/utils/utils.dart';
 import 'package:highvibe/values/themes.dart';
 
@@ -52,7 +53,12 @@ class PlayListAudioTile extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
-                  Text(audio.userName, style: normal12Hint),
+                  GestureDetector(
+                    onTap: () {
+                      ProfileModule.toOtherProfileId(audio.userId);
+                    },
+                    child: Text(audio.userName, style: normal12Hint),
+                  ),
                   Text(audio.title, style: bold18White),
                   Text(
                       mediaTimeFormatter(
