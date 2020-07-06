@@ -312,8 +312,8 @@ class _EditPlayListPageState
         ..audioFiles = BuiltList<Audio>.from(_audioItems).toBuilder(),
     );
 
-    tempInMemoryPlaylistCollection.remove(widget.playlist);
-    tempInMemoryPlaylistCollection.add(updatePlaylist);
+    // tempInMemoryPlaylistCollection.remove(widget.playlist);
+    // tempInMemoryPlaylistCollection.add(updatePlaylist);
 
     showDialog(
       context: context,

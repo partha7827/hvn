@@ -10,8 +10,6 @@ import 'package:highvibe/models/serializer/serializer.dart';
 
 part 'playlist.g.dart';
 
-final Set<PlayList> tempInMemoryPlaylistCollection = {};
-
 abstract class PlayList implements Built<PlayList, PlayListBuilder> {
   static Serializer<PlayList> get serializer => _$playListSerializer;
 

@@ -18,7 +18,7 @@ class ShowPlaylistsModule extends WidgetModule {
             userId: _currentUserStore.currentUser.id,
           ),
         ),
-        Bind((i) => ShowPlaylistsController(userId: userId)),
+        Bind((i) => ShowPlaylistsController()),
       ];
 
   @override

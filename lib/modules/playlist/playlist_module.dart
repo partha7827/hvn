@@ -30,14 +30,12 @@ class PlaylistModule extends ChildModule {
         ),
         Bind<StorageService>((_) => StorageService.withFirebase()),
         Bind<PlaylistController>((_) => PlaylistController()),
-        Bind<AddToPlaylistController>((_) => AddToPlaylistController()),
+        Bind<AddToPlaylistController>(
+          (i) => AddToPlaylistController(i.args.data),
+        ),
         Bind<CreateNewPlaylistController>((_) => CreateNewPlaylistController()),
         Bind<EditPlaylistController>((_) => EditPlaylistController()),
-        Bind<ShowPlaylistsController>(
-          (_) => ShowPlaylistsController(
-            userId: _currentUserStore.currentUser.id,
-          ),
-        ),
+        Bind<ShowPlaylistsController>((_) => ShowPlaylistsController()),
         Bind<PlaylistMoreMenuController>((_) => PlaylistMoreMenuController()),
       ];
 
@@ -55,8 +53,7 @@ class PlaylistModule extends ChildModule {
         ),
         Router(
           '$_playlistRoute/add_to_playlist',
-          child: (_, args) => AddToPlaylistPage(
-            audioFile: args.data,
+          child: (_, args) => const AddToPlaylistPage(
             isPresentedAsOverlay: false,
           ),
           transition: TransitionType.fadeIn,
