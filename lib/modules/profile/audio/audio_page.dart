@@ -3,8 +3,6 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:highvibe/models/models.dart';
 import 'package:highvibe/modules/app/media_overlays.dart';
-import 'package:highvibe/modules/playlist/resources/resources.dart';
-import 'package:highvibe/modules/playlist/widgets/widgets.dart';
 import 'package:highvibe/utils/utils.dart';
 import 'package:highvibe/values/strings.dart';
 import 'package:highvibe/widgets/audio_tile.dart';
@@ -59,28 +57,6 @@ class _AudioPageState extends ModularState<AudioPage, AudioController> {
               audioFile: item,
             ),
           ),
-        ],
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            const HeaderRow(title: PlaylistStrings.playlist),
-          ],
-        ),
-        const SizedBox(height: 10),
-        for (final item in tempInMemoryPlaylistCollection) ...[
-          GestureDetector(
-            onTap: () async {
-              MediaOverlays.presentPlayListPlayerAsOverlay(
-                context: context,
-                playList: item,
-              );
-            },
-            child: PlaylistTile(
-              isInEditMode: false,
-              playList: item,
-              onTap: (item) => playlistContextMenu(context, item),
-            ),
-          )
         ],
       ],
     );
