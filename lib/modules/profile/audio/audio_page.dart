@@ -11,7 +11,6 @@ import 'package:highvibe/widgets/audio_tile.dart';
 import 'package:highvibe/widgets/header_row.dart';
 import 'package:highvibe/widgets/repeat_widget.dart';
 import 'package:highvibe/widgets/splash_widget.dart';
-import 'package:highvibe/widgets/load_widget.dart';
 import 'package:mobx/mobx.dart';
 
 import 'audio_controller.dart';
