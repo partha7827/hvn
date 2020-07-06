@@ -1,12 +1,8 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:highvibe/models/audio/audio.dart';
-import 'package:highvibe/models/options_model/options_model.dart';
 import 'package:highvibe/models/user/user.dart';
 import 'package:highvibe/modules/app/app_controller.dart';
 import 'package:highvibe/services/firestore_service.dart';
-import 'package:highvibe/values/constants.dart';
 import 'package:mobx/mobx.dart';
 
 part 'audio_controller.g.dart';
@@ -23,7 +19,6 @@ abstract class _AudioControllerBase with Store {
   final String userId;
   _AudioControllerBase(this.userId);
   User get currentUser => currentUserStore.currentUser;
-  final List<OptionsModel> optionsModelList = List<OptionsModel>.from([]);
 
   @action
   void loadAudios() {

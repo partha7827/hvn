@@ -2,7 +2,6 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:highvibe/models/models.dart' show Audio;
-import 'package:highvibe/models/options_model/options_model.dart';
 import 'package:highvibe/modules/app/app_controller.dart';
 import 'package:highvibe/modules/playlist/resources/assets.dart';
 import 'package:highvibe/utils/utils.dart';
@@ -71,16 +70,37 @@ class AudioTile extends StatelessWidget {
                 print('selected: $value');
               },
               itemBuilder: (_) => [
-                if (isCreator)
+                if (isCreator) ...[
                   _buildMenuItem(
                     id: 'edit',
                     title: 'Edit',
                     iconPath: 'assets/ic_highlight.png',
                   ),
+                  _buildMenuItem(
+                    id: 'waypoints',
+                    title: 'Add WayPoints',
+                    iconPath: 'assets/ic_waypoint.png',
+                  ),
+                  _buildMenuItem(
+                    id: 'delete',
+                    title: 'Delete',
+                    iconPath: 'assets/ic_delete.png',
+                  ),
+                ],
                 _buildMenuItem(
                   id: 'add-to-playlist',
                   title: 'Add to Playlist',
                   iconPath: 'assets/ic_add_to_playlist.png',
+                ),
+                _buildMenuItem(
+                  id: 'add-to-favorites',
+                  title: 'Add to Favorites',
+                  iconPath: 'assets/ic_favorite.png',
+                ),
+                _buildMenuItem(
+                  id: 'share',
+                  title: 'Share',
+                  iconPath: 'assets/ic_share.png',
                 ),
               ],
             )
@@ -99,7 +119,7 @@ class AudioTile extends StatelessWidget {
       value: id,
       child: ListTile(
         leading: Image.asset(
-          'assets/$iconPath.png',
+          '$iconPath',
           width: 24,
           height: 24,
         ),
