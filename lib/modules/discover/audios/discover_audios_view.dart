@@ -8,7 +8,6 @@ import 'package:highvibe/modules/discover/audios/discover_audios_controller.dart
 import 'package:highvibe/utils/utils.dart';
 import 'package:highvibe/widgets/repeat_widget.dart';
 import 'package:highvibe/widgets/splash_widget.dart';
-import 'package:highvibe/widgets/load_widget.dart';
 import 'package:mobx/mobx.dart';
 
 class DiscoverAudiosView extends StatefulWidget {
@@ -35,19 +34,17 @@ class _DiscoverAudiosViewState
     super.build(context);
     return WillPopScope(
       onWillPop: onWillPop,
-      child: LoadWidget(
-        child: Observer(
-          builder: (_) {
-            switch (controller.audios.status) {
-              case FutureStatus.fulfilled:
-                return buildAudios(controller.audios.value.toList());
-              case FutureStatus.rejected:
-                return RepeatWidget(controller.loadAudios);
-              default:
-                return const SplashWidget();
-            }
-          },
-        ),
+      child: Observer(
+        builder: (_) {
+          switch (controller.audios.status) {
+            case FutureStatus.fulfilled:
+              return buildAudios(controller.audios.value.toList());
+            case FutureStatus.rejected:
+              return RepeatWidget(controller.loadAudios);
+            default:
+              return const SplashWidget();
+          }
+        },
       ),
     );
   }
