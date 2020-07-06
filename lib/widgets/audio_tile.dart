@@ -1,7 +1,9 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:highvibe/models/models.dart' show Audio;
 import 'package:highvibe/models/options_model/options_model.dart';
+import 'package:highvibe/modules/app/app_controller.dart';
 import 'package:highvibe/modules/playlist/resources/assets.dart';
 import 'package:highvibe/utils/utils.dart';
 import 'package:highvibe/values/themes.dart';
@@ -9,15 +11,14 @@ import 'package:highvibe/values/themes.dart';
 class AudioTile extends StatelessWidget {
   final Audio audioFile;
   final ValueChanged<Audio> onTap;
-  final Function onOptionsTap;
-  final List<OptionsModel> optionsModelList;
 
   const AudioTile({
     @required this.audioFile,
     @required this.onTap,
-    @required this.onOptionsTap,
-    this.optionsModelList,
   });
+
+  bool get isCreator =>
+      audioFile.userId == Modular.get<AppController>().currentUser.id;
 
   @override
   Widget build(BuildContext context) {
@@ -62,29 +63,47 @@ class AudioTile extends StatelessWidget {
             ),
             PopupMenuButton(
               icon: PlaylistImageAssets.more,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(15),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(15),
+              ),
+              color: secondaryColor,
+              onSelected: (value) {
+                print('selected: $value');
+              },
+              itemBuilder: (_) => [
+                if (isCreator)
+                  _buildMenuItem(
+                    id: 'edit',
+                    title: 'Edit',
+                    iconPath: 'assets/ic_highlight.png',
+                  ),
+                _buildMenuItem(
+                  id: 'add-to-playlist',
+                  title: 'Add to Playlist',
+                  iconPath: 'assets/ic_add_to_playlist.png',
                 ),
-                color: secondaryColor,
-                onSelected: (value) => onOptionsTap(audioFile, value),
-                itemBuilder: (BuildContext context) {
-                  return optionsModelList
-                      ?.map(
-                        (optionsModel) => PopupMenuItem<String>(
-                          value: '${optionsModel.id}',
-                          child: ListTile(
-                            leading: optionsModel.widget,
-                            title: Text(
-                              optionsModel.text,
-                              style: normal16White,
-                            ),
-                          ),
-                        ),
-                      )
-                      ?.toList();
-                })
+              ],
+            )
           ],
         ),
+      ),
+    );
+  }
+
+  PopupMenuItem<String> _buildMenuItem({
+    String id,
+    String title,
+    String iconPath,
+  }) {
+    return PopupMenuItem<String>(
+      value: id,
+      child: ListTile(
+        leading: Image.asset(
+          'assets/$iconPath.png',
+          width: 24,
+          height: 24,
+        ),
+        title: Text(title, style: normal16White),
       ),
     );
   }

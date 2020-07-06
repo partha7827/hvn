@@ -27,7 +27,6 @@ class _AudioPageState extends ModularState<AudioPage, AudioController> {
   void initState() {
     super.initState();
     controller.loadAudios();
-    controller.loadOptionsList();
   }
 
   @override
@@ -63,9 +62,6 @@ class _AudioPageState extends ModularState<AudioPage, AudioController> {
               context: context,
               audioFile: item,
             ),
-            optionsModelList: controller.optionsModelList,
-            onOptionsTap: (Audio audioFile, String value) =>
-                selectedOption(audioFile, value),
           ),
         ],
         Row(
@@ -92,29 +88,5 @@ class _AudioPageState extends ModularState<AudioPage, AudioController> {
         ],
       ],
     );
-  }
-
-  void selectedOption(Audio audioFile, String value) {
-    final optionId = int.parse(value);
-    switch (optionId) {
-      case edit:
-        // Edit
-        break;
-      case addToPlaylist:
-        // Add to playlist
-        break;
-      case addWayPoints:
-        // Add Waypoints
-        break;
-      case addToFavorites:
-        // Add to favorites
-        break;
-      case delete:
-        // Delete
-        break;
-      case share:
-        // Share
-        break;
-    }
   }
 }

@@ -54,7 +54,6 @@ class PlaylistsCard extends StatelessWidget {
               for (final audioItem in mockAudioItemsList)
                 AudioTile(
                   audioFile: audioItem,
-                  onOptionsTap: () {},
                   onTap: (item) {
                     MediaOverlays.presentAudioPlayerAsOverlay(
                       context: context,
