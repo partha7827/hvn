@@ -32,19 +32,17 @@ class _AudioPageState extends ModularState<AudioPage, AudioController> {
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: onWillPop,
-      child: LoadWidget(
-        child: Observer(
-          builder: (_) {
-            switch (controller.audios.status) {
-              case FutureStatus.fulfilled:
-                return buildAudios(controller.audios.value);
-              case FutureStatus.rejected:
-                return RepeatWidget(controller.loadAudios);
-              default:
-                return const SplashWidget();
-            }
-          },
-        ),
+      child: Observer(
+        builder: (_) {
+          switch (controller.audios.status) {
+            case FutureStatus.fulfilled:
+              return buildAudios(controller.audios.value);
+            case FutureStatus.rejected:
+              return RepeatWidget(controller.loadAudios);
+            default:
+              return const SplashWidget();
+          }
+        },
       ),
     );
   }

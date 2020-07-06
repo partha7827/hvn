@@ -27,10 +27,7 @@ class _ShowPlaylistsPageState
 
   @override
   Widget build(BuildContext context) {
-    return LoadWidget(
-      future: controller.playlists,
-      builder: buildPlaylists,
-    );
+    return buildPlaylists(controller.playlists.value);
   }
 
   Widget buildPlaylists(List<PlayList> playlists) {
