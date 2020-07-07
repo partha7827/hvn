@@ -8,7 +8,7 @@ import 'package:highvibe/modules/playlist/add_to_playlist/add_to_playlist_contro
 import 'package:highvibe/modules/playlist/playlist_module.dart';
 import 'package:highvibe/modules/playlist/resources/resources.dart';
 import 'package:highvibe/modules/playlist/widgets/widgets.dart'
-    show PlaylistTile;
+    show PlaylistTile, progressDialog, showSuccessDialog;
 import 'package:highvibe/widgets/gradient_raised_button.dart';
 import 'package:highvibe/widgets/header_row.dart';
 import 'package:highvibe/widgets/responsive_safe_area.dart';
@@ -125,7 +125,8 @@ class _AddToPlaylistPageState
                     bottom: widget.isPresentedAsOverlay ? 8 : 120,
                     child: GradientRaisedButton(
                       label: PlaylistStrings.save,
-                      onPressed: () async => _savePlaylists(),
+                      onPressed: () async =>
+                          _updatePlaylistAndShowSuccessDialog(context: context),
                     ),
                   ),
                 ],
@@ -154,8 +155,19 @@ class _AddToPlaylistPageState
     }
   }
 
-  Future<void> _savePlaylists() async {
+  // TODO:- Implement an unhappy path when UX/UI will be clarified
+  Future<void> _updatePlaylistAndShowSuccessDialog({
+    @required BuildContext context,
+  }) async {
+    // TODO:- Implement display of progress hud as overlay
+    await progressDialog(context: context).show();
     await controller.saveAudioToPlaylists();
-    _close();
+    await progressDialog(context: context).hide();
+    showSuccessDialog(
+      context: context,
+      isPresentedAsOverlay: widget.isPresentedAsOverlay,
+      title: PlaylistStrings.audioAddedSuccessTitle,
+      subTitle: PlaylistStrings.audioAddedSuccessSubTitle,
+    );
   }
 }

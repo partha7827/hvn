@@ -12,6 +12,9 @@ import 'package:uuid/uuid.dart';
 
 part 'create_new_playlist_controller.g.dart';
 
+final _defaultCover =
+    'https://images.unsplash.com/photo-1593455071238-92dd081a39b1?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80';
+
 class CreateNewPlaylistController = _CreateNewPlaylistControllerBase
     with _$CreateNewPlaylistController;
 
@@ -102,6 +105,3 @@ abstract class _CreateNewPlaylistControllerBase with Store {
     }
   }
 }
-
-final _defaultCover =
-    'https://images.unsplash.com/photo-1593455071238-92dd081a39b1?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80';

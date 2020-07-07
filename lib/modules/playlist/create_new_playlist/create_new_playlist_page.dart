@@ -8,7 +8,6 @@ import 'package:highvibe/modules/playlist/widgets/widgets.dart';
 import 'package:highvibe/widgets/gradient_raised_button.dart';
 import 'package:highvibe/widgets/header_row.dart';
 import 'package:highvibe/widgets/responsive_safe_area.dart';
-import 'package:progress_dialog/progress_dialog.dart';
 
 class CreateNewPlaylistPage extends StatefulWidget {
   final bool isPresentedAsOverlay;
@@ -209,9 +208,11 @@ class _CreateNewPlaylistPage
     }
   }
 
-  void _savePlaylistAndShowSuccessDialog({
+  // TODO:- Implement an unhappy path when UX/UI will be clarified
+  Future<void> _savePlaylistAndShowSuccessDialog({
     @required BuildContext context,
   }) async {
+    // TODO:- Implement display of progress hud as overlay
     await progressDialog(context: context).show();
     await controller.createPlaylist();
     await progressDialog(context: context).hide();
