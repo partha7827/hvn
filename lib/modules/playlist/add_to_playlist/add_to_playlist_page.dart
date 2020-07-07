@@ -1,6 +1,5 @@
 import 'package:flappy_search_bar/flappy_search_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:highvibe/models/models.dart' show PlayList;
 import 'package:highvibe/modules/app/app_module.dart';
@@ -32,12 +31,6 @@ class _AddToPlaylistPageState
       SearchBarController();
 
   @override
-  void initState() {
-    super.initState();
-    controller.init();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -53,36 +46,37 @@ class _AddToPlaylistPageState
       ),
       body: ResponsiveSafeArea(
         builder: (context, size) {
-          return Observer(
-            builder: (_) {
-              return Align(
-                alignment: Alignment.topCenter,
-                child: Container(
-                  padding: const EdgeInsets.fromLTRB(12, 8, 12, 8),
-                  child: Stack(
-                    children: [
-                      Positioned(
-                        child: Container(
-                          height: 30,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              const HeaderRow(title: PlaylistStrings.playlist),
-                              GestureDetector(
-                                onTap: () => _presentCreateNewPlaylist(context),
-                                child: SizedBox(
-                                  height: 20,
-                                  width: 120,
-                                  child: PlaylistImageAssets.newPlaylist,
-                                ),
-                              )
-                            ],
-                          ),
-                        ),
+          return Align(
+            alignment: Alignment.topCenter,
+            child: Container(
+              padding: const EdgeInsets.fromLTRB(12, 8, 12, 8),
+              child: Stack(
+                children: [
+                  Positioned(
+                    child: Container(
+                      height: 30,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          const HeaderRow(title: PlaylistStrings.playlist),
+                          GestureDetector(
+                            onTap: () => _presentCreateNewPlaylist(context),
+                            child: SizedBox(
+                              height: 20,
+                              width: 120,
+                              child: PlaylistImageAssets.newPlaylist,
+                            ),
+                          )
+                        ],
                       ),
-                      Padding(
-                        padding: const EdgeInsets.fromLTRB(0, 30, 0, 0),
-                        child: SearchBar(
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(0, 30, 0, 0),
+                    child: StreamBuilder<List<PlayList>>(
+                      stream: controller.fetchPlaylists(),
+                      builder: (context, snapshot) {
+                        return SearchBar(
                           icon: const Padding(
                             padding: EdgeInsets.fromLTRB(8, 0, 0, 0),
                             child: Icon(
@@ -102,8 +96,7 @@ class _AddToPlaylistPageState
                             style: TextStyle(color: Colors.white),
                           ),
                           searchBarController: _searchBarController,
-                          suggestions:
-                              controller.listOfPlaylistToAddAudio.toList(),
+                          suggestions: snapshot.hasData ? snapshot.data : [],
                           onItemFound: (item, index) {
                             return PlaylistTile(
                               playList: item,
@@ -114,27 +107,30 @@ class _AddToPlaylistPageState
                               ),
                             );
                           },
-                          onSearch: controller.findPlaylists,
+                          onSearch: (searchTerm) => controller.findPlaylists(
+                            items: snapshot.hasData ? snapshot.data : [],
+                            searchTerm: searchTerm,
+                          ),
                           emptyWidget: const Text(
                             PlaylistStrings.noMatches,
                             style: TextStyle(color: Colors.white, fontSize: 12),
                           ),
-                        ),
-                      ),
-                      Positioned(
-                        right: 0,
-                        left: 0,
-                        bottom: widget.isPresentedAsOverlay ? 8 : 120,
-                        child: GradientRaisedButton(
-                          label: PlaylistStrings.save,
-                          onPressed: () => _savePlaylists(),
-                        ),
-                      ),
-                    ],
+                        );
+                      },
+                    ),
                   ),
-                ),
-              );
-            },
+                  Positioned(
+                    right: 0,
+                    left: 0,
+                    bottom: widget.isPresentedAsOverlay ? 8 : 120,
+                    child: GradientRaisedButton(
+                      label: PlaylistStrings.save,
+                      onPressed: () => _savePlaylists(),
+                    ),
+                  ),
+                ],
+              ),
+            ),
           );
         },
       ),
