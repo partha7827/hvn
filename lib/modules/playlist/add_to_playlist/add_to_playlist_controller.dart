@@ -53,7 +53,6 @@ abstract class _AddToPlaylistControllerBase with Store {
         .toList();
   }
 
-  @action
   Future<void> init() async {
     await _firestorePlaylistService.playlistCollectionStream().forEach(
       (element) {

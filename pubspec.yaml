@@ -78,7 +78,6 @@ dev_dependencies:
   flutter_driver:
     sdk: flutter
 
-  analyzer: '<=0.39.11' # https://github.com/dart-lang/build/issues/2745
   build_runner: ^1.10.0
   built_value_generator: ^7.1.0
   built_value_test: ^7.1.0
