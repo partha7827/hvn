@@ -60,6 +60,7 @@ class Strings {
   static const yes = 'Yes';
   static const no = 'No';
   static const editProfile = 'Edit Profile';
+  static const termsAndConditionsError = 'Please accept terms & conditions';
 
   ///Messages
   static String emailToChangePassword(String email) =>
@@ -109,7 +110,6 @@ class Strings {
   static const String sad = 'Sad';
   static const String goodMorning = 'Good Morning';
   static const String howAreYouFeeling = 'How are you feeling?';
-
 
   static const String about = 'About';
   static const String viewMore = 'View More';

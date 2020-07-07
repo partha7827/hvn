@@ -1,5 +1,6 @@
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:highvibe/models/audio/audio.dart';
+import 'package:highvibe/models/user/user.dart';
 import 'package:highvibe/modules/app/app_controller.dart';
 import 'package:highvibe/services/firestore_service.dart';
 import 'package:mobx/mobx.dart';
@@ -17,6 +18,7 @@ abstract class _AudioControllerBase with Store {
 
   final String userId;
   _AudioControllerBase(this.userId);
+  User get currentUser => currentUserStore.currentUser;
 
   @action
   void loadAudios() {
