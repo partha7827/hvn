@@ -125,7 +125,7 @@ class _AddToPlaylistPageState
                     bottom: widget.isPresentedAsOverlay ? 8 : 120,
                     child: GradientRaisedButton(
                       label: PlaylistStrings.save,
-                      onPressed: () => _savePlaylists(),
+                      onPressed: () async => _savePlaylists(),
                     ),
                   ),
                 ],
@@ -154,8 +154,8 @@ class _AddToPlaylistPageState
     }
   }
 
-  void _savePlaylists() {
-    controller.saveAudioToPlaylists();
+  Future<void> _savePlaylists() async {
+    await controller.saveAudioToPlaylists();
     _close();
   }
 }

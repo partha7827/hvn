@@ -303,7 +303,7 @@ class _EditPlayListPageState
   }
 
   void _showSuccessDialog() {
-    final updatePlaylist = PlayList(
+    final _ = PlayList(
       (b) => b
         ..coverUrlPath = _imagePath
         ..description = _descriptionTextEditingController.text

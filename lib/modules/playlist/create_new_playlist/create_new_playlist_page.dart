@@ -182,7 +182,9 @@ class _CreateNewPlaylistPage
                   const SizedBox(height: 20),
                   GradientRaisedButton(
                     label: PlaylistStrings.save,
-                    onPressed: () async => _savePlaylistAndShowSuccessDialog(),
+                    onPressed: () async => _savePlaylistAndShowSuccessDialog(
+                      context: context,
+                    ),
                   ),
                 ],
               ),
@@ -207,36 +209,17 @@ class _CreateNewPlaylistPage
     }
   }
 
-  ProgressDialog _progressDialog() {
-    return ProgressDialog(
-      context,
-      type: ProgressDialogType.Normal,
-      isDismissible: false,
-      showLogs: false,
-    );
-  }
-
-  void _savePlaylistAndShowSuccessDialog() async {
-    await _progressDialog().show();
+  void _savePlaylistAndShowSuccessDialog({
+    @required BuildContext context,
+  }) async {
+    await progressDialog(context: context).show();
     await controller.createPlaylist();
-    await _progressDialog().hide();
-    _showSuccessDialog();
-  }
-
-  void _showSuccessDialog() {
-    final modalAlert = PlaylistModalAlert(
+    await progressDialog(context: context).hide();
+    showSuccessDialog(
+      context: context,
+      isPresentedAsOverlay: widget.isPresentedAsOverlay,
       title: PlaylistStrings.newPlaylistSuccessTitle,
       subTitle: PlaylistStrings.newPlaylistSuccessSubTitle,
-      isPresentedAsOverlay: widget.isPresentedAsOverlay,
     );
-
-    if (widget.isPresentedAsOverlay) {
-      MediaOverlays.presentShowDialogAsOverlay(
-        context: context,
-        modalAlert: modalAlert,
-      );
-    } else {
-      showDialog(context: context, builder: (_) => modalAlert);
-    }
   }
 }

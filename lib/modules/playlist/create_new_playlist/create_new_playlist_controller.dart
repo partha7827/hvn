@@ -34,9 +34,6 @@ abstract class _CreateNewPlaylistControllerBase with Store {
   bool isPrivate;
 
   @observable
-  bool hasError = false;
-
-  @observable
   File playlistCoverFile;
 
   @action
@@ -65,7 +62,6 @@ abstract class _CreateNewPlaylistControllerBase with Store {
 
       await _firestorePlaylistService.setPlaylist(playlist: playlist);
     } catch (error) {
-      hasError = true;
       throw Exception(error.toString());
     }
   }
@@ -91,7 +87,6 @@ abstract class _CreateNewPlaylistControllerBase with Store {
         playlistCoverFile = file;
       }
     } catch (error) {
-      hasError = true;
       throw Exception(error.toString());
     }
   }
