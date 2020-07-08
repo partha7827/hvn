@@ -155,11 +155,9 @@ class _AddToPlaylistPageState
     }
   }
 
-  // TODO:- Implement an unhappy path when UX/UI will be clarified
   Future<void> _updatePlaylistAndShowSuccessDialog({
     @required BuildContext context,
   }) async {
-    // TODO:- Implement display of progress hud as overlay
     await progressDialog(context: context).show();
     await controller.saveAudioToPlaylists();
     await progressDialog(context: context).hide();

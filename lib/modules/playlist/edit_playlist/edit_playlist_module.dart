@@ -11,9 +11,9 @@ class EditPlaylistModule extends WidgetModule {
 
   @override
   List<Bind<Object>> get binds => [
-        Bind<EditPlaylistController>((i) => EditPlaylistController()),
+        Bind<EditPlaylistController>((i) => EditPlaylistController(playList)),
       ];
 
   @override
-  Widget get view => EditPlaylistPage(playlist: playList);
+  Widget get view => EditPlaylistPage();
 }

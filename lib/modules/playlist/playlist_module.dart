@@ -34,7 +34,9 @@ class PlaylistModule extends ChildModule {
           (i) => AddToPlaylistController(i.args.data),
         ),
         Bind<CreateNewPlaylistController>((_) => CreateNewPlaylistController()),
-        Bind<EditPlaylistController>((_) => EditPlaylistController()),
+        Bind<EditPlaylistController>(
+          (i) => EditPlaylistController(i.args.data),
+        ),
         Bind<ShowPlaylistsController>((_) => ShowPlaylistsController()),
         Bind<PlaylistMoreMenuController>((_) => PlaylistMoreMenuController()),
       ];
@@ -67,7 +69,7 @@ class PlaylistModule extends ChildModule {
         ),
         Router(
           '$_playlistRoute/edit_playlist',
-          child: (_, args) => EditPlaylistPage(playlist: args.data),
+          child: (_, args) => EditPlaylistPage(),
           transition: TransitionType.rightToLeft,
         ),
       ];
