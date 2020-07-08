@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:highvibe/models/playlist/playlist.dart';
+import 'package:highvibe/modules/app/media_overlays.dart';
 import 'package:highvibe/modules/playlist/playlist_module.dart';
 import 'package:highvibe/modules/playlist/resources/resources.dart';
 import 'package:highvibe/modules/playlist/resources/strings.dart';
@@ -53,10 +54,18 @@ class _ShowPlaylistsPageState
           ],
         ),
         for (final item in playlists)
-          PlaylistTile(
-            isInEditMode: false,
-            playList: item,
-            onTap: (item) => playlistContextMenu(context, item),
+          GestureDetector(
+            onTap: () async {
+              MediaOverlays.presentPlayListPlayerAsOverlay(
+                context: context,
+                playList: item,
+              );
+            },
+            child: PlaylistTile(
+              isInEditMode: false,
+              playList: item,
+              onTap: (item) => playlistContextMenu(context, item),
+            ),
           ),
       ],
     );

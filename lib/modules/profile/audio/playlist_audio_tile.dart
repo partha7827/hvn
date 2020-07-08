@@ -12,10 +12,12 @@ class PlayListAudioTile extends StatelessWidget {
     Key key,
     @required this.audio,
     this.isPlaying = false,
+    this.authorCallback,
   }) : super(key: key);
 
   final Audio audio;
   final bool isPlaying;
+  final AuthorCallback authorCallback;
 
   @override
   Widget build(BuildContext context) {
@@ -55,6 +57,9 @@ class PlayListAudioTile extends StatelessWidget {
                 children: <Widget>[
                   GestureDetector(
                     onTap: () {
+                      if (authorCallback != null) {
+                        authorCallback();
+                      }
                       ProfileModule.toOtherProfileId(audio.userId);
                     },
                     child: Text(audio.userName, style: normal12Hint),
@@ -90,3 +95,5 @@ class PlayListAudioTile extends StatelessWidget {
     );
   }
 }
+
+typedef AuthorCallback = void Function();
