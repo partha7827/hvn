@@ -153,16 +153,13 @@ class _EditPlayListPageState
                     children: [
                       ClipRRect(
                         borderRadius: BorderRadius.circular(12),
-                        child: CachedNetworkImage(
-                          imageUrl: controller.playlistCoverPath,
-                          fit: BoxFit.cover,
-                        ),
+                        child: _imageWidget(),
                       ),
                       Positioned(
                         top: 12,
                         right: 12,
                         child: GestureDetector(
-                          onTap: () => controller.selectPlaylistCover(),
+                          onTap: () => controller.deletePlaylistCover(),
                           child: PlaylistImageAssets.deletePlaylistCover,
                         ),
                       ),
@@ -252,6 +249,20 @@ class _EditPlayListPageState
         ],
       ),
     );
+  }
+
+  Widget _imageWidget() {
+    if (Uri.parse(controller.playlistCoverPath).isAbsolute) {
+      return CachedNetworkImage(
+        imageUrl: controller.playlistCoverPath,
+        fit: BoxFit.cover,
+      );
+    } else {
+      return Image.asset(
+        controller.playlistCoverPath,
+        fit: BoxFit.cover,
+      );
+    }
   }
 
   Future<void> _updatePlaylistAndShowSuccessDialog({
