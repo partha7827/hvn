@@ -85,18 +85,18 @@ class _EditPlayListPageState
 
   Widget _audioFilesListView() {
     if (controller.audioItems.isNotEmpty) {
-      return ReorderableListView(
-        children: [
-          for (final item in controller.audioItems)
-            PlaylistAudioItemTile(
-              key: ValueKey(item),
-              audioFile: item,
-              onDelete: (item) {
-                setState(() => controller.audioItems.remove(item));
-              },
-            ),
-        ],
-        onReorder: controller.handleListReorder,
+      return Observer(
+        builder: (_) => ReorderableListView(
+          children: [
+            for (final item in controller.audioItems)
+              PlaylistAudioItemTile(
+                key: ValueKey(item),
+                audioFile: item,
+                onDelete: (item) => controller.audioItems.remove(item),
+              ),
+          ],
+          onReorder: controller.handleListReorder,
+        ),
       );
     } else {
       return Center(

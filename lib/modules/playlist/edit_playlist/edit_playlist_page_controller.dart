@@ -1,16 +1,16 @@
 import 'dart:io';
 
+import 'package:built_collection/built_collection.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:highvibe/models/models.dart';
 import 'package:highvibe/modules/playlist/api/firestore_playlist_service.dart';
+import 'package:highvibe/modules/playlist/resources/resources.dart';
+import 'package:highvibe/services/storage_service.dart';
 import 'package:mobx/mobx.dart';
 
 part 'edit_playlist_page_controller.g.dart';
-
-final _defaultCover =
-    'https://images.unsplash.com/photo-1593455071238-92dd081a39b1?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80';
 
 class EditPlaylistController = _EditPlaylistControllerBase
     with _$EditPlaylistController;
@@ -18,6 +18,7 @@ class EditPlaylistController = _EditPlaylistControllerBase
 abstract class _EditPlaylistControllerBase with Store {
   final PlayList playList;
 
+  final _firebaseStorage = Modular.get<StorageService>();
   final _firestorePlaylistService = Modular.get<FirestorePlaylistService>();
 
   final TextEditingController titleTextEditingController =
@@ -51,13 +52,11 @@ abstract class _EditPlaylistControllerBase with Store {
 
   @action
   void handleListReorder(int oldIndex, int newIndex) {
-    // if (oldIndex < newIndex) {
-    //   newIndex -= 1;
-    // }
-    // setState(() {
-    //   final oldItem = _audioItems.removeAt(oldIndex);
-    //   _audioItems.insert(newIndex, oldItem);
-    // });
+    if (oldIndex < newIndex) {
+      newIndex -= 1;
+    }
+    final oldItem = audioItems.removeAt(oldIndex);
+    audioItems.insert(newIndex, oldItem);
   }
 
   @action
@@ -83,17 +82,46 @@ abstract class _EditPlaylistControllerBase with Store {
     }
   }
 
-  Future<void> _updatePlaylist({@required PlayList playlist}) async {
+  Future<void> _updatePlaylist() async {
     try {
+      final playlistCoverStoragePath = await _updatePlaylistCover();
+
+      final playlist = PlayList(
+        (b) => b
+          ..audioFiles = playList.audioFiles.toBuilder()
+          ..coverUrlPath = playlistCoverStoragePath
+          ..description = descriptionTextEditingController.text
+          ..id = playList.id
+          ..title = titleTextEditingController.text
+          ..privacy = privacy,
+      );
+
       await _firestorePlaylistService.setPlaylist(playlist: playlist);
     } catch (e) {
       throw Exception(e.toString());
     }
   }
 
+  Future<String> _updatePlaylistCover() async {
+    var playlistCoverStoragePath = '';
+    print('playlistCoverPath $playlistCoverPath');
+    if (playlistCoverPath != playList.coverUrlPath) {
+      if (playlistCoverFile == null && playlistCoverPath.isEmpty) {
+        playlistCoverStoragePath = PlaylistImageAssets.defaultCover;
+      } else {
+        playlistCoverStoragePath = await _firebaseStorage.uploadPlaylistCover(
+          file: playlistCoverFile,
+        );
+      }
+    } else {
+      playlistCoverStoragePath = playList.coverUrlPath;
+    }
+    return playlistCoverStoragePath;
+  }
+
   @action
   Future<void> savePlaylist() async {
-    //await _updatePlaylist(playlist: updatedPlaylist);
+    await _updatePlaylist();
   }
 
   @action
