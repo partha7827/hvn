@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
-
 <dict>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
@@ -19,8 +18,42 @@
 	<string>$(FLUTTER_BUILD_NAME)</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>com.googleusercontent.apps.468548202200-709hu7uni0n4c1l3ppd8n35c39r0de9r</string>
+				<string>fb253659302522509</string>
+			</array>
+		</dict>
+	</array>
 	<key>CFBundleVersion</key>
-	<string>$(FLUTTER_BUILD_NUMBER)</string>
+	<string>$(CURRENT_PROJECT_VERSION)</string>
+	<key>FacebookAppID</key>
+	<string>253659302522509</string>
+	<key>FacebookDisplayName</key>
+	<string>HighVibe Network</string>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>fbapi</string>
+		<string>fbapi20130214</string>
+		<string>fbapi20130410</string>
+		<string>fbapi20130702</string>
+		<string>fbapi20131010</string>
+		<string>fbapi20131219</string>
+		<string>fbapi20140410</string>
+		<string>fbapi20140116</string>
+		<string>fbapi20150313</string>
+		<string>fbapi20150629</string>
+		<string>fbapi20160328</string>
+		<string>fbauth</string>
+		<string>fb-messenger-share-api</string>
+		<string>fbauth2</string>
+		<string>fbshareextension</string>
+	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSAppTransportSecurity</key>
@@ -28,30 +61,29 @@
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
 	</dict>
-    <key>NSAppleMusicUsageDescription</key>
-    <string>We access your music to play background music.</string>
-    <key>NSCalendarsUsageDescription</key>
-    <string>We need access to the calendar to enter reminders for events.</string>
-    <key>NSCameraUsageDescription</key>
-    <string>App requires access to the camera.</string>
-    <key>NSContactsUsageDescription</key>
-    <string>We access your contacts to find connections.</string>
-    <key>NSLocationWhenInUseUsageDescription</key>
-    <string>Unused permission required by a library. Never shown to the user.</string>
-    <key>NSMicrophoneUsageDescription</key>
-    <string>This app requires mic access to record video.</string>
-    <key>NSMotionUsageDescription</key>
-    <string>We need to access the motion sensors to track your progress.</string>
-    <key>NSPhotoLibraryUsageDescription</key>
-    <string>We need access to photos to uploade pictures.</string>
-    <key>NSSpeechRecognitionUsageDescription</key>
-    <string>Unused permission required by a library. Never shown to the user.</string>
-    
+	<key>NSAppleMusicUsageDescription</key>
+	<string>We access your music to play background music.</string>
+	<key>NSCalendarsUsageDescription</key>
+	<string>We need access to the calendar to enter reminders for events.</string>
+	<key>NSCameraUsageDescription</key>
+	<string>App requires access to the camera.</string>
+	<key>NSContactsUsageDescription</key>
+	<string>We access your contacts to find connections.</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Unused permission required by a library. Never shown to the user.</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>This app requires mic access to record video.</string>
+	<key>NSMotionUsageDescription</key>
+	<string>We need to access the motion sensors to track your progress.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>We need access to photos to uploade pictures.</string>
+	<key>NSSpeechRecognitionUsageDescription</key>
+	<string>Unused permission required by a library. Never shown to the user.</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>audio</string>
 		<string>fetch</string>
-		<string>remote-notification</string>		
+		<string>remote-notification</string>
 	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
@@ -72,39 +104,5 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
-	<key>CFBundleURLTypes</key>
-    <array>
-        <dict>
-            <key>CFBundleTypeRole</key>
-            <string>Editor</string>
-            <key>CFBundleURLSchemes</key>
-            <array>
-                <string>com.googleusercontent.apps.468548202200-709hu7uni0n4c1l3ppd8n35c39r0de9r</string>
-				<string>fb253659302522509</string>
-            </array>
-        </dict>
-    </array>
-	<key>FacebookAppID</key>
-	<string>253659302522509</string>
-	<key>FacebookDisplayName</key>
-	<string>HighVibe Network</string>
-<key>LSApplicationQueriesSchemes</key>
-<array>
-  <string>fbapi</string>
-  <string>fbapi20130214</string>
-  <string>fbapi20130410</string>
-  <string>fbapi20130702</string>
-  <string>fbapi20131010</string>
-  <string>fbapi20131219</string>
-  <string>fbapi20140410</string>
-  <string>fbapi20140116</string>
-  <string>fbapi20150313</string>
-  <string>fbapi20150629</string>
-  <string>fbapi20160328</string>
-  <string>fbauth</string>
-  <string>fb-messenger-share-api</string>
-  <string>fbauth2</string>
-  <string>fbshareextension</string>
-</array>
 </dict>
 </plist>
