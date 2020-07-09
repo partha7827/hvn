@@ -92,7 +92,7 @@ class _EditPlayListPageState
               PlaylistAudioItemTile(
                 key: ValueKey(item),
                 audioFile: item,
-                onDelete: (item) => controller.audioItems.remove(item),
+                onDelete: (item) => controller.removeAudioItem(item),
               ),
           ],
           onReorder: controller.handleListReorder,

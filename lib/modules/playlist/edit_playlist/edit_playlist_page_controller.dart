@@ -40,7 +40,7 @@ abstract class _EditPlaylistControllerBase with Store {
   File playlistCoverFile;
 
   @observable
-  List<Audio> audioItems;
+  ObservableList<Audio> audioItems = ObservableList.of([]);
 
   _EditPlaylistControllerBase(this.playList);
 
@@ -50,7 +50,8 @@ abstract class _EditPlaylistControllerBase with Store {
   @action
   void deletePlaylistCover() => playlistCoverPath = '';
 
-  @action
+  void removeAudioItem(Audio item) => audioItems.remove(item);
+
   void handleListReorder(int oldIndex, int newIndex) {
     if (oldIndex < newIndex) {
       newIndex -= 1;
@@ -65,7 +66,7 @@ abstract class _EditPlaylistControllerBase with Store {
     descriptionTextEditingController.text = playList.description;
     playlistCoverPath = playList.coverUrlPath;
     privacy = playList.privacy;
-    audioItems = playList.audioFiles.toList();
+    audioItems = ObservableList.of(playList.audioFiles.toList());
     isPrivate = playList.privacy == Privacy.private ? true : false;
   }
 
@@ -88,7 +89,7 @@ abstract class _EditPlaylistControllerBase with Store {
 
       final playlist = PlayList(
         (b) => b
-          ..audioFiles = playList.audioFiles.toBuilder()
+          ..audioFiles = BuiltList<Audio>.from(audioItems).toBuilder()
           ..coverUrlPath = playlistCoverStoragePath
           ..description = descriptionTextEditingController.text
           ..id = playList.id
