@@ -33,7 +33,7 @@ class _LoginRegisterPageState
 
   Container _gradientOverlay() {
     return Container(
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         gradient: homeHeaderGradient,
       ),
       alignment: Alignment.center,
