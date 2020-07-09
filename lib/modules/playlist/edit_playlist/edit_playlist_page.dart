@@ -142,7 +142,7 @@ class _EditPlayListPageState
       text: widget.playlist.title,
     );
     _descriptionTextEditingController = TextEditingController(
-      text: widget.playlist.desscription,
+      text: widget.playlist.description,
     );
     _tabController = TabController(vsync: this, length: 2);
   }
@@ -309,7 +309,7 @@ class _EditPlayListPageState
     final updatePlaylist = PlayList(
       (b) => b
         ..coverUrlPath = _imagePath
-        ..desscription = _descriptionTextEditingController.text
+        ..description = _descriptionTextEditingController.text
         ..title = _titleTextEditingController.text
         ..privacy = _privacy
         ..audioFiles = BuiltList<Audio>.from(_audioItems).toBuilder(),

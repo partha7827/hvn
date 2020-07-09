@@ -5,10 +5,13 @@ typedef UpdateTrackPosition = double Function();
 class AudioPlayerSlider extends StatelessWidget {
   final double trackPosition;
   final ValueChanged<double> onChanged;
+  final Color inActiveColor, activeColor;
 
   const AudioPlayerSlider({
     @required this.trackPosition,
     @required this.onChanged,
+    this.activeColor = Colors.black,
+    this.inActiveColor,
     Key key,
   }) : super(key: key);
 
@@ -16,7 +19,8 @@ class AudioPlayerSlider extends StatelessWidget {
   Widget build(BuildContext context) {
     return Slider(
       value: trackPosition,
-      activeColor: Colors.black,
+      activeColor: activeColor,
+      inactiveColor: inActiveColor,
       onChanged: (value) => onChanged(value),
     );
   }

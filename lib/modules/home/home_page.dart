@@ -21,6 +21,11 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends ModularState<HomePage, HomeController> {
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+  }
+
   void _openDrawer() {
     controller.scaffoldKey.currentState.openDrawer();
   }
@@ -31,7 +36,7 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
       onWillPop: _willPop,
       child: Scaffold(
         key: controller.scaffoldKey,
-        drawer: DrawerWidget(controller),
+        drawer: DrawerWidget(),
         body: Stack(
           children: [
             Positioned(
