@@ -56,7 +56,6 @@ class AuthModule extends ChildModule {
             countryCode: args.data[1],
           ),
         ),
-        Router('/registerWithSMS', child: (_, args) => RegisterWithSms()),
         Router(
           '/letsGetYouSignedUp',
           child: (_, args) => LetsGetYouSignedUp(

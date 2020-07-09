@@ -45,8 +45,8 @@ class _LetsGetYouSignedUpState
                       horizontal: 20,
                     ),
                     child: Text(
-                      Strings.letsGetSignedUp,
-                      style: bold30PlayfairWhite,
+                      Strings.enterNameAndUsername,
+                      style: bold24PlayfairWhite,
                     ),
                   ),
                   _textInputField(
@@ -118,7 +118,7 @@ class _LetsGetYouSignedUpState
               ),
             ),
             controller: controller,
-            style: normal14White,
+            style: normal16White,
             validator: (String input) {
               return input.isEmpty ? 'Invalid $label' : null;
             },

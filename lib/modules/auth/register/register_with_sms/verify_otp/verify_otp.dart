@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:highvibe/utils/utils.dart';
 import 'package:highvibe/values/Strings.dart';
 import 'package:highvibe/values/themes.dart';
 import 'package:highvibe/widgets/gradient_rounded_button.dart';
@@ -25,13 +27,21 @@ class _VerifyOtpPageState
 
   @override
   void initState() {
+    controller.startCountDown();
     controller.registerUser(widget.phoneNumber, widget.countryCode);
     super.initState();
   }
 
   @override
+  void dispose() {
+    controller.timer.cancel();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: controller.scaffoldKey,
       appBar: AppBar(
         leading: IconButton(
           icon: Icon(
@@ -74,16 +84,28 @@ class _VerifyOtpPageState
                   ],
                 ),
               ),
-              GestureDetector(
-                onTap: () {},
+              FlatButton(
+                onPressed: () {
+                  if (controller.seconds == 0) {
+                    // resend
+                    controller.registerUser(
+                        widget.phoneNumber, widget.countryCode);
+                    showSnackBarMsg(controller.scaffoldKey.currentState,
+                        'OTP sent successfully!');
+                  }
+                },
                 child: Container(
                   padding: const EdgeInsets.all(20),
-                  child: Text(
-                    Strings.resend,
-                    style: TextStyle(
-                      color: accentColor.withOpacity(0.5),
-                      fontSize: 16,
-                    ),
+                  child: Observer(
+                    builder: (_) {
+                      return Text(
+                        formatText(),
+                        style: TextStyle(
+                          color: accentColor.withOpacity(0.5),
+                          fontSize: 16,
+                        ),
+                      );
+                    },
                   ),
                 ),
               ),
@@ -131,6 +153,21 @@ class _VerifyOtpPageState
         ],
       ),
     );
+  }
+
+  String formatText() {
+    var formattedText = '';
+
+    if (controller.seconds == 0) {
+      formattedText = Strings.resend;
+    } else {
+      if (controller.seconds < 10) {
+        formattedText = '00:0${controller.seconds}';
+      } else {
+        formattedText = '00:${controller.seconds}';
+      }
+    }
+    return formattedText;
   }
 
   void _handleKeyPress(String key) {

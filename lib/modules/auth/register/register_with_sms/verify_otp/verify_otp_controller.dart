@@ -1,4 +1,7 @@
+import 'dart:async';
+
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:highvibe/models/user/user.dart';
 import 'package:highvibe/modules/app/app_controller.dart';
@@ -17,6 +20,8 @@ abstract class _VerifyOtpControllerBase with Store {
   final AuthService auth = Modular.get<AuthService>();
   final FirestoreService firestore = Modular.get<FirestoreService>();
   final AppController appStore = Modular.get<AppController>();
+  final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
+  Timer timer;
 
   String verificationId;
 
@@ -25,6 +30,9 @@ abstract class _VerifyOtpControllerBase with Store {
 
   @observable
   bool inProgress = false;
+
+  @observable
+  int seconds = 0;
 
   @action
   Future<void> registerUser(String phoneNumber, String countryCode) async {
@@ -101,5 +109,20 @@ abstract class _VerifyOtpControllerBase with Store {
     } catch (e) {
       print('error ${e.toString()}');
     }
+  }
+
+  @action
+  Future<void> startCountDown() async {
+    const oneSec = Duration(seconds: 1);
+    timer = Timer.periodic(
+      oneSec,
+      (Timer timer) {
+        seconds = 60 - timer.tick;
+        if (timer.tick == 60) {
+          timer.cancel();
+          print('seconds = $seconds');
+        }
+      },
+    );
   }
 }

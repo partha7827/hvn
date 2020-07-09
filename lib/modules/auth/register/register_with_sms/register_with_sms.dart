@@ -26,22 +26,21 @@ class _RegisterWithSmsState
     return Scaffold(
       backgroundColor: primaryColor,
       body: SingleChildScrollView(
-              child: SafeArea(
-          child: GestureDetector(
-            onTap: () => FocusScope.of(context).unfocus(),
-            child: Container(
-              color: Colors.transparent,
-              width: screenWidth(context),
-              child: Form(
-                key: controller.formKey,
-                child: Column(
-                  mainAxisSize: MainAxisSize.max,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[
-                    _bodyWidget(context),
-                    _bottomRow(),
-                  ],
-                ),
+        child: GestureDetector(
+          onTap: () => FocusScope.of(context).unfocus(),
+          child: Container(
+            color: Colors.transparent,
+            width: screenWidth(context),
+            height: screenHeight(context),
+            child: Form(
+              key: controller.formKey,
+              child: Column(
+                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  _bodyWidget(context),
+                  _bottomRow(),
+                ],
               ),
             ),
           ),
@@ -67,7 +66,7 @@ class _RegisterWithSmsState
           GestureDetector(
             onTap: () {},
             child: Text(
-              Strings.signUp,
+              Strings.logSpaceIn,
               style: normal16Accent,
             ),
           )
@@ -76,44 +75,57 @@ class _RegisterWithSmsState
     );
   }
 
-  Column _bodyWidget(BuildContext context) {
-    return Column(
-      children: <Widget>[
-        _logo(),
-        _textInputWidget(),
-        _signUpViaEmail(),
-        Container(
-          margin: const EdgeInsets.symmetric(
-            horizontal: 20,
+  Widget _bodyWidget(BuildContext context) {
+    return Expanded(
+      child: Column(
+        children: <Widget>[
+          _logo(),
+          Container(
+            margin: const EdgeInsets.only(bottom: 40),
+            padding: const EdgeInsets.symmetric(
+              horizontal: 20,
+            ),
+            alignment: Alignment.centerLeft,
+            child: Text(
+              Strings.letsGetSignedUp,
+              style: bold24PlayfairWhite,
+            ),
           ),
-          child: GradientRoundedRaisedButton(
-            label: Strings.getStarted,
-            onPressed: () {
-              if (controller.phoneNumberController.text.isNotEmpty &&
-                  controller.phoneNumberController.text.length == 10) {
-                FocusScope.of(context).unfocus();
-                AuthModule.toVerifyOtp(
-                  [controller.phoneNumberController.text, countryCode],
-                );
-              } else {
-                setState(() {
-                  invalidPhoneNumber = true;
-                });
-              }
-            },
+          _textInputWidget(),
+          _orViaEmail(),
+          Container(
+            margin: const EdgeInsets.symmetric(
+              horizontal: 20,
+            ),
+            child: GradientRoundedRaisedButton(
+              label: Strings.getStarted,
+              onPressed: () {
+                if (controller.phoneNumberController.text.isNotEmpty &&
+                    controller.phoneNumberController.text.length == 10) {
+                  FocusScope.of(context).unfocus();
+                  AuthModule.toVerifyOtp(
+                    [controller.phoneNumberController.text, countryCode],
+                  );
+                } else {
+                  setState(() {
+                    invalidPhoneNumber = true;
+                  });
+                }
+              },
+            ),
           ),
-        ),
-        Container(
-          padding: const EdgeInsets.only(
-            top: 50,
+          Container(
+            padding: const EdgeInsets.only(
+              top: 40,
+            ),
+            child: Text(
+              Strings.orSignupWithSocialAccount,
+              style: normal16White,
+            ),
           ),
-          child: Text(
-            Strings.loginWithSocialAccount,
-            style: normal14White,
-          ),
-        ),
-        _socialMediaButtons(),
-      ],
+          _socialMediaButtons(),
+        ],
+      ),
     );
   }
 
@@ -123,10 +135,16 @@ class _RegisterWithSmsState
         top: 40,
       ),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        mainAxisSize: MainAxisSize.min,
         children: <Widget>[
           _appleSignIn(),
+          const SizedBox(
+            width: 40,
+          ),
           _facebookSignIn(),
+          const SizedBox(
+            width: 40,
+          ),
           _googleSignIn(),
         ],
       ),
@@ -145,8 +163,7 @@ class _RegisterWithSmsState
               await controller.googleSignIn();
             } catch (e) {
               showSnackBarMsg(
-                  controller.scaffoldKey.currentState,
-                  e.toString());
+                  controller.scaffoldKey.currentState, e.toString());
             }
           },
         ),
@@ -166,8 +183,7 @@ class _RegisterWithSmsState
               await controller.facebookLogin();
             } catch (e) {
               showSnackBarMsg(
-                  controller.scaffoldKey.currentState,
-                  e.toString());
+                  controller.scaffoldKey.currentState, e.toString());
             }
           },
         ),
@@ -185,19 +201,19 @@ class _RegisterWithSmsState
     );
   }
 
-  Container _signUpViaEmail() {
+  Container _orViaEmail() {
     return Container(
       margin: const EdgeInsets.only(
         top: 20,
         left: 20,
-        bottom: 85,
+        bottom: 50,
       ),
       alignment: Alignment.centerLeft,
       child: GestureDetector(
         onTap: () {},
         child: Text(
-          Strings.signUpViaEmail,
-          style: normal14Accent,
+          Strings.orViaEmail,
+          style: normal16Accent,
         ),
       ),
     );
@@ -240,7 +256,7 @@ class _RegisterWithSmsState
                       const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
                   child: Text(
                     '+1',
-                    style: normal14Accent,
+                    style: normal16White,
                     textAlign: TextAlign.center,
                   ),
                 ),
@@ -249,7 +265,7 @@ class _RegisterWithSmsState
                 child: Container(
                   child: TextFormField(
                     controller: controller.phoneNumberController,
-                    style: normal14White,
+                    style: normal16White,
                     decoration: const InputDecoration(
                       contentPadding: EdgeInsets.only(
                         left: 20,
@@ -290,9 +306,10 @@ class _RegisterWithSmsState
         top: 100,
         bottom: 40,
       ),
+      height: 80,
+      width: 80,
       child: Image.asset(
-        'assets/image_hvn.png',
-        height: 130,
+        'assets/ic_hvn_logo.png',
       ),
     );
   }
