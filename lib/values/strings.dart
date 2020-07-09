@@ -35,6 +35,7 @@ class Strings {
   static const retypePassword = 'Retype Password';
   static const forgotPassword = 'Forgot Password?';
   static const login = 'Login';
+  static const logSpaceIn = 'Log in';
   static const dontHaveAccount = "Don't have an account?";
   static const alreadyHaveAccount = 'Already have an account?';
   static const signUp = 'Sign Up';
@@ -76,9 +77,12 @@ class Strings {
   static const resend = 'Resend';
   static const continueText = 'Continue';
   static const getStarted = 'Get Started';
-  static const loginWithSocialAccount = 'Or login with your social account';
-  static const signUpViaEmail = 'Sign Up via E-mail';
+  static const orSignupWithSocialAccount =
+      'Or Sign up with your social account';
+  static const orViaEmail = 'Or via E-mail';
   static const invalidPhoneNumber = 'Invalid Phone number';
+  static const String enterNameAndUsername =
+      'Please enter your Name and select a Username';
 
   ///Messages
   static String emailToChangePassword(String email) =>
