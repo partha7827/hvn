@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:highvibe/modules/auth/register/register_with_sms/lets_get_you_started/lets_get_you_signed_up_contoller.dart';
 import 'package:highvibe/values/Strings.dart';
@@ -56,6 +57,53 @@ class _LetsGetYouSignedUpState
                   _textInputField(
                     label: Strings.username,
                     controller: controller.userNameController,
+                    isUsername: true,
+                  ),
+                  Observer(
+                    builder: (_) {
+                      var errorText = '', color = Colors.red;
+                      if (!controller.isUsernameAvailable &&
+                          controller.userNameController.text.length >= 6) {
+                        errorText = 'That username is taken';
+                        color = Colors.red;
+                      } else if (controller.isUsernameAvailable) {
+                        errorText = 'That username is available';
+                        color = Colors.green;
+                      }
+                      return Visibility(
+                        visible: errorText.isNotEmpty,
+                        child: Container(
+                          padding: const EdgeInsets.only(left: 20, top: 10),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: <Widget>[
+                              Text(
+                                errorText,
+                                style: TextStyle(color: color),
+                              ),
+                              const SizedBox(
+                                height: 20,
+                              ),
+                              Visibility(
+                                visible: !controller.isUsernameAvailable,
+                                child: Row(
+                                  children: <Widget>[
+                                    Text(
+                                      'Suggestions: ',
+                                      style: normal16Accent,
+                                    ),
+                                    Text(
+                                      controller.suggestions(),
+                                      style: normal16White,
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      );
+                    },
                   ),
                   Container(
                     margin: const EdgeInsets.only(top: 86),
@@ -64,11 +112,7 @@ class _LetsGetYouSignedUpState
                     ),
                     child: GradientRoundedRaisedButton(
                       label: Strings.next,
-                      onPressed: () {
-                        if (controller.formKey.currentState.validate()) {
-                          controller.toPasswordScreen(widget.user);
-                        }
-                      },
+                      onPressed: () => controller.checkUsername(widget.user),
                     ),
                   ),
                 ],
@@ -80,8 +124,11 @@ class _LetsGetYouSignedUpState
     );
   }
 
-  Column _textInputField(
-      {String label = '', TextEditingController controller}) {
+  Column _textInputField({
+    String label = '',
+    TextEditingController controller,
+    bool isUsername = false,
+  }) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisSize: MainAxisSize.min,
@@ -120,6 +167,11 @@ class _LetsGetYouSignedUpState
             controller: controller,
             style: normal16White,
             validator: (String input) {
+              if (isUsername) {
+                if (input.length < 6) {
+                  return 'Username should be greater than 6 characters';
+                }
+              }
               return input.isEmpty ? 'Invalid $label' : null;
             },
           ),
