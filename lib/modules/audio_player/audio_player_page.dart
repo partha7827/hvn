@@ -25,6 +25,7 @@ class AudioPlayerPageState
     with TickerProviderStateMixin {
   AnimationController playButtonAnimation;
   AnimationController artworkAnimation;
+  ReactionDisposer playButtonReactionDispose;
 
   @override
   Widget build(BuildContext context) {
@@ -42,6 +43,8 @@ class AudioPlayerPageState
   void dispose() {
     playButtonAnimation.dispose();
     artworkAnimation.dispose();
+    playButtonReactionDispose();
+    
     super.dispose();
   }
 
@@ -60,7 +63,7 @@ class AudioPlayerPageState
       duration: const Duration(milliseconds: 500),
     );
 
-    reaction(
+    playButtonReactionDispose = reaction(
       (_) => controller.isPlaying,
       (val) {
         if (val) {

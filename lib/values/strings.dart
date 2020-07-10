@@ -127,3 +127,12 @@ class Strings {
   static const String audioFileUploaded = 'Audio file uploaded';
   static const String audioFileUploadFailed = 'Error uploading file!';
 }
+
+class UploadAudioStrings {
+  static const chooseAudio = '';
+  static const chooseCover = '';
+  static const uploadAudioAndCover = '';
+  static const processDocument = '';
+  static const success = '';
+  static const error = '';
+}

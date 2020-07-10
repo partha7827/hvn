@@ -3,22 +3,20 @@ import 'package:highvibe/models/audio/audio.dart';
 import 'package:highvibe/services/firestore_service.dart';
 import 'package:mobx/mobx.dart';
 
-part 'audio_controller.g.dart';
+part 'show_audio_controller.g.dart';
 
-class AudioController = _AudioControllerBase with _$AudioController;
 
-abstract class _AudioControllerBase with Store {
+class ShowAudioController = _ShowAudioControllerBase with _$ShowAudioController;
+
+abstract class _ShowAudioControllerBase with Store {
   final FirestoreService store = Modular.get<FirestoreService>();
 
   @observable
   ObservableFuture<List<Audio>> audios;
 
-  @observable
-  FutureStatus uploadStatus = FutureStatus.fulfilled;
-
   final String userId;
 
-  _AudioControllerBase(this.userId);
+  _ShowAudioControllerBase(this.userId);
 
   @action
   void loadAudios() {
@@ -30,14 +28,4 @@ abstract class _AudioControllerBase with Store {
     );
   }
 
-  @action
-  Future<void> uploadAudio(Audio audio) async {
-    uploadStatus = FutureStatus.pending;
-    try {
-      await store.audioCollection.document(audio.id).setData(audio.toMap());
-      uploadStatus = FutureStatus.fulfilled;
-    } catch (error) {
-      uploadStatus = FutureStatus.rejected;
-    }
-  }
 }

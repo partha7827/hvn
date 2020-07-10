@@ -5,6 +5,7 @@ import 'package:highvibe/models/models.dart';
 import 'package:highvibe/modules/app/media_overlays.dart';
 import 'package:highvibe/modules/playlist/resources/resources.dart';
 import 'package:highvibe/modules/playlist/widgets/widgets.dart';
+import 'package:highvibe/modules/profile/profile_module.dart';
 import 'package:highvibe/utils/utils.dart';
 import 'package:highvibe/values/strings.dart';
 import 'package:highvibe/widgets/audio_tile.dart';
@@ -14,29 +15,21 @@ import 'package:highvibe/widgets/splash_widget.dart';
 import 'package:highvibe/widgets/load_widget.dart';
 import 'package:mobx/mobx.dart';
 
-import '../../../mocks/mock_audio_files.dart';
-import 'audio_controller.dart';
+import 'show_audio_controller.dart';
 
-class AudioPage extends StatefulWidget {
+class ShowAudioPage extends StatefulWidget {
   @override
-  _AudioPageState createState() => _AudioPageState();
+  _ShowAudioPageState createState() => _ShowAudioPageState();
 }
 
-class _AudioPageState extends ModularState<AudioPage, AudioController> {
+class _ShowAudioPageState
+    extends ModularState<ShowAudioPage, ShowAudioController> {
+  ReactionDisposer disposeReaction;
+
   @override
   void initState() {
     super.initState();
     controller.loadAudios();
-    reaction((reaction) => controller.uploadStatus, (status) {
-      switch (status) {
-        case FutureStatus.fulfilled:
-          showSnackBarMsg(Scaffold.of(context), Strings.audioFileUploaded);
-          break;
-        case FutureStatus.rejected:
-          showSnackBarMsg(Scaffold.of(context), Strings.audioFileUploadFailed);
-          break;
-      }
-    });
   }
 
   @override
@@ -70,19 +63,10 @@ class _AudioPageState extends ModularState<AudioPage, AudioController> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
             const HeaderRow(title: Strings.uploads),
-            Observer(builder: (_) {
-              switch (controller.uploadStatus) {
-                case FutureStatus.pending:
-                  return const CircularProgressIndicator();
-                default:
-                  return IconButton(
-                    icon: Icon(Icons.file_upload),
-                    onPressed: () {
-                      controller.uploadAudio(mockAudioItemsList.first);
-                    },
-                  );
-              }
-            }),
+            IconButton(
+              icon: Icon(Icons.file_upload),
+              onPressed: ProfileModule.toUploadAudio,
+            )
           ],
         ),
         for (final item in audios) ...[

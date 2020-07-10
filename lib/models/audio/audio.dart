@@ -28,6 +28,10 @@ abstract class Audio implements Built<Audio, AudioBuilder> {
   String get author;
   String get artworkUrlPath;
   String get audioUrlPath;
+  String get waveformUrlPath;
+  int get karmaReward;
+  int get xpReward;
+  bool get isProcessed;
   bool get isRecommended;
   int get duration;
   BuiltList<String> get tags;
@@ -67,6 +71,10 @@ abstract class Audio implements Built<Audio, AudioBuilder> {
     ..subTitle = ''
     ..author = ''
     ..artworkUrlPath = Assets.audioArtworkPlaceholder
+    ..karmaReward = 0
+    ..xpReward = 0
+    ..waveformUrlPath = ''
+    ..isProcessed = false
     ..audioUrlPath = ''
     ..duration = 0
     ..isRecommended = false

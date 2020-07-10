@@ -4,8 +4,8 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:highvibe/modules/playlist/show_playlists/show_playlists_module.dart';
 import 'package:highvibe/modules/profile/achievements/achievements_module.dart';
-import 'package:highvibe/modules/profile/audio/audio_module.dart';
 import 'package:highvibe/modules/profile/profile_module.dart';
+import 'package:highvibe/modules/profile/show_audio/show_audio_module.dart';
 import 'package:highvibe/modules/profile/widgets/profile_widget.dart';
 import 'package:highvibe/values/strings.dart';
 import 'package:highvibe/values/themes.dart';
@@ -100,7 +100,7 @@ class _CurrentUserPageState
         controller: tabController,
         children: <Widget>[
           AchievementsModule(controller.currentUser),
-          AudioModule(controller.currentUser.id),
+          ShowAudioModule(controller.currentUser.id),
           ShowPlaylistsModule(controller.currentUser.id),
         ],
       ),
