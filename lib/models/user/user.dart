@@ -28,6 +28,7 @@ abstract class User implements Built<User, UserBuilder> {
   String get name;
   String get photoUrl;
   String get bio;
+  String get username;
   int get experiencePoints;
   int get karmaPoints;
   int get hvnEarned;
@@ -76,6 +77,7 @@ abstract class User implements Built<User, UserBuilder> {
     ..name = ''
     ..photoUrl = Assets.dummyAvatarUrl
     ..bio = ''
+    ..username = ''
     ..experiencePoints = 0
     ..karmaPoints = 0
     ..hvnEarned = 0
