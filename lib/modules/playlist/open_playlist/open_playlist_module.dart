@@ -17,5 +17,5 @@ class OpenPlayListModule extends WidgetModule {
       ];
 
   @override
-  Widget get view => OpenPlaylistPage(playList: playList,);
+  Widget get view => OpenPlaylistPage(playList: playList);
 }
