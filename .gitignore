@@ -1,5 +1,8 @@
 # App Secrets
 
+key.properties
+hvn.keystore
+
 env.js
 ./GoogleService-Info.plist
 **/ios/Runner/GoogleService-Info.plist
