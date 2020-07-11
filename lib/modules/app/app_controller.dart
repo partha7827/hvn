@@ -2,9 +2,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:highvibe/models/models.dart' show User;
 import 'package:highvibe/services/auth_service.dart';
 import 'package:highvibe/services/firestore_service.dart';
-import 'package:highvibe/values/strings.dart';
 import 'package:mobx/mobx.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 part 'app_controller.g.dart';
 
@@ -16,7 +14,6 @@ abstract class _AppControllerBase with Store {
   final AuthService auth = Modular.get<AuthService>();
 
   final FirestoreService firestore = Modular.get<FirestoreService>();
-  SharedPreferences sharedPreferences;
 
   @observable
   AuthState authState = AuthState.initial;
@@ -28,8 +25,6 @@ abstract class _AppControllerBase with Store {
   Future<void> setCurrentUser(User user) async {
     if (user != null) {
       currentUser = user;
-      await sharedPreferences?.setBool(Strings.hasPreviouslySignedUp, true);
-
       _setAuthenticated(true);
       _setUserOnline(true);
     } else {
@@ -53,9 +48,5 @@ abstract class _AppControllerBase with Store {
         // "lastTimeSeen": serializers.serialize(DateTime.now().toUtc())
       });
     }
-  }
-
-  void initSharedPreferences() async {
-    sharedPreferences = await SharedPreferences.getInstance();
   }
 }

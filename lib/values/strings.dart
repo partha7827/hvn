@@ -136,6 +136,4 @@ You are allowed to share only those files which you have under legal ownership. 
   static const processDocument = 'Analyzing audio file, please wait...';
   static const success = 'Success';
   static const error = 'Error';
-  // SharedPreferences Keys
-  static const String hasPreviouslySignedUp = 'hasPreviouslySignedUp';
 }

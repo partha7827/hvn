@@ -74,7 +74,6 @@ dependencies:
   gradient_text: ^1.0.2
   flutter_facebook_login: ^3.0.0
   flare_flutter: ^2.0.3
-  shared_preferences: ^0.5.8
 
 dev_dependencies:
   flutter_driver:
