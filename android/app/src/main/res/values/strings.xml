@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<resources>
+    <string name="app_name">HighVibe Network</string>
+    <string name="facebook_app_id">253659302522509</string>
+    <string name="fb_login_protocol_scheme">fb253659302522509</string>
+</resources>
