@@ -1,26 +1,22 @@
-import 'package:built_collection/built_collection.dart';
 import 'package:flappy_search_bar/flappy_search_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:highvibe/models/models.dart'
-    show Audio, PlayList, tempInMemoryPlaylistCollection;
+import 'package:highvibe/models/models.dart' show PlayList;
 import 'package:highvibe/modules/app/app_module.dart';
 import 'package:highvibe/modules/app/media_overlays.dart';
 import 'package:highvibe/modules/playlist/add_to_playlist/add_to_playlist_controller.dart';
 import 'package:highvibe/modules/playlist/playlist_module.dart';
 import 'package:highvibe/modules/playlist/resources/resources.dart';
 import 'package:highvibe/modules/playlist/widgets/widgets.dart'
-    show PlaylistTile;
+    show PlaylistTile, progressDialog, showSuccessDialog;
 import 'package:highvibe/widgets/gradient_raised_button.dart';
 import 'package:highvibe/widgets/header_row.dart';
 import 'package:highvibe/widgets/responsive_safe_area.dart';
 
 class AddToPlaylistPage extends StatefulWidget {
-  final Audio audioFile;
   final bool isPresentedAsOverlay;
 
   const AddToPlaylistPage({
-    @required this.audioFile,
     @required this.isPresentedAsOverlay,
     Key key,
   }) : super(key: key);
@@ -33,18 +29,6 @@ class _AddToPlaylistPageState
     extends ModularState<AddToPlaylistPage, AddToPlaylistController> {
   final SearchBarController<PlayList> _searchBarController =
       SearchBarController();
-
-  final Set<PlayList> _listOfPlaylistToAddAudio = {};
-
-  void _presentCreateNewPlaylist(BuildContext contex) {
-    if (widget.isPresentedAsOverlay) {
-      MediaOverlays.presentCreateNewPlaylistAsOverlay(
-        context: context,
-      );
-    } else {
-      PlaylistModule.toCreateNewPlaylist();
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -89,40 +73,50 @@ class _AddToPlaylistPageState
                   ),
                   Padding(
                     padding: const EdgeInsets.fromLTRB(0, 30, 0, 0),
-                    child: SearchBar(
-                      icon: const Padding(
-                        padding: EdgeInsets.fromLTRB(8, 0, 0, 0),
-                        child: Icon(
-                          Icons.search,
-                          color: Color(0xFF8E8F99),
-                        ),
-                      ),
-                      hintText: PlaylistStrings.search,
-                      hintStyle: const TextStyle(
-                        color: Color(0xFF8E8F99),
-                        fontSize: 18,
-                      ),
-                      iconActiveColor: Colors.white,
-                      textStyle: const TextStyle(color: Colors.white),
-                      cancellationWidget: const Text(
-                        PlaylistStrings.cancel,
-                        style: TextStyle(color: Colors.white),
-                      ),
-                      searchBarController: _searchBarController,
-                      suggestions: tempInMemoryPlaylistCollection.toList(),
-                      onItemFound: (item, index) {
-                        return PlaylistTile(
-                          playList: item,
-                          isInEditMode: true,
-                          onTap: (selectedPlaylist) =>
-                              _populatePlaylistItems(selectedPlaylist),
+                    child: StreamBuilder<List<PlayList>>(
+                      stream: controller.fetchPlaylists(),
+                      builder: (context, snapshot) {
+                        return SearchBar(
+                          icon: const Padding(
+                            padding: EdgeInsets.fromLTRB(8, 0, 0, 0),
+                            child: Icon(
+                              Icons.search,
+                              color: Color(0xFF8E8F99),
+                            ),
+                          ),
+                          hintText: PlaylistStrings.search,
+                          hintStyle: const TextStyle(
+                            color: Color(0xFF8E8F99),
+                            fontSize: 18,
+                          ),
+                          iconActiveColor: Colors.white,
+                          textStyle: const TextStyle(color: Colors.white),
+                          cancellationWidget: const Text(
+                            PlaylistStrings.cancel,
+                            style: TextStyle(color: Colors.white),
+                          ),
+                          searchBarController: _searchBarController,
+                          suggestions: snapshot.hasData ? snapshot.data : [],
+                          onItemFound: (item, index) {
+                            return PlaylistTile(
+                              playList: item,
+                              isInEditMode: true,
+                              onTap: (selectedPlaylist) =>
+                                  controller.populatePlaylistItems(
+                                playlist: selectedPlaylist,
+                              ),
+                            );
+                          },
+                          onSearch: (searchTerm) => controller.findPlaylists(
+                            items: snapshot.hasData ? snapshot.data : [],
+                            searchTerm: searchTerm,
+                          ),
+                          emptyWidget: const Text(
+                            PlaylistStrings.noMatches,
+                            style: TextStyle(color: Colors.white, fontSize: 12),
+                          ),
                         );
                       },
-                      onSearch: _findPlaylists,
-                      emptyWidget: const Text(
-                        PlaylistStrings.noMatches,
-                        style: TextStyle(color: Colors.white, fontSize: 12),
-                      ),
                     ),
                   ),
                   Positioned(
@@ -131,7 +125,8 @@ class _AddToPlaylistPageState
                     bottom: widget.isPresentedAsOverlay ? 8 : 120,
                     child: GradientRaisedButton(
                       label: PlaylistStrings.save,
-                      onPressed: () => _showSuccessDialog(),
+                      onPressed: () async =>
+                          _updatePlaylistAndShowSuccessDialog(context: context),
                     ),
                   ),
                 ],
@@ -143,28 +138,6 @@ class _AddToPlaylistPageState
     );
   }
 
-  void _addAudioFileToPlaylist(PlayList playlist) {
-    //ignore: prefer_final_locals
-    var _playlist = <Audio>[];
-    if (playlist.audioFiles.isNotEmpty) {
-      _playlist.addAll(playlist.audioFiles.asList());
-    }
-    _playlist.add(widget.audioFile);
-
-    final updatedPlaylist = PlayList(
-      (b) => b
-        ..coverUrlPath = playlist.coverUrlPath
-        ..description = playlist.description
-        ..title = playlist.title
-        ..privacy = playlist.privacy
-        ..audioFiles =
-            BuiltSet<Audio>.from(_playlist).toBuiltList().toBuilder(),
-    );
-
-    tempInMemoryPlaylistCollection.remove(playlist);
-    tempInMemoryPlaylistCollection.add(updatedPlaylist);
-  }
-
   void _close() {
     if (widget.isPresentedAsOverlay) {
       MediaOverlays.disposeAddToPlaylistOverlayEntry();
@@ -174,37 +147,25 @@ class _AddToPlaylistPageState
     }
   }
 
-  Future<List<PlayList>> _findPlaylists(String searchTerm) async {
-    return tempInMemoryPlaylistCollection
-        .where(
-          (element) => element.title.startsWith(searchTerm),
-        )
-        .toList();
-  }
-
-  void _populatePlaylistItems(PlayList playlist) {
-    if (_listOfPlaylistToAddAudio.contains(playlist)) {
-      _listOfPlaylistToAddAudio.remove(playlist);
+  void _presentCreateNewPlaylist(BuildContext contex) {
+    if (widget.isPresentedAsOverlay) {
+      MediaOverlays.presentCreateNewPlaylistAsOverlay(context: context);
     } else {
-      _listOfPlaylistToAddAudio.add(playlist);
+      PlaylistModule.toCreateNewPlaylist();
     }
   }
 
-  void _showSuccessDialog() {
-    for (final item in _listOfPlaylistToAddAudio) {
-      _addAudioFileToPlaylist(item);
-    }
-
-    _close();
-
-    // TODO: - Rethink how we notify a user about results of the operation
-    // showDialog(
-    //   context: context,
-    //   builder: (_) => const PlaylistModalAlert(
-    //     title: PlaylistStrings.audioAddedSuccessTitle,
-    //     subTitle: PlaylistStrings.audioAddedSuccessSubTitle,
-    //     popsCount: 1,
-    //   ),
-    // );
+  Future<void> _updatePlaylistAndShowSuccessDialog({
+    @required BuildContext context,
+  }) async {
+    await progressDialog(context: context).show();
+    await controller.saveAudioToPlaylists();
+    await progressDialog(context: context).hide();
+    showSuccessDialog(
+      context: context,
+      isPresentedAsOverlay: widget.isPresentedAsOverlay,
+      title: PlaylistStrings.audioAddedSuccessTitle,
+      subTitle: PlaylistStrings.audioAddedSuccessSubTitle,
+    );
   }
 }

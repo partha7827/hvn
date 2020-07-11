@@ -18,14 +18,13 @@ class _AchievementsPageState
     extends ModularState<AchievementsPage, AchievementsController> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(body: buildAchievements());
+    return Scaffold(body: _buildAchievements());
   }
 
-  Widget buildAchievements() {
+  Widget _buildAchievements() {
     return Container(
       padding: const EdgeInsets.only(left: 20, top: 10, right: 8),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+      child: ListView(
         children: [
           const HeaderRow(title: Strings.achievements),
           _badges(),
@@ -53,9 +52,7 @@ class _AchievementsPageState
           if (controller.showShareButton)
             Container(
               alignment: Alignment.center,
-              margin: const EdgeInsets.symmetric(
-                vertical: 20,
-              ),
+              margin: const EdgeInsets.symmetric(vertical: 20),
               child: Container(
                 width: MediaQuery.of(context).size.width * 0.8,
                 child: GradientOutlineButton(

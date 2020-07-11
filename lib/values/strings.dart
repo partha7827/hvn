@@ -60,6 +60,7 @@ class Strings {
   static const yes = 'Yes';
   static const no = 'No';
   static const editProfile = 'Edit Profile';
+  static const termsAndConditionsError = 'Please accept terms & conditions';
 
   ///Messages
   static String emailToChangePassword(String email) =>

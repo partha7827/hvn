@@ -43,16 +43,20 @@ class _VideoPageState extends ModularState<VideoPage, VideoController> {
 
   @override
   Widget build(BuildContext context) {
-    return LoadWidget(child: Observer(builder: (_) {
-      switch (controller.videos.status) {
-        case FutureStatus.fulfilled:
-          return buildVideos(controller.videos.value);
-        case FutureStatus.rejected:
-          return RepeatWidget(controller.loadVideos);
-        default:
-          return const SplashWidget();
-      }
-    },),);
+    return LoadWidget(
+      child: Observer(
+        builder: (_) {
+          switch (controller.videos.status) {
+            case FutureStatus.fulfilled:
+              return buildVideos(controller.videos.value);
+            case FutureStatus.rejected:
+              return RepeatWidget(controller.loadVideos);
+            default:
+              return const SplashWidget();
+          }
+        },
+      ),
+    );
   }
 
   void _showVideoPlayer(BuildContext context, Video videoFile) {

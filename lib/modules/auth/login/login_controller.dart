@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -46,16 +47,24 @@ abstract class _LoginControllerBase with Store {
     inProgress = true;
 
     try {
-      final uid = await auth.login(
-        emailController.text,
-        passwordController.text,
-      );
+      String uid;
+      try {
+        uid = await auth.login(
+          emailController.text,
+          passwordController.text,
+        );
+      } catch (e) {
+        if (uid == null) throw LoginException(Strings.userNotFound);
+      }
 
-      if (uid == null) throw LoginException(Strings.userNotFound);
-
-      final user = await firestore.userCollection.document(uid).get();
-
-      if (!user.exists) throw LoginException(Strings.userNotFound);
+      DocumentSnapshot user;
+      try {
+        user = await firestore.userCollection.document(uid).get();
+      } catch (e) {
+        if (user == null || !user.exists) {
+          throw LoginException(Strings.userNotFound);
+        }
+      }
 
       await appStore.setCurrentUser(User.fromSnapshot(user));
     } catch (e) {
