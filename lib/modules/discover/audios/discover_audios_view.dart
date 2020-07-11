@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -22,11 +24,28 @@ class _DiscoverAudiosViewState
     with AutomaticKeepAliveClientMixin {
   @override
   bool get wantKeepAlive => true;
+  double _opacity = 0.0;
+  Timer _timer;
+  bool audioLoaded = false;
 
   @override
   void initState() {
     super.initState();
     controller.loadAudios();
+  }
+
+  @override
+  void dispose() {
+    _timer.cancel();
+    super.dispose();
+  }
+
+  void changeOpacity() async {
+    _timer = Timer(const Duration(milliseconds: 200), () {
+      setState(() {
+        _opacity = 1.0;
+      });
+    });
   }
 
   @override
@@ -38,6 +57,10 @@ class _DiscoverAudiosViewState
         builder: (_) {
           switch (controller.audios.status) {
             case FutureStatus.fulfilled:
+              if (!audioLoaded) {
+                audioLoaded = true;
+                changeOpacity();
+              }
               return buildAudios(controller.audios.value.toList());
             case FutureStatus.rejected:
               return RepeatWidget(controller.loadAudios);
@@ -49,17 +72,21 @@ class _DiscoverAudiosViewState
     );
   }
 
-  Widget buildAudios(List<Audio> audios) => ListView.builder(
-    physics: const AlwaysScrollableScrollPhysics(),
-        itemBuilder: (_, index) {
-          return AudioCard(
-            audios[index],
-            onPlayTap: () => MediaOverlays.presentAudioPlayerAsOverlay(
-              context: context,
-              audioFile: audios[index],
-            ),
-          );
-        },
-        itemCount: audios.length,
+  Widget buildAudios(List<Audio> audios) => AnimatedOpacity(
+        duration: const Duration(seconds: 1),
+        opacity: _opacity,
+        child: ListView.builder(
+          physics: const AlwaysScrollableScrollPhysics(),
+          itemBuilder: (_, index) {
+            return AudioCard(
+              audios[index],
+              onPlayTap: () => MediaOverlays.presentAudioPlayerAsOverlay(
+                context: context,
+                audioFile: audios[index],
+              ),
+            );
+          },
+          itemCount: audios.length,
+        ),
       );
 }
