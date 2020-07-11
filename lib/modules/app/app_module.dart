@@ -12,6 +12,7 @@ import 'package:highvibe/modules/profile/profile_module.dart';
 import 'package:highvibe/modules/wallet/wallet_module.dart';
 import 'package:highvibe/services/auth_service.dart';
 import 'package:highvibe/services/firestore_service.dart';
+import 'package:highvibe/services/storage_service.dart';
 
 class AppModule extends MainModule {
   static bool audioPlayerPageIsOffstage = false;
@@ -21,6 +22,7 @@ class AppModule extends MainModule {
         Bind((i) => AppController()),
         Bind((i) => AuthService.withFirebase()),
         Bind((i) => FirestoreService.withFirebase()),
+        Bind((i) => StorageService.withFirebase()),
       ];
 
   @override

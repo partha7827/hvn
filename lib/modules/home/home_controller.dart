@@ -1,5 +1,6 @@
 import 'package:built_collection/built_collection.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_facebook_login/flutter_facebook_login.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:highvibe/modules/app/app_controller.dart';
 import 'package:highvibe/services/auth_service.dart';
@@ -16,7 +17,7 @@ abstract class _HomeControllerBase with Store {
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
   final AuthService auth = Modular.get<AuthService>();
   final AppController currentUserStore = Modular.get<AppController>();
-
+  final FacebookLogin facebookLogin = FacebookLogin();
 
   @observable
   ObservableFuture<BuiltList<Audio>> audios;
@@ -62,6 +63,12 @@ abstract class _HomeControllerBase with Store {
 
   @action
   Future<void> logout() async {
+    await facebookLogin.isLoggedIn.then((isLoggedIn) {
+      if (isLoggedIn) {
+        facebookLogin.logOut();
+      }
+    });
+
     await auth.logout();
     await currentUserStore.setCurrentUser(null);
   }

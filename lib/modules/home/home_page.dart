@@ -21,6 +21,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends ModularState<HomePage, HomeController> {
+<<<<<<< HEAD
   bool showQuote = false;
 
   @override
@@ -31,6 +32,11 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
         showQuote = true;
       });
     });
+=======
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+>>>>>>> master
   }
 
   void _openDrawer() {

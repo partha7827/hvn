@@ -1,10 +1,7 @@
-import 'package:built_collection/built_collection.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:highvibe/models/models.dart';
-import 'package:highvibe/models/playlist/playlist.dart';
 import 'package:highvibe/modules/playlist/edit_playlist/edit_playlist_page_controller.dart';
 import 'package:highvibe/modules/playlist/resources/resources.dart';
 import 'package:highvibe/modules/playlist/widgets/widgets.dart';
@@ -13,12 +10,7 @@ import 'package:highvibe/widgets/header_row.dart';
 import 'package:highvibe/widgets/responsive_safe_area.dart';
 
 class EditPlaylistPage extends StatefulWidget {
-  final PlayList playlist;
-
-  EditPlaylistPage({
-    @required this.playlist,
-    Key key,
-  }) : super(key: key);
+  EditPlaylistPage({Key key}) : super(key: key);
 
   @override
   _EditPlayListPageState createState() => _EditPlayListPageState();
@@ -27,13 +19,7 @@ class EditPlaylistPage extends StatefulWidget {
 class _EditPlayListPageState
     extends ModularState<EditPlaylistPage, EditPlaylistController>
     with SingleTickerProviderStateMixin {
-  String _imagePath;
-  Privacy _privacy;
-  bool _isPrivate;
-  TextEditingController _titleTextEditingController;
-  TextEditingController _descriptionTextEditingController;
   TabController _tabController;
-  List<Audio> _audioItems;
 
   @override
   Widget build(BuildContext context) {
@@ -70,12 +56,14 @@ class _EditPlayListPageState
       ),
       body: ResponsiveSafeArea(
         builder: (context, size) {
-          return TabBarView(
-            controller: _tabController,
-            children: [
-              _editPlaylist(),
-              _audioFilesListView(),
-            ],
+          return Observer(
+            builder: (_) => TabBarView(
+              controller: _tabController,
+              children: [
+                _editPlaylist(),
+                _audioFilesListView(),
+              ],
+            ),
           );
         },
       ),
@@ -85,31 +73,30 @@ class _EditPlayListPageState
   @override
   void dispose() {
     _tabController.dispose();
-    _titleTextEditingController.dispose();
-    _descriptionTextEditingController.dispose();
     super.dispose();
   }
 
   @override
   void initState() {
     super.initState();
-    _configure();
+    _tabController = TabController(vsync: this, length: 2);
+    controller.init();
   }
 
   Widget _audioFilesListView() {
-    if (_audioItems.isNotEmpty) {
-      return ReorderableListView(
-        children: [
-          for (final item in _audioItems)
-            PlaylistAudioItemTile(
-              key: ValueKey(item),
-              audioFile: item,
-              onDelete: (item) {
-                setState(() => _audioItems.remove(item));
-              },
-            ),
-        ],
-        onReorder: _handleListReorder,
+    if (controller.audioItems.isNotEmpty) {
+      return Observer(
+        builder: (_) => ReorderableListView(
+          children: [
+            for (final item in controller.audioItems)
+              PlaylistAudioItemTile(
+                key: ValueKey(item),
+                audioFile: item,
+                onDelete: (item) => controller.removeAudioItem(item),
+              ),
+          ],
+          onReorder: controller.handleListReorder,
+        ),
       );
     } else {
       return Center(
@@ -123,6 +110,7 @@ class _EditPlayListPageState
     }
   }
 
+<<<<<<< HEAD
   void _handleListReorder(int oldIndex, int newIndex) {
     if (oldIndex < newIndex) {
       newIndex -= 1;
@@ -147,6 +135,8 @@ class _EditPlayListPageState
     _tabController = TabController(vsync: this, length: 2);
   }
 
+=======
+>>>>>>> master
   Widget _editPlaylist() {
     return Container(
       padding: const EdgeInsets.fromLTRB(20, 8, 20, 8),
@@ -161,9 +151,9 @@ class _EditPlayListPageState
               ),
               borderRadius: BorderRadius.circular(12),
             ),
-            child: _imagePath.isEmpty
+            child: controller.playlistCoverPath.isEmpty
                 ? GestureDetector(
-                    onTap: () async => _selectCover(),
+                    onTap: () async => controller.selectPlaylistCover(),
                     child: Stack(
                       alignment: Alignment.topCenter,
                       children: [
@@ -190,16 +180,13 @@ class _EditPlayListPageState
                     children: [
                       ClipRRect(
                         borderRadius: BorderRadius.circular(12),
-                        child: CachedNetworkImage(
-                          imageUrl: _imagePath,
-                          fit: BoxFit.cover,
-                        ),
+                        child: _imageWidget(),
                       ),
                       Positioned(
                         top: 12,
                         right: 12,
                         child: GestureDetector(
-                          onTap: () => setState(() => _imagePath = ''),
+                          onTap: () => controller.deletePlaylistCover(),
                           child: PlaylistImageAssets.deletePlaylistCover,
                         ),
                       ),
@@ -216,7 +203,7 @@ class _EditPlayListPageState
           ),
           const SizedBox(height: 10),
           TextField(
-            controller: _titleTextEditingController,
+            controller: controller.titleTextEditingController,
             decoration: const InputDecoration(
               enabledBorder: UnderlineInputBorder(
                 borderSide: BorderSide(color: Color(0xFF525366), width: 1),
@@ -239,7 +226,7 @@ class _EditPlayListPageState
           ),
           const SizedBox(height: 10),
           TextField(
-            controller: _descriptionTextEditingController,
+            controller: controller.descriptionTextEditingController,
             decoration: const InputDecoration(
               enabledBorder: UnderlineInputBorder(
                 borderSide: BorderSide(color: Color(0xFF525366), width: 1),
@@ -257,10 +244,10 @@ class _EditPlayListPageState
           Row(
             children: [
               IconButton(
-                icon: !_isPrivate
+                icon: !controller.isPrivate
                     ? PlaylistImageAssets.radioButtonActive
                     : PlaylistImageAssets.radioButtonNotActive,
-                onPressed: () => _togglePrivacy(),
+                onPressed: () => controller.togglePrivacy(),
               ),
               const Text(
                 PlaylistStrings.public,
@@ -268,10 +255,10 @@ class _EditPlayListPageState
               ),
               const SizedBox(width: 20),
               IconButton(
-                icon: _isPrivate
+                icon: controller.isPrivate
                     ? PlaylistImageAssets.radioButtonActive
                     : PlaylistImageAssets.radioButtonNotActive,
-                onPressed: () => _togglePrivacy(),
+                onPressed: () => controller.togglePrivacy(),
               ),
               const Text(
                 PlaylistStrings.private,
@@ -282,29 +269,30 @@ class _EditPlayListPageState
           const SizedBox(height: 20),
           GradientRaisedButton(
             label: PlaylistStrings.save,
-            onPressed: () => _showSuccessDialog(),
+            onPressed: () => _updatePlaylistAndShowSuccessDialog(
+              context: context,
+            ),
           ),
         ],
       ),
     );
   }
 
-  Future<void> _selectCover() async {
-    try {
-      final file = await FilePicker.getFile(type: FileType.image);
-      if (file != null) {
-        setState(() {
-          _imagePath = file.path;
-          // FIXME: - temporarily overide. Implement image upload.
-          _imagePath =
-              'https://takelessons.com/blog/wp-content/uploads/2020/03/flute-for-beginners.jpg';
-        });
-      }
-    } catch (error) {
-      print(error);
+  Widget _imageWidget() {
+    if (Uri.parse(controller.playlistCoverPath).isAbsolute) {
+      return CachedNetworkImage(
+        imageUrl: controller.playlistCoverPath,
+        fit: BoxFit.cover,
+      );
+    } else {
+      return Image.asset(
+        controller.playlistCoverPath,
+        fit: BoxFit.cover,
+      );
     }
   }
 
+<<<<<<< HEAD
   void _showSuccessDialog() {
     final updatePlaylist = PlayList(
       (b) => b
@@ -319,25 +307,19 @@ class _EditPlayListPageState
     tempInMemoryPlaylistCollection.add(updatePlaylist);
 
     showDialog(
+=======
+  Future<void> _updatePlaylistAndShowSuccessDialog({
+    @required BuildContext context,
+  }) async {
+    await progressDialog(context: context).show();
+    await controller.savePlaylist();
+    await progressDialog(context: context).hide();
+    showSuccessDialog(
+>>>>>>> master
       context: context,
-      builder: (_) => const PlaylistModalAlert(
-        title: PlaylistStrings.newPlaylistSuccessTitle,
-        subTitle: PlaylistStrings.newPlaylistSuccessSubTitle,
-      ),
+      isPresentedAsOverlay: false,
+      title: PlaylistStrings.newPlaylistSuccessTitle,
+      subTitle: PlaylistStrings.audioAddedSuccessSubTitle,
     );
-  }
-
-  void _togglePrivacy() {
-    if (_isPrivate) {
-      setState(() {
-        _privacy = Privacy.public;
-        _isPrivate = false;
-      });
-    } else {
-      setState(() {
-        _privacy = Privacy.private;
-        _isPrivate = true;
-      });
-    }
   }
 }

@@ -56,11 +56,14 @@ class _LoadWidgetState extends State<LoadWidget> {
   Widget build(BuildContext context) {
     return Stack(
       children: <Widget>[
+<<<<<<< HEAD
         AnimatedOpacity(
           opacity: widgetOpacity,
           duration: widget.duration,
           child: widget.child ?? widget.builder(widget.future.value),
         ),
+=======
+>>>>>>> master
         SplashWidget(
           duration: widget.duration,
           animationCompleteCallback: () {
@@ -70,6 +73,14 @@ class _LoadWidgetState extends State<LoadWidget> {
             maybeShow();
           },
         ),
+<<<<<<< HEAD
+=======
+        AnimatedOpacity(
+          opacity: widgetOpacity,
+          duration: widget.duration,
+          child: widget.child ?? widget.builder(widget.future.value),
+        ),
+>>>>>>> master
       ],
     );
   }

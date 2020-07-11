@@ -53,6 +53,7 @@ class _DiscoverAudiosViewState
   }
 
   Widget buildAudios(List<Audio> audios) => ListView.builder(
+    physics: const AlwaysScrollableScrollPhysics(),
         itemBuilder: (_, index) {
           return AudioCard(
             audios[index],

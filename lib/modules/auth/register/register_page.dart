@@ -46,8 +46,9 @@ class _RegisterPageState
                     icon: Icons.person_outline,
                     controller: controller.usernameController,
                     maxLength: 15,
-                    validator: (str) =>
-                        str.length < 2 && str.isNotEmpty ? 'Add a Name' : null,
+                    validator: (str) => str.length < 2 && str.isNotEmpty
+                        ? 'Add a Name (min. 2 characters)'
+                        : null,
                   ),
                 ),
                 Padding(
@@ -103,10 +104,16 @@ class _RegisterPageState
                     label: Strings.signUp,
                     isLoading: controller.inProgress,
                     onPressed: () async {
-                      if (!controller.formKey.currentState.validate() ||
-                          !controller.hasAcceptedTerms) {
+                      if (!controller.formKey.currentState.validate()) {
                         return;
                       }
+
+                      if (!controller.hasAcceptedTerms) {
+                        showSnackBarMsg(controller.scaffoldKey.currentState,
+                            Strings.termsAndConditionsError);
+                        return;
+                      }
+
                       try {
                         await controller.registerUser();
                       } catch (e) {

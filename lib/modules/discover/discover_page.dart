@@ -28,6 +28,7 @@ class _DiscoverPageState extends ModularState<DiscoverPage, DiscoverController>
   @override
   void initState() {
     _tabController = TabController(
+
       initialIndex: widget.pageIndex,
       length: _tabs.length,
       vsync: this,
@@ -65,6 +66,7 @@ class _DiscoverPageState extends ModularState<DiscoverPage, DiscoverController>
         ),
       ),
       body: TabBarView(
+        physics: const NeverScrollableScrollPhysics(),
         controller: _tabController,
         children: [
           DiscoverAudios(),

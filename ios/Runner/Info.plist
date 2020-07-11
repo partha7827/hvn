@@ -31,7 +31,11 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
+<<<<<<< HEAD
 	<string>$(CURRENT_PROJECT_VERSION)</string>
+=======
+	<string>$(FLUTTER_BUILD_NUMBER)</string>
+>>>>>>> master
 	<key>FacebookAppID</key>
 	<string>253659302522509</string>
 	<key>FacebookDisplayName</key>
@@ -62,9 +66,13 @@
 		<true/>
 	</dict>
 	<key>NSAppleMusicUsageDescription</key>
+<<<<<<< HEAD
 	<string>We access your music to play background music.</string>
 	<key>NSCalendarsUsageDescription</key>
 	<string>We need access to the calendar to enter reminders for events.</string>
+=======
+	<string>App requires access to music library for playing music.</string>
+>>>>>>> master
 	<key>NSCameraUsageDescription</key>
 	<string>App requires access to the camera.</string>
 	<key>NSContactsUsageDescription</key>
@@ -73,12 +81,17 @@
 	<string>Unused permission required by a library. Never shown to the user.</string>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>This app requires mic access to record video.</string>
+<<<<<<< HEAD
 	<key>NSMotionUsageDescription</key>
 	<string>We need to access the motion sensors to track your progress.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>We need access to photos to uploade pictures.</string>
 	<key>NSSpeechRecognitionUsageDescription</key>
 	<string>Unused permission required by a library. Never shown to the user.</string>
+=======
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>App requires access to photo library for uploading avatars.</string>
+>>>>>>> master
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>audio</string>
