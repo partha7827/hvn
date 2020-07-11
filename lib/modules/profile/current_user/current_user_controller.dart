@@ -15,18 +15,18 @@ class CurrentUserController = _CurrentUserControllerBase
 abstract class _CurrentUserControllerBase with Store {
   final AuthService auth = Modular.get<AuthService>();
   final FirestoreService store = Modular.get<FirestoreService>();
-  final AppController currentUserStore = Modular.get<AppController>();
+  final AppController app = Modular.get<AppController>();
 
   final TextEditingController nameController = TextEditingController();
   final TextEditingController statusController = TextEditingController();
 
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
 
-  User get currentUser => currentUserStore.currentUser;
+  User get currentUser => app.currentUser;
 
   @action
   Future<void> logout() async {
     await auth.logout();
-    await currentUserStore.setCurrentUser(null);
+    await app.setCurrentUser(null);
   }
 }

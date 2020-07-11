@@ -28,12 +28,19 @@ abstract class Audio implements Built<Audio, AudioBuilder> {
   String get author;
   String get artworkUrlPath;
   String get audioUrlPath;
+  String get waveformUrlPath;
+  int get karmaReward;
+  int get xpReward;
+  bool get isProcessed;
   bool get isRecommended;
   int get duration;
   BuiltList<String> get tags;
 
   String toJson() {
     return json.encode(serializers.serializeWith(Audio.serializer, this));
+  }
+  Map<String, dynamic> toMap() {
+    return serializers.serializeWith(Audio.serializer, this);
   }
 
   static Audio fromJson(String jsonString) {
@@ -64,6 +71,10 @@ abstract class Audio implements Built<Audio, AudioBuilder> {
     ..subTitle = ''
     ..author = ''
     ..artworkUrlPath = Assets.audioArtworkPlaceholder
+    ..karmaReward = 0
+    ..xpReward = 0
+    ..waveformUrlPath = ''
+    ..isProcessed = false
     ..audioUrlPath = ''
     ..duration = 0
     ..isRecommended = false
