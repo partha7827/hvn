@@ -50,9 +50,7 @@ abstract class _EditAudioControllerBase with Store {
   @action
   Future<void> updateCover(File file) async {
     coverUrl = await storage.uploadAudioThumb(file, currentUserId);
-
     audio = audio.rebuild((b) => b..artworkUrlPath = coverUrl);
-
     await firestore.audioCollection
         .document(audio.id)
         .updateData(audio.toMap());

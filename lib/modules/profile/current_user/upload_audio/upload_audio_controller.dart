@@ -38,7 +38,7 @@ abstract class _UploadAudioControllerBase with Store {
   int karmaPoints;
 
   @action
-  void nextStep({dynamic data}) {
+  void nextStep({Object data}) {
     switch (currentStep) {
       case UploadAudioStep.askChooseAudio:
         currentStep = UploadAudioStep.chooseAudio;
@@ -65,10 +65,7 @@ abstract class _UploadAudioControllerBase with Store {
 
   @action
   Future<void> performUpload() async {
-    // return Future<String>.delayed(const Duration(seconds: 2));
-
     final audioUrl = await storage.uploadAudio(audioFile, currentUserId);
-
     final coverUrl = await storage.uploadAudioThumb(coverFile, currentUserId);
 
     final audio = Audio(
@@ -94,14 +91,9 @@ abstract class _UploadAudioControllerBase with Store {
     //       ..karmaReward = 42,
     //   ),
     // );
-
     final stream = store.audioCollection.document(audioId).snapshots();
-
     final event = await stream.first;
-
-    final audio = Audio.fromSnapshot(event);
-
-    return audio;
+    return Audio.fromSnapshot(event);
   }
 
   @observable
