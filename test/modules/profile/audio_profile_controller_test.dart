@@ -4,12 +4,11 @@ import 'package:flutter_modular/flutter_modular_test.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:highvibe/mocks/mock_database.dart';
 import 'package:highvibe/modules/app/app_controller.dart';
+import 'package:highvibe/modules/profile/show_audio/show_audio_controller.dart';
+import 'package:highvibe/modules/profile/show_audio/show_audio_module.dart';
 import 'package:highvibe/services/auth_service.dart';
 import 'package:highvibe/services/firestore_service.dart';
 import 'package:highvibe/services/storage_service.dart';
-import 'package:mobx/mobx.dart';
-
-import 'package:highvibe/mocks/mock_audio_files.dart';
 import 'package:highvibe/mocks/mock_database.dart' as database;
 
 
@@ -22,26 +21,18 @@ void main() {
     Bind<StorageService>((i) => StorageService.withMock()),
   ]);
 
-  AudioController controller;
+  ShowAudioController controller;
   AppController app;
 
   setUp(() async {
     app = Modular.get<AppController>();
-    controller = Modular.get<AudioController>();
+    controller = Modular.get<ShowAudioController>();
 
     await app.setCurrentUser(mockUser);
 
   });
 
   test('controller', () async {
-    expect(controller, isInstanceOf<AudioController>());
-  });
-
-
-  test('upload audio', () async {
-    final audio = mockAudioItemsList.first;
-
-    controller.uploadAudio(audio);
-    expect(controller.uploadStatus, equals(FutureStatus.pending));
+    expect(controller, isInstanceOf<ShowAudioController>());
   });
 }

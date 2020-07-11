@@ -110,7 +110,6 @@ class Strings {
   static const String goodMorning = 'Good Morning';
   static const String howAreYouFeeling = 'How are you feeling?';
 
-
   static const String about = 'About';
   static const String viewMore = 'View More';
   static const String swag = 'Swag';
@@ -129,10 +128,11 @@ class Strings {
 }
 
 class UploadAudioStrings {
-  static const chooseAudio = '';
-  static const chooseCover = '';
-  static const uploadAudioAndCover = '';
-  static const processDocument = '';
-  static const success = '';
-  static const error = '';
+  static const askChooseAudio =
+      '''
+You are allowed to share only those files which you have under legal ownership. Tap Next to continue and open file manager.''';
+  static const uploadAudio = 'Uploading audio file, please wait...';
+  static const processDocument = 'Analyzing audio file, please wait...';
+  static const success = 'Success';
+  static const error = 'Error';
 }

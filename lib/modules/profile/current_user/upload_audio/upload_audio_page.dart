@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:highvibe/modules/profile/profile_module.dart';
-import 'package:highvibe/utils/utils.dart';
 import 'package:highvibe/values/strings.dart';
 import 'package:highvibe/values/themes.dart';
 import 'package:highvibe/widgets/splash_widget.dart';
@@ -32,23 +31,18 @@ class _UploadAudioPageState
       controller.nextStep(data: file);
     });
 
-    when((_) => controller.currentStep == UploadAudioStep.chooseCover,
-        () async {
-      final file = await FilePicker.getFile(type: FileType.image);
-      controller.nextStep(data: file);
-    });
-
-    when((_) => controller.currentStep == UploadAudioStep.editDocument,
-        () async {
-      ProfileModule.toEditAudio(controller.audioId);
+    when((_) => controller.currentStep == UploadAudioStep.editDocument, () {
+      ProfileModule.toEditAudio(controller.audio);
     });
   }
 
   @override
   Widget build(BuildContext context) {
+    print('build upload audio page');
+
     return Scaffold(
       appBar: AppBar(
-        title: Text(
+        title: const Text(
           'Upload Audio',
           style: TextStyle(fontWeight: FontWeight.bold),
         ),
@@ -68,11 +62,8 @@ class _UploadAudioPageState
           case UploadAudioStep.askChooseAudio:
             return _askChooseAudio();
             break;
-          case UploadAudioStep.askChooseCover:
-            return _askChooseCover();
-            break;
-          case UploadAudioStep.uploadAudioAndCover:
-            return _uploadAudioAndCover();
+          case UploadAudioStep.uploadAudio:
+            return _uploadAudio();
             break;
           case UploadAudioStep.processDocument:
             return _processDocument();
@@ -91,18 +82,15 @@ class _UploadAudioPageState
   }
 
   Widget _askChooseAudio() => Center(
-        child: Text(UploadAudioStrings.chooseAudio, style: bold24PlayfairWhite),
+        child:
+            Text(UploadAudioStrings.askChooseAudio, style: bold24PlayfairWhite),
       );
 
-  Widget _askChooseCover() => Center(
-        child: Text(UploadAudioStrings.chooseCover, style: bold24PlayfairWhite),
-      );
-
-  Widget _uploadAudioAndCover() => Column(
+  Widget _uploadAudio() => Column(
         children: <Widget>[
           const SplashWidget(),
           const SizedBox(height: 10),
-          Text(UploadAudioStrings.uploadAudioAndCover),
+          Text(UploadAudioStrings.uploadAudio),
         ],
       );
 
@@ -122,5 +110,5 @@ class _UploadAudioPageState
       );
 
   Widget _error() => Container(
-      child: Text(controller.errorMessage, style: bold20PlayfairWhite));
+      child: Text(UploadAudioStrings.error, style: bold20PlayfairWhite));
 }

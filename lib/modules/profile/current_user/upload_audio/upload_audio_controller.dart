@@ -10,16 +10,13 @@ import 'package:mobx/mobx.dart';
 part 'upload_audio_controller.g.dart';
 
 enum UploadAudioStep {
-  askChooseAudio, // welcome here... agree on ownership and click next
-  chooseAudio, // file manager to choose audio file - navigator pop with file
-  askChooseCover, // pick up thumnbnail for your audio file
-  chooseCover, // file manage to choose image file - async function returns file
-  // ignore: lines_longer_than_80_chars
-  uploadAudioAndCover, // straight after choosing cover - we upload files to fire storage and create document in firestore
-  processDocument, // still show splash loading screen but with different caption - now processing the file
-  editDocument, // show screen with all fields of upload audio and allow to edit these fields
-  success, // congratulations and give karma points
-  error // show error and allow to return back to profile ie navigator pop
+  askChooseAudio,
+  chooseAudio,
+  uploadAudio,
+  processDocument,
+  editDocument,
+  success,
+  error
 }
 
 class UploadAudioController = _UploadAudioControllerBase
@@ -34,6 +31,7 @@ abstract class _UploadAudioControllerBase with Store {
   String get currentUserName => app.currentUser.name;
   String get currentUserAvatar => app.currentUser.photoUrl;
 
+  Audio audio;
   String audioId;
   File audioFile;
   File coverFile;
@@ -47,23 +45,15 @@ abstract class _UploadAudioControllerBase with Store {
         break;
       case UploadAudioStep.chooseAudio:
         audioFile = data;
-        currentStep = UploadAudioStep.askChooseCover;
+        currentStep = UploadAudioStep.uploadAudio;
+        performUpload().then((_) => nextStep());
         break;
-      case UploadAudioStep.askChooseCover:
-        currentStep = UploadAudioStep.chooseCover;
-        break;
-      case UploadAudioStep.chooseCover:
-        coverFile = data;
-        currentStep = UploadAudioStep.uploadAudioAndCover;
-        performUpload().then((audioId) => nextStep(data: audioId));
-        break;
-      case UploadAudioStep.uploadAudioAndCover:
-        audioId = data;
+      case UploadAudioStep.uploadAudio:
         currentStep = UploadAudioStep.processDocument;
-        whenProcessed().then((karmaPoints) => nextStep(data: karmaPoints));
+        whenProcessed().then((audio) => nextStep(data: audio));
         break;
       case UploadAudioStep.processDocument:
-        karmaPoints = data;
+        audio = data;
         currentStep = UploadAudioStep.editDocument;
         break;
       case UploadAudioStep.editDocument:
@@ -74,7 +64,9 @@ abstract class _UploadAudioControllerBase with Store {
   }
 
   @action
-  Future<String> performUpload() async {
+  Future<void> performUpload() async {
+    // return Future<String>.delayed(const Duration(seconds: 2));
+
     final audioUrl = await storage.uploadAudio(audioFile, currentUserId);
 
     final coverUrl = await storage.uploadAudioThumb(coverFile, currentUserId);
@@ -89,31 +81,29 @@ abstract class _UploadAudioControllerBase with Store {
     );
 
     await store.audioCollection.document(audio.id).setData(audio.toMap());
-
-    return audio.id;
   }
 
   @action
-  Future<int> whenProcessed() async {
+  Future<Audio> whenProcessed() async {
+    // return Future<Audio>.delayed(const Duration(seconds: 1)).then(
+    //   (value) => Audio(
+    //     (b) => b
+    //       ..userId = currentUserId
+    //       ..userName = currentUserName
+    //       ..userAvatar = currentUserAvatar
+    //       ..karmaReward = 42,
+    //   ),
+    // );
+
     final stream = store.audioCollection.document(audioId).snapshots();
 
     final event = await stream.first;
 
     final audio = Audio.fromSnapshot(event);
 
-    if (audio.isProcessed) {
-      return audio.karmaReward;
-    } else {
-      return 0;
-    }
+    return audio;
   }
 
   @observable
-  String errorMessage;
-
-  @observable
   UploadAudioStep currentStep = UploadAudioStep.askChooseAudio;
-
-  @observable
-  FutureStatus uploadStatus = FutureStatus.fulfilled;
 }

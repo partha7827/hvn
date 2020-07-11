@@ -1,4 +1,5 @@
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:highvibe/models/audio/audio.dart';
 import 'package:highvibe/models/models.dart' show User;
 import 'package:highvibe/modules/profile/current_user/current_user_module.dart';
 import 'package:highvibe/modules/profile/current_user/edit_audio/edit_audio_module.dart';
@@ -59,8 +60,8 @@ class ProfileModule extends ChildModule {
           transition: TransitionType.fadeIn,
         ),
         Router(
-          '$profileRoute/editAudio/:audioId',
-          child: (_, args) => EditAudioModule(args.params['audioId']),
+          '$profileRoute/editAudio',
+          child: (_, args) => EditAudioModule(args.data),
           transition: TransitionType.leftToRight,
         ),
       ];
@@ -95,6 +96,6 @@ class ProfileModule extends ChildModule {
   static Future<Object> toUploadAudio() =>
       Modular.to.pushNamed('$profileRoute/uploadAudio');
 
-  static Future<Object> toEditAudio(String audioId) =>
-      Modular.to.pushNamed('$profileRoute/editAudio/$audioId');
+  static Future<Object> toEditAudio(Audio audio) =>
+      Modular.to.pushNamed('$profileRoute/editAudio', arguments: audio);
 }
