@@ -117,11 +117,9 @@ class _CurrentUserPageState
       tabView: TabBarView(
         controller: tabController,
         children: <Widget>[
-          AudioModule(controller.currentUser.id),
-          ShowPlaylistsModule(userId: controller.currentUser.id),
           AchievementsModule(controller.currentUser),
           ShowAudioModule(controller.currentUser.id),
-          ShowPlaylistsModule(controller.currentUser.id),
+          ShowPlaylistsModule(userId: controller.currentUser.id),
         ],
       ),
     );

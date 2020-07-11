@@ -3,7 +3,7 @@ import 'package:highvibe/models/audio/audio.dart';
 import 'package:highvibe/models/models.dart' show User;
 import 'package:highvibe/modules/profile/current_user/current_user_module.dart';
 import 'package:highvibe/modules/profile/current_user/edit_audio/edit_audio_module.dart';
-import 'package:highvibe/modules/profile/current_user/edit_profile/edit_profile.dart';
+import 'package:highvibe/modules/profile/current_user/edit_profile/edit_profile_module.dart';
 import 'package:highvibe/modules/profile/current_user/upload_audio/upload_audio_module.dart';
 import 'package:highvibe/modules/profile/other_user/other_user_module.dart';
 import 'package:highvibe/modules/profile/users_list/users_list_module.dart';

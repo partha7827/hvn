@@ -139,11 +139,9 @@ class _OtherUserPageState
       tabView: TabBarView(
         controller: tabController,
         children: <Widget>[
-          AudioModule(controller.otherUser.id),
-          ShowPlaylistsModule(userId: controller.otherUser.id),
           AchievementsModule(controller.otherUser),
           ShowAudioModule(controller.otherUser.id),
-          ShowPlaylistsModule(controller.otherUser.id),
+          ShowPlaylistsModule(userId: controller.otherUser.id),
         ],
       ),
     );

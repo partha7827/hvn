@@ -52,7 +52,7 @@ class _UploadAudioPageState
         ),
         actions: <Widget>[
           IconButton(
-            icon: Icon(Icons.navigate_next),
+            icon: const Icon(Icons.navigate_next),
             onPressed: controller.nextStep,
           ),
         ],
@@ -90,7 +90,7 @@ class _UploadAudioPageState
         children: <Widget>[
           const SplashWidget(),
           const SizedBox(height: 10),
-          Text(UploadAudioStrings.uploadAudio),
+          const Text(UploadAudioStrings.uploadAudio),
         ],
       );
 
@@ -98,13 +98,13 @@ class _UploadAudioPageState
         children: <Widget>[
           const SplashWidget(),
           const SizedBox(height: 10),
-          Text(UploadAudioStrings.processDocument),
+          const Text(UploadAudioStrings.processDocument),
         ],
       );
 
   Widget _success() => Column(
         children: <Widget>[
-          Text(UploadAudioStrings.success),
+          const Text(UploadAudioStrings.success),
           Text('${controller.karmaPoints} Karma Points'),
         ],
       );

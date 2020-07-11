@@ -4,7 +4,6 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:highvibe/models/models.dart';
 import 'package:highvibe/modules/app/media_overlays.dart';
 import 'package:highvibe/modules/playlist/resources/resources.dart';
-import 'package:highvibe/modules/playlist/widgets/widgets.dart';
 import 'package:highvibe/modules/profile/profile_module.dart';
 import 'package:highvibe/utils/utils.dart';
 import 'package:highvibe/values/strings.dart';
@@ -63,7 +62,7 @@ class _ShowAudioPageState
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
             const HeaderRow(title: Strings.uploads),
-            IconButton(
+            const IconButton(
               icon: Icon(Icons.file_upload),
               onPressed: ProfileModule.toUploadAudio,
             )
@@ -85,21 +84,21 @@ class _ShowAudioPageState
           ],
         ),
         const SizedBox(height: 10),
-        for (final item in tempInMemoryPlaylistCollection) ...[
-          GestureDetector(
-            onTap: () async {
-              MediaOverlays.presentPlayListPlayerAsOverlay(
-                context: context,
-                playList: item,
-              );
-            },
-            child: PlaylistTile(
-              isInEditMode: false,
-              playList: item,
-              onTap: (item) => playlistContextMenu(context, item),
-            ),
-          )
-        ],
+        // for (final item in tempInMemoryPlaylistCollection) ...[
+        //   GestureDetector(
+        //     onTap: () async {
+        //       MediaOverlays.presentPlayListPlayerAsOverlay(
+        //         context: context,
+        //         playList: item,
+        //       );
+        //     },
+        //     child: PlaylistTile(
+        //       isInEditMode: false,
+        //       playList: item,
+        //       onTap: (item) => playlistContextMenu(context, item),
+        //     ),
+        //   )
+        // ],
       ],
     );
   }
