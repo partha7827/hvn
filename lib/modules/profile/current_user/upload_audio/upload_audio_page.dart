@@ -8,6 +8,7 @@ import 'package:highvibe/modules/profile/profile_module.dart';
 import 'package:highvibe/utils/supported_audio_types.dart';
 import 'package:highvibe/values/strings.dart';
 import 'package:highvibe/values/themes.dart';
+import 'package:highvibe/widgets/responsive_safe_area.dart';
 import 'package:highvibe/widgets/splash_widget.dart';
 import 'package:mobx/mobx.dart';
 
@@ -43,28 +44,30 @@ class _UploadAudioPageState
           ),
         ],
       ),
-      body: Observer(
-        builder: (_) {
-          switch (controller.currentStep) {
-            case UploadAudioStep.askChooseAudio:
-              return _askChooseAudio();
-              break;
-            case UploadAudioStep.uploadAudio:
-              return _uploadAudio();
-              break;
-            case UploadAudioStep.processDocument:
-              return _processDocument();
-              break;
-            case UploadAudioStep.success:
-              return _success();
-              break;
-            case UploadAudioStep.error:
-              return _error();
-              break;
-            default:
-              return Container();
-          }
-        },
+      body: ResponsiveSafeArea(
+        builder: (context, size) => Observer(
+          builder: (_) {
+            switch (controller.currentStep) {
+              case UploadAudioStep.askChooseAudio:
+                return _askChooseAudio();
+                break;
+              case UploadAudioStep.uploadAudio:
+                return _uploadAudio();
+                break;
+              case UploadAudioStep.processDocument:
+                return _processDocument();
+                break;
+              case UploadAudioStep.success:
+                return _success();
+                break;
+              case UploadAudioStep.error:
+                return _error();
+                break;
+              default:
+                return Container();
+            }
+          },
+        ),
       ),
     );
   }
