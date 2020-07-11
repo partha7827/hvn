@@ -66,14 +66,12 @@ abstract class _UploadAudioControllerBase with Store {
   @action
   Future<void> performUpload() async {
     final audioUrl = await storage.uploadAudio(audioFile, currentUserId);
-    final coverUrl = await storage.uploadAudioThumb(coverFile, currentUserId);
 
     final audio = Audio(
       (b) => b
         ..userId = currentUserId
         ..userName = currentUserName
         ..userAvatar = currentUserAvatar
-        ..artworkUrlPath = coverUrl
         ..audioUrlPath = audioUrl,
     );
 
