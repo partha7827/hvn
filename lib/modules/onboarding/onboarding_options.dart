@@ -1,5 +1,5 @@
-class OnboardingOptionsModel {
-  OnboardingOptionsModel({
+class OnboardingOptions {
+  OnboardingOptions({
     this.title = '',
     this.imagePath = '',
     this.isSelected = false,
