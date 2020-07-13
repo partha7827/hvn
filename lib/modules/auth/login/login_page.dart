@@ -175,10 +175,6 @@ class _LoginPageState extends ModularState<LoginPage, LoginController> {
                     ],
                   ),
                 ),
-                GradientRaisedButton(
-                  label: 'Onboarding User Options',
-                  onPressed: () => AuthModule.toOnboardingUserOptions(),
-                )
               ],
             ),
           ),
