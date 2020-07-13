@@ -10,9 +10,8 @@ import 'package:highvibe/values/strings.dart';
 import 'package:highvibe/widgets/audio_tile.dart';
 import 'package:highvibe/widgets/header_row.dart';
 import 'package:highvibe/widgets/repeat_widget.dart';
-import 'package:highvibe/widgets/splash_widget.dart';
-import 'package:highvibe/widgets/load_widget.dart';
 import 'package:mobx/mobx.dart';
+import 'package:shimmer/shimmer.dart';
 
 import 'show_audio_controller.dart';
 
@@ -35,19 +34,17 @@ class _ShowAudioPageState
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: onWillPop,
-      child: LoadWidget(
-        child: Observer(
-          builder: (_) {
-            switch (controller.audios.status) {
-              case FutureStatus.fulfilled:
-                return buildAudios(controller.audios.value);
-              case FutureStatus.rejected:
-                return RepeatWidget(controller.loadAudios);
-              default:
-                return const SplashWidget();
-            }
-          },
-        ),
+      child: Observer(
+        builder: (_) {
+          switch (controller.audios.status) {
+            case FutureStatus.fulfilled:
+              return buildAudios(controller.audios.value);
+            case FutureStatus.rejected:
+              return RepeatWidget(controller.loadAudios);
+            default:
+              return _shimmers();
+          }
+        },
       ),
     );
   }
@@ -100,6 +97,99 @@ class _ShowAudioPageState
         //   )
         // ],
       ],
+    );
+  }
+
+  Widget _shimmers() {
+    return Shimmer.fromColors(
+      baseColor: Colors.white12,
+      highlightColor: Colors.white38,
+      child: Container(
+        padding: const EdgeInsets.all(20),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: <Widget>[
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                Container(
+                  height: 24,
+                  width: 100,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(4),
+                    color: Colors.white,
+                  ),
+                ),
+                Container(
+                  height: 30,
+                  width: 30,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: Colors.white,
+                  ),
+                ),
+              ],
+            ),
+            ListView.builder(
+              shrinkWrap: true,
+              physics: const AlwaysScrollableScrollPhysics(),
+              padding: const EdgeInsets.only(top: 20),
+              itemBuilder: (_, index) {
+                return Container(
+                  margin: const EdgeInsets.only(bottom: 20),
+                  child: Row(
+                    children: <Widget>[
+                      Container(
+                        height: 50,
+                        width: 50,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(8),
+                          color: Colors.white,
+                        ),
+                        margin: const EdgeInsets.symmetric(horizontal: 8),
+                      ),
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            Container(
+                              height: 12,
+                              width: screenWidth(context) * 0.4,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(2),
+                                color: Colors.white,
+                              ),
+                            ),
+                            Container(
+                              margin: const EdgeInsets.only(top: 8),
+                              height: 12,
+                              width: screenWidth(context) * 0.2,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(2),
+                                color: Colors.white,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Container(
+                        margin: const EdgeInsets.only(right: 20),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(2),
+                          color: Colors.white,
+                        ),
+                        height: 30,
+                        width: 10,
+                      ),
+                    ],
+                  ),
+                );
+              },
+              itemCount: 4,
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
