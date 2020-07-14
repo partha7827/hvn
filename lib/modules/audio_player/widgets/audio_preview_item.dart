@@ -23,6 +23,7 @@ class AudioPreviewItem extends StatelessWidget {
       onTap: () => onTap(audio),
       child: Container(
         padding: const EdgeInsets.all(4),
+        alignment: Alignment.center,
         child: Stack(
           children: [
             Column(

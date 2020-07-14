@@ -60,6 +60,7 @@ class Strings {
   static const yes = 'Yes';
   static const no = 'No';
   static const editProfile = 'Edit Profile';
+  static const termsAndConditionsError = 'Please accept terms & conditions';
 
   ///Messages
   static String emailToChangePassword(String email) =>
@@ -110,7 +111,6 @@ class Strings {
   static const String goodMorning = 'Good Morning';
   static const String howAreYouFeeling = 'How are you feeling?';
 
-
   static const String about = 'About';
   static const String viewMore = 'View More';
   static const String swag = 'Swag';
@@ -123,4 +123,17 @@ class Strings {
   static const String currentStreak = 'Current\nStreak';
   static const String questCompletion = 'Quest\nCompletion';
   static const String shareYourStats = 'Share your stats';
+
+  static const String audioFileUploaded = 'Audio file uploaded';
+  static const String audioFileUploadFailed = 'Error uploading file!';
+}
+
+class UploadAudioStrings {
+  static const askChooseAudio =
+      '''
+You are allowed to share only those files which you have under legal ownership. Tap Next to continue and open file manager.''';
+  static const uploadAudio = 'Uploading audio file, please wait...';
+  static const processDocument = 'Analyzing audio file, please wait...';
+  static const success = 'Success';
+  static const error = 'Error';
 }

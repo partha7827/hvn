@@ -174,7 +174,7 @@ class _LoginPageState extends ModularState<LoginPage, LoginController> {
                       ),
                     ],
                   ),
-                )
+                ),
               ],
             ),
           ),

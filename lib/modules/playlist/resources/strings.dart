@@ -33,4 +33,7 @@ class PlaylistStrings {
   static const String tracks = 'Tracks';
   static const String noAudio = 'No Audio Files';
   static const String editPlaylist = ' Edit Playlist';
+  static const String emptyContentErrorTitle = 'Something went wrong';
+  static const String emptyContentErrorDescription =
+      'Can\'t load items right now';
 }

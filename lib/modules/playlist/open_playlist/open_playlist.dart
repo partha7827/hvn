@@ -10,7 +10,7 @@ import 'package:highvibe/modules/audio_player/widgets/audio_player_play_button.d
 import 'package:highvibe/modules/audio_player/widgets/audio_player_slider.dart';
 import 'package:highvibe/modules/playlist/open_playlist/open_playlist_controller.dart';
 import 'package:highvibe/modules/playlist/playlist_module.dart';
-import 'package:highvibe/modules/profile/audio/playlist_audio_tile.dart';
+import 'package:highvibe/modules/profile/show_audio/playlist_audio_tile.dart';
 import 'package:highvibe/utils/utils.dart';
 import 'package:highvibe/values/constants.dart';
 import 'package:highvibe/values/themes.dart';

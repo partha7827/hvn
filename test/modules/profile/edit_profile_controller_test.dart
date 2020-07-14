@@ -5,8 +5,8 @@ import 'package:flutter_modular/flutter_modular_test.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:highvibe/mocks/mock_database.dart';
 import 'package:highvibe/modules/app/app_controller.dart';
-import 'package:highvibe/modules/profile/current_user/edit_profile/edit_profile.dart';
 import 'package:highvibe/modules/profile/current_user/edit_profile/edit_profile_controller.dart';
+import 'package:highvibe/modules/profile/current_user/edit_profile/edit_profile_module.dart';
 import 'package:highvibe/services/auth_service.dart';
 import 'package:highvibe/services/firestore_service.dart';
 import 'package:highvibe/services/storage_service.dart';
@@ -14,7 +14,7 @@ import 'package:highvibe/services/storage_service.dart';
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
 
-  initModule(EditProfile(), changeBinds: [
+  initModule(EditProfileModule(), changeBinds: [
     Bind<AuthService>((i) => AuthService.withMock()),
     Bind<FirestoreService>((i) => FirestoreService.withMock()),
     Bind<StorageService>((i) => StorageService.withMock()),

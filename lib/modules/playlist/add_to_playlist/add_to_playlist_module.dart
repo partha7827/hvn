@@ -15,12 +15,12 @@ class AddToPlaylistModule extends WidgetModule {
 
   @override
   List<Bind<Object>> get binds => [
-        Bind<AddToPlaylistController>((i) => AddToPlaylistController()),
+        Bind<AddToPlaylistController>(
+            (i) => AddToPlaylistController(audioFile)),
       ];
 
   @override
-  Widget get view => AddToPlaylistPage(
-        audioFile: audioFile,
-        isPresentedAsOverlay: isPresentedAsOverlay,
-      );
+  Widget get view {
+    return AddToPlaylistPage(isPresentedAsOverlay: isPresentedAsOverlay);
+  }
 }
