@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:highvibe/modules/auth/login_register/login_register_controller.dart';
+import 'package:highvibe/modules/playlist/widgets/ui_utils.dart';
 import 'package:highvibe/utils/utils.dart';
 import 'package:highvibe/values/strings.dart';
 import 'package:highvibe/values/themes.dart';
@@ -18,6 +19,7 @@ class _LoginRegisterPageState
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: controller.scaffoldKey,
       body: Stack(
         children: <Widget>[
           _backgroundImage(),
@@ -30,9 +32,13 @@ class _LoginRegisterPageState
   }
 
   Widget _backgroundImage() => Container(
-      width: screenWidth(context),
-      height: screenHeight(context),
-      child: Image.asset('assets/ic_mountains.png', fit: BoxFit.cover,),);
+        width: screenWidth(context),
+        height: screenHeight(context),
+        child: Image.asset(
+          'assets/ic_mountains.png',
+          fit: BoxFit.cover,
+        ),
+      );
 
   Container _gradientOverlay() {
     return Container(
@@ -78,7 +84,17 @@ class _LoginRegisterPageState
               ),
             ),
             FlatButton(
-              onPressed: controller.skipAndExplore,
+              onPressed: () async {
+                await progressDialog(context: context).show();
+                try {
+                  await controller.skipAndExplore();
+                } catch (err) {
+                  showSnackBarMsg(
+                      controller.scaffoldKey.currentState, err.toString());
+                } finally {
+                  await progressDialog(context: context).hide();
+                }
+              },
               child: const Text(
                 'Skip sign-up and explore',
                 style: TextStyle(
