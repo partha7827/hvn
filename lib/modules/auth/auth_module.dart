@@ -6,8 +6,10 @@ import 'package:highvibe/modules/auth/login/login_controller.dart';
 import 'package:highvibe/modules/auth/login/login_page.dart';
 import 'package:highvibe/modules/auth/register/register_controller.dart';
 import 'package:highvibe/modules/auth/register/register_page.dart';
+import 'package:highvibe/modules/onboarding/onboarding_page.dart';
 import 'package:highvibe/services/auth_service.dart';
 import 'package:highvibe/services/firestore_service.dart';
+import 'package:highvibe/modules/onboarding/onboarding_controller.dart';
 
 import 'login/forgot_password_page.dart';
 import 'login/thank_you_page.dart';
@@ -23,12 +25,14 @@ class AuthModule extends ChildModule {
         Bind((i) => AutoLoginController()),
         Bind((i) => LoginController()),
         Bind((i) => RegisterController()),
+        Bind((i) => OnboardingUserOptionsController()),
       ];
 
   @override
   List<Router<Object>> get routers => [
         Router('/autologin', child: (_, args) => const AutoLoginPage()),
         Router('/register', child: (_, args) => const RegisterPage()),
+        Router('/onboardingUserOptions', child: (_, args) => const OnboardingUserOptions()),
         Router('/login', child: (_, args) => const LoginPage()),
         Router(
           '/forgotPassword',
@@ -46,4 +50,7 @@ class AuthModule extends ChildModule {
 
   static Future<Object> toThankYouPage(String args) =>
       Modular.to.pushReplacementNamed('/thankYou', arguments: args);
+
+  static Future<Object> toOnboardingUserOptions() =>
+      Modular.to.pushNamed('/onboardingUserOptions',);
 }
