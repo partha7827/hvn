@@ -63,6 +63,7 @@ abstract class _HomeControllerBase with Store {
 
   @action
   Future<void> logout() async {
+    // Facebook logout
     await facebookLogin.isLoggedIn.then((isLoggedIn) {
       if (isLoggedIn) {
         facebookLogin.logOut();
