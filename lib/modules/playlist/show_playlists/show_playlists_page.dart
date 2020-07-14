@@ -35,7 +35,7 @@ class _ShowPlaylistsPageState
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                HeaderRow(title: PlaylistStrings.playlists),
+                const HeaderRow(title: PlaylistStrings.playlists),
                 GestureDetector(
                   onTap: () => PlaylistModule.toCreateNewPlaylist(),
                   child: SizedBox(
