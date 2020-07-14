@@ -29,7 +29,10 @@ class _LoginRegisterPageState
     );
   }
 
-  Image _backgroundImage() => Image.asset('assets/ic_mountains.png');
+  Widget _backgroundImage() => Container(
+      width: screenWidth(context),
+      height: screenHeight(context),
+      child: Image.asset('assets/ic_mountains.png', fit: BoxFit.cover,),);
 
   Container _gradientOverlay() {
     return Container(
