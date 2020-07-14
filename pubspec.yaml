@@ -2,7 +2,7 @@ name: highvibe
 description: HighVibe Network
 publish_to: "none" # Remove this line if you wish to publish to pub.dev
 
-version: 0.0.6+8
+version: 0.0.6+9
 
 environment:
   sdk: ">=2.8.2 <3.0.0"
