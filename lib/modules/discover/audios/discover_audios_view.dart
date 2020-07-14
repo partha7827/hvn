@@ -24,7 +24,6 @@ class _DiscoverAudiosViewState
     with AutomaticKeepAliveClientMixin {
   @override
   bool get wantKeepAlive => true;
-  double _opacity = 0.0;
   Timer _timer;
   bool audioLoaded = false;
 
@@ -43,7 +42,6 @@ class _DiscoverAudiosViewState
   void changeOpacity() async {
     _timer = Timer(const Duration(milliseconds: 200), () {
       setState(() {
-        _opacity = 1.0;
       });
     });
   }

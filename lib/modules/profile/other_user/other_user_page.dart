@@ -11,7 +11,6 @@ import 'package:highvibe/values/strings.dart';
 import 'package:highvibe/values/themes.dart';
 import 'package:highvibe/widgets/gradient_outline_button.dart';
 import 'package:highvibe/widgets/splash_widget.dart';
-import 'package:highvibe/widgets/underline_gradient_indicator.dart';
 import 'other_user_controller.dart';
 
 class OtherUserPage extends StatefulWidget {

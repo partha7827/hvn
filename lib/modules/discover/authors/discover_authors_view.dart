@@ -1,10 +1,8 @@
 import 'dart:async';
 
-import 'package:built_collection/src/list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:highvibe/models/user/user.dart';
 import 'package:highvibe/modules/discover/authors/author_card.dart';
 import 'package:highvibe/modules/profile/profile_module.dart';
 import 'package:highvibe/utils/utils.dart';
@@ -23,7 +21,6 @@ class _DiscoverAuthorsViewState
     with AutomaticKeepAliveClientMixin {
   @override
   bool get wantKeepAlive => true;
-  double _opacity = 0.0;
   Timer _timer;
   bool audioLoaded = false;
 
@@ -42,7 +39,6 @@ class _DiscoverAuthorsViewState
   void changeOpacity() async {
     _timer = Timer(const Duration(milliseconds: 200), () {
       setState(() {
-        _opacity = 1.0;
       });
     });
   }

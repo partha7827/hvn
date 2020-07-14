@@ -10,7 +10,6 @@ import 'package:highvibe/modules/profile/widgets/profile_widget.dart';
 import 'package:highvibe/values/strings.dart';
 import 'package:highvibe/values/themes.dart';
 import 'package:highvibe/widgets/gradient_outline_button.dart';
-import 'package:highvibe/widgets/underline_gradient_indicator.dart';
 
 import 'current_user_controller.dart';
 
