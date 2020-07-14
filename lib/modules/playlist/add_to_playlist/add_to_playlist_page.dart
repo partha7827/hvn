@@ -138,31 +138,6 @@ class _AddToPlaylistPageState
     );
   }
 
-<<<<<<< HEAD
-  void _addAudioFileToPlaylist(PlayList playlist) {
-    //ignore: prefer_final_locals
-    var _playlist = <Audio>[];
-    if (playlist.audioFiles.isNotEmpty) {
-      _playlist.addAll(playlist.audioFiles.asList());
-    }
-    _playlist.add(widget.audioFile);
-
-    final updatedPlaylist = PlayList(
-      (b) => b
-        ..coverUrlPath = playlist.coverUrlPath
-        ..description = playlist.description
-        ..title = playlist.title
-        ..privacy = playlist.privacy
-        ..audioFiles =
-            BuiltSet<Audio>.from(_playlist).toBuiltList().toBuilder(),
-    );
-
-    tempInMemoryPlaylistCollection.remove(playlist);
-    tempInMemoryPlaylistCollection.add(updatedPlaylist);
-  }
-
-=======
->>>>>>> master
   void _close() {
     if (widget.isPresentedAsOverlay) {
       MediaOverlays.disposeAddToPlaylistOverlayEntry();

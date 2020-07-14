@@ -10,18 +10,12 @@ import 'package:highvibe/modules/playlist/create_new_playlist/create_new_playlis
 import 'package:highvibe/modules/playlist/create_new_playlist/create_new_playlist_page.dart';
 import 'package:highvibe/modules/playlist/edit_playlist/edit_playlist_page.dart';
 import 'package:highvibe/modules/playlist/edit_playlist/edit_playlist_page_controller.dart';
-import 'package:highvibe/modules/playlist/open_playlist/open_playlist_controller.dart';
-import 'package:highvibe/modules/playlist/open_playlist/open_playlist_page.dart';
 import 'package:highvibe/modules/playlist/playlist_controller.dart';
-<<<<<<< HEAD
-import 'package:highvibe/modules/playlist/show_playlists/show_playlists_module.dart';
-=======
 import 'package:highvibe/modules/playlist/playlist_more_menu/playlist_more_menu_controller.dart';
 import 'package:highvibe/modules/playlist/playlist_more_menu/playlist_more_menu_page.dart';
 import 'package:highvibe/modules/playlist/show_playlists/show_playlists_controller.dart';
 import 'package:highvibe/modules/playlist/show_playlists/show_playlists_module.dart';
 import 'package:highvibe/services/storage_service.dart';
->>>>>>> master
 
 class PlaylistModule extends ChildModule {
   static final _playlistRoute = '/playlist';
@@ -40,30 +34,16 @@ class PlaylistModule extends ChildModule {
           (i) => AddToPlaylistController(i.args.data),
         ),
         Bind<CreateNewPlaylistController>((_) => CreateNewPlaylistController()),
-<<<<<<< HEAD
-        Bind<EditPlaylistController>((_) => EditPlaylistController()),
-        Bind<OpenPlaylistController>((_) => OpenPlaylistController()),
-=======
         Bind<EditPlaylistController>(
           (i) => EditPlaylistController(i.args.data),
         ),
         Bind<ShowPlaylistsController>((_) => ShowPlaylistsController()),
         Bind<PlaylistMoreMenuController>((_) => PlaylistMoreMenuController()),
->>>>>>> master
       ];
 
   @override
   List<Router<Object>> get routers => [
         Router(
-<<<<<<< HEAD
-          '$_playlistRoute/show_playlists',
-          child: (_, args) => ShowPlaylistsModule(args.data),
-          transition: TransitionType.fadeIn,
-        ),
-        Router(
-          '$_playlistRoute/open_playlist',
-          child: (_, args) => const OpenPlaylistPage(),
-=======
           '$_playlistRoute/context_menu',
           child: (_, args) => PlaylistMoreMenuPage(playlist: args.data),
           transition: TransitionType.downToUp,
@@ -71,7 +51,6 @@ class PlaylistModule extends ChildModule {
         Router(
           '$_playlistRoute/show_playlists',
           child: (_, args) => ShowPlaylistsModule(userId: args.data),
->>>>>>> master
           transition: TransitionType.fadeIn,
         ),
         Router(
@@ -110,12 +89,9 @@ class PlaylistModule extends ChildModule {
       Modular.to
           .pushNamed('$_playlistRoute/open_playlist', arguments: playList);
 
-<<<<<<< HEAD
-=======
   static Future<Object> toShowPlaylists() =>
       Modular.to.pushNamed('$_playlistRoute/show_playlists');
 
   static Future<Object> toContextMenu({@required PlayList playList}) =>
       Modular.to.pushNamed('$_playlistRoute/context_menu', arguments: playList);
->>>>>>> master
 }

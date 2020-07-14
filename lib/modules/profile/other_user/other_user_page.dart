@@ -1,15 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-<<<<<<< HEAD
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:highvibe/modules/playlist/show_playlists/show_playlists_module.dart';
 import 'package:highvibe/modules/profile/achievements/achievements_module.dart';
-import 'package:highvibe/modules/profile/audio/audio_module.dart';
-=======
-import 'package:highvibe/modules/playlist/show_playlists/show_playlists_module.dart';
-import 'package:highvibe/modules/profile/achievements/achievements_module.dart';
->>>>>>> master
 import 'package:highvibe/modules/profile/profile_module.dart';
 import 'package:highvibe/modules/profile/show_audio/show_audio_module.dart';
 import 'package:highvibe/modules/profile/widgets/profile_widget.dart';
@@ -111,12 +104,6 @@ class _OtherUserPageState
         ),
         tabs: [
           Tab(
-<<<<<<< HEAD
-            icon: Image.asset('assets/ic_badge_one.png'),
-          ),
-          Tab(
-            icon: Image.asset('assets/ic_audio_colored.png'),
-=======
             icon: tabController.index == 0
                 ? Image.asset('assets/ic_audio_colored.png')
                 : Image.asset('assets/ic_audio.png'),
@@ -146,10 +133,6 @@ class _OtherUserPageState
                     height: 36,
                     width: 36,
                   ),
->>>>>>> master
-          ),
-          Tab(
-            icon: SvgPicture.asset('assets/ic_playlist.svg', color: Colors.blueAccent,),
           ),
         ],
       ),
@@ -157,13 +140,8 @@ class _OtherUserPageState
         controller: tabController,
         children: <Widget>[
           AchievementsModule(controller.otherUser),
-<<<<<<< HEAD
-          AudioModule(controller.otherUser.id),
-          ShowPlaylistsModule(controller.otherUser.id),
-=======
           ShowAudioModule(controller.otherUser.id),
           ShowPlaylistsModule(userId: controller.otherUser.id),
->>>>>>> master
         ],
       ),
     );

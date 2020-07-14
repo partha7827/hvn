@@ -208,51 +208,6 @@ class _CreateNewPlaylistPage
     }
   }
 
-<<<<<<< HEAD
-  void _configure() {
-    _imagePath = '';
-    _privacy = Privacy.private;
-    _isPrivate = true;
-    _titleTextEditingController = TextEditingController(text: '');
-    _descriptionTextEditingController = TextEditingController(text: '');
-  }
-
-  void _deleteCover() {
-    setState(() => _imagePath = '');
-  }
-
-  Future<void> _selectCover() async {
-    try {
-      final file = await FilePicker.getFile(type: FileType.image);
-      if (file != null) {
-        setState(() {
-          _imagePath = file.path;
-        });
-      }
-    } catch (error) {
-      print(error);
-    }
-  }
-
-  void _savePlaylist() {
-    final playlist = PlayList(
-      (b) => b
-        ..coverUrlPath =
-            'https://takelessons.com/blog/wp-content/uploads/2020/03/flute-for-beginners.jpg'
-        ..description = _descriptionTextEditingController.text
-        ..title = _titleTextEditingController.text
-        ..privacy = _privacy
-        ..audioFiles = BuiltList<Audio>().toBuilder(),
-    );
-
-    tempInMemoryPlaylistCollection.add(playlist);
-  }
-
-  void _savePlaylistAndShowSuccessDialog() {
-    _savePlaylist();
-
-    final modalAlert = PlaylistModalAlert(
-=======
   Future<void> _savePlaylistAndShowSuccessDialog({
     @required BuildContext context,
   }) async {
@@ -262,7 +217,6 @@ class _CreateNewPlaylistPage
     showSuccessDialog(
       context: context,
       isPresentedAsOverlay: widget.isPresentedAsOverlay,
->>>>>>> master
       title: PlaylistStrings.newPlaylistSuccessTitle,
       subTitle: PlaylistStrings.newPlaylistSuccessSubTitle,
     );
