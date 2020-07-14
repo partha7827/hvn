@@ -2,7 +2,7 @@ name: highvibe
 description: HighVibe Network
 publish_to: "none" # Remove this line if you wish to publish to pub.dev
 
-version: 0.0.4+4
+version: 0.0.6+8
 
 environment:
   sdk: ">=2.8.2 <3.0.0"
@@ -63,7 +63,7 @@ dependencies:
   provider: ^4.0.5
   pull_to_refresh: ^1.5.8
   progress_dialog: ^1.2.4
-  shimmer: ^1.0.1
+  shimmer: ^1.1.1
   stream_chat_flutter: ^0.2.0-alpha+2
   styled_widget: ^0.0.6
   timeago: ^2.0.25
