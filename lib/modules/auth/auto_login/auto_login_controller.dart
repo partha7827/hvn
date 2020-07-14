@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:highvibe/models/models.dart';
 import 'package:highvibe/modules/app/app_controller.dart';
@@ -20,18 +22,20 @@ abstract class _AutoLoginControllerBase with Store {
 
   @action
   Future<void> init() async {
-    try {
-      final uid = await auth.getUid();
+    Timer(const Duration(seconds: 3, milliseconds: 500), () async {
+      try {
+        final uid = await auth.getUid();
 
-      if (uid == null) throw LoginException(Strings.userNotFound);
+        if (uid == null) throw LoginException(Strings.userNotFound);
 
-      final user = await firestore.userCollection.document(uid).get();
+        final user = await firestore.userCollection.document(uid).get();
 
-      if (!user.exists) throw LoginException(Strings.userNotFound);
+        if (!user.exists) throw LoginException(Strings.userNotFound);
 
-      await appStore.setCurrentUser(User.fromSnapshot(user));
-    } catch (_) {
-      await appStore.setCurrentUser(null);
-    }
+        await appStore.setCurrentUser(User.fromSnapshot(user));
+      } catch (_) {
+        await appStore.setCurrentUser(null);
+      }
+    });
   }
 }

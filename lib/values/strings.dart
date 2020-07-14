@@ -14,7 +14,8 @@ class Strings {
   static const unfollow = 'Unfollow';
   static const followers = 'Followers';
   static const following = 'Following';
-  static const uploads = 'Uploads';
+  static const uploads = 'Audios';
+  static const uploadAudio = 'Upload';
   static const seeAll = 'See All';
   static const playlists = 'Playlists';
   static const meditations = 'Meditations';

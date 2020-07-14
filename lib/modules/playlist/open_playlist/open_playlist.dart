@@ -265,9 +265,11 @@ class _OpenPlaylistPageState
                     .play(controller.playList.audioFiles[index].audioUrlPath);
               },
               child: PlayListAudioTile(
-                audio: widget.playList.audioFiles[index],
-                isPlaying: index == controller.index && controller.isPlaying,
-              ),
+                  audio: widget.playList.audioFiles[index],
+                  isPlaying: index == controller.index && controller.isPlaying,
+                  authorCallback: () {
+                    controller.toggleAudioPlayerMode();
+                  }),
             );
           },
         ),
