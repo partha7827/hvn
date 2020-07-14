@@ -5,6 +5,7 @@ import 'package:highvibe/modules/playlist/show_playlists/show_playlists_module.d
 import 'package:highvibe/modules/profile/achievements/achievements_module.dart';
 import 'package:highvibe/modules/profile/profile_module.dart';
 import 'package:highvibe/modules/profile/show_audio/show_audio_module.dart';
+import 'package:highvibe/modules/profile/widgets/build_tabs_header.dart';
 import 'package:highvibe/modules/profile/widgets/profile_widget.dart';
 import 'package:highvibe/values/strings.dart';
 import 'package:highvibe/values/themes.dart';
@@ -93,49 +94,7 @@ class _OtherUserPageState
         ),
         onPressed: controller.followUser,
       ),
-      tabBar: TabBar(
-        controller: tabController,
-        onTap: (value) {
-          setState(() {});
-        },
-        indicator: const UnderlineGradientIndicator(
-          gradient: primaryGradientHorizontal,
-          insets: EdgeInsets.symmetric(horizontal: 16),
-        ),
-        tabs: [
-          Tab(
-            icon: tabController.index == 0
-                ? Image.asset('assets/ic_audio_colored.png')
-                : Image.asset('assets/ic_audio.png'),
-          ),
-          Tab(
-            icon: tabController.index == 1
-                ? Image.asset(
-                    'assets/ic_playlist_active.png',
-                    height: 36,
-                    width: 36,
-                  )
-                : Image.asset(
-                    'assets/ic_playlist_inactive.png',
-                    height: 36,
-                    width: 36,
-                  ),
-          ),
-          Tab(
-            icon: tabController.index == 2
-                ? Image.asset(
-                    'assets/ic_stats_and_reward_active.png',
-                    height: 36,
-                    width: 36,
-                  )
-                : Image.asset(
-                    'assets/ic_stats_and_reward_inactive.png',
-                    height: 36,
-                    width: 36,
-                  ),
-          ),
-        ],
-      ),
+      tabBar: buildTabsHeader(tabController),
       tabView: TabBarView(
         controller: tabController,
         children: <Widget>[

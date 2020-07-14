@@ -1,10 +1,10 @@
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:highvibe/models/audio/audio.dart';
+import 'package:highvibe/modules/app/app_controller.dart';
 import 'package:highvibe/services/firestore_service.dart';
 import 'package:mobx/mobx.dart';
 
 part 'show_audio_controller.g.dart';
-
 
 class ShowAudioController = _ShowAudioControllerBase with _$ShowAudioController;
 
@@ -18,6 +18,9 @@ abstract class _ShowAudioControllerBase with Store {
 
   _ShowAudioControllerBase(this.userId);
 
+  bool get isCurrentUser =>
+      Modular.get<AppController>().currentUser.id == userId;
+
   @action
   void loadAudios() {
     audios = ObservableFuture(
@@ -27,5 +30,4 @@ abstract class _ShowAudioControllerBase with Store {
           .then((s) => Audio.parseListOfAudios(s).toList()),
     );
   }
-
 }

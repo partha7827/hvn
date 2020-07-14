@@ -7,7 +7,9 @@ import 'package:highvibe/modules/playlist/resources/resources.dart';
 import 'package:highvibe/modules/profile/profile_module.dart';
 import 'package:highvibe/utils/utils.dart';
 import 'package:highvibe/values/strings.dart';
+import 'package:highvibe/values/themes.dart';
 import 'package:highvibe/widgets/audio_tile.dart';
+import 'package:highvibe/widgets/gradient_outline_button.dart';
 import 'package:highvibe/widgets/header_row.dart';
 import 'package:highvibe/widgets/repeat_widget.dart';
 import 'package:mobx/mobx.dart';
@@ -59,10 +61,17 @@ class _ShowAudioPageState
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
             const HeaderRow(title: Strings.uploads),
-            const IconButton(
-              icon: Icon(Icons.file_upload),
-              onPressed: ProfileModule.toUploadAudio,
-            )
+            if (controller.isCurrentUser)
+              Padding(
+                padding: const EdgeInsets.only(top: 8),
+                child: Container(
+                  width: MediaQuery.of(context).size.width * 0.3,
+                  child: GradientOutlineButton(
+                    onPressed: ProfileModule.toUploadAudio,
+                    label: Text(Strings.uploadAudio, style: normal16Accent),
+                  ),
+                ),
+              ),
           ],
         ),
         for (final item in audios) ...[
@@ -74,28 +83,6 @@ class _ShowAudioPageState
             ),
           ),
         ],
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            const HeaderRow(title: PlaylistStrings.playlist),
-          ],
-        ),
-        const SizedBox(height: 10),
-        // for (final item in tempInMemoryPlaylistCollection) ...[
-        //   GestureDetector(
-        //     onTap: () async {
-        //       MediaOverlays.presentPlayListPlayerAsOverlay(
-        //         context: context,
-        //         playList: item,
-        //       );
-        //     },
-        //     child: PlaylistTile(
-        //       isInEditMode: false,
-        //       playList: item,
-        //       onTap: (item) => playlistContextMenu(context, item),
-        //     ),
-        //   )
-        // ],
       ],
     );
   }
