@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -19,11 +21,26 @@ class _DiscoverAuthorsViewState
     with AutomaticKeepAliveClientMixin {
   @override
   bool get wantKeepAlive => true;
+  Timer _timer;
+  bool audioLoaded = false;
 
   @override
   void initState() {
     super.initState();
     controller.loadAuthors();
+  }
+
+  @override
+  void dispose() {
+    _timer.cancel();
+    super.dispose();
+  }
+
+  void changeOpacity() async {
+    _timer = Timer(const Duration(milliseconds: 200), () {
+      setState(() {
+      });
+    });
   }
 
   @override
