@@ -1,7 +1,10 @@
+<<<<<<< HEAD
+=======
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:highvibe/models/models.dart';
 import 'package:highvibe/services/audio_player_service.dart';
+>>>>>>> master
 import 'package:mobx/mobx.dart';
 
 part 'open_playlist_controller.g.dart';
@@ -10,6 +13,19 @@ class OpenPlaylistController = _OpenPlaylistControllerBase
     with _$OpenPlaylistController;
 
 abstract class _OpenPlaylistControllerBase with Store {
+<<<<<<< HEAD
+  @observable
+  int amount = 1;
+
+  @computed
+  int get total => amount + 1;
+
+  @action
+  void increment() {
+    amount++;
+  }
+}
+=======
   _OpenPlaylistControllerBase(this.playList);
 
   final PlayList playList;
@@ -108,3 +124,4 @@ abstract class _OpenPlaylistControllerBase with Store {
       ? trackPosition.inMilliseconds / playList.audioFiles[index].duration
       : 0;
 }
+>>>>>>> master

@@ -110,6 +110,33 @@ class _EditPlayListPageState
     }
   }
 
+<<<<<<< HEAD
+  void _handleListReorder(int oldIndex, int newIndex) {
+    if (oldIndex < newIndex) {
+      newIndex -= 1;
+    }
+    setState(() {
+      final oldItem = _audioItems.removeAt(oldIndex);
+      _audioItems.insert(newIndex, oldItem);
+    });
+  }
+
+  void _configure() {
+    _audioItems = widget.playlist.audioFiles.toList();
+    _imagePath = widget.playlist.coverUrlPath;
+    _privacy = widget.playlist.privacy;
+    _isPrivate = widget.playlist.privacy == Privacy.private;
+    _titleTextEditingController = TextEditingController(
+      text: widget.playlist.title,
+    );
+    _descriptionTextEditingController = TextEditingController(
+      text: widget.playlist.description,
+    );
+    _tabController = TabController(vsync: this, length: 2);
+  }
+
+=======
+>>>>>>> master
   Widget _editPlaylist() {
     return Container(
       padding: const EdgeInsets.fromLTRB(20, 8, 20, 8),
@@ -265,6 +292,22 @@ class _EditPlayListPageState
     }
   }
 
+<<<<<<< HEAD
+  void _showSuccessDialog() {
+    final updatePlaylist = PlayList(
+      (b) => b
+        ..coverUrlPath = _imagePath
+        ..description = _descriptionTextEditingController.text
+        ..title = _titleTextEditingController.text
+        ..privacy = _privacy
+        ..audioFiles = BuiltList<Audio>.from(_audioItems).toBuilder(),
+    );
+
+    tempInMemoryPlaylistCollection.remove(widget.playlist);
+    tempInMemoryPlaylistCollection.add(updatePlaylist);
+
+    showDialog(
+=======
   Future<void> _updatePlaylistAndShowSuccessDialog({
     @required BuildContext context,
   }) async {
@@ -272,6 +315,7 @@ class _EditPlayListPageState
     await controller.savePlaylist();
     await progressDialog(context: context).hide();
     showSuccessDialog(
+>>>>>>> master
       context: context,
       isPresentedAsOverlay: false,
       title: PlaylistStrings.newPlaylistSuccessTitle,

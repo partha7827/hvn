@@ -25,7 +25,6 @@ env.js
 .idea/
 
 # Flutter/Dart/Pub related
-*.g.dart
 **/doc/api/
 .dart_tool/
 .flutter-plugins

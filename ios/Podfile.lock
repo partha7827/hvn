@@ -334,7 +334,7 @@ PODS:
     - FBSDKCoreKit (~> 5.5)
     - FBSDKLoginKit (~> 5.5)
     - Flutter
-  - flutter_keyboard_visibility (0.0.1):
+  - flutter_keyboard_visibility (0.7.0):
     - Flutter
   - flutter_local_notifications (0.0.1):
     - Flutter
@@ -416,11 +416,13 @@ PODS:
   - nanopb/encode (0.3.9011)
   - path_provider (0.0.1):
     - Flutter
-  - path_provider_linux (0.0.1):
-    - Flutter
   - path_provider_macos (0.0.1):
     - Flutter
+<<<<<<< HEAD
+  - "permission_handler (5.0.0+hotfix.6)":
+=======
   - "permission_handler (5.0.1+1)":
+>>>>>>> master
     - Flutter
   - PromisesObjC (1.2.8)
   - Protobuf (3.11.4)
@@ -480,7 +482,6 @@ DEPENDENCIES:
   - image_picker (from `.symlinks/plugins/image_picker/ios`)
   - moor_ffi (from `.symlinks/plugins/moor_ffi/ios`)
   - path_provider (from `.symlinks/plugins/path_provider/ios`)
-  - path_provider_linux (from `.symlinks/plugins/path_provider_linux/ios`)
   - path_provider_macos (from `.symlinks/plugins/path_provider_macos/ios`)
   - permission_handler (from `.symlinks/plugins/permission_handler/ios`)
   - shared_preferences (from `.symlinks/plugins/shared_preferences/ios`)
@@ -584,8 +585,6 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/moor_ffi/ios"
   path_provider:
     :path: ".symlinks/plugins/path_provider/ios"
-  path_provider_linux:
-    :path: ".symlinks/plugins/path_provider_linux/ios"
   path_provider_macos:
     :path: ".symlinks/plugins/path_provider_macos/ios"
   permission_handler:
@@ -653,7 +652,7 @@ SPEC CHECKSUMS:
   Flutter: 0e3d915762c693b495b44d77113d4970485de6ec
   flutter_apns: f516b118e423fe7c0a38771180549c4d6cb67c2f
   flutter_facebook_login: cfb5659f686b1c575ef205c6b6fd20db9679d3c4
-  flutter_keyboard_visibility: 0339d06371254c3eb25eeb90ba8d17dca8f9c069
+  flutter_keyboard_visibility: 6195387fb6d8f46e5cd6dda4a4154e41f800f545
   flutter_local_notifications: 9e4738ce2471c5af910d961a6b7eadcf57c50186
   flutter_plugin_android_lifecycle: dc0b544e129eebb77a6bfb1239d4d1c673a60a35
   FMDB: 2ce00b547f966261cd18927a3ddb07cb6f3db82a
@@ -673,9 +672,12 @@ SPEC CHECKSUMS:
   moor_ffi: d66c9470c18e9cb333423bbcb493c105c6c774c6
   nanopb: 18003b5e52dab79db540fe93fe9579f399bd1ccd
   path_provider: abfe2b5c733d04e238b0d8691db0cfd63a27a93c
-  path_provider_linux: 4d630dc393e1f20364f3e3b4a2ff41d9674a84e4
   path_provider_macos: f760a3c5b04357c380e2fddb6f9db6f3015897e0
+<<<<<<< HEAD
+  permission_handler: b7a0953389e699927c6217933754cdcd0fa2c5a7
+=======
   permission_handler: eac8e15b4a1a3fba55b761d19f3f4e6b005d15b6
+>>>>>>> master
   PromisesObjC: c119f3cd559f50b7ae681fa59dc1acd19173b7e6
   Protobuf: 176220c526ad8bd09ab1fb40a978eac3fef665f7
   SDWebImage: 97351f6582ceca541ea294ba66a1fcb342a331c2
@@ -693,6 +695,10 @@ SPEC CHECKSUMS:
   video_player_web: da8cadb8274ed4f8dbee8d7171b420dedd437ce7
   wakelock: 0d4a70faf8950410735e3f61fb15d517c8a6efc4
 
-PODFILE CHECKSUM: c34e2287a9ccaa606aeceab922830efb9a6ff69a
+PODFILE CHECKSUM: 885377b8521c9c0abbc7b2dcc6bf3503f093164f
 
+<<<<<<< HEAD
+COCOAPODS: 1.9.2
+=======
 COCOAPODS: 1.9.3
+>>>>>>> master
