@@ -130,11 +130,10 @@ class Strings {
 }
 
 class UploadAudioStrings {
-  static const askChooseAudio =
-      '''
-You are allowed to share only those files which you have under legal ownership. Tap Next to continue and open file manager.''';
-  static const uploadAudio = 'Uploading audio file, please wait...';
-  static const processDocument = 'Analyzing audio file, please wait...';
+  static const chooseAudio =
+      '''Choose audio file...''';
+  static const uploadAudio = 'Uploading audio file...';
+  static const processDocument = 'Analyzing audio file...';
   static const success = 'Success';
   static const error = 'Error';
 }

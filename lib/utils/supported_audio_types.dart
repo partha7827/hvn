@@ -7,7 +7,7 @@ final _supportedAudioTypes = ['.mp3', '.wav', '.aac', '.ogg', '.m4a', '.aiff'];
 bool isAudioFile({@required File file}) {
   final fileExtension = p.extension(file.path);
   print('fileExtension => $fileExtension');
-  if (_supportedAudioTypes.contains(fileExtension)) {
+  if (_supportedAudioTypes[0] == fileExtension) {
     return true;
   } else {
     return false;

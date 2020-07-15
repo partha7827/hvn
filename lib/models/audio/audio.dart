@@ -31,6 +31,7 @@ abstract class Audio implements Built<Audio, AudioBuilder> {
   String get waveformUrlPath;
   int get karmaReward;
   int get xpReward;
+  bool get isBroken;
   bool get isProcessed;
   bool get isRecommended;
   int get duration;
@@ -75,6 +76,7 @@ abstract class Audio implements Built<Audio, AudioBuilder> {
     ..xpReward = 0
     ..waveformUrlPath = ''
     ..isProcessed = false
+    ..isBroken = false
     ..audioUrlPath = ''
     ..duration = 0
     ..isRecommended = false
