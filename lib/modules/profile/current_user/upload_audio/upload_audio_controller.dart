@@ -10,7 +10,6 @@ import 'package:mobx/mobx.dart';
 part 'upload_audio_controller.g.dart';
 
 enum UploadAudioStep {
-  askChooseAudio,
   chooseAudio,
   uploadAudio,
   processDocument,
@@ -40,31 +39,33 @@ abstract class _UploadAudioControllerBase with Store {
   @action
   void nextStep({Object data}) {
     switch (currentStep) {
-      case UploadAudioStep.askChooseAudio:
-        currentStep = UploadAudioStep.chooseAudio;
-        break;
       case UploadAudioStep.chooseAudio:
         audioFile = data;
         currentStep = UploadAudioStep.uploadAudio;
-        performUpload().then((_) => nextStep());
+        performUpload().then((audioId) => nextStep(data: audioId));
         break;
       case UploadAudioStep.uploadAudio:
+        audioId = data;
         currentStep = UploadAudioStep.processDocument;
         whenProcessed().then((audio) => nextStep(data: audio));
         break;
       case UploadAudioStep.processDocument:
         audio = data;
-        currentStep = UploadAudioStep.editDocument;
-        break;
-      case UploadAudioStep.editDocument:
         currentStep = UploadAudioStep.success;
+        increaseKarma();
         break;
       default:
     }
   }
 
   @action
-  Future<void> performUpload() async {
+  void increaseKarma() {
+    app.currentUser = app.currentUser
+        .rebuild((b) => b..karmaPoints = b.karmaPoints + audio.karmaReward);
+  }
+
+  @action
+  Future<String> performUpload() async {
     final audioUrl = await storage.uploadAudio(audioFile, currentUserId);
 
     final audio = Audio(
@@ -75,25 +76,24 @@ abstract class _UploadAudioControllerBase with Store {
         ..audioUrlPath = audioUrl,
     );
 
+    print('audio uploaded: ${audio.id}');
+
     await store.audioCollection.document(audio.id).setData(audio.toMap());
+
+    return audio.id;
   }
 
   @action
   Future<Audio> whenProcessed() async {
-    // return Future<Audio>.delayed(const Duration(seconds: 1)).then(
-    //   (value) => Audio(
-    //     (b) => b
-    //       ..userId = currentUserId
-    //       ..userName = currentUserName
-    //       ..userAvatar = currentUserAvatar
-    //       ..karmaReward = 42,
-    //   ),
-    // );
     final stream = store.audioCollection.document(audioId).snapshots();
-    final event = await stream.first;
-    return Audio.fromSnapshot(event);
+
+    return stream.firstWhere((element) {
+      return element.exists &&
+          element.data['isProcessed'] == true &&
+          element.data['isBroken'] == false;
+    }).then((value) => Audio.fromSnapshot(value));
   }
 
   @observable
-  UploadAudioStep currentStep = UploadAudioStep.askChooseAudio;
+  UploadAudioStep currentStep = UploadAudioStep.chooseAudio;
 }
