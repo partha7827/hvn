@@ -125,7 +125,7 @@ class _RegisterPageState
                         showSnackBarMsg(
                             controller.scaffoldKey.currentState, e.toString());
                       } finally {
-                        await progressDialog(context: context).hide();
+                        // await progressDialog(context: context).hide();
                       }
                     },
                   ),
