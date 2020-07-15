@@ -3,13 +3,8 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:highvibe/models/models.dart';
 import 'package:highvibe/modules/app/media_overlays.dart';
-import 'package:highvibe/modules/profile/profile_module.dart';
 import 'package:highvibe/utils/utils.dart';
-import 'package:highvibe/values/strings.dart';
-import 'package:highvibe/values/themes.dart';
 import 'package:highvibe/widgets/audio_tile.dart';
-import 'package:highvibe/widgets/gradient_outline_button.dart';
-import 'package:highvibe/widgets/header_row.dart';
 import 'package:highvibe/widgets/repeat_widget.dart';
 import 'package:mobx/mobx.dart';
 import 'package:shimmer/shimmer.dart';
@@ -54,25 +49,25 @@ class _ShowAudioPageState
     return ListView(
       padding: const EdgeInsets.only(left: 20, top: 10, bottom: 80, right: 8),
       children: [
-        Row(
-          mainAxisSize: MainAxisSize.max,
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: <Widget>[
-            const HeaderRow(title: Strings.uploads),
-            if (controller.isCurrentUser)
-              Padding(
-                padding: const EdgeInsets.only(top: 8),
-                child: Container(
-                  width: MediaQuery.of(context).size.width * 0.3,
-                  child: GradientOutlineButton(
-                    onPressed: ProfileModule.toUploadAudio,
-                    label: Text(Strings.uploadAudio, style: normal16Accent),
-                  ),
-                ),
-              ),
-          ],
-        ),
+        // Row(
+        //   mainAxisSize: MainAxisSize.max,
+        //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        //   crossAxisAlignment: CrossAxisAlignment.center,
+        //   children: <Widget>[
+        //     const HeaderRow(title: Strings.uploads),
+        //     if (controller.isCurrentUser)
+        //       Padding(
+        //         padding: const EdgeInsets.only(top: 8),
+        //         child: Container(
+        //           width: MediaQuery.of(context).size.width * 0.3,
+        //           child: GradientOutlineButton(
+        //             onPressed: ProfileModule.toUploadAudio,
+        //             label: Text(Strings.uploadAudio, style: normal16Accent),
+        //           ),
+        //         ),
+        //       ),
+        //   ],
+        // ),
         for (final item in audios) ...[
           AudioTile(
             audioFile: item,

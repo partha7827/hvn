@@ -39,6 +39,7 @@ class _CurrentUserPageState
   @override
   Widget build(BuildContext context) {
     return ProfileWidget(
+      showFab: true,
       userName: controller.currentUser.name,
       userStatus: controller.currentUser.status,
       userBio: controller.currentUser.bio,

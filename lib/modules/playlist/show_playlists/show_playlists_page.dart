@@ -3,11 +3,8 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:highvibe/models/playlist/playlist.dart';
 import 'package:highvibe/modules/app/media_overlays.dart';
 import 'package:highvibe/modules/playlist/playlist_module.dart';
-import 'package:highvibe/modules/playlist/resources/assets.dart';
-import 'package:highvibe/modules/playlist/resources/strings.dart';
 import 'package:highvibe/modules/playlist/widgets/playlist_tile.dart';
 import 'package:highvibe/modules/playlist/widgets/widgets.dart';
-import 'package:highvibe/widgets/header_row.dart';
 import 'show_playlists_controller.dart';
 
 class ShowPlaylistsPage extends StatefulWidget {
@@ -32,23 +29,7 @@ class _ShowPlaylistsPageState
       builder: (context, snapshot) {
         return Column(
           children: <Widget>[
-            Container(
-              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  const HeaderRow(title: PlaylistStrings.playlists),
-                  GestureDetector(
-                    onTap: () => PlaylistModule.toCreateNewPlaylist(),
-                    child: SizedBox(
-                      height: 20,
-                      width: 120,
-                      child: PlaylistImageAssets.newPlaylist,
-                    ),
-                  ),
-                ],
-              ),
-            ),
+            const SizedBox(height: 12),
             ListItemsBuilder<PlayList>(
               snapshot: snapshot,
               itemBuilder: (context, item) {
