@@ -4,6 +4,7 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:highvibe/modules/playlist/widgets/ui_utils.dart';
+import 'package:highvibe/modules/auth/login/login_controller.dart';
 import 'package:highvibe/utils/utils.dart';
 import 'package:highvibe/values/strings.dart';
 import 'package:highvibe/values/themes.dart';
@@ -22,6 +23,8 @@ class RegisterPage extends StatefulWidget {
 
 class _RegisterPageState
     extends ModularState<RegisterPage, RegisterController> {
+  final _loginController = Modular.get<LoginController>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -145,7 +148,7 @@ class _RegisterPageState
                         height: 48,
                         padding: const EdgeInsets.only(right: 8),
                         child: RaisedButton.icon(
-                          onPressed: () {},
+                          onPressed: () => _loginController.facebookLogin(),
                           icon: SvgPicture.asset('assets/ic_facebook.svg'),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(10),
@@ -163,7 +166,7 @@ class _RegisterPageState
                         height: 48,
                         padding: const EdgeInsets.only(left: 8),
                         child: RaisedButton.icon(
-                          onPressed: () {},
+                          onPressed: () => _loginController.googleSignIn(),
                           icon: SvgPicture.asset('assets/ic_google.svg'),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(10),
@@ -188,7 +191,7 @@ class _RegisterPageState
                         style: normal16White,
                       ),
                       FlatButton(
-                        onPressed: () => Navigator.pop(context),
+                        onPressed: () => Modular.to.pop(),
                         child: Text(
                           Strings.signIn,
                           style: normal16Accent,
