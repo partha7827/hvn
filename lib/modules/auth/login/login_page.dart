@@ -94,7 +94,7 @@ class _LoginPageState extends ModularState<LoginPage, LoginController> {
                           showSnackBarMsg(controller.scaffoldKey.currentState,
                               e.toString());
                         } finally {
-                          await progressDialog(context: context).hide();
+                          // await progressDialog(context: context).hide();
                         }
                       },
                     ),
