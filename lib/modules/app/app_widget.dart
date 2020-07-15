@@ -29,10 +29,9 @@ class _AppWidgetState extends State<AppWidget> {
   @override
   void initState() {
     super.initState();
-
     reaction((_) => appStore.authState, (authState) {
       if (authState == AuthState.unauthenticated) {
-        Modular.to.pushNamedAndRemoveUntil('/login', (_) => false);
+        Modular.to.pushNamedAndRemoveUntil('/loginRegister', (_) => false);
       } else if (authState == AuthState.authenticated) {
         Modular.to.pushNamedAndRemoveUntil('/home', (_) => false);
       }

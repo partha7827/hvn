@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:highvibe/modules/playlist/widgets/ui_utils.dart';
 import 'package:highvibe/utils/utils.dart';
 import 'package:highvibe/values/strings.dart';
 import 'package:highvibe/values/themes.dart';
@@ -114,11 +115,14 @@ class _RegisterPageState
                         return;
                       }
 
+                      await progressDialog(context: context).show();
                       try {
                         await controller.registerUser();
                       } catch (e) {
                         showSnackBarMsg(
                             controller.scaffoldKey.currentState, e.toString());
+                      } finally {
+                        await progressDialog(context: context).hide();
                       }
                     },
                   ),

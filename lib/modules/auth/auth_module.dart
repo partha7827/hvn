@@ -4,6 +4,8 @@ import 'package:highvibe/modules/auth/auto_login/auto_login_controller.dart';
 import 'package:highvibe/modules/auth/auto_login/auto_login_page.dart';
 import 'package:highvibe/modules/auth/login/login_controller.dart';
 import 'package:highvibe/modules/auth/login/login_page.dart';
+import 'package:highvibe/modules/auth/login_register/login_register_controller.dart';
+import 'package:highvibe/modules/auth/login_register/login_register_page.dart';
 import 'package:highvibe/modules/auth/register/register_controller.dart';
 import 'package:highvibe/modules/auth/register/register_page.dart';
 import 'package:highvibe/modules/onboarding/onboarding_page.dart';
@@ -26,6 +28,7 @@ class AuthModule extends ChildModule {
         Bind((i) => LoginController()),
         Bind((i) => RegisterController()),
         Bind((i) => OnboardingUserOptionsController()),
+        Bind((i) => LoginRegisterController()),
       ];
 
   @override
@@ -39,6 +42,7 @@ class AuthModule extends ChildModule {
           child: (_, args) => ForgotPasswordPage(email: args.data),
         ),
         Router('/thankYou', child: (_, args) => ThankYouPage(email: args.data)),
+        Router('/loginRegister', child: (_, args) => LoginRegisterPage()),
       ];
 
   static Future<Object> toForgotPassword(String email) =>
