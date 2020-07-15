@@ -25,6 +25,7 @@ class _AchievementsPageState
     return Container(
       padding: const EdgeInsets.only(left: 20, top: 10, right: 8),
       child: ListView(
+        padding: const EdgeInsets.only(bottom: 12),
         children: [
           const HeaderRow(title: Strings.achievements),
           _badges(),

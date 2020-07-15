@@ -32,19 +32,22 @@ class _ShowPlaylistsPageState
       builder: (context, snapshot) {
         return Column(
           children: <Widget>[
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                const HeaderRow(title: PlaylistStrings.playlists),
-                GestureDetector(
-                  onTap: () => PlaylistModule.toCreateNewPlaylist(),
-                  child: SizedBox(
-                    height: 20,
-                    width: 120,
-                    child: PlaylistImageAssets.newPlaylist,
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  const HeaderRow(title: PlaylistStrings.playlists),
+                  GestureDetector(
+                    onTap: () => PlaylistModule.toCreateNewPlaylist(),
+                    child: SizedBox(
+                      height: 20,
+                      width: 120,
+                      child: PlaylistImageAssets.newPlaylist,
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
             ListItemsBuilder<PlayList>(
               snapshot: snapshot,

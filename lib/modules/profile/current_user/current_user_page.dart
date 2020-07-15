@@ -71,13 +71,13 @@ class _CurrentUserPageState
         label: Text(Strings.editProfile, style: normal16Accent),
         onPressed: () => ProfileModule.toEditProfile(),
       ),
-      tabBar: buildTabsHeader(tabController),
+      tabBar: buildTabsHeader(tabController, () => setState(() {})),
       tabView: TabBarView(
         controller: tabController,
         children: <Widget>[
-          AchievementsModule(controller.currentUser),
           ShowAudioModule(controller.currentUser.id),
           ShowPlaylistsModule(userId: controller.currentUser.id),
+          AchievementsModule(controller.currentUser),
         ],
       ),
     );
