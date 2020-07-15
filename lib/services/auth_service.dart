@@ -18,6 +18,11 @@ class AuthService extends Disposable {
     return response?.user?.uid;
   }
 
+  Future<bool> isAnonymous() async {
+    final user = await _auth.currentUser();
+    return user?.isAnonymous;
+  }
+
   //dispose will be called automatically
   @override
   void dispose() {}

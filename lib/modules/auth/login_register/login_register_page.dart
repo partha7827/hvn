@@ -92,7 +92,7 @@ class _LoginRegisterPageState
                   showSnackBarMsg(
                       controller.scaffoldKey.currentState, err.toString());
                 } finally {
-                  await progressDialog(context: context).hide();
+                  // await progressDialog(context: context).hide();
                 }
               },
               child: const Text(
