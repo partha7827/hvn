@@ -105,15 +105,15 @@ class _LoginPageState extends ModularState<LoginPage, LoginController> {
                 ),
                 Row(
                   children: <Widget>[
-                    Expanded(
-                      child: Padding(
-                        padding: const EdgeInsets.only(right: 8.0),
-                        child: GradientOutlineButton(
-                          icon: SvgPicture.asset('assets/ic_apple.svg'),
-                          onPressed: () {},
-                        ),
-                      ),
-                    ),
+                    // Expanded(
+                    //   child: Padding(
+                    //     padding: const EdgeInsets.only(right: 8.0),
+                    //     child: GradientOutlineButton(
+                    //       icon: SvgPicture.asset('assets/ic_apple.svg'),
+                    //       onPressed: () {},
+                    //     ),
+                    //   ),
+                    // ),
                     Expanded(
                       child: Observer(
                         builder: (_) => Padding(
