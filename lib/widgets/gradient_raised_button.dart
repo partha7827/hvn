@@ -7,6 +7,7 @@ class GradientRaisedButton extends StatelessWidget {
   final IconData icon;
   final bool isLoading;
   final double minHeight;
+  final double radius;
 
   const GradientRaisedButton({
     this.onPressed,
@@ -14,6 +15,7 @@ class GradientRaisedButton extends StatelessWidget {
     this.icon,
     this.isLoading = false,
     this.minHeight = 48,
+    this.radius = 10,
   });
 
   @override
@@ -21,11 +23,11 @@ class GradientRaisedButton extends StatelessWidget {
     return Container(
       constraints: BoxConstraints(minWidth: 88, minHeight: minHeight),
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(10),
+        borderRadius: BorderRadius.circular(radius),
         gradient: primaryGradient,
       ),
       child: InkWell(
-        borderRadius: BorderRadius.circular(10),
+        borderRadius: BorderRadius.circular(radius),
         onTap: onPressed,
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16),

@@ -4,6 +4,7 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:highvibe/modules/auth/auth_module.dart';
+import 'package:highvibe/modules/playlist/widgets/ui_utils.dart';
 import 'package:highvibe/utils/utils.dart';
 import 'package:highvibe/values/strings.dart';
 import 'package:highvibe/values/themes.dart';
@@ -86,11 +87,14 @@ class _LoginPageState extends ModularState<LoginPage, LoginController> {
                         if (!controller.formKey.currentState.validate()) {
                           return null;
                         }
+                        await progressDialog(context: context).show();
                         try {
                           await controller.loginUser();
                         } catch (e) {
                           showSnackBarMsg(controller.scaffoldKey.currentState,
                               e.toString());
+                        } finally {
+                          await progressDialog(context: context).hide();
                         }
                       },
                     ),
@@ -122,12 +126,15 @@ class _LoginPageState extends ModularState<LoginPage, LoginController> {
                             isLoading: controller.inProgressFacebookLogIn,
                             icon: SvgPicture.asset('assets/ic_facebook.svg'),
                             onPressed: () async {
+                              await progressDialog(context: context).show();
                               try {
                                 await controller.facebookLogin();
                               } catch (e) {
                                 showSnackBarMsg(
                                     controller.scaffoldKey.currentState,
                                     e.toString());
+                              } finally {
+                                await progressDialog(context: context).hide();
                               }
                             },
                           ),
@@ -142,12 +149,15 @@ class _LoginPageState extends ModularState<LoginPage, LoginController> {
                             isLoading: controller.inProgressGoogleSignIn,
                             icon: SvgPicture.asset('assets/ic_google.svg'),
                             onPressed: () async {
+                              await progressDialog(context: context).show();
                               try {
                                 await controller.googleSignIn();
                               } catch (e) {
                                 showSnackBarMsg(
                                     controller.scaffoldKey.currentState,
                                     e.toString());
+                              } finally {
+                                await progressDialog(context: context).hide();
                               }
                             },
                           ),

@@ -25,7 +25,6 @@ abstract class _AppControllerBase with Store {
   Future<void> setCurrentUser(User user) async {
     if (user != null) {
       currentUser = user;
-
       _setAuthenticated(true);
       _setUserOnline(true);
     } else {
