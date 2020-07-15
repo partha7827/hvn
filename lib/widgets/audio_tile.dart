@@ -4,6 +4,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:highvibe/models/models.dart' show Audio;
 import 'package:highvibe/modules/app/app_controller.dart';
 import 'package:highvibe/modules/playlist/resources/assets.dart';
+import 'package:highvibe/modules/profile/profile_module.dart';
 import 'package:highvibe/utils/utils.dart';
 import 'package:highvibe/values/themes.dart';
 
@@ -67,7 +68,9 @@ class AudioTile extends StatelessWidget {
               ),
               color: secondaryColor,
               onSelected: (value) {
-                print('selected: $value');
+                if (value == 'edit') {
+                  ProfileModule.toEditAudio(audioFile);
+                }
               },
               itemBuilder: (_) => [
                 if (isCreator) ...[

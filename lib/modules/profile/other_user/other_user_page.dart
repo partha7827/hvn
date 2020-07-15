@@ -93,13 +93,13 @@ class _OtherUserPageState
         ),
         onPressed: controller.followUser,
       ),
-      tabBar: buildTabsHeader(tabController),
+      tabBar: buildTabsHeader(tabController, () => setState(() {})),
       tabView: TabBarView(
         controller: tabController,
         children: <Widget>[
-          AchievementsModule(controller.otherUser),
           ShowAudioModule(controller.otherUser.id),
           ShowPlaylistsModule(userId: controller.otherUser.id),
+          AchievementsModule(controller.otherUser),
         ],
       ),
     );

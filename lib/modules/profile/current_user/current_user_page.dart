@@ -39,6 +39,7 @@ class _CurrentUserPageState
   @override
   Widget build(BuildContext context) {
     return ProfileWidget(
+      showFab: true,
       userName: controller.currentUser.name,
       userStatus: controller.currentUser.status,
       userBio: controller.currentUser.bio,
@@ -71,13 +72,13 @@ class _CurrentUserPageState
         label: Text(Strings.editProfile, style: normal16Accent),
         onPressed: () => ProfileModule.toEditProfile(),
       ),
-      tabBar: buildTabsHeader(tabController),
+      tabBar: buildTabsHeader(tabController, () => setState(() {})),
       tabView: TabBarView(
         controller: tabController,
         children: <Widget>[
-          AchievementsModule(controller.currentUser),
           ShowAudioModule(controller.currentUser.id),
           ShowPlaylistsModule(userId: controller.currentUser.id),
+          AchievementsModule(controller.currentUser),
         ],
       ),
     );

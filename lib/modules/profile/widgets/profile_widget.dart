@@ -18,6 +18,7 @@ class ProfileWidget extends StatefulWidget {
   final Widget buttonWidget;
   final TabBar tabBar;
   final TabBarView tabView;
+  final bool showFab;
 
   ProfileWidget({
     @required this.userName,
@@ -29,6 +30,7 @@ class ProfileWidget extends StatefulWidget {
     @required this.userFollowingWidget,
     @required this.tabBar,
     @required this.tabView,
+    this.showFab = false,
   });
 
   @override
@@ -157,10 +159,13 @@ class _ProfileWidgetState extends State<ProfileWidget> {
         ],
         body: widget.tabView,
       ),
-      floatingActionButton: FabWithIcons(
+      floatingActionButton: widget.showFab ? FabWithIcons(
         icons: fabicons,
         onIconTapped: (iconIndex) {
           switch (iconIndex) {
+            case 0:
+              ProfileModule.toUploadAudio();
+              break;
             case 2:
               PlaylistModule.toCreateNewPlaylist();
               break;
@@ -168,7 +173,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
               break;
           }
         },
-      ),
+      ) : null,
     );
   }
 }

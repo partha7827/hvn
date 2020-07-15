@@ -4,7 +4,6 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:highvibe/values/strings.dart';
 import 'package:highvibe/values/themes.dart';
 import 'package:highvibe/widgets/gradient_outline_button.dart';
-import 'package:highvibe/widgets/header_row.dart';
 import 'achievements_controller.dart';
 
 class AchievementsPage extends StatefulWidget {
@@ -25,8 +24,8 @@ class _AchievementsPageState
     return Container(
       padding: const EdgeInsets.only(left: 20, top: 10, right: 8),
       child: ListView(
+        padding: const EdgeInsets.only(bottom: 12),
         children: [
-          const HeaderRow(title: Strings.achievements),
           _badges(),
           _userPoints(),
           Container(
