@@ -1,9 +1,11 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:highvibe/modules/home/home_controller.dart';
 import 'package:highvibe/modules/home/widgets/drawer_button.dart';
 import 'package:highvibe/modules/home/widgets/logout_button.dart';
+import 'package:highvibe/utils/utils.dart';
 import 'package:highvibe/values/strings.dart';
 import 'package:highvibe/values/themes.dart';
 
@@ -60,9 +62,17 @@ class DrawerWidget extends StatelessWidget {
                     DrawerButton(
                       iconPath: 'assets/ic_profile.svg',
                       title: Strings.myProfile,
-                      onTap: () {
+                      onTap: () async {
                         _closeDrawer();
-                        Modular.to.pushNamed('profile');
+
+                        final isAnonymous =
+                            await _controller.auth.isAnonymous() ?? false;
+                        if (isAnonymous) {
+                          showSnackBarMsg(_controller.scaffoldKey.currentState,
+                              'Please login/register to view your profile');
+                        } else {
+                          await Modular.to.pushNamed('profile');
+                        }
                       },
                     ),
                     DrawerButton(
