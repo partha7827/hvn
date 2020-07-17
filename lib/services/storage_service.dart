@@ -26,9 +26,9 @@ class StorageService extends Disposable {
   @override
   void dispose() {}
 
-  Future<String> uploadAudio(File file, String userId) async {
-    final snapshot = await audioStorage.putFile(file).onComplete;
-    return (await snapshot.ref.getDownloadURL()).toString();
+  StorageUploadTask uploadAudio(File file, String userId) {
+    final storageUploadTask = audioStorage.putFile(file);
+    return storageUploadTask;
   }
 
   Future<String> uploadAudioThumb(File file, String audioId) async {

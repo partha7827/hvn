@@ -19,6 +19,8 @@ class ProfileWidget extends StatefulWidget {
   final TabBar tabBar;
   final TabBarView tabView;
   final bool showFab;
+  final Function uploadAudio;
+  final Widget audioUploadWidget;
 
   ProfileWidget({
     @required this.userName,
@@ -31,6 +33,8 @@ class ProfileWidget extends StatefulWidget {
     @required this.tabBar,
     @required this.tabView,
     this.showFab = false,
+    this.uploadAudio,
+    this.audioUploadWidget,
   });
 
   @override
@@ -56,7 +60,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
       body: NestedScrollView(
         headerSliverBuilder: (context, _) => [
           SliverAppBar(
-            expandedHeight: 300,
+            expandedHeight: 350,
             floating: false,
             pinned: true,
             backgroundColor: secondaryColor,
@@ -73,16 +77,17 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                     style: bold20White,
                   ),
                 ),
-                background: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      AppBar(
-                        backgroundColor: Colors.transparent,
-                        leading: Container(),
-                      ),
-                      Row(
+                background: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    AppBar(
+                      backgroundColor: Colors.transparent,
+                      leading: Container(),
+                    ),
+                    widget.audioUploadWidget ?? const SizedBox(),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                      child: Row(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: <Widget>[
                           GestureDetector(
@@ -127,24 +132,24 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                           ),
                         ],
                       ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 20),
-                        child: Text(
-                          widget.userBio,
-                          maxLines: 2,
-                          overflow: TextOverflow.ellipsis,
-                          style: normal16Hint,
-                        ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 20),
+                      child: Text(
+                        widget.userBio,
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
+                        style: normal16Hint,
                       ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: <Widget>[
-                          widget.userFollowersWidget,
-                          widget.userFollowingWidget,
-                        ],
-                      ),
-                    ],
-                  ),
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: <Widget>[
+                        widget.userFollowersWidget,
+                        widget.userFollowingWidget,
+                      ],
+                    ),
+                  ],
                 ),
               );
             }),
@@ -159,21 +164,23 @@ class _ProfileWidgetState extends State<ProfileWidget> {
         ],
         body: widget.tabView,
       ),
-      floatingActionButton: widget.showFab ? FabWithIcons(
-        icons: fabicons,
-        onIconTapped: (iconIndex) {
-          switch (iconIndex) {
-            case 0:
-              ProfileModule.toUploadAudio();
-              break;
-            case 2:
-              PlaylistModule.toCreateNewPlaylist();
-              break;
-            default:
-              break;
-          }
-        },
-      ) : null,
+      floatingActionButton: widget.showFab
+          ? FabWithIcons(
+              icons: fabicons,
+              onIconTapped: (iconIndex) {
+                switch (iconIndex) {
+                  case 0:
+                    widget.uploadAudio();
+                    break;
+                  case 2:
+                    PlaylistModule.toCreateNewPlaylist();
+                    break;
+                  default:
+                    break;
+                }
+              },
+            )
+          : null,
     );
   }
 }

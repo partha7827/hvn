@@ -15,7 +15,8 @@ enum UploadAudioStep {
   processDocument,
   editDocument,
   success,
-  error
+  error,
+  none,
 }
 
 class UploadAudioController = _UploadAudioControllerBase
@@ -66,15 +67,15 @@ abstract class _UploadAudioControllerBase with Store {
 
   @action
   Future<String> performUpload() async {
-    final audioUrl = await storage.uploadAudio(audioFile, currentUserId);
+    // final audioUrl = await storage.uploadAudio(audioFile, currentUserId);
 
-    final audio = Audio(
-      (b) => b
-        ..userId = currentUserId
-        ..userName = currentUserName
-        ..userAvatar = currentUserAvatar
-        ..audioUrlPath = audioUrl,
-    );
+    // final audio = Audio(
+    //   (b) => b
+    //     ..userId = currentUserId
+    //     ..userName = currentUserName
+    //     ..userAvatar = currentUserAvatar
+    //     ..audioUrlPath = audioUrl,
+    // );
 
     print('audio uploaded: ${audio.id}');
 
@@ -95,5 +96,5 @@ abstract class _UploadAudioControllerBase with Store {
   }
 
   @observable
-  UploadAudioStep currentStep = UploadAudioStep.chooseAudio;
+  UploadAudioStep currentStep = UploadAudioStep.none;
 }

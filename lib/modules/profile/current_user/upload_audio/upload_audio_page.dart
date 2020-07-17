@@ -109,7 +109,7 @@ class _UploadAudioPageState
 
   @override
   void didChangeDependencies() {
-    super.didChangeDependencies();
+    super.didChangeDependencies(); 
     when(
       (_) => controller.currentStep == UploadAudioStep.chooseAudio,
       () async {
