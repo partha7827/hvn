@@ -30,24 +30,26 @@ class _ShowPlaylistsPageState
         return Column(
           children: <Widget>[
             const SizedBox(height: 12),
-            ListItemsBuilder<PlayList>(
-              snapshot: snapshot,
-              itemBuilder: (context, item) {
-                return GestureDetector(
-                  onTap: () async {
-                    MediaOverlays.presentPlayListPlayerAsOverlay(
-                      context: context,
+            Expanded(
+              child: ListItemsBuilder<PlayList>(
+                snapshot: snapshot,
+                itemBuilder: (context, item) {
+                  return GestureDetector(
+                    onTap: () async {
+                      MediaOverlays.presentPlayListPlayerAsOverlay(
+                        context: context,
+                        playList: item,
+                      );
+                    },
+                    child: PlaylistTile(
+                      isInEditMode: false,
                       playList: item,
-                    );
-                  },
-                  child: PlaylistTile(
-                    isInEditMode: false,
-                    playList: item,
-                    onTap: (item) =>
-                        PlaylistModule.toContextMenu(playList: item),
-                  ),
-                );
-              },
+                      onTap: (item) =>
+                          PlaylistModule.toContextMenu(playList: item),
+                    ),
+                  );
+                },
+              ),
             ),
           ],
         );
