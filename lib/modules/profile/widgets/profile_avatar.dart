@@ -26,12 +26,14 @@ class ProfileAvatar extends StatelessWidget {
           ),
           child: Center(
             child: ClipOval(
-              child: CachedNetworkImage(
-                imageUrl: photoUrl,
-                width: 100,
-                height: 100,
-                fit: BoxFit.cover,
-              ),
+              child: photoUrl.isEmpty
+                  ? Image.asset('assets/ic_profile_placeholder.png')
+                  : CachedNetworkImage(
+                      imageUrl: photoUrl,
+                      width: 100,
+                      height: 100,
+                      fit: BoxFit.cover,
+                    ),
             ),
           ),
         ),

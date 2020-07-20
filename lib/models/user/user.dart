@@ -7,7 +7,6 @@ import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:highvibe/models/serializer/serializer.dart';
-import 'package:highvibe/values/assets.dart';
 import 'package:uuid/uuid.dart';
 
 part 'user.g.dart';
@@ -74,7 +73,7 @@ abstract class User implements Built<User, UserBuilder> {
     ..status = 'Author'
     ..email = ''
     ..name = ''
-    ..photoUrl = Assets.dummyAvatarUrl
+    ..photoUrl = ''
     ..bio = ''
     ..experiencePoints = 0
     ..karmaPoints = 0
