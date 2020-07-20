@@ -33,7 +33,7 @@ class _AppWidgetState extends State<AppWidget> {
       if (authState == AuthState.unauthenticated) {
         Modular.to.pushNamedAndRemoveUntil('/loginRegister', (_) => false);
       } else if (authState == AuthState.authenticated) {
-        Modular.to.pushNamedAndRemoveUntil('/home', (_) => false);
+        Modular.to.pushNamedAndRemoveUntil('/wallet', (_) => false);
       }
     });
   }
