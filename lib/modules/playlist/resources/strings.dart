@@ -10,7 +10,7 @@ class PlaylistStrings {
   static const String createNew = 'Create New Playlist';
   static const String selectCover = 'Select Cover';
   static const String playlistName = 'Playlist Name';
-  static const String enterPlaylistName = 'Eneter Playlist Name';
+  static const String enterPlaylistName = 'Enter Playlist Name';
   static const String description = 'Description';
   static const String enterDescription = 'Enter Description';
   static const String privacy = 'Privacy';
