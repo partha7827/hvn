@@ -125,7 +125,7 @@ class Balance extends StatelessWidget {
                             child: Padding(
                               padding: EdgeInsets.fromLTRB(20, 10, 20, 0),
                               child: Text(
-                                "PBLC",
+                                "HV",
                                 style: TextStyle(
                                     fontSize: 20.0, color: Colors.white),
                               ),

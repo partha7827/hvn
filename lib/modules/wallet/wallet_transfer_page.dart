@@ -107,7 +107,7 @@ class _WalletTransferPageState
                   padding: EdgeInsets.fromLTRB(20, 0, 20, 10),
                   child: Observer(
                     builder: (_) => Text(
-                      "PBLC ${EthAmountFormatter(controller.walletStore.tokenBalance).format()}",
+                      "HV ${EthAmountFormatter(controller.walletStore.tokenBalance).format()}",
                       style: Theme.of(context)
                           .textTheme
                           .body2
@@ -209,13 +209,13 @@ class _WalletTransferPageState
                               items: [
                                 DropdownMenuItem<String>(
                                   child: Text(
-                                    'PBLC',
+                                    'HV',
                                     style: TextStyle(
                                       fontSize: 15,
                                       color: Color(0xff818181),
                                     ),
                                   ),
-                                  value: 'PBLC',
+                                  value: 'HV',
                                 ),
                                 DropdownMenuItem<String>(
                                   child: Text(
@@ -262,13 +262,13 @@ class _WalletTransferPageState
                                 controller.denomination = value;
                               },
                               hint: Text(
-                                "PBLC",
+                                "HV",
                                 style: TextStyle(
                                   fontSize: 15,
                                   color: Color(0xff818181),
                                 ),
                               ),
-                              value: controller.denomination ?? "PBLC",
+                              value: controller.denomination ?? "HV",
                             ),
                           ],
                         ),
@@ -276,7 +276,7 @@ class _WalletTransferPageState
                         PaperValidationSummary(controller.errors),
                         Opacity(
                           opacity: !controller.loading &&
-                                  controller.denomination == "PBLC"
+                                  controller.denomination == "HV"
                               ? 1.0
                               : 0.5,
                           child: Container(
@@ -290,7 +290,7 @@ class _WalletTransferPageState
                             ),
                             child: Opacity(
                               opacity: !controller.loading &&
-                                      controller.denomination == "PBLC"
+                                      controller.denomination == "HV"
                                   ? 1.0
                                   : 0.5,
                               child: Row(
@@ -298,14 +298,14 @@ class _WalletTransferPageState
                                 children: <Widget>[
                                   FlatButton(
                                     child: const Text(
-                                      'Send PBLC',
+                                      'Send HV',
                                       style: TextStyle(
                                         fontSize: 15,
                                         color: Colors.white,
                                       ),
                                     ),
                                     onPressed: !controller.loading &&
-                                            controller.denomination == "PBLC"
+                                            controller.denomination == "HV"
                                         ? () {
                                             controller.transfer().listen((tx) {
                                               switch (tx.status) {
@@ -340,7 +340,7 @@ class _WalletTransferPageState
                         SizedBox(height: 10),
                         Opacity(
                           opacity: !controller.loading &&
-                                  controller.denomination != "PBLC"
+                                  controller.denomination != "HV"
                               ? 1.0
                               : 0.5,
                           child: Container(
@@ -354,7 +354,7 @@ class _WalletTransferPageState
                             ),
                             child: Opacity(
                               opacity: !controller.loading &&
-                                      controller.denomination != "PBLC"
+                                      controller.denomination != "HV"
                                   ? 1.0
                                   : 0.5,
                               child: Row(
@@ -369,7 +369,7 @@ class _WalletTransferPageState
                                       ),
                                     ),
                                     onPressed: !controller.loading &&
-                                            controller.denomination != "PBLC"
+                                            controller.denomination != "HV"
                                         ? () {
                                             // showInfoFlushbar(context, true,
                                             //     "actual ETH transaction");
@@ -399,7 +399,7 @@ class _WalletTransferPageState
                         SizedBox(height: 20),
                         ListTile(
                           title: Text(
-                            'When transfering PBLC, make sure the receiving address has a PBLC compliant wallet',
+                            'When transfering HV, make sure the receiving address has a HV compliant wallet',
                             style: TextStyle(
                               fontSize: 12,
                               color: Colors.grey,

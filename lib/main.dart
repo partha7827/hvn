@@ -11,10 +11,11 @@ import 'package:web3dart/contracts.dart';
 var infuraApiKey = "cd8401520b5e4bce93716ee0eebf277a";
 
 AppConfigParams walletConfig = AppConfigParams(
-    "https://mainnet.infura.io/v3/$infuraApiKey",
-    "wss://mainnet.infura.io/ws/v3/$infuraApiKey",
-    "0x141abb03f001deded9a0223d4ff26d929117b72e",
-    "mainnet");
+  "https://mainnet.infura.io/v3/$infuraApiKey",
+  "wss://mainnet.infura.io/ws/v3/$infuraApiKey",
+  "0x141abb03f001deded9a0223d4ff26d929117b72e",
+  "mainnet",
+);
 SharedPreferences sharedPrefs;
 DeployedContract contract;
 
