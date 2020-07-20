@@ -3,7 +3,9 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:highvibe/models/models.dart';
 import 'package:highvibe/modules/app/media_overlays.dart';
+import 'package:highvibe/modules/profile/profile_module.dart';
 import 'package:highvibe/utils/utils.dart';
+import 'package:highvibe/values/themes.dart';
 import 'package:highvibe/widgets/audio_tile.dart';
 import 'package:highvibe/widgets/repeat_widget.dart';
 import 'package:mobx/mobx.dart';
@@ -46,6 +48,10 @@ class _ShowAudioPageState
   }
 
   Widget buildAudios(List<Audio> audios) {
+    if (audios.isEmpty && controller.isCurrentUser) {
+      return _uploadNow();
+    }
+
     return ListView(
       padding: const EdgeInsets.only(left: 20, top: 10, bottom: 80, right: 8),
       children: [
@@ -77,6 +83,27 @@ class _ShowAudioPageState
             ),
           ),
         ],
+      ],
+    );
+  }
+
+  Column _uploadNow() {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      mainAxisSize: MainAxisSize.max,
+      children: <Widget>[
+        SizedBox(
+          height: 80,
+          width: 80,
+          child: Image.asset('assets/ic_add_content.png'),
+        ),
+        Container(
+            padding: const EdgeInsets.symmetric(vertical: 20),
+            child: Text('Upload your first content', style: normal16White)),
+        FlatButton(
+          onPressed: () => ProfileModule.toUploadAudio(),
+          child: Text('Upload now!', style: normal16Accent),
+        ),
       ],
     );
   }
