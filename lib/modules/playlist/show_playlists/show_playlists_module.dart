@@ -15,7 +15,7 @@ class ShowPlaylistsModule extends WidgetModule {
   List<Bind<Object>> get binds => [
         Bind<FirestorePlaylistService>(
           (_) => FirestorePlaylistService(
-            userId: _currentUserStore.currentUser.id,
+            userId: userId,
           ),
         ),
         Bind((i) => ShowPlaylistsController()),

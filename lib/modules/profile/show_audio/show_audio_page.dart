@@ -48,8 +48,17 @@ class _ShowAudioPageState
   }
 
   Widget buildAudios(List<Audio> audios) {
-    if (audios.isEmpty && controller.isCurrentUser) {
-      return _uploadNow();
+    if (audios.isEmpty) {
+      if (controller.isCurrentUser) {
+        return _uploadNow();
+      } else {
+        return Center(
+          child: Text(
+            "There's no content here yet!",
+            style: normal16White,
+          ),
+        );
+      }
     }
 
     return ListView(

@@ -43,6 +43,7 @@ class _OtherUserPageState
   }
 
   Widget buildProfileWidget() {
+    print('CONTROLLER.OTHERUSER.ID: ${controller.otherUser.id}');
     return ProfileWidget(
       userName: controller.otherUser.name,
       userStatus: controller.otherUser.status,
@@ -99,6 +100,7 @@ class _OtherUserPageState
         children: <Widget>[
           ShowAudioModule(controller.otherUser.id),
           ShowPlaylistsModule(userId: controller.otherUser.id),
+          
           AchievementsModule(controller.otherUser),
         ],
       ),

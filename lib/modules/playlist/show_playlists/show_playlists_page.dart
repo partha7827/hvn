@@ -24,30 +24,37 @@ class _ShowPlaylistsPageState
 
   @override
   Widget build(BuildContext context) {
+    print('${controller.firestorePlaylistService.userId}');
+    print('${controller.appController.currentUser.id}');
+
     return StreamBuilder<List<PlayList>>(
       stream: controller.fetchPlaylists(),
       builder: (context, snapshot) {
         return Column(
           children: <Widget>[
             const SizedBox(height: 12),
-            ListItemsBuilder<PlayList>(
-              snapshot: snapshot,
-              itemBuilder: (context, item) {
-                return GestureDetector(
-                  onTap: () async {
-                    MediaOverlays.presentPlayListPlayerAsOverlay(
-                      context: context,
+            Expanded(
+              child: ListItemsBuilder<PlayList>(
+                snapshot: snapshot,
+                isCurrentUser: controller.firestorePlaylistService.userId ==
+                    controller.appController.currentUser.id,
+                itemBuilder: (context, item) {
+                  return GestureDetector(
+                    onTap: () async {
+                      MediaOverlays.presentPlayListPlayerAsOverlay(
+                        context: context,
+                        playList: item,
+                      );
+                    },
+                    child: PlaylistTile(
+                      isInEditMode: false,
                       playList: item,
-                    );
-                  },
-                  child: PlaylistTile(
-                    isInEditMode: false,
-                    playList: item,
-                    onTap: (item) =>
-                        PlaylistModule.toContextMenu(playList: item),
-                  ),
-                );
-              },
+                      onTap: (item) =>
+                          PlaylistModule.toContextMenu(playList: item),
+                    ),
+                  );
+                },
+              ),
             ),
           ],
         );
