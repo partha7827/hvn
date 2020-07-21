@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -105,4 +106,25 @@ Future<bool> onWillPop() async {
     return false;
   }
   return true;
+}
+
+Future<String> createProfileLink(String userId) async {
+  final parameters = DynamicLinkParameters(
+    uriPrefix: 'https://highvibe.page.link',
+    link: Uri.parse('https://highvibe.page.link/$userId'),
+    androidParameters: AndroidParameters(
+      packageName: 'network.highvibe.hvn',
+    ),
+    // iosParameters: IosParameters(
+    //   bundleId: 'network.highvibe.hvn',
+    //   minimumVersion: '1.0.1',
+    //   appStoreId: '123456789',
+    // ),
+  );
+
+  final dynamicUrl = await parameters.buildShortLink();
+
+  print('DYNAMICURL: ${dynamicUrl.shortUrl}');
+
+  return dynamicUrl.toString();
 }

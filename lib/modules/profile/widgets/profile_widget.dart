@@ -4,12 +4,13 @@ import 'package:highvibe/modules/playlist/playlist_module.dart';
 import 'package:highvibe/modules/profile/profile_module.dart';
 import 'package:highvibe/modules/profile/widgets/fab_with_icons.dart';
 import 'package:highvibe/modules/profile/widgets/profile_avatar.dart';
+import 'package:highvibe/utils/utils.dart';
 import 'package:highvibe/values/strings.dart';
 import 'package:highvibe/values/themes.dart';
 import 'package:highvibe/widgets/image_viewer.dart';
 
 class ProfileWidget extends StatefulWidget {
-  final String userName;
+  final String name;
   final String userAvatar;
   final String userStatus;
   final String userBio;
@@ -18,9 +19,11 @@ class ProfileWidget extends StatefulWidget {
   final Widget buttonWidget;
   final TabBar tabBar;
   final TabBarView tabView;
+  final String username;
+  final String userId;
 
-  ProfileWidget({
-    @required this.userName,
+  const ProfileWidget({
+    @required this.name,
     @required this.userAvatar,
     @required this.userStatus,
     @required this.buttonWidget,
@@ -29,6 +32,8 @@ class ProfileWidget extends StatefulWidget {
     @required this.userFollowingWidget,
     @required this.tabBar,
     @required this.tabView,
+    @required this.userId,
+    this.username = '',
   });
 
   @override
@@ -54,7 +59,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
       body: NestedScrollView(
         headerSliverBuilder: (context, _) => [
           SliverAppBar(
-            expandedHeight: 300,
+            expandedHeight: 320,
             floating: false,
             pinned: true,
             backgroundColor: secondaryColor,
@@ -67,7 +72,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                 title: Opacity(
                   opacity: top > 100 ? 0 : 1,
                   child: Text(
-                    widget.userName,
+                    widget.name,
                     style: bold20White,
                   ),
                 ),
@@ -102,7 +107,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: <Widget>[
                                 Text(
-                                  widget.userName,
+                                  widget.name,
                                   style: bold20White,
                                 ),
                                 Padding(
@@ -110,6 +115,19 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                   child: Text(
                                     widget.userStatus,
                                     style: normal16Hint,
+                                  ),
+                                ),
+                                Visibility(
+                                  visible: widget.username.isNotEmpty,
+                                  child: FlatButton(
+                                    onPressed: () {
+                                      createProfileLink(widget.userId);
+                                    },
+                                    padding: const EdgeInsets.only(top: 4),
+                                    child: Text(
+                                      '@${widget.username}',
+                                      style: normal16Accent,
+                                    ),
                                   ),
                                 ),
                                 Padding(

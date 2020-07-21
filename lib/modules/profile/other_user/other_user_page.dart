@@ -44,10 +44,11 @@ class _OtherUserPageState
 
   Widget buildProfileWidget() {
     return ProfileWidget(
-      userName: controller.otherUser.name,
+      name: controller.otherUser.name,
       userStatus: controller.otherUser.status,
       userBio: controller.otherUser.bio,
       userAvatar: controller.otherUser.photoUrl,
+      userId: controller.otherUser.id,
       userFollowersWidget: Observer(builder: (_) {
         return InkWell(
           onTap: () {

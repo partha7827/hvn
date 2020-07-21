@@ -12,7 +12,7 @@ class VerifyOtpPage extends StatefulWidget {
   const VerifyOtpPage({
     this.phoneNumber = '',
     this.countryCode = '',
-  });
+  }); 
 
   final String phoneNumber;
   final String countryCode;

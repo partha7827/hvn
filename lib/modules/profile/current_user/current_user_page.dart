@@ -39,10 +39,12 @@ class _CurrentUserPageState
   @override
   Widget build(BuildContext context) {
     return ProfileWidget(
-      userName: controller.currentUser.name,
+      name: controller.currentUser.name,
       userStatus: controller.currentUser.status,
       userBio: controller.currentUser.bio,
       userAvatar: controller.currentUser.photoUrl,
+      username: controller.currentUser.username,
+      userId: controller.currentUser.id,
       userFollowersWidget: Observer(builder: (_) {
         return Column(
           children: <Widget>[

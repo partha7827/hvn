@@ -26,7 +26,7 @@ class _LetsGetYouSignedUpState
       backgroundColor: primaryColor,
       appBar: AppBar(
         leading: IconButton(
-          icon: Icon(Icons.arrow_back),
+          icon: const Icon(Icons.arrow_back),
           onPressed: () => Modular.to.pop(),
         ),
       ),

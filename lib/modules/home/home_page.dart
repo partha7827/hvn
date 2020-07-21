@@ -1,3 +1,6 @@
+import 'dart:async';
+
+import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -6,6 +9,7 @@ import 'package:highvibe/modules/home/widgets/audios_widget.dart';
 import 'package:highvibe/modules/home/widgets/authors_widget.dart';
 import 'package:highvibe/modules/home/widgets/drawer_widget.dart';
 import 'package:highvibe/modules/home/widgets/exit_app.dart';
+import 'package:highvibe/modules/profile/profile_module.dart';
 import 'package:highvibe/utils/utils.dart';
 import 'package:highvibe/values/strings.dart';
 import 'package:highvibe/values/themes.dart';
@@ -20,7 +24,9 @@ class HomePage extends StatefulWidget {
   _HomePageState createState() => _HomePageState();
 }
 
-class _HomePageState extends ModularState<HomePage, HomeController> {
+class _HomePageState extends ModularState<HomePage, HomeController>
+    with WidgetsBindingObserver {
+  Timer _timerLink;
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
@@ -28,6 +34,55 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
 
   void _openDrawer() {
     controller.scaffoldKey.currentState.openDrawer();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addObserver(this);
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (state == AppLifecycleState.resumed) {
+      // In iOS, the appLifeCycle is resumed before the link is received
+      // so, we need to delay the dynamic link call
+      _timerLink = Timer(const Duration(milliseconds: 1000), () {
+        _retrieveDynamicLink();
+      });
+    }
+  }
+
+  Future<void> _retrieveDynamicLink() async {
+    final data = await FirebaseDynamicLinks.instance.getInitialLink();
+    final deepLink = data?.link;
+
+    if (deepLink != null) {
+      print('deepLink = $deepLink');
+    }
+
+    FirebaseDynamicLinks.instance.onLink(
+        onSuccess: (PendingDynamicLinkData dynamicLink) async {
+      final deepLink = dynamicLink?.link;
+
+      if (deepLink != null) {
+        print('DEEPLINK PATH: ${deepLink.path}');
+        if (controller.currentUserStore.currentUser.id == deepLink.path) {
+          await ProfileModule.toProfile();
+        } else {
+          await ProfileModule.toOtherProfileId(deepLink.path);
+        }
+      }
+    }, onError: (OnLinkErrorException e) async {
+      print('onLinkError');
+      print(e.message);
+    });
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _timerLink.cancel();
   }
 
   @override
