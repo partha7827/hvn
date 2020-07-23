@@ -43,10 +43,10 @@ class PaperInput extends StatelessWidget {
         fillColor: fillColor,
         contentPadding:
             const EdgeInsets.only(left: 15.0, top: 20.0, bottom: 5.0),
-        focusedBorder: OutlineInputBorder(
+        focusedBorder: const OutlineInputBorder(
           borderSide: BorderSide(color: Colors.white),
         ),
-        enabledBorder: UnderlineInputBorder(
+        enabledBorder: const UnderlineInputBorder(
           borderSide: BorderSide(color: Colors.white),
         ),
       ),
