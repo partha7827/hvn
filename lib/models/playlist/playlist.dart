@@ -25,6 +25,7 @@ abstract class PlayList implements Built<PlayList, PlayListBuilder> {
   @nullable
   String get title;
   Privacy get privacy;
+  String get userId;
 
   String toJson() {
     return json.encode(serializers.serializeWith(PlayList.serializer, this));

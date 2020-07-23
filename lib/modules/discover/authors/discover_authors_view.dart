@@ -32,7 +32,7 @@ class _DiscoverAuthorsViewState
 
   @override
   void dispose() {
-    _timer.cancel();
+    _timer?.cancel();
     super.dispose();
   }
 

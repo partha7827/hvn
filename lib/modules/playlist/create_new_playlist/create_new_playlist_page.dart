@@ -11,9 +11,11 @@ import 'package:highvibe/widgets/responsive_safe_area.dart';
 
 class CreateNewPlaylistPage extends StatefulWidget {
   final bool isPresentedAsOverlay;
+  final Function callback;
 
   CreateNewPlaylistPage({
     @required this.isPresentedAsOverlay,
+    this.callback,
     Key key,
   }) : super(key: key);
 
@@ -220,5 +222,8 @@ class _CreateNewPlaylistPage
       title: PlaylistStrings.newPlaylistSuccessTitle,
       subTitle: PlaylistStrings.newPlaylistSuccessSubTitle,
     );
+    if (widget.callback != null) {
+      widget.callback();
+    }
   }
 }

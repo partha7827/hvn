@@ -57,6 +57,7 @@ class Strings {
   static const discoverAuthors = 'Authors';
   static const discoverAudios = 'Audio';
   static const discoverVideos = 'Video';
+  static const discoverPlaylists = 'Playlists';
   static const exitConfirmation = 'Do you want to close app?';
   static const yes = 'Yes';
   static const no = 'No';

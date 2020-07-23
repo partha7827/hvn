@@ -3,6 +3,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:highvibe/modules/discover/audios/discover_audios.dart';
 import 'package:highvibe/modules/discover/authors/discover_authors.dart';
 import 'package:highvibe/modules/discover/discover_controller.dart';
+import 'package:highvibe/modules/discover/playlists/discover_playlists.dart';
 import 'package:highvibe/values/strings.dart';
 import 'package:highvibe/values/themes.dart';
 import 'package:highvibe/widgets/outline_tab_indicator.dart';
@@ -21,14 +22,13 @@ class _DiscoverPageState extends ModularState<DiscoverPage, DiscoverController>
   TabController _tabController;
   final _tabs = [
     Strings.discoverAudios,
-    // Strings.discoverVideos,
     Strings.discoverAuthors,
+    Strings.discoverPlaylists,
   ];
 
   @override
   void initState() {
     _tabController = TabController(
-
       initialIndex: widget.pageIndex,
       length: _tabs.length,
       vsync: this,
@@ -70,8 +70,8 @@ class _DiscoverPageState extends ModularState<DiscoverPage, DiscoverController>
         controller: _tabController,
         children: [
           DiscoverAudios(),
-          // DiscoverVideos(),
           DiscoverAuthors(),
+          DiscoverPlaylists(),
         ],
       ),
     );
