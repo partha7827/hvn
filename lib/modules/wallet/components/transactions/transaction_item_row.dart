@@ -20,14 +20,10 @@ class TransactionItemRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Container(
-        padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
+        padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
         decoration: BoxDecoration(
           color: color,
           borderRadius: borderRadius,
-          // borderRadius: BorderRadius.only(
-          //   topRight: Radius.circular(5.0),
-          //   topLeft: Radius.circular(5.0),
-          // ),
         ),
         width: MediaQuery.of(context).size.width,
         child: Row(
@@ -35,7 +31,7 @@ class TransactionItemRow extends StatelessWidget {
           children: <Widget>[
             TransactionItemRowText(
               title: title,
-              color: Color(0xff818181),
+              color: const Color(0xff818181),
               fontSize: 14,
               height: 50,
             ),
@@ -53,7 +49,7 @@ class TransactionItemRow extends StatelessWidget {
             width: MediaQuery.of(context).size.width * 0.6,
             child: Text(
               '$property',
-              style: TextStyle(color: Color(0xff696969), fontSize: 12),
+              style: const TextStyle(color: Color(0xff696969), fontSize: 12),
               maxLines: 2,
               overflow: TextOverflow.ellipsis,
             ),
@@ -70,12 +66,12 @@ class TransactionItemRow extends StatelessWidget {
                   ClipboardData(text: property),
                 );
                 Scaffold.of(context).showSnackBar(
-                  SnackBar(
-                    content: Text("Copied"),
+                  const SnackBar(
+                    content: Text('Copied'),
                   ),
                 );
               },
-              color: Color(0xff858585),
+              color: const Color(0xff858585),
             ),
           ),
         ],
@@ -83,7 +79,7 @@ class TransactionItemRow extends StatelessWidget {
     }
     return Text(
       '$property',
-      style: TextStyle(color: Color(0xff696969), fontSize: 14),
+      style: const TextStyle(color: Color(0xff696969), fontSize: 14),
     );
   }
 }

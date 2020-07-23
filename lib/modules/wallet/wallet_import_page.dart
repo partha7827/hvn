@@ -27,6 +27,7 @@ class _WalletImportPage
     controller.reset();
   }
 
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       extendBodyBehindAppBar: true,
@@ -36,15 +37,15 @@ class _WalletImportPage
         backgroundColor: Colors.transparent,
         elevation: 0.0,
         leading: IconButton(
-          icon: ImageIcon(
-            AssetImage("assets/images/back.png"),
+          icon: const ImageIcon(
+            AssetImage('assets/images/back.png'),
           ),
           onPressed: () => Modular.to.pop(),
         ),
       ),
       body: GestureDetector(
         onTap: () {
-          FocusScope.of(context).requestFocus(new FocusNode());
+          FocusScope.of(context).requestFocus(FocusNode());
         },
         child: Observer(
           builder: (context) => buildForm(context),
@@ -59,9 +60,9 @@ class _WalletImportPage
         child: Column(
           children: <Widget>[
             Container(
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 image: DecorationImage(
-                  image: AssetImage("assets/images/bkg1.png"),
+                  image: AssetImage('assets/images/bkg1.png'),
                   fit: BoxFit.fill,
                 ),
               ),
@@ -70,13 +71,13 @@ class _WalletImportPage
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  Text(
-                    "Import Account",
+                  const Text(
+                    'Import Account',
                     style: TextStyle(fontSize: 32.0, color: Colors.white),
                   ),
-                  SizedBox(height: 10),
-                  Text(
-                    "Import your account using a private key \n or a previous seed phrase.",
+                  const SizedBox(height: 10),
+                  const Text(
+                    '''Import your account using a private key \n or a previous seed phrase.''',
                     style: TextStyle(fontSize: 16.0, color: Colors.white),
                     textAlign: TextAlign.center,
                   ),
@@ -86,13 +87,13 @@ class _WalletImportPage
             Expanded(
               child: ListView(
                 shrinkWrap: true,
-                padding: EdgeInsets.all(10),
+                padding: const EdgeInsets.all(10),
                 children: <Widget>[
                   Container(
-                    margin: EdgeInsets.all(10),
+                    margin: const EdgeInsets.all(10),
                     decoration: BoxDecoration(
-                      borderRadius: new BorderRadius.circular(5.0),
-                      color: Color(0xfff6f6f6),
+                      borderRadius: BorderRadius.circular(5.0),
+                      color: const Color(0xfff6f6f6),
                     ),
                     height: 280,
                     width: MediaQuery.of(context).size.width,
@@ -103,8 +104,8 @@ class _WalletImportPage
                           child: Container(
                             decoration: BoxDecoration(
                               color: Colors.black,
-                              image: DecorationImage(
-                                image: AssetImage("assets/images/bkg5.png"),
+                              image: const DecorationImage(
+                                image: AssetImage('assets/images/bkg5.png'),
                                 fit: BoxFit.cover,
                               ),
                               borderRadius: BorderRadius.circular(5.0),
@@ -124,12 +125,12 @@ class _WalletImportPage
                                     if (controller.type ==
                                             WalletImportType.mnemonic &&
                                         await controller.confirmMnemonic()) {
-                                      WalletModule.toMainPage();
+                                      await WalletModule.toMainPage();
                                     }
                                     if (controller.type ==
                                             WalletImportType.privateKey &&
                                         await controller.confirmPrivateKey()) {
-                                      WalletModule.toMainPage();
+                                      await WalletModule.toMainPage();
                                     }
                                   },
                                 ),
@@ -142,13 +143,13 @@ class _WalletImportPage
                         Row(
                           children: <Widget>[
                             PaperRadio(
-                              "Seed Phrase",
+                              'Seed Phrase',
                               groupValue: controller.type,
                               value: WalletImportType.mnemonic,
                               onChanged: (value) => controller.setType(value),
                             ),
                             PaperRadio(
-                              "Private Key",
+                              'Private Key',
                               groupValue: controller.type,
                               value: WalletImportType.privateKey,
                               onChanged: (value) => controller.setType(value),
@@ -189,12 +190,12 @@ class _WalletImportPage
           onChanged: controller.setPrivateKey,
           filled: true,
           fillColor: Colors.white,
-          style: TextStyle(
+          style: const TextStyle(
             fontSize: 15,
             color: Color(0xff515151),
           ),
         ),
-        SizedBox(height: 10),
+        const SizedBox(height: 10),
         PaperValidationSummary(controller.errors),
       ],
     );
@@ -210,12 +211,12 @@ class _WalletImportPage
           onChanged: controller.setMnemonic,
           filled: true,
           fillColor: Colors.white,
-          style: TextStyle(
+          style: const TextStyle(
             fontSize: 15,
             color: Color(0xff515151),
           ),
         ),
-        SizedBox(height: 10),
+        const SizedBox(height: 10),
         Observer(
           builder: (context) => PaperValidationSummary(controller.errors),
         ),

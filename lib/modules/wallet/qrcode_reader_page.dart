@@ -13,7 +13,8 @@ import 'utils/detector_painters.dart';
 typedef OnScanned = void Function(String address);
 
 class QRCodeReaderPage extends StatefulWidget {
-  QRCodeReaderPage({this.title, this.onScanned, this.closeWhenScanned = true});
+  QRCodeReaderPage(
+      {this.title = '', this.onScanned, this.closeWhenScanned = true});
   final OnScanned onScanned;
   final bool closeWhenScanned;
   final String title;
@@ -40,8 +41,7 @@ class _QRCodeReaderPageState extends State<QRCodeReaderPage> {
   }
 
   void _initializeCamera() async {
-    final CameraDescription description =
-        await ScannerUtils.getCamera(_direction);
+    final description = await ScannerUtils.getCamera(_direction);
 
     _camera = CameraController(
       description,
@@ -52,7 +52,7 @@ class _QRCodeReaderPageState extends State<QRCodeReaderPage> {
     );
     await _camera.initialize();
 
-    _camera.startImageStream((CameraImage image) {
+    await _camera.startImageStream((CameraImage image) {
       if (_isDetecting) return;
 
       _isDetecting = true;
@@ -70,14 +70,15 @@ class _QRCodeReaderPageState extends State<QRCodeReaderPage> {
           });
         },
       ).whenComplete(() {
-        if (_scanResults.length > 0) {
-          if (widget.onScanned != null)
+        if (_scanResults.isNotEmpty) {
+          if (widget.onScanned != null) {
             widget.onScanned(_scanResults.first.displayValue);
+          }
 
           if (widget.closeWhenScanned) {
             _isDetecting = true; // stop looping
 
-            Future.delayed(Duration(seconds: 1), () {
+            Future.delayed(const Duration(seconds: 1), () {
               if (Navigator.canPop(context)) {
                 Navigator.pop(context);
               }
@@ -98,7 +99,7 @@ class _QRCodeReaderPageState extends State<QRCodeReaderPage> {
       return Container();
     }
 
-    final Size imageSize = Size(
+    final imageSize = Size(
       _camera.value.previewSize.height,
       _camera.value.previewSize.width,
     );
@@ -152,8 +153,8 @@ class _QRCodeReaderPageState extends State<QRCodeReaderPage> {
         backgroundColor: Colors.transparent,
         elevation: 0.0,
         leading: IconButton(
-          icon: ImageIcon(
-            AssetImage("assets/images/back.png"),
+          icon: const ImageIcon(
+            AssetImage('assets/images/back.png'),
           ),
           onPressed: () => Modular.to.pop(),
         ),
@@ -161,9 +162,9 @@ class _QRCodeReaderPageState extends State<QRCodeReaderPage> {
       body: Column(
         children: <Widget>[
           Container(
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               image: DecorationImage(
-                image: AssetImage("assets/images/bkg1.png"),
+                image: AssetImage('assets/images/bkg1.png'),
                 fit: BoxFit.fill,
               ),
             ),
@@ -177,7 +178,7 @@ class _QRCodeReaderPageState extends State<QRCodeReaderPage> {
         ],
       ),
       floatingActionButton: FloatingActionButton(
-        backgroundColor: Color(0xff515151),
+        backgroundColor: const Color(0xff515151),
         onPressed: _toggleCameraDirection,
         child: _direction == CameraLensDirection.back
             ? const Icon(Icons.camera_front)

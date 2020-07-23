@@ -9,6 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:highvibe/modules/wallet/utils/eth_amount_formatter.dart';
 import 'package:highvibe/modules/wallet/wallet_module.dart';
+import 'package:highvibe/values/themes.dart';
 
 class WalletTransferPage extends StatefulWidget {
   WalletTransferPage({Key key, this.title = 'Send ETH'}) : super(key: key);
@@ -41,15 +42,15 @@ class _WalletTransferPageState
         backgroundColor: Colors.transparent,
         elevation: 0.0,
         leading: IconButton(
-          icon: ImageIcon(
-            AssetImage("assets/images/back.png"),
+          icon: const ImageIcon(
+            AssetImage('assets/images/back.png'),
           ),
           onPressed: () => Modular.to.pop(),
         ),
         actions: <Widget>[
-          IconButton(
+          const IconButton(
             icon: ImageIcon(
-              AssetImage("assets/images/transactions.png"),
+              AssetImage('assets/images/transactions.png'),
             ),
             onPressed: WalletModule.toTransactions,
           ),
@@ -57,7 +58,7 @@ class _WalletTransferPageState
       ),
       body: GestureDetector(
         onTap: () {
-          FocusScope.of(context).requestFocus(new FocusNode());
+          FocusScope.of(context).requestFocus(FocusNode());
         },
         child: Builder(
           builder: (ctx) => buildForm(ctx),
@@ -71,9 +72,9 @@ class _WalletTransferPageState
       child: Column(
         children: <Widget>[
           Container(
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               image: DecorationImage(
-                image: AssetImage("assets/images/bkg1.png"),
+                image: AssetImage('assets/images/bkg1.png'),
                 fit: BoxFit.fill,
               ),
             ),
@@ -82,10 +83,10 @@ class _WalletTransferPageState
             child: null,
           ),
           Container(
-            margin: EdgeInsets.fromLTRB(0, 10, 0, 0),
-            decoration: BoxDecoration(
+            margin: const EdgeInsets.fromLTRB(0, 10, 0, 0),
+            decoration: const BoxDecoration(
               image: DecorationImage(
-                image: AssetImage("assets/images/bkg2.png"),
+                image: AssetImage('assets/images/bkg2.png'),
                 fit: BoxFit.cover,
               ),
               // border: Border.all(),
@@ -96,45 +97,39 @@ class _WalletTransferPageState
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                Padding(
+                const Padding(
                   padding: EdgeInsets.fromLTRB(20, 10, 20, 10),
                   child: Text(
-                    "Available Balance",
+                    'Available Balance',
                     style: TextStyle(fontSize: 10.0, color: Colors.white),
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsets.fromLTRB(20, 0, 20, 10),
+                  padding: const EdgeInsets.fromLTRB(20, 0, 20, 10),
                   child: Observer(
                     builder: (_) => Text(
-                      "HV ${EthAmountFormatter(controller.walletStore.tokenBalance).format()}",
-                      style: Theme.of(context)
-                          .textTheme
-                          .body2
-                          .apply(fontSizeDelta: 10, color: Colors.white),
+                      '''HV ${EthAmountFormatter(controller.walletStore.tokenBalance).format()}''',
+                      style: normal16White,
                     ),
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
+                  padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
                   child: Observer(
                     builder: (_) => Text(
-                      "ETH ${EthAmountFormatter(controller.walletStore.ethBalance).format()}",
-                      style: Theme.of(context)
-                          .textTheme
-                          .body2
-                          .apply(fontSizeDelta: 10, color: Colors.white),
+                      '''ETH ${EthAmountFormatter(controller.walletStore.ethBalance).format()}''',
+                      style: normal16White,
                     ),
                   ),
                 ),
               ],
             ),
           ),
-          SizedBox(height: 20),
+          const SizedBox(height: 20),
           Expanded(
             child: ListView(
               shrinkWrap: true,
-              padding: EdgeInsets.all(10),
+              padding: const EdgeInsets.all(10),
               children: <Widget>[
                 Observer(
                   builder: (_) {
@@ -143,14 +138,14 @@ class _WalletTransferPageState
                       children: <Widget>[
                         Row(
                           children: <Widget>[
-                            Text(
-                              "Please fill in the form below to send money",
+                            const Text(
+                              'Please fill in the form below to send money',
                               style: TextStyle(
                                   fontSize: 10.0, color: Color(0xff515151)),
                             ),
                           ],
                         ),
-                        SizedBox(height: 10),
+                        const SizedBox(height: 10),
                         Row(
                           children: <Widget>[
                             Expanded(
@@ -160,7 +155,7 @@ class _WalletTransferPageState
                                 hintText: 'Type the destination address',
                                 filled: true,
                                 fillColor: Colors.white,
-                                style: TextStyle(
+                                style: const TextStyle(
                                   fontSize: 15,
                                   color: Color(0xff515151),
                                 ),
@@ -168,25 +163,24 @@ class _WalletTransferPageState
                               ),
                             ),
                             Container(
-                              margin: EdgeInsets.fromLTRB(0, 0, 0, 0),
+                              margin: const EdgeInsets.fromLTRB(0, 0, 0, 0),
                               child: IconButton(
-                                icon: ImageIcon(
-                                    AssetImage("assets/images/camera.png")),
+                                icon: const ImageIcon(
+                                    AssetImage('assets/images/camera.png')),
                                 tooltip: 'camera',
-                                padding: EdgeInsets.fromLTRB(20, 0, 0, 0),
+                                padding: const EdgeInsets.fromLTRB(20, 0, 0, 0),
                                 onPressed: () {
                                   WalletModule.toQrCodeReader(
-                                    callback: (ethAddress) async {
-                                      controller.setTo(ethAddress);
-                                      _popForm();
-                                    }
-                                  );
+                                      callback: (dynamic ethAddress) async {
+                                    controller.setTo(ethAddress);
+                                    _popForm();
+                                  });
                                 },
                               ),
                             ),
                           ],
                         ),
-                        SizedBox(height: 10),
+                        const SizedBox(height: 10),
                         Row(
                           crossAxisAlignment: CrossAxisAlignment.end,
                           children: <Widget>[
@@ -197,17 +191,17 @@ class _WalletTransferPageState
                                 hintText: '0',
                                 filled: true,
                                 fillColor: Colors.white,
-                                style: TextStyle(
+                                style: const TextStyle(
                                   fontSize: 15,
                                   color: Color(0xff515151),
                                 ),
                                 onChanged: controller.setAmount,
                               ),
                             ),
-                            SizedBox(width: 10),
+                            const SizedBox(width: 10),
                             DropdownButton<String>(
                               items: [
-                                DropdownMenuItem<String>(
+                                const DropdownMenuItem<String>(
                                   child: Text(
                                     'HV',
                                     style: TextStyle(
@@ -217,7 +211,7 @@ class _WalletTransferPageState
                                   ),
                                   value: 'HV',
                                 ),
-                                DropdownMenuItem<String>(
+                                const DropdownMenuItem<String>(
                                   child: Text(
                                     'wei',
                                     style: TextStyle(
@@ -227,7 +221,7 @@ class _WalletTransferPageState
                                   ),
                                   value: 'wei',
                                 ),
-                                DropdownMenuItem<String>(
+                                const DropdownMenuItem<String>(
                                   child: Text(
                                     'gwei (Shannon)',
                                     style: TextStyle(
@@ -237,7 +231,7 @@ class _WalletTransferPageState
                                   ),
                                   value: 'gwei',
                                 ),
-                                DropdownMenuItem<String>(
+                                const DropdownMenuItem<String>(
                                   child: Text(
                                     'pwei (Finney)',
                                     style: TextStyle(
@@ -247,7 +241,7 @@ class _WalletTransferPageState
                                   ),
                                   value: 'pwei',
                                 ),
-                                DropdownMenuItem<String>(
+                                const DropdownMenuItem<String>(
                                   child: Text(
                                     'ether (Buterin)',
                                     style: TextStyle(
@@ -257,40 +251,50 @@ class _WalletTransferPageState
                                   ),
                                   value: 'ether',
                                 ),
+                                const DropdownMenuItem<String>(
+                                  child: Text(
+                                    'PBLC',
+                                    style: TextStyle(
+                                      fontSize: 15,
+                                      color: Color(0xff555555),
+                                    ),
+                                  ),
+                                  value: 'PBLC',
+                                ),
                               ],
                               onChanged: (String value) {
                                 controller.denomination = value;
                               },
-                              hint: Text(
-                                "HV",
+                              hint: const Text(
+                                'HV',
                                 style: TextStyle(
                                   fontSize: 15,
                                   color: Color(0xff818181),
                                 ),
                               ),
-                              value: controller.denomination ?? "HV",
+                              value: controller.denomination ?? 'HV',
                             ),
                           ],
                         ),
-                        SizedBox(height: 10),
+                        const SizedBox(height: 10),
                         PaperValidationSummary(controller.errors),
                         Opacity(
                           opacity: !controller.loading &&
-                                  controller.denomination == "HV"
+                                  controller.denomination == 'HV'
                               ? 1.0
                               : 0.5,
                           child: Container(
                             decoration: BoxDecoration(
                               color: Colors.black,
-                              image: DecorationImage(
-                                image: AssetImage("assets/images/bkg5.png"),
+                              image: const DecorationImage(
+                                image: AssetImage('assets/images/bkg5.png'),
                                 fit: BoxFit.cover,
                               ),
                               borderRadius: BorderRadius.circular(5.0),
                             ),
                             child: Opacity(
                               opacity: !controller.loading &&
-                                      controller.denomination == "HV"
+                                      controller.denomination == 'HV'
                                   ? 1.0
                                   : 0.5,
                               child: Row(
@@ -305,13 +309,13 @@ class _WalletTransferPageState
                                       ),
                                     ),
                                     onPressed: !controller.loading &&
-                                            controller.denomination == "HV"
+                                            controller.denomination == 'HV'
                                         ? () {
                                             controller.transfer().listen((tx) {
                                               switch (tx.status) {
                                                 case TransactionStatus.started:
                                                   print(
-                                                      'transact pending ${tx.key}');
+                                                      '''transact pending ${tx.key}''');
                                                   // showInfoFlushbar(
                                                   //     context, true, tx.key);
                                                   //Navigator.pushNamed(context, '/transactions', arguments: tx.key);
@@ -319,16 +323,17 @@ class _WalletTransferPageState
                                                 case TransactionStatus
                                                     .confirmed:
                                                   print(
-                                                      'transact confirmed ${tx.key}');
+                                                      '''transact confirmed ${tx.key}''');
                                                   // showInfoFlushbar(
-                                                  //     context, false, tx.key);
+                                                  //    context, false, tx.key);
                                                   //Navigator.popUntil(context, ModalRoute.withName('/'));
                                                   break;
                                                 default:
                                                   break;
                                               }
-                                            }).onError((error) => controller
-                                                .setError(error.message));
+                                            }).onError((dynamic error) =>
+                                                controller
+                                                    .setError(error.message));
                                           }
                                         : null,
                                   ),
@@ -337,24 +342,24 @@ class _WalletTransferPageState
                             ),
                           ),
                         ),
-                        SizedBox(height: 10),
+                        const SizedBox(height: 10),
                         Opacity(
                           opacity: !controller.loading &&
-                                  controller.denomination != "HV"
+                                  controller.denomination != 'HV'
                               ? 1.0
                               : 0.5,
                           child: Container(
                             decoration: BoxDecoration(
                               color: Colors.black,
-                              image: DecorationImage(
-                                image: AssetImage("assets/images/bkg5.png"),
+                              image: const DecorationImage(
+                                image: AssetImage('assets/images/bkg5.png'),
                                 fit: BoxFit.cover,
                               ),
                               borderRadius: BorderRadius.circular(5.0),
                             ),
                             child: Opacity(
                               opacity: !controller.loading &&
-                                      controller.denomination != "HV"
+                                      controller.denomination != 'HV'
                                   ? 1.0
                                   : 0.5,
                               child: Row(
@@ -369,7 +374,7 @@ class _WalletTransferPageState
                                       ),
                                     ),
                                     onPressed: !controller.loading &&
-                                            controller.denomination != "HV"
+                                            controller.denomination != 'HV'
                                         ? () {
                                             // showInfoFlushbar(context, true,
                                             //     "actual ETH transaction");
@@ -396,10 +401,10 @@ class _WalletTransferPageState
                         //     PaperGasPrice(_getEthGasPrice()),
                         //   ],
                         // )
-                        SizedBox(height: 20),
+                        const SizedBox(height: 20),
                         ListTile(
-                          title: Text(
-                            'When transfering HV, make sure the receiving address has a HV compliant wallet',
+                          title: const Text(
+                            '''When transfering HV, make sure the receiving address has a HV compliant wallet''',
                             style: TextStyle(
                               fontSize: 12,
                               color: Colors.grey,
@@ -420,8 +425,8 @@ class _WalletTransferPageState
   }
 
   void _popForm() {
-    _toController.value = TextEditingValue(text: controller.to ?? "");
-    _amountController.value = TextEditingValue(text: controller.amount ?? "");
+    _toController.value = TextEditingValue(text: controller.to ?? '');
+    _amountController.value = TextEditingValue(text: controller.amount ?? '');
   }
 
   // String _getEthGasPrice() {

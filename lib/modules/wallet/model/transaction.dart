@@ -21,7 +21,7 @@ class Transaction {
 
   Transaction confirmed(
       EthereumAddress from, EthereumAddress to, BigInt value) {
-    this.status = TransactionStatus.confirmed;
+    status = TransactionStatus.confirmed;
     this.from = from.toString();
     this.to = to.toString();
     this.value = value;

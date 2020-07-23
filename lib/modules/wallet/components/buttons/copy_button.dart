@@ -9,12 +9,12 @@ class CopyButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return OutlineButton(
-      child: this.text,
+      child: text,
       onPressed: () {
-        Clipboard.setData(ClipboardData(text: this.value));
+        Clipboard.setData(ClipboardData(text: value));
 
-        Scaffold.of(context).showSnackBar(SnackBar(
-          content: Text("Copied"),
+        Scaffold.of(context).showSnackBar(const SnackBar(
+          content: Text('Copied'),
         ));
       },
     );

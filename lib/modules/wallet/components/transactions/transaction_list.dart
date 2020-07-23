@@ -9,53 +9,52 @@ class TransactionList extends StatelessWidget {
   TransactionList(this.store);
 
   final WalletTransactionsStore store;
-  final streamController = StreamController<List<TransactionModel>>();
-  final interval = const Duration(seconds: 25);
+  final StreamController<List<TransactionModel>> streamController =
+      StreamController<List<TransactionModel>>();
+  final Duration interval = const Duration(seconds: 25);
 
   @override
   Widget build(BuildContext context) {
-    if (store.timer == null) {
-      store.timer =
-          Timer.periodic(interval, (Timer t) => _fetchTransactions(context));
-    }
+    store.timer ??=
+        Timer.periodic(interval, (Timer t) => _fetchTransactions(context));
 
     return StreamBuilder<List<TransactionModel>>(
       stream: streamController.stream,
       builder: (context, snapshot) {
         if (snapshot.hasData) {
-          List<TransactionModel> data = snapshot.data;
+          final data = snapshot.data;
           if (data.isEmpty) {
-            return Text("No transactions available!");
+            return const Text('No transactions available!');
           }
           return _transactionsListView(context, data);
         } else if (snapshot.hasError) {
-          return Text("${snapshot.error}");
+          return Text('${snapshot.error}');
         } else {
           _fetchTransactions(context);
         }
-        return Center(child: CircularProgressIndicator());
+        return const Center(child: CircularProgressIndicator());
       },
     );
   }
 
-  _fetchTransactions(BuildContext context) async {
-    print("fetching transactions...");
+  Future<void> _fetchTransactions(BuildContext context) async {
+    print('fetching transactions...');
     try {
       await store.fetchTransactions(context);
       streamController.add(store.transactionsModel.transactions);
     } catch (ex) {
-      print("ERROR: ${ex.toString()}");
+      print('ERROR: ${ex.toString()}');
       store.timer.cancel();
       store.timer = null;
     }
   }
 
   String showAmount(String value) {
-    var ethValue = int.parse(value) / pow(10, 18);
+    final ethValue = int.parse(value) / pow(10, 18);
     return '$value wei / $ethValue ETH';
   }
 
-  RefreshIndicator _transactionsListView(BuildContext context, data) {
+  RefreshIndicator _transactionsListView(BuildContext context, dynamic data) {
     return RefreshIndicator(
       child: Container(
         //color: Colors.red,
@@ -63,14 +62,14 @@ class TransactionList extends StatelessWidget {
           fit: StackFit.loose,
           children: <Widget>[
             Container(
-              margin: EdgeInsets.fromLTRB(30, 0, 30, 0),
+              margin: const EdgeInsets.fromLTRB(30, 0, 30, 0),
               decoration: BoxDecoration(
-                borderRadius: new BorderRadius.circular(5.0),
-                color: Color(0xfff6f6f6),
+                borderRadius: BorderRadius.circular(5.0),
+                color: const Color(0xfff6f6f6),
               ),
               child: ListTile(
-                title: Text(
-                  'Tap on a transaction address below, to visit Etherscan for more details',
+                title: const Text(
+                  '''Tap on a transaction address below, to visit Etherscan for more details''',
                   style: TextStyle(
                     fontSize: 14,
                     color: Colors.grey,

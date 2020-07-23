@@ -17,13 +17,13 @@ class TransactionItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.fromLTRB(10, 0, 10, 10),
-      padding: EdgeInsets.all(10),
+      margin: const EdgeInsets.fromLTRB(10, 0, 10, 10),
+      padding: const EdgeInsets.all(10),
       decoration: BoxDecoration(
-        borderRadius: new BorderRadius.circular(5.0),
-        color: transaction.txreceiptStatus == "0"
-            ? Color(0xaaff0000)
-            : Color(0xfff6f6f6),
+        borderRadius: BorderRadius.circular(5.0),
+        color: transaction.txreceiptStatus == '0'
+            ? const Color(0xaaff0000)
+            : const Color(0xfff6f6f6),
       ),
       height: 360,
       width: MediaQuery.of(context).size.width,
@@ -37,21 +37,21 @@ class TransactionItem extends StatelessWidget {
                 children: <Widget>[
                   Text(
                     transaction.to == store.walletStore.address
-                        ? "RECEIVED"
-                        : "SENT",
+                        ? 'RECEIVED'
+                        : 'SENT',
                     style: TextStyle(
-                        color: transaction.txreceiptStatus == "0"
-                            ? Color(0xffffffff)
-                            : Color(0xff616161),
+                        color: transaction.txreceiptStatus == '0'
+                            ? const Color(0xffffffff)
+                            : const Color(0xff616161),
                         fontSize: 20),
                   ),
                   Text(
                     transaction.formatTxreceiptStatus(),
                     style: TextStyle(
-                      color: transaction.txreceiptStatus == "0"
-                          ? Color(0xffffffff)
-                          : Color(0xff616161),
-                      fontSize: transaction.txreceiptStatus == "0" ? 20 : 12,
+                      color: transaction.txreceiptStatus == '0'
+                          ? const Color(0xffffffff)
+                          : const Color(0xff616161),
+                      fontSize: transaction.txreceiptStatus == '0' ? 20 : 12,
                     ),
                   ),
                 ],
@@ -59,17 +59,17 @@ class TransactionItem extends StatelessWidget {
               subtitle: Text(
                 '${transaction.hash}',
                 style: TextStyle(
-                    color: transaction.txreceiptStatus == "0"
-                        ? Color(0xffffffff)
-                        : Color(0xff818181),
+                    color: transaction.txreceiptStatus == '0'
+                        ? const Color(0xffffffff)
+                        : const Color(0xff818181),
                     fontSize: 14),
               ),
             ),
             onTap: () async {
               final sharedPrefs = await SharedPreferences.getInstance();
-              var configurationService = ConfigurationService(sharedPrefs);
-              var network = configurationService.getNetwork();
-              var url = 'https://$network.etherscan.io/tx/${transaction.hash}';
+              final configurationService = ConfigurationService(sharedPrefs);
+              final network = configurationService.getNetwork();
+              final url = 'https://$network.etherscan.io/tx/${transaction.hash}';
               if (await canLaunch(url)) {
                 await launch(url);
               } else {
@@ -77,34 +77,34 @@ class TransactionItem extends StatelessWidget {
               }
             },
           ),
-          SizedBox(height: 20),
+          const SizedBox(height: 20),
           TransactionItemRow(
             title: 'Block',
-            color: Color(0xffededed),
+            color: const Color(0xffededed),
             property: transaction.blockNumber,
-            borderRadius: BorderRadius.only(
+            borderRadius: const BorderRadius.only(
                 topRight: Radius.circular(5.0), topLeft: Radius.circular(5.0)),
           ),
           TransactionItemRow(
               title: 'From',
-              color: Color(0xfff3f3f3),
+              color: const Color(0xfff3f3f3),
               property: transaction.from,
               copy: true),
           TransactionItemRow(
               title: 'To',
-              color: Color(0xffededed),
+              color: const Color(0xffededed),
               property: transaction.to,
               copy: true),
           TransactionItemRow(
             title: 'Date',
-            color: Color(0xfff3f3f3),
+            color: const Color(0xfff3f3f3),
             property: transaction.formattedDate(),
           ),
           TransactionItemRow(
             title: 'Amount',
-            color: Color(0xffededed),
+            color: const Color(0xffededed),
             property: transaction.formattedValue(),
-            borderRadius: BorderRadius.only(
+            borderRadius: const BorderRadius.only(
                 bottomRight: Radius.circular(5.0),
                 bottomLeft: Radius.circular(5.0)),
           ),

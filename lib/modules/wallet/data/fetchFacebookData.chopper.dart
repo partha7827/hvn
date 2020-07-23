@@ -6,7 +6,8 @@ part of 'fetchFacebookData.dart';
 // ChopperGenerator
 // **************************************************************************
 
-// ignore_for_file: always_put_control_body_on_new_line, always_specify_types, prefer_const_declarations
+// ignore_for_file: always_put_control_body_on_new_line, always_specify_types, 
+// prefer_const_declarations
 class _$FetchFacebookData extends FetchFacebookData {
   _$FetchFacebookData([ChopperClient client]) {
     if (client == null) return;
@@ -14,7 +15,7 @@ class _$FetchFacebookData extends FetchFacebookData {
   }
 
   @override
-  final definitionType = FetchFacebookData;
+  final Type definitionType = FetchFacebookData;
 
   @override
   Future<Response<dynamic>> getProfile(String token) {

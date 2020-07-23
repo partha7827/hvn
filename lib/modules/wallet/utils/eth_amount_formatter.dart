@@ -7,10 +7,10 @@ class EthAmountFormatter {
   final BigInt amount;
 
   String format({
-    fromUnit = EtherUnit.wei,
-    toUnit = EtherUnit.ether,
+    EtherUnit fromUnit = EtherUnit.wei,
+    EtherUnit toUnit = EtherUnit.ether,
   }) {
-    if (amount == null) return "-";
+    if (amount == null) return '-';
 
     final res =
         EtherAmount.fromUnitAndValue(fromUnit, amount).getValueInUnit(toUnit);
@@ -18,7 +18,7 @@ class EthAmountFormatter {
   }
 
   double roundDouble(double value, int places) {
-    double mod = pow(10.0, places);
-    return ((value * mod).round().toDouble() / mod);
+    final mod = pow(10.0, places);
+    return (value * mod).round().toDouble() / mod;
   }
 }

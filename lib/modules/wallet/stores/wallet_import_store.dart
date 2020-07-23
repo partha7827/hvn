@@ -28,32 +28,32 @@ abstract class WalletImportStoreBase with Store {
 
   @action
   void reset() {
-    this.mnemonic = null;
-    this.privateKey = null;
-    this.type = WalletImportType.mnemonic;
+    mnemonic = null;
+    privateKey = null;
+    type = WalletImportType.mnemonic;
   }
 
   @action
   void setMnemonic(String value) {
-    this.errors.clear();
-    this.mnemonic = value;
+    errors.clear();
+    mnemonic = value;
   }
 
   @action
   void setType(WalletImportType value) {
-    this.errors.clear();
-    this.type = value;
+    errors.clear();
+    type = value;
   }
 
   @action
   void setPrivateKey(String value) {
-    this.errors.clear();
-    this.privateKey = value;
+    errors.clear();
+    privateKey = value;
   }
 
   @action
   Future<bool> confirmMnemonic() async {
-    this.errors.clear();
+    errors.clear();
     try {
       if (_validateMnemonic(mnemonic)) {
         final normalisedMnemonic = _mnemonicNormalise(mnemonic);
@@ -62,17 +62,17 @@ abstract class WalletImportStoreBase with Store {
         return true;
       }
     } catch (e) {
-      //this.errors.add(e.toString());
+      //errors.add(e.toString());
     }
 
-    this.errors.add("Invalid mnemonic, it requires 12 words.");
+    errors.add('Invalid mnemonic, it requires 12 words.');
 
     return false;
   }
 
   @action
   Future<bool> confirmPrivateKey() async {
-    this.errors.clear();
+    errors.clear();
     try {
       if (_validatePrivateKey(privateKey)) {
         await _addressService.setupFromPrivateKey(privateKey);
@@ -80,21 +80,21 @@ abstract class WalletImportStoreBase with Store {
         return true;
       }
     } catch (e) {
-      //this.errors.add(e.toString());
+      //errors.add(e.toString());
     }
 
-    this.errors.add("Invalid private key, please try again.");
+    errors.add('Invalid private key, please try again.');
 
     return false;
   }
 
   String _mnemonicNormalise(String mnemonic) {
-    return _mnemonicWords(mnemonic).join(" ");
+    return _mnemonicWords(mnemonic).join(' ');
   }
 
   List<String> _mnemonicWords(String mnemonic) {
     return mnemonic
-        .split(" ")
+        .split(' ')
         .where((item) => item != null && item.trim().isNotEmpty)
         .map((item) => item.trim())
         .toList();
@@ -105,6 +105,6 @@ abstract class WalletImportStoreBase with Store {
   }
 
   bool _validatePrivateKey(String pk) {
-    return pk.length > 0;
+    return pk.isNotEmpty;
   }
 }

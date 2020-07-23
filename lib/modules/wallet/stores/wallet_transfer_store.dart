@@ -30,75 +30,75 @@ abstract class WalletTransferStoreBase with Store {
   String ethGasPrice;
 
   @observable
-  String denomination = "PBLC";
+  String denomination = 'PBLC';
 
   @action
   void setTo(String value) {
-    this.to = value;
+    to = value;
   }
 
   @action
   void setAmount(String value) {
-    if (value == "") {
-      this.errors.clear();
-      this.loading = true;
+    if (value == '') {
+      errors.clear();
+      loading = true;
     } else {
       if (double.tryParse(value) != null) {
-        this.loading = false;
-        this.amount = value;
+        loading = false;
+        amount = value;
       } else {
-        this.errors.clear();
-        this.loading = true;
-        this.errors.add("Amount error: enter a numeric value");
+        errors.clear();
+        loading = true;
+        errors.add('Amount error: enter a numeric value');
       }
     }
   }
 
   @action
   void isLoading(bool value) {
-    this.loading = value;
+    loading = value;
   }
 
   @action
   void reset() {
-    this.to = "";
-    this.amount = "";
-    this.loading = true;
-    this.errors.clear();
+    to = '';
+    amount = '';
+    loading = true;
+    errors.clear();
   }
 
   @action
   void setError(String message) {
     isLoading(false);
 
-    this.errors.clear();
-    this.errors.add(message);
+    errors.clear();
+    errors.add(message);
   }
 
   @action
   Stream<Transaction> transfer() {
-    var controller = StreamController<Transaction>();
-    var transactionEvent = Transaction();
+    final controller = StreamController<Transaction>();
+    final transactionEvent = Transaction();
 
     isLoading(true);
 
     // PBLC is 9 decimals. 1 PBLC = 0,000,000,001 ETH
-    var amount = double.parse(this.amount) * pow(10, 9);
+    final amount = double.parse(this.amount) * pow(10, 9);
     try {
-      EthereumAddress.fromHex(this.to);
+      EthereumAddress.fromHex(to);
     } catch (ex) {
-      this.errors.add("Address format error: ${ex.message}");
+      errors.add('Address format error: ${ex.message}');
       return null;
     }
 
     _contractService.send(
         walletStore.privateKey,
-        EthereumAddress.fromHex(this.to),
+        EthereumAddress.fromHex(to),
         BigInt.from(amount), onTransfer: (from, to, value) {
       controller.add(transactionEvent.confirmed(from, to, value));
       controller.close();
       isLoading(false);
-    }, onError: (ex) {
+    }, onError: (Error ex) {
       controller.addError(ex);
       isLoading(false);
     }).then(
@@ -111,36 +111,36 @@ abstract class WalletTransferStoreBase with Store {
   void transferEth(BuildContext context) {
     var multiplier = 1;
     switch (denomination) {
-      case "wei":
+      case 'wei':
         multiplier = 1;
         break;
-      case "gwei":
+      case 'gwei':
         multiplier = pow(10, 9);
         break;
-      case "pwei":
+      case 'pwei':
         multiplier = pow(10, 15);
         break;
-      case "ether":
+      case 'ether':
         multiplier = pow(10, 18);
         break;
       default:
         break;
     }
-    var amount = double.parse(this.amount) * multiplier;
+    final amount = double.parse(this.amount) * multiplier;
 
     _contractService
-        .sendEth(walletStore.privateKey, EthereumAddress.fromHex(this.to),
+        .sendEth(walletStore.privateKey, EthereumAddress.fromHex(to),
             BigInt.from(amount))
         .then((id) {
-      print("Transaction ETH pending: $id");
+      print('Transaction ETH pending: $id');
       //Navigator.pushNamed(context, '/transactions');
     });
   }
 
   @action
-  Future getEthGasPrice() async {
+  Future<void> getEthGasPrice() async {
     await _contractService
         .getEthGasPrice()
-        .then((amnt) => this.ethGasPrice = amnt.getInWei.toString());
+        .then((amnt) => ethGasPrice = amnt.getInWei.toString());
   }
 }

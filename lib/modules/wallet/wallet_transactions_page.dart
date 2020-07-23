@@ -31,8 +31,8 @@ class _WalletTransactionsPageState
         backgroundColor: Colors.transparent,
         elevation: 0.0,
         leading: IconButton(
-          icon: ImageIcon(
-            AssetImage("assets/images/back.png"),
+          icon: const ImageIcon(
+            AssetImage('assets/images/back.png'),
           ),
           onPressed: () => Modular.to.pop(),
         ),
@@ -48,9 +48,9 @@ class _WalletTransactionsPageState
       child: Column(
         children: <Widget>[
           Container(
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               image: DecorationImage(
-                image: AssetImage("assets/images/bkg1.png"),
+                image: AssetImage('assets/images/bkg1.png'),
                 fit: BoxFit.fill,
               ),
             ),
@@ -69,7 +69,7 @@ class _WalletTransactionsPageState
   @override
   void dispose() {
     super.dispose();
-    print("INFO: cancelling timer");
+    print('INFO: cancelling timer');
     controller.timer.cancel();
     controller.timer = null;
   }

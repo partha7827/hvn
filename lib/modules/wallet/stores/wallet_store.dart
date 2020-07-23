@@ -3,7 +3,6 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:highvibe/modules/app/app_controller.dart';
-import 'package:highvibe/modules/discover/authors/discover_authors_controller.dart';
 import 'package:highvibe/modules/wallet/app_config.dart';
 import 'package:highvibe/modules/wallet/model/transaction.dart';
 import 'package:highvibe/modules/wallet/service/address_service.dart';
@@ -11,7 +10,6 @@ import 'package:highvibe/modules/wallet/service/configuration_service.dart';
 import 'package:highvibe/modules/wallet/service/contract_service.dart';
 import 'package:highvibe/services/auth_service.dart';
 import 'package:mobx/mobx.dart';
-import 'package:provider/provider.dart';
 import 'package:web3dart/credentials.dart';
 
 part 'wallet_store.g.dart';
@@ -48,7 +46,7 @@ abstract class WalletStoreBase with Store {
   ObservableList<Transaction> transactions = ObservableList<Transaction>();
 
   @observable
-  String username = "";
+  String username = '';
 
   @action
   Future<void> initialise() async {
@@ -56,11 +54,11 @@ abstract class WalletStoreBase with Store {
     final privateKey = _configurationService.getPrivateKey();
 
     if (entropyMnemonic != null && entropyMnemonic.isNotEmpty) {
-      _initialiseFromMnemonic(entropyMnemonic);
+      await _initialiseFromMnemonic(entropyMnemonic);
       return;
     }
 
-    _initialiseFromPrivateKey(privateKey);
+    await _initialiseFromPrivateKey(privateKey);
   }
 
   Future<void> _initialiseFromMnemonic(String entropyMnemonic) async {
@@ -88,11 +86,11 @@ abstract class WalletStoreBase with Store {
   }
 
   Future<void> _initialise() async {
-    await this.fetchOwnBalance();
+    await fetchOwnBalance();
 
     _contractService.listenTransfer((from, to, value) async {
-      var fromMe = from.toString() == this.address;
-      var toMe = to.toString() == this.address;
+      final fromMe = from.toString() == address;
+      final toMe = to.toString() == address;
 
       if (!fromMe && !toMe) {
         return;
@@ -104,9 +102,9 @@ abstract class WalletStoreBase with Store {
 
   @action
   Future<void> fetchOwnBalance() async {
-    var tokenBalance = await _contractService
+    final tokenBalance = await _contractService
         .getTokenBalance(EthereumAddress.fromHex(address));
-    var ethBalance =
+    final ethBalance =
         await _contractService.getEthBalance(EthereumAddress.fromHex(address));
 
     this.tokenBalance = tokenBalance * BigInt.from(pow(10, 9));
@@ -118,47 +116,47 @@ abstract class WalletStoreBase with Store {
     await _configurationService.setMnemonic(null);
     await _configurationService.setupDone(false);
 
-    this.transactions.clear();
+    transactions.clear();
   }
 
   @action
   Future<void> fetchEthGasPrice() async {
-    var gasPrice = await _contractService.getEthGasPrice();
+    final gasPrice = await _contractService.getEthGasPrice();
 
-    this.ethGasPrice = gasPrice.getInWei;
+    ethGasPrice = gasPrice.getInWei;
   }
 
   @action
-  Future getUserInfo(BuildContext context) async {
+  Future<void> getUserInfo(BuildContext context) async {
     username = Modular.get<AppController>().currentUser.name;
   }
 
   @action
-  Future signOut(BuildContext context) async {
+  Future<void> signOut(BuildContext context) async {
     await Modular.get<AuthService>().logout();
   }
 
   @action
-  Future deleteUser(BuildContext context) async {
-    Navigator.of(context)
+  Future<void> deleteUser(BuildContext context) async {
+    await Navigator.of(context)
         .pushNamedAndRemoveUntil('/', (Route<dynamic> route) => false);
   }
 
   @action
   Stream<Transaction> transfer() {
-    var controller = StreamController<Transaction>();
-    var transactionEvent = Transaction();
+    final controller = StreamController<Transaction>();
+    final transactionEvent = Transaction();
 
-    var amount = BigInt.from(this.tokenBalance / BigInt.from(pow(10, 9)));
-    var network = Modular.get<ConfigurationService>().getNetwork();
-    var contractAddress = AppConfig().params[network].contractAddress;
+    final amount = BigInt.from(tokenBalance / BigInt.from(pow(10, 9)));
+    final network = Modular.get<ConfigurationService>().getNetwork();
+    final contractAddress = AppConfig().params[network].contractAddress;
 
     _contractService.send(
-        this.privateKey, EthereumAddress.fromHex(contractAddress), amount,
+        privateKey, EthereumAddress.fromHex(contractAddress), amount,
         onTransfer: (from, to, value) {
       controller.add(transactionEvent.confirmed(from, to, value));
       controller.close();
-    }, onError: (ex) {
+    }, onError: (dynamic ex) {
       controller.addError(ex);
     }).then(
         (id) => {if (id != null) controller.add(transactionEvent.setId(id))});

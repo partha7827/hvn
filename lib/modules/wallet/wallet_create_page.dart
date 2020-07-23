@@ -25,6 +25,7 @@ class _WalletCreatePage
     controller.generateMnemonic();
   }
 
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       extendBodyBehindAppBar: true,
@@ -33,16 +34,16 @@ class _WalletCreatePage
         centerTitle: true,
         backgroundColor: Colors.transparent,
         elevation: 0.0,
-        leading: IconButton(
+        leading: const IconButton(
           icon: ImageIcon(
-            AssetImage("assets/images/back.png"),
+            AssetImage('assets/images/back.png'),
           ),
           onPressed: HomeModule.toHome,
         ),
       ),
       body: GestureDetector(
         onTap: () {
-          FocusScope.of(context).requestFocus(new FocusNode());
+          FocusScope.of(context).requestFocus(FocusNode());
         },
         child: Builder(
           builder: (context) => buildForm(context),
@@ -60,9 +61,9 @@ class _WalletCreatePage
         mainAxisSize: MainAxisSize.max,
         children: <Widget>[
           Container(
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               image: DecorationImage(
-                image: AssetImage("assets/images/bkg1.png"),
+                image: AssetImage('assets/images/bkg1.png'),
                 fit: BoxFit.fill,
               ),
             ),
@@ -71,13 +72,13 @@ class _WalletCreatePage
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                Text(
-                  "Mnemonic Setup",
+                const Text(
+                  'Mnemonic Setup',
                   style: TextStyle(fontSize: 32.0, color: Colors.white),
                 ),
-                SizedBox(height: 10),
-                Text(
-                  "Generate a new mnemonic or \n import your account",
+                const SizedBox(height: 10),
+                const Text(
+                  'Generate a new mnemonic or \n import your account',
                   style: TextStyle(fontSize: 16.0, color: Colors.white),
                   textAlign: TextAlign.center,
                 ),
@@ -88,13 +89,13 @@ class _WalletCreatePage
             children: <Widget>[
               ListView(
                 shrinkWrap: true,
-                padding: EdgeInsets.all(10),
+                padding: const EdgeInsets.all(10),
                 children: <Widget>[
                   Container(
-                    margin: EdgeInsets.all(20),
+                    margin: const EdgeInsets.all(20),
                     decoration: BoxDecoration(
-                      borderRadius: new BorderRadius.circular(5.0),
-                      color: Color(0xfff6f6f6),
+                      borderRadius: BorderRadius.circular(5.0),
+                      color: const Color(0xfff6f6f6),
                     ),
                     height: 230,
                     width: MediaQuery.of(context).size.width,
@@ -103,24 +104,24 @@ class _WalletCreatePage
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
                         Container(
-                          margin: EdgeInsets.fromLTRB(5, 5, 0, 0),
-                          child: Text(
-                            "12-word bip39 mnemonic",
+                          margin: const EdgeInsets.fromLTRB(5, 5, 0, 0),
+                          child: const Text(
+                            '12-word bip39 mnemonic',
                             style: TextStyle(
                                 fontSize: 18.0, color: Color(0xff696969)),
                           ),
                         ),
-                        SizedBox(height: 10),
+                        const SizedBox(height: 10),
                         Row(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: <Widget>[
                             Observer(
                               builder: (_) => Expanded(
                                 child: Container(
-                                  margin: EdgeInsets.fromLTRB(5, 5, 0, 0),
+                                  margin: const EdgeInsets.fromLTRB(5, 5, 0, 0),
                                   child: Text(
                                     controller.mnemonic,
-                                    style: TextStyle(
+                                    style:const  TextStyle(
                                         fontSize: 14.0,
                                         color: Color(0xff858585)),
                                   ),
@@ -128,7 +129,7 @@ class _WalletCreatePage
                               ),
                             ),
                             Padding(
-                              padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
+                              padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
                               child: IconButton(
                                 icon: Icon(Icons.content_copy),
                                 tooltip: 'copy address',
@@ -137,25 +138,25 @@ class _WalletCreatePage
                                     ClipboardData(text: controller.mnemonic),
                                   );
                                   Scaffold.of(context).showSnackBar(
-                                    SnackBar(
-                                      content: Text("Copied"),
+                                    const SnackBar(
+                                      content: Text('Copied'),
                                     ),
                                   );
                                 },
-                                color: Color(0xff858585),
+                                color: const Color(0xff858585),
                               ),
                             ),
                           ],
                         ),
-                        SizedBox(height: 10),
+                        const SizedBox(height: 10),
                         Container(
-                          margin: EdgeInsets.fromLTRB(5, 5, 5, 0),
+                          margin: const EdgeInsets.fromLTRB(5, 5, 5, 0),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: <Widget>[
                               Container(
                                 decoration: BoxDecoration(
-                                  color: Color(0xffe1e1e1),
+                                  color: const Color(0xffe1e1e1),
                                   borderRadius: BorderRadius.circular(5.0),
                                 ),
                                 child: FlatButton(
@@ -173,8 +174,8 @@ class _WalletCreatePage
                               Container(
                                 decoration: BoxDecoration(
                                   color: Colors.black,
-                                  image: DecorationImage(
-                                    image: AssetImage("assets/images/bkg5.png"),
+                                  image: const DecorationImage(
+                                    image: AssetImage('assets/images/bkg5.png'),
                                     fit: BoxFit.cover,
                                   ),
                                   borderRadius: BorderRadius.circular(5.0),
@@ -189,17 +190,17 @@ class _WalletCreatePage
                                     ),
                                     onPressed: () async {
                                       if (await controller.confirmMnemonic()) {
-                                        WalletModule.toMainPage();
+                                        await WalletModule.toMainPage();
                                       }
                                     }),
                               ),
                             ],
                           ),
                         ),
-                        SizedBox(height: 20),
+                        const SizedBox(height: 20),
                         ListTile(
-                          title: Text(
-                            'Keep your seed phrase somewhere safe and do not lose it! Otherwise you will not be able to retrieve your accounts!',
+                          title: const Text(
+                            '''Keep your seed phrase somewhere safe and do not lose it! Otherwise you will not be able to retrieve your accounts!''',
                             style: TextStyle(
                               fontSize: 12,
                               color: Colors.grey,
@@ -211,10 +212,10 @@ class _WalletCreatePage
                     ),
                   ),
                   Container(
-                    margin: EdgeInsets.all(20),
+                    margin: const EdgeInsets.all(20),
                     decoration: BoxDecoration(
-                      borderRadius: new BorderRadius.circular(5.0),
-                      color: Color(0xfff6f6f6),
+                      borderRadius: BorderRadius.circular(5.0),
+                      color: const Color(0xfff6f6f6),
                     ),
                     height: 100,
                     width: MediaQuery.of(context).size.width,
@@ -223,20 +224,20 @@ class _WalletCreatePage
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
                         Container(
-                          margin: EdgeInsets.fromLTRB(5, 5, 0, 0),
-                          child: Text(
-                            "import an account",
+                          margin: const EdgeInsets.fromLTRB(5, 5, 0, 0),
+                          child: const Text(
+                            'import an account',
                             style: TextStyle(
                                 fontSize: 18.0, color: Color(0xff696969)),
                           ),
                         ),
-                        SizedBox(height: 20),
+                        const SizedBox(height: 20),
                         Container(
-                          margin: EdgeInsets.fromLTRB(5, 0, 5, 0),
+                          margin: const EdgeInsets.fromLTRB(5, 0, 5, 0),
                           decoration: BoxDecoration(
                             color: Colors.black,
-                            image: DecorationImage(
-                              image: AssetImage("assets/images/bkg5.png"),
+                            image: const DecorationImage(
+                              image: AssetImage('assets/images/bkg5.png'),
                               fit: BoxFit.cover,
                             ),
                             borderRadius: BorderRadius.circular(5.0),
@@ -244,8 +245,8 @@ class _WalletCreatePage
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: <Widget>[
-                              FlatButton(
-                                child: const Text(
+                              const FlatButton(
+                                child: Text(
                                   'Import Account',
                                   style: TextStyle(
                                     fontSize: 15,

@@ -1,7 +1,7 @@
 import 'package:highvibe/modules/wallet/service/configuration_service.dart';
 import 'package:bip39/bip39.dart' as bip39;
 import 'package:ed25519_hd_key/ed25519_hd_key.dart';
-import "package:hex/hex.dart";
+import 'package:hex/hex.dart';
 import 'package:web3dart/credentials.dart';
 
 abstract class IAddressService {
@@ -14,7 +14,7 @@ abstract class IAddressService {
 }
 
 class AddressService implements IAddressService {
-  IConfigurationService _configService;
+  final IConfigurationService _configService;
   AddressService(this._configService);
 
   @override
@@ -22,16 +22,17 @@ class AddressService implements IAddressService {
     return bip39.generateMnemonic();
   }
 
+  @override
   String entropyToMnemonic(String entropyMnemonic) {
     return bip39.entropyToMnemonic(entropyMnemonic);
   }
 
   @override
   String getPrivateKey(String mnemonic) {
-    String seed = bip39.mnemonicToSeedHex(mnemonic);
-    KeyData master = ED25519_HD_KEY.getMasterKeyFromSeed(seed);
+    final seed = bip39.mnemonicToSeedHex(mnemonic);
+    final master = ED25519_HD_KEY.getMasterKeyFromSeed(seed);
     final privateKey = HEX.encode(master.key);
-    print("private: $privateKey");
+    print('private: $privateKey');
     return privateKey;
   }
 
@@ -39,7 +40,7 @@ class AddressService implements IAddressService {
   Future<EthereumAddress> getPublicAddress(String privateKey) async {
     final private = EthPrivateKey.fromHex(privateKey);
     final address = await private.extractAddress();
-    print("address: $address");
+    print('address: $address');
     return address;
   }
 

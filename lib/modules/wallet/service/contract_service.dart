@@ -7,25 +7,18 @@ typedef TransferEvent = void Function(
 abstract class IContractService {
   Future<Credentials> getCredentials(String privateKey);
 
-  Future<String> send(String privateKey, 
-                      EthereumAddress receiver, 
-                      BigInt amount, 
-                      {TransferEvent onTransfer, 
-                      Function onError});
+  Future<String> send(
+      String privateKey, EthereumAddress receiver, BigInt amount,
+      {TransferEvent onTransfer, Function onError});
 
-  Future<String> buy(String privateKey, 
-                      BigInt amount, 
-                      {TransferEvent onTransfer, 
-                      Function onError});
+  Future<String> buy(String privateKey, BigInt amount,
+      {TransferEvent onTransfer, Function onError});
 
-  Future<String> sell(String privateKey, 
-                      BigInt amount, 
-                      {TransferEvent onTransfer, 
-                      Function onError});
+  Future<String> sell(String privateKey, BigInt amount,
+      {TransferEvent onTransfer, Function onError});
 
-  Future<String> sendEth(String privateKey, 
-                          EthereumAddress receiver, 
-                          BigInt amount);
+  Future<String> sendEth(
+      String privateKey, EthereumAddress receiver, BigInt amount);
 
   Future<BigInt> getTokenBalance(EthereumAddress from);
 
@@ -37,7 +30,7 @@ abstract class IContractService {
 
   Future<void> dispose();
 
-  StreamSubscription listenTransfer(TransferEvent onTransfer);
+  StreamSubscription<dynamic> listenTransfer(TransferEvent onTransfer);
 
   Future<EtherAmount> getEthGasPrice();
 }
@@ -56,19 +49,19 @@ class ContractService implements IContractService {
   ContractFunction _buyPriceFunction() => contract.function('buyPrice');
   ContractFunction _sellPriceFunction() => contract.function('sellPrice');
 
+  @override
   Future<Credentials> getCredentials(String privateKey) =>
       client.credentialsFromPrivateKey(privateKey);
 
-  Future<String> send(String privateKey, 
-                      EthereumAddress receiver, 
-                      BigInt amount, 
-                      {TransferEvent onTransfer, 
-                      Function onError}) async {
-    final credentials = await this.getCredentials(privateKey);
+  @override
+  Future<String> send(
+      String privateKey, EthereumAddress receiver, BigInt amount,
+      {TransferEvent onTransfer, Function onError}) async {
+    final credentials = await getCredentials(privateKey);
     final from = await credentials.extractAddress();
     final networkId = await client.getNetworkId();
 
-    StreamSubscription event;
+    StreamSubscription<dynamic> event;
     // Work around once sendTransacton doesn't return a Promise containing confirmation / receipt
     if (onTransfer != null) {
       event = listenTransfer((from, to, value) async {
@@ -83,7 +76,8 @@ class ContractService implements IContractService {
         Transaction.callContract(
           contract: contract,
           function: _sendFunction(),
-          gasPrice: EtherAmount.inWei(BigInt.from(1000000000)), // ZOIS: set it in UI
+          gasPrice:
+              EtherAmount.inWei(BigInt.from(1000000000)), // ZOIS: set it in UI
           maxGas: 3000000, // ZOIS: set it in UI
           parameters: [receiver, amount],
           from: from,
@@ -100,15 +94,14 @@ class ContractService implements IContractService {
     }
   }
 
-  Future<String> buy(String privateKey, 
-                      BigInt amount, 
-                      {TransferEvent onTransfer, 
-                      Function onError}) async {
-    final credentials = await this.getCredentials(privateKey);
+  @override
+  Future<String> buy(String privateKey, BigInt amount,
+      {TransferEvent onTransfer, Function onError}) async {
+    final credentials = await getCredentials(privateKey);
     final from = await credentials.extractAddress();
     final networkId = await client.getNetworkId();
 
-    StreamSubscription event;
+    StreamSubscription<dynamic> event;
     // Work around once sendTransacton doesn't return a Promise containing confirmation / receipt
     if (onTransfer != null) {
       event = listenTransfer((from, to, value) async {
@@ -120,23 +113,24 @@ class ContractService implements IContractService {
     // amount for PBLC = (buyPrice in contract) * amount
     // e.g to buy 1 PBLC we need the amount to be 63.800 * 1.000.000.000
     var buyPrice = await getBuyPrice();
-    if (buyPrice == null || buyPrice == BigInt.from(0)) 
+    if (buyPrice == null || buyPrice == BigInt.from(0)) {
       buyPrice = BigInt.from(63800);
-    
-    var amountForPBLC = buyPrice * amount;
+    }
+
+    final amountForPBLC = buyPrice * amount;
 
     try {
       final transactionId = await client.sendTransaction(
         credentials,
         Transaction.callContract(
-          contract: contract,
-          function: _buyFunction(),
-          gasPrice: EtherAmount.inWei(BigInt.from(1000000000)), // ZOIS: set it in UI
-          maxGas: 3000000, // ZOIS: set it in UI
-          parameters: [],
-          from: from,
-          value: EtherAmount.inWei(amountForPBLC)
-        ),
+            contract: contract,
+            function: _buyFunction(),
+            gasPrice: EtherAmount.inWei(
+                BigInt.from(1000000000)), // ZOIS: set it in UI
+            maxGas: 3000000, // ZOIS: set it in UI
+            parameters: [],
+            from: from,
+            value: EtherAmount.inWei(amountForPBLC)),
         chainId: networkId,
       );
       print('transact started $transactionId');
@@ -149,15 +143,14 @@ class ContractService implements IContractService {
     }
   }
 
-  Future<String> sell(String privateKey, 
-                      BigInt amount, 
-                      {TransferEvent onTransfer, 
-                      Function onError}) async {
-    final credentials = await this.getCredentials(privateKey);
+  @override
+  Future<String> sell(String privateKey, BigInt amount,
+      {TransferEvent onTransfer, Function onError}) async {
+    final credentials = await getCredentials(privateKey);
     final from = await credentials.extractAddress();
     final networkId = await client.getNetworkId();
 
-    StreamSubscription event;
+    StreamSubscription<dynamic> event;
     // Work around once sendTransacton doesn't return a Promise containing confirmation / receipt
     if (onTransfer != null) {
       event = listenTransfer((from, to, value) async {
@@ -168,20 +161,20 @@ class ContractService implements IContractService {
 
     // 0.000063770000000000ETH = 1 token
     // var sellPrice = await getSellPrice();
-    // if (sellPrice == null || sellPrice == BigInt.from(0)) 
+    // if (sellPrice == null || sellPrice == BigInt.from(0))
     //  sellPrice = BigInt.from(63770);
-    
+
     try {
       final transactionId = await client.sendTransaction(
         credentials,
         Transaction.callContract(
-          contract: contract,
-          function: _sellFunction(),
-          gasPrice: EtherAmount.inWei(BigInt.from(1000000000)), // ZOIS: set it in UI
-          maxGas: 3000000, // ZOIS: set it in UI
-          parameters: [amount],
-          from: from
-        ),
+            contract: contract,
+            function: _sellFunction(),
+            gasPrice: EtherAmount.inWei(
+                BigInt.from(1000000000)), // ZOIS: set it in UI
+            maxGas: 3000000, // ZOIS: set it in UI
+            parameters: [amount],
+            from: from),
         chainId: networkId,
       );
       print('transact started $transactionId');
@@ -194,10 +187,10 @@ class ContractService implements IContractService {
     }
   }
 
-  Future<String> sendEth(String privateKey, 
-                          EthereumAddress receiver, 
-                          BigInt amount) async {
-    final credentials = await this.getCredentials(privateKey);
+  @override
+  Future<String> sendEth(
+      String privateKey, EthereumAddress receiver, BigInt amount) async {
+    final credentials = await getCredentials(privateKey);
     final networkId = await client.getNetworkId();
 
     try {
@@ -218,63 +211,69 @@ class ContractService implements IContractService {
     }
   }
 
+  @override
   Future<EtherAmount> getEthBalance(EthereumAddress from) async {
-    return await client.getBalance(from);
+    return client.getBalance(from);
   }
 
+  @override
   Future<EtherAmount> getEthGasPrice() async {
-    return await client.getGasPrice();
+    return client.getGasPrice();
   }
 
+  @override
   Future<BigInt> getTokenBalance(EthereumAddress from) async {
     try {
-      var response = await client.call(
+      final response = await client.call(
         contract: contract,
         function: _balanceFunction(),
         params: [from],
       );
 
       return response.first as BigInt;
-    }
-    catch (e) {
+    } catch (e) {
       print("${e.toString()} \n Couldn't get PBLC balance for address: $from");
       return BigInt.from(0);
     }
   }
 
+  @override
   Future<BigInt> getBuyPrice() async {
     try {
-      var response = await client.call(
+      final response = await client.call(
         contract: contract,
         function: _buyPriceFunction(),
         params: [],
       );
 
       return response.first as BigInt;
-    }
-    catch (e) {
-      print("${e.toString()} \n Couldn't get buyPrice for address: ${contract.address}");
+    } catch (e) {
+      print(
+          '''${e.toString()} \n Couldn't get buyPrice for address: ${contract.address}''');
       return BigInt.from(0);
     }
   }
 
+  @override
   Future<BigInt> getSellPrice() async {
     try {
-      var response = await client.call(
+      final response = await client.call(
         contract: contract,
         function: _sellPriceFunction(),
         params: [],
       );
 
       return response.first as BigInt;
-    }
-    catch (e) {
-      print("${e.toString()} \n Couldn't get sellPrice for address: ${contract.address}");
+    } catch (e) {
+      print(
+          '''${e.toString()} \n Couldn't get sellPrice for address: ${contract.address}''');
       return BigInt.from(0);
     }
   }
 
-  StreamSubscription listenTransfer(TransferEvent onTransfer, {int take}) {
+  @override
+  StreamSubscription<dynamic> listenTransfer(TransferEvent onTransfer,
+      {int take}) {
     var events = client.events(FilterOptions.events(
       contract: contract,
       event: _transferEvent(),
@@ -295,6 +294,7 @@ class ContractService implements IContractService {
     });
   }
 
+  @override
   Future<void> dispose() async {
     await client.dispose();
   }

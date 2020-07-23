@@ -11,7 +11,7 @@ class ContractParser {
 
     return DeployedContract(
         ContractAbi.fromJson(
-            jsonEncode(contractJson["abi"]), contractJson["contractName"]),
+            jsonEncode(contractJson['abi']), contractJson['contractName']),
         EthereumAddress.fromHex(contractAddress));
   }
 }

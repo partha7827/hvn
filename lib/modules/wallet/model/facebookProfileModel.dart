@@ -27,18 +27,18 @@ class FacebookProfileModel {
 
   factory FacebookProfileModel.fromJson(Map<String, dynamic> json) =>
       FacebookProfileModel(
-        name: json["name"],
-        firstName: json["first_name"],
-        lastName: json["last_name"],
-        email: json["email"],
-        id: json["id"],
+        name: json['name'],
+        firstName: json['first_name'],
+        lastName: json['last_name'],
+        email: json['email'],
+        id: json['id'],
       );
 
   Map<String, dynamic> toJson() => {
-        "name": name,
-        "first_name": firstName,
-        "last_name": lastName,
-        "email": email,
-        "id": id,
+        'name': name,
+        'first_name': firstName,
+        'last_name': lastName,
+        'email': email,
+        'id': id,
       };
 }

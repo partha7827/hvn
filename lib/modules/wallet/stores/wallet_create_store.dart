@@ -28,16 +28,16 @@ abstract class WalletCreateStoreBase with Store {
 
   @action
   void generateMnemonic() {
-    this.reset();
-    this.mnemonic = _addressService.generateMnemonic();
-    
-    this.mnemonicConfirm = this.mnemonic;
+    reset();
+    mnemonic = _addressService.generateMnemonic();
+
+    mnemonicConfirm = mnemonic;
   }
 
   @action
   void setMnemonicConfirmation(String value) {
-    this.errors.clear();
-    this.mnemonicConfirm = value;
+    errors.clear();
+    mnemonicConfirm = value;
   }
 
   @action
@@ -47,15 +47,15 @@ abstract class WalletCreateStoreBase with Store {
 
   @action
   void clearErrors() {
-    this.errors = ObservableList();
+    errors = ObservableList();
   }
 
   @action
   void reset() {
-    this.mnemonic = null;
-    this.mnemonicConfirm = null;
-    this.errors.clear();
-    this.goto(WalletCreateSteps.display);
+    mnemonic = null;
+    mnemonicConfirm = null;
+    errors.clear();
+    goto(WalletCreateSteps.display);
   }
 
   @action
@@ -65,8 +65,8 @@ abstract class WalletCreateStoreBase with Store {
       await walletStore.initialise();
       return true;
     }
-    this.errors.clear();
-    this.errors.add("Invalid mnemonic, please try again.");
+    errors.clear();
+    errors.add('Invalid mnemonic, please try again.');
 
     return false;
   }

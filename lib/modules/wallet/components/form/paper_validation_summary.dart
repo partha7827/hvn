@@ -9,10 +9,9 @@ class PaperValidationSummary extends StatelessWidget {
   Widget build(BuildContext context) {
     return Observer(
       builder: (_) => Container(
-        margin: EdgeInsets.fromLTRB(0, 0, 0, 10),
+        margin: const EdgeInsets.fromLTRB(0, 0, 0, 10),
         child: Column(
-          children: this
-              .errors
+          children: errors
               .map((error) => Text(
                     error,
                     style: TextStyle(

@@ -10,14 +10,14 @@ class IntroPage extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
-            RaisedButton(
-              child: Text("Create new wallet"),
+            const RaisedButton(
+              child: Text('Create new wallet'),
               onPressed: WalletModule.toCreate,
             ),
             Container(
-              padding: EdgeInsets.all(10),
-              child: OutlineButton(
-                child: Text("Import wallet"),
+              padding: const EdgeInsets.all(10),
+              child: const OutlineButton(
+                child: Text('Import wallet'),
                 onPressed: WalletModule.toImport,
               ),
             )

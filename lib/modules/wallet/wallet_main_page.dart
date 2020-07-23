@@ -3,7 +3,6 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:highvibe/modules/home/home_module.dart';
 import 'package:highvibe/modules/wallet/components/transactions/transaction_list.dart';
 import 'package:highvibe/modules/wallet/pages/widgets/buttons/main_button.dart';
-import 'package:highvibe/modules/wallet/pages/widgets/containers/transaction_container.dart';
 import 'package:highvibe/modules/wallet/resources/app_colors.dart';
 import 'package:highvibe/modules/wallet/stores/wallet_store.dart';
 import 'package:flutter/material.dart';

@@ -28,19 +28,19 @@ class PaperInput extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextField(
-      obscureText: this.obscureText,
-      controller: this.controller,
-      onChanged: this.onChanged,
-      maxLines: this.maxLines,
-      style: this.style,
+      obscureText: obscureText,
+      controller: controller,
+      onChanged: onChanged,
+      maxLines: maxLines,
+      style: style,
       decoration: InputDecoration(
-        labelText: this.labelText,
-        labelStyle: TextStyle(color: Color(0xff818181)),
-        hintText: this.hintText,
-        hintStyle: TextStyle(fontSize: 14, color: Color(0xff818181)),
-        errorText: this.errorText,
-        filled: this.filled,
-        fillColor: this.fillColor,
+        labelText: labelText,
+        labelStyle: const TextStyle(color: Color(0xff818181)),
+        hintText: hintText,
+        hintStyle: const TextStyle(fontSize: 14, color: Color(0xff818181)),
+        errorText: errorText,
+        filled: filled,
+        fillColor: fillColor,
         contentPadding:
             const EdgeInsets.only(left: 15.0, top: 20.0, bottom: 5.0),
         focusedBorder: OutlineInputBorder(

@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 class ProcessingTransactionPage extends StatelessWidget {
-  ProcessingTransactionPage({this.title});
+  ProcessingTransactionPage({this.title = ''});
   final String title;
 
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -13,11 +14,11 @@ class ProcessingTransactionPage extends StatelessWidget {
       ),
       body: Center(
         child: Container(
-          padding: EdgeInsets.all(25),
+          padding: const EdgeInsets.all(25),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text(
+              const Text(
                 'Your transaction is being processed',
                 textAlign: TextAlign.center,
               ),

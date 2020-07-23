@@ -8,7 +8,8 @@ import 'package:provider/provider.dart';
 
 part 'wallet_transactions_store.g.dart';
 
-class WalletTransactionsStore = WalletTransactionsStoreBase with _$WalletTransactionsStore;
+class WalletTransactionsStore = WalletTransactionsStoreBase
+    with _$WalletTransactionsStore;
 
 abstract class WalletTransactionsStoreBase with Store {
   WalletTransactionsStoreBase(this.walletStore);
@@ -25,7 +26,7 @@ abstract class WalletTransactionsStoreBase with Store {
   }
 
   @action
-  Future fetchTransactions(BuildContext context) async {
+  Future<void> fetchTransactions(BuildContext context) async {
     final etherscanData = Provider.of<FetchEtherscanData>(context);
     final response = await etherscanData.fetchData(walletStore.address);
     transactionsModel = transactionsModelFromJson(response.bodyString);
