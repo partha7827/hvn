@@ -38,15 +38,8 @@ class _WalletTransferPageState
       extendBodyBehindAppBar: true,
       appBar: AppBar(
         title: Text(widget.title),
-        centerTitle: true,
         backgroundColor: Colors.transparent,
         elevation: 0.0,
-        leading: IconButton(
-          icon: const ImageIcon(
-            AssetImage('assets/images/back.png'),
-          ),
-          onPressed: () => Modular.to.pop(),
-        ),
         actions: <Widget>[
           const IconButton(
             icon: ImageIcon(

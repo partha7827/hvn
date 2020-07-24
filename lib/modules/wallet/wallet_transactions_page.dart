@@ -27,15 +27,8 @@ class _WalletTransactionsPageState
       extendBodyBehindAppBar: true,
       appBar: AppBar(
         title: Text(widget.title),
-        centerTitle: true,
         backgroundColor: Colors.transparent,
         elevation: 0.0,
-        leading: IconButton(
-          icon: const ImageIcon(
-            AssetImage('assets/images/back.png'),
-          ),
-          onPressed: () => Modular.to.pop(),
-        ),
       ),
       body: Builder(
         builder: (ctx) => buildForm(ctx),
@@ -59,7 +52,11 @@ class _WalletTransactionsPageState
             child: null,
           ),
           Expanded(
-            child: TransactionList(controller),
+            child: Column(
+              children: <Widget>[
+                TransactionList(controller),
+              ],
+            ),
           ),
         ],
       ),

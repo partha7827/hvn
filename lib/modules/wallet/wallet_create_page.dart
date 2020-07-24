@@ -31,12 +31,12 @@ class _WalletCreatePage
       extendBodyBehindAppBar: true,
       appBar: AppBar(
         title: Text(widget.title),
-        centerTitle: true,
         backgroundColor: Colors.transparent,
         elevation: 0.0,
         leading: const IconButton(
-          icon: ImageIcon(
-            AssetImage('assets/images/back.png'),
+          icon: Icon(
+            Icons.arrow_back,
+            color: Colors.white,
           ),
           onPressed: HomeModule.toHome,
         ),
@@ -121,7 +121,7 @@ class _WalletCreatePage
                                   margin: const EdgeInsets.fromLTRB(5, 5, 0, 0),
                                   child: Text(
                                     controller.mnemonic,
-                                    style:const  TextStyle(
+                                    style: const TextStyle(
                                         fontSize: 14.0,
                                         color: Color(0xff858585)),
                                   ),

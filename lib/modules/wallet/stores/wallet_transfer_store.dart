@@ -98,7 +98,7 @@ abstract class WalletTransferStoreBase with Store {
       controller.add(transactionEvent.confirmed(from, to, value));
       controller.close();
       isLoading(false);
-    }, onError: (Error ex) {
+    }, onError: (dynamic ex) {
       controller.addError(ex);
       isLoading(false);
     }).then(

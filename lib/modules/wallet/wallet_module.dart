@@ -1,5 +1,6 @@
 import 'package:highvibe/main.dart';
 import 'package:highvibe/modules/wallet/data/fetchEtherscanData.dart';
+import 'package:highvibe/modules/wallet/pages/transactions/transactions_page.dart';
 import 'package:highvibe/modules/wallet/processing_transaction_page.dart';
 import 'package:highvibe/modules/wallet/qrcode_reader_page.dart';
 import 'package:highvibe/modules/wallet/service/address_service.dart';
@@ -16,8 +17,8 @@ import 'package:highvibe/modules/wallet/wallet_create_page.dart';
 import 'package:highvibe/modules/wallet/wallet_import_page.dart';
 import 'package:highvibe/modules/wallet/wallet_main_page.dart';
 import 'package:highvibe/modules/wallet/wallet_page.dart';
-import 'package:highvibe/modules/wallet/wallet_transactions_page.dart';
 import 'package:highvibe/modules/wallet/wallet_transfer_page.dart';
+import 'package:highvibe/modules/wallet/pages/receive/receive_page.dart';
 import 'package:web3dart/web3dart.dart';
 import 'package:web_socket_channel/io.dart';
 import 'package:http/http.dart';
@@ -102,7 +103,11 @@ class WalletModule extends ChildModule {
         ),
         Router(
           '/$wallet/transactions',
-          child: (_, args) => WalletTransactionsPage(),
+          child: (_, args) => TransactionsPage(),
+        ),
+        Router(
+          '/$wallet/receive',
+          child: (_, args) => ReceivePage(),
         ),
       ];
 
@@ -121,4 +126,6 @@ class WalletModule extends ChildModule {
       Modular.to.pushNamed('$wallet/qrcode_reader', arguments: callback);
   static Future<Object> toTransactions() =>
       Modular.to.pushNamed('$wallet/transactions');
+  static Future<Object> toReceive() =>
+      Modular.to.pushNamed('$wallet/receive');
 }

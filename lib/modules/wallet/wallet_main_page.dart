@@ -41,96 +41,108 @@ class _WalletMainPageState extends ModularState<WalletMainPage, WalletStore> {
   Widget buildHeader() {
     final width = MediaQuery.of(context).size.width;
     return Container(
-        width: width,
-        decoration: const BoxDecoration(
-            color: AppColors.backgroundLightBlue,
-            borderRadius: BorderRadius.only(
-                bottomLeft: Radius.circular(10),
-                bottomRight: Radius.circular(10))),
-        child: Stack(children: [
+      width: width,
+      decoration: const BoxDecoration(
+          color: AppColors.backgroundLightBlue,
+          borderRadius: BorderRadius.only(
+              bottomLeft: Radius.circular(10),
+              bottomRight: Radius.circular(10))),
+      child: Stack(
+        children: [
           Container(
-              alignment: Alignment.topRight,
-              child: Image.asset(
-                'assets/images/star.png',
-                width: width * 0.4,
-              )),
+            alignment: Alignment.topRight,
+            child: SizedBox(
+              width: width * 0.4,
+              height: width * 0.4,
+              child: Icon(
+                Icons.star,
+                color: Colors.white,
+              ),
+            ),
+          ),
           Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Padding(
-                    padding: EdgeInsets.only(
-                        top: MediaQuery.of(context).padding.top),
-                    child: const BackButton(
-                      color: Colors.white,
-                      onPressed: HomeModule.toHome,
-                    )),
-                Container(
-                    padding: const EdgeInsets.only(
-                        left: 20, top: 20, right: 20, bottom: 30),
-                    child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          Row(children: <Widget>[
-                            const Text(
-                              'Wallet Balance',
-                              style: TextStyle(
-                                  fontWeight: FontWeight.w600,
-                                  color: Colors.white,
-                                  fontSize: 14),
-                            ),
-                          ]),
-                          Text(
-                            controller.address,
-                            style: normal12White,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Padding(
+                  padding:
+                      EdgeInsets.only(top: MediaQuery.of(context).padding.top),
+                  child: const BackButton(
+                    color: Colors.white,
+                    onPressed: HomeModule.toHome,
+                  )),
+              Container(
+                padding: const EdgeInsets.only(
+                    left: 20, top: 20, right: 20, bottom: 30),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Row(children: <Widget>[
+                      const Text(
+                        'Wallet Balance',
+                        style: TextStyle(
+                            fontWeight: FontWeight.w600,
+                            color: Colors.white,
+                            fontSize: 14),
+                      ),
+                    ]),
+                    Text(
+                      controller.address,
+                      style: normal12White,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 15),
+                      child: Observer(
+                        builder: (_) {
+                          final amount =
+                              EthAmountFormatter(controller.tokenBalance);
+                          return Text(
+                            '${amount.format()}',
+                            style: const TextStyle(
+                                color: Colors.white, fontSize: 42),
+                          );
+                        },
+                      ),
+                    ),
+                    const Padding(
+                      padding: EdgeInsets.only(top: 15, bottom: 40),
+                      child: Text(
+                        'HV TOKENS',
+                        style:
+                            TextStyle(color: AppColors.textGrey, fontSize: 14),
+                      ),
+                    ),
+                    Row(
+                      children: <Widget>[
+                        Expanded(
+                            child: MainButton(
+                          title: 'Send',
+                          icon: const Icon(
+                            Icons.arrow_upward,
+                            color: Colors.white,
                           ),
-                          Padding(
-                            padding: const EdgeInsets.only(top: 15),
-                            child: Observer(
-                              builder: (_) {
-                                final amount =
-                                    EthAmountFormatter(controller.tokenBalance);
-                                return Text(
-                                  '${amount.format()}',
-                                  style: const TextStyle(
-                                      color: Colors.white, fontSize: 42),
-                                );
-                              },
+                          onPressed: WalletModule.toTransfer,
+                        )),
+                        const Padding(padding: EdgeInsets.only(left: 20)),
+                        Expanded(
+                          child: MainButton(
+                            title: 'Receive',
+                            icon: const Icon(
+                              Icons.arrow_downward,
+                              color: Colors.white,
                             ),
+                            onPressed: WalletModule.toReceive,
                           ),
-                          const Padding(
-                            padding: EdgeInsets.only(top: 15, bottom: 40),
-                            child: Text(
-                              'HV TOKENS',
-                              style: TextStyle(
-                                  color: AppColors.textGrey, fontSize: 14),
-                            ),
-                          ),
-                          Row(
-                            children: <Widget>[
-                              Expanded(
-                                  child: MainButton(
-                                title: 'Send',
-                                icon: const Icon(
-                                  Icons.arrow_upward,
-                                  color: Colors.white,
-                                ),
-                                onPressed: WalletModule.toTransfer,
-                              )),
-                              const Padding(padding: EdgeInsets.only(left: 20)),
-                              Expanded(
-                                  child: MainButton(
-                                title: 'Receive',
-                                icon: const Icon(
-                                  Icons.arrow_downward,
-                                  color: Colors.white,
-                                ),
-                                onPressed: () {},
-                              ))
-                            ],
-                          )
-                        ]))
-              ])
-        ]));
+                        )
+                      ],
+                    )
+                  ],
+                ),
+              )
+            ],
+          ),
+        ],
+      ),
+    );
   }
 
   Widget buildTransactionsHeader() {
@@ -155,8 +167,8 @@ class _WalletMainPageState extends ModularState<WalletMainPage, WalletStore> {
                     'See All',
                     style: TextStyle(fontSize: 14, color: AppColors.textGrey),
                   ),
-                ))
-          ]),
+                ),),
+          ],),
     );
   }
 

@@ -1,10 +1,10 @@
 import 'dart:async';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:highvibe/modules/wallet/data/fetchEtherscanData.dart';
 import 'package:highvibe/modules/wallet/model/transactionsModel.dart';
 import 'package:highvibe/modules/wallet/stores/wallet_store.dart';
 import 'package:mobx/mobx.dart';
-import 'package:provider/provider.dart';
 
 part 'wallet_transactions_store.g.dart';
 
@@ -27,7 +27,7 @@ abstract class WalletTransactionsStoreBase with Store {
 
   @action
   Future<void> fetchTransactions(BuildContext context) async {
-    final etherscanData = Provider.of<FetchEtherscanData>(context);
+    final etherscanData = Modular.get<FetchEtherscanData>();
     final response = await etherscanData.fetchData(walletStore.address);
     transactionsModel = transactionsModelFromJson(response.bodyString);
   }
