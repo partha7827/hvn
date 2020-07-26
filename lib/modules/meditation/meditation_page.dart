@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'focus/screens/breathe_screen.dart';
 import 'meditation_controller.dart';
 
 class MeditationPage extends StatefulWidget {
@@ -16,13 +17,6 @@ class _MeditationPageState
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
-      body: Column(
-        children: <Widget>[],
-      ),
-    );
+    return BreatheScreen();
   }
 }

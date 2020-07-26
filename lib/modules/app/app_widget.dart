@@ -22,7 +22,7 @@ class _AppWidgetState extends State<AppWidget> {
       navigatorKey: Modular.navigatorKey,
       initialRoute: '/',
       onGenerateRoute: Modular.generateRoute,
-      theme: appTheme,
+      // theme: appTheme,
     );
   }
 

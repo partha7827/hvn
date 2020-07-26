@@ -7,10 +7,23 @@ class MeditationController = _MeditationControllerBase
 
 abstract class _MeditationControllerBase with Store {
   @observable
-  int value = 0;
+  int numRounds = 3;
+  @observable
+  int breathsPerRound = 35;
+  @observable
+  int holdTime = 120;
+  @observable
+  int speed = 6;
 
   @action
-  void increment() {
-    value++;
-  }
+  void setNumRounds(int n) => numRounds = n;
+
+  @action
+  void setBreathsPerRound(int n) => breathsPerRound = n;
+
+  @action
+  void setHoldTime(int n) => holdTime = n;
+
+  @action
+  void setSpeed(int n) => speed = n;
 }
