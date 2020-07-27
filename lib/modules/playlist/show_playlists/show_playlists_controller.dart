@@ -14,7 +14,7 @@ abstract class _ShowPlaylistsControllerBase with Store {
       Modular.get<FirestorePlaylistService>();
   final AppController appController = Modular.get<AppController>();
 
-  Stream<List<PlayList>> fetchPlaylists() {
-    return firestorePlaylistService.playlistCollectionStream();
+  Future<List<PlayList>> fetchPlaylists() {
+    return firestorePlaylistService.fetchPublicPlaylists();
   }
 }

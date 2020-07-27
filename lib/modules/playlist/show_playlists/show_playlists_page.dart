@@ -37,8 +37,8 @@ class _ShowPlaylistsPageState
     print('${controller.firestorePlaylistService.userId}');
     print('${controller.appController.currentUser.id}');
 
-    return StreamBuilder<List<PlayList>>(
-      stream: controller.fetchPlaylists(),
+    return FutureBuilder<List<PlayList>>(
+      future: controller.fetchPlaylists(),
       builder: (context, snapshot) {
         return Column(
           children: <Widget>[
@@ -66,6 +66,9 @@ class _ShowPlaylistsPageState
                 },
               ),
             ),
-          );
+          ],
+        );
+      },
+    );
   }
 }
