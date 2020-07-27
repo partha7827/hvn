@@ -10,9 +10,11 @@ import 'package:highvibe/widgets/widgets.dart';
 
 class PlaylistMoreMenuPage extends StatefulWidget {
   final PlayList playlist;
+  final Function callback;
 
   PlaylistMoreMenuPage({
     @required this.playlist,
+    this.callback,
     Key key,
   }) : super(key: key);
 
@@ -70,6 +72,9 @@ class _PlaylistMoreMenuPageState
                     await controller.deletePlaylistCover(
                       playlist: widget.playlist,
                     );
+                    if (widget.callback != null) {
+                      widget.callback();
+                    }
                     Modular.to.pop();
                     Modular.to.pop();
                   },
