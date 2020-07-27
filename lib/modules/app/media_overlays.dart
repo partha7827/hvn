@@ -1,4 +1,7 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:highvibe/models/models.dart' show Audio, Video;
 import 'package:highvibe/models/playlist/playlist.dart';
 import 'package:highvibe/modules/audio_player/audio_player_module.dart';
@@ -8,6 +11,7 @@ import 'package:highvibe/modules/playlist/create_new_playlist/create_new_playlis
 import 'package:highvibe/modules/playlist/open_playlist/open_playlist_module.dart';
 import 'package:highvibe/modules/playlist/widgets/widgets.dart';
 import 'package:highvibe/modules/video_player/video_player_page.dart';
+import 'package:highvibe/services/audio_player_service.dart';
 
 class MediaOverlays {
   static GlobalKey<AudioPlayerPageState> audioKey = GlobalKey();
@@ -70,15 +74,29 @@ class MediaOverlays {
   static void presentAudioPlayerAsOverlay({
     @required BuildContext context,
     @required Audio audioFile,
-  }) {
-    _removeAllOverlays();
+  }) async {
+    try {
+      final player = Modular.get<AudioPlayerService>();
+      await player.stop();
 
-    _mediaOverlayState = Overlay.of(context);
+      if (MediaOverlays._audioOverlayEntry != null) {
+        MediaOverlays._audioOverlayEntry?.remove();
+        MediaOverlays._audioOverlayEntry = null;
+      }
+    } catch (e) {
+      print(e.toString());
+    }
 
-    _audioOverlayEntry = OverlayEntry(
-      builder: (_) => AudioPlayerModule(audioFile: audioFile),
-    );
-    _mediaOverlayState.insert(_audioOverlayEntry);
+    Timer(const Duration(milliseconds: 400), () {
+      _removeAllOverlays();
+
+      _mediaOverlayState = Overlay.of(context);
+
+      _audioOverlayEntry = OverlayEntry(
+        builder: (_) => AudioPlayerModule(audioFile: audioFile),
+      );
+      _mediaOverlayState.insert(_audioOverlayEntry);
+    });
   }
 
   static void presentPlayListPlayerAsOverlay({
