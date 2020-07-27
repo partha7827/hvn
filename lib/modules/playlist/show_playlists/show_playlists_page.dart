@@ -5,7 +5,6 @@ import 'package:highvibe/modules/app/media_overlays.dart';
 import 'package:highvibe/modules/playlist/playlist_module.dart';
 import 'package:highvibe/modules/playlist/widgets/playlist_tile.dart';
 import 'package:highvibe/modules/playlist/widgets/widgets.dart';
-import 'package:highvibe/values/themes.dart';
 import 'show_playlists_controller.dart';
 
 class ShowPlaylistsPage extends StatefulWidget {
