@@ -35,6 +35,7 @@ class AppModule extends MainModule {
         Router('', module: JournalModule()),
         Router('', module: MoodTrackerModule()),
         Router('', module: PlaylistModule()),
+        Router('', module: WalletModule()),
       ];
 
   @override

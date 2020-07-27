@@ -6,8 +6,12 @@ import 'package:highvibe/services/storage_service.dart';
 
 class CreateNewPlaylistModule extends WidgetModule {
   final bool isPresentedAsOverlay;
+  final Function callback;
 
-  CreateNewPlaylistModule({@required this.isPresentedAsOverlay});
+  CreateNewPlaylistModule({
+    @required this.isPresentedAsOverlay,
+    this.callback,
+  });
 
   @override
   List<Bind<Object>> get binds => [
@@ -17,6 +21,9 @@ class CreateNewPlaylistModule extends WidgetModule {
 
   @override
   Widget get view {
-    return CreateNewPlaylistPage(isPresentedAsOverlay: isPresentedAsOverlay);
+    return CreateNewPlaylistPage(
+      isPresentedAsOverlay: isPresentedAsOverlay,
+      callback: callback,
+    );
   }
 }

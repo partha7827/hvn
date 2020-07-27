@@ -90,18 +90,22 @@ class MediaOverlays {
     _mediaOverlayState = Overlay.of(context);
 
     _audioOverlayEntry = OverlayEntry(
-      builder: (_) => OpenPlayListModule(playList: playList,),
+      builder: (_) => OpenPlayListModule(
+        playList: playList,
+      ),
     );
     _mediaOverlayState.insert(_audioOverlayEntry);
   }
 
   static void presentCreateNewPlaylistAsOverlay({
     @required BuildContext context,
+    Function callback,
   }) {
     _mediaOverlayState = Overlay.of(context);
 
     _createNewPlaylistOverlayEntry = OverlayEntry(
-      builder: (_) => CreateNewPlaylistModule(isPresentedAsOverlay: true),
+      builder: (_) => CreateNewPlaylistModule(
+          isPresentedAsOverlay: true, callback: callback),
     );
 
     _mediaOverlayState.insert(

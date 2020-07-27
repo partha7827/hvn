@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
+import 'package:highvibe/modules/wallet/components/transactions/transaction_list.dart';
 import 'package:highvibe/modules/wallet/resources/app_colors.dart';
 import 'package:highvibe/modules/wallet/pages/widgets/containers/transaction_container.dart';
+import 'package:highvibe/modules/wallet/stores/wallet_transactions_store.dart';
 
 class TransactionsPage extends StatefulWidget {
   @override
@@ -10,6 +13,8 @@ class TransactionsPage extends StatefulWidget {
 class TransactionsPageState extends State<TransactionsPage>
     with SingleTickerProviderStateMixin {
   TabController tabController;
+  final WalletTransactionsStore controller =
+      Modular.get<WalletTransactionsStore>();
 
   @override
   void initState() {
@@ -143,9 +148,23 @@ class TransactionsPageState extends State<TransactionsPage>
         children: [
           buildTabs(),
           buildSearch(),
-          Expanded(child: SingleChildScrollView(child: buildTransactions()))
+          Expanded(
+            child: Column(
+              children: [
+                TransactionList(controller),
+              ],
+            ),
+          )
         ],
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    print('INFO: cancelling timer');
+    controller.timer.cancel();
+    controller.timer = null;
   }
 }

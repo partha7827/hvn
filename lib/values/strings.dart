@@ -57,6 +57,7 @@ class Strings {
   static const discoverAuthors = 'Authors';
   static const discoverAudios = 'Audio';
   static const discoverVideos = 'Video';
+  static const discoverPlaylists = 'Playlists';
   static const exitConfirmation = 'Do you want to close app?';
   static const yes = 'Yes';
   static const no = 'No';
@@ -130,8 +131,7 @@ class Strings {
 }
 
 class UploadAudioStrings {
-  static const chooseAudio =
-      '''Choose audio file...''';
+  static const chooseAudio = 'Choose audio file...';
   static const uploadAudio = 'Uploading audio file...';
   static const processDocument = 'Analyzing audio file...';
   static const success = 'Success';
