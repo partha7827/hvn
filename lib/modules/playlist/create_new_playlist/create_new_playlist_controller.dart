@@ -5,6 +5,7 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:highvibe/models/models.dart' show Audio, PlayList, Privacy;
+import 'package:highvibe/modules/app/app_controller.dart';
 import 'package:highvibe/modules/playlist/api/firestore_playlist_service.dart';
 import 'package:highvibe/modules/playlist/resources/resources.dart';
 import 'package:highvibe/services/storage_service.dart';
@@ -19,6 +20,7 @@ class CreateNewPlaylistController = _CreateNewPlaylistControllerBase
 abstract class _CreateNewPlaylistControllerBase with Store {
   final _firebaseStorage = Modular.get<StorageService>();
   final _firestorePlaylistService = Modular.get<FirestorePlaylistService>();
+  final _appController = Modular.get<AppController>();
 
   final TextEditingController titleTextEditingController =
       TextEditingController();
@@ -58,7 +60,8 @@ abstract class _CreateNewPlaylistControllerBase with Store {
           ..description = descriptionTextEditingController.text
           ..id = uuid.v4()
           ..title = titleTextEditingController.text
-          ..privacy = privacy,
+          ..privacy = privacy
+          ..userId = _appController.currentUser.id,
       );
 
       await _firestorePlaylistService.setPlaylist(playlist: playlist);

@@ -55,11 +55,16 @@ class WalletPageState extends State<WalletPage> {
                 bottomRight: Radius.circular(10))),
         child: Stack(children: [
           Container(
-              alignment: Alignment.topRight,
-              child: Image.asset(
-                'assets/images/star.png',
-                width: width * 0.4,
-              )),
+            alignment: Alignment.topRight,
+            child: SizedBox(
+              width: width * 0.4,
+              height: width * 0.4,
+              child: Icon(
+                Icons.star,
+                color: Colors.white,
+              ),
+            ),
+          ),
           Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[

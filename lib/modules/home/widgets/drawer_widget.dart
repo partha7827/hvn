@@ -27,9 +27,12 @@ class DrawerWidget extends StatelessWidget {
                   color: const Color(0xFF202340),
                   image: DecorationImage(
                     fit: BoxFit.fitWidth,
-                    image: CachedNetworkImageProvider(
-                      _controller.currentUserStore.currentUser.photoUrl,
-                    ),
+                    image: _controller
+                            .currentUserStore.currentUser.photoUrl.isEmpty
+                        ? const AssetImage('assets/ic_profile_placeholder.png')
+                        : CachedNetworkImageProvider(
+                            _controller.currentUserStore.currentUser.photoUrl,
+                          ),
                   ),
                 ),
                 width: double.infinity,

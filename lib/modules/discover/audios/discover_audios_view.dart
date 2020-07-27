@@ -35,7 +35,7 @@ class _DiscoverAudiosViewState
 
   @override
   void dispose() {
-    _timer.cancel();
+    _timer?.cancel();
     super.dispose();
   }
 

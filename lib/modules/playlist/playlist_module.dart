@@ -45,7 +45,10 @@ class PlaylistModule extends ChildModule {
   List<Router<Object>> get routers => [
         Router(
           '$_playlistRoute/context_menu',
-          child: (_, args) => PlaylistMoreMenuPage(playlist: args.data),
+          child: (_, args) => PlaylistMoreMenuPage(
+            playlist: args.data[0],
+            callback: args.data[1],
+          ),
           transition: TransitionType.downToUp,
         ),
         Router(
@@ -64,6 +67,7 @@ class PlaylistModule extends ChildModule {
           '$_playlistRoute/create_new_playlist',
           child: (_, args) => CreateNewPlaylistPage(
             isPresentedAsOverlay: false,
+            callback: args.data,
           ),
           transition: TransitionType.rightToLeft,
         ),
@@ -78,8 +82,8 @@ class PlaylistModule extends ChildModule {
       Modular.to
           .pushNamed('$_playlistRoute/add_to_playlist', arguments: audioFile);
 
-  static Future<Object> toCreateNewPlaylist() =>
-      Modular.to.pushNamed('$_playlistRoute/create_new_playlist');
+  static Future<Object> toCreateNewPlaylist({Function callback}) =>
+      Modular.to.pushNamed('$_playlistRoute/create_new_playlist', arguments: callback);
 
   static Future<Object> toEditPlaylist({@required PlayList playList}) =>
       Modular.to
@@ -92,6 +96,8 @@ class PlaylistModule extends ChildModule {
   static Future<Object> toShowPlaylists() =>
       Modular.to.pushNamed('$_playlistRoute/show_playlists');
 
-  static Future<Object> toContextMenu({@required PlayList playList}) =>
-      Modular.to.pushNamed('$_playlistRoute/context_menu', arguments: playList);
+  static Future<Object> toContextMenu(
+          {@required PlayList playList, Function callback}) =>
+      Modular.to.pushNamed('$_playlistRoute/context_menu',
+          arguments: [playList, callback]);
 }

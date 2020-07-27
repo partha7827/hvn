@@ -11,9 +11,11 @@ import 'package:highvibe/widgets/responsive_safe_area.dart';
 
 class CreateNewPlaylistPage extends StatefulWidget {
   final bool isPresentedAsOverlay;
+  final Function callback;
 
   CreateNewPlaylistPage({
     @required this.isPresentedAsOverlay,
+    this.callback,
     Key key,
   }) : super(key: key);
 
@@ -106,7 +108,7 @@ class _CreateNewPlaylistPage
                     alignment: Alignment.centerLeft,
                     child: Text(
                       PlaylistStrings.playlistName,
-                      style: TextStyle(color: Color(0xFF525366)),
+                      style: TextStyle(color: Colors.white),
                     ),
                   ),
                   const SizedBox(height: 10),
@@ -122,7 +124,7 @@ class _CreateNewPlaylistPage
                             BorderSide(color: Color(0xFF525366), width: 1),
                       ),
                       hintText: PlaylistStrings.enterPlaylistName,
-                      hintStyle: TextStyle(color: Colors.white),
+                      hintStyle: TextStyle(color: Color(0xFF525366)),
                     ),
                     style: const TextStyle(color: Colors.white),
                   ),
@@ -131,7 +133,7 @@ class _CreateNewPlaylistPage
                     alignment: Alignment.centerLeft,
                     child: Text(
                       PlaylistStrings.description,
-                      style: TextStyle(color: Color(0xFF525366)),
+                      style: TextStyle(color: Colors.white),
                     ),
                   ),
                   const SizedBox(height: 10),
@@ -147,7 +149,7 @@ class _CreateNewPlaylistPage
                             BorderSide(color: Color(0xFF525366), width: 1),
                       ),
                       hintText: PlaylistStrings.enterDescription,
-                      hintStyle: TextStyle(color: Colors.white),
+                      hintStyle: TextStyle(color: Color(0xFF525366)),
                     ),
                     style: const TextStyle(color: Colors.white),
                   ),
@@ -220,5 +222,8 @@ class _CreateNewPlaylistPage
       title: PlaylistStrings.newPlaylistSuccessTitle,
       subTitle: PlaylistStrings.newPlaylistSuccessSubTitle,
     );
+    if (widget.callback != null) {
+      widget.callback();
+    }
   }
 }

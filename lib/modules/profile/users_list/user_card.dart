@@ -17,12 +17,14 @@ class UserCard extends StatelessWidget {
         children: [
           ClipRRect(
             borderRadius: BorderRadius.circular(50),
-            child: CachedNetworkImage(
-              width: 48,
-              height: 48,
-              imageUrl: user.photoUrl,
-              fit: BoxFit.cover,
-            ),
+            child: user.photoUrl.isEmpty
+                ? Image.asset('assets/ic_profile_placeholder.png')
+                : CachedNetworkImage(
+                    width: 48,
+                    height: 48,
+                    imageUrl: user.photoUrl,
+                    fit: BoxFit.cover,
+                  ),
           ),
           Expanded(
             child: InkWell(

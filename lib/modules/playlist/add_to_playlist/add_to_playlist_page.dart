@@ -30,6 +30,18 @@ class _AddToPlaylistPageState
   final SearchBarController<PlayList> _searchBarController =
       SearchBarController();
 
+  List<PlayList> playLists = [];
+  @override
+  void initState() {
+    fetchPlayLists();
+    super.initState();
+  }
+
+  void fetchPlayLists() async {
+    playLists = await controller.fetchPlaylists();
+    setState(() {});
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -73,50 +85,45 @@ class _AddToPlaylistPageState
                   ),
                   Padding(
                     padding: const EdgeInsets.fromLTRB(0, 30, 0, 0),
-                    child: StreamBuilder<List<PlayList>>(
-                      stream: controller.fetchPlaylists(),
-                      builder: (context, snapshot) {
-                        return SearchBar(
-                          icon: const Padding(
-                            padding: EdgeInsets.fromLTRB(8, 0, 0, 0),
-                            child: Icon(
-                              Icons.search,
-                              color: Color(0xFF8E8F99),
-                            ),
-                          ),
-                          hintText: PlaylistStrings.search,
-                          hintStyle: const TextStyle(
-                            color: Color(0xFF8E8F99),
-                            fontSize: 18,
-                          ),
-                          iconActiveColor: Colors.white,
-                          textStyle: const TextStyle(color: Colors.white),
-                          cancellationWidget: const Text(
-                            PlaylistStrings.cancel,
-                            style: TextStyle(color: Colors.white),
-                          ),
-                          searchBarController: _searchBarController,
-                          suggestions: snapshot.hasData ? snapshot.data : [],
-                          onItemFound: (item, index) {
-                            return PlaylistTile(
-                              playList: item,
-                              isInEditMode: true,
-                              onTap: (selectedPlaylist) =>
-                                  controller.populatePlaylistItems(
-                                playlist: selectedPlaylist,
-                              ),
-                            );
-                          },
-                          onSearch: (searchTerm) => controller.findPlaylists(
-                            items: snapshot.hasData ? snapshot.data : [],
-                            searchTerm: searchTerm,
-                          ),
-                          emptyWidget: const Text(
-                            PlaylistStrings.noMatches,
-                            style: TextStyle(color: Colors.white, fontSize: 12),
+                    child: SearchBar(
+                      icon: const Padding(
+                        padding: EdgeInsets.fromLTRB(8, 0, 0, 0),
+                        child: Icon(
+                          Icons.search,
+                          color: Color(0xFF8E8F99),
+                        ),
+                      ),
+                      hintText: PlaylistStrings.search,
+                      hintStyle: const TextStyle(
+                        color: Color(0xFF8E8F99),
+                        fontSize: 18,
+                      ),
+                      iconActiveColor: Colors.white,
+                      textStyle: const TextStyle(color: Colors.white),
+                      cancellationWidget: const Text(
+                        PlaylistStrings.cancel,
+                        style: TextStyle(color: Colors.white),
+                      ),
+                      searchBarController: _searchBarController,
+                      suggestions: playLists,
+                      onItemFound: (item, index) {
+                        return PlaylistTile(
+                          playList: item,
+                          isInEditMode: true,
+                          onTap: (selectedPlaylist) =>
+                              controller.populatePlaylistItems(
+                            playlist: selectedPlaylist,
                           ),
                         );
                       },
+                      onSearch: (searchTerm) => controller.findPlaylists(
+                        items: playLists,
+                        searchTerm: searchTerm,
+                      ),
+                      emptyWidget: const Text(
+                        PlaylistStrings.noMatches,
+                        style: TextStyle(color: Colors.white, fontSize: 12),
+                      ),
                     ),
                   ),
                   Positioned(
@@ -149,9 +156,15 @@ class _AddToPlaylistPageState
 
   void _presentCreateNewPlaylist(BuildContext contex) {
     if (widget.isPresentedAsOverlay) {
-      MediaOverlays.presentCreateNewPlaylistAsOverlay(context: context);
+      MediaOverlays.presentCreateNewPlaylistAsOverlay(
+          context: context,
+          callback: () {
+            fetchPlayLists();
+          });
     } else {
-      PlaylistModule.toCreateNewPlaylist();
+      PlaylistModule.toCreateNewPlaylist(callback: () {
+        fetchPlayLists();
+      });
     }
   }
 

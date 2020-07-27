@@ -95,12 +95,14 @@ Widget _authorCard({
               tag: 'author#${user.id}',
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(10.0),
-                child: CachedNetworkImage(
-                  imageUrl: user.photoUrl,
-                  fit: BoxFit.cover,
-                  height: 140,
-                  width: 100,
-                ),
+                child: user.photoUrl.isEmpty
+                    ? Image.asset('assets/ic_profile_placeholder.png')
+                    : CachedNetworkImage(
+                        imageUrl: user.photoUrl,
+                        fit: BoxFit.cover,
+                        height: 140,
+                        width: 100,
+                      ),
               ),
             ),
             Positioned(

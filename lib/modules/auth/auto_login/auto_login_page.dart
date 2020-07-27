@@ -23,7 +23,7 @@ class _AutoLoginPageState
     _controller = AnimationController(vsync: this)
       ..value = 0
       ..duration = const Duration(seconds: 3);
-      
+
     _controller.forward();
 
     _controller.addStatusListener((status) {
@@ -33,6 +33,12 @@ class _AutoLoginPageState
     });
 
     controller.init();
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
   }
 
   @override

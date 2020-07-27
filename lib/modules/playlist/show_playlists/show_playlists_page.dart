@@ -5,6 +5,7 @@ import 'package:highvibe/modules/app/media_overlays.dart';
 import 'package:highvibe/modules/playlist/playlist_module.dart';
 import 'package:highvibe/modules/playlist/widgets/playlist_tile.dart';
 import 'package:highvibe/modules/playlist/widgets/widgets.dart';
+import 'package:highvibe/values/themes.dart';
 import 'show_playlists_controller.dart';
 
 class ShowPlaylistsPage extends StatefulWidget {
@@ -16,16 +17,28 @@ class ShowPlaylistsPage extends StatefulWidget {
 
 class _ShowPlaylistsPageState
     extends ModularState<ShowPlaylistsPage, ShowPlaylistsController> {
+  List<PlayList> playLists = [];
+  String noPlaylists = '';
   @override
   void initState() {
     super.initState();
-    controller.fetchPlaylists();
+    fetchPlayLists();
+  }
+
+  void fetchPlayLists() async {
+    playLists = await controller.fetchPlaylists();
+    setState(() {
+      noPlaylists = 'No Playlists available';
+    });
   }
 
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder<List<PlayList>>(
-      stream: controller.fetchPlaylists(),
+    print('${controller.firestorePlaylistService.userId}');
+    print('${controller.appController.currentUser.id}');
+
+    return FutureBuilder<List<PlayList>>(
+      future: controller.fetchPlaylists(),
       builder: (context, snapshot) {
         return Column(
           children: <Widget>[
@@ -33,6 +46,8 @@ class _ShowPlaylistsPageState
             Expanded(
               child: ListItemsBuilder<PlayList>(
                 snapshot: snapshot,
+                isCurrentUser: controller.firestorePlaylistService.userId ==
+                    controller.appController.currentUser.id,
                 itemBuilder: (context, item) {
                   return GestureDetector(
                     onTap: () async {
