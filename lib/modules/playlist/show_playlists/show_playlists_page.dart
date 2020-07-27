@@ -34,43 +34,41 @@ class _ShowPlaylistsPageState
 
   @override
   Widget build(BuildContext context) {
-    return playLists.isNotEmpty
-        ? Column(
-            children: <Widget>[
-              const SizedBox(height: 12),
-              Expanded(
-                child: ListView.builder(
-                  itemCount: playLists.length,
-                  itemBuilder: (context, item) {
-                    return GestureDetector(
-                      onTap: () async {
-                        MediaOverlays.presentPlayListPlayerAsOverlay(
-                          context: context,
-                          playList: playLists[item],
-                        );
-                      },
-                      child: PlaylistTile(
-                        isInEditMode: false,
-                        playList: playLists[item],
-                        onTap: (item) => PlaylistModule.toContextMenu(
-                          playList: item,
-                          callback: () {
-                            fetchPlayLists();
-                          },
-                        ),
-                      ),
-                    );
-                  },
-                ),
+    print('${controller.firestorePlaylistService.userId}');
+    print('${controller.appController.currentUser.id}');
+
+    return FutureBuilder<List<PlayList>>(
+      future: controller.fetchPlaylists(),
+      builder: (context, snapshot) {
+        return Column(
+          children: <Widget>[
+            const SizedBox(height: 12),
+            Expanded(
+              child: ListItemsBuilder<PlayList>(
+                snapshot: snapshot,
+                isCurrentUser: controller.firestorePlaylistService.userId ==
+                    controller.appController.currentUser.id,
+                itemBuilder: (context, item) {
+                  return GestureDetector(
+                    onTap: () async {
+                      MediaOverlays.presentPlayListPlayerAsOverlay(
+                        context: context,
+                        playList: item,
+                      );
+                    },
+                    child: PlaylistTile(
+                      isInEditMode: false,
+                      playList: item,
+                      onTap: (item) =>
+                          PlaylistModule.toContextMenu(playList: item),
+                    ),
+                  );
+                },
               ),
-            ],
-          )
-        : Container(
-            alignment: Alignment.center,
-            child: Text(
-              noPlaylists,
-              style: normal16White,
             ),
-          );
+          ],
+        );
+      },
+    );
   }
 }
