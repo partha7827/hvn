@@ -130,8 +130,7 @@ class Strings {
 }
 
 class UploadAudioStrings {
-  static const chooseAudio =
-      '''Choose audio file...''';
+  static const chooseAudio = 'Choose audio file...';
   static const uploadAudio = 'Uploading audio file...';
   static const processDocument = 'Analyzing audio file...';
   static const success = 'Success';

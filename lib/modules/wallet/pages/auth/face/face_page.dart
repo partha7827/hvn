@@ -28,11 +28,12 @@ class FacePageState extends State<FacePage> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
-          Image.asset(
-            'assets/icons/faceid.png',
-            width: 63,
-            height: 63,
-          ),
+          const CircularProgressIndicator(),
+          // Image.asset(
+          //   'assets/icons/faceid.png',
+          //   width: 63,
+          //   height: 63,
+          // ),
           const Padding(
             padding: EdgeInsets.only(top: 34),
             child: Text(
