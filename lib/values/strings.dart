@@ -136,7 +136,10 @@ class Strings {
       '''I understand that if this app is moved to another device or deleted, my HV can only be recovered with recovery phrase''';
   static const String hvTermsAndConditions =
       '''HV is diffrent - It cannot be safely held with a bank web service''';
-      static const String setupHvnWallet = '''Set up your HighVibe wallet to send, \nreceive and manage your HV tokens.''';
+  static const String setupHvnWallet =
+      '''Set up your HighVibe wallet to send, \nreceive and manage your HV tokens.''';
+  static const String restoreWalletUsingSeed =
+      '''Enter your 12-word seed phrase below to access your HV Account.''';
 }
 
 class UploadAudioStrings {

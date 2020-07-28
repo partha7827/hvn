@@ -2,6 +2,7 @@ import 'package:flutter/services.dart';
 import 'package:highvibe/modules/home/home_module.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:highvibe/modules/wallet/pages/wallet/wallet_restore.dart';
 import 'package:highvibe/modules/wallet/wallet_module.dart';
 import 'package:highvibe/modules/wallet/pages/wallet/wallet_seed_phrase.dart';
 import 'package:highvibe/values/strings.dart';
@@ -89,7 +90,7 @@ class _WalletCreatePage
                       padding: const EdgeInsets.only(right: 16),
                       child: GradientRaisedButton(
                         label: 'Restore',
-                        onPressed: () {},
+                        onPressed: toRestoreWallet,
                         radius: 50,
                       ),
                     ),
@@ -117,6 +118,14 @@ class _WalletCreatePage
       context,
       MaterialPageRoute<WalletSeedPhrase>(
           builder: (context) => WalletSeedPhrase()),
+    );
+  }
+
+  void toRestoreWallet() {
+    Navigator.push(
+      context,
+      MaterialPageRoute<WalletRestore>(
+          builder: (context) => WalletRestore()),
     );
   }
 
