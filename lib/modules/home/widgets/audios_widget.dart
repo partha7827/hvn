@@ -18,8 +18,9 @@ class AudiosWidget extends StatefulWidget {
   _AudiosWidgetState createState() => _AudiosWidgetState();
 }
 
-class _AudiosWidgetState extends ModularState<AudiosWidget, HomeController> {
+class _AudiosWidgetState extends State<AudiosWidget> {
   final PageController sliderController = PageController();
+  final HomeController controller = Modular.get<HomeController>();
 
   @override
   void initState() {

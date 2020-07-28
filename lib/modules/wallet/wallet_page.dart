@@ -25,9 +25,9 @@ class _WalletPageState extends ModularState<WalletPage, WalletController> {
         await Modular.get<ConfigurationService>()
             .setNetwork(walletConfig.network);
 
-        await WalletModule.toMainPage();
+        await WalletModule.replaceToMainPage();
       } else {
-        await WalletModule.toCreate();
+        await WalletModule.replaceToCreate();
       }
     });
   }

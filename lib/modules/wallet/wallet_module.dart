@@ -83,7 +83,7 @@ class WalletModule extends ChildModule {
         ),
         Router(
           '/$wallet/create',
-          child: (_, args) => WalletCreatePage(),
+          child: (_, args) => const WalletCreatePage(),
         ),
         Router(
           '/$wallet/import',
@@ -118,16 +118,19 @@ class WalletModule extends ChildModule {
   static Future<Object> toWallet() => Modular.to.pushNamed(wallet);
   static Future<Object> toMainPage() =>
       Modular.to.pushNamed('$wallet/main-page');
+  static Future<Object> replaceToMainPage() =>
+      Modular.to.pushReplacementNamed('$wallet/main-page');
   static Future<Object> toCreate() => Modular.to.pushNamed('$wallet/create');
+  static Future<Object> replaceToCreate() =>
+      Modular.to.pushReplacementNamed('$wallet/create');
   static Future<Object> toImport() => Modular.to.pushNamed('$wallet/import');
   static Future<Object> toTransfer() =>
       Modular.to.pushNamed('$wallet/transfer');
   static Future<Object> toProcessingTransaction() =>
       Modular.to.pushNamed('$wallet/processing-transaction');
-  static Future<Object> toQrCodeReader({ Function callback }) =>
+  static Future<Object> toQrCodeReader({Function callback}) =>
       Modular.to.pushNamed('$wallet/qrcode_reader', arguments: callback);
   static Future<Object> toTransactions() =>
       Modular.to.pushNamed('$wallet/transactions');
-  static Future<Object> toReceive() =>
-      Modular.to.pushNamed('$wallet/receive');
+  static Future<Object> toReceive() => Modular.to.pushNamed('$wallet/receive');
 }
