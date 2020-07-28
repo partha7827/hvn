@@ -1,10 +1,12 @@
 import 'package:flutter/services.dart';
-import 'package:flutter_modular/flutter_modular.dart';
 import 'package:highvibe/modules/home/home_module.dart';
-import 'package:highvibe/modules/wallet/stores/wallet_create_store.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:highvibe/modules/wallet/wallet_module.dart';
+import 'package:highvibe/modules/wallet/pages/wallet/wallet_seed_phrase.dart';
+import 'package:highvibe/values/strings.dart';
+import 'package:highvibe/values/themes.dart';
+import 'package:highvibe/widgets/gradient_raised_button.dart';
 
 class WalletCreatePage extends StatefulWidget {
   WalletCreatePage({
@@ -18,11 +20,10 @@ class WalletCreatePage extends StatefulWidget {
 }
 
 class _WalletCreatePage
-    extends ModularState<WalletCreatePage, WalletCreateStore> {
+    extends State<WalletCreatePage> {
   @override
   void initState() {
     super.initState();
-    controller.generateMnemonic();
   }
 
   @override
@@ -30,7 +31,6 @@ class _WalletCreatePage
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
-        title: Text(widget.title),
         backgroundColor: Colors.transparent,
         elevation: 0.0,
         leading: const IconButton(
@@ -41,17 +41,82 @@ class _WalletCreatePage
           onPressed: HomeModule.toHome,
         ),
       ),
-      body: GestureDetector(
-        onTap: () {
-          FocusScope.of(context).requestFocus(FocusNode());
-        },
-        child: Builder(
-          builder: (context) => buildForm(context),
-          // return widget.store.step == WalletCreateSteps.display
-          //     ? _displayMnemonic()
-          //     : _confirmMnemonic();
+      body: 
+      _walletBody(),
+    );
+  }
+
+  Stack _walletBody() {
+    return Stack(
+      children: <Widget>[
+        Container(
+          padding: const EdgeInsets.only(top: 120, left: 20, bottom: 32),
+          decoration: const BoxDecoration(
+            borderRadius: BorderRadius.only(
+              bottomLeft: Radius.circular(40),
+              bottomRight: Radius.circular(40),
+            ),
+            color: secondaryColor,
+          ),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Text(
+                'HV Wallet',
+                style: bold18PlayfairWhite,
+              ),
+              const SizedBox(height: 40),
+              Text(
+                Strings.setupHvnWallet,
+                style: normal14White,
+              ),
+              const SizedBox(height: 40),
+              Row(
+                children: <Widget>[
+                  Expanded(
+                    child: Container(
+                      padding: const EdgeInsets.only(right: 16),
+                      child: GradientRaisedButton(
+                        label: 'Create',
+                        onPressed: toSeedPhrase,
+                        radius: 50,
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                    child: Container(
+                      padding: const EdgeInsets.only(right: 16),
+                      child: GradientRaisedButton(
+                        label: 'Restore',
+                        onPressed: () {},
+                        radius: 50,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
         ),
-      ),
+
+        Positioned(
+          right: 0,
+          top: 0,
+          child: Container(
+            height: 225,
+            child: Image.asset('assets/ic_card_bg.png'),
+          ),
+        ),
+      ],
+    );
+  }
+
+  void toSeedPhrase() {
+    Navigator.push(
+      context,
+      MaterialPageRoute<WalletSeedPhrase>(
+          builder: (context) => WalletSeedPhrase()),
     );
   }
 
@@ -62,11 +127,11 @@ class _WalletCreatePage
         children: <Widget>[
           Container(
             decoration: const BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage('assets/images/bkg1.png'),
-                fit: BoxFit.fill,
-              ),
-            ),
+                // image: DecorationImage(
+                //   image: AssetImage('assets/images/bkg1.png'),
+                //   fit: BoxFit.fill,
+                // ),
+                ),
             height: MediaQuery.of(context).size.height / 3,
             width: MediaQuery.of(context).size.width,
             child: Column(
@@ -120,7 +185,7 @@ class _WalletCreatePage
                                 child: Container(
                                   margin: const EdgeInsets.fromLTRB(5, 5, 0, 0),
                                   child: Text(
-                                    controller.mnemonic,
+                                    'controller.mnemonic',
                                     style: const TextStyle(
                                         fontSize: 14.0,
                                         color: Color(0xff858585)),
@@ -135,7 +200,7 @@ class _WalletCreatePage
                                 tooltip: 'copy address',
                                 onPressed: () {
                                   Clipboard.setData(
-                                    ClipboardData(text: controller.mnemonic),
+                                    ClipboardData(text: 'controller.mnemonic'),
                                   );
                                   Scaffold.of(context).showSnackBar(
                                     const SnackBar(
@@ -168,7 +233,7 @@ class _WalletCreatePage
                                       ),
                                     ),
                                     onPressed: () async {
-                                      controller.generateMnemonic();
+                                      // controller.generateMnemonic();
                                     }),
                               ),
                               Container(
@@ -189,9 +254,9 @@ class _WalletCreatePage
                                       ),
                                     ),
                                     onPressed: () async {
-                                      if (await controller.confirmMnemonic()) {
-                                        await WalletModule.toMainPage();
-                                      }
+                                      // if (await controller.confirmMnemonic()) {
+                                        // await WalletModule.toMainPage();
+                                      // }
                                     }),
                               ),
                             ],

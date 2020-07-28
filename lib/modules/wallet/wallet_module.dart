@@ -1,6 +1,7 @@
 import 'package:highvibe/main.dart';
 import 'package:highvibe/modules/wallet/data/fetchEtherscanData.dart';
 import 'package:highvibe/modules/wallet/pages/transactions/transactions_page.dart';
+import 'package:highvibe/modules/wallet/pages/wallet/wallet_verify_seed_controller.dart';
 import 'package:highvibe/modules/wallet/processing_transaction_page.dart';
 import 'package:highvibe/modules/wallet/qrcode_reader_page.dart';
 import 'package:highvibe/modules/wallet/service/address_service.dart';
@@ -70,6 +71,7 @@ class WalletModule extends ChildModule {
         Bind<WalletTransactionsStore>((i) => WalletTransactionsStore(
               i.get<WalletStore>(),
             )),
+        Bind((i) => WalletVerifySeedController()),
       ];
 
   @override

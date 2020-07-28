@@ -53,10 +53,10 @@ class CustomTextForm extends StatelessWidget {
             borderRadius: BorderRadius.circular(borderRadius ?? 10),
             borderSide: const BorderSide(color: Colors.white),
           ),
-          prefixIcon: Icon(
+          prefixIcon: icon != null ? Icon(
             icon,
             color: Colors.white,
-          ),
+          ) : null,
           hintStyle: normal16Hint,
           hintText: hint,
         ),

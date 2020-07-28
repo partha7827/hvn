@@ -128,6 +128,15 @@ class Strings {
 
   static const String audioFileUploaded = 'Audio file uploaded';
   static const String audioFileUploadFailed = 'Error uploading file!';
+  static const String savePhraseDescription =
+      '''Be sure to store your recovery \nphrase in a secure place. if this \napp is deleted, your tokens can \nnot be recovered without it''';
+  static const String fundsTermsAndConditions =
+      '''I understand that my funds are held securely on this device, not by a company.''';
+  static const String seedPhraseTermsAndConditions =
+      '''I understand that if this app is moved to another device or deleted, my HV can only be recovered with recovery phrase''';
+  static const String hvTermsAndConditions =
+      '''HV is diffrent - It cannot be safely held with a bank web service''';
+      static const String setupHvnWallet = '''Set up your HighVibe wallet to send, \nreceive and manage your HV tokens.''';
 }
 
 class UploadAudioStrings {
