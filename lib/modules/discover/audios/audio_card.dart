@@ -38,12 +38,6 @@ class AudioCard extends StatelessWidget {
                         _authorWidget(),
                       ],
                     ),
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        _infoWidget(),
-                      ],
-                    )
                   ],
                 ),
               ),
@@ -107,7 +101,7 @@ class AudioCard extends StatelessWidget {
   GestureDetector _headerWidget() {
     return GestureDetector(
       onTap: onPlayTap,
-          child: Row(
+      child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(
@@ -115,13 +109,6 @@ class AudioCard extends StatelessWidget {
             style: bold20White,
             overflow: TextOverflow.clip,
           ),
-          if (audio.tags.isNotEmpty)
-            Text(
-              audio.tags[0],
-              style: normal16White,
-            )
-          else
-            Container(),
         ],
       ),
     );
@@ -136,34 +123,13 @@ class AudioCard extends StatelessWidget {
         padding: const EdgeInsets.only(top: 8.0),
         child: Row(
           children: [
-            if (audio.userAvatar.isNotEmpty)
-              ClipRRect(
-                borderRadius: BorderRadius.circular(50),
-                child: CachedNetworkImage(
-                  imageUrl: audio.userAvatar,
-                  width: 32,
-                  height: 32,
-                  fit: BoxFit.cover,
-                ),
-              )
-            else
-              Container(),
-            Padding(
-              padding: audio.userAvatar.isNotEmpty
-                  ? const EdgeInsets.only(left: 8.0)
-                  : const EdgeInsets.all(0),
-              child: Text(
-                audio.userName,
-                style: normal14Hint,
-              ),
+            Text(
+              audio.userName,
+              style: normal14Hint,
             ),
           ],
         ),
       ),
     );
-  }
-
-  Container _infoWidget() {
-    return Container();
   }
 }
