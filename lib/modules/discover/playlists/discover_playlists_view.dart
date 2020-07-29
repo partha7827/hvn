@@ -5,7 +5,9 @@ import 'package:highvibe/modules/app/media_overlays.dart';
 import 'package:highvibe/modules/discover/playlists/discover_playlists_controller.dart';
 import 'package:highvibe/modules/playlist/playlist_module.dart';
 import 'package:highvibe/modules/playlist/widgets/playlist_tile.dart';
+import 'package:highvibe/utils/utils.dart';
 import 'package:highvibe/values/themes.dart';
+import 'package:shimmer/shimmer.dart';
 
 class DiscoverPlaylistsView extends StatefulWidget {
   const DiscoverPlaylistsView();
@@ -18,6 +20,7 @@ class _DiscoverPlaylistsViewState
     extends ModularState<DiscoverPlaylistsView, DiscoverPlaylistsController> {
   List<PlayList> _playLists = [];
   String noPlaylists = '';
+  bool isPlaylistsFetched = false;
   @override
   void initState() {
     fetchPlayLists();
@@ -28,11 +31,16 @@ class _DiscoverPlaylistsViewState
     _playLists = await controller.fetchPublicPlaylists();
     setState(() {
       noPlaylists = 'No public playlists available';
+      isPlaylistsFetched = true;
     });
   }
 
   @override
   Widget build(BuildContext context) {
+    if (!isPlaylistsFetched) {
+      return _shimmers();
+    }
+
     return _playLists.isEmpty
         ? Container(
             alignment: Alignment.center,
@@ -67,5 +75,65 @@ class _DiscoverPlaylistsViewState
               ],
             ),
           );
+  }
+
+  Widget _shimmers() {
+    return Container(
+      margin: const EdgeInsets.only(top: 20),
+      child: ListView.builder(
+        physics: const AlwaysScrollableScrollPhysics(),
+        itemBuilder: (_, index) {
+          return Container(
+            padding: const EdgeInsets.symmetric(
+              horizontal: 20,
+            ),
+            margin: const EdgeInsets.only(bottom: 24),
+            child: Shimmer.fromColors(
+              baseColor: Colors.white12,
+              highlightColor: Colors.white38,
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Container(
+                    height: 70,
+                    width: 70,
+                    decoration: BoxDecoration(
+                      color: Colors.white60,
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    margin: const EdgeInsets.only(right: 16),
+                  ),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Container(
+                          decoration: BoxDecoration(
+                            color: Colors.white60,
+                            borderRadius: BorderRadius.circular(4),
+                          ),
+                          height: 20,
+                          width: screenWidth(context) * 0.8,
+                        ),
+                        Container(
+                          margin: const EdgeInsets.only(top: 10),
+                          decoration: BoxDecoration(
+                            color: Colors.white60,
+                            borderRadius: BorderRadius.circular(4),
+                          ),
+                          height: 20,
+                          width: screenWidth(context) * 0.4,
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          );
+        },
+        itemCount: 8,
+      ),
+    );
   }
 }
