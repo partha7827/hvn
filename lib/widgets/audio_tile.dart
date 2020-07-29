@@ -79,11 +79,11 @@ class AudioTile extends StatelessWidget {
                     title: 'Edit',
                     iconPath: 'assets/ic_highlight.png',
                   ),
-                  _buildMenuItem(
-                    id: 'waypoints',
-                    title: 'Add WayPoints',
-                    iconPath: 'assets/ic_waypoint.png',
-                  ),
+                  // _buildMenuItem(
+                  //   id: 'waypoints',
+                  //   title: 'Add WayPoints',
+                  //   iconPath: 'assets/ic_waypoint.png',
+                  // ),
                   _buildMenuItem(
                     id: 'delete',
                     title: 'Delete',
@@ -95,16 +95,16 @@ class AudioTile extends StatelessWidget {
                   title: 'Add to Playlist',
                   iconPath: 'assets/ic_add_to_playlist.png',
                 ),
-                _buildMenuItem(
-                  id: 'add-to-favorites',
-                  title: 'Add to Favorites',
-                  iconPath: 'assets/ic_favorite.png',
-                ),
-                _buildMenuItem(
-                  id: 'share',
-                  title: 'Share',
-                  iconPath: 'assets/ic_share.png',
-                ),
+                // _buildMenuItem(
+                //   id: 'add-to-favorites',
+                //   title: 'Add to Favorites',
+                //   iconPath: 'assets/ic_favorite.png',
+                // ),
+                // _buildMenuItem(
+                //   id: 'share',
+                //   title: 'Share',
+                //   iconPath: 'assets/ic_share.png',
+                // ),
               ],
             )
           ],

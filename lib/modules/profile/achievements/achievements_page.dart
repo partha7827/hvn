@@ -28,48 +28,48 @@ class _AchievementsPageState
         children: [
           _badges(),
           _userPoints(),
-          Container(
-            margin: const EdgeInsets.only(top: 30),
-            child: Column(
-              children: <Widget>[
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    _profileStatsWidget(
-                        controller.hvnEarned, Strings.hvnEarned),
-                    _profileStatsWidget(
-                        controller.sessionCount, Strings.sessionCount),
-                    _profileStatsWidget(
-                        controller.currentStreak, Strings.currentStreak),
-                    _profileStatsWidget(
-                        controller.questCompletion, Strings.questCompletion),
-                  ],
-                ),
-              ],
-            ),
-          ),
-          if (controller.showShareButton)
-            Container(
-              alignment: Alignment.center,
-              margin: const EdgeInsets.symmetric(vertical: 20),
-              child: Container(
-                width: MediaQuery.of(context).size.width * 0.8,
-                child: GradientOutlineButton(
-                  label: Container(
-                    margin: const EdgeInsets.only(left: 12),
-                    child: Text(
-                      Strings.shareYourStats,
-                      style: normal16Accent,
-                    ),
-                  ),
-                  icon: SvgPicture.asset(
-                    'assets/ic_share.svg',
-                    color: accentColor,
-                  ),
-                  onPressed: () {},
-                ),
-              ),
-            ),
+          // Container(
+          //   margin: const EdgeInsets.only(top: 30),
+          //   child: Column(
+          //     children: <Widget>[
+          //       Row(
+          //         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          //         children: [
+          //           _profileStatsWidget(
+          //               controller.hvnEarned, Strings.hvnEarned),
+          //           _profileStatsWidget(
+          //               controller.sessionCount, Strings.sessionCount),
+          //           _profileStatsWidget(
+          //               controller.currentStreak, Strings.currentStreak),
+          //           _profileStatsWidget(
+          //               controller.questCompletion, Strings.questCompletion),
+          //         ],
+          //       ),
+          //     ],
+          //   ),
+          // ),
+          // if (controller.showShareButton)
+          //   Container(
+          //     alignment: Alignment.center,
+          //     margin: const EdgeInsets.symmetric(vertical: 20),
+          //     child: Container(
+          //       width: MediaQuery.of(context).size.width * 0.8,
+          //       child: GradientOutlineButton(
+          //         label: Container(
+          //           margin: const EdgeInsets.only(left: 12),
+          //           child: Text(
+          //             Strings.shareYourStats,
+          //             style: normal16Accent,
+          //           ),
+          //         ),
+          //         icon: SvgPicture.asset(
+          //           'assets/ic_share.svg',
+          //           color: accentColor,
+          //         ),
+          //         onPressed: () {},
+          //       ),
+          //     ),
+          //   ),
         ],
       ),
     );
