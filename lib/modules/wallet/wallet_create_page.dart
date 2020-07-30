@@ -131,7 +131,7 @@ class _WalletCreatePage
                             Padding(
                               padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
                               child: IconButton(
-                                icon: Icon(Icons.content_copy),
+                                icon: const Icon(Icons.content_copy),
                                 tooltip: 'copy address',
                                 onPressed: () {
                                   Clipboard.setData(
@@ -198,8 +198,8 @@ class _WalletCreatePage
                           ),
                         ),
                         const SizedBox(height: 20),
-                        ListTile(
-                          title: const Text(
+                        const ListTile(
+                          title: Text(
                             '''Keep your seed phrase somewhere safe and do not lose it! Otherwise you will not be able to retrieve your accounts!''',
                             style: TextStyle(
                               fontSize: 12,

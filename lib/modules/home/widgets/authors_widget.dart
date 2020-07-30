@@ -26,16 +26,19 @@ class _AuthorsWidgetState extends ModularState<AuthorsWidget, HomeController> {
 
   @override
   Widget build(BuildContext context) {
-    return Observer(builder: (_) {
-      final isVisible = controller.authors.status == FutureStatus.fulfilled &&
-          controller.authors.value.isNotEmpty;
+    return Observer(
+      builder: (_) {
+        final isVisible = controller.authors.status == FutureStatus.fulfilled &&
+            controller.authors.value.isNotEmpty;
 
-      return AnimatedOpacity(
-        child: isVisible ? buildAuthors(controller.authors.value) : Container(),
-        opacity: isVisible ? 1 : 0,
-        duration: const Duration(seconds: 1),
-      );
-    });
+        return AnimatedOpacity(
+          child:
+              isVisible ? buildAuthors(controller.authors.value) : Container(),
+          opacity: isVisible ? 1 : 0,
+          duration: const Duration(seconds: 1),
+        );
+      },
+    );
   }
 
   Widget buildAuthors(BuiltList<User> authors) {

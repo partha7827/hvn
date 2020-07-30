@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:highvibe/modules/auth/login_register/login_register_controller.dart';
-import 'package:highvibe/modules/playlist/widgets/ui_utils.dart';
+import 'package:highvibe/widgets/ui_utils.dart';
 import 'package:highvibe/utils/utils.dart';
 import 'package:highvibe/values/strings.dart';
 import 'package:highvibe/values/themes.dart';

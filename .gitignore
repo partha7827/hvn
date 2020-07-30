@@ -12,6 +12,7 @@ env.js
 **/android/app/src/google-services.json
 
 # Miscellaneous
+.firebase/
 *.class
 *.log
 *.pyc

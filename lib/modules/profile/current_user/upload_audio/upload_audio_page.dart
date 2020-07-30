@@ -4,16 +4,15 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:highvibe/modules/playlist/widgets/ui_utils.dart';
+import 'package:highvibe/modules/profile/current_user/upload_audio/upload_audio_controller.dart';
 import 'package:highvibe/utils/supported_audio_types.dart';
 import 'package:highvibe/utils/utils.dart';
 import 'package:highvibe/values/strings.dart';
 import 'package:highvibe/values/themes.dart';
-import 'package:highvibe/widgets/responsive_safe_area.dart';
+import 'package:highvibe/widgets/widgets.dart'
+    show ResponsiveSafeArea, showSuccessDialog;
 import 'package:lottie/lottie.dart';
 import 'package:mobx/mobx.dart';
-
-import 'upload_audio_controller.dart';
 
 class UploadAudioPage extends StatefulWidget {
   const UploadAudioPage();
@@ -131,8 +130,7 @@ class _UploadAudioPageState
         }
       },
     );
-    when((_) => controller.currentStep == UploadAudioStep.success,
-        () async {
+    when((_) => controller.currentStep == UploadAudioStep.success, () async {
 //      await ProfileModule.toEditAudio(controller.audio);
       showSuccessDialog(
         context: context,

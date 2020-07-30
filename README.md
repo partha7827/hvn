@@ -134,3 +134,36 @@ In **iOS**, build-name is used as CFBundleShortVersionString while build-number 
 ```sh
 flutter pub run flutter_launcher_icons:main
 ```
+
+#### Build Web App
+
+#### Compile Web Portal and copy to public dir
+
+```sh
+flutter build web && cp -a build/web/ public/
+```
+
+##### Run Web Portal Localy
+
+https://highvibe-8601d.web.app
+
+```sh
+flutter build web && firebase serve --only hosting
+```
+
+```sh
+flutter build web && cp -a build/web/ public/ && cd public && python -m SimpleHTTPServer 8000
+```
+##### Deploy Web Portal to Firebase
+
+```sh
+flutter build web && firebase deploy
+```
+
+OR
+
+```sh
+firebase deploy -m "Deploying the best new feature ever."
+```
+
+https://firebase.google.com/docs/hosting/deploying#deploy

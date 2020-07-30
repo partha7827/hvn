@@ -54,10 +54,7 @@ class _WalletMainPageState extends ModularState<WalletMainPage, WalletStore> {
             child: SizedBox(
               width: width * 0.4,
               height: width * 0.4,
-              child: Icon(
-                Icons.star,
-                color: Colors.white,
-              ),
+              child: const Icon(Icons.star, color: Colors.white),
             ),
           ),
           Column(
@@ -149,26 +146,26 @@ class _WalletMainPageState extends ModularState<WalletMainPage, WalletStore> {
     return Container(
       margin: const EdgeInsets.only(left: 20, right: 5, top: 5, bottom: 5),
       child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            const Text(
-              'Recent Transactions',
-              style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 20,
-                  fontWeight: FontWeight.w600),
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          const Text(
+            'Recent Transactions',
+            style: TextStyle(
+                color: Colors.white, fontSize: 20, fontWeight: FontWeight.w600),
+          ),
+          const Padding(
+            padding: EdgeInsets.only(top: 4),
+            child: FlatButton(
+              onPressed: WalletModule.toTransactions,
+              child: Text(
+                'See All',
+                style: TextStyle(fontSize: 14, color: AppColors.textGrey),
+              ),
             ),
-            const Padding(
-                padding: EdgeInsets.only(top: 4),
-                child: FlatButton(
-                  onPressed: WalletModule.toTransactions,
-                  child: Text(
-                    'See All',
-                    style: TextStyle(fontSize: 14, color: AppColors.textGrey),
-                  ),
-                ),),
-          ],),
+          ),
+        ],
+      ),
     );
   }
 

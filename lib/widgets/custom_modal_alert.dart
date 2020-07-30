@@ -6,24 +6,38 @@ import 'package:highvibe/modules/playlist/resources/resources.dart';
 import 'package:highvibe/modules/wallet/resources/app_colors.dart';
 import 'package:highvibe/utils/utils.dart';
 import 'package:highvibe/widgets/gradient_raised_button.dart';
+import 'package:highvibe/widgets/widgets.dart' show isDisplayWebDesktop;
 
-class PlaylistModalAlert extends StatelessWidget {
+class CustomModalAlert extends StatelessWidget {
   final String title;
   final String subTitle;
-  final String buttonTitle;
   final int popsCount;
+  final Image mainButtonImage;
+  final String mainButtonTitle;
+  final Image secondButtonImage;
+  final String secondButtonTitle;
+  final VoidCallback secondButtonAction;
+  final String artworkImagePath;
   final bool isPresentedAsOverlay;
 
-  const PlaylistModalAlert({
+  const CustomModalAlert({
     @required this.title,
     @required this.subTitle,
-    this.isPresentedAsOverlay = false,
     this.popsCount = 2,
-    this.buttonTitle = PlaylistStrings.save,
+    this.mainButtonImage,
+    this.mainButtonTitle = 'Save',
+    this.secondButtonImage,
+    this.secondButtonTitle,
+    this.secondButtonAction,
+    this.artworkImagePath,
+    this.isPresentedAsOverlay = false,
   });
 
   @override
   Widget build(BuildContext context) {
+    final hasSecondButton =
+        secondButtonImage != null && secondButtonTitle != null;
+    final hasArtwork = artworkImagePath != null;
     return Scaffold(
       backgroundColor: Colors.transparent,
       body: Container(
@@ -48,7 +62,19 @@ class PlaylistModalAlert extends StatelessWidget {
               child: Column(
                 children: [
                   const SizedBox(height: 16),
-                  PlaylistImageAssets.checkMarkRounded,
+                  if (!hasArtwork) PlaylistImageAssets.checkMarkRounded,
+                  if (hasArtwork) ...[
+                    const SizedBox(height: 32),
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(10),
+                      child: Image.network(
+                        artworkImagePath,
+                        width: 80,
+                        height: 80,
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                  ],
                   const SizedBox(height: 32),
                   Text(
                     title,
@@ -68,14 +94,32 @@ class PlaylistModalAlert extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 43),
-                  Container(
-                    width: 160,
-                    height: 48,
-                    child: GradientRaisedButton(
-                      label: buttonTitle,
-                      onPressed: () => _close(context),
-                    ),
-                  ),
+                  Wrap(
+                    alignment: WrapAlignment.center,
+                    children: [
+                      Container(
+                        width: isDisplayWebDesktop ? 140 : 160,
+                        height: isDisplayWebDesktop ? 38 : 48,
+                        child: GradientRaisedButton(
+                          label: mainButtonTitle,
+                          buttonImage: mainButtonImage,
+                          onPressed: () => _close(context),
+                        ),
+                      ),
+                      if (hasSecondButton) ...[
+                        const SizedBox(width: 10),
+                        Container(
+                          width: isDisplayWebDesktop ? 140 : 160,
+                          height: isDisplayWebDesktop ? 38 : 48,
+                          child: GradientRaisedButton(
+                            label: secondButtonTitle,
+                            buttonImage: secondButtonImage,
+                            onPressed: () => secondButtonAction(),
+                          ),
+                        ),
+                      ]
+                    ],
+                  )
                 ],
               ),
             ),

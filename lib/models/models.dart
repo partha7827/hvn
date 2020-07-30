@@ -1,4 +1,5 @@
 export 'package:highvibe/models/audio/audio.dart';
+export 'package:highvibe/models/audio/audio_plus_firestore.dart';
 export 'package:highvibe/models/channel/channel.dart';
 export 'package:highvibe/models/message/message.dart';
 export 'package:highvibe/models/playlist/playlist.dart';

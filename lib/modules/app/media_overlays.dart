@@ -9,7 +9,7 @@ import 'package:highvibe/modules/audio_player/audio_player_page.dart';
 import 'package:highvibe/modules/playlist/add_to_playlist/add_to_playlist_module.dart';
 import 'package:highvibe/modules/playlist/create_new_playlist/create_new_playlist_module.dart';
 import 'package:highvibe/modules/playlist/open_playlist/open_playlist_module.dart';
-import 'package:highvibe/modules/playlist/widgets/widgets.dart';
+import 'package:highvibe/widgets/widgets.dart' show CustomModalAlert;
 import 'package:highvibe/modules/video_player/video_player_page.dart';
 import 'package:highvibe/services/audio_player_service.dart';
 
@@ -134,7 +134,7 @@ class MediaOverlays {
 
   static void presentShowDialogAsOverlay({
     @required BuildContext context,
-    @required PlaylistModalAlert modalAlert,
+    @required CustomModalAlert modalAlert,
   }) {
     _mediaOverlayState = Overlay.of(context);
 

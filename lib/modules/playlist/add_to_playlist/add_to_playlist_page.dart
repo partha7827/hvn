@@ -11,7 +11,7 @@ import 'package:highvibe/modules/playlist/widgets/widgets.dart'
     show PlaylistTile, progressDialog, showSuccessDialog;
 import 'package:highvibe/widgets/gradient_raised_button.dart';
 import 'package:highvibe/widgets/header_row.dart';
-import 'package:highvibe/widgets/responsive_safe_area.dart';
+import 'package:highvibe/widgets/widgets.dart' show ResponsiveSafeArea;
 
 class AddToPlaylistPage extends StatefulWidget {
   final bool isPresentedAsOverlay;

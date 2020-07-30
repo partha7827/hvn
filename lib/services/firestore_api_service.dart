@@ -17,21 +17,22 @@ class FirestoreApiService {
       query = queryBuilder(query);
     }
     final snapshots = query.snapshots();
-    return snapshots.map((snapshot) {
-      final result = snapshot.documents
-          .map((snapshot) => builder(snapshot.data, snapshot.documentID))
-          .where((value) => value != null)
-          .toList();
-      if (sort != null) {
-        result.sort(sort);
-      }
-      return result;
-    });
+    return snapshots.map(
+      (snapshot) {
+        final result = snapshot.documents
+            .map((snapshot) => builder(snapshot.data, snapshot.documentID))
+            .where((value) => value != null)
+            .toList();
+        if (sort != null) {
+          result.sort(sort);
+        }
+        return result;
+      },
+    );
   }
 
   Future<void> deleteData({@required String path}) async {
     final reference = Firestore.instance.document(path);
-    print('delete: $path');
     await reference.delete();
   }
 
@@ -50,7 +51,6 @@ class FirestoreApiService {
     @required Map<String, Object> data,
   }) async {
     final reference = Firestore.instance.document(path);
-    print('$path: $data');
     await reference.setData(data);
   }
 }

@@ -14,7 +14,7 @@ class PaperValidationSummary extends StatelessWidget {
           children: errors
               .map((error) => Text(
                     error,
-                    style: TextStyle(
+                    style: const TextStyle(
                       color: Colors.red,
                     ),
                   ))

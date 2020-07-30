@@ -30,9 +30,7 @@ class CustomTextForm extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Theme(
-      data: ThemeData(
-        primaryColor: Colors.white,
-      ),
+      data: ThemeData(primaryColor: Colors.white),
       child: TextFormField(
         style: normal16White,
         controller: controller,

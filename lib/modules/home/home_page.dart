@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:highvibe/modules/app/media_overlays.dart';
-import 'package:highvibe/modules/home/widgets/audios_widget.dart';
-import 'package:highvibe/modules/home/widgets/authors_widget.dart';
 import 'package:highvibe/modules/home/widgets/drawer_widget.dart';
 import 'package:highvibe/modules/home/widgets/exit_app.dart';
+import 'package:highvibe/modules/home/widgets/widgets.dart';
 import 'package:highvibe/utils/utils.dart';
-import 'package:highvibe/values/strings.dart';
-import 'package:highvibe/values/themes.dart';
+import 'package:highvibe/widgets/widgets.dart' show ResponsiveSafeArea;
+import 'package:highvibe/widgets/widgets.dart';
+import 'package:universal_html/html.dart' as html;
 
 import 'home_controller.dart';
 
@@ -22,105 +21,20 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends ModularState<HomePage, HomeController> {
   @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-  }
-
-  void _openDrawer() {
-    controller.scaffoldKey.currentState.openDrawer();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: _willPop,
       child: Scaffold(
         key: controller.scaffoldKey,
         drawer: DrawerWidget(),
-        body: Stack(
-          children: [
-            Positioned(
-              top: 0,
-              right: 0,
-              child: ColorFiltered(
-                colorFilter: ColorFilter.mode(
-                    Colors.black.withOpacity(0.4), BlendMode.dstATop),
-                child: Image.asset(
-                  'assets/home_background.jpg',
-                  fit: BoxFit.cover,
-                ),
-              ),
-            ),
-            Positioned(
-              bottom: 0,
-              left: 0,
-              right: 0,
-              child: Container(
-                width: double.maxFinite,
-                height: MediaQuery.of(context).size.height * 0.7,
-                decoration: const BoxDecoration(
-                  gradient: homeHeaderGradient,
-                ),
-              ),
-            ),
-            SafeArea(
-              child: ListView(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(top: 80, bottom: 40),
-                    child: _buildQuoteWidget(),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 40),
-                    child: AudiosWidget(),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 40),
-                    child: AuthorsWidget(),
-                  ),
-                ],
-              ),
-            ),
-            Positioned(
-              top: 40,
-              left: 10,
-              child: Container(
-                width: screenWidth(context),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[
-                    IconButton(
-                      onPressed: _openDrawer,
-                      icon: SvgPicture.asset('assets/ic_hamburger.svg'),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ],
+        body: ResponsiveSafeArea(
+          builder: (context, size) {
+            return isDisplayWebDesktop
+                ? DesktopHomeWidget(controller: controller)
+                : MobileHomeWidget(controller: controller);
+          },
         ),
       ),
-    );
-  }
-
-  Column _buildQuoteWidget() {
-    return Column(
-      children: <Widget>[
-        SvgPicture.asset('assets/ic_quote.svg'),
-        Padding(
-          padding: const EdgeInsets.all(20.0),
-          child: Text(
-            Strings.defaultQuote,
-            style: bold20PlayfairWhite,
-            textAlign: TextAlign.center,
-          ),
-        ),
-        Text(
-          'Henry James',
-          style: normal14White,
-          textAlign: TextAlign.center,
-        ),
-      ],
     );
   }
 
@@ -136,5 +50,11 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
       return shouldExit;
     }
     return shouldPop;
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    html.window.history.pushState(null, 'Home', '/home');
   }
 }

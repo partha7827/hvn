@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:highvibe/modules/app/app_controller.dart';
 import 'package:highvibe/values/themes.dart';
+import 'package:highvibe/widgets/widgets.dart';
 import 'package:mobx/mobx.dart';
 
 class AppWidget extends StatefulWidget {
@@ -29,12 +30,19 @@ class _AppWidgetState extends State<AppWidget> {
   @override
   void initState() {
     super.initState();
-    reaction((_) => appStore.authState, (authState) {
-      if (authState == AuthState.unauthenticated) {
-        Modular.to.pushNamedAndRemoveUntil('/loginRegister', (_) => false);
-      } else if (authState == AuthState.authenticated) {
-        Modular.to.pushNamedAndRemoveUntil('/home', (_) => false);
-      }
-    });
+    reaction(
+      (_) => appStore.authState,
+      (authState) {
+        if (authState == AuthState.unauthenticated) {
+          if (isDisplayWebDesktop) {
+            Modular.to.pushNamedAndRemoveUntil('/register', (_) => false);
+          } else {
+            Modular.to.pushNamedAndRemoveUntil('/loginRegister', (_) => false);
+          }
+        } else if (authState == AuthState.authenticated) {
+          Modular.to.pushNamedAndRemoveUntil('/home', (_) => false);
+        }
+      },
+    );
   }
 }

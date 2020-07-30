@@ -6,7 +6,7 @@ import 'package:highvibe/modules/video_player/widgets/widgets.dart'
     show PlayPauseOverlay;
 import 'package:highvibe/utils/utils.dart';
 import 'package:highvibe/values/themes.dart';
-import 'package:highvibe/widgets/responsive_safe_area.dart';
+import 'package:highvibe/widgets/widgets.dart' show ResponsiveSafeArea;
 import 'package:video_player/video_player.dart';
 
 enum VideoPlayerMode { fullScreenMode, minimised, none }

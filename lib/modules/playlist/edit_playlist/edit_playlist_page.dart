@@ -7,7 +7,7 @@ import 'package:highvibe/modules/playlist/resources/resources.dart';
 import 'package:highvibe/modules/playlist/widgets/widgets.dart';
 import 'package:highvibe/widgets/gradient_raised_button.dart';
 import 'package:highvibe/widgets/header_row.dart';
-import 'package:highvibe/widgets/responsive_safe_area.dart';
+import 'package:highvibe/widgets/widgets.dart' show ResponsiveSafeArea;
 
 class EditPlaylistPage extends StatefulWidget {
   EditPlaylistPage({Key key}) : super(key: key);

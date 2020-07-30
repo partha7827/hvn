@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:highvibe/modules/app/media_overlays.dart';
-import 'package:highvibe/modules/playlist/widgets/widgets.dart';
+import 'package:highvibe/widgets/widgets.dart' show CustomModalAlert;
 import 'package:progress_dialog/progress_dialog.dart';
 
 ProgressDialog progressDialog({@required BuildContext context}) {
@@ -17,10 +17,24 @@ void showSuccessDialog({
   @required bool isPresentedAsOverlay,
   @required String title,
   @required String subTitle,
+  int popsCount,
+  Image mainButtonImage,
+  String mainButtonTitle,
+  Image secondButtonImage,
+  String secondButtonTitle,
+  VoidCallback secondButtonAction,
+  String artworkImagePath,
 }) {
-  final modalAlert = PlaylistModalAlert(
+  final modalAlert = CustomModalAlert(
     title: title,
     subTitle: subTitle,
+    popsCount: popsCount,
+    mainButtonImage: mainButtonImage,
+    mainButtonTitle: mainButtonTitle,
+    secondButtonImage: secondButtonImage,
+    secondButtonTitle: secondButtonTitle,
+    secondButtonAction: secondButtonAction,
+    artworkImagePath: artworkImagePath,
     isPresentedAsOverlay: isPresentedAsOverlay,
   );
 

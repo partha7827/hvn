@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta content="IE=Edge" http-equiv="X-UA-Compatible">
-  <meta name="description" content="A new Flutter project.">
+  <meta name="description" content="HighVibe Network is blockchain-based ecosystem designed to incentivize personal growth.">
 
   <!-- iOS meta tags & icons -->
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -14,10 +14,31 @@
   <!-- Favicon -->
   <link rel="shortcut icon" type="image/png" href="favicon.png"/>
 
-  <title>highvibe</title>
+  <title>HighVibe Network</title>
   <link rel="manifest" href="manifest.json">
 </head>
 <body>
+  <script src="https://www.gstatic.com/firebasejs/7.16.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.16.1/firebase-firestore.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.16.1/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.16.1/firebase-storage.js"></script>
+
+  <!-- Firebase Credentials -->
+  <script>
+  var firebaseConfig = {
+    apiKey: "AIzaSyCjROh9e2eflWa6xZEx5RRY_9vkFW6qBfM",
+    authDomain: "highvibe-8601d.firebaseapp.com",
+    databaseURL: "https://highvibe-8601d.firebaseio.com",
+    projectId: "highvibe-8601d",
+    storageBucket: "highvibe-8601d.appspot.com",
+    messagingSenderId: "468548202200",
+    appId: "1:468548202200:web:9e60215d90078bebd931ad",
+    measurementId: "G-8EQ939NY0K"
+  }
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+  </script>
+
   <!-- This script installs service_worker.js to provide PWA functionality to
        application. For more information, see:
        https://developers.google.com/web/fundamentals/primers/service-workers -->

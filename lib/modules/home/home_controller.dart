@@ -73,4 +73,10 @@ abstract class _HomeControllerBase with Store {
     await auth.logout();
     await currentUserStore.setCurrentUser(null);
   }
+
+  @action
+  Future<void> tempLogoutDesktop() async {
+    await auth.logout();
+    await currentUserStore.setCurrentUser(null);
+  }
 }

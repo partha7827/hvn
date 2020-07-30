@@ -9,7 +9,7 @@ class ProcessingTransactionPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: Icon(Icons.send),
+        leading: const Icon(Icons.send),
         title: Text(title),
       ),
       body: Center(
@@ -23,7 +23,7 @@ class ProcessingTransactionPage extends StatelessWidget {
                 textAlign: TextAlign.center,
               ),
               const SizedBox(height: 48.0),
-              SpinKitWanderingCubes(color: Colors.blue),
+              const SpinKitWanderingCubes(color: Colors.blue),
             ],
           ),
         ),

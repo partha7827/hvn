@@ -45,8 +45,6 @@ class _ShowPlaylistsPageState
             Expanded(
               child: ListItemsBuilder<PlayList>(
                 snapshot: snapshot,
-                isCurrentUser: controller.firestorePlaylistService.userId ==
-                    controller.appController.currentUser.id,
                 itemBuilder: (context, item) {
                   return GestureDetector(
                     onTap: () async {

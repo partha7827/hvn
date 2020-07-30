@@ -26,18 +26,6 @@ DateTime getDateTime(dynamic dateTime) {
 String mediaTimeFormatter(Duration d) =>
     d.toString().split('.').first.padLeft(8, '0');
 
-// Future<bool> onWillPop() async {
-//   if (audioKey.currentState != null &&
-//       audioKey.currentState.controller != null) {
-//     if (!audioKey.currentState.controller.isMinimized) {
-//       await audioKey.currentState.controller.player.stop();
-//       MediaOverlays.disposeAudioOverlayEntry();
-//       return false;
-//     }
-//   }
-//   return true;
-// }
-
 bool isWebUrl(String path) => Uri.parse(path).host != null;
 
 void popUntil({
@@ -73,8 +61,24 @@ void showSnackBarMsg(ScaffoldState scaffoldState, String message) {
   );
 }
 
-Future<String> uploadFile(File file, String childName,
-    {String fileName = ''}) async {
+Widget snackBarLight({@required String message}) {
+  return SnackBar(
+    backgroundColor: Colors.black,
+    content: Text(
+      message,
+      style: const TextStyle(
+        color: Colors.white,
+      ),
+      textAlign: TextAlign.center,
+    ),
+  );
+}
+
+Future<String> uploadFile(
+  File file,
+  String childName, {
+  String fileName = '',
+}) async {
   if (Platform.isAndroid) {
     await checkStoragePermission();
   }

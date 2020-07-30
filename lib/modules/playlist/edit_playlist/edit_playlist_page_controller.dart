@@ -105,7 +105,6 @@ abstract class _EditPlaylistControllerBase with Store {
 
   Future<String> _updatePlaylistCover() async {
     var playlistCoverStoragePath = '';
-    print('playlistCoverPath $playlistCoverPath');
     if (playlistCoverPath != playList.coverUrlPath) {
       if (playlistCoverFile == null && playlistCoverPath.isEmpty) {
         playlistCoverStoragePath = PlaylistImageAssets.defaultCover;

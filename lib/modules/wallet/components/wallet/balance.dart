@@ -14,7 +14,6 @@ class Balance extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: Column(
-        //mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           Container(
             decoration: const BoxDecoration(
@@ -75,7 +74,7 @@ class Balance extends StatelessWidget {
                                   margin:
                                       const EdgeInsets.fromLTRB(20, 0, 0, 0),
                                   child: IconButton(
-                                    icon: Icon(Icons.content_copy),
+                                    icon: const Icon(Icons.content_copy),
                                     iconSize: 20,
                                     tooltip: 'copy address',
                                     onPressed: () {
