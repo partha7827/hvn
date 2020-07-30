@@ -66,7 +66,7 @@ abstract class _UploadAudioControllerBase with Store {
 
   @action
   Future<String> performUpload() async {
-    final audioUrl = await storage.uploadAudio(audioFile, currentUserId);
+    final audioUrl = await storage.uploadAudio(audioFile: audioFile);
 
     final audio = Audio(
       (b) => b
@@ -75,11 +75,7 @@ abstract class _UploadAudioControllerBase with Store {
         ..userAvatar = currentUserAvatar
         ..audioUrlPath = audioUrl,
     );
-
-    print('audio uploaded: ${audio.id}');
-
     await store.audioCollection.document(audio.id).setData(audio.toMap());
-
     return audio.id;
   }
 

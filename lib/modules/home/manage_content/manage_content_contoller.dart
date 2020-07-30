@@ -67,6 +67,7 @@ abstract class ManageContentBase with Store {
           ..tags = BuiltList<String>(tags).toBuilder(),
       );
       await _firestoreAudioService.setAudioItem(audioItem: audioItem);
+      print(audioItem);
       isUploadingData = false;
     } catch (error) {
       isUploadingData = false;

@@ -31,8 +31,8 @@ class StorageService extends Disposable {
   @override
   void dispose() {}
 
-  Future<String> uploadAudio(File file, String userId) async {
-    final snapshot = await audioFilesStorage.putFile(file).onComplete;
+  Future<String> uploadAudio({@required File audioFile}) async {
+    final snapshot = await audioFilesStorage.putFile(audioFile).onComplete;
     return (await snapshot.ref.getDownloadURL()).toString();
   }
 
