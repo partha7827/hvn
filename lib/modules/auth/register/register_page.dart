@@ -117,8 +117,7 @@ class _RegisterPageState
                             Strings.termsAndConditionsError);
                         return;
                       }
-
-                      await progressDialog(context: context).show();
+                      showProgressDialog(context);
                       try {
                         await controller.registerUser();
                       } catch (e) {

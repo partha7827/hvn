@@ -268,9 +268,11 @@ class _EditPlayListPageState
   Future<void> _updatePlaylistAndShowSuccessDialog({
     @required BuildContext context,
   }) async {
-    await progressDialog(context: context).show();
+    showProgressDialog(
+      context,
+      barrierDismissable: true,
+    );
     await controller.savePlaylist();
-    await progressDialog(context: context).hide();
     showSuccessDialog(
       context: context,
       isPresentedAsOverlay: false,
