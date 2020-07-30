@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:highvibe/models/models.dart' show Audio;
 import 'package:highvibe/utils/date_formater.dart';
+import 'package:highvibe/utils/utils.dart';
 import 'package:highvibe/widgets/widgets.dart' show isDisplayDesktop;
 
 class ManageContentListTile extends StatelessWidget {
@@ -66,7 +67,11 @@ class ManageContentListTile extends StatelessWidget {
                   ),
                   const SizedBox(width: 30),
                   Text(
-                    '${audioItem.duration}',
+                    mediaTimeFormatter(
+                      Duration(
+                        milliseconds: audioItem.duration,
+                      ),
+                    ),
                     style: const TextStyle(
                       fontSize: 16,
                       color: Color(0xFF8E8F99),
