@@ -9,6 +9,7 @@ const primaryTextColor = Colors.white;
 const accentColor = Color(0xFF66CCCC);
 const hintTextColor = Color(0xFF8E8F99);
 const redColor = Color(0xFFFF0000);
+const purpleColor = Color(0xFF666CCC);
 const mediaPlayerBackgroundColor = Color(0xFF000222);
 
 const LinearGradient primaryGradient = LinearGradient(
@@ -157,6 +158,16 @@ TextStyle normaBoldl16White = const TextStyle(
 TextStyle normal18White = const TextStyle(
   fontSize: 18,
   color: Colors.white,
+);
+
+TextStyle normal18Hint = const TextStyle(
+  fontSize: 18,
+  color: Color(0xFF8E8F99),
+);
+
+TextStyle normal18Purple = const TextStyle(
+  fontSize: 18,
+  color: purpleColor,
 );
 
 TextStyle normal12White = const TextStyle(

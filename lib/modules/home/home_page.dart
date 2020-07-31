@@ -21,10 +21,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends ModularState<HomePage, HomeController> {
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-  }
 
   void _openDrawer() {
     controller.scaffoldKey.currentState.openDrawer();
