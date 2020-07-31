@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:highvibe/values/strings.dart';
 import 'package:highvibe/values/themes.dart';
-import 'package:highvibe/widgets/gradient_outline_button.dart';
 import 'achievements_controller.dart';
 
 class AchievementsPage extends StatefulWidget {
@@ -28,48 +26,48 @@ class _AchievementsPageState
         children: [
           _badges(),
           _userPoints(),
-          Container(
-            margin: const EdgeInsets.only(top: 30),
-            child: Column(
-              children: <Widget>[
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    _profileStatsWidget(
-                        controller.hvnEarned, Strings.hvnEarned),
-                    _profileStatsWidget(
-                        controller.sessionCount, Strings.sessionCount),
-                    _profileStatsWidget(
-                        controller.currentStreak, Strings.currentStreak),
-                    _profileStatsWidget(
-                        controller.questCompletion, Strings.questCompletion),
-                  ],
-                ),
-              ],
-            ),
-          ),
-          if (controller.showShareButton)
-            Container(
-              alignment: Alignment.center,
-              margin: const EdgeInsets.symmetric(vertical: 20),
-              child: Container(
-                width: MediaQuery.of(context).size.width * 0.8,
-                child: GradientOutlineButton(
-                  label: Container(
-                    margin: const EdgeInsets.only(left: 12),
-                    child: Text(
-                      Strings.shareYourStats,
-                      style: normal16Accent,
-                    ),
-                  ),
-                  icon: SvgPicture.asset(
-                    'assets/ic_share.svg',
-                    color: accentColor,
-                  ),
-                  onPressed: () {},
-                ),
-              ),
-            ),
+          // Container(
+          //   margin: const EdgeInsets.only(top: 30),
+          //   child: Column(
+          //     children: <Widget>[
+          //       Row(
+          //         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          //         children: [
+          //           _profileStatsWidget(
+          //               controller.hvnEarned, Strings.hvnEarned),
+          //           _profileStatsWidget(
+          //               controller.sessionCount, Strings.sessionCount),
+          //           _profileStatsWidget(
+          //               controller.currentStreak, Strings.currentStreak),
+          //           _profileStatsWidget(
+          //               controller.questCompletion, Strings.questCompletion),
+          //         ],
+          //       ),
+          //     ],
+          //   ),
+          // ),
+          // if (controller.showShareButton)
+          //   Container(
+          //     alignment: Alignment.center,
+          //     margin: const EdgeInsets.symmetric(vertical: 20),
+          //     child: Container(
+          //       width: MediaQuery.of(context).size.width * 0.8,
+          //       child: GradientOutlineButton(
+          //         label: Container(
+          //           margin: const EdgeInsets.only(left: 12),
+          //           child: Text(
+          //             Strings.shareYourStats,
+          //             style: normal16Accent,
+          //           ),
+          //         ),
+          //         icon: SvgPicture.asset(
+          //           'assets/ic_share.svg',
+          //           color: accentColor,
+          //         ),
+          //         onPressed: () {},
+          //       ),
+          //     ),
+          //   ),
         ],
       ),
     );
@@ -153,28 +151,28 @@ class _AchievementsPageState
     );
   }
 
-  Widget _profileStatsWidget(String value, String label) {
-    return Expanded(
-      child: Container(
-        child: Column(
-          children: <Widget>[
-            Text(
-              value ?? '',
-              style: bold24White,
-              textAlign: TextAlign.center,
-            ),
-            Container(
-              margin: const EdgeInsets.only(top: 4),
-              child: Text(
-                label ?? '',
-                textAlign: TextAlign.center,
-                style: normal14Hint,
-                overflow: TextOverflow.fade,
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
+  // Widget _profileStatsWidget(String value, String label) {
+  //   return Expanded(
+  //     child: Container(
+  //       child: Column(
+  //         children: <Widget>[
+  //           Text(
+  //             value ?? '',
+  //             style: bold24White,
+  //             textAlign: TextAlign.center,
+  //           ),
+  //           Container(
+  //             margin: const EdgeInsets.only(top: 4),
+  //             child: Text(
+  //               label ?? '',
+  //               textAlign: TextAlign.center,
+  //               style: normal14Hint,
+  //               overflow: TextOverflow.fade,
+  //             ),
+  //           ),
+  //         ],
+  //       ),
+  //     ),
+  //   );
+  // }
 }

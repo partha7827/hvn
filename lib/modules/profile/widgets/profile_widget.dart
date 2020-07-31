@@ -44,7 +44,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
   final List<FabIconModel> fabicons = [
     FabIconModel(
         title: Strings.uploadContent, imagePath: 'assets/ic_upload.svg'),
-    FabIconModel(title: Strings.goLive, imagePath: 'assets/ic_go_live.svg'),
+    // FabIconModel(title: Strings.goLive, imagePath: 'assets/ic_go_live.svg'),
     FabIconModel(
         title: Strings.createPlaylist,
         imagePath: 'assets/ic_create_playlist.svg'),

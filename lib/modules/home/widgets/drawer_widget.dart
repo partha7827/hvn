@@ -93,13 +93,13 @@ class DrawerWidget extends StatelessWidget {
                     //     Modular.to.pushNamed('journal');
                     //   },
                     // ),
-                    DrawerButton(
-                        iconPath: 'assets/ic_activity_history.svg',
-                        title: Strings.myMoodTracker,
-                        onTap: () {
-                          _closeDrawer();
-                          Modular.to.pushNamed('/moodtracker');
-                        }),
+                    // DrawerButton(
+                    //     iconPath: 'assets/ic_activity_history.svg',
+                    //     title: Strings.myMoodTracker,
+                    //     onTap: () {
+                    //       _closeDrawer();
+                    //       Modular.to.pushNamed('/moodtracker');
+                    //     }),
                   ],
                 ),
               ),
