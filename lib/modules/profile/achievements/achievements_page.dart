@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:highvibe/values/strings.dart';
 import 'package:highvibe/values/themes.dart';
-import 'package:highvibe/widgets/gradient_outline_button.dart';
 import 'achievements_controller.dart';
 
 class AchievementsPage extends StatefulWidget {
@@ -153,28 +151,28 @@ class _AchievementsPageState
     );
   }
 
-  Widget _profileStatsWidget(String value, String label) {
-    return Expanded(
-      child: Container(
-        child: Column(
-          children: <Widget>[
-            Text(
-              value ?? '',
-              style: bold24White,
-              textAlign: TextAlign.center,
-            ),
-            Container(
-              margin: const EdgeInsets.only(top: 4),
-              child: Text(
-                label ?? '',
-                textAlign: TextAlign.center,
-                style: normal14Hint,
-                overflow: TextOverflow.fade,
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
+  // Widget _profileStatsWidget(String value, String label) {
+  //   return Expanded(
+  //     child: Container(
+  //       child: Column(
+  //         children: <Widget>[
+  //           Text(
+  //             value ?? '',
+  //             style: bold24White,
+  //             textAlign: TextAlign.center,
+  //           ),
+  //           Container(
+  //             margin: const EdgeInsets.only(top: 4),
+  //             child: Text(
+  //               label ?? '',
+  //               textAlign: TextAlign.center,
+  //               style: normal14Hint,
+  //               overflow: TextOverflow.fade,
+  //             ),
+  //           ),
+  //         ],
+  //       ),
+  //     ),
+  //   );
+  // }
 }
