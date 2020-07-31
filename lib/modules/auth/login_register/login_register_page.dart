@@ -85,7 +85,7 @@ class _LoginRegisterPageState
             ),
             FlatButton(
               onPressed: () async {
-                await progressDialog(context: context).show();
+                showProgressDialog(context);
                 try {
                   await controller.skipAndExplore();
                 } catch (err) {

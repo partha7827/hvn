@@ -87,14 +87,13 @@ class _LoginPageState extends ModularState<LoginPage, LoginController> {
                         if (!controller.formKey.currentState.validate()) {
                           return null;
                         }
-                        await progressDialog(context: context).show();
+                        showProgressDialog(context);
                         try {
                           await controller.loginUser();
                         } catch (e) {
                           showSnackBarMsg(controller.scaffoldKey.currentState,
                               e.toString());
                         } finally {
-                          // await progressDialog(context: context).hide();
                         }
                       },
                     ),
@@ -126,7 +125,7 @@ class _LoginPageState extends ModularState<LoginPage, LoginController> {
                             isLoading: controller.inProgressFacebookLogIn,
                             icon: SvgPicture.asset('assets/ic_facebook.svg'),
                             onPressed: () async {
-                              await progressDialog(context: context).show();
+                              showProgressDialog(context);
                               try {
                                 await controller.facebookLogin();
                               } catch (e) {
@@ -134,7 +133,6 @@ class _LoginPageState extends ModularState<LoginPage, LoginController> {
                                     controller.scaffoldKey.currentState,
                                     e.toString());
                               } finally {
-                                //await progressDialog(context: context).hide();
                               }
                             },
                           ),
@@ -149,7 +147,7 @@ class _LoginPageState extends ModularState<LoginPage, LoginController> {
                             isLoading: controller.inProgressGoogleSignIn,
                             icon: SvgPicture.asset('assets/ic_google.svg'),
                             onPressed: () async {
-                              await progressDialog(context: context).show();
+                              showProgressDialog(context);
                               try {
                                 await controller.googleSignIn();
                               } catch (e) {
@@ -157,7 +155,6 @@ class _LoginPageState extends ModularState<LoginPage, LoginController> {
                                     controller.scaffoldKey.currentState,
                                     e.toString());
                               } finally {
-                                //await progressDialog(context: context).hide();
                               }
                             },
                           ),

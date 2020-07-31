@@ -7,8 +7,9 @@ import 'package:highvibe/modules/app/media_overlays.dart';
 import 'package:highvibe/modules/playlist/add_to_playlist/add_to_playlist_controller.dart';
 import 'package:highvibe/modules/playlist/playlist_module.dart';
 import 'package:highvibe/modules/playlist/resources/resources.dart';
+import 'package:highvibe/modules/playlist/widgets/ui_utils.dart';
 import 'package:highvibe/modules/playlist/widgets/widgets.dart'
-    show PlaylistTile, progressDialog, showSuccessDialog;
+    show PlaylistTile, showSuccessDialog;
 import 'package:highvibe/widgets/gradient_raised_button.dart';
 import 'package:highvibe/widgets/header_row.dart';
 import 'package:highvibe/widgets/responsive_safe_area.dart';
@@ -171,9 +172,11 @@ class _AddToPlaylistPageState
   Future<void> _updatePlaylistAndShowSuccessDialog({
     @required BuildContext context,
   }) async {
-    await progressDialog(context: context).show();
+    showProgressDialog(
+      context,
+      barrierDismissable: true,
+    );
     await controller.saveAudioToPlaylists();
-    await progressDialog(context: context).hide();
     showSuccessDialog(
       context: context,
       isPresentedAsOverlay: widget.isPresentedAsOverlay,

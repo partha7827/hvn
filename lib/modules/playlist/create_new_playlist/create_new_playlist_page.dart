@@ -213,9 +213,11 @@ class _CreateNewPlaylistPage
   Future<void> _savePlaylistAndShowSuccessDialog({
     @required BuildContext context,
   }) async {
-    await progressDialog(context: context).show();
+    showProgressDialog(
+      context,
+      barrierDismissable: true,
+    );
     await controller.createPlaylist();
-    await progressDialog(context: context).hide();
     showSuccessDialog(
       context: context,
       isPresentedAsOverlay: widget.isPresentedAsOverlay,
