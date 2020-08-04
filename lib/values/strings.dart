@@ -128,6 +128,8 @@ class Strings {
 
   static const String audioFileUploaded = 'Audio file uploaded';
   static const String audioFileUploadFailed = 'Error uploading file!';
+  static const String currentMoodDescription =
+      "Acknowledging how we're feeling helps to strengthen our resilience.";
 }
 
 class UploadAudioStrings {

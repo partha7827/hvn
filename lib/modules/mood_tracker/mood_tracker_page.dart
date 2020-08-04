@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:highvibe/modules/mood_tracker/mood_tracker_controller.dart';
+import 'package:highvibe/modules/mood_tracker/mood_tracker_module.dart';
 import 'package:highvibe/utils/utils.dart';
 import 'package:highvibe/values/strings.dart';
 import 'package:highvibe/values/themes.dart';
@@ -136,7 +137,12 @@ class _MoodTrackerPageState
   Center _emojiWidget(int index) {
     return Center(
       child: GestureDetector(
-        onTap: () {},
+        onTap: () {
+          MoodTrackerModule.toCurrentMood(
+            emojiNameList[index],
+            emojiPathList[index],
+          );
+        },
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
@@ -144,7 +150,9 @@ class _MoodTrackerPageState
               margin: const EdgeInsets.only(bottom: 8),
               height: 60,
               width: 60,
-              child: Image.asset(emojiPathList[index]),
+              child: Image.asset(
+                emojiPathList[index],
+              ),
             ),
             Text(
               emojiNameList[index],

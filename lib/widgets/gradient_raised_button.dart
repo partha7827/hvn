@@ -8,6 +8,7 @@ class GradientRaisedButton extends StatelessWidget {
   final bool isLoading;
   final double minHeight;
   final double radius;
+  final Widget leading;
 
   const GradientRaisedButton({
     this.onPressed,
@@ -16,6 +17,7 @@ class GradientRaisedButton extends StatelessWidget {
     this.isLoading = false,
     this.minHeight = 48,
     this.radius = 10,
+    this.leading,
   });
 
   @override
@@ -38,6 +40,11 @@ class GradientRaisedButton extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.only(right: 8),
                   child: Icon(icon),
+                ),
+              if (leading != null)
+                Padding(
+                  padding: const EdgeInsets.only(right: 8),
+                  child: leading,
                 ),
               if (isLoading)
                 const SizedBox(

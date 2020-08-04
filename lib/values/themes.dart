@@ -159,6 +159,11 @@ TextStyle normal18White = const TextStyle(
   color: Colors.white,
 );
 
+TextStyle normal20White = const TextStyle(
+  fontSize: 20,
+  color: Colors.white,
+);
+
 TextStyle normal12White = const TextStyle(
   fontSize: 12,
   color: Colors.white,
