@@ -58,7 +58,7 @@ class _MoodTrackerPageState
             IconButton(
               icon:
                   SvgPicture.asset('assets/ic_date.svg', height: 24, width: 24),
-              onPressed: null,
+              onPressed: () => MoodTrackerModule.toMoodCalendarScreen(),
             ),
           ]),
       body: Container(

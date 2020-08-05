@@ -240,9 +240,13 @@ class ChipButton extends StatefulWidget {
   const ChipButton({
     Key key,
     @required this.label,
+    this.color,
+    this.isEnabled = true,
   }) : super(key: key);
 
   final String label;
+  final Color color;
+  final bool isEnabled;
 
   @override
   _ChipButtonState createState() => _ChipButtonState();
@@ -253,29 +257,39 @@ class _ChipButtonState extends State<ChipButton> {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: () {
-        setState(() {
-          isSelected = !isSelected;
-        });
-      },
+    return IgnorePointer(
+      ignoring: !widget.isEnabled,
       child: Container(
         margin: const EdgeInsets.only(right: 16, bottom: 16),
-        padding: const EdgeInsets.all(1),
-        decoration: BoxDecoration(
+        child: InkWell(
           borderRadius: BorderRadius.circular(100),
-          gradient: isSelected ? primaryGradient : null,
-          color: isSelected ? null : hintTextColor,
-        ),
-        child: Container(
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-          decoration: BoxDecoration(
-            color: secondaryColor,
-            borderRadius: BorderRadius.circular(100),
-          ),
-          child: Text(
-            widget.label,
-            style: isSelected ? normal16White : normal16Hint,
+          onTap: () {
+            setState(() {
+              isSelected = !isSelected;
+            });
+          },
+          child: Container(
+            padding: const EdgeInsets.all(1),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(100),
+              gradient: isSelected ? primaryGradient : null,
+              color: isSelected
+                  ? null
+                  : !widget.isEnabled ? Colors.white : hintTextColor,
+            ),
+            child: Container(
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+              decoration: BoxDecoration(
+                color: widget.color ?? secondaryColor,
+                borderRadius: BorderRadius.circular(100),
+              ),
+              child: Text(
+                widget.label,
+                style: isSelected || !widget.isEnabled
+                    ? normal16White
+                    : normal16Hint,
+              ),
+            ),
           ),
         ),
       ),

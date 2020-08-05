@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:highvibe/modules/mood_tracker/mood_tracker_module.dart';
 import 'package:highvibe/utils/utils.dart';
 import 'package:highvibe/values/themes.dart';
 import 'package:highvibe/widgets/gradient_raised_button.dart';
@@ -25,7 +26,7 @@ class _MoodCheckInsScreenState extends State<MoodCheckInsScreen> {
               'assets/ic_date.svg',
               height: 24,
             ),
-            onPressed: () {},
+            onPressed: () => MoodTrackerModule.toMoodCalendarScreen(),
           ),
         ],
       ),

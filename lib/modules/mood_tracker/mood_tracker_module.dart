@@ -1,5 +1,6 @@
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:highvibe/modules/mood_tracker/current_mood.dart';
+import 'package:highvibe/modules/mood_tracker/mood_calendar_screen.dart';
 import 'package:highvibe/modules/mood_tracker/mood_check_ins.dart';
 import 'package:highvibe/modules/mood_tracker/mood_tracker_controller.dart';
 import 'package:highvibe/modules/mood_tracker/mood_tracker_page.dart';
@@ -30,6 +31,11 @@ class MoodTrackerModule extends ChildModule {
           child: (_, args) => MoodCheckInsScreen(),
           transition: TransitionType.fadeIn,
         ),
+        Router(
+          '/moodCalendar',
+          child: (_, args) => MoodCalendarScreen(),
+          transition: TransitionType.fadeIn,
+        ),
       ];
 
   static Future<Object> toCurrentMood(String title, String imagePath) =>
@@ -37,5 +43,9 @@ class MoodTrackerModule extends ChildModule {
 
   static Future<Object> toMoodCheckInScreen() => Modular.to.pushNamed(
         '/moodCheckIns',
+      );
+
+      static Future<Object> toMoodCalendarScreen() => Modular.to.pushNamed(
+        '/moodCalendar',
       );
 }
