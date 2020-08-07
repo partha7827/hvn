@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:highvibe/modules/mood_tracker/current_mood.dart';
 import 'package:highvibe/modules/mood_tracker/mood.dart';
 import 'package:highvibe/modules/mood_tracker/mood_tracker_module.dart';
 import 'package:highvibe/values/themes.dart';
@@ -8,6 +7,18 @@ import 'package:date_util/date_util.dart';
 import 'package:highvibe/widgets/calendar_day_widget.dart';
 import 'package:highvibe/widgets/calendar_week_day_widget.dart';
 import 'package:highvibe/widgets/chip_button.dart';
+
+class Month {
+  String monthStartingDay;
+  int offset, totalDays;
+  DateTime month;
+
+  Month(
+      {this.month,
+      this.offset = 0,
+      this.monthStartingDay = '',
+      this.totalDays = 0});
+}
 
 class MoodCalendarScreen extends StatefulWidget {
   const MoodCalendarScreen({this.mood});
@@ -27,6 +38,14 @@ class _MoodCalendarScreenState extends State<MoodCalendarScreen> {
 
   final _pageController = PageController(initialPage: 12);
   int currentPage = 12;
+
+  final List<Month> calendar = [];
+
+  void setCalendar() {
+    for (var i = 0; i < 25; i++) {
+      calendar.add(Month());
+    }
+  }
 
   bool isFullScreenCalendar = true;
   final List<Mood> events = [
@@ -53,8 +72,11 @@ class _MoodCalendarScreenState extends State<MoodCalendarScreen> {
   @override
   void initState() {
     super.initState();
+
     dateTime = DateTime(now.year, now.month, now.day);
-    initCurrentMonth();
+    setCalendar();
+    initDateTimeList();
+
     if (widget.mood != null) {
       events.insert(0, widget.mood);
     }
@@ -100,64 +122,72 @@ class _MoodCalendarScreenState extends State<MoodCalendarScreen> {
       ),
       body: Container(
           child: isFullScreenCalendar
-              ? Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    Container(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 20, vertical: 24),
-                      child: Text(
-                        '${dateUtil.month(dateTime.month)}, ${dateTime.year}',
-                        style: bold18PlayfairWhite,
-                      ),
-                    ),
-                    const WeekdayWidget(),
-                    const SizedBox(
-                      height: 22,
-                    ),
-                    Expanded(
-                      child: PageView.builder(
-                        onPageChanged: onPageChanged,
-                        controller: _pageController,
-                        itemBuilder: (BuildContext context, int index) {
-                          return GridView.builder(
-                            itemCount: totalNoOfDaysInCurrentMonth + offset,
+              ? PageView.builder(
+                  itemCount: calendar.length,
+                  controller: _pageController,
+                  itemBuilder: (BuildContext context, int index) {
+                    return Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Container(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 20, vertical: 24),
+                          child: Text(
+                            '${dateUtil.month(calendar[index].month.month)}, ${calendar[index].month.year}',
+                            style: bold18PlayfairWhite,
+                          ),
+                        ),
+                        const WeekdayWidget(),
+                        const SizedBox(
+                          height: 22,
+                        ),
+                        Expanded(
+                          child: GridView.builder(
+                            itemCount: calendar[index].totalDays +
+                                calendar[index].offset,
                             gridDelegate:
                                 const SliverGridDelegateWithFixedCrossAxisCount(
                                     crossAxisCount: 7, childAspectRatio: 0.7),
                             itemBuilder: (BuildContext context, int daysIndex) {
-                              if (daysIndex - offset < 0) {
+                              if (daysIndex - calendar[index].offset < 0) {
                                 return const SizedBox();
                               }
 
                               for (final mood in events) {
                                 if (mood.dateTime
                                         .difference(DateTime(
-                                            dateTime.year,
-                                            dateTime.month,
-                                            daysIndex - offset + 1))
+                                            calendar[index].month.year,
+                                            calendar[index].month.month,
+                                            daysIndex -
+                                                calendar[index].offset +
+                                                1))
                                         .inDays ==
                                     0) {
                                   return CalendarDay(
-                                    offset: daysIndex - offset + 1,
-                                    dateTime: DateTime(dateTime.year,
-                                        dateTime.month, daysIndex - offset + 1),
+                                    offset:
+                                        daysIndex - calendar[index].offset + 1,
+                                    dateTime: DateTime(
+                                        calendar[index].month.year,
+                                        calendar[index].month.month,
+                                        daysIndex - calendar[index].offset + 1),
                                     isMoodTracked: true,
                                     mood: mood,
                                   );
                                 }
                               }
                               return CalendarDay(
-                                offset: daysIndex - offset + 1,
-                                dateTime: DateTime(dateTime.year,
-                                    dateTime.month, daysIndex - offset + 1),
+                                offset: daysIndex - calendar[index].offset + 1,
+                                dateTime: DateTime(
+                                    calendar[index].month.year,
+                                    calendar[index].month.month,
+                                    daysIndex - calendar[index].offset + 1),
                               );
                             },
-                          );
-                        },
-                      ),
-                    ),
-                  ],
+                          ),
+                        ),
+                      ],
+                    );
+                  },
                 )
               : (events.isEmpty)
                   ? Container(
@@ -311,7 +341,7 @@ class _MoodCalendarScreenState extends State<MoodCalendarScreen> {
     );
   }
 
-  void onPageChanged(int page) {
+  DateTime setDateTime(int page) {
     if (currentPage < page) {
       // Going forward
       if (dateTime.month < 12) {
@@ -334,15 +364,32 @@ class _MoodCalendarScreenState extends State<MoodCalendarScreen> {
 
     currentPage = page;
 
-    initCurrentMonth();
-    setState(() {});
+    currentMonth(page);
+    return dateTime;
   }
 
-  void initCurrentMonth() {
+  void initDateTimeList() {
+    for (var i = 12; i >= 0; i--) {
+      calendar[i].month = setDateTime(i);
+    }
+
+    currentPage = 12;
+    dateTime = DateTime(now.year, now.month, 1);
+
+    for (var i = 12; i <= 24; i++) {
+      calendar[i].month = setDateTime(i);
+    }
+  }
+
+  void currentMonth(int i) {
     totalNoOfDaysInCurrentMonth =
         dateUtil.daysInMonth(dateTime.month, dateTime.year);
     monthStartingWithDay = dateUtil
         .day(dateUtil.totalLengthOfDays(dateTime.month, 1, dateTime.year));
     offset = getDayOffset(monthStartingWithDay);
+
+    calendar[i].totalDays = totalNoOfDaysInCurrentMonth;
+    calendar[i].monthStartingDay = monthStartingWithDay;
+    calendar[i].offset = offset;
   }
 }
