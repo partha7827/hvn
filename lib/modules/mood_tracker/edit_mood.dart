@@ -2,50 +2,37 @@ import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:highvibe/modules/mood_tracker/mood.dart';
-import 'package:highvibe/modules/mood_tracker/mood_tracker_module.dart';
 import 'package:highvibe/utils/utils.dart';
-import 'package:highvibe/values/strings.dart';
 import 'package:highvibe/values/themes.dart';
 import 'package:highvibe/widgets/chip_button.dart';
-import 'package:highvibe/widgets/gradient_raised_button.dart';
+import 'package:highvibe/widgets/gradient_outline_button.dart';
 
-class CurrentMood extends StatefulWidget {
-  const CurrentMood({
-    this.imagePath,
-    this.title = '',
+class EditMoodScreen extends StatefulWidget {
+  const EditMoodScreen({
+    @required this.mood,
   });
 
-  final String imagePath, title;
-
+  final Mood mood;
   @override
-  _CurrentMoodState createState() => _CurrentMoodState();
+  _EditMoodScreenState createState() => _EditMoodScreenState();
 }
 
-class _CurrentMoodState extends State<CurrentMood> {
+class _EditMoodScreenState extends State<EditMoodScreen> {
   final _textEditingController = TextEditingController();
-  final List<String> _selectedTags = [];
-  List<String> allTags = [
-    'Work',
-    'School',
-    'Family',
-    'Friends',
-    'Travel',
-    'Self Care',
-    'Relationships',
-    'Calm',
-    'Money',
-    'Food',
-    'Spirituality',
-    'Health'
-  ];
+
+  @override
+  void initState() {
+    super.initState();
+    _textEditingController.text = widget.mood.notes;
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
-          icon: Icon(
-            Icons.arrow_back,
+          icon: const Icon(
+            Icons.close,
             color: Colors.white,
           ),
           onPressed: () {
@@ -57,7 +44,6 @@ class _CurrentMoodState extends State<CurrentMood> {
         child: Column(
           children: <Widget>[
             _currentMoodHeader(),
-            _description(),
             _tagsAndNotes(context),
           ],
         ),
@@ -82,11 +68,49 @@ class _CurrentMoodState extends State<CurrentMood> {
             Expanded(child: _tags()),
             Container(
               padding: const EdgeInsets.all(20),
-              child: GradientRaisedButton(
-                label: 'Done',
-                icon: Icons.check,
-                onPressed: toMoodCheckIns,
-                radius: 100,
+              child: Row(
+                children: <Widget>[
+                  Expanded(
+                    child: Container(
+                      margin: const EdgeInsets.only(right: 10),
+                      child: GradientOutlineButton(
+                        label: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text(
+                            'Edit Mood',
+                            style: normal14Accent,
+                          ),
+                        ),
+                        icon: Icon(
+                          Icons.edit,
+                          color: accentColor,
+                        ),
+                        onPressed: toMoodCheckIns,
+                        radius: 100,
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                    child: Container(
+                      margin: const EdgeInsets.only(left: 10),
+                      child: GradientOutlineButton(
+                        label: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text(
+                            'Delete Mood',
+                            style: normal14Accent,
+                          ),
+                        ),
+                        icon: Icon(
+                          Icons.delete,
+                          color: accentColor,
+                        ),
+                        onPressed: toMoodCheckIns,
+                        radius: 100,
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ),
           ],
@@ -96,18 +120,7 @@ class _CurrentMoodState extends State<CurrentMood> {
   }
 
   void toMoodCheckIns() {
-    final dateTime = DateTime.now();
-    final mood = Mood(
-      title: widget.title,
-      imagePath: widget.imagePath,
-      notes: _textEditingController.text,
-      tags: _selectedTags,
-      dateTime: DateTime(dateTime.year, dateTime.month, dateTime.day),
-    );
-
-    print(mood.toString());
-
-    MoodTrackerModule.toMoodCheckInScreen(mood);
+    // MoodTrackerModule.toMoodCheckInScreen();
   }
 
   Widget _tags() {
@@ -130,17 +143,13 @@ class _CurrentMoodState extends State<CurrentMood> {
           child: Wrap(
             alignment: WrapAlignment.start,
             children: List.generate(
-                allTags.length,
-                (index) => ChipButton(
-                      label: allTags[index],
-                      voidCallback: (bool isSelected) {
-                        if (isSelected) {
-                          _selectedTags.add(allTags[index]);
-                        } else {
-                          _selectedTags.remove(allTags[index]);
-                        }
-                      },
-                    )),
+              widget.mood.tags.length,
+              (i) => ChipButton(
+                label: widget.mood.tags[i],
+                color: secondaryColor,
+                isEnabled: false,
+              ),
+            ),
           ),
         ),
         Divider(
@@ -207,39 +216,23 @@ class _CurrentMoodState extends State<CurrentMood> {
     );
   }
 
-  Container _description() {
-    return Container(
-      padding: const EdgeInsets.all(20),
-      child: Text(
-        Strings.currentMoodDescription,
-        style: normal20White,
-      ),
-    );
-  }
-
   Container _currentMoodHeader() {
     return Container(
       padding: const EdgeInsets.all(20),
       child: Row(
         children: <Widget>[
-          Image.asset(widget.imagePath),
+          Image.asset(widget.mood.imagePath),
           const SizedBox(
             width: 8,
           ),
           Expanded(
             child: Text(
-              widget.title,
+              widget.mood.title,
               style: bold20PlayfairWhite,
             ),
           ),
         ],
       ),
     );
-  }
-
-  @override
-  void dispose() {
-    _textEditingController?.dispose();
-    super.dispose();
   }
 }

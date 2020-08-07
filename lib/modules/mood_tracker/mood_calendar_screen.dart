@@ -1,10 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:highvibe/modules/mood_tracker/current_mood.dart';
+import 'package:highvibe/modules/mood_tracker/mood.dart';
+import 'package:highvibe/modules/mood_tracker/mood_tracker_module.dart';
 import 'package:highvibe/values/themes.dart';
 import 'package:date_util/date_util.dart';
+import 'package:highvibe/widgets/calendar_day_widget.dart';
+import 'package:highvibe/widgets/calendar_week_day_widget.dart';
+import 'package:highvibe/widgets/chip_button.dart';
 
 class MoodCalendarScreen extends StatefulWidget {
+  const MoodCalendarScreen({this.mood});
+  final Mood mood;
+
   @override
   _MoodCalendarScreenState createState() => _MoodCalendarScreenState();
 }
@@ -21,13 +29,35 @@ class _MoodCalendarScreenState extends State<MoodCalendarScreen> {
   int currentPage = 12;
 
   bool isFullScreenCalendar = true;
-  final List<String> events = [''];
+  final List<Mood> events = [
+    Mood(
+      dateTime: DateTime(DateTime.now().year, DateTime.now().month, 1),
+      imagePath: 'assets/emoji/ic_happy.png',
+      title: 'Happy',
+      tags: ['Work'],
+    ),
+    Mood(
+        dateTime: DateTime(DateTime.now().year, DateTime.now().month, 3),
+        imagePath: 'assets/emoji/ic_grateful.png',
+        title: 'Grateful',
+        tags: ['Work', 'School', 'Family'],
+        notes: 'I am feeling very happy today'),
+    Mood(
+      dateTime: DateTime(DateTime.now().year, DateTime.now().month, 4),
+      imagePath: 'assets/emoji/ic_relaxed.png',
+      title: 'Relaxed',
+      tags: ['Work', 'School'],
+    ),
+  ];
 
   @override
   void initState() {
     super.initState();
     dateTime = DateTime(now.year, now.month, now.day);
     initCurrentMonth();
+    if (widget.mood != null) {
+      events.insert(0, widget.mood);
+    }
   }
 
   int getDayOffset(String day) {
@@ -99,8 +129,28 @@ class _MoodCalendarScreenState extends State<MoodCalendarScreen> {
                               if (daysIndex - offset < 0) {
                                 return const SizedBox();
                               }
+
+                              for (final mood in events) {
+                                if (mood.dateTime
+                                        .difference(DateTime(
+                                            dateTime.year,
+                                            dateTime.month,
+                                            daysIndex - offset + 1))
+                                        .inDays ==
+                                    0) {
+                                  return CalendarDay(
+                                    offset: daysIndex - offset + 1,
+                                    dateTime: DateTime(dateTime.year,
+                                        dateTime.month, daysIndex - offset + 1),
+                                    isMoodTracked: true,
+                                    mood: mood,
+                                  );
+                                }
+                              }
                               return CalendarDay(
                                 offset: daysIndex - offset + 1,
+                                dateTime: DateTime(dateTime.year,
+                                    dateTime.month, daysIndex - offset + 1),
                               );
                             },
                           );
@@ -126,75 +176,78 @@ class _MoodCalendarScreenState extends State<MoodCalendarScreen> {
       child: ListView.builder(
           itemCount: events.length,
           itemBuilder: (BuildContext context, int index) {
-            return Container(
-              margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
-              child: Card(
-                color: secondaryColor,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: Container(
-                  padding:
-                      const EdgeInsets.all(16),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: <Widget>[
-                          Row(
-                            children: <Widget>[
-                              Image.asset('assets/emoji/ic_happy.png'),
-                              Container(
-                                padding:
-                                    const EdgeInsets.symmetric(horizontal: 16),
-                                child: Text(
-                                  'Happy',
-                                  style: bold18PlayfairWhite,
+            return GestureDetector(
+              onTap: () => MoodTrackerModule.toEditMoodScreen(events[index]),
+              child: Container(
+                margin:
+                    const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+                child: Card(
+                  color: secondaryColor,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: Container(
+                    padding: const EdgeInsets.all(16),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: <Widget>[
+                            Row(
+                              children: <Widget>[
+                                Image.asset(events[index].imagePath),
+                                Container(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 16),
+                                  child: Text(
+                                    events[index].title,
+                                    style: bold18PlayfairWhite,
+                                  ),
                                 ),
+                              ],
+                            ),
+                            Text(
+                              '${events[index].dateTime.day} ${dateUtil.month(events[index].dateTime.month)}',
+                              style: normal14Hint,
+                            ),
+                          ],
+                        ),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        Wrap(
+                          children: List.generate(
+                            events[index].tags.length,
+                            (i) => ChipButton(
+                              label: events[index].tags[i],
+                              isEnabled: false,
+                              color: secondaryColor,
+                            ),
+                          ),
+                        ),
+                        Visibility(
+                          visible: events[index].notes != null &&
+                              events[index].notes.isNotEmpty,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: <Widget>[
+                              Divider(
+                                color: hintTextColor,
+                              ),
+                              const SizedBox(
+                                height: 12,
+                              ),
+                              Text(
+                                events[index].notes ?? '',
+                                style: normal16White,
                               ),
                             ],
                           ),
-                          Text(
-                            'Today: 12:44 AM',
-                            style: normal14Hint,
-                          ),
-                        ],
-                      ),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      Wrap(
-                        children: <Widget>[
-                          ChipButton(
-                            label: 'Work',
-                            color: secondaryColor,
-                            isEnabled: false,
-                          ),
-                          ChipButton(
-                            label: 'School',
-                            color: secondaryColor,
-                            isEnabled: false,
-                          ),
-                          ChipButton(
-                            label: 'Family',
-                            color: secondaryColor,
-                            isEnabled: false,
-                          ),
-                        ],
-                      ),
-                      Divider(
-                        color: hintTextColor,
-                      ),
-                      const SizedBox(
-                        height: 12,
-                      ),
-                      Text(
-                        'I am feeling very happy today',
-                        style: normal16White,
-                      ),
-                    ],
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),
@@ -291,74 +344,5 @@ class _MoodCalendarScreenState extends State<MoodCalendarScreen> {
     monthStartingWithDay = dateUtil
         .day(dateUtil.totalLengthOfDays(dateTime.month, 1, dateTime.year));
     offset = getDayOffset(monthStartingWithDay);
-  }
-}
-
-class CalendarDay extends StatelessWidget {
-  const CalendarDay({
-    Key key,
-    @required this.offset,
-  }) : super(key: key);
-
-  final int offset;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      alignment: Alignment.topCenter,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: <Widget>[
-          Container(
-            height: 36,
-            width: 36,
-            margin: const EdgeInsets.only(bottom: 4),
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              border: Border.all(
-                color: calendarDayBorderColor,
-                width: 2,
-              ),
-            ),
-          ),
-          Text(
-            '$offset',
-            style: normal14White,
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class WeekdayWidget extends StatelessWidget {
-  const WeekdayWidget({
-    Key key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      children: <Widget>[
-        _buildDay('MON'),
-        _buildDay('TUE'),
-        _buildDay('WED'),
-        _buildDay('THU'),
-        _buildDay('FRI'),
-        _buildDay('SAT'),
-        _buildDay('SUN'),
-      ],
-    );
-  }
-
-  Expanded _buildDay(String label) {
-    return Expanded(
-      child: Text(
-        label,
-        style: normal14Hint,
-        textAlign: TextAlign.center,
-      ),
-    );
   }
 }

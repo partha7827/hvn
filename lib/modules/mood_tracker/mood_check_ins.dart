@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:highvibe/modules/mood_tracker/mood.dart';
 import 'package:highvibe/modules/mood_tracker/mood_tracker_module.dart';
 import 'package:highvibe/utils/utils.dart';
 import 'package:highvibe/values/themes.dart';
@@ -7,6 +8,9 @@ import 'package:highvibe/widgets/gradient_raised_button.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class MoodCheckInsScreen extends StatefulWidget {
+  const MoodCheckInsScreen({this.mood});
+
+  final Mood mood;
   @override
   _MoodCheckInsScreenState createState() => _MoodCheckInsScreenState();
 }
@@ -26,7 +30,9 @@ class _MoodCheckInsScreenState extends State<MoodCheckInsScreen> {
               'assets/ic_date.svg',
               height: 24,
             ),
-            onPressed: () => MoodTrackerModule.toMoodCalendarScreen(),
+            onPressed: () => MoodTrackerModule.toMoodCalendarScreen(
+              mood: widget.mood,
+            ),
           ),
         ],
       ),
