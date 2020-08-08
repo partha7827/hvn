@@ -10,4 +10,9 @@ class TagItemInterface {
     this.active,
     this.customData,
   });
+
+  @override
+  String toString() {
+    return 'id:$index, title: $title, active: $active, customData: $customData';
+  }
 }

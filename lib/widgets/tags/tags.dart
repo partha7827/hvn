@@ -20,35 +20,32 @@ class Tags extends StatefulWidget {
   /// ability to scroll tags horizontally
   final bool horizontalScroll;
 
-  /// horizontal spacing of  the [ItemTags]
+  /// horizontal spacing of  the [TagItem]
   final double heightHorizontalScroll;
 
-  /// horizontal spacing of  the [ItemTags]
+  /// horizontal spacing of  the [TagItem]
   final double spacing;
 
-  /// vertical spacing of  the [ItemTags]
+  /// vertical spacing of  the [TagItem]
   final double runSpacing;
 
-  /// horizontal alignment of  the [ItemTags]
+  /// horizontal alignment of  the [TagItem]
   final WrapAlignment alignment;
 
-  /// vertical alignment of  the [ItemTags]
+  /// vertical alignment of  the [TagItem]
   final WrapAlignment runAlignment;
 
-  /// direction of  the [ItemTags]
+  /// direction of  the [TagItem]
   final Axis direction;
 
-  /// Iterate [TagItem] from the lower to the upper direction or vice versa
+  /// Iterate [TagItemInterface] from the lower
+  /// to the upper direction or vice versa
   final VerticalDirection verticalDirection;
 
-  /// Text direction of  the [ItemTags]
+  /// Text direction of  the [TagItem]
   final TextDirection textDirection;
 
-  /// Generates a list of [ItemTags].
-  ///
-  /// Creates a list with [length] positions and fills it with values created by
-  /// calling [generator] for each index in the range `0` .. `length - 1`
-  /// in increasing order.
+  /// Generates a list of [TagItem].
   final ItemBuilder itemBuilder;
   final TagsTextFieldViewModel textField;
 
