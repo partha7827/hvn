@@ -4,4 +4,5 @@ export 'package:highvibe/widgets/layout/responsive_safe_area.dart';
 export 'package:highvibe/widgets/platform/platform_alert_dialog.dart';
 export 'package:highvibe/widgets/platform/platform_alert_dialog_action.dart';
 export 'package:highvibe/widgets/platform/platform_exception_alert_dialog.dart';
+export 'package:highvibe/widgets/tag/tag.dart';
 export 'package:highvibe/widgets/ui_utils.dart';

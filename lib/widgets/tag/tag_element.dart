@@ -1,4 +1,6 @@
-abstract class TagElement {}
+abstract class TagElement {
+  String text;
+}
 
 /// Represents an element containing a hastag #
 class HashTagElement extends TagElement {
@@ -25,6 +27,7 @@ class LinkElement extends TagElement {
 }
 
 class TextElement extends TagElement {
+  @override
   final String text;
 
   TextElement(this.text);
@@ -37,12 +40,12 @@ class TextElement extends TagElement {
 
 /// Represents an element containing a @
 class UserTagElement extends TagElement {
-  final String tag;
+  final String userTag;
 
-  UserTagElement(this.tag);
+  UserTagElement(this.userTag);
 
   @override
   String toString() {
-    return 'HashTagElement: $tag';
+    return 'HashTagElement: $userTag';
   }
 }
