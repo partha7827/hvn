@@ -107,7 +107,6 @@ class ManageContentItemsList extends StatelessWidget {
             child: StreamBuilder<List<Audio>>(
               stream: controller.fetchAudioItems(),
               builder: (context, snapshot) {
-                print(snapshot);
                 return Scrollbar(
                   child: ListItemsBuilder<Audio>(
                     snapshot: snapshot,
