@@ -39,6 +39,9 @@ abstract class ManageContentBase with Store {
   @observable
   bool isAudioFileSelcted = false;
 
+  @observable
+  ObservableList<String> tags;
+
   bool get isRequiredFieldsWereFilled =>
       isAudioCoverFileSelcted &&
       isAudioFileSelcted &&
@@ -76,6 +79,12 @@ abstract class ManageContentBase with Store {
 
   @action
   void deleteAudioCoverFile() => audioCoverFile = null;
+
+  @action
+  void addTag(String item) => tags.add(item);
+
+  @action
+  void deleteTag(String item) => tags.remove(item);
 
   @action
   void deleteAudioFile() => audioFile = null;
@@ -117,12 +126,13 @@ abstract class ManageContentBase with Store {
     isUploadingData = false;
     isAudioFileSelcted = false;
     isAudioCoverFileSelcted = false;
+    tags = ObservableList<String>.of([]);
   }
 
   @action
   void initWithAudio({@required Audio audioItem}) {
     titleController.text = audioItem.title;
-    hashtagsController.text = audioItem.tags.toList().join(',');
+    tags = ObservableList<String>.of(audioItem.tags.toList());
     descriptionController.text = audioItem.subTitle;
     searchController.text = '';
     audioCoverFile = null;

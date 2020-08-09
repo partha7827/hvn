@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-typedef OnDeletedCallback = bool Function();
+typedef OnDeletedCallback = void Function();
 
 class ItemTagsRemoveButtonViewModel {
   final IconData icon;

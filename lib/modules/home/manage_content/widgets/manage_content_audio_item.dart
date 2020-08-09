@@ -5,6 +5,7 @@ import 'package:highvibe/models/models.dart' show Audio;
 import 'package:highvibe/modules/home/manage_content/manage_content_contoller.dart';
 import 'package:highvibe/modules/home/manage_content/widgets/upload_content_textfield.dart';
 import 'package:highvibe/modules/home/manage_content/widgets/manage_content_view_model.dart';
+import 'package:highvibe/modules/home/manage_content/widgets/manage_content_audio_item_tags.dart';
 import 'package:highvibe/modules/home/resources/resources.dart';
 import 'package:highvibe/utils/utils.dart';
 import 'package:highvibe/widgets/gradient_raised_button.dart';
@@ -196,24 +197,40 @@ class ManageAudioContentItem extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(height: 12),
-                    TagsSuggestionTextField(
-                      textEditingController: controller.hashtagsController,
-                      tagsTextField: TagsTextFieldViewModel(
-                        suggestions: [
-                          'Demo',
-                          'Relaxing',
-                          'Meditation',
-                          'Chill-out',
-                          'Party',
-                        ],
-                        hintText: UploadContentStrings.hashtags,
-                        onSubmitted: (value) {
-                          print('TagsTextFieldViewModel $value');
-                        },
-                      ),
-                      onSubmitted: (value) {
-                        print('TagsSuggestionTextField $value');
+                    Observer(
+                      builder: (_) {
+                        return TagsSuggestionTextField(
+                          textEditingController: controller.hashtagsController,
+                          tagsTextField: const TagsTextFieldViewModel(
+                            suggestions: [
+                              'Demo',
+                              'Relaxing',
+                              'Meditation',
+                              'Chill-out',
+                              'Party',
+                            ],
+                            hintText: UploadContentStrings.hashtags,
+                          ),
+                          onSubmitted: (tag) {
+                            print('TagsSuggestionTextField $tag');
+                            controller.addTag(tag);
+                            print(controller.tags);
+                          },
+                        );
                       },
+                    ),
+                    const SizedBox(height: 12),
+                    Observer(
+                      builder: (_) => SizedBox(
+                        height: 60,
+                        child: ManageContenAudioItemtTags(
+                          tagItems: controller.tags,
+                          onDelete: (tag) {
+                            print('onDelete onDelete onDelete: $tag');
+                            controller.deleteTag(tag);
+                          },
+                        ),
+                      ),
                     ),
                     const SizedBox(height: 20),
                     const Text(

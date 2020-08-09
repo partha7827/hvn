@@ -103,17 +103,6 @@ class _TagsSuggestionTextFieldState extends State<TagsSuggestionTextField> {
     );
   }
 
-  @override
-  void dispose() {
-    widget.textEditingController.dispose();
-    super.dispose();
-  }
-
-  @override
-  void initState() {
-    super.initState();
-  }
-
   void _checkOnChanged(String str) {
     if (_suggestions != null) {
       _matches =
