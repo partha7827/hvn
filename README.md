@@ -143,7 +143,7 @@ flutter pub run flutter_launcher_icons:main
 flutter build web && cp -a build/web/ public/
 ```
 
-##### Run Web Portal Localy
+##### Run Web Portal Locally
 
 https://highvibe-8601d.web.app
 
@@ -154,6 +154,7 @@ flutter build web && firebase serve --only hosting
 ```sh
 flutter build web && cp -a build/web/ public/ && cd public && python -m SimpleHTTPServer 8000
 ```
+
 ##### Deploy Web Portal to Firebase
 
 ```sh
