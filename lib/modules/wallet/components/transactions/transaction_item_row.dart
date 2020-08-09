@@ -58,7 +58,7 @@ class TransactionItemRow extends StatelessWidget {
             //color: Colors.greenAccent,
             width: 30,
             child: IconButton(
-              icon: Icon(Icons.content_copy),
+              icon: const Icon(Icons.content_copy),
               iconSize: 20,
               tooltip: 'copy address',
               onPressed: () {

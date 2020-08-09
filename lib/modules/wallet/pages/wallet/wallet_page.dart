@@ -59,7 +59,7 @@ class WalletPageState extends State<WalletPage> {
             child: SizedBox(
               width: width * 0.4,
               height: width * 0.4,
-              child: Icon(
+              child: const Icon(
                 Icons.star,
                 color: Colors.white,
               ),

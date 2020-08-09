@@ -75,7 +75,7 @@ class Balance extends StatelessWidget {
                                   margin:
                                       const EdgeInsets.fromLTRB(20, 0, 0, 0),
                                   child: IconButton(
-                                    icon: Icon(Icons.content_copy),
+                                    icon: const Icon(Icons.content_copy),
                                     iconSize: 20,
                                     tooltip: 'copy address',
                                     onPressed: () {

@@ -76,8 +76,8 @@ class TransactionList extends StatelessWidget {
                 borderRadius: BorderRadius.circular(5.0),
                 color: const Color(0xfff6f6f6),
               ),
-              child: ListTile(
-                title: const Text(
+              child: const ListTile(
+                title: Text(
                   '''Tap on a transaction address below, to visit Etherscan for more details''',
                   style: TextStyle(
                     fontSize: 14,

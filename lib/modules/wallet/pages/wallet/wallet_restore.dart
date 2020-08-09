@@ -28,7 +28,7 @@ class _WalletRestoreState
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
-          icon: Icon(
+          icon: const Icon(
             Icons.arrow_back,
             color: Colors.white,
           ),
@@ -96,11 +96,10 @@ class _WalletRestoreState
                 ),
                 const SizedBox(height: 10),
                 Observer(
-                  builder: (context) =>
-                      Padding(
-                        padding: const EdgeInsets.only(left: 20.0),
-                        child: PaperValidationSummary(controller.errors),
-                      ),
+                  builder: (context) => Padding(
+                    padding: const EdgeInsets.only(left: 20.0),
+                    child: PaperValidationSummary(controller.errors),
+                  ),
                 ),
               ],
             ),
