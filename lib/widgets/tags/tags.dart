@@ -49,7 +49,10 @@ class Tags extends StatefulWidget {
   final ItemBuilder itemBuilder;
   final TagsTextFieldViewModel textField;
 
+  final TextEditingController textEditingController;
+
   Tags({
+    this.textEditingController,
     this.columns,
     this.itemCount = 0,
     this.symmetry = false,
@@ -117,6 +120,7 @@ class TagsState extends State<Tags> {
             alignment: Alignment.center,
             width: widget.symmetry ? _calculateWidth() : widget.textField.width,
             child: TagsSuggestionTextField(
+              textEditingController: widget.textEditingController,
               tagsTextField: widget.textField,
               onSubmitted: (str) {
                 if (!widget.textField.duplicates) {

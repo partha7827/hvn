@@ -21,7 +21,7 @@ class UploadContentStrings {
   static const String coverPicture = 'Cover Picture';
   static const String title = 'Title';
   static const String enterTitle = 'Enter Title';
-  static const String hashtags = 'Hashtags (comma separated)';
+  static const String hashtags = 'Hashtags';
   static const String suggestedHashtags = 'Suggested Hashtags';
   static const String description = 'Description';
   static const String tellMeAbout = 'Tell me about...';

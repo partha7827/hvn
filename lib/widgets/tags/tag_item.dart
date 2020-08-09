@@ -14,9 +14,6 @@ class TagItem extends StatefulWidget {
   final double textScaleFactor;
   final bool active;
   final bool pressEnabled;
-
-  ///  Add any custom value in customData field.
-  /// A good example: store an id from Firestore document.
   final Object customData;
   final ItemTagsRemoveButtonViewModel removeButton;
   final TextStyle textStyle;
@@ -81,11 +78,6 @@ class _TagItemState extends State<TagItem> {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       mainAxisSize: MainAxisSize.min,
       children: <Widget>[
-        // Flexible(
-        //   fit: _dataListInherited.symmetry ? FlexFit.tight : FlexFit.loose,
-        //   flex: 2,
-        //   child: row,
-        // ),
         Flexible(
           flex: 0,
           child: FittedBox(
@@ -120,33 +112,6 @@ class _TagItemState extends State<TagItem> {
           ),
         )
       ],
-    );
-  }
-
-  ///Text Alignment
-  // ignore: unused_element
-  TextAlign get _textAlignment {
-    switch (widget.alignment) {
-      case MainAxisAlignment.spaceBetween:
-      case MainAxisAlignment.start:
-        return TextAlign.start;
-        break;
-      case MainAxisAlignment.end:
-        return TextAlign.end;
-        break;
-      case MainAxisAlignment.spaceAround:
-      case MainAxisAlignment.spaceEvenly:
-      case MainAxisAlignment.center:
-        return TextAlign.center;
-    }
-    return null;
-  }
-
-  ///TextStyle
-  // ignore: unused_element
-  TextStyle get _textStyle {
-    return widget.textStyle.apply(
-      color: _dataList.active ? widget.textActiveColor : widget.textColor,
     );
   }
 

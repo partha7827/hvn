@@ -196,10 +196,24 @@ class ManageAudioContentItem extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(height: 12),
-                    UploadContentTextfield(
+                    TagsSuggestionTextField(
                       textEditingController: controller.hashtagsController,
-                      hintText: UploadContentStrings.hashtags,
-                      onEditingComplete: () {},
+                      tagsTextField: TagsTextFieldViewModel(
+                        suggestions: [
+                          'Demo',
+                          'Relaxing',
+                          'Meditation',
+                          'Chill-out',
+                          'Party',
+                        ],
+                        hintText: UploadContentStrings.hashtags,
+                        onSubmitted: (value) {
+                          print('TagsTextFieldViewModel $value');
+                        },
+                      ),
+                      onSubmitted: (value) {
+                        print('TagsSuggestionTextField $value');
+                      },
                     ),
                     const SizedBox(height: 20),
                     const Text(

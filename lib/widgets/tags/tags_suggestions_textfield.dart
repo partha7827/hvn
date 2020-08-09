@@ -1,13 +1,17 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:highvibe/widgets/tags/tags_text_field_view_model.dart';
 
 class TagsSuggestionTextField extends StatefulWidget {
   final TagsTextFieldViewModel tagsTextField;
+  final TextEditingController textEditingController;
   final OnSubmittedCallback onSubmitted;
 
   TagsSuggestionTextField({
     @required this.tagsTextField,
-    this.onSubmitted,
+    @required this.textEditingController,
+    @required this.onSubmitted,
     Key key,
   })  : assert(tagsTextField != null),
         super(key: key);
@@ -18,102 +22,90 @@ class TagsSuggestionTextField extends StatefulWidget {
 }
 
 class _TagsSuggestionTextFieldState extends State<TagsSuggestionTextField> {
-  final _controller = TextEditingController();
-
   List<String> _matches = [];
+  String _hintText;
   String _helperText;
   bool _helperCheck = true;
-
   List<String> _suggestions;
   bool _constraintSuggestion;
   double _fontSize;
   InputDecoration _inputDecoration;
 
-  InputDecoration get _initialInputDecoration {
-    final input = _inputDecoration ??
-        InputDecoration(
-          disabledBorder: InputBorder.none,
-          errorBorder: InputBorder.none,
-          contentPadding: EdgeInsets.symmetric(
-              vertical: 6 * (_fontSize / 14), horizontal: 6 * (_fontSize / 14)),
-          focusedBorder: UnderlineInputBorder(
-            borderSide: BorderSide(
-              color: Colors.blueGrey[300],
-            ),
-          ),
-          enabledBorder: UnderlineInputBorder(
-            borderSide:
-                BorderSide(color: Colors.blueGrey[400].withOpacity(0.3)),
-          ),
-          border: UnderlineInputBorder(
-            borderSide:
-                BorderSide(color: Colors.blueGrey[400].withOpacity(0.3)),
-          ),
-        );
-
-    return input.copyWith(
-      helperText: _helperCheck || _suggestions == null ? null : _helperText,
-      helperStyle: widget.tagsTextField.helperTextStyle,
-      hintText: widget.tagsTextField.hintText ?? 'Add a tag',
-      hintStyle: TextStyle(color: widget.tagsTextField.hintTextColor),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
+    _hintText = widget.tagsTextField.helperText ?? '';
     _helperText = widget.tagsTextField.helperText ?? 'no matches';
     _suggestions = widget.tagsTextField.suggestions;
     _constraintSuggestion = widget.tagsTextField.constraintSuggestion;
     _inputDecoration = widget.tagsTextField.inputDecoration;
     _fontSize = widget.tagsTextField.textStyle.fontSize;
 
-    return Stack(
-      alignment: Alignment.centerLeft,
-      children: <Widget>[
-        Visibility(
-          visible: _suggestions != null,
-          child: Container(
-            padding: _inputDecoration != null
-                ? _inputDecoration.contentPadding
-                : EdgeInsets.symmetric(
-                    vertical: 6 * (_fontSize / 14),
-                    horizontal: 6 * (_fontSize / 14)),
-            child: Text(
-              _matches.isNotEmpty ? (_matches.first) : '',
-              softWrap: false,
-              overflow: TextOverflow.fade,
-              style: TextStyle(
-                height: widget.tagsTextField.textStyle.height ?? 1,
-                fontSize: _fontSize ?? 12,
-                color: widget.tagsTextField.suggestionTextColor ?? Colors.red,
+    return SizedBox(
+      height: widget.tagsTextField.height,
+      child: Stack(
+        alignment: Alignment.centerLeft,
+        children: [
+          Visibility(
+            visible: _suggestions != null,
+            child: Container(
+              padding: _inputDecoration != null
+                  ? _inputDecoration.contentPadding
+                  : const EdgeInsets.fromLTRB(15, 11, 0, 11),
+              child: Text(
+                _matches.isNotEmpty ? (_matches.first) : '',
+                softWrap: false,
+                overflow: TextOverflow.fade,
+                style: TextStyle(
+                  height: widget.tagsTextField.textStyle.height,
+                  fontSize: _fontSize,
+                  color: widget.tagsTextField.suggestionTextColor ??
+                      const Color(0xFF8E8F99),
+                ),
               ),
             ),
           ),
-        ),
-        TextField(
-          controller: _controller,
-          enabled: widget.tagsTextField.enabled,
-          autofocus: widget.tagsTextField.autofocus ?? true,
-          keyboardType: widget.tagsTextField.keyboardType ?? TextInputType.text,
-          textCapitalization: widget.tagsTextField.textCapitalization ??
-              TextCapitalization.none,
-          maxLength: widget.tagsTextField.maxLength ?? 50,
-          maxLines: 1,
-          autocorrect: widget.tagsTextField.autocorrect ?? false,
-          style: widget.tagsTextField.textStyle.copyWith(
-            height: widget.tagsTextField.textStyle.height == null ? 1 : null,
-          ),
-          decoration: _initialInputDecoration,
-          onChanged: (str) => _checkOnChanged(str),
-          onSubmitted: (str) => _onSubmitted(str),
-        )
-      ],
+          TextField(
+            controller: widget.textEditingController,
+            enabled: widget.tagsTextField.enabled,
+            autofocus: widget.tagsTextField.autofocus,
+            keyboardType:
+                widget.tagsTextField.keyboardType ?? TextInputType.text,
+            textCapitalization: widget.tagsTextField.textCapitalization ??
+                TextCapitalization.none,
+            maxLength: widget.tagsTextField.maxLength,
+            maxLines: widget.tagsTextField.maxLines,
+            autocorrect: widget.tagsTextField.autocorrect,
+            style: widget.tagsTextField.textStyle,
+            decoration: InputDecoration(
+              hintText: _hintText,
+              helperText:
+                  _helperCheck || _suggestions == null ? null : _helperText,
+              hintStyle: const TextStyle(color: Color(0xFF8E8F99)),
+              border: const OutlineInputBorder(),
+              enabledBorder: const OutlineInputBorder(
+                borderSide: BorderSide(
+                  color: Color(0xFF525366),
+                  width: 1,
+                ),
+                borderRadius: BorderRadius.all(Radius.circular(10)),
+              ),
+              focusedBorder: const OutlineInputBorder(
+                borderSide: BorderSide(color: Colors.white, width: 1),
+                borderRadius: BorderRadius.all(Radius.circular(10)),
+              ),
+              contentPadding: const EdgeInsets.fromLTRB(15, 11, 0, 11),
+            ),
+            onChanged: (str) => _checkOnChanged(str),
+            onSubmitted: (str) => _onSubmitted(str),
+          )
+        ],
+      ),
     );
   }
 
   @override
   void dispose() {
-    _controller.dispose();
+    widget.textEditingController.dispose();
     super.dispose();
   }
 
@@ -160,11 +152,11 @@ class _TagsSuggestionTextFieldState extends State<TagsSuggestionTextField> {
         setState(() {
           _matches = [];
         });
-        _controller.clear();
+        widget.textEditingController.clear();
       }
     } else if (str.isNotEmpty) {
       if (onSubmitted != null) onSubmitted(str);
-      _controller.clear();
+      widget.textEditingController.clear();
     }
   }
 }

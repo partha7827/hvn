@@ -4,49 +4,57 @@ typedef OnChangedCallback = void Function(String string);
 typedef OnSubmittedCallback = void Function(String string);
 
 class TagsTextFieldViewModel {
-  final double width;
-  final bool enabled;
-  final bool duplicates;
-  final TextStyle textStyle;
-  final InputDecoration inputDecoration;
   final bool autocorrect;
-  final List<String> suggestions;
+  final bool autofocus;
 
   /// Allows you to insert tags not present in the list of suggestions
   final bool constraintSuggestion;
+  final bool duplicates;
+  final bool enabled;
   final bool lowerCase;
-  final bool autofocus;
-  final String hintText;
   final Color hintTextColor;
   final Color suggestionTextColor;
-  final String helperText;
-  final TextStyle helperTextStyle;
-  final TextInputType keyboardType;
-  final TextCapitalization textCapitalization;
+  final double width;
+  final double height;
+  final InputDecoration inputDecoration;
   final int maxLength;
-  final OnSubmittedCallback onSubmitted;
+  final List<String> suggestions;
   final OnChangedCallback onChanged;
+  final OnSubmittedCallback onSubmitted;
+  final String helperText;
+  final String hintText;
+  final TextCapitalization textCapitalization;
+  final TextInputType keyboardType;
+  final TextStyle helperTextStyle;
+  final TextStyle textStyle;
+  final int maxLines;
 
   const TagsTextFieldViewModel({
-    this.lowerCase = false,
-    this.textStyle = const TextStyle(fontSize: 14),
-    this.width = 200,
-    this.enabled = true,
+    this.autocorrect = false,
+    this.autofocus = false,
+    this.constraintSuggestion = false,
     this.duplicates = false,
-    this.suggestions,
-    this.constraintSuggestion = true,
-    this.autocorrect,
-    this.autofocus,
-    this.hintText,
-    this.hintTextColor,
-    this.suggestionTextColor,
+    this.enabled = true,
     this.helperText,
     this.helperTextStyle,
-    this.keyboardType,
-    this.textCapitalization,
-    this.maxLength,
+    this.hintText,
+    this.hintTextColor,
     this.inputDecoration,
-    this.onSubmitted,
+    this.keyboardType,
+    this.lowerCase = false,
+    this.maxLength,
     this.onChanged,
+    this.onSubmitted,
+    this.suggestions,
+    this.suggestionTextColor,
+    this.textCapitalization,
+    this.textStyle = const TextStyle(
+      fontSize: 14,
+      color: Colors.white,
+      height: 1.3,
+    ),
+    this.width = 200,
+    this.height = 40,
+    this.maxLines = 1,
   });
 }
