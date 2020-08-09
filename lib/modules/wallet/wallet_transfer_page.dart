@@ -395,8 +395,8 @@ class _WalletTransferPageState
                         //   ],
                         // )
                         const SizedBox(height: 20),
-                        ListTile(
-                          title: const Text(
+                        const ListTile(
+                          title: Text(
                             '''When transfering HV, make sure the receiving address has a HV compliant wallet''',
                             style: TextStyle(
                               fontSize: 12,

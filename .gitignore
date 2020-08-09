@@ -2,6 +2,7 @@
 
 key.properties
 hvn.keystore
+.firebase/
 
 env.js
 ./GoogleService-Info.plist

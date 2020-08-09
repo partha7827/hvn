@@ -5,10 +5,11 @@ analyzer:
     strict-inference: true
     strict-raw-types: true
   errors:
-    missing_required_param: error
     always_put_required_named_parameters_first: error
-    no_duplicate_case_values: error
     avoid_relative_lib_imports: error
+    missing_required_param: error
+    no_duplicate_case_values: error
+    prefer_const_constructors: error
   exclude:
     - lib/generated_plugin_registrant.dart
     - lib/**.g.dart

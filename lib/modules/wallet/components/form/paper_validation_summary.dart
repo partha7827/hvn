@@ -12,12 +12,14 @@ class PaperValidationSummary extends StatelessWidget {
         margin: const EdgeInsets.fromLTRB(0, 0, 0, 10),
         child: Column(
           children: errors
-              .map((error) => Text(
-                    error,
-                    style: TextStyle(
-                      color: Colors.red,
-                    ),
-                  ))
+              .map(
+                (error) => Text(
+                  error,
+                  style: const TextStyle(
+                    color: Colors.red,
+                  ),
+                ),
+              )
               .toList(),
         ),
       ),
