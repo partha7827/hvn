@@ -6,7 +6,7 @@ version: 0.0.8
 
 environment:
   sdk: ">=2.8.4 <3.0.0"
-  flutter: 1.19.0-4.3.pre # The latest cheked verion by @minikin on Flutter Beta channel
+  flutter: 1.19.0-4.3.pre # The latest checked version by @minikin on Flutter Beta channel
 
 dependencies:
   agora_rtc_engine: ^1.0.12
