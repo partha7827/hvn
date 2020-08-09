@@ -58,8 +58,6 @@ abstract class ManageContentBase with Store {
         ],
       );
 
-      final tags = hashtagsController.text.split(',');
-
       final audioItem = Audio(
         (b) => b
           ..userId = _currentUserStore.currentUser.id
@@ -192,8 +190,6 @@ abstract class ManageContentBase with Store {
           audio: audioFile,
         );
       }
-
-      final tags = hashtagsController.text.split(',');
 
       final updatedAudioItem = Audio(
         (b) => b

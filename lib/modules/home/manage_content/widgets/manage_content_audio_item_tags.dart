@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:highvibe/widgets/widgets.dart';
 
-class ManageContenAudioItemtTags extends StatelessWidget {
+class ManageContenAudioItemTags extends StatelessWidget {
   final List<String> tagItems;
   final ValueChanged<String> onDelete;
 
-  ManageContenAudioItemtTags({
+  ManageContenAudioItemTags({
     @required this.tagItems,
     @required this.onDelete,
     Key key,
@@ -13,22 +14,33 @@ class ManageContenAudioItemtTags extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print('ManageContenAudioItemtTags: $tagItems');
-    return Wrap(
-      children: [
-        for (final item in tagItems) ...[
-          TagItem(
-            title: item,
-            backgroundColor: const Color(0xFF66CCCC),
-            removeButton: ItemTagsRemoveButtonViewModel(
-              icon: Icons.delete,
-              size: 12,
-              backgroundColor: Colors.transparent,
-              onDelete: () => onDelete(item),
+    return Observer(
+      builder: (context) {
+        return Scrollbar(
+          child: SingleChildScrollView(
+            child: Wrap(
+              children: [
+                for (final item in tagItems) ...[
+                  Padding(
+                    padding: const EdgeInsets.all(4),
+                    child: TagItem(
+                      title: item,
+                      backgroundColor: const Color(0xFF66CCCC),
+                      removeButton: ItemTagsRemoveButtonViewModel(
+                        icon: Icons.delete,
+                        size: 14,
+                        backgroundColor: Colors.transparent,
+                        color: const Color(0xFF525366),
+                        onDelete: () => onDelete(item),
+                      ),
+                    ),
+                  ),
+                ]
+              ],
             ),
           ),
-        ],
-      ],
+        );
+      },
     );
   }
 }

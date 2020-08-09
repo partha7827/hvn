@@ -11,6 +11,18 @@ import 'package:highvibe/utils/utils.dart';
 import 'package:highvibe/widgets/gradient_raised_button.dart';
 import 'package:highvibe/widgets/widgets.dart';
 
+const _tagsSuggestions = [
+  'Relaxing',
+  'Meditation',
+  'Chill-out',
+  'Party',
+  'Techno',
+  'Funk',
+  'Sea Sounds',
+  'Jungle Sounds',
+  'Morning Birds',
+];
+
 class ManageAudioContentItem extends StatelessWidget {
   final ManageContentController controller;
   final VoidCallback onCloseOrSavePressed;
@@ -202,34 +214,31 @@ class ManageAudioContentItem extends StatelessWidget {
                         return TagsSuggestionTextField(
                           textEditingController: controller.hashtagsController,
                           tagsTextField: const TagsTextFieldViewModel(
-                            suggestions: [
-                              'Demo',
-                              'Relaxing',
-                              'Meditation',
-                              'Chill-out',
-                              'Party',
-                            ],
+                            suggestions: _tagsSuggestions,
                             hintText: UploadContentStrings.hashtags,
+                            helperText: UploadContentStrings.addHashtag,
                           ),
                           onSubmitted: (tag) {
-                            print('TagsSuggestionTextField $tag');
-                            controller.addTag(tag);
-                            print(controller.tags);
+                            if (tag.isNotEmpty &&
+                                !controller.tags.contains(tag)) {
+                              controller.addTag(tag);
+                            } else {
+                              Scaffold.of(context).showSnackBar(
+                                snackBarLight(
+                                  message: UploadContentStrings.hashTagExists,
+                                ),
+                              );
+                            }
                           },
                         );
                       },
                     ),
                     const SizedBox(height: 12),
-                    Observer(
-                      builder: (_) => SizedBox(
-                        height: 60,
-                        child: ManageContenAudioItemtTags(
-                          tagItems: controller.tags,
-                          onDelete: (tag) {
-                            print('onDelete onDelete onDelete: $tag');
-                            controller.deleteTag(tag);
-                          },
-                        ),
+                    SizedBox(
+                      height: 70,
+                      child: ManageContenAudioItemTags(
+                        tagItems: controller.tags,
+                        onDelete: (tag) => controller.deleteTag(tag),
                       ),
                     ),
                     const SizedBox(height: 20),
@@ -362,14 +371,6 @@ class ManageAudioContentItem extends StatelessWidget {
             fontSize: 20,
           ),
         ),
-        // Container(
-        //   color: const Color(0xFF525366),
-        //   width: 270,
-        //   height: 180,
-        //   decoration: const BoxDecoration(
-        //     color: Colors.white,
-        //     borderRadius: BorderRadius.all(Radius.circular(10)),
-        //   ),
       ],
     );
   }

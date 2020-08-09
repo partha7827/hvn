@@ -22,6 +22,8 @@ class UploadContentStrings {
   static const String title = 'Title';
   static const String enterTitle = 'Enter Title';
   static const String hashtags = 'Hashtags';
+  static const String addHashtag = 'Add Hashtag';
+  static const String hashTagExists = 'The hashtag is already exists';
   static const String suggestedHashtags = 'Suggested Hashtags';
   static const String description = 'Description';
   static const String tellMeAbout = 'Tell me about...';
