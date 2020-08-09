@@ -16,7 +16,7 @@ To get started, see [Contributing](#contributing)
 
 ## Requirements
 
-- Flutter: flutter: 1.19.0-4.3.pre (_The latest checked version by [@minikin](https://github.com/minikin) on Flutter Beta channel_)
+- Flutter: 1.19.0-4.3.pre (_The latest checked version by [@minikin](https://github.com/minikin) on Flutter Beta channel_)
 - Dart: 2.8.4+
 - Xcode: 11.5.0+
 - Androind Studio 4.0.0+
